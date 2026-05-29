@@ -1,0 +1,348 @@
+/* ─── PROFILE PAGE OVERRIDES ──────────────── */
+
+.profile-page .dash-main {
+  max-width: 1100px;
+}
+
+.calendar-wrap {
+  position: fixed !important;
+  top: 4.5rem !important;
+  right: 3rem !important;
+  left: auto !important;
+  transform-origin: center center !important;
+}
+
+/* ─ PROFILE TOP ────────────────────────── */
+.profile-top {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+  align-items: start;
+}
+
+.profile-card {
+  background: var(--white);
+  border: 2px solid var(--black);
+  padding: 2.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  height: 100%;
+  transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.shadow-wrap:hover > .profile-card {
+  transform: translate(-3px, -3px) scale(1.015);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+}
+
+.shadow-wrap:active > .profile-card {
+  transform: translate(-1px, -1px) scale(0.995);
+}
+
+.profile-avatar {
+  width: 140px;
+  height: 140px;
+  background: var(--black);
+  margin-bottom: 1.5rem;
+  transition: transform 0.35s var(--ease);
+}
+
+.shadow-wrap:hover .profile-avatar {
+  transform: scale(1.03);
+}
+
+.profile-name {
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  color: var(--black);
+  transition: transform 0.3s var(--ease);
+}
+
+.shadow-wrap:hover .profile-name {
+  transform: translateY(-2px);
+}
+
+.profile-email {
+  font-size: 0.5rem;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  color: var(--gray-400);
+  margin-top: 0.4rem;
+  margin-bottom: 2rem;
+  transition: color 0.3s var(--ease);
+}
+
+.shadow-wrap:hover .profile-email {
+  color: var(--gray-500);
+}
+
+.profile-edit-btn {
+  padding: 1rem 2rem;
+  background: var(--black);
+  color: var(--white);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  border: 2px solid var(--black);
+  transition: all 0.3s var(--ease);
+  width: 100%;
+  margin-top: auto;
+}
+
+.profile-edit-btn:hover {
+  background: var(--white);
+  color: var(--black);
+  transform: translateY(-1px);
+}
+
+.profile-edit-btn:active {
+  transform: translateY(0);
+}
+
+/* ─── PROFILE STATS ───────────────────────── */
+.profile-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.profile-stats .stat-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 2.5rem 3rem;
+  min-height: 160px;
+}
+
+.profile-stats .stat-icon {
+  width: 56px;
+  height: 56px;
+  background: var(--gray-100);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.profile-stats .stat-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-stats .stat-value {
+  font-size: 2.25rem;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  margin-bottom: 0;
+}
+
+.profile-stats .stat-label {
+  font-size: 0.55rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: var(--gray-500);
+  text-transform: uppercase;
+  margin-top: 0.15rem;
+}
+
+.profile-stats .shadow-box {
+  top: 6px;
+  left: 6px;
+}
+
+.profile-stats .shadow-wrap:hover > .shadow-box {
+  top: 8px;
+  left: 8px;
+}
+
+.profile-stats .shadow-wrap:active > .shadow-box {
+  top: 3px;
+  left: 3px;
+}
+
+/* ─── STAT CARD HOVER (white stay) ────────── */
+.profile-page .stat-card:hover {
+  background: var(--white);
+  color: var(--black);
+}
+
+.profile-page .stat-card:hover .stat-value {
+  color: var(--black);
+}
+
+.profile-page .stat-card:hover .stat-label {
+  color: var(--gray-500);
+}
+
+.profile-page .stat-card:hover .stat-trend {
+  border-color: var(--black);
+  color: var(--black);
+}
+
+.profile-page .stat-card:hover .stat-trend.up {
+  background: var(--success);
+  border-color: var(--success);
+  color: var(--white);
+}
+
+.profile-page .stat-card:hover .stat-bar {
+  border-color: var(--black);
+  background: var(--gray-200);
+}
+
+.profile-page .stat-card:hover .stat-bar-fill {
+  background: var(--black);
+}
+
+/* ─── SKILL ANALYTICS ──────────────────────── */
+.profile-page .section-header {
+  margin-bottom: 1rem;
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+}
+
+.skill-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1.5rem;
+  text-align: center;
+  background: var(--white);
+  border: 2px solid var(--black);
+  min-height: 140px;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+}
+
+.skill-card svg {
+  color: var(--gray-500);
+}
+
+.skill-name {
+  font-size: 0.55rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: var(--gray-500);
+  text-transform: uppercase;
+}
+
+.skill-score {
+  font-size: 1.5rem;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+}
+
+/* ─── PERSONAL DETAILS ─────────────────────── */
+.personal-details {
+  background: var(--white);
+  border: 2px solid var(--black);
+  padding: 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+.details-title {
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid var(--black);
+}
+
+.details-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.detail-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.detail-icon {
+  width: 36px;
+  height: 36px;
+  background: var(--gray-100);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.detail-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.detail-label {
+  font-size: 0.55rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: var(--gray-500);
+  text-transform: uppercase;
+}
+
+.detail-value {
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  margin-top: 0.15rem;
+}
+
+/* ─── EDIT PROFILE MODAL ────────────────────── */
+.edit-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.edit-modal {
+  background: var(--white);
+  border: 2px solid var(--black);
+  padding: 2.5rem;
+  width: 100%;
+  max-width: 420px;
+  position: relative;
+}
+
+.edit-modal-close {
+  position: absolute;
+  top: 0.75rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  font-weight: 700;
+  cursor: pointer;
+  color: var(--black);
+  line-height: 1;
+}
+
+.edit-modal-title {
+  font-size: 1.1rem;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid var(--black);
+}
