@@ -437,6 +437,9 @@ button.snav-item {
     transition: all 0.2s var(--ease);
     position: relative;
     top: -4px;
+    display: inline-flex;
+    align-items: center;
+    height: 2.2rem;
 }
 
 .header-date:hover {
@@ -2173,7 +2176,7 @@ select.settings-input {
 .admin-notify .admin-layer { max-width: 500px; }
 
 /* ─── Notification Bell ─── */
-.notif-bell-btn { background: none; border: 2px solid var(--black); padding: 0.5rem 0.8rem; cursor: pointer; display: flex; align-items: center; position: relative; top: 2px; line-height: 1; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.12em; transition: all 0.2s var(--ease); }
+.notif-bell-btn { background: none; border: 2px solid var(--black); padding: 0.5rem 0.8rem; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; line-height: 1; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.12em; transition: all 0.2s var(--ease); height: 2.2rem; }
 .notif-bell-btn:hover { background: var(--black); color: var(--white); }
 .notif-bell-btn:hover svg { stroke: var(--white); }
 .notif-bell-btn:active { transform: scale(0.97); }
