@@ -20,6 +20,7 @@ const TopicsPage = lazy(() => import('./pages/TopicsPage'))
 const TestPage = lazy(() => import('./pages/TestPage'))
 const TestReview = lazy(() => import('./pages/TestReview'))
 const SatTestAdmin = lazy(() => import('./pages/SatTestAdmin'))
+const SatTestList = lazy(() => import('./pages/SatTestList'))
 const SatTestPage = lazy(() => import('./pages/SatTestPage'))
 const NotFound = lazy(() => import('./pages/NotFound'))
 
@@ -48,6 +49,7 @@ export default function App() {
         <Route path="/ap-bio" element={<SuspenseWrap><ApBio /></SuspenseWrap>} />
         <Route path="/ap-calc" element={<SuspenseWrap><ApCalc /></SuspenseWrap>} />
         <Route path="/practice-tests" element={<SuspenseWrap><PracticeTests /></SuspenseWrap>} />
+        <Route path="/practice/sat-tests" element={<SuspenseWrap><SatTestList /></SuspenseWrap>} />
         <Route path="/test-history" element={<SuspenseWrap><TestHistory /></SuspenseWrap>} />
         <Route path="/study-plan" element={<SuspenseWrap><StudyPlan /></SuspenseWrap>} />
         <Route path="/profile" element={<SuspenseWrap><Profile /></SuspenseWrap>} />

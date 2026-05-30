@@ -99,6 +99,54 @@ create table study_plans (
   created_at timestamptz default now()
 );
 
+-- Full SAT Tests
+create table sat_tests (
+  id uuid default gen_random_uuid() primary key,
+  title text not null,
+  subject_id uuid references subjects(id),
+  pdf_url text default '',
+  total_questions int default 0,
+  created_at timestamptz default now()
+);
+
+create table sat_modules (
+  id uuid default gen_random_uuid() primary key,
+  test_id uuid references sat_tests(id) on delete cascade,
+  name text not null,
+  section text not null,
+  module_number int not null,
+  question_count int default 0,
+  order_index int default 0
+);
+
+create table sat_questions (
+  id uuid default gen_random_uuid() primary key,
+  module_id uuid references sat_modules(id) on delete cascade,
+  question_number int not null,
+  question_text text not null,
+  options jsonb default '[]',
+  correct_index int default 0,
+  explanation text default '',
+  image_url text default ''
+);
+
+alter table sat_tests enable row level security;
+alter table sat_modules enable row level security;
+alter table sat_questions enable row level security;
+
+create policy "Anyone can view SAT tests"
+  on sat_tests for select using (true);
+create policy "Admins can insert/update/delete SAT tests"
+  on sat_tests for all using (auth.uid() in (select id from profiles where role in ('admin','owner')));
+create policy "Anyone can view SAT modules"
+  on sat_modules for select using (true);
+create policy "Admins can manage SAT modules"
+  on sat_modules for all using (auth.uid() in (select id from profiles where role in ('admin','owner')));
+create policy "Anyone can view SAT questions"
+  on sat_questions for select using (true);
+create policy "Admins can manage SAT questions"
+  on sat_questions for all using (auth.uid() in (select id from profiles where role in ('admin','owner')));
+
 -- Practice tests
 create table practice_tests (
   id uuid default gen_random_uuid() primary key,

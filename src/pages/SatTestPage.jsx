@@ -97,10 +97,15 @@ export default function SatTestPage() {
     const totalAns = answers.map(a => ({ qIdx: a.qIdx, selected: a.selected, correct: a.correct, question: questions[a.qIdx] }))
     const { data: { session } } = await supabase.auth.getSession()
     if (session?.user?.id && test) {
-      await supabase.from('practice_tests').insert({
+      const { data: inserted } = await supabase.from('practice_tests').insert({
         user_id: session.user.id, title: test.title, score, total: answers.length,
         duration: 'full', answers: totalAns, subject: 'SAT',
-      })
+      }).select('id').single()
+      if (inserted?.id) {
+        toast.success('Test submitted! Score: ' + score + '/' + answers.length)
+        navigate('/test-review/' + inserted.id)
+        return
+      }
     }
     toast.success('Test submitted! Score: ' + score + '/' + answers.length)
     navigate('/test-history')

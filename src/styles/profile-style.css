@@ -346,3 +346,12 @@
   padding-bottom: 1rem;
   border-bottom: 2px solid var(--black);
 }
+
+@media (max-width: 768px) {
+  .profile-top { grid-template-columns: 1fr; }
+  .profile-card { padding: 1.5rem; }
+  .details-grid { grid-template-columns: 1fr; }
+  .skills-grid { grid-template-columns: repeat(2, 1fr); }
+  .profile-stats .stat-card { padding: 1.5rem; min-height: auto; }
+  .calendar-wrap { right: 1rem !important; width: 280px !important; }
+}

@@ -1913,6 +1913,28 @@ select.settings-input {
     .admin-select, .admin-input, .admin-textarea { font-size: 0.75rem; padding: 0.4rem; }
 }
 
+@media (max-width: 768px) {
+    .dash-layout { overflow-x: hidden; }
+    .header-title { font-size: 1.5rem; }
+    .stat-value { font-size: 2rem; }
+    .dash-card { min-height: auto; }
+    .sat-page { font-size: 15px; }
+    .sat-q-text { font-size: 0.85rem; }
+    .sat-opt { padding: 0.5rem 0.6rem; }
+    .sat-opt-letter { width: 24px; height: 24px; font-size: 0.65rem; }
+    .sat-opt-text { font-size: 0.8rem; }
+    .sat-nav-grid { grid-template-columns: repeat(5,1fr); }
+    .sat-body { padding: 0.75rem; }
+    .sat-header { padding: 0.4rem 0.75rem; }
+    .sat-footer { padding: 0.5rem 0.75rem; }
+    .sat-next-btn { padding: 0.5rem 1.5rem; font-size: 0.7rem; }
+    .sat-break-stats { flex-direction: column; gap: 0.5rem; align-items: center; }
+    .test-done-q-grid { grid-template-columns: 1fr; }
+    .sat-list-page { padding: 0; }
+    .sat-list-row { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+    .sat-list-right { width: 100%; justify-content: flex-end; }
+}
+
 /* ─── Toast Notifications ─── */
 .toast-container {
   position: fixed;
@@ -2070,6 +2092,7 @@ select.settings-input {
 }
 /* ─── SAT Test Admin ─── */
 .sat-admin-wrap { }
+.sat-list-page { padding: 0; }
 .sat-list { display: flex; flex-direction: column; gap: 0.5rem; }
 .sat-list-row { display: flex; justify-content: space-between; align-items: center; border: 2px solid var(--black); padding: 0.8rem 1rem; background: var(--white); box-shadow: 3px 3px 0 var(--gray-700); }
 .sat-list-left { display: flex; flex-direction: column; gap: 0.1rem; }
