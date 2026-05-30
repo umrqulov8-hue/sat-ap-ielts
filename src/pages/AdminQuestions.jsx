@@ -46,6 +46,23 @@ export default function AdminQuestions() {
   const [modDuration, setModDuration] = useState('')
   const [editingMod, setEditingMod] = useState(null)
 
+  const [notifTitle, setNotifTitle] = useState('')
+  const [notifBody, setNotifBody] = useState('')
+  const [sending, setSending] = useState(false)
+
+  const sendNotification = async () => {
+    if (!notifTitle.trim() || !notifBody.trim()) { toast.error('Fill title and body'); return }
+    setSending(true)
+    const { data: profiles } = await supabase.from('profiles').select('id')
+    if (!profiles?.length) { toast.error('No users found'); setSending(false); return }
+    const notifs = profiles.map(p => ({ user_id: p.id, title: notifTitle.trim(), body: notifBody.trim() }))
+    const { error } = await supabase.from('notifications').insert(notifs)
+    if (error) { toast.error('Error: ' + error.message); setSending(false); return }
+    toast.success('Sent to ' + notifs.length + ' users')
+    setNotifTitle(''); setNotifBody('')
+    setSending(false)
+  }
+
   useEffect(() => {
     setPageTitle('ADMIN')
     setPageSub('Manage Questions')
@@ -325,6 +342,7 @@ export default function AdminQuestions() {
         <button className={'admin-tab' + (tab === 'questions' ? ' active' : '')} onClick={() => setTab('questions')}>QUESTIONS</button>
         <button className={'admin-tab' + (tab === 'users' ? ' active' : '')} onClick={() => setTab('users')}>USERS</button>
         <button className={'admin-tab' + (tab === 'stats' ? ' active' : '')} onClick={() => setTab('stats')}>STATS</button>
+        <button className={'admin-tab' + (tab === 'notify' ? ' active' : '')} onClick={() => setTab('notify')}>NOTIFY</button>
       </div>
 
       {tab === 'users' && (
@@ -388,6 +406,19 @@ export default function AdminQuestions() {
                 <span className="admin-stats-sc">{pct(s.score, s.total)}</span>
               </div>
             ))}
+          </div>
+        </div>
+      )}
+
+      {tab === 'notify' && (
+        <div className="admin-notify">
+          <div className="admin-layer">
+            <label className="admin-label">SEND NOTIFICATION TO ALL USERS</label>
+            <input className="admin-input" placeholder="Title" value={notifTitle} onChange={e => setNotifTitle(e.target.value)} />
+            <textarea className="admin-textarea" rows={3} placeholder="Message body" value={notifBody} onChange={e => setNotifBody(e.target.value)} style={{ marginTop: '0.5rem' }} />
+            <button className="btn btn-primary" style={{ marginTop: '0.5rem' }} onClick={sendNotification} disabled={sending}>
+              {sending ? 'SENDING...' : 'SEND TO ALL USERS'}
+            </button>
           </div>
         </div>
       )}

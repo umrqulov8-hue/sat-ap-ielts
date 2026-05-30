@@ -3,6 +3,7 @@ import { createContext, useContext, useState, useRef, useEffect } from 'react'
 import Sidebar from './Sidebar'
 import CalendarModal from './CalendarModal'
 import StudyReminder from './StudyReminder'
+import NotificationBell from './NotificationBell'
 import { UserProvider } from '../context/UserContext'
 import { ToastProvider } from './Toast'
 import { supabase } from '../lib/supabaseClient'
@@ -63,6 +64,7 @@ export default function DashLayout() {
                 <p className="header-sub">{pageSub || 'Welcome back'}</p>
               </div>
               <div className="header-right">
+                <NotificationBell />
                 <span
                   ref={dateRef}
                   className={`header-date small-caps${calActive ? ' hidden' : ''}`}

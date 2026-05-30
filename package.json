@@ -14,7 +14,6 @@
   "dependencies": {
     "@supabase/supabase-js": "^2.106.1",
     "html2canvas": "^1.4.1",
-    "pdfjs-dist": "^4.9.155",
     "react": "^19.2.6",
     "react-dom": "^19.2.6",
     "react-router-dom": "^7.15.1",
