@@ -2169,9 +2169,14 @@ select.settings-input {
 .sat-break-stats { display: flex; gap: 1rem; margin: 0.75rem 0; }
 .sat-break-stat { font-size: 0.8rem; font-weight: 600; padding: 0.3rem 0.6rem; border: 2px solid var(--gray-300); }
 
+/* ─── Admin Notify ─── */
+.admin-notify .admin-layer { max-width: 500px; }
+
 /* ─── Notification Bell ─── */
-.notif-bell-btn { background: none; border: 2px solid var(--black); padding: 0.3rem 0.5rem; cursor: pointer; display: flex; align-items: center; position: relative; line-height: 1; }
-.notif-bell-btn:hover { background: var(--gray-100); }
+.notif-bell-btn { background: none; border: 2px solid var(--black); padding: 0.5rem 0.6rem; cursor: pointer; display: flex; align-items: center; position: relative; line-height: 1; font-size: 0.65rem; font-weight: 700; transition: all 0.2s var(--ease); }
+.notif-bell-btn:hover { background: var(--black); color: var(--white); }
+.notif-bell-btn:hover svg { stroke: var(--white); }
+.notif-bell-btn:active { transform: scale(0.97); }
 .notif-badge { position: absolute; top: -5px; right: -5px; background: #a31a1a; color: white; font-size: 0.5rem; font-weight: 800; padding: 0.1rem 0.3rem; border-radius: 0; line-height: 1; min-width: 14px; text-align: center; }
 .notif-panel { position: absolute; top: 100%; right: 0; margin-top: 0.25rem; width: 320px; background: var(--white); border: 2px solid var(--black); box-shadow: 4px 4px 0 var(--gray-700); z-index: 300; max-height: 70vh; display: flex; flex-direction: column; }
 .notif-panel-header { display: flex; justify-content: space-between; align-items: center; padding: 0.6rem 0.8rem; border-bottom: 2px solid var(--black); }
