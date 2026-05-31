@@ -25,6 +25,7 @@ export default function AdminQuestions() {
 
   const [qText, setQText] = useState('')
   const [noText, setNoText] = useState(false)
+  const [layoutSplit, setLayoutSplit] = useState(localStorage.getItem('testLayout') === 'split')
   const [qType, setQType] = useState('mc')
   const [opts, setOpts] = useState(['', '', '', ''])
   const [correct, setCorrect] = useState(0)
@@ -560,6 +561,19 @@ export default function AdminQuestions() {
                           <span className="admin-toggle-knob" />
                         </span>
                         <span className="admin-toggle-state">{noText ? 'YES' : 'NO'}</span>
+                      </label>
+                    </div>
+                    <div className="admin-no-text-row" style={{ marginTop: '0.3rem' }}>
+                      <label className="admin-toggle-label">
+                        <span className="admin-toggle-text">Split layout (two columns)</span>
+                        <span className={'admin-toggle' + (layoutSplit ? ' on' : '')} onClick={() => {
+                          const next = !layoutSplit
+                          setLayoutSplit(next)
+                          localStorage.setItem('testLayout', next ? 'split' : 'centered')
+                        }}>
+                          <span className="admin-toggle-knob" />
+                        </span>
+                        <span className="admin-toggle-state">{layoutSplit ? 'YES' : 'NO'}</span>
                       </label>
                     </div>
                   </div>
