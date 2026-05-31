@@ -507,17 +507,8 @@ export default function TestPage() {
       ) : (
       <div className="bb-body">
         <div className="bb-body-inner">
-          {q?.image_url && (
-            <img src={q.image_url} alt="" className="bb-q-img" draggable="false" onContextMenu={e => e.preventDefault()} />
-          )}
-          {q?.question_text && !hasInlineImg(q.question_text) && (
-            <div className="bb-passage" dangerouslySetInnerHTML={{ __html: q.question_text }} />
-          )}
           {q && (
             <>
-              {q?.question_text && hasInlineImg(q.question_text) && (
-                <div className="bb-q-text">{renderQuestionText(q.question_text)}</div>
-              )}
               <div className="bb-q-header">
                 <div className="bb-q-header-left">
                   <div className="bb-q-num">{current + 1}</div>
@@ -533,6 +524,15 @@ export default function TestPage() {
                   </button>
                 )}
               </div>
+              {q?.image_url && (
+                <img src={q.image_url} alt="" className="bb-q-img" draggable="false" onContextMenu={e => e.preventDefault()} />
+              )}
+              {q?.question_text && !hasInlineImg(q.question_text) && (
+                <div className="bb-passage" dangerouslySetInnerHTML={{ __html: q.question_text }} />
+              )}
+              {q?.question_text && hasInlineImg(q.question_text) && (
+                <div className="bb-q-text">{renderQuestionText(q.question_text)}</div>
+              )}
               {isWrittenQ(q) ? (
               <div className="bb-choices">
                 <textarea className="bb-written-input" rows={1} value={selected || ''} onChange={e => setSelected(e.target.value)} placeholder="Type your answer..." />
