@@ -1,4 +1,3 @@
 {
-  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }],
-  "rootDirectory": "."
+  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
 }
