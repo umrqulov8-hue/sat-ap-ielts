@@ -1520,29 +1520,14 @@ a, button { text-decoration: none; color: inherit; font-family: inherit; cursor:
 .bb-divider { border: none; border-top: 2px dashed #888; margin: 0; flex-shrink: 0; }
 
 /* BODY */
-.bb-body { flex: 1; display: flex; overflow: hidden; }
+.bb-body { flex: 1; overflow-y: auto; background: #fff; padding: 28px; }
 
-/* LEFT PANEL */
-.bb-left {
-  width: 50%; border-right: 2px solid #ddd;
-  padding: 28px; overflow-y: auto; background: #fff;
-  display: flex; flex-direction: column;
-}
-.bb-left-img {
-  width: 100%; display: block;
-  user-select: none; -webkit-user-drag: none; pointer-events: none;
-}
-.bb-passage {
-  font-size: 17px; line-height: 1.7; color: #222;
-}
-.bb-passage img, .bb-inline-img { max-width: 100%; display: block; margin: 0.5rem 0; }
+/* INNER SINGLE COLUMN */
+.bb-body-inner { max-width: 720px; margin: 0 auto; }
+.bb-body-inner .bb-q-img { width: 100%; display: block; user-select: none; -webkit-user-drag: none; pointer-events: none; margin-bottom: 1rem; }
+.bb-body-inner .bb-passage { font-size: 17px; line-height: 1.7; color: #222; margin-bottom: 1.5rem; }
+.bb-body-inner .bb-passage img, .bb-inline-img { max-width: 100%; display: block; margin: 0.5rem 0; }
 .test-done-q-text img { max-width: 100%; display: block; margin: 0.3rem 0; }
-
-/* RIGHT PANEL */
-.bb-right {
-  width: 50%; padding: 0; overflow-y: auto; background: #fff;
-  display: flex; flex-direction: column;
-}
 
 .bb-q-header {
   display: flex; align-items: center; justify-content: space-between;

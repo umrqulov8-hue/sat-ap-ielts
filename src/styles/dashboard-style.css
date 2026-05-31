@@ -1874,9 +1874,8 @@ select.settings-input {
     .settings-2fa-status { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
 
     /* ─── Test Page Mobile ─── */
-    .bb-body { flex-direction: column; }
-    .bb-left { width: 100%; max-width: 100%; position: relative; top: auto; min-height: auto; max-height: 50vh; }
-    .bb-right { width: 100%; min-height: auto; border-left: none; border-top: 2px dashed #888; }
+    .bb-body { padding: 16px; }
+    .bb-body-inner { padding: 0; }
     .bb-top { flex-wrap: wrap; gap: 0.3rem; padding: 0.5rem 0.8rem; }
     .bb-top-title { font-size: 14px; white-space: normal; }
     .bb-choices { padding: 0.8rem; }
@@ -1910,7 +1909,6 @@ select.settings-input {
 
 @media (max-width: 480px) {
     .bb-modal-grid { grid-template-columns: repeat(4, 1fr); }
-    .bb-left { max-height: 40vh; }
     .bb-choice-letter { width: 28px; height: 28px; font-size: 12px; }
     .bb-choice { font-size: 13px; padding: 0.5rem 0.6rem; }
     .admin-select, .admin-input, .admin-textarea { font-size: 0.75rem; padding: 0.4rem; }
