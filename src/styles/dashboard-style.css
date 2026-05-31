@@ -1,13 +1,13 @@
 :root {
-    --black: #0F172A;
+    --black: #000;
     --white: #fff;
-    --gray-100: #F8FAFC;
-    --gray-200: #F1F5F9;
-    --gray-300: #E2E8F0;
-    --gray-400: #CBD5E1;
-    --gray-500: #94A3B8;
-    --gray-600: #64748B;
-    --gray-700: #475569;
+    --gray-100: #f5f5f5;
+    --gray-200: #eee;
+    --gray-300: #ddd;
+    --gray-400: #bbb;
+    --gray-500: #888;
+    --gray-600: #555;
+    --gray-700: #333;
     --teal: #1a3c34;
     --teal-light: #2d6a4f;
     --navy: #1e3a5f;
@@ -16,24 +16,98 @@
     --purple-light: #7c3aed;
     --amber: #78350f;
     --amber-light: #d97706;
-    --success: #16A34A;
-    --error: #DC2626;
+    --success: #065f46;
+    --error: #991b1b;
     --ease: cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
-    font-family: var(--font);
-    background: var(--c-bg);
-    color: var(--c-text);
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: var(--white);
+    color: var(--black);
     -webkit-font-smoothing: antialiased;
     line-height: 1.5;
 }
 
-.sidebar-logo { font-size: 1.8rem; font-weight: 900; letter-spacing: -0.04em; color: var(--c-text-inv); }
+a { text-decoration: none; color: inherit; }
+button { cursor: pointer; border: none; font-family: inherit; background: none; }
+.small-caps { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gray-500); }
 
-.sidebar-badge { font-size: 0.55rem; font-weight: 700; letter-spacing: 0.15em; color: rgba(255,255,255,0.4); text-transform: uppercase; }
+/* ─── SHADOW WRAP ───────────────────────── */
+.shadow-wrap { position: relative; }
+
+.shadow-box {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    width: 100%;
+    height: 100%;
+    background: var(--gray-700);
+    z-index: 0;
+    border: 2px solid var(--black);
+    transition: all 0.3s var(--ease);
+}
+
+.shadow-wrap:hover > .shadow-box {
+    top: 16px;
+    left: 16px;
+}
+
+.shadow-wrap:active > .shadow-box {
+    top: 6px;
+    left: 6px;
+}
+
+.shadow-wrap > .shadow-box + * { position: relative; z-index: 1; }
+
+/* ─── LOADING ────────────────────────────── */
+.dash-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 300px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    color: #888;
+    text-transform: uppercase;
+}
+
+/* ─── LAYOUT ─────────────────────────────── */
+.dash-layout {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    min-height: 100vh;
+}
+
+/* ─── SIDEBAR ────────────────────────────── */
+.dash-sidebar {
+    background: var(--white);
+    border-right: 2px solid var(--black);
+    padding: 2rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.sidebar-header {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 2px solid var(--black);
+    flex-shrink: 0;
+}
+
+.sidebar-logo { font-size: 1.8rem; font-weight: 900; letter-spacing: -0.04em; }
+
+.sidebar-badge { font-size: 0.55rem; font-weight: 700; letter-spacing: 0.15em; color: var(--gray-500); text-transform: uppercase; }
 
 .sidebar-scroll {
     flex: 1;
@@ -61,7 +135,7 @@ body {
     font-size: 0.6rem;
     font-weight: 700;
     letter-spacing: 0.2em;
-    color: rgba(255,255,255,0.35);
+    color: var(--gray-400);
     text-transform: uppercase;
     padding-left: 0.25rem;
     margin-bottom: 0.25rem;
@@ -98,15 +172,14 @@ body {
     gap: 0.75rem;
     padding: 0.85rem 1rem;
     font-size: 0.75rem;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    color: rgba(255,255,255,0.6);
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: var(--gray-600);
     border: 2px solid transparent;
     background: transparent;
-    transition: all 0.15s ease;
+    transition: all 0.3s var(--ease);
     position: relative;
     z-index: 1;
-    border-radius: var(--radius);
 }
 
 button.snav-item {
@@ -118,9 +191,9 @@ button.snav-item {
 }
 
 .snav-wrap:hover .snav-item {
-    background: rgba(255,255,255,0.08);
-    color: var(--c-text-inv);
-    border-color: transparent;
+    background: var(--white);
+    color: var(--black);
+    border-color: var(--black);
 }
 
 .snav-item:active {
@@ -128,14 +201,14 @@ button.snav-item {
 }
 
 .snav-item.active {
-    background: var(--c-primary);
-    color: var(--c-text-inv);
-    border-color: var(--c-primary);
+    background: var(--black);
+    color: var(--white);
+    border-color: var(--black);
 }
 
 .snav-item.active:hover {
-    background: var(--c-primary-hover);
-    color: var(--c-text-inv);
+    background: var(--black);
+    color: var(--white);
 }
 
 .snav-item svg { flex-shrink: 0; }
@@ -146,40 +219,29 @@ button.snav-item {
     font-size: 0.55rem;
     font-weight: 700;
     letter-spacing: 0.1em;
-    background: rgba(255,255,255,0.15);
-    color: rgba(255,255,255,0.8);
+    background: var(--black);
+    color: var(--white);
     padding: 0.3rem 0.5rem;
     flex-shrink: 0;
-    border-radius: var(--radius);
 }
 
 .snav-item.active .snav-badge {
-    background: rgba(255,255,255,0.2);
-    color: var(--c-text-inv);
+    background: var(--white);
+    color: var(--black);
 }
 
 .snav-divider {
-    height: 1px;
-    background: rgba(255,255,255,0.1);
+    height: 2px;
+    background: var(--gray-200);
     margin: 0.5rem 0;
 }
 
 .snav-item.logout {
     margin-top: 0.5rem;
-    color: rgba(255,255,255,0.5);
+    color: var(--black);
     font-size: 0.7rem;
     background: transparent;
     border-color: transparent;
-}
-
-.snav-item.logout:hover {
-    color: var(--c-text-inv);
-    background: rgba(255,255,255,0.1);
-    border-color: rgba(255,255,255,0.2);
-}
-
-.snav-item.logout:active {
-    background: rgba(255,255,255,0.05);
 }
 
 .snav-item.logout:hover {
@@ -274,44 +336,9 @@ button.snav-item {
 }
 
 .sidebar-footer {
-    border-top: 1px solid rgba(255,255,255,0.15);
+    border-top: 2px solid var(--black);
     padding-top: 1.5rem;
     flex-shrink: 0;
-}
-
-.sidebar-user {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    padding: 0.75rem;
-    margin-bottom: 0.75rem;
-    border: 2px solid transparent;
-    transition: all 0.15s ease;
-    cursor: pointer;
-    border-radius: var(--radius);
-    color: rgba(255,255,255,0.7);
-}
-
-.sidebar-user:hover {
-    background: rgba(255,255,255,0.08);
-    color: var(--c-text-inv);
-    border-color: transparent;
-}
-
-.sidebar-user:active {
-    background: rgba(255,255,255,0.05);
-}
-
-.sidebar-user:hover svg {
-    color: var(--c-text-inv);
-}
-
-.sidebar-user-avatar {
-    width: 36px;
-    height: 36px;
-    border: 2px solid rgba(255,255,255,0.2);
-    object-fit: cover;
-    border-radius: var(--radius);
 }
 
 .sidebar-user {
@@ -388,37 +415,36 @@ button.snav-item {
     top: 0;
     left: 280px;
     right: 0;
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.85);
     backdrop-filter: blur(12px);
     z-index: 10;
     padding-left: 3rem;
     padding-right: 3rem;
 }
 
-.header-title { font-size: 2rem; font-weight: 800; letter-spacing: -0.03em; line-height: 1; color: var(--c-text); }
+.header-title { font-size: 2.5rem; font-weight: 900; letter-spacing: -0.04em; line-height: 1; }
 
-.header-sub { font-size: 0.8rem; color: var(--c-text-2); font-weight: 500; margin-top: 0.3rem; }
+.header-sub { font-size: 0.85rem; color: var(--gray-500); font-weight: 500; margin-top: 0.4rem; }
 
 .header-date {
     padding: 0.5rem 0.8rem;
-    border: 2px solid var(--c-border);
+    border: 2px solid var(--black);
     font-size: 0.65rem;
     font-weight: 700;
     letter-spacing: 0.12em;
-    color: var(--c-text-3);
+    color: var(--gray-500);
     cursor: pointer;
-    transition: all 0.15s ease;
+    transition: all 0.2s var(--ease);
     position: relative;
     top: -4px;
     display: inline-flex;
     align-items: center;
     height: 2.2rem;
-    border-radius: var(--radius);
 }
 
 .header-date:hover {
-    background: var(--c-base);
-    color: var(--c-text-inv);
+    background: var(--black);
+    color: var(--white);
 }
 
 .header-date:active {
