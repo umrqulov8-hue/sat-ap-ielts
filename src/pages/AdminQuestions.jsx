@@ -554,9 +554,13 @@ export default function AdminQuestions() {
                         placeholder={noText ? 'Optional — question is in the image' : 'Enter question...'} disabled={noText} />
                     </div>
                     <div className="admin-no-text-row">
-                      <button className={'admin-no-text-btn' + (noText ? ' active' : '')} onClick={() => setNoText(!noText)}>
-                        {noText ? 'QUESTION TEXT DISABLED' : 'QUESTION IN IMAGE (no text)'}
-                      </button>
+                      <label className="admin-toggle-label">
+                        <span className="admin-toggle-text">Question in image (no text)</span>
+                        <span className={'admin-toggle' + (noText ? ' on' : '')} onClick={() => setNoText(!noText)}>
+                          <span className="admin-toggle-knob" />
+                        </span>
+                        <span className="admin-toggle-state">{noText ? 'YES' : 'NO'}</span>
+                      </label>
                     </div>
                   </div>
 

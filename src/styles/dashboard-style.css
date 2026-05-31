@@ -1876,9 +1876,6 @@ select.settings-input {
     /* ─── Test Page Mobile ─── */
     .bb-body { padding: 16px; }
     .bb-body-inner { padding: 0; }
-    .bb-body-split { flex-direction: column; }
-    .bb-body-split .bb-left { width: 100%; max-width: 100%; max-height: 50vh; border-right: none; border-bottom: 2px dashed #888; padding: 16px; }
-    .bb-body-split .bb-right { width: 100%; }
     .bb-top { flex-wrap: wrap; gap: 0.3rem; padding: 0.5rem 0.8rem; }
     .bb-top-title { font-size: 14px; white-space: normal; }
     .bb-choices { padding: 0.8rem; }
@@ -2010,10 +2007,16 @@ select.settings-input {
 .tr-date { font-size: 0.7rem; color: var(--gray-500); }
 .tr-header-right { display: flex; align-items: center; gap: 0.75rem; }
 
-.bb-split-btn { background: none; border: 2px solid #888; padding: 4px 6px; cursor: pointer; display: flex; align-items: center; line-height: 1; }
-.bb-split-btn:hover { border-color: #000; }
-.bb-split-btn.active { background: #000; border-color: #000; }
-.bb-split-btn.active svg { stroke: #fff; }
+/* ─── Admin USERS tab ─── */
+.admin-users { display: flex; flex-direction: column; border: 2px solid var(--black); background: var(--white); box-shadow: 3px 3px 0 var(--gray-700); }
+.admin-users-header { display: grid; grid-template-columns: 1fr 0.5fr 0.5fr 0.5fr 0.8fr; background: var(--black); color: var(--white); font-size: 0.6rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
+.admin-usr-h { padding: 0.6rem 0.8rem; }
+.admin-users-row { display: grid; grid-template-columns: 1fr 0.5fr 0.5fr 0.5fr 0.8fr; border-top: 1px solid var(--gray-300); font-size: 0.7rem; }
+.admin-usr-c { padding: 0.5rem 0.8rem; display: flex; align-items: center; }
+.admin-role-select { font-family: inherit; font-size: 0.6rem; padding: 0.2rem 0.3rem; border: 1.5px solid var(--black); background: var(--white); cursor: pointer; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+.admin-role-badge { font-size: 0.5rem; font-weight: 700; padding: 2px 6px; border: 1.5px solid var(--black); text-transform: uppercase; letter-spacing: 0.05em; }
+.admin-role-badge.admin { background: var(--black); color: var(--white); }
+.admin-role-badge.owner { background: #a31a1a; color: var(--white); border-color: #a31a1a; }
 
 @media (max-width: 768px) {
   .admin-stats-grid { flex-direction: column; gap: 0.5rem; }
