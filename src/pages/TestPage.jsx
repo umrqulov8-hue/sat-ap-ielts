@@ -33,6 +33,7 @@ export default function TestPage() {
   const [calcPos, setCalcPos] = useState({ x: 80, y: 60 })
   const [calcSize, setCalcSize] = useState({ w: 640, h: 520 })
   const [totalElapsed, setTotalElapsed] = useState(0)
+  const [splitView, setSplitView] = useState(false)
   const timerRef = useRef(null)
   const qStartRef = useRef(null)
   const toast = useToast()
@@ -444,6 +445,11 @@ export default function TestPage() {
         <div className="bb-top-title">{topic.modules?.title || 'Test'} &mdash; {topic.title}</div>
         <div className="bb-timer">{formatTime(elapsed)}</div>
         <div className="bb-top-right">
+          <button className={'bb-split-btn' + (splitView ? '' : ' active')} onClick={() => setSplitView(v => !v)} title="Toggle layout">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              {splitView ? <><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="12" y1="3" x2="12" y2="21"/></> : <><rect x="3" y="3" width="18" height="18" rx="2"/></>}
+            </svg>
+          </button>
           <button className="bb-icon-btn" title="Reference" onClick={() => setShowRef(true)}>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
           </button>
@@ -459,6 +465,58 @@ export default function TestPage() {
       <hr className="bb-divider" />
 
       {/* BODY */}
+      {splitView ? (
+      <div className="bb-body bb-body-split">
+        <div className="bb-left">
+          <div className="bb-left-content">
+            {q?.image_url && (
+              <img src={q.image_url} alt="" className="bb-left-img" draggable="false" onContextMenu={e => e.preventDefault()} />
+            )}
+            {q?.question_text && !hasInlineImg(q.question_text) && (
+              <div className="bb-passage" dangerouslySetInnerHTML={{ __html: q.question_text }} />
+            )}
+          </div>
+        </div>
+        <div className="bb-right">
+          <div className="bb-q-header">
+            <div className="bb-q-header-left">
+              <div className="bb-q-num">{current + 1}</div>
+              <button className={'bb-mark-btn' + (reviewMarked.includes(current) ? ' marked' : '')} onClick={markReview}>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill={reviewMarked.includes(current) ? 'currentColor' : 'none'} stroke="currentColor" strokeWidth="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                Mark for Review
+              </button>
+            </div>
+            {!isWrittenQ(q) && (
+              <button className={'bb-abc-btn' + (abcMode ? ' active' : '')} onClick={() => setAbcMode(v => !v)}>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="3" y1="12" x2="21" y2="12"/></svg>
+                ABC
+              </button>
+            )}
+          </div>
+          {q && (
+            <>
+              {q?.question_text && hasInlineImg(q.question_text) && (
+                <div className="bb-q-text">{renderQuestionText(q.question_text)}</div>
+              )}
+              {isWrittenQ(q) ? (
+              <div className="bb-choices">
+                <textarea className="bb-written-input" rows={1} value={selected || ''} onChange={e => setSelected(e.target.value)} placeholder="Type your answer..." />
+              </div>
+            ) : (
+              <div className="bb-choices">
+                {q.options.map((opt, i) => (
+                  <div key={i} className={'bb-choice' + (selected === i ? ' selected' : '') + ((strikethrough['q' + current] || []).includes(i) ? ' struck' : '')} onClick={() => handleSelect(i)}>
+                    <div className="bb-choice-letter">{String.fromCharCode(65 + i)}</div>
+                    <div className="bb-choice-text">{opt}</div>
+                  </div>
+                ))}
+              </div>
+            )}
+            </>
+          )}
+        </div>
+      </div>
+      ) : (
       <div className="bb-body">
         <div className="bb-body-inner">
           {q?.image_url && (
@@ -470,9 +528,7 @@ export default function TestPage() {
           {q && (
             <>
               {q?.question_text && hasInlineImg(q.question_text) && (
-                <div className="bb-q-text">
-                  {renderQuestionText(q.question_text)}
-                </div>
+                <div className="bb-q-text">{renderQuestionText(q.question_text)}</div>
               )}
               <div className="bb-q-header">
                 <div className="bb-q-header-left">
@@ -491,32 +547,23 @@ export default function TestPage() {
               </div>
               {isWrittenQ(q) ? (
               <div className="bb-choices">
-                <textarea
-                  className="bb-written-input"
-                  rows={1}
-                  value={selected || ''}
-                  onChange={e => setSelected(e.target.value)}
-                  placeholder="Type your answer..."
-                />
+                <textarea className="bb-written-input" rows={1} value={selected || ''} onChange={e => setSelected(e.target.value)} placeholder="Type your answer..." />
               </div>
             ) : (
               <div className="bb-choices">
                 {q.options.map((opt, i) => (
-                  <div
-                    key={i}
-                    className={'bb-choice' + (selected === i ? ' selected' : '') + ((strikethrough['q' + current] || []).includes(i) ? ' struck' : '')}
-                    onClick={() => handleSelect(i)}
-                  >
+                  <div key={i} className={'bb-choice' + (selected === i ? ' selected' : '') + ((strikethrough['q' + current] || []).includes(i) ? ' struck' : '')} onClick={() => handleSelect(i)}>
                     <div className="bb-choice-letter">{String.fromCharCode(65 + i)}</div>
                     <div className="bb-choice-text">{opt}</div>
                   </div>
-                  ))}
+                ))}
               </div>
             )}
             </>
           )}
         </div>
       </div>
+      )}
 
       <hr className="bb-divider" />
 

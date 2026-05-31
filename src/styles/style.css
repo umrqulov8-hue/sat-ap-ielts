@@ -1519,8 +1519,16 @@ a, button { text-decoration: none; color: inherit; font-family: inherit; cursor:
 /* DIVIDER */
 .bb-divider { border: none; border-top: 2px dashed #888; margin: 0; flex-shrink: 0; }
 
-/* BODY */
+/* BODY — merged (default) */
 .bb-body { flex: 1; overflow-y: auto; background: #fff; padding: 28px; }
+
+/* BODY — split (toggle on) */
+.bb-body-split { display: flex; overflow: hidden; padding: 0; }
+.bb-body-split .bb-left { width: 50%; border-right: 2px solid #ddd; padding: 28px; overflow-y: auto; display: flex; flex-direction: column; }
+.bb-body-split .bb-left-img { width: 100%; display: block; user-select: none; -webkit-user-drag: none; pointer-events: none; }
+.bb-body-split .bb-right { width: 50%; display: flex; flex-direction: column; overflow-y: auto; }
+.bb-body-split .bb-q-header { display: flex; align-items: center; justify-content: space-between; background: #fff; border-bottom: 2px solid #ddd; padding: 10px 16px; flex-shrink: 0; }
+.bb-body-split .bb-choices { padding: 16px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
 
 /* INNER SINGLE COLUMN */
 .bb-body-inner { max-width: 720px; margin: 0 auto; }
