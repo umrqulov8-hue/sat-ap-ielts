@@ -159,11 +159,12 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
     background: var(--gray-700);
     z-index: 0;
     opacity: 0;
-    transition: opacity 0.2s var(--ease);
+    transition: opacity 0.2s var(--ease), transform 0.2s var(--ease);
 }
 
 .snav-wrap:hover .shadow-box {
     opacity: 1;
+    transform: translate(2px, 2px);
 }
 
 .snav-item {
@@ -177,7 +178,7 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
     color: var(--gray-600);
     border: 2px solid transparent;
     background: transparent;
-    transition: all 0.3s var(--ease);
+    transition: background 0.2s var(--ease), color 0.2s var(--ease), border-color 0.2s var(--ease), transform 0.12s var(--ease);
     position: relative;
     z-index: 1;
 }
@@ -445,10 +446,12 @@ button.snav-item {
 .header-date:hover {
     background: var(--black);
     color: var(--white);
+    transform: translateY(-1px);
+    box-shadow: 0 3px 8px rgba(0,0,0,0.12);
 }
 
 .header-date:active {
-    transform: scale(0.97);
+    transform: scale(0.95) !important;
 }
 
 .header-date.hidden {
@@ -468,7 +471,7 @@ button.snav-item {
     background: var(--white);
     border: 2px solid var(--black);
     padding: 1.75rem;
-    transition: all 0.3s var(--ease);
+    transition: background 0.2s var(--ease), color 0.2s var(--ease), transform 0.15s var(--ease), box-shadow 0.2s var(--ease);
 }
 
 .stat-card:hover { background: var(--black); color: var(--white); }
@@ -2032,7 +2035,7 @@ select.settings-input {
 .sat-admin-wrap { }
 .sat-list-page { padding: 0; }
 .sat-list { display: flex; flex-direction: column; gap: 0.5rem; }
-.sat-list-row { display: flex; justify-content: space-between; align-items: center; border: 2px solid var(--black); padding: 0.8rem 1rem; background: var(--white); box-shadow: 3px 3px 0 var(--gray-700); }
+.sat-list-row { display: flex; justify-content: space-between; align-items: center; border: 2px solid var(--black); padding: 0.8rem 1rem; background: var(--white); box-shadow: 3px 3px 0 var(--gray-700); transition: transform 0.15s var(--ease), box-shadow 0.15s var(--ease), background 0.2s var(--ease); }
 .sat-list-left { display: flex; flex-direction: column; gap: 0.1rem; }
 .sat-list-title { font-size: 0.85rem; font-weight: 700; }
 .sat-list-meta { font-size: 0.65rem; color: var(--gray-500); }
