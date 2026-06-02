@@ -1,5 +1,5 @@
 import { lazy, Suspense } from 'react'
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, Outlet } from 'react-router-dom'
 import DashLayout from './components/DashLayout'
 
 const Home = lazy(() => import('./pages/Home'))
@@ -24,11 +24,13 @@ const SatTestList = lazy(() => import('./pages/SatTestList'))
 const SatTestPage = lazy(() => import('./pages/SatTestPage'))
 const NotFound = lazy(() => import('./pages/NotFound'))
 
-function AuthOverlay() {
+function HomeLayout() {
   return (
     <>
-      <Home />
-      <Auth />
+      <Suspense fallback={null}>
+        <Home />
+      </Suspense>
+      <Outlet />
     </>
   )
 }
@@ -40,8 +42,10 @@ function SuspenseWrap({ children }) {
 export default function App() {
   return (
     <Routes>
-      <Route path="/" element={<SuspenseWrap><Home /></SuspenseWrap>} />
-      <Route path="/auth" element={<SuspenseWrap><AuthOverlay /></SuspenseWrap>} />
+      <Route element={<SuspenseWrap><HomeLayout /></SuspenseWrap>}>
+        <Route path="/" element={null} />
+        <Route path="/auth" element={<SuspenseWrap><Auth /></SuspenseWrap>} />
+      </Route>
       <Route element={<DashLayout />}>
         <Route path="/dashboard" element={<SuspenseWrap><Dashboard /></SuspenseWrap>} />
         <Route path="/sat-math" element={<SuspenseWrap><SatMath /></SuspenseWrap>} />

@@ -1,65 +1,68 @@
 import { useEffect } from 'react'
 
+const easeOutCubic = (t) => 1 - Math.pow(1 - t, 3)
+
+const animateCount = (el) => {
+  const target = parseFloat(el.dataset.countTo)
+  if (isNaN(target)) return
+  const duration = parseFloat(el.dataset.countDuration || '1800')
+  const decimals = parseInt(el.dataset.countDecimals || '0', 10)
+  const prefix = el.dataset.countPrefix || ''
+  const suffix = el.dataset.countSuffix || ''
+  const start = performance.now()
+  const tick = (now) => {
+    const elapsed = now - start
+    const t = Math.min(1, elapsed / duration)
+    const v = target * easeOutCubic(t)
+    el.textContent = prefix + v.toFixed(decimals) + suffix
+    if (t < 1) requestAnimationFrame(tick)
+    else el.textContent = prefix + target.toFixed(decimals) + suffix
+  }
+  requestAnimationFrame(tick)
+}
+
+const animateProgress = (el) => {
+  const target = parseFloat(el.dataset.progressTo || '100')
+  const duration = parseFloat(el.dataset.progressDuration || '1400')
+  el.style.width = '0%'
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      el.style.transition = `width ${duration}ms cubic-bezier(0.16, 1, 0.3, 1)`
+      el.style.width = target + '%'
+    })
+  })
+}
+
 export default function useScrollReveal() {
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
+      entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          const delay = entry.target.style.transitionDelay || '0s'
-          entry.target.style.transitionDelay = delay
-          entry.target.classList.add('active')
-          observer.unobserve(entry.target)
+          const el = entry.target
+          const delay = el.dataset.revealDelay
+          if (delay) el.style.transitionDelay = delay
+          el.classList.add('active')
+          if (el.classList.contains('u-count')) animateCount(el)
+          if (el.classList.contains('u-progress')) animateProgress(el)
+          observer.unobserve(el)
         }
       })
-    }, { root: null, rootMargin: '0px 0px 60px 0px', threshold: 0 })
+    }, { root: null, rootMargin: '0px 0px 70px 0px', threshold: 0.05 })
 
-    const els = document.querySelectorAll('.reveal-fade, .reveal-hero, .reveal-heading, .reveal-card, .reveal-epic')
-    els.forEach(el => observer.observe(el))
+    const els = document.querySelectorAll(
+      '.reveal-fade, .reveal-hero, .reveal-heading, .reveal-card, .reveal-epic, .u-reveal, .u-count, .u-progress, .u-stagger'
+    )
+    els.forEach((el) => observer.observe(el))
 
-    const parallaxConfigs = [
-      { selector: '.parallax-slow', speed: 0.015 },
-      { selector: '.parallax-medium', speed: 0.025 },
-      { selector: '.parallax-fast', speed: 0.04 },
-      { selector: '.parallax-bg', speed: -0.02 }
-    ]
-
-    const parallaxCache = parallaxConfigs.map(({ selector, speed }) => ({
-      elements: [...document.querySelectorAll(selector)],
-      speed
-    }))
-
-    const state = new Map()
-    let id = 0
-
-    let rafId
-    const loop = () => {
-      const sy = window.scrollY
-      parallaxCache.forEach(({ elements, speed }) => {
-        elements.forEach(el => {
-          if (!el.isConnected) return
-          const rect = el.getBoundingClientRect()
-          const key = el.dataset.pid || (el.dataset.pid = id++)
-          if (rect.top < window.innerHeight + 200 && rect.bottom > -200) {
-            const dc = rect.top + rect.height / 2 - window.innerHeight / 2
-            const target = -(dc * speed)
-            const cur = state.get(key) || 0
-            const smooth = cur + (target - cur) * 0.1
-            state.set(key, smooth)
-            el.style.transform = `translateY(${smooth}px)`
-          }
-        })
-      })
-      rafId = requestAnimationFrame(loop)
+    const navbar = document.querySelector('.unitap-nav')
+    const onScroll = () => {
+      if (navbar) navbar.classList.toggle('scrolled', window.scrollY > 50)
     }
-    rafId = requestAnimationFrame(loop)
-
-    const navbar = document.getElementById('navbar')
-    const onScroll = () => navbar?.classList.toggle('scrolled', window.scrollY > 50)
     window.addEventListener('scroll', onScroll, { passive: true })
+    onScroll()
 
     return () => {
       observer.disconnect()
-      cancelAnimationFrame(rafId)
       window.removeEventListener('scroll', onScroll)
     }
   }, [])
