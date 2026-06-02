@@ -2747,3 +2747,81 @@ select.settings-input {
 .notif-item-body { font-size: 0.65rem; color: var(--gray-600); line-height: 1.4; }
 .notif-item-time { font-size: 0.55rem; color: var(--gray-400); margin-top: 0.2rem; }
 .header-right { display: flex; align-items: center; gap: 0.75rem; }
+
+/* ─── Admin Stats (Redesign) ─── */
+.admin-stat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem; margin-bottom: 1rem; }
+.admin-stat-card { padding: 1rem 1.1rem; border: 2.5px solid var(--dark); background: var(--white); box-shadow: 4px 4px 0 var(--dark); position: relative; transition: transform 0.2s var(--ease), box-shadow 0.2s var(--ease); }
+.admin-stat-card:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 var(--dark); }
+.admin-stat-card.admin-stat-lavender { background: var(--lavender); }
+.admin-stat-card.admin-stat-peach { background: var(--peach); }
+.admin-stat-card.admin-stat-green { background: var(--green); }
+.admin-stat-card.admin-stat-yellow { background: var(--yellow); }
+.admin-stat-icon { width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; border: 2px solid var(--dark); background: var(--white); margin-bottom: 0.6rem; }
+.admin-stat-val { font-size: 1.8rem; font-weight: 800; line-height: 1; margin-bottom: 0.25rem; letter-spacing: -0.02em; }
+.admin-stat-lbl { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+
+.admin-stats-row-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 0.75rem; }
+.admin-stat-block { padding: 1rem 1.1rem; border: 2.5px solid var(--dark); background: var(--white); box-shadow: 4px 4px 0 var(--dark); }
+.admin-stat-block-title { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.85rem; padding-bottom: 0.6rem; border-bottom: 2px solid var(--dark); }
+.admin-stat-block-title > span:first-child { font-size: 0.7rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; }
+.admin-stat-block-hint { font-size: 0.6rem; font-weight: 600; color: var(--muted); letter-spacing: 0.05em; }
+
+.admin-week-chart { display: grid; grid-template-columns: repeat(7, 1fr); gap: 0.4rem; align-items: end; min-height: 140px; }
+.admin-week-col { display: flex; flex-direction: column; align-items: center; gap: 0.2rem; }
+.admin-week-val { font-size: 0.65rem; font-weight: 700; min-height: 0.9em; }
+.admin-week-bar-wrap { width: 100%; height: 90px; display: flex; align-items: flex-end; background: var(--gray-100); border: 1.5px solid var(--dark); }
+.admin-week-bar { width: 100%; background: var(--lavender); border-top: 2px solid var(--dark); transition: height 0.4s var(--ease); min-height: 2px; }
+.admin-week-day { font-size: 0.55rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--muted); }
+.admin-week-date { font-size: 0.7rem; font-weight: 700; }
+
+.admin-subj-list { display: flex; flex-direction: column; gap: 0.6rem; }
+.admin-subj-item { display: flex; flex-direction: column; gap: 0.3rem; }
+.admin-subj-head { display: flex; align-items: center; gap: 0.5rem; }
+.admin-subj-dot { width: 10px; height: 10px; border: 1.5px solid var(--dark); flex-shrink: 0; }
+.admin-subj-dot.admin-stat-lavender { background: var(--lavender); }
+.admin-subj-dot.admin-stat-peach { background: var(--peach); }
+.admin-subj-dot.admin-stat-green { background: var(--green); }
+.admin-subj-dot.admin-stat-yellow { background: var(--yellow); }
+.admin-subj-dot.admin-stat-pink { background: var(--pink); }
+.admin-subj-name { flex: 1; font-size: 0.75rem; font-weight: 700; }
+.admin-subj-pct { font-size: 0.8rem; font-weight: 800; font-variant-numeric: tabular-nums; }
+.admin-subj-bar-bg { height: 8px; background: var(--gray-100); border: 1.5px solid var(--dark); overflow: hidden; }
+.admin-subj-bar-fill { height: 100%; transition: width 0.5s var(--ease); }
+.admin-subj-bar-fill.admin-stat-lavender { background: var(--lavender); }
+.admin-subj-bar-fill.admin-stat-peach { background: var(--peach); }
+.admin-subj-bar-fill.admin-stat-green { background: var(--green); }
+.admin-subj-bar-fill.admin-stat-yellow { background: var(--yellow); }
+.admin-subj-bar-fill.admin-stat-pink { background: var(--pink); }
+.admin-subj-meta { display: flex; gap: 0.5rem; font-size: 0.6rem; color: var(--muted); font-weight: 600; }
+.admin-subj-today { color: var(--dark); font-weight: 700; }
+
+.admin-top-users { display: flex; flex-direction: column; gap: 0.5rem; }
+.admin-top-user { display: flex; align-items: center; gap: 0.6rem; padding: 0.4rem 0.5rem; border: 1.5px solid var(--gray-300); background: var(--gray-100); transition: all 0.15s var(--ease); }
+.admin-top-user:hover { background: var(--yellow); border-color: var(--dark); transform: translateX(2px); }
+.admin-top-rank { font-size: 0.7rem; font-weight: 800; min-width: 1.5rem; }
+.admin-top-avatar { width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; background: var(--lavender); border: 2px solid var(--dark); font-size: 0.85rem; font-weight: 800; flex-shrink: 0; }
+.admin-top-info { flex: 1; min-width: 0; }
+.admin-top-name { font-size: 0.7rem; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.admin-top-tests { font-size: 0.6rem; color: var(--muted); font-weight: 600; }
+
+.admin-recent { display: flex; flex-direction: column; gap: 0.4rem; }
+.admin-recent-item { display: flex; align-items: center; gap: 0.7rem; padding: 0.4rem 0.5rem; border: 1.5px solid var(--gray-300); background: var(--white); transition: all 0.15s var(--ease); }
+.admin-recent-item:hover { border-color: var(--dark); transform: translateX(2px); }
+.admin-recent-pct { font-size: 0.75rem; font-weight: 800; padding: 0.3rem 0.5rem; border: 1.5px solid var(--dark); min-width: 3.2rem; text-align: center; font-variant-numeric: tabular-nums; }
+.admin-recent-pct.high { background: var(--green); }
+.admin-recent-pct.mid { background: var(--yellow); }
+.admin-recent-pct.low { background: var(--peach); }
+.admin-recent-info { flex: 1; min-width: 0; }
+.admin-recent-subj { font-size: 0.7rem; font-weight: 700; }
+.admin-recent-meta { font-size: 0.6rem; color: var(--muted); font-weight: 600; }
+
+.admin-empty { padding: 1.5rem 1rem; text-align: center; font-size: 0.7rem; color: var(--muted); font-weight: 600; border: 1.5px dashed var(--gray-300); background: var(--gray-100); }
+
+@media (max-width: 900px) {
+  .admin-stat-grid { grid-template-columns: repeat(2, 1fr); }
+  .admin-stats-row-grid { grid-template-columns: 1fr; }
+}
+
+/* ─── Admin Toast (inline msg) ─── */
+.admin-msg-toast { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem; padding: 0.6rem 0.9rem; background: var(--green); border: 2.5px solid var(--dark); box-shadow: 3px 3px 0 var(--dark); font-size: 0.7rem; font-weight: 700; color: var(--dark); }
+.admin-msg-close { margin-left: auto; background: none; border: none; color: var(--dark); font-size: 1.2rem; line-height: 1; cursor: pointer; padding: 0 0.2rem; font-weight: 800; }

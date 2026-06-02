@@ -97,24 +97,59 @@ export default function AdminQuestions() {
         supabase.rpc('get_all_practice_tests'),
         supabase.rpc('get_all_profiles'),
       ])
-      const allTests = testsRes.data
-      const allProfiles = profilesRes.data
-      if (!allTests) return
+      const allTests = testsRes.data || []
+      const allProfiles = profilesRes.data || []
       const totalTests = allTests.length
-      const totalScore = allTests.reduce((a, t) => a + t.score, 0)
-      const totalTotal = allTests.reduce((a, t) => a + t.total, 0)
+      const totalScore = allTests.reduce((a, t) => a + (t.score || 0), 0)
+      const totalTotal = allTests.reduce((a, t) => a + (t.total || 0), 0)
       const subjectCounts = {}
       for (const t of allTests) {
         const key = t.subject || 'General'
-        if (!subjectCounts[key]) subjectCounts[key] = { count: 0, score: 0, total: 0 }
+        if (!subjectCounts[key]) subjectCounts[key] = { count: 0, score: 0, total: 0, today: 0 }
         subjectCounts[key].count++
-        subjectCounts[key].score += t.score
-        subjectCounts[key].total += t.total
+        subjectCounts[key].score += t.score || 0
+        subjectCounts[key].total += t.total || 0
       }
-      const today = new Date()
-      today.setHours(0, 0, 0, 0)
-      const todayTests = allTests.filter(t => new Date(t.taken_at) >= today).length
-      setStats({ totalTests, totalScore, totalToday: todayTests, subjectCounts, totalUsers: allProfiles?.length || 0 })
+      const now = new Date()
+      const todayStart = new Date(now); todayStart.setHours(0, 0, 0, 0)
+      const weekStart = new Date(todayStart); weekStart.setDate(weekStart.getDate() - 6)
+      const todayTests = []
+      const weekBuckets = {}
+      for (let i = 0; i < 7; i++) {
+        const d = new Date(weekStart); d.setDate(d.getDate() + i)
+        weekBuckets[d.toISOString().slice(0, 10)] = { count: 0, score: 0, total: 0 }
+      }
+      const userStats = {}
+      for (const t of allTests) {
+        const taken = new Date(t.taken_at)
+        if (taken >= todayStart) {
+          todayTests.push(t)
+          const subj = t.subject || 'General'
+          if (subjectCounts[subj]) subjectCounts[subj].today++
+        }
+        const dayKey = taken.toISOString().slice(0, 10)
+        if (weekBuckets[dayKey]) {
+          weekBuckets[dayKey].count++
+          weekBuckets[dayKey].score += t.score || 0
+          weekBuckets[dayKey].total += t.total || 0
+        }
+        if (!userStats[t.user_id]) userStats[t.user_id] = { tests: 0, score: 0, total: 0 }
+        userStats[t.user_id].tests++
+        userStats[t.user_id].score += t.score || 0
+        userStats[t.user_id].total += t.total || 0
+      }
+      const topUsers = Object.entries(userStats)
+        .map(([uid, s]) => ({ ...s, id: uid, avg: s.total > 0 ? s.score / s.total : 0, name: allProfiles.find(p => p.id === uid)?.display_name || '—' }))
+        .sort((a, b) => b.tests - a.tests)
+        .slice(0, 5)
+      const allProfilesById = Object.fromEntries(allProfiles.map(p => [p.id, p]))
+      const recent = [...allTests].sort((a, b) => new Date(b.taken_at) - new Date(a.taken_at)).slice(0, 6)
+      setStats({
+        totalTests, totalScore, totalTotal,
+        totalToday: todayTests.length,
+        subjectCounts, totalUsers: allProfiles.length,
+        weekBuckets, topUsers, recent, allProfilesById,
+      })
     })()
   }, [tab])
 
@@ -337,13 +372,27 @@ export default function AdminQuestions() {
           <p>You do not have admin access.</p>
         </div>
       ) : (<>
-      {msg && <div className="admin-msg" style={{ marginBottom: '1rem', padding: '0.5rem 1rem', background: '#000', color: '#fff', fontSize: '0.7rem', fontWeight: 700 }}>{msg}</div>}
+      {msg && <div className="admin-msg-toast"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polyline points="20 6 9 17 4 12"/></svg>{msg}<button className="admin-msg-close" onClick={() => setMsg('')}>×</button></div>}
 
       <div className="admin-tabs">
-        <button className={'admin-tab' + (tab === 'questions' ? ' active' : '')} onClick={() => setTab('questions')}>QUESTIONS</button>
-        <button className={'admin-tab' + (tab === 'users' ? ' active' : '')} onClick={() => setTab('users')}>USERS</button>
-        <button className={'admin-tab' + (tab === 'stats' ? ' active' : '')} onClick={() => setTab('stats')}>STATS</button>
-        <button className={'admin-tab' + (tab === 'notify' ? ' active' : '')} onClick={() => setTab('notify')}>NOTIFY</button>
+        <button className={'admin-tab' + (tab === 'questions' ? ' active' : '')} onClick={() => setTab('questions')}>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          QUESTIONS
+          {questions.length > 0 && <span className="admin-tab-badge">{questions.length}</span>}
+        </button>
+        <button className={'admin-tab' + (tab === 'users' ? ' active' : '')} onClick={() => setTab('users')}>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          USERS
+          {users.length > 0 && <span className="admin-tab-badge">{users.length}</span>}
+        </button>
+        <button className={'admin-tab' + (tab === 'stats' ? ' active' : '')} onClick={() => setTab('stats')}>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          STATS
+        </button>
+        <button className={'admin-tab' + (tab === 'notify' ? ' active' : '')} onClick={() => setTab('notify')}>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M3 11l18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg>
+          NOTIFY
+        </button>
       </div>
 
       {tab === 'users' && (
@@ -392,21 +441,139 @@ export default function AdminQuestions() {
 
       {tab === 'stats' && stats && (
         <div className="admin-stats">
-          <div className="admin-stats-grid">
-            <div className="admin-stat-card"><span className="admin-stat-val">{stats.totalTests}</span><span className="admin-stat-lbl">Total Tests</span></div>
-            <div className="admin-stat-card"><span className="admin-stat-val">{pct(stats.totalScore, stats.totalTotal)}</span><span className="admin-stat-lbl">Avg Score</span></div>
-            <div className="admin-stat-card"><span className="admin-stat-val">{stats.totalUsers}</span><span className="admin-stat-lbl">Users</span></div>
-            <div className="admin-stat-card"><span className="admin-stat-val">{stats.todayTests}</span><span className="admin-stat-lbl">Today</span></div>
-          </div>
-          <div className="admin-stats-section">
-            <span className="admin-stats-section-title">By Subject</span>
-            {Object.entries(stats.subjectCounts).map(([subj, s]) => (
-              <div key={subj} className="admin-stats-row">
-                <span className="admin-stats-name">{subj}</span>
-                <span className="admin-stats-ct">{s.count} tests</span>
-                <span className="admin-stats-sc">{pct(s.score, s.total)}</span>
+          <div className="admin-stat-grid">
+            <div className="admin-stat-card admin-stat-lavender">
+              <div className="admin-stat-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
               </div>
-            ))}
+              <div className="admin-stat-val">{stats.totalTests}</div>
+              <div className="admin-stat-lbl">Total Tests</div>
+            </div>
+            <div className="admin-stat-card admin-stat-peach">
+              <div className="admin-stat-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+              </div>
+              <div className="admin-stat-val">{pct(stats.totalScore, stats.totalTotal)}</div>
+              <div className="admin-stat-lbl">Average Score</div>
+            </div>
+            <div className="admin-stat-card admin-stat-green">
+              <div className="admin-stat-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              </div>
+              <div className="admin-stat-val">{stats.totalUsers}</div>
+              <div className="admin-stat-lbl">Total Users</div>
+            </div>
+            <div className="admin-stat-card admin-stat-yellow">
+              <div className="admin-stat-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              </div>
+              <div className="admin-stat-val">{stats.totalToday}</div>
+              <div className="admin-stat-lbl">Today's Tests</div>
+            </div>
+          </div>
+
+          <div className="admin-stats-row-grid">
+            <div className="admin-stat-block">
+              <div className="admin-stat-block-title">
+                <span>Last 7 Days</span>
+                <span className="admin-stat-block-hint">{stats.weekBuckets ? Object.values(stats.weekBuckets).reduce((a, b) => a + b.count, 0) : 0} tests</span>
+              </div>
+              <div className="admin-week-chart">
+                {Object.entries(stats.weekBuckets || {}).map(([day, d]) => {
+                  const maxCount = Math.max(1, ...Object.values(stats.weekBuckets).map(b => b.count))
+                  const h = (d.count / maxCount) * 100
+                  const dt = new Date(day)
+                  return (
+                    <div key={day} className="admin-week-col">
+                      <div className="admin-week-val">{d.count || ''}</div>
+                      <div className="admin-week-bar-wrap">
+                        <div className="admin-week-bar" style={{ height: Math.max(h, d.count > 0 ? 8 : 2) + '%' }}></div>
+                      </div>
+                      <div className="admin-week-day">{['Sun','Mon','Tue','Wed','Thu','Fri','Sat'][dt.getDay()]}</div>
+                      <div className="admin-week-date">{dt.getDate()}</div>
+                    </div>
+                  )
+                })}
+              </div>
+            </div>
+
+            <div className="admin-stat-block">
+              <div className="admin-stat-block-title">
+                <span>By Subject</span>
+              </div>
+              <div className="admin-subj-list">
+                {Object.entries(stats.subjectCounts).sort((a, b) => b[1].count - a[1].count).map(([subj, s], i) => {
+                  const colors = ['admin-stat-lavender', 'admin-stat-peach', 'admin-stat-green', 'admin-stat-yellow', 'admin-stat-pink']
+                  const colorClass = colors[i % colors.length]
+                  return (
+                    <div key={subj} className="admin-subj-item">
+                      <div className="admin-subj-head">
+                        <span className={'admin-subj-dot ' + colorClass}></span>
+                        <span className="admin-subj-name">{subj}</span>
+                        <span className="admin-subj-pct">{pct(s.score, s.total)}</span>
+                      </div>
+                      <div className="admin-subj-bar-bg">
+                        <div className={'admin-subj-bar-fill ' + colorClass} style={{ width: (s.total > 0 ? (s.score / s.total * 100) : 0) + '%' }}></div>
+                      </div>
+                      <div className="admin-subj-meta">
+                        <span>{s.count} tests</span>
+                        {s.today > 0 && <span className="admin-subj-today">+{s.today} today</span>}
+                      </div>
+                    </div>
+                  )
+                })}
+                {Object.keys(stats.subjectCounts).length === 0 && (
+                  <div className="admin-empty">No tests taken yet</div>
+                )}
+              </div>
+            </div>
+          </div>
+
+          <div className="admin-stats-row-grid">
+            <div className="admin-stat-block">
+              <div className="admin-stat-block-title">
+                <span>Top Users</span>
+                <span className="admin-stat-block-hint">by tests taken</span>
+              </div>
+              <div className="admin-top-users">
+                {stats.topUsers.length === 0 ? (
+                  <div className="admin-empty">No data yet</div>
+                ) : stats.topUsers.map((u, i) => (
+                  <div key={u.id} className="admin-top-user">
+                    <span className="admin-top-rank">#{i + 1}</span>
+                    <div className="admin-top-avatar">{(u.name || '?').charAt(0).toUpperCase()}</div>
+                    <div className="admin-top-info">
+                      <div className="admin-top-name">{u.name}</div>
+                      <div className="admin-top-tests">{u.tests} tests &middot; {pct(u.score, u.total)} avg</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="admin-stat-block">
+              <div className="admin-stat-block-title">
+                <span>Recent Tests</span>
+              </div>
+              <div className="admin-recent">
+                {stats.recent.length === 0 ? (
+                  <div className="admin-empty">No tests yet</div>
+                ) : stats.recent.map((t, i) => {
+                  const u = stats.topUsers ? allProfilesById?.[t.user_id] : null
+                  return (
+                    <div key={i} className="admin-recent-item">
+                      <div className={'admin-recent-pct ' + (t.score / t.total >= 0.7 ? 'high' : t.score / t.total >= 0.4 ? 'mid' : 'low')}>
+                        {t.total > 0 ? Math.round(t.score / t.total * 100) : 0}%
+                      </div>
+                      <div className="admin-recent-info">
+                        <div className="admin-recent-subj">{t.subject || 'General'}</div>
+                        <div className="admin-recent-meta">{t.score}/{t.total} &middot; {new Date(t.taken_at).toLocaleDateString()}</div>
+                      </div>
+                    </div>
+                  )
+                })}
+              </div>
+            </div>
           </div>
         </div>
       )}
@@ -427,9 +594,21 @@ export default function AdminQuestions() {
       {tab === 'questions' && (
       <>
           <div className="admin-tabs">
-            <button className={'admin-tab' + (qtab === 'modules' ? ' active' : '')} onClick={() => setQtab('modules')}>MODULES</button>
-            <button className={'admin-tab' + (qtab === 'topic' ? ' active' : '')} onClick={() => setQtab('topic')}>TOPICS</button>
-            <button className={'admin-tab' + (qtab === 'question' ? ' active' : '')} onClick={() => setQtab('question')}>QUESTIONS</button>
+            <button className={'admin-tab' + (qtab === 'modules' ? ' active' : '')} onClick={() => setQtab('modules')}>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+              MODULES
+              {modules.length > 0 && <span className="admin-tab-badge">{modules.length}</span>}
+            </button>
+            <button className={'admin-tab' + (qtab === 'topic' ? ' active' : '')} onClick={() => setQtab('topic')}>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+              TOPICS
+              {topics.length > 0 && <span className="admin-tab-badge">{topics.length}</span>}
+            </button>
+            <button className={'admin-tab' + (qtab === 'question' ? ' active' : '')} onClick={() => setQtab('question')}>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+              QUESTIONS
+              {questions.length > 0 && <span className="admin-tab-badge">{questions.length}</span>}
+            </button>
           </div>
 
           <div className="admin-layers">
