@@ -6,6 +6,8 @@ import html2canvas from 'html2canvas'
 import { useToast } from '../components/Toast'
 import AITutor from '../components/AITutor'
 
+const IS_PRACTICE = true
+
 export default function TestPage() {
   const { topicId } = useParams()
   const navigate = useNavigate()
@@ -27,7 +29,6 @@ export default function TestPage() {
   const [showCalc, setShowCalc] = useState(false)
   const [showRef, setShowRef] = useState(false)
   const [showAITutor, setShowAITutor] = useState(false)
-  const [isPractice] = useState(true)
   const [displayName, setDisplayName] = useState('STUDENT')
   const [elapsed, setElapsed] = useState(0)
   const [expExplain, setExpExplain] = useState(null)
@@ -101,7 +102,7 @@ export default function TestPage() {
   }, [topicId])
 
   useEffect(() => {
-    if (!q || !isPractice) return
+    if (!q || !IS_PRACTICE) return
     const handler = (e) => {
       if ((e.metaKey || e.ctrlKey || e.altKey) && e.key.toLowerCase() === 'a' && !e.shiftKey) {
         e.preventDefault()
@@ -110,7 +111,7 @@ export default function TestPage() {
     }
     window.addEventListener('keydown', handler)
     return () => window.removeEventListener('keydown', handler)
-  }, [q, isPractice])
+  }, [q])
 
   const handleSelect = (idx) => {
     if (abcMode) {
@@ -473,7 +474,7 @@ export default function TestPage() {
           <button className="bb-icon-btn" title="Calculator" onClick={() => setShowCalc(true)}>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="10" y2="10"/><line x1="14" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="10" y2="14"/><line x1="14" y1="14" x2="16" y2="14"/><line x1="8" y1="18" x2="16" y2="18"/></svg>
           </button>
-          {isPractice && (
+          {IS_PRACTICE && (
             <button className="bb-icon-btn" title="Explanation (⌘A / Ctrl+A)" onClick={() => setShowAITutor(true)}>
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M9 21h6M12 17v4M12 3a7 7 0 0 0-4 12.7c.7.6 1 1.5 1 2.3v1h6v-1c0-.8.3-1.7 1-2.3A7 7 0 0 0 12 3z"/></svg>
             </button>
@@ -766,7 +767,7 @@ export default function TestPage() {
         </div>
       )}
 
-      {showAITutor && q && isPractice && (
+      {showAITutor && q && IS_PRACTICE && (
         <AITutor question={q} userAnswer={selected} onClose={() => setShowAITutor(false)} />
       )}
     </div>
