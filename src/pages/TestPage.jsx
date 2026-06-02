@@ -102,7 +102,7 @@ export default function TestPage() {
   }, [topicId])
 
   useEffect(() => {
-    if (!currentQuestion || !IS_PRACTICE) return
+    if (!questions[current] || !IS_PRACTICE) return
     const handler = (e) => {
       if ((e.metaKey || e.ctrlKey || e.altKey) && e.key.toLowerCase() === 'a' && !e.shiftKey) {
         e.preventDefault()
@@ -111,7 +111,7 @@ export default function TestPage() {
     }
     window.addEventListener('keydown', handler)
     return () => window.removeEventListener('keydown', handler)
-  }, [currentQuestion])
+  }, [current, questions])
 
   const handleSelect = (idx) => {
     if (abcMode) {
