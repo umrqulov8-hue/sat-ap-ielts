@@ -113,6 +113,8 @@ export default function TestPage() {
     return () => window.removeEventListener('keydown', handler)
   }, [current, questions])
 
+  const currentQuestion = questions[current] || null
+
   const handleSelect = (idx) => {
     if (abcMode) {
       const key = 'q' + current
@@ -135,15 +137,14 @@ export default function TestPage() {
   }
 
   const handleNext = () => {
-    const q = questions[current]
-    const isCorrect = checkCorrect(q, selected)
+    const isCorrect = checkCorrect(currentQuestion, selected)
     const already = answers.findIndex(a => a.qIdx === current)
     let newAnswers
     if (already >= 0) {
       newAnswers = [...answers]
-      newAnswers[already] = { qIdx: current, selected, correct: isCorrect, question: q }
+      newAnswers[already] = { qIdx: current, selected, correct: isCorrect, question: currentQuestion }
     } else {
-      newAnswers = [...answers, { qIdx: current, selected, correct: isCorrect, question: q }]
+      newAnswers = [...answers, { qIdx: current, selected, correct: isCorrect, question: currentQuestion }]
     }
     setAnswers(newAnswers)
     setSelected(null)
@@ -163,8 +164,7 @@ export default function TestPage() {
 
   const handleJump = (idx) => {
     if (selected !== null && step === 'taking') {
-  let currentQuestion = questions[current]
-      const isCorrect = checkCorrect(q, selected)
+      const isCorrect = checkCorrect(currentQuestion, selected)
       const already = answers.findIndex(a => a.qIdx === current)
       let newAnswers
       if (already >= 0) {
