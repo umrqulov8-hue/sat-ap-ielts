@@ -4,3 +4,7 @@ dist
 *.log
 .env
 .vercel
+images/
+images-extra/
+scripts/
+sql-*.sql

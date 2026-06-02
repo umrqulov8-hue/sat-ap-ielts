@@ -268,6 +268,14 @@ export default function TestPage() {
 
   if (loading) return <div className="test-loading" />
   if (!topic) return <div className="test-loading"><div className="test-loading-text">TOPIC NOT FOUND</div></div>
+  if (!questions.length) return (
+    <div className="bb-empty-state">
+      <div className="bb-empty-icon">📭</div>
+      <h2 className="bb-empty-title">Bu modulda savollar yo'q</h2>
+      <p className="bb-empty-text">"{topic.title}" moduliga hozircha savollar qo'shilmagan. Boshqa modulni tanlang.</p>
+      <button className="bb-empty-btn" onClick={() => navigate('/dashboard')}>Bosh sahifaga qaytish</button>
+    </div>
+  )
 
   if (step === 'done') {
     const pct = answers.length ? Math.round(correctCount / answers.length * 100) : 0
@@ -465,9 +473,6 @@ export default function TestPage() {
           {q?.image_url && (
             <img src={q.image_url} alt="" className="bb-left-img" draggable="false" onContextMenu={e => e.preventDefault()} />
           )}
-          {q?.question_text && !hasInlineImg(q.question_text) && (
-            <div className="bb-passage" dangerouslySetInnerHTML={{ __html: q.question_text }} />
-          )}
         </div>
         <div className="bb-right">
           <div className="bb-q-header">
@@ -485,8 +490,8 @@ export default function TestPage() {
               </button>
             )}
           </div>
-          {q?.question_text && hasInlineImg(q.question_text) && (
-            <div className="bb-q-text">{renderQuestionText(q.question_text)}</div>
+          {q?.question_text && (
+            <div className="bb-q-text" dangerouslySetInnerHTML={{ __html: q.question_text }} />
           )}
           {isWrittenQ(q) ? (
           <div className="bb-choices">
