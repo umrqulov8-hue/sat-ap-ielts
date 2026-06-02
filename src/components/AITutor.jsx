@@ -29,8 +29,8 @@ export default function AITutor({ question, userAnswer, onClose }) {
       <div className="aitutor-modal" onClick={e => e.stopPropagation()}>
         <div className="aitutor-header">
           <div className="aitutor-header-left">
-            <span className="aitutor-icon">✨</span>
-            <h3>AI Tutor</h3>
+            <span className="aitutor-icon">💡</span>
+            <h3>Explanation</h3>
           </div>
           <button className="aitutor-close" onClick={onClose} aria-label="Close">×</button>
         </div>
