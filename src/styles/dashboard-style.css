@@ -2996,3 +2996,19 @@ select.settings-input {
   .admin-notify-grid { grid-template-columns: 1fr; }
   .admin-notify-preview { position: static; }
 }
+
+/* ─── Admin Activity Log ─── */
+.admin-activity { display: flex; flex-direction: column; }
+.admin-activity-timeline { display: flex; flex-direction: column; position: relative; padding-left: 1.5rem; }
+.admin-activity-timeline::before { content: ''; position: absolute; left: 0.6rem; top: 0.5rem; bottom: 0.5rem; width: 2px; background: var(--gray-300); }
+.admin-activity-item { display: flex; gap: 0.6rem; padding: 0.5rem 0; position: relative; }
+.admin-activity-dot { position: absolute; left: -1.5rem; top: 0.6rem; width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; border: 2px solid var(--dark); color: var(--white); background: var(--lavender); flex-shrink: 0; }
+.admin-activity-dot.green { background: var(--green); }
+.admin-activity-dot.lavender { background: var(--lavender); }
+.admin-activity-dot.peach { background: var(--peach); }
+.admin-activity-dot.yellow { background: var(--yellow); color: var(--dark); }
+.admin-activity-dot.pink { background: var(--pink); }
+.admin-activity-content { flex: 1; min-width: 0; }
+.admin-activity-text { font-size: 0.75rem; line-height: 1.4; color: var(--dark); }
+.admin-activity-text strong { font-weight: 800; }
+.admin-activity-time { font-size: 0.6rem; color: var(--muted); font-weight: 600; margin-top: 0.15rem; letter-spacing: 0.03em; }

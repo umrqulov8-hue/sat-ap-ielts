@@ -55,6 +55,7 @@ export default function AdminQuestions() {
   const [userSearch, setUserSearch] = useState('')
   const [userRoleFilter, setUserRoleFilter] = useState('all')
   const [notifTarget, setNotifTarget] = useState('all')
+  const [activity, setActivity] = useState([])
 
   const sendNotification = async () => {
     if (!notifTitle.trim() || !notifBody.trim()) { toast.error('Fill title and body'); return }
@@ -96,6 +97,45 @@ export default function AdminQuestions() {
         ...p,
         ...(userMap[p.id] || { tests: 0, score: 0, total: 0 })
       })))
+    })()
+  }, [tab])
+
+  useEffect(() => {
+    if (tab !== 'activity') return
+    ;(async () => {
+      const [testsRes, profilesRes, questionsRes, notifsRes] = await Promise.all([
+        supabase.rpc('get_all_practice_tests'),
+        supabase.rpc('get_all_profiles'),
+        supabase.from('questions').select('id, created_at, subject_id, subjects(title)').order('created_at', { ascending: false }).limit(20),
+        supabase.from('notifications').select('id, title, body, created_at').order('created_at', { ascending: false }).limit(20),
+      ])
+      const events = []
+      for (const t of (testsRes.data || []).slice(0, 20)) {
+        events.push({
+          type: 'test', ts: t.taken_at, icon: 'check', color: 'green',
+          text: <><strong>{t.subject || 'General'}</strong> test taken — {t.score}/{t.total} ({t.total > 0 ? Math.round(t.score / t.total * 100) : 0}%)</>,
+        })
+      }
+      for (const q of (questionsRes.data || [])) {
+        events.push({
+          type: 'question', ts: q.created_at, icon: 'plus', color: 'lavender',
+          text: <>New question added in <strong>{q.subjects?.title || 'subject'}</strong></>,
+        })
+      }
+      for (const p of (profilesRes.data || []).slice(0, 10)) {
+        if (p.created_at) events.push({
+          type: 'user', ts: p.created_at, icon: 'user', color: 'peach',
+          text: <>New user signed up: <strong>{p.display_name || p.email || 'unknown'}</strong></>,
+        })
+      }
+      for (const n of (notifsRes.data || []).slice(0, 10)) {
+        events.push({
+          type: 'notif', ts: n.created_at, icon: 'bell', color: 'yellow',
+          text: <>Notification sent: <strong>{n.title}</strong></>,
+        })
+      }
+      events.sort((a, b) => new Date(b.ts || 0) - new Date(a.ts || 0))
+      setActivity(events.slice(0, 30))
     })()
   }, [tab])
 
@@ -427,6 +467,11 @@ export default function AdminQuestions() {
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
           STATS
         </button>
+        <button className={'admin-tab' + (tab === 'activity' ? ' active' : '')} onClick={() => setTab('activity')}>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          ACTIVITY
+          {activity.length > 0 && <span className="admin-tab-badge">{activity.length}</span>}
+        </button>
         <button className={'admin-tab' + (tab === 'notify' ? ' active' : '')} onClick={() => setTab('notify')}>
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M3 11l18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg>
           NOTIFY
@@ -662,6 +707,44 @@ export default function AdminQuestions() {
                 })}
               </div>
             </div>
+          </div>
+        </div>
+      )}
+
+      {tab === 'activity' && (
+        <div className="admin-activity">
+          <div className="admin-stat-block">
+            <div className="admin-stat-block-title">
+              <span>Recent Activity</span>
+              <span className="admin-stat-block-hint">last {activity.length} events</span>
+            </div>
+            {activity.length === 0 ? (
+              <div className="admin-empty">No activity yet</div>
+            ) : (
+              <div className="admin-activity-timeline">
+                {activity.map((ev, i) => {
+                  const iconSvgs = {
+                    check: <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><polyline points="20 6 9 17 4 12"/></svg>,
+                    plus: <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>,
+                    user: <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>,
+                    bell: <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/></svg>,
+                  }
+                  return (
+                    <div key={i} className="admin-activity-item">
+                      <div className={'admin-activity-dot ' + ev.color}>
+                        {iconSvgs[ev.icon] || iconSvgs.plus}
+                      </div>
+                      <div className="admin-activity-content">
+                        <div className="admin-activity-text">{ev.text}</div>
+                        <div className="admin-activity-time">
+                          {ev.ts ? new Date(ev.ts).toLocaleString([], { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' }) : '—'}
+                        </div>
+                      </div>
+                    </div>
+                  )
+                })}
+              </div>
+            )}
           </div>
         </div>
       )}
