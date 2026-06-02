@@ -191,13 +191,12 @@ export default function AdminQuestions() {
         .map(([uid, s]) => ({ ...s, id: uid, avg: s.total > 0 ? s.score / s.total : 0, name: allProfiles.find(p => p.id === uid)?.display_name || '—' }))
         .sort((a, b) => b.tests - a.tests)
         .slice(0, 5)
-      const allProfilesById = Object.fromEntries(allProfiles.map(p => [p.id, p]))
       const recent = [...allTests].sort((a, b) => new Date(b.taken_at) - new Date(a.taken_at)).slice(0, 6)
       setStats({
         totalTests, totalScore, totalTotal,
         totalToday: todayTests.length,
         subjectCounts, totalUsers: allProfiles.length,
-        weekBuckets, topUsers, recent, allProfilesById,
+        weekBuckets, topUsers, recent,
       })
     })()
   }, [tab])
@@ -692,10 +691,9 @@ export default function AdminQuestions() {
                 {stats.recent.length === 0 ? (
                   <div className="admin-empty">No tests yet</div>
                 ) : stats.recent.map((t, i) => {
-                  const u = stats.topUsers ? allProfilesById?.[t.user_id] : null
                   return (
                     <div key={i} className="admin-recent-item">
-                      <div className={'admin-recent-pct ' + (t.score / t.total >= 0.7 ? 'high' : t.score / t.total >= 0.4 ? 'mid' : 'low')}>
+                      <div className={'admin-recent-pct ' + (t.total > 0 && t.score / t.total >= 0.7 ? 'high' : t.total > 0 && t.score / t.total >= 0.4 ? 'mid' : 'low')}>
                         {t.total > 0 ? Math.round(t.score / t.total * 100) : 0}%
                       </div>
                       <div className="admin-recent-info">
