@@ -46,6 +46,8 @@ export default function AdminQuestions() {
   const [modLessons, setModLessons] = useState(0)
   const [modDuration, setModDuration] = useState('')
   const [editingMod, setEditingMod] = useState(null)
+  const [savingMod, setSavingMod] = useState(false)
+  const [savingTopic, setSavingTopic] = useState(false)
 
   const [notifTitle, setNotifTitle] = useState('')
   const [notifBody, setNotifBody] = useState('')
@@ -198,18 +200,21 @@ export default function AdminQuestions() {
   const handleAddModule = async () => {
     if (!modTitle.trim()) { setMsg('Enter module title'); return }
     if (!selSubject) { setMsg('Select a subject first'); return }
+    setSavingMod(true)
     if (editingMod) {
       const { error } = await supabase.from('modules').update({ title: modTitle.trim(), description: modDesc.trim(), lesson_count: modLessons, duration: modDuration }).eq('id', editingMod)
-      if (error) { setMsg('Error: ' + error.message); return }
+      if (error) { setMsg('Error: ' + error.message); setSavingMod(false); return }
       setEditingMod(null)
     } else {
       const { error } = await supabase.from('modules').insert({ subject_id: selSubject, title: modTitle.trim(), description: modDesc.trim(), lesson_count: modLessons, duration: modDuration, order_index: modules.length })
-      if (error) { setMsg('Error: ' + error.message); return }
+      if (error) { setMsg('Error: ' + error.message); setSavingMod(false); return }
     }
     setModTitle(''); setModDesc(''); setModLessons(0); setModDuration('')
     const { data, error } = await supabase.from('modules').select('*').eq('subject_id', selSubject).order('order_index')
     if (data) setModules(data)
+    toast.success(editingMod ? 'Module updated!' : 'Module added!')
     setMsg(editingMod ? 'Module updated!' : 'Module added!')
+    setSavingMod(false)
   }
 
   const editModule = (m) => {
@@ -232,19 +237,22 @@ export default function AdminQuestions() {
   const handleAddTopic = async () => {
     if (!topicTitle.trim()) { setMsg('Enter topic title'); return }
     if (!selModule) { setMsg('Select a module first'); return }
+    setSavingTopic(true)
     if (editingTopic) {
       const { error } = await supabase.from('topics').update({ title: topicTitle.trim(), description: topicDesc.trim() }).eq('id', editingTopic)
-      if (error) { setMsg('Error: ' + error.message); return }
+      if (error) { setMsg('Error: ' + error.message); setSavingTopic(false); return }
       setEditingTopic(null)
     } else {
       const { error } = await supabase.from('topics').insert({ module_id: selModule, title: topicTitle.trim(), description: topicDesc.trim(), order_index: topics.length })
-      if (error) { setMsg('Error: ' + error.message); return }
+      if (error) { setMsg('Error: ' + error.message); setSavingTopic(false); return }
     }
     setTopicTitle(''); setTopicDesc('')
     const { data, error } = await supabase.from('topics').select('*').eq('module_id', selModule).order('order_index')
-    if (error) { setMsg('Error loading topics: ' + error.message); return }
+    if (error) { setMsg('Error loading topics: ' + error.message); setSavingTopic(false); return }
     if (data) setTopics(data)
+    toast.success(editingTopic ? 'Topic updated!' : 'Topic added!')
     setMsg(editingTopic ? 'Topic updated!' : 'Topic added!')
+    setSavingTopic(false)
   }
 
   const editTopic = (t) => {
@@ -690,30 +698,49 @@ export default function AdminQuestions() {
                 <input className="admin-input" value={modTitle} onChange={e => setModTitle(e.target.value)} placeholder="Module title" />
                 <input className="admin-input" value={modDesc} onChange={e => setModDesc(e.target.value)} placeholder="Description (optional)" style={{ marginTop: '0.5rem' }} />
                 <div style={{ display: 'flex', gap: '0.5rem', marginTop: '0.5rem' }}>
-                  <input className="admin-input" type="number" min="0" value={modLessons} onChange={e => setModLessons(Number(e.target.value))} placeholder="Lesson count" style={{ width: '40%' }} />
+                  <input className="admin-input" type="number" min="0" value={modLessons} onChange={e => setModLessons(Number(e.target.value))} placeholder="Lessons" style={{ width: '40%' }} />
                   <input className="admin-input" value={modDuration} onChange={e => setModDuration(e.target.value)} placeholder="Duration (e.g. 2 weeks)" style={{ width: '60%' }} />
                 </div>
                 <div style={{ display: 'flex', gap: '0.5rem', marginTop: '0.5rem' }}>
-                  <button className="btn-solid-black" onClick={handleAddModule}>{editingMod ? 'UPDATE MODULE' : 'ADD MODULE'}</button>
+                  <button className="btn-solid-black" onClick={handleAddModule} disabled={savingMod}>
+                    {savingMod ? 'SAVING...' : (editingMod ? 'UPDATE MODULE' : 'ADD MODULE')}
+                  </button>
                   {editingMod && <button className="btn-solid-black" style={{ background: 'transparent', color: '#000' }} onClick={() => { setEditingMod(null); setModTitle(''); setModDesc(''); setModLessons(0); setModDuration('') }}>CANCEL</button>}
                 </div>
               </div>
 
               <div className="admin-layer" style={{ marginTop: '1rem' }}>
-                <label className="admin-label">EXISTING MODULES</label>
+                <label className="admin-label">EXISTING MODULES ({modules.length})</label>
                 {modules.length === 0 ? (
                   <div className="admin-empty">No modules yet.</div>
                 ) : (
-                  modules.map(m => (
-                    <div key={m.id} className="admin-topic-item">
-                      <div style={{ flex: 1 }}>
-                        <span className="admin-topic-title">{m.title}</span>
-                        <span className="admin-topic-count">{m.duration} &middot; {m.lesson_count} lessons</span>
-                      </div>
-                      <button className="admin-q-del" onClick={() => editModule(m)} style={{ marginRight: '0.5rem' }}>EDIT</button>
-                      <button className="admin-q-del" onClick={() => deleteModule(m.id)}>DEL</button>
-                    </div>
-                  ))
+                  <div className="admin-card-list">
+                    {modules.map((m, idx) => {
+                      const colors = ['admin-stat-lavender', 'admin-stat-peach', 'admin-stat-green', 'admin-stat-yellow', 'admin-stat-pink']
+                      const colorClass = colors[idx % colors.length]
+                      return (
+                        <div key={m.id} className={'admin-card-item ' + colorClass}>
+                          <div className="admin-card-num">#{idx + 1}</div>
+                          <div className="admin-card-body">
+                            <div className="admin-card-title">{m.title}</div>
+                            <div className="admin-card-desc">{m.description || 'No description'}</div>
+                            <div className="admin-card-meta">
+                              {m.duration && <span className="admin-card-tag"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> {m.duration}</span>}
+                              {m.lesson_count > 0 && <span className="admin-card-tag"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg> {m.lesson_count} lessons</span>}
+                            </div>
+                          </div>
+                          <div className="admin-card-actions">
+                            <button className="admin-icon-btn" onClick={() => editModule(m)} title="Edit">
+                              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+                            </button>
+                            <button className="admin-icon-btn admin-icon-btn-danger" onClick={() => deleteModule(m.id)} title="Delete">
+                              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/></svg>
+                            </button>
+                          </div>
+                        </div>
+                      )
+                    })}
+                  </div>
                 )}
               </div>
             </div>
@@ -726,24 +753,39 @@ export default function AdminQuestions() {
                 <input className="admin-input" value={topicTitle} onChange={e => setTopicTitle(e.target.value)} placeholder="Topic title" />
                 <input className="admin-input" value={topicDesc} onChange={e => setTopicDesc(e.target.value)} placeholder="Description (optional)" style={{ marginTop: '0.5rem' }} />
                 <div style={{ display: 'flex', gap: '0.5rem', marginTop: '0.5rem' }}>
-                  <button className="btn-solid-black" onClick={handleAddTopic}>{editingTopic ? 'UPDATE TOPIC' : 'ADD TOPIC'}</button>
+                  <button className="btn-solid-black" onClick={handleAddTopic} disabled={savingTopic}>
+                    {savingTopic ? 'SAVING...' : (editingTopic ? 'UPDATE TOPIC' : 'ADD TOPIC')}
+                  </button>
                   {editingTopic && <button className="btn-solid-black" style={{ background: 'transparent', color: '#000' }} onClick={() => { setEditingTopic(null); setTopicTitle(''); setTopicDesc('') }}>CANCEL</button>}
                 </div>
               </div>
 
               {topics.length > 0 && (
                 <div className="admin-layer">
-                  <label className="admin-label">EXISTING TOPICS</label>
-                  {topics.map(t => (
-                    <div key={t.id} className="admin-topic-item">
-                      <div style={{ flex: 1, cursor: 'pointer' }} onClick={() => { setSelTopic(t.id); setQtab('question') }}>
-                        <span className="admin-topic-title">{t.title}</span>
-                        <span className="admin-topic-count">{t.description}</span>
-                      </div>
-                      <button className="admin-q-del" onClick={() => editTopic(t)} style={{ marginRight: '0.5rem' }}>EDIT</button>
-                      <button className="admin-q-del" onClick={() => deleteTopic(t.id)}>DEL</button>
-                    </div>
-                  ))}
+                  <label className="admin-label">EXISTING TOPICS ({topics.length})</label>
+                  <div className="admin-card-list">
+                    {topics.map((t, idx) => {
+                      const colors = ['admin-stat-lavender', 'admin-stat-peach', 'admin-stat-green', 'admin-stat-yellow', 'admin-stat-pink']
+                      const colorClass = colors[idx % colors.length]
+                      return (
+                        <div key={t.id} className={'admin-card-item ' + colorClass} onClick={() => { setSelTopic(t.id); setQtab('question') }} style={{ cursor: 'pointer' }}>
+                          <div className="admin-card-num">#{idx + 1}</div>
+                          <div className="admin-card-body">
+                            <div className="admin-card-title">{t.title}</div>
+                            <div className="admin-card-desc">{t.description || 'Click to manage questions →'}</div>
+                          </div>
+                          <div className="admin-card-actions" onClick={e => e.stopPropagation()}>
+                            <button className="admin-icon-btn" onClick={() => editTopic(t)} title="Edit">
+                              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+                            </button>
+                            <button className="admin-icon-btn admin-icon-btn-danger" onClick={() => deleteTopic(t.id)} title="Delete">
+                              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg>
+                            </button>
+                          </div>
+                        </div>
+                      )
+                    })}
+                  </div>
                 </div>
               )}
             </div>

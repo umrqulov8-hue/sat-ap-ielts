@@ -2860,3 +2860,26 @@ select.settings-input {
 
 .admin-users-row { transition: background 0.15s var(--ease); }
 .admin-users-row:hover { background: var(--gray-100); }
+
+/* ─── Admin Card List (modules/topics) ─── */
+.admin-card-list { display: flex; flex-direction: column; gap: 0.5rem; }
+.admin-card-item { display: flex; align-items: center; gap: 0.75rem; padding: 0.7rem 0.9rem; background: var(--white); border: 2.5px solid var(--dark); transition: all 0.2s var(--ease); }
+.admin-card-item:hover { transform: translateX(3px); box-shadow: 3px 3px 0 var(--dark); }
+.admin-card-item.admin-stat-lavender { border-left: 6px solid var(--lavender); }
+.admin-card-item.admin-stat-peach { border-left: 6px solid var(--peach); }
+.admin-card-item.admin-stat-green { border-left: 6px solid var(--green); }
+.admin-card-item.admin-stat-yellow { border-left: 6px solid var(--yellow); }
+.admin-card-item.admin-stat-pink { border-left: 6px solid var(--pink); }
+.admin-card-num { font-size: 0.85rem; font-weight: 800; color: var(--muted); min-width: 2rem; }
+.admin-card-body { flex: 1; min-width: 0; }
+.admin-card-title { font-size: 0.85rem; font-weight: 700; color: var(--dark); margin-bottom: 0.15rem; }
+.admin-card-desc { font-size: 0.7rem; color: var(--muted); margin-bottom: 0.3rem; line-height: 1.4; }
+.admin-card-meta { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+.admin-card-tag { display: inline-flex; align-items: center; gap: 0.25rem; font-size: 0.6rem; font-weight: 700; padding: 0.15rem 0.45rem; background: var(--gray-100); border: 1.5px solid var(--dark); letter-spacing: 0.05em; text-transform: uppercase; }
+.admin-card-tag svg { stroke: var(--dark); }
+.admin-card-actions { display: flex; gap: 0.3rem; flex-shrink: 0; }
+.admin-icon-btn { width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; background: var(--white); border: 2px solid var(--dark); cursor: pointer; color: var(--dark); transition: all 0.15s var(--ease); }
+.admin-icon-btn:hover { background: var(--dark); color: var(--white); }
+.admin-icon-btn:hover svg { stroke: var(--white); }
+.admin-icon-btn:active { transform: scale(0.93); }
+.admin-icon-btn-danger:hover { background: #a31a1a; border-color: #a31a1a; }
