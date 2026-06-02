@@ -373,6 +373,29 @@ export default function AdminQuestions() {
     const next = [...opts]; next[i] = v; setOpts(next)
   }
 
+  const addOpt = () => {
+    if (opts.length >= 6) return
+    setOpts([...opts, ''])
+  }
+
+  const removeOpt = (i) => {
+    if (opts.length <= 2) return
+    const next = opts.filter((_, idx) => idx !== i)
+    setOpts(next)
+    if (correct === i) setCorrect(0)
+    else if (correct > i) setCorrect(correct - 1)
+  }
+
+  const moveOpt = (i, dir) => {
+    const j = i + dir
+    if (j < 0 || j >= opts.length) return
+    const next = [...opts]
+    ;[next[i], next[j]] = [next[j], next[i]]
+    setOpts(next)
+    if (correct === i) setCorrect(j)
+    else if (correct === j) setCorrect(i)
+  }
+
   const pct = (s, t) => t > 0 ? Math.round(s / t * 100) + '%' : '-'
 
   return (
@@ -805,109 +828,203 @@ export default function AdminQuestions() {
                 )}
               </div>
 
-              {selTopic && (
-                <>
-                  <div className="admin-layer">
-                    <label className="admin-label">IMAGE (optional)</label>
-                    <div className={'admin-dropzone' + (dragOver ? ' drag-over' : '')}
-                      onDragOver={e => { e.preventDefault(); setDragOver(true) }}
-                      onDragLeave={() => setDragOver(false)} onDrop={handleDropImg}>
-                      {imagePreview ? <img src={imagePreview} alt="" className="admin-preview" /> :
-                        <div className="admin-dropzone-text">Drop image here or click to browse</div>}
-                      <input type="file" accept="image/*" onChange={handleImageSelect} className="admin-file-input" ref={fileRef} />
-                    </div>
-                    {editingQ?.image_url && !imageFile && <p style={{ fontSize: '0.65rem', color: '#888', marginTop: '0.3rem' }}>Current image: {editingQ.image_url}</p>}
-                  </div>
-
-                  <div className="admin-layer">
-                    <label className="admin-label">QUESTION TEXT</label>
-                    <div className={'admin-textarea-wrap' + (textDragOver ? ' drag-over' : '')}
-                      onDragOver={e => { e.preventDefault(); setTextDragOver(true) }}
-                      onDragLeave={() => setTextDragOver(false)} onDrop={handleDropToText}>
-                      <textarea className="admin-textarea admin-textarea-q" rows={8} value={qText} onChange={e => setQText(e.target.value)}
-                        placeholder={noText ? 'Optional — question is in the image' : 'Enter question...'} disabled={noText} />
-                    </div>
-                    <div className="admin-no-text-row">
-                      <label className="admin-toggle-label">
-                        <span className="admin-toggle-text">Question in image (no text)</span>
-                        <span className={'admin-toggle' + (noText ? ' on' : '')} onClick={() => setNoText(!noText)}>
-                          <span className="admin-toggle-knob" />
-                        </span>
-                        <span className="admin-toggle-state">{noText ? 'YES' : 'NO'}</span>
-                      </label>
-                    </div>
-                    <div className="admin-no-text-row" style={{ marginTop: '0.3rem' }}>
-                      <label className="admin-toggle-label">
-                        <span className="admin-toggle-text">Split layout (two columns)</span>
-                        <span className={'admin-toggle' + (layoutSplit ? ' on' : '')} onClick={() => {
-                          const next = !layoutSplit
-                          setLayoutSplit(next)
-                          localStorage.setItem('testLayout', next ? 'split' : 'centered')
-                        }}>
-                          <span className="admin-toggle-knob" />
-                        </span>
-                        <span className="admin-toggle-state">{layoutSplit ? 'YES' : 'NO'}</span>
-                      </label>
-                    </div>
-                  </div>
-
-                  <div className="admin-layer">
-                    <label className="admin-label">QUESTION TYPE</label>
-                    <div className="admin-type-row">
-                      <button className={'admin-type-btn' + (qType === 'mc' ? ' active' : '')} onClick={() => setQType('mc')}>MULTIPLE CHOICE</button>
-                      <button className={'admin-type-btn' + (qType === 'written' ? ' active' : '')} onClick={() => setQType('written')}>WRITTEN ANSWER</button>
-                    </div>
-                  </div>
-
-                  {qType === 'mc' ? (
-                    <div className="admin-layer">
-                      <label className="admin-label">OPTIONS</label>
-                      {opts.map((o, i) => (
-                        <div key={i} className="admin-opt-row">
-                          <span className="admin-opt-letter">{String.fromCharCode(65 + i)}</span>
-                          <input className="admin-input" value={o} onChange={e => updateOpt(i, e.target.value)} placeholder={'Option ' + String.fromCharCode(65 + i)} />
-                          <input type="radio" name="correct" checked={correct === i} onChange={() => setCorrect(i)} className="admin-radio" />
-                        </div>
-                      ))}
-                      <span className="admin-radio-label">(radio = correct answer)</span>
-                    </div>
-                  ) : (
-                    <div className="admin-layer">
-                      <label className="admin-label">CORRECT ANSWER</label>
-                      <textarea className="admin-textarea" rows={2} value={correctAnswer} onChange={e => setCorrectAnswer(e.target.value)} placeholder="Enter the correct answer..." />
-                    </div>
-                  )}
-
-                  <div className="admin-layer">
-                    <label className="admin-label">EXPLANATION (optional)</label>
-                    <textarea className="admin-textarea" rows={2} value={explanation} onChange={e => setExplanation(e.target.value)} placeholder="Explain why the answer is correct..." />
-                  </div>
-
-                  <div style={{ display: 'flex', gap: '0.5rem' }}>
-                    <button className="btn-solid-black" onClick={handleSaveQuestion} disabled={uploading}>
-                      {uploading ? 'SAVING...' : (editingQ ? 'UPDATE QUESTION' : 'SAVE QUESTION')}
-                    </button>
-                    {editingQ && <button className="btn-solid-black" style={{ background: 'transparent', color: '#000' }} onClick={resetQForm}>CANCEL</button>}
-                  </div>
-
-                  {questions.length > 0 && (
-                    <div className="admin-layer" style={{ marginTop: '2rem' }}>
-                      <label className="admin-label">QUESTIONS ({questions.length})</label>
-                      {questions.map((q, i) => (
-                        <div key={q.id} className="admin-q-item">
-                          <div className="admin-q-item-top">
-                            <span className="admin-q-num">Q{i + 1}.</span>
-                            <span className={'admin-q-type' + (q.correct_index === -1 ? ' written' : '')}>{q.correct_index === -1 ? 'WRITTEN' : 'MC'}</span>
-                            <span className="admin-q-text">{q.question_text}</span>
-                            <button className="admin-q-del" onClick={() => editQuestion(q)} style={{ marginRight: '0.3rem' }}>EDIT</button>
-                            <button className="admin-q-del" onClick={() => handleDeleteQuestion(q.id)}>DEL</button>
+              {selTopic && questions.length > 0 && (
+                <div className="admin-layer admin-q-list-section">
+                  <label className="admin-label">EXISTING QUESTIONS ({questions.length})</label>
+                  <div className="admin-q-list">
+                    {questions.map((q, i) => (
+                      <div key={q.id} className="admin-q-list-item">
+                        <div className="admin-q-list-num">Q{i + 1}</div>
+                        <div className="admin-q-list-body">
+                          <div className="admin-q-list-meta">
+                            <span className={'admin-q-list-type ' + (q.correct_index === -1 ? 'written' : 'mc')}>
+                              {q.correct_index === -1 ? 'WRITTEN' : 'MC'}
+                            </span>
+                            {q.image_url && <span className="admin-q-list-img-badge" title="Has image">
+                              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5" fill="currentColor"/><polyline points="21 15 16 10 5 21"/></svg>
+                            </span>}
                           </div>
-                          {q.image_url && <img src={q.image_url} alt="" className="admin-q-thumb" />}
+                          <div className="admin-q-list-text">
+                            {q.question_text ? <span dangerouslySetInnerHTML={{ __html: q.question_text.replace(/<img[^>]+>/g, '🖼') }} /> : <em>No text</em>}
+                          </div>
+                          {q.correct_index >= 0 && Array.isArray(q.options) && q.options[q.correct_index] && (
+                            <div className="admin-q-list-ans">✓ {String.fromCharCode(65 + q.correct_index)}. {q.options[q.correct_index]}</div>
+                          )}
                         </div>
-                      ))}
+                        <div className="admin-q-list-actions">
+                          <button className="admin-icon-btn" onClick={() => editQuestion(q)} title="Edit">
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+                          </button>
+                          <button className="admin-icon-btn admin-icon-btn-danger" onClick={() => handleDeleteQuestion(q.id)} title="Delete">
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg>
+                          </button>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {selTopic && (
+                <div className="admin-q-editor-grid">
+                  <div className="admin-q-editor-form">
+                    <div className="admin-layer">
+                      <label className="admin-label">IMAGE (optional)</label>
+                      <div className={'admin-dropzone' + (dragOver ? ' drag-over' : '')}
+                        onDragOver={e => { e.preventDefault(); setDragOver(true) }}
+                        onDragLeave={() => setDragOver(false)} onDrop={handleDropImg}>
+                        {imagePreview ? (
+                          <div className="admin-dropzone-preview">
+                            <img src={imagePreview} alt="" className="admin-preview" />
+                            <button className="admin-dropzone-remove" onClick={(e) => { e.stopPropagation(); setImageFile(null); setImagePreview(''); if (fileRef.current) fileRef.current.value = '' }}>
+                              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                            </button>
+                          </div>
+                        ) : (
+                          <div className="admin-dropzone-text">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                            <span>Drop image here or click to browse</span>
+                            <span className="admin-dropzone-hint">PNG, JPG, WEBP, SVG up to 5MB</span>
+                          </div>
+                        )}
+                        <input type="file" accept="image/*" onChange={handleImageSelect} className="admin-file-input" ref={fileRef} />
+                      </div>
                     </div>
-                  )}
-                </>
+
+                    <div className="admin-layer">
+                      <label className="admin-label">QUESTION TEXT</label>
+                      <div className={'admin-textarea-wrap' + (textDragOver ? ' drag-over' : '')}
+                        onDragOver={e => { e.preventDefault(); setTextDragOver(true) }}
+                        onDragLeave={() => setTextDragOver(false)} onDrop={handleDropToText}>
+                        <textarea className="admin-textarea admin-textarea-q" rows={5} value={qText} onChange={e => setQText(e.target.value)}
+                          placeholder={noText ? 'Optional — question is in the image' : 'Enter question... You can use <img src="..."/> tags for inline images.'} disabled={noText} />
+                      </div>
+                      <div className="admin-q-toggles">
+                        <label className="admin-toggle-label">
+                          <span className="admin-toggle-text">Question in image</span>
+                          <span className={'admin-toggle' + (noText ? ' on' : '')} onClick={() => setNoText(!noText)}>
+                            <span className="admin-toggle-knob" />
+                          </span>
+                        </label>
+                        <label className="admin-toggle-label">
+                          <span className="admin-toggle-text">Split layout</span>
+                          <span className={'admin-toggle' + (layoutSplit ? ' on' : '')} onClick={() => {
+                            const next = !layoutSplit
+                            setLayoutSplit(next)
+                            localStorage.setItem('testLayout', next ? 'split' : 'centered')
+                          }}>
+                            <span className="admin-toggle-knob" />
+                          </span>
+                        </label>
+                      </div>
+                    </div>
+
+                    <div className="admin-layer">
+                      <label className="admin-label">QUESTION TYPE</label>
+                      <div className="admin-type-row">
+                        <button className={'admin-type-btn' + (qType === 'mc' ? ' active' : '')} onClick={() => setQType('mc')}>
+                          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5" fill="currentColor"/><path d="M21 15l-5-5L5 21"/></svg>
+                          MULTIPLE CHOICE
+                        </button>
+                        <button className={'admin-type-btn' + (qType === 'written' ? ' active' : '')} onClick={() => setQType('written')}>
+                          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+                          WRITTEN ANSWER
+                        </button>
+                      </div>
+                    </div>
+
+                    {qType === 'mc' ? (
+                      <div className="admin-layer">
+                        <label className="admin-label">OPTIONS <span className="admin-label-hint">— click circle to mark correct</span></label>
+                        {opts.map((o, i) => (
+                          <div key={i} className={'admin-opt-row' + (correct === i ? ' correct' : '')}>
+                            <span className="admin-opt-letter" onClick={() => setCorrect(i)} title="Mark as correct">
+                              {correct === i && <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3.5"><polyline points="20 6 9 17 4 12"/></svg>}
+                            </span>
+                            <input className="admin-input" value={o} onChange={e => updateOpt(i, e.target.value)} placeholder={'Option ' + String.fromCharCode(65 + i)} />
+                            <div className="admin-opt-controls">
+                              <button className="admin-opt-move" onClick={() => moveOpt(i, -1)} disabled={i === 0} title="Move up">
+                                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><polyline points="18 15 12 9 6 15"/></svg>
+                              </button>
+                              <button className="admin-opt-move" onClick={() => moveOpt(i, 1)} disabled={i === opts.length - 1} title="Move down">
+                                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><polyline points="6 9 12 15 18 9"/></svg>
+                              </button>
+                              <button className="admin-opt-move admin-opt-del" onClick={() => removeOpt(i)} disabled={opts.length <= 2} title="Remove">
+                                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                              </button>
+                            </div>
+                          </div>
+                        ))}
+                        {opts.length < 6 && (
+                          <button className="admin-add-opt" onClick={addOpt}>
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                            Add option
+                          </button>
+                        )}
+                      </div>
+                    ) : (
+                      <div className="admin-layer">
+                        <label className="admin-label">CORRECT ANSWER</label>
+                        <textarea className="admin-textarea" rows={2} value={correctAnswer} onChange={e => setCorrectAnswer(e.target.value)} placeholder="Enter the correct answer..." />
+                      </div>
+                    )}
+
+                    <div className="admin-layer">
+                      <label className="admin-label">EXPLANATION (optional)</label>
+                      <textarea className="admin-textarea" rows={2} value={explanation} onChange={e => setExplanation(e.target.value)} placeholder="Explain why the answer is correct..." />
+                    </div>
+
+                    <div className="admin-q-actions">
+                      <button className="btn-solid-black" onClick={handleSaveQuestion} disabled={uploading}>
+                        {uploading ? <><span className="admin-btn-spinner" /> SAVING...</> : (editingQ ? 'UPDATE QUESTION' : 'SAVE QUESTION')}
+                      </button>
+                      {editingQ && <button className="btn-solid-black" style={{ background: 'transparent', color: '#000' }} onClick={resetQForm}>CANCEL</button>}
+                    </div>
+                  </div>
+
+                  <div className="admin-q-preview-wrap">
+                    <div className="admin-q-preview-label">
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                      LIVE PREVIEW
+                    </div>
+                    <div className={'admin-q-preview' + ((imagePreview || layoutSplit) ? ' split' : '')}>
+                      {(imagePreview || layoutSplit) && imagePreview && (
+                        <div className="admin-q-preview-img"><img src={imagePreview} alt="" /></div>
+                      )}
+                      <div className="admin-q-preview-body">
+                        <div className="admin-q-preview-header">
+                          <span className="admin-q-preview-num">Q{(questions.length || 0) + 1}</span>
+                          <span className="admin-q-preview-type">{qType === 'mc' ? 'MULTIPLE CHOICE' : 'WRITTEN'}</span>
+                        </div>
+                        <div className="admin-q-preview-text">
+                          {qText ? <div dangerouslySetInnerHTML={{ __html: qText }} /> : <span className="admin-q-preview-placeholder">Your question text will appear here...</span>}
+                        </div>
+                        {qType === 'mc' ? (
+                          <div className="admin-q-preview-opts">
+                            {opts.filter(o => o.trim()).map((o, i) => (
+                              <div key={i} className={'admin-q-preview-opt' + (correct === i ? ' correct' : '')}>
+                                <span className="admin-q-preview-letter">{String.fromCharCode(65 + i)}</span>
+                                <span>{o}</span>
+                              </div>
+                            ))}
+                            {opts.filter(o => o.trim()).length === 0 && (
+                              <span className="admin-q-preview-placeholder">Options will appear here...</span>
+                            )}
+                          </div>
+                        ) : (
+                          <div className="admin-q-preview-written">
+                            {correctAnswer || <span className="admin-q-preview-placeholder">Correct answer will appear here...</span>}
+                          </div>
+                        )}
+                        {explanation && (
+                          <div className="admin-q-preview-explanation">
+                            <strong>Explanation:</strong> {explanation}
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </div>
               )}
             </div>
           )}
