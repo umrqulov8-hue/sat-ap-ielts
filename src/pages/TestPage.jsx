@@ -102,7 +102,7 @@ export default function TestPage() {
   }, [topicId])
 
   useEffect(() => {
-    if (!q || !IS_PRACTICE) return
+    if (!currentQuestion || !IS_PRACTICE) return
     const handler = (e) => {
       if ((e.metaKey || e.ctrlKey || e.altKey) && e.key.toLowerCase() === 'a' && !e.shiftKey) {
         e.preventDefault()
@@ -111,7 +111,7 @@ export default function TestPage() {
     }
     window.addEventListener('keydown', handler)
     return () => window.removeEventListener('keydown', handler)
-  }, [q])
+  }, [currentQuestion])
 
   const handleSelect = (idx) => {
     if (abcMode) {
@@ -163,7 +163,7 @@ export default function TestPage() {
 
   const handleJump = (idx) => {
     if (selected !== null && step === 'taking') {
-      const q = questions[current]
+  const currentQuestion = questions[current]
       const isCorrect = checkCorrect(q, selected)
       const already = answers.findIndex(a => a.qIdx === current)
       let newAnswers
@@ -491,8 +491,8 @@ export default function TestPage() {
       {(localStorage.getItem('testLayout') === 'split') ? (
       <div className="bb-body bb-body-split">
         <div className="bb-left">
-          {q?.image_url && (
-            <img src={q.image_url} alt="" className="bb-left-img" draggable="false" onContextMenu={e => e.preventDefault()} />
+          {currentQuestion?.image_url && (
+            <img src={currentQuestion.image_url} alt="" className="bb-left-img" draggable="false" onContextMenu={e => e.preventDefault()} />
           )}
         </div>
         <div className="bb-right">
@@ -504,23 +504,23 @@ export default function TestPage() {
                 Mark for Review
               </button>
             </div>
-            {!isWrittenQ(q) && (
+            {!isWrittenQ(currentQuestion) && (
               <button className={'bb-abc-btn' + (abcMode ? ' active' : '')} onClick={() => setAbcMode(v => !v)}>
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="3" y1="12" x2="21" y2="12"/></svg>
                 ABC
               </button>
             )}
           </div>
-          {q?.question_text && (
-            <div className="bb-q-text" dangerouslySetInnerHTML={{ __html: q.question_text }} />
+          {currentQuestion?.question_text && (
+            <div className="bb-q-text" dangerouslySetInnerHTML={{ __html: currentQuestion.question_text }} />
           )}
-          {isWrittenQ(q) ? (
+          {isWrittenQ(currentQuestion) ? (
           <div className="bb-choices">
             <textarea className="bb-written-input" rows={1} value={selected || ''} onChange={e => setSelected(e.target.value)} placeholder="Type your answer..." />
           </div>
         ) : (
           <div className="bb-choices">
-            {q.options.map((opt, i) => (
+            {currentQuestion.options.map((opt, i) => (
               <div key={i} className={'bb-choice' + (selected === i ? ' selected' : '') + ((strikethrough['q' + current] || []).includes(i) ? ' struck' : '')} onClick={() => handleSelect(i)}>
                 <div className="bb-choice-letter">{String.fromCharCode(65 + i)}</div>
                 <div className="bb-choice-text">{opt}</div>
@@ -533,7 +533,7 @@ export default function TestPage() {
       ) : (
       <div className="bb-body">
         <div className="bb-body-inner">
-          {q && (
+          {currentQuestion && (
             <>
               <div className="bb-q-header">
                 <div className="bb-q-header-left">
@@ -543,29 +543,29 @@ export default function TestPage() {
                     Mark for Review
                   </button>
                 </div>
-                {!isWrittenQ(q) && (
+                {!isWrittenQ(currentQuestion) && (
                   <button className={'bb-abc-btn' + (abcMode ? ' active' : '')} onClick={() => setAbcMode(v => !v)}>
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="3" y1="12" x2="21" y2="12"/></svg>
                     ABC
                   </button>
                 )}
               </div>
-              {q?.image_url && (
-                <img src={q.image_url} alt="" className="bb-q-img" draggable="false" onContextMenu={e => e.preventDefault()} />
+              {currentQuestion?.image_url && (
+                <img src={currentQuestion.image_url} alt="" className="bb-q-img" draggable="false" onContextMenu={e => e.preventDefault()} />
               )}
-              {q?.question_text && !hasInlineImg(q.question_text) && (
-                <div className="bb-passage" dangerouslySetInnerHTML={{ __html: q.question_text }} />
+              {currentQuestion?.question_text && !hasInlineImg(currentQuestion.question_text) && (
+                <div className="bb-passage" dangerouslySetInnerHTML={{ __html: currentQuestion.question_text }} />
               )}
-              {q?.question_text && hasInlineImg(q.question_text) && (
-                <div className="bb-q-text">{renderQuestionText(q.question_text)}</div>
+              {currentQuestion?.question_text && hasInlineImg(currentQuestion.question_text) && (
+                <div className="bb-q-text">{renderQuestionText(currentQuestion.question_text)}</div>
               )}
-              {isWrittenQ(q) ? (
+              {isWrittenQ(currentQuestion) ? (
               <div className="bb-choices">
                 <textarea className="bb-written-input" rows={1} value={selected || ''} onChange={e => setSelected(e.target.value)} placeholder="Type your answer..." />
               </div>
             ) : (
               <div className="bb-choices">
-                {q.options.map((opt, i) => (
+                {currentQuestion.options.map((opt, i) => (
                   <div key={i} className={'bb-choice' + (selected === i ? ' selected' : '') + ((strikethrough['q' + current] || []).includes(i) ? ' struck' : '')} onClick={() => handleSelect(i)}>
                     <div className="bb-choice-letter">{String.fromCharCode(65 + i)}</div>
                     <div className="bb-choice-text">{opt}</div>
@@ -767,8 +767,8 @@ export default function TestPage() {
         </div>
       )}
 
-      {showAITutor && q && IS_PRACTICE && (
-        <AITutor question={q} userAnswer={selected} onClose={() => setShowAITutor(false)} />
+      {showAITutor && currentQuestion && IS_PRACTICE && (
+        <AITutor question={currentQuestion} userAnswer={selected} onClose={() => setShowAITutor(false)} />
       )}
     </div>
   )
