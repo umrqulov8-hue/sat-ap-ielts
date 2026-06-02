@@ -79,8 +79,7 @@ export default function Support() {
   )
 
   return (
-      <><div className="support-hero shadow-wrap">
-        <div className="shadow-box" />
+      <><div className="support-hero settings-card">
         <div className="support-hero-inner">
           <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" /></svg>
           <input className="support-search" type="text" placeholder="SEARCH HELP TOPICS..." value={search} onChange={e => setSearch(e.target.value)} />
@@ -91,8 +90,8 @@ export default function Support() {
 
       <div className="support-layout">
         <div className="support-faq">
-          <h3 className="support-subtitle">FREQUENTLY ASKED QUESTIONS</h3>
-          <div className="faq-list">
+          <h3 className="section-title" style={{ fontSize: '0.85rem', marginBottom: '1rem' }}>FREQUENTLY ASKED QUESTIONS</h3>
+          <div className="faq-list settings-card" style={{ padding: 0 }}>
             {filteredFAQ.length === 0 ? (
               <div className="faq-empty">No results found for &quot;{search}&quot;</div>
             ) : filteredFAQ.map((item) => {
@@ -113,67 +112,55 @@ export default function Support() {
         </div>
 
         <div className="support-side">
-          <div className="shadow-wrap">
-            <div className="shadow-box" />
-            <div className="support-side-card">
-              <div className="support-side-icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" /></svg>
-              </div>
-              <span className="support-side-title">LIVE CHAT</span>
-              <span className="support-side-desc">Chat with our team in real time</span>
-              <button className="btn-support-side">START CHAT</button>
+          <div className="settings-card support-side-card">
+            <div className="support-side-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" /></svg>
             </div>
+            <span className="support-side-title">LIVE CHAT</span>
+            <span className="support-side-desc">Chat with our team in real time</span>
+            <button className="btn-support-side">START CHAT</button>
           </div>
-          <div className="shadow-wrap">
-            <div className="shadow-box" />
-            <div className="support-side-card">
-              <div className="support-side-icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12" /></svg>
-              </div>
-              <span className="support-side-title">GUIDES</span>
-              <span className="support-side-desc">Step-by-step tutorials & resources</span>
-              <button className="btn-support-side">VIEW GUIDES</button>
+          <div className="settings-card support-side-card">
+            <div className="support-side-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12" /></svg>
             </div>
+            <span className="support-side-title">GUIDES</span>
+            <span className="support-side-desc">Step-by-step tutorials & resources</span>
+            <button className="btn-support-side">VIEW GUIDES</button>
           </div>
-          <div className="shadow-wrap">
-            <div className="shadow-box" />
-            <div className="support-side-card">
-              <div className="support-side-icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" /><polyline points="22,6 12,13 2,6" /></svg>
-              </div>
-              <span className="support-side-title">CONTACT US</span>
-              <span className="support-side-desc">support@satapacademy.com</span>
-              <button className="btn-support-side">SEND EMAIL</button>
+          <div className="settings-card support-side-card">
+            <div className="support-side-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" /><polyline points="22,6 12,13 2,6" /></svg>
             </div>
+            <span className="support-side-title">CONTACT US</span>
+            <span className="support-side-desc">support@satapacademy.com</span>
+            <button className="btn-support-side">SEND EMAIL</button>
           </div>
         </div>
       </div>
 
-      <h2 className="section-title" style={{ marginTop: '2rem' }}>SEND US A MESSAGE.</h2>
+      <h2 className="section-title" style={{ marginTop: '2.5rem' }}>SEND US A MESSAGE</h2>
 
-      <div className="shadow-wrap" style={{ width: '100%' }}>
-        <div className="shadow-box" />
-        <div className="support-contact">
-          <div className="contact-form-grid">
-            <div className="settings-field">
-              <label className="settings-label">YOUR NAME</label>
-              <input className="settings-input" type="text" placeholder="Enter your name" value={contact.name} onChange={e => setContact({ ...contact, name: e.target.value })} />
-            </div>
-            <div className="settings-field">
-              <label className="settings-label">YOUR EMAIL</label>
-              <input className="settings-input" type="email" placeholder="Enter your email" value={contact.email} onChange={e => setContact({ ...contact, email: e.target.value })} />
-            </div>
+      <div className="settings-card support-contact">
+        <div className="contact-form-grid">
+          <div className="settings-field">
+            <label className="settings-label">YOUR NAME</label>
+            <input className="settings-input" type="text" placeholder="Enter your name" value={contact.name} onChange={e => setContact({ ...contact, name: e.target.value })} />
           </div>
-          <div className="settings-field" style={{ marginTop: '1rem' }}>
-            <label className="settings-label">SUBJECT</label>
-            <input className="settings-input" type="text" placeholder="What is this about?" value={contact.subject} onChange={e => setContact({ ...contact, subject: e.target.value })} />
+          <div className="settings-field">
+            <label className="settings-label">YOUR EMAIL</label>
+            <input className="settings-input" type="email" placeholder="Enter your email" value={contact.email} onChange={e => setContact({ ...contact, email: e.target.value })} />
           </div>
-          <div className="settings-field" style={{ marginTop: '1rem' }}>
-            <label className="settings-label">MESSAGE</label>
-            <textarea className="settings-input support-textarea" rows={4} placeholder="Describe your issue or question in detail..." value={contact.message} onChange={e => setContact({ ...contact, message: e.target.value })} />
-          </div>
-          <button className="btn-settings" style={{ marginTop: '1rem' }} onClick={submitContact}>SUBMIT TICKET</button>
         </div>
+        <div className="settings-field" style={{ marginTop: '1rem' }}>
+          <label className="settings-label">SUBJECT</label>
+          <input className="settings-input" type="text" placeholder="What is this about?" value={contact.subject} onChange={e => setContact({ ...contact, subject: e.target.value })} />
+        </div>
+        <div className="settings-field" style={{ marginTop: '1rem' }}>
+          <label className="settings-label">MESSAGE</label>
+          <textarea className="settings-input support-textarea" rows={4} placeholder="Describe your issue or question in detail..." value={contact.message} onChange={e => setContact({ ...contact, message: e.target.value })} />
+        </div>
+        <button className="btn-settings" style={{ marginTop: '1.25rem' }} onClick={submitContact}>SUBMIT TICKET</button>
       </div>
     </>
   )

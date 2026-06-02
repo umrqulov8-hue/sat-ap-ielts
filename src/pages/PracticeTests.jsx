@@ -88,32 +88,56 @@ export default function PracticeTests() {
 
   return (
     <><div className="stats-grid">
-      <div className="shadow-wrap"><div className="shadow-box" />
-        <div className="stat-card">
-          <div className="stat-card-top"><span className="stat-label">TESTS COMPLETED</span></div>
-          <div className="stat-value tests">{completed}</div>
-          <div className="stat-footer"><span className="stat-footer-label">TOTAL TESTS TAKEN</span><div className="stat-bar"><div className="stat-bar-fill" style={{ width: `${Math.min(100, completed * 4)}%` }} /></div></div>
+      <div className="stat-card">
+        <div className="stat-card-top">
+          <div className="stat-label-row">
+            <span className="stat-tag lavender">DONE</span>
+            <span className="stat-label">TESTS COMPLETED</span>
+          </div>
+        </div>
+        <div className="stat-value tests">{completed}</div>
+        <div className="stat-footer">
+          <span className="stat-footer-label">TOTAL TESTS TAKEN</span>
+          <div className="stat-bar"><div className="stat-bar-fill lavender" style={{ width: `${Math.min(100, completed * 4)}%` }} /></div>
         </div>
       </div>
-      <div className="shadow-wrap"><div className="shadow-box" />
-        <div className="stat-card">
-          <div className="stat-card-top"><span className="stat-label">AVG SCORE</span></div>
-          <div className="stat-value">{avgScore > 0 ? avgScore : '—'}</div>
-          <div className="stat-footer"><span className="stat-footer-label">ALL TESTS</span><div className="stat-bar"><div className="stat-bar-fill" style={{ width: `${avgScore > 0 ? Math.min(100, avgScore / 16) : 0}%` }} /></div></div>
+      <div className="stat-card">
+        <div className="stat-card-top">
+          <div className="stat-label-row">
+            <span className="stat-tag peach">AVG</span>
+            <span className="stat-label">AVG SCORE</span>
+          </div>
+        </div>
+        <div className="stat-value">{avgScore > 0 ? avgScore : '—'}</div>
+        <div className="stat-footer">
+          <span className="stat-footer-label">ALL TESTS</span>
+          <div className="stat-bar"><div className="stat-bar-fill peach" style={{ width: `${avgScore > 0 ? Math.min(100, avgScore / 16) : 0}%` }} /></div>
         </div>
       </div>
-      <div className="shadow-wrap"><div className="shadow-box" />
-        <div className="stat-card">
-          <div className="stat-card-top"><span className="stat-label">BEST SCORE</span></div>
-          <div className="stat-value">{bestScore > 0 ? bestScore : '—'}</div>
-          <div className="stat-footer"><span className="stat-footer-label">PERSONAL BEST</span><div className="stat-bar"><div className="stat-bar-fill" style={{ width: `${bestScore > 0 ? Math.min(100, bestScore / 16) : 0}%` }} /></div></div>
+      <div className="stat-card">
+        <div className="stat-card-top">
+          <div className="stat-label-row">
+            <span className="stat-tag green">BEST</span>
+            <span className="stat-label">BEST SCORE</span>
+          </div>
+        </div>
+        <div className="stat-value">{bestScore > 0 ? bestScore : '—'}</div>
+        <div className="stat-footer">
+          <span className="stat-footer-label">PERSONAL BEST</span>
+          <div className="stat-bar"><div className="stat-bar-fill green" style={{ width: `${bestScore > 0 ? Math.min(100, bestScore / 16) : 0}%` }} /></div>
         </div>
       </div>
-      <div className="shadow-wrap"><div className="shadow-box" />
-        <div className="stat-card">
-          <div className="stat-card-top"><span className="stat-label">TOTAL TIME</span></div>
-          <div className="stat-value time">{totalTime > 0 ? totalTime : '—'}</div>
-          <div className="stat-footer"><span className="stat-footer-label">HOURS PRACTICING</span><div className="stat-bar"><div className="stat-bar-fill" style={{ width: `${totalTime > 0 ? Math.min(100, totalTime / 60 * 100) : 0}%` }} /></div></div>
+      <div className="stat-card">
+        <div className="stat-card-top">
+          <div className="stat-label-row">
+            <span className="stat-tag yellow">TIME</span>
+            <span className="stat-label">TOTAL TIME</span>
+          </div>
+        </div>
+        <div className="stat-value time">{totalTime > 0 ? totalTime : '—'}</div>
+        <div className="stat-footer">
+          <span className="stat-footer-label">HOURS PRACTICING</span>
+          <div className="stat-bar"><div className="stat-bar-fill yellow" style={{ width: `${totalTime > 0 ? Math.min(100, totalTime / 60 * 100) : 0}%` }} /></div>
         </div>
       </div>
     </div>
@@ -125,22 +149,22 @@ export default function PracticeTests() {
 
       <div className="module-list">
         {loading ? (
-          <div className="module-row shadow-wrap"><div className="shadow-box" />
+          <div className="module-row">
             <div className="module-inner">
-              <div className="module-left"><div><div className="module-name">Loading...</div><div className="module-desc">Fetching your test history</div></div></div>
+              <div className="module-left"><div className="module-info"><div className="module-name">Loading...</div><div className="module-desc">Fetching your test history</div></div></div>
             </div>
           </div>
         ) : tests.length === 0 ? (
-          <div className="module-row shadow-wrap"><div className="shadow-box" />
+          <div className="module-row">
             <div className="module-inner">
-              <div className="module-left"><div><div className="module-name">No practice tests taken yet</div><div className="module-desc">Click + NEW TEST to start</div></div></div>
+              <div className="module-left"><div className="module-info"><div className="module-name">No practice tests taken yet</div><div className="module-desc">Click + NEW TEST to start</div></div></div>
             </div>
           </div>
         ) : tests.map((t, i) => (
-          <div key={t.id || i} className="module-row shadow-wrap"><div className="shadow-box" />
+          <div key={t.id || i} className="module-row">
             <div className="module-inner">
-              <div className="module-left"><span className="module-tag math">SAT</span><div><div className="module-name">{t.name}</div><div className="module-desc">{t.desc}</div></div></div>
-              <div className="module-right"><div className="module-progress"><div className="module-progress-bar" style={{ width: `${t.progress}%` }} /></div><button className="btn-module">{t.btn}</button></div>
+              <div className="module-left"><span className="module-tag math">SAT</span><div className="module-info"><div className="module-name">{t.name}</div><div className="module-desc">{t.desc}</div></div></div>
+              <div className="module-right"><div className="module-progress"><div className="module-progress-bar lavender-bar" style={{ width: `${t.progress}%` }} /></div><button className="btn-module">{t.btn}</button></div>
             </div>
           </div>
         ))}

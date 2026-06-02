@@ -88,46 +88,83 @@ export default function SubjectPage({ slug, title, subtitle, tag }) {
 
   return (
     <><div className="stats-grid">
-      <div className="shadow-wrap"><div className="shadow-box" />
-        <div className="stat-card">
-          <div className="stat-card-top"><span className="stat-label">CURRENT SCORE</span></div>
-          <div className={`stat-value${isAp ? ' ap' : ''}`}>{score > 0 ? score : '—'}</div>
-          <div className="stat-footer"><span className="stat-footer-label">TARGET: {target}</span><div className="stat-bar"><div className="stat-bar-fill" style={{ width: `${score > 0 ? Math.min(100, Math.round(score / target * 100)) : 0}%` }} /></div></div>
+      <div className="stat-card">
+        <div className="stat-card-top">
+          <div className="stat-label-row">
+            <span className={`stat-tag ${tag === 'math' ? 'lavender' : tag === 'rw' ? 'peach' : 'yellow'}`}>SCORE</span>
+            <span className="stat-label">CURRENT SCORE</span>
+          </div>
+        </div>
+        <div className={`stat-value${isAp ? ' ap' : ''}`}>{score > 0 ? score : '—'}</div>
+        <div className="stat-footer">
+          <span className="stat-footer-label">TARGET: {target}</span>
+          <div className="stat-bar"><div className={`stat-bar-fill ${tag === 'math' ? 'lavender' : tag === 'rw' ? 'peach' : 'yellow'}`} style={{ width: `${score > 0 ? Math.min(100, Math.round(score / target * 100)) : 0}%` }} /></div>
         </div>
       </div>
-      <div className="shadow-wrap"><div className="shadow-box" />
-        <div className="stat-card">
-          <div className="stat-card-top"><span className="stat-label">TESTS COMPLETED</span><span className="stat-trend">{tests}/{totalTests || '—'}</span></div>
-          <div className="stat-value tests">{tests}</div>
-          <div className="stat-footer"><span className="stat-footer-label">{pct}% COMPLETE</span><div className="stat-bar"><div className="stat-bar-fill" style={{ width: `${pct}%` }} /></div></div>
+      <div className="stat-card">
+        <div className="stat-card-top">
+          <div className="stat-label-row">
+            <span className="stat-tag green">TEST</span>
+            <span className="stat-label">TESTS COMPLETED</span>
+          </div>
+          <span className="stat-trend">{tests}/{totalTests || '—'}</span>
+        </div>
+        <div className="stat-value tests">{tests}</div>
+        <div className="stat-footer">
+          <span className="stat-footer-label">{pct}% COMPLETE</span>
+          <div className="stat-bar"><div className="stat-bar-fill green" style={{ width: `${pct}%` }} /></div>
         </div>
       </div>
-      <div className="shadow-wrap"><div className="shadow-box" />
-        <div className="stat-card">
-          <div className="stat-card-top"><span className="stat-label">ACCURACY RATE</span></div>
-          <div className="stat-value">{accuracy > 0 ? accuracy + '%' : '—'}</div>
-          <div className="stat-footer"><span className="stat-footer-label">LAST 5 TESTS</span><div className="stat-bar"><div className="stat-bar-fill" style={{ width: `${accuracy}%` }} /></div></div>
+      <div className="stat-card">
+        <div className="stat-card-top">
+          <div className="stat-label-row">
+            <span className="stat-tag peach">ACC</span>
+            <span className="stat-label">ACCURACY RATE</span>
+          </div>
+        </div>
+        <div className="stat-value">{accuracy > 0 ? accuracy + '%' : '—'}</div>
+        <div className="stat-footer">
+          <span className="stat-footer-label">LAST 5 TESTS</span>
+          <div className="stat-bar"><div className="stat-bar-fill peach" style={{ width: `${accuracy}%` }} /></div>
         </div>
       </div>
-      <div className="shadow-wrap"><div className="shadow-box" />
-        <div className="stat-card">
-          <div className="stat-card-top"><span className="stat-label">STUDY TIME</span></div>
-          <div className="stat-value time">{time > 0 ? time : '—'}</div>
-          <div className="stat-footer"><span className="stat-footer-label">HOURS THIS WEEK</span><div className="stat-bar"><div className="stat-bar-fill" style={{ width: `${time > 0 ? Math.min(100, time * 3.3) : 0}%` }} /></div></div>
+      <div className="stat-card">
+        <div className="stat-card-top">
+          <div className="stat-label-row">
+            <span className="stat-tag yellow">TIME</span>
+            <span className="stat-label">STUDY TIME</span>
+          </div>
+        </div>
+        <div className="stat-value time">{time > 0 ? time : '—'}</div>
+        <div className="stat-footer">
+          <span className="stat-footer-label">HOURS THIS WEEK</span>
+          <div className="stat-bar"><div className="stat-bar-fill yellow" style={{ width: `${time > 0 ? Math.min(100, time * 3.3) : 0}%` }} /></div>
         </div>
       </div>
     </div>
 
       {modules.length > 0 && <><h2 className="section-title">MODULES</h2>
       <div className="module-list">
-        {modules.map((m, i) => (
-          <div key={i} className="module-row shadow-wrap"><div className="shadow-box" />
-            <div className="module-inner">
-              <div className="module-left"><span className={`module-tag ${tag}`}>{TAG_LABEL[tag]}</span><div><div className="module-name">{m.name}</div><div className="module-desc">MODULE {i + 1} OF {modules.length} &mdash; {m.desc}</div></div></div>
-              <div className="module-right"><div className="module-progress"><div className="module-progress-bar" style={{ width: `${m.progress}%` }} /></div><button className={'btn-module' + (m.status === 'soon' ? ' soon' : '')} onClick={() => handleModuleStart(m)} disabled={m.status === 'soon'}>{m.btn}</button></div>
+        {modules.map((m, i) => {
+          const barClass = tag === 'math' ? 'lavender-bar' : tag === 'rw' ? 'peach-bar' : 'yellow-bar'
+          return (
+            <div key={i} className="module-row" onClick={() => handleModuleStart(m)}>
+              <div className="module-inner">
+                <div className="module-left">
+                  <span className={`module-tag ${tag}`}>{TAG_LABEL[tag]}</span>
+                  <div className="module-info">
+                    <div className="module-name">{m.name}</div>
+                    <div className="module-desc">MODULE {i + 1} OF {modules.length} &mdash; {m.desc}</div>
+                  </div>
+                </div>
+                <div className="module-right">
+                  <div className="module-progress"><div className={`module-progress-bar ${barClass}`} style={{ width: `${m.progress}%` }} /></div>
+                  <button className={'btn-module' + (m.status === 'soon' ? ' soon' : '')} onClick={(e) => { e.stopPropagation(); handleModuleStart(m) }} disabled={m.status === 'soon'}>{m.btn}</button>
+                </div>
+              </div>
             </div>
-          </div>
-        ))}
+          )
+        })}
       </div></>}
     </>
   )

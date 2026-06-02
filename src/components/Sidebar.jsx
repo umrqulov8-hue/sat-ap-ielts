@@ -68,7 +68,6 @@ export default function Sidebar() {
                 const isHash = item.path === '#'
                 return (
                   <div key={item.label} className="snav-wrap">
-                    <div className="shadow-box" />
                     {isHash ? (
                       <span className={`snav-item${isActive ? ' active' : ''}`}>
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" dangerouslySetInnerHTML={{ __html: item.icon }} />
@@ -96,25 +95,23 @@ export default function Sidebar() {
           <div className="nav-section">
             <span className="nav-section-label">ACCOUNT</span>
             <div className="snav-wrap">
-              <div className="shadow-box" />
               <Link to="/settings" className={`snav-item${currentPath === '/settings' ? ' active' : ''}`}>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72l1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
                 SETTINGS
               </Link>
             </div>
             <div className="snav-wrap">
-              <div className="shadow-box" />
               <Link to="/support" className={`snav-item${currentPath === '/support' ? ' active' : ''}`}>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
                 SUPPORT
               </Link>
             </div>
-            {(isAdmin || isOwner) ? <><div className="snav-wrap"><div className="shadow-box" />
+            {(isAdmin || isOwner) ? <><div className="snav-wrap">
                 <Link to="/admin/questions" className={'snav-item' + (currentPath === '/admin/questions' ? ' active' : '')}>
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72l1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
                   ADMIN
                 </Link></div>
-                <div className="snav-wrap"><div className="shadow-box" />
+                <div className="snav-wrap">
                 <Link to="/admin/sat-tests" className={'snav-item' + (currentPath === '/admin/sat-tests' ? ' active' : '')}>
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
                   TEST ADMIN
@@ -134,7 +131,6 @@ export default function Sidebar() {
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="9 18 15 12 9 6" /></svg>
         </Link>
         <div className="snav-wrap">
-          <div className="shadow-box" />
           <button className="snav-item logout" onClick={handleLogout}>
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" /><polyline points="16 17 21 12 16 7" /><line x1="21" y1="12" x2="9" y2="12" /></svg>
             LOGOUT

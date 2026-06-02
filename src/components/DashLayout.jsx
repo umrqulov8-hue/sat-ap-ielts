@@ -29,6 +29,23 @@ export default function DashLayout() {
     })
   }, [])
 
+  useEffect(() => {
+    const trackLogin = async () => {
+      const { data: { session } } = await supabase.auth.getSession()
+      if (!session?.user) return
+      const now = new Date()
+      const today = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`
+      const lastTracked = localStorage.getItem('satap_last_login_tracked')
+      if (lastTracked === today) return
+      const { error } = await supabase.from('login_streaks').upsert(
+        { user_id: session.user.id, login_date: today },
+        { onConflict: 'user_id, login_date' }
+      )
+      if (!error) localStorage.setItem('satap_last_login_tracked', today)
+    }
+    trackLogin()
+  }, [])
+
   const today = new Date()
   const dateStr = `${today.toLocaleString('en-US', { month: 'long' }).toUpperCase()} ${today.getDate()}, ${today.getFullYear()}`
 

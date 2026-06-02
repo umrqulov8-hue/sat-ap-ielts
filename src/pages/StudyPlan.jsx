@@ -53,7 +53,7 @@ export default function StudyPlan() {
 
     const [planRes, streakRes, profRes] = await Promise.all([
       supabase.from('study_plans').select('*').eq('user_id', uid).order('day_of_week'),
-      supabase.from('login_streaks').select('*').eq('user_id', uid).order('login_date', { ascending: false }).limit(30),
+      supabase.from('login_streaks').select('*').eq('user_id', uid).order('login_date', { ascending: false }),
       supabase.from('profiles').select('exam_date').eq('id', uid).maybeSingle(),
     ])
 
@@ -65,12 +65,21 @@ export default function StudyPlan() {
 
     let curStreak = 0
     if (streakRes.data?.length) {
-      curStreak = 1
-      const dates = streakRes.data.map(s => new Date(s.login_date))
-      for (let i = 1; i < dates.length; i++) {
-        const diff = (dates[i - 1] - dates[i]) / 86400000
-        if (Math.abs(diff - 1) < 0.01) curStreak++
-        else break
+      const today = new Date()
+      today.setHours(0, 0, 0, 0)
+      const todayMs = today.getTime()
+      const dates = streakRes.data.map(s => {
+        const d = new Date(s.login_date)
+        d.setHours(0, 0, 0, 0)
+        return d.getTime()
+      })
+      const dayMs = 86400000
+      if (dates[0] === todayMs || dates[0] === todayMs - dayMs) {
+        curStreak = 1
+        for (let i = 1; i < dates.length; i++) {
+          if (dates[i - 1] - dates[i] === dayMs) curStreak++
+          else break
+        }
       }
       setStreak(curStreak)
     }
@@ -198,32 +207,57 @@ export default function StudyPlan() {
 
   return (
     <><div className="stats-grid">
-      <div className="shadow-wrap"><div className="shadow-box" />
-        <div className="stat-card">
-          <div className="stat-card-top"><span className="stat-label">IMTIHONGACHA</span></div>
-          <div className="stat-value">{daysLeft !== null ? daysLeft : '—'}</div>
-          <div className="stat-footer"><span className="stat-footer-label">KUN QOLDI</span><div className="stat-bar"><div className="stat-bar-fill" style={{ width: daysLeft !== null ? `${Math.min(100, daysLeft / 3)}%` : '0%' }} /></div></div>
+      <div className="stat-card">
+        <div className="stat-card-top">
+          <div className="stat-label-row">
+            <span className="stat-tag lavender">DATE</span>
+            <span className="stat-label">IMTIHONGACHA</span>
+          </div>
+        </div>
+        <div className="stat-value">{daysLeft !== null ? daysLeft : '—'}</div>
+        <div className="stat-footer">
+          <span className="stat-footer-label">KUN QOLDI</span>
+          <div className="stat-bar"><div className="stat-bar-fill lavender" style={{ width: daysLeft !== null ? `${Math.min(100, daysLeft / 3)}%` : '0%' }} /></div>
         </div>
       </div>
-      <div className="shadow-wrap"><div className="shadow-box" />
-        <div className="stat-card">
-          <div className="stat-card-top"><span className="stat-label">BAJARILDI</span><span className="stat-trend">{tasksDone}/{totalTasks || '—'}</span></div>
-          <div className="stat-value tests">{tasksDone}</div>
-          <div className="stat-footer"><span className="stat-footer-label">{pct}% TOPSHIRIQ</span><div className="stat-bar"><div className="stat-bar-fill" style={{ width: `${pct}%` }} /></div></div>
+      <div className="stat-card">
+        <div className="stat-card-top">
+          <div className="stat-label-row">
+            <span className="stat-tag green">DONE</span>
+            <span className="stat-label">BAJARILDI</span>
+          </div>
+          <span className="stat-trend">{tasksDone}/{totalTasks || '—'}</span>
+        </div>
+        <div className="stat-value tests">{tasksDone}</div>
+        <div className="stat-footer">
+          <span className="stat-footer-label">{pct}% TOPSHIRIQ</span>
+          <div className="stat-bar"><div className="stat-bar-fill green" style={{ width: `${pct}%` }} /></div>
         </div>
       </div>
-      <div className="shadow-wrap"><div className="shadow-box" />
-        <div className="stat-card">
-          <div className="stat-card-top"><span className="stat-label">VAQT</span></div>
-          <div className="stat-value time">{totalHours ? totalHours + 'h' : '—'}</div>
-          <div className="stat-footer"><span className="stat-footer-label">{doneHours ? doneHours + 'h bajarildi' : 'Rejalashtirilgan'}</span><div className="stat-bar"><div className="stat-bar-fill" style={{ width: totalPlannedMin ? `${(totalDoneMin / totalPlannedMin) * 100}%` : '0%' }} /></div></div>
+      <div className="stat-card">
+        <div className="stat-card-top">
+          <div className="stat-label-row">
+            <span className="stat-tag peach">TIME</span>
+            <span className="stat-label">VAQT</span>
+          </div>
+        </div>
+        <div className="stat-value time">{totalHours ? totalHours + 'h' : '—'}</div>
+        <div className="stat-footer">
+          <span className="stat-footer-label">{doneHours ? doneHours + 'h bajarildi' : 'Rejalashtirilgan'}</span>
+          <div className="stat-bar"><div className="stat-bar-fill peach" style={{ width: totalPlannedMin ? `${(totalDoneMin / totalPlannedMin) * 100}%` : '0%' }} /></div>
         </div>
       </div>
-      <div className="shadow-wrap"><div className="shadow-box" />
-        <div className="stat-card">
-          <div className="stat-card-top"><span className="stat-label">STREAK</span></div>
-          <div className="stat-value time">{streak > 0 ? streak : '—'}</div>
-          <div className="stat-footer"><span className="stat-footer-label">KUN KETMA-KET</span><div className="stat-bar"><div className="stat-bar-fill" style={{ width: `${streak > 0 ? Math.min(100, streak * 8) : 0}%` }} /></div></div>
+      <div className="stat-card">
+        <div className="stat-card-top">
+          <div className="stat-label-row">
+            <span className="stat-tag yellow">STREAK</span>
+            <span className="stat-label">STREAK</span>
+          </div>
+        </div>
+        <div className="stat-value time">{streak > 0 ? streak : '—'}</div>
+        <div className="stat-footer">
+          <span className="stat-footer-label">KUN KETMA-KET</span>
+          <div className="stat-bar"><div className="stat-bar-fill yellow" style={{ width: `${streak > 0 ? Math.min(100, streak * 8) : 0}%` }} /></div>
         </div>
       </div>
     </div>

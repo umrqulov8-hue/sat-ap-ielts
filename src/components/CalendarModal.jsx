@@ -20,8 +20,9 @@ export default function CalendarModal({ active, onClose, dateRef }) {
     if (!session?.user) return
     const { data } = await supabase.from('login_streaks').select('login_date').eq('user_id', session.user.id)
     if (data) setLoginDates(data.map(r => {
-      const d = new Date(r.login_date)
-      return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`
+      const raw = r.login_date
+      const str = typeof raw === 'string' ? raw.substring(0, 10) : dateStr(new Date(raw))
+      return str
     }))
   }, [])
 
@@ -106,8 +107,7 @@ export default function CalendarModal({ active, onClose, dateRef }) {
   return (
     <div className={`calendar-modal${active ? ' active' : ''}`} onClick={handleBackdrop}>
       <div className="calendar-backdrop" />
-      <div className="calendar-wrap shadow-wrap" ref={wrapRef}>
-        <div className="shadow-box" />
+      <div className="calendar-wrap" ref={wrapRef}>
         <div className="calendar-container">
           <div className="calendar-header">
             <button className="cal-nav" onClick={prevMonth}>
