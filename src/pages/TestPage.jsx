@@ -4,6 +4,7 @@ import { supabase } from '../lib/supabaseClient'
 import { getCache, setCache } from '../lib/dataCache'
 import html2canvas from 'html2canvas'
 import { useToast } from '../components/Toast'
+import AITutor from '../components/AITutor'
 
 export default function TestPage() {
   const { topicId } = useParams()
@@ -25,6 +26,7 @@ export default function TestPage() {
   const [strikethrough, setStrikethrough] = useState({})
   const [showCalc, setShowCalc] = useState(false)
   const [showRef, setShowRef] = useState(false)
+  const [showAITutor, setShowAITutor] = useState(false)
   const [displayName, setDisplayName] = useState('STUDENT')
   const [elapsed, setElapsed] = useState(0)
   const [expExplain, setExpExplain] = useState(null)
@@ -458,6 +460,9 @@ export default function TestPage() {
           <button className="bb-icon-btn" title="Calculator" onClick={() => setShowCalc(true)}>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="10" y2="10"/><line x1="14" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="10" y2="14"/><line x1="14" y1="14" x2="16" y2="14"/><line x1="8" y1="18" x2="16" y2="18"/></svg>
           </button>
+          <button className="bb-icon-btn" title="AI Tutor" onClick={() => setShowAITutor(true)}>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 2l2.4 5.4L20 8l-4 4 1 6-5-2.8L7 18l1-6-4-4 5.6-.6L12 2z"/></svg>
+          </button>
           <button className="bb-icon-btn" title="Home" onClick={() => { if (window.confirm('Exit test?')) navigate('/dashboard') }}>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
           </button>
@@ -744,6 +749,10 @@ export default function TestPage() {
             </div>
           </div>
         </div>
+      )}
+
+      {showAITutor && q && (
+        <AITutor question={q} userAnswer={selected} onClose={() => setShowAITutor(false)} />
       )}
     </div>
   )
