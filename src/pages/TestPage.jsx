@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useMemo, memo } from 'react'
 import { useParams, useNavigate, useLocation } from 'react-router-dom'
 import { supabase } from '../lib/supabaseClient'
 import { getCache, setCache } from '../lib/dataCache'
@@ -7,6 +7,23 @@ import { useToast } from '../components/Toast'
 import AITutor from '../components/AITutor'
 
 const IS_PRACTICE = true
+
+const formatTime = (s) => {
+  const m = Math.floor(s / 60)
+  const sec = s % 60
+  return `${m}:${sec.toString().padStart(2, '0')}`
+}
+
+const QuestionTimer = memo(function QuestionTimer({ startTime }) {
+  const [elapsed, setElapsed] = useState(0)
+  useEffect(() => {
+    const tick = () => setElapsed(Math.floor((Date.now() - startTime) / 1000))
+    tick()
+    const id = setInterval(tick, 1000)
+    return () => clearInterval(id)
+  }, [startTime])
+  return <div className="bb-timer">{formatTime(elapsed)}</div>
+})
 
 export default function TestPage() {
   const { topicId } = useParams()
@@ -30,14 +47,12 @@ export default function TestPage() {
   const [showRef, setShowRef] = useState(false)
   const [showAITutor, setShowAITutor] = useState(false)
   const [displayName, setDisplayName] = useState('STUDENT')
-  const [elapsed, setElapsed] = useState(0)
   const [expExplain, setExpExplain] = useState(null)
   const [showCert, setShowCert] = useState(false)
   const [savedTestId, setSavedTestId] = useState(null)
   const [calcPos, setCalcPos] = useState({ x: 80, y: 60 })
   const [calcSize, setCalcSize] = useState({ w: 640, h: 520 })
   const [totalElapsed, setTotalElapsed] = useState(0)
-  const timerRef = useRef(null)
   const qStartRef = useRef(null)
   const toast = useToast()
 
@@ -90,15 +105,8 @@ export default function TestPage() {
         setCache('test-questions-' + topicId, shuffled)
       }
       setLoading(false)
-
-      timerRef.current = setInterval(() => {
-        if (qStartRef.current) {
-          setElapsed(Math.floor((Date.now() - qStartRef.current) / 1000))
-        }
-      }, 1000)
     })()
 
-    return () => { if (timerRef.current) clearInterval(timerRef.current) }
   }, [topicId])
 
   useEffect(() => {
@@ -113,7 +121,7 @@ export default function TestPage() {
     return () => window.removeEventListener('keydown', handler)
   }, [current, questions])
 
-  const currentQuestion = questions[current] || null
+  const currentQuestion = useMemo(() => questions[current] || null, [questions, current])
 
   const handleSelect = (idx) => {
     if (abcMode) {
@@ -148,12 +156,10 @@ export default function TestPage() {
     }
     setAnswers(newAnswers)
     setSelected(null)
-    setTotalElapsed(t => t + elapsed)
+    setTotalElapsed(t => t + Math.floor((Date.now() - qStartRef.current) / 1000))
     qStartRef.current = Date.now()
-    setElapsed(0)
 
     if (current + 1 >= questions.length) {
-      clearInterval(timerRef.current)
       setStep('review')
       setShowNav(true)
     } else {
@@ -176,9 +182,8 @@ export default function TestPage() {
       setAnswers(newAnswers)
     }
     setCurrent(idx)
-    setTotalElapsed(t => t + elapsed)
+    setTotalElapsed(t => t + Math.floor((Date.now() - qStartRef.current) / 1000))
     qStartRef.current = new Date().getTime()
-    setElapsed(0)
     setAbcMode(false)
     const jumpAns = (step === 'taking' && answers.find(a => a.qIdx === idx))
     setSelected(jumpAns ? jumpAns.selected : null)
@@ -230,7 +235,7 @@ export default function TestPage() {
       }
     }
     setSaving(false)
-    setTotalElapsed(t => t + elapsed)
+    setTotalElapsed(t => t + Math.floor((Date.now() - qStartRef.current) / 1000))
     setStep('done')
     toast.success('Natija saqlandi')
   }
@@ -255,12 +260,6 @@ export default function TestPage() {
     document.getElementById('desmos-api')?.addEventListener('load', check)
   }, [showCalc])
 
-  const formatTime = (s) => {
-    const m = Math.floor(s / 60)
-    const sec = s % 60
-    return String(m).padStart(2, '0') + ':' + String(sec).padStart(2, '0')
-  }
-
   const renderQuestionText = (text) => {
     if (!text) return null
     const parts = text.split(/(<img[^>]+>)/g)
@@ -274,13 +273,30 @@ export default function TestPage() {
     })
   }
 
-  const hasInlineImg = (text) => {
-    if (!text) return false
-    return /<img\s[^>]*src=/i.test(text)
-  }
+  const hasInlineImg = useMemo(
+    () => /<img\s[^>]*src=/i.test(currentQuestion?.question_text || ''),
+    [currentQuestion]
+  )
 
-  const q = questions[current]
-  const correctCount = answers.filter(a => a.correct).length
+  const renderedQuestionText = useMemo(
+    () => {
+      const text = currentQuestion?.question_text
+      if (!text) return null
+      if (!hasInlineImg) return <div className="bb-q-text" dangerouslySetInnerHTML={{ __html: text }} />
+      const parts = text.split(/(<img[^>]+>)/g)
+      return parts.map((part, i) => {
+        if (part.startsWith('<img')) {
+          const match = part.match(/src="([^"]+)"/)
+          const src = match ? match[1] : ''
+          return <img key={i} src={src} alt="" className="bb-inline-img" draggable="false" onContextMenu={e => e.preventDefault()} />
+        }
+        return <span key={i} dangerouslySetInnerHTML={{ __html: part }} />
+      })
+    },
+    [currentQuestion, hasInlineImg]
+  )
+
+  const correctCount = useMemo(() => answers.filter(a => a.correct).length, [answers])
 
   if (loading) return <div className="test-loading" />
   if (!topic) return <div className="test-loading"><div className="test-loading-text">TOPIC NOT FOUND</div></div>
@@ -466,7 +482,7 @@ export default function TestPage() {
       {/* TOP NAV */}
       <div className="bb-top">
         <div className="bb-top-title">{topic.modules?.title || 'Test'} &mdash; {topic.title}</div>
-        <div className="bb-timer">{formatTime(elapsed)}</div>
+        <QuestionTimer key={current} startTime={qStartRef.current} />
         <div className="bb-top-right">
           <button className="bb-icon-btn" title="Reference" onClick={() => setShowRef(true)}>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
@@ -488,7 +504,7 @@ export default function TestPage() {
       <hr className="bb-divider" />
 
       {/* BODY */}
-      {(localStorage.getItem('testLayout') === 'split') ? (
+      {(currentQuestion?.image_url || hasInlineImg) ? (
       <div className="bb-body bb-body-split">
         <div className="bb-left">
           {currentQuestion?.image_url && (
@@ -553,10 +569,10 @@ export default function TestPage() {
               {currentQuestion?.image_url && (
                 <img src={currentQuestion.image_url} alt="" className="bb-q-img" draggable="false" onContextMenu={e => e.preventDefault()} />
               )}
-              {currentQuestion?.question_text && !hasInlineImg(currentQuestion.question_text) && (
+              {currentQuestion?.question_text && !hasInlineImg && (
                 <div className="bb-passage" dangerouslySetInnerHTML={{ __html: currentQuestion.question_text }} />
               )}
-              {currentQuestion?.question_text && hasInlineImg(currentQuestion.question_text) && (
+              {currentQuestion?.question_text && hasInlineImg && (
                 <div className="bb-q-text">{renderQuestionText(currentQuestion.question_text)}</div>
               )}
               {isWrittenQ(currentQuestion) ? (
