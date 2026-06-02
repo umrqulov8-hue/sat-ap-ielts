@@ -1,8 +1,8 @@
 const GROQ_API_URL = 'https://api.groq.com/openai/v1/chat/completions'
 const MODEL = 'llama-3.3-70b-versatile'
+const apiKey = import.meta.env.VITE_GROQ_API_KEY
 
 export async function explainQuestion(question, userAnswer = null) {
-  const apiKey = import.meta.env.VITE_GROQ_API_KEY
   if (!apiKey) throw new Error('Groq API key topilmadi. .env faylni tekshiring.')
 
   const opts = (question.options || []).map((o, i) => `${String.fromCharCode(65 + i)}) ${o}`).join('\n')
