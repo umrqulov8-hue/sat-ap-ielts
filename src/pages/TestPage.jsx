@@ -163,7 +163,7 @@ export default function TestPage() {
 
   const handleJump = (idx) => {
     if (selected !== null && step === 'taking') {
-  const currentQuestion = questions[current]
+  let currentQuestion = questions[current]
       const isCorrect = checkCorrect(q, selected)
       const already = answers.findIndex(a => a.qIdx === current)
       let newAnswers
