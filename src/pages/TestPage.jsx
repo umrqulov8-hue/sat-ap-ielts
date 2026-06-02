@@ -27,7 +27,7 @@ export default function TestPage() {
   const [showCalc, setShowCalc] = useState(false)
   const [showRef, setShowRef] = useState(false)
   const [showAITutor, setShowAITutor] = useState(false)
-  const isPractice = true
+  const [isPractice] = useState(true)
   const [displayName, setDisplayName] = useState('STUDENT')
   const [elapsed, setElapsed] = useState(0)
   const [expExplain, setExpExplain] = useState(null)
