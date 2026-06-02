@@ -50,6 +50,8 @@ export default function AdminQuestions() {
   const [notifTitle, setNotifTitle] = useState('')
   const [notifBody, setNotifBody] = useState('')
   const [sending, setSending] = useState(false)
+  const [userSearch, setUserSearch] = useState('')
+  const [userRoleFilter, setUserRoleFilter] = useState('all')
 
   const sendNotification = async () => {
     if (!notifTitle.trim() || !notifBody.trim()) { toast.error('Fill title and body'); return }
@@ -396,46 +398,96 @@ export default function AdminQuestions() {
       </div>
 
       {tab === 'users' && (
-        <div className="admin-users">
-          <div className="admin-users-header">
-            <span className="admin-usr-h">Name</span>
-            <span className="admin-usr-h">Tests</span>
-            <span className="admin-usr-h">Correct</span>
-            <span className="admin-usr-h">Avg</span>
-            <span className="admin-usr-h">Role</span>
-          </div>
-          {users.map(u => (
-            <div key={u.id} className="admin-users-row">
-              <span className="admin-usr-c">{u.display_name || '—'}</span>
-              <span className="admin-usr-c">{u.tests}</span>
-              <span className="admin-usr-c">{u.score}/{u.total}</span>
-              <span className="admin-usr-c">{pct(u.score, u.total)}</span>
-              <span className="admin-usr-c">
-                {isOwner ? (
-                  <select
-                    className="admin-role-select"
-                    value={u.role || 'user'}
-                    onChange={async (e) => {
-                      const { data } = await supabase.rpc('set_user_role', { target_user_id: u.id, new_role: e.target.value })
-                      if (data) {
-                        setUsers(prev => prev.map(p => p.id === u.id ? { ...p, role: e.target.value } : p))
-                        if (u.id === userProfile?.id) refreshUser()
-                        toast.success('Role updated')
-                      } else {
-                        toast.error('Only owner can change roles')
-                      }
-                    }}
-                  >
-                    <option value="user">User</option>
-                    <option value="admin">Admin</option>
-                    <option value="owner">Owner</option>
-                  </select>
-                ) : (
-                  <span className={'admin-role-badge ' + (u.role || 'user')}>{(u.role || 'user').toUpperCase()}</span>
-                )}
-              </span>
+        <div className="admin-users-wrap">
+          <div className="admin-users-toolbar">
+            <div className="admin-search-box">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              <input className="admin-search-input" placeholder="Search by name or email..." value={userSearch} onChange={e => setUserSearch(e.target.value)} />
+              {userSearch && <button className="admin-search-clear" onClick={() => setUserSearch('')}>×</button>}
             </div>
-          ))}
+            <div className="admin-role-filters">
+              {['all', 'owner', 'admin', 'user'].map(r => (
+                <button
+                  key={r}
+                  className={'admin-role-filter' + (userRoleFilter === r ? ' active' : '')}
+                  onClick={() => setUserRoleFilter(r)}
+                >
+                  {r.toUpperCase()}
+                  <span className="admin-role-filter-count">
+                    {r === 'all' ? users.length : users.filter(u => (u.role || 'user') === r).length}
+                  </span>
+                </button>
+              ))}
+            </div>
+          </div>
+          <div className="admin-users">
+            <div className="admin-users-header">
+              <span className="admin-usr-h">User</span>
+              <span className="admin-usr-h">Tests</span>
+              <span className="admin-usr-h">Correct</span>
+              <span className="admin-usr-h">Avg</span>
+              <span className="admin-usr-h">Role</span>
+            </div>
+            {(() => {
+              const filtered = users.filter(u => {
+                if (userRoleFilter !== 'all' && (u.role || 'user') !== userRoleFilter) return false
+                if (userSearch.trim()) {
+                  const q = userSearch.toLowerCase()
+                  return (u.display_name || '').toLowerCase().includes(q) || (u.email || '').toLowerCase().includes(q)
+                }
+                return true
+              })
+              if (filtered.length === 0) {
+                return <div className="admin-empty">No users match.</div>
+              }
+              return filtered.map(u => {
+                const displayName = u.display_name || (u.email ? u.email.split('@')[0] : '—')
+                const initial = (displayName || '?').charAt(0).toUpperCase()
+                const avatarColors = ['admin-stat-lavender', 'admin-stat-peach', 'admin-stat-green', 'admin-stat-yellow', 'admin-stat-pink']
+                const avatarColor = avatarColors[displayName.charCodeAt(0) % avatarColors.length]
+                return (
+                  <div key={u.id} className="admin-users-row">
+                    <span className="admin-usr-c admin-usr-user">
+                      <span className={'admin-usr-avatar ' + avatarColor}>{initial}</span>
+                      <span className="admin-usr-info">
+                        <span className="admin-usr-name">{displayName}</span>
+                        {u.email && <span className="admin-usr-email">{u.email}</span>}
+                      </span>
+                    </span>
+                    <span className="admin-usr-c admin-usr-num">{u.tests}</span>
+                    <span className="admin-usr-c admin-usr-num">{u.score}/{u.total}</span>
+                    <span className="admin-usr-c">
+                      <span className={'admin-usr-pct ' + (u.total > 0 && u.score / u.total >= 0.7 ? 'high' : u.total > 0 && u.score / u.total >= 0.4 ? 'mid' : 'low')}>{pct(u.score, u.total)}</span>
+                    </span>
+                    <span className="admin-usr-c">
+                      {isOwner ? (
+                        <select
+                          className="admin-role-select"
+                          value={u.role || 'user'}
+                          onChange={async (e) => {
+                            const { data } = await supabase.rpc('set_user_role', { target_user_id: u.id, new_role: e.target.value })
+                            if (data) {
+                              setUsers(prev => prev.map(p => p.id === u.id ? { ...p, role: e.target.value } : p))
+                              if (u.id === userProfile?.id) refreshUser()
+                              toast.success('Role updated')
+                            } else {
+                              toast.error('Only owner can change roles')
+                            }
+                          }}
+                        >
+                          <option value="user">User</option>
+                          <option value="admin">Admin</option>
+                          <option value="owner">Owner</option>
+                        </select>
+                      ) : (
+                        <span className={'admin-role-badge ' + (u.role || 'user')}>{(u.role || 'user').toUpperCase()}</span>
+                      )}
+                    </span>
+                  </div>
+                )
+              })
+            })()}
+          </div>
         </div>
       )}
 
