@@ -2,7 +2,6 @@ import { useState, useEffect, useRef, useMemo, memo } from 'react'
 import { useParams, useNavigate, useLocation } from 'react-router-dom'
 import { supabase } from '../lib/supabaseClient'
 import { getCache, setCache } from '../lib/dataCache'
-import html2canvas from 'html2canvas'
 import { useToast } from '../components/Toast'
 import AITutor from '../components/AITutor'
 
@@ -394,6 +393,7 @@ export default function TestPage() {
               <button className="test-done-btn" onClick={async () => {
                 const el = document.getElementById('cert')
                 if (!el) return
+                const { default: html2canvas } = await import('html2canvas')
                 const canvas = await html2canvas(el, { scale: 2, backgroundColor: '#ffffff' })
                 const link = document.createElement('a')
                 link.download = 'SATAP-Certificate-' + topic.title.replace(/\s+/g, '-') + '.png'
