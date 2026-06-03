@@ -4,6 +4,7 @@ import '../styles/dashboard-style.css'
 import Sidebar from './Sidebar'
 import CalendarModal from './CalendarModal'
 import StudyReminder from './StudyReminder'
+import LogoIcon from './LogoIcon'
 
 import { UserProvider } from '../context/UserContext'
 import { ToastProvider } from './Toast'
@@ -70,6 +71,7 @@ export default function DashLayout() {
       <LayoutCtx.Provider value={{ setPageTitle, setPageSub, setPageClass }}>
         <div className={`dash-layout${pageClass ? ` ${pageClass}` : ''}${mobileOpen ? ' mobile-open' : ''}`}>
           <div className="mobile-overlay" onClick={() => setMobileOpen(false)} />
+          <LogoIcon />
           <Sidebar />
           <StudyReminder />
           <main className="dash-main">

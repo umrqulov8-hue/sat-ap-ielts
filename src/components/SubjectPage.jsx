@@ -6,8 +6,39 @@ import { getCache, setCache } from '../lib/dataCache'
 import { useUser } from '../context/UserContext'
 
 const TAG_LABEL = { math: 'MATH', rw: 'R&W', ap: 'AP' }
-
 const TARGET_MAP = { math: 800, rw: 800, ap: 5 }
+
+function Skeleton() {
+  return (
+    <div className="subject-skeleton">
+      <div className="stats-grid">
+        {[1,2,3,4].map(i => (
+          <div key={i} className="stat-card" style={{ minHeight: 120 }}>
+            <div style={{ background: 'var(--gray-100)', borderRadius: 4, height: 14, width: '40%', marginBottom: 12 }} />
+            <div style={{ background: 'var(--gray-100)', borderRadius: 4, height: 32, width: '60%', marginBottom: 12 }} />
+            <div style={{ background: 'var(--gray-100)', borderRadius: 4, height: 6, width: '100%' }} />
+          </div>
+        ))}
+      </div>
+      <h2 className="section-title" style={{ opacity: 0.4 }}>MODULES</h2>
+      <div className="module-list">
+        {[1,2,3].map(i => (
+          <div key={i} className="module-row">
+            <div className="module-inner" style={{ opacity: 0.4 }}>
+              <div className="module-left">
+                <span className="module-tag math" style={{ background: 'var(--gray-100)' }}>MOD</span>
+                <div className="module-info">
+                  <div className="module-name" style={{ background: 'var(--gray-100)', height: 14, width: 180, borderRadius: 4 }} />
+                  <div className="module-desc" style={{ background: 'var(--gray-100)', height: 10, width: 120, borderRadius: 4, marginTop: 6 }} />
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
 
 export default function SubjectPage({ slug, title, subtitle, tag }) {
   const navigate = useNavigate()
@@ -20,6 +51,7 @@ export default function SubjectPage({ slug, title, subtitle, tag }) {
   const [accuracy, setAccuracy] = useState(cached?.accuracy ?? 0)
   const [time] = useState(cached?.time ?? 0)
   const [modules, setModules] = useState(cached?.modules ?? [])
+  const [loading, setLoading] = useState(!cached)
   const target = TARGET_MAP[tag] || 800
 
   useEffect(() => {
@@ -31,19 +63,17 @@ export default function SubjectPage({ slug, title, subtitle, tag }) {
 
   const refreshData = async () => {
     const uid = profile?.id
-    if (!uid) return
+    if (!uid) { setLoading(false); return }
 
     const { data: sub } = await supabase.from('subjects').select('id').eq('slug', slug).single()
-    if (!sub) return
+    if (!sub) { setLoading(false); return }
 
-    const modRes = await supabase.from('modules').select('*').eq('subject_id', sub.id).order('order_index')
-    const moduleIds = modRes.data?.map(m => m.id) || []
-
-    const [scRes, ptRes, accRes, topicRes, doneRes] = await Promise.all([
+    const [modRes, scRes, ptRes, accRes, topicRes, doneRes] = await Promise.all([
+      supabase.from('modules').select('*').eq('subject_id', sub.id).order('order_index'),
       supabase.from('user_scores').select('*').eq('user_id', uid).eq('subject_id', sub.id).maybeSingle(),
       supabase.from('practice_tests').select('id', { count: 'exact', head: true }).eq('user_id', uid),
       supabase.from('practice_tests').select('score, total').eq('user_id', uid),
-      supabase.from('topics').select('id, module_id').in('module_id', moduleIds),
+      supabase.from('topics').select('id, module_id'),
       supabase.from('practice_tests').select('topic_id').eq('user_id', uid),
     ])
 
@@ -76,6 +106,7 @@ export default function SubjectPage({ slug, title, subtitle, tag }) {
     }
 
     setCache('subj-' + slug, { score: scRes.data?.score ?? score, tests: ptRes.count ?? tests, totalTests: mods.length || totalTests, accuracy: acc, time, modules: mods })
+    setLoading(false)
   }
 
   const handleModuleStart = (mod) => {
@@ -85,6 +116,8 @@ export default function SubjectPage({ slug, title, subtitle, tag }) {
 
   const isAp = tag === 'ap'
   const pct = totalTests > 0 ? Math.round(tests / totalTests * 100) : 0
+
+  if (loading) return <Skeleton />
 
   return (
     <><div className="stats-grid">

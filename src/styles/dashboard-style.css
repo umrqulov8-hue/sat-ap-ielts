@@ -3143,6 +3143,53 @@ select.settings-input {
 .ai-analysis-recs li { font-size: 0.68rem; color: var(--gray-500); padding: 0.2rem 0; border-bottom: 1px solid var(--gray-200); }
 .ai-analysis-recs li:last-child { border-bottom: none; }
 
+/* ─── FIXED LOGO (ALL PAGES) ─── */
+.logo-fixed {
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  z-index: 9999;
+  background: var(--lavender);
+  border: 2.5px solid var(--dark);
+  box-shadow: 3px 3px 0 var(--dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: var(--dark);
+  transition: transform 0.2s var(--u-ease), box-shadow 0.2s var(--u-ease);
+}
+
+.logo-fixed:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 5px 5px 0 var(--dark);
+}
+
+.logo-fixed span {
+  font-weight: 900;
+  line-height: 1;
+}
+
+@media (min-width: 769px) {
+  .dash-layout .logo-fixed {
+    top: 5rem;
+    left: 1.25rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .logo-fixed {
+    top: auto;
+    bottom: 1rem;
+    left: 1rem;
+    width: 44px !important;
+    height: 44px !important;
+  }
+  .logo-fixed span {
+    font-size: 1.2rem !important;
+  }
+}
+
 /* ─── SUBJECT PAGE SKELETON ─── */
 .subject-skeleton .stat-card { min-height: 120px; }
 .subject-skeleton .stat-card > div:not(.stat-card-top):not(.stat-value):not(.stat-footer) {
