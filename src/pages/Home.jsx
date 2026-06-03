@@ -488,7 +488,7 @@ export default function Home() {
               <Link to="/support">Help Center</Link>
               <Link to="/auth">Sign In</Link>
               <Link to="/auth">Sign Up</Link>
-              <a href="mailto:hello@satap.academy">Contact</a>
+              <a href="mailto:umrqulov8@gmail.com">Contact</a>
             </div>
           </div>
           <div className="unitap-footer-bottom">

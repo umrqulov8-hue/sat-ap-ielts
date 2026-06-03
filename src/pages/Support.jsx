@@ -56,22 +56,11 @@ export default function Support() {
       setTimeout(() => setMsg(''), 3000)
       return
     }
-    const { data: { session } } = await supabase.auth.getSession()
-    if (session?.user) {
-      const { error } = await supabase.from('user_activity').insert({
-        user_id: session.user.id,
-        action: 'Support ticket submitted',
-        detail: contact.subject ? `${contact.subject}: ${contact.message.substring(0, 200)}` : contact.message.substring(0, 200)
-      })
-      if (error) {
-        toast.error('Error submitting ticket')
-        return
-      }
-    }
-    setMsg('Ticket submitted! We\'ll get back to you soon.')
-    toast.success('Ticket submitted!')
+    const body = `Name: ${contact.name}\nEmail: ${contact.email}\nSubject: ${contact.subject || 'N/A'}\n\nMessage:\n${contact.message}`
+    window.location.href = `mailto:umrqulov8@gmail.com?subject=${encodeURIComponent(contact.subject || 'Support Request')}&body=${encodeURIComponent(body)}`
+    setMsg('Redirecting to your email client...')
     setContact({ name: '', email: '', subject: '', message: '' })
-    setTimeout(() => setMsg(''), 3000)
+    setTimeout(() => setMsg(''), 4000)
   }
 
   const filteredFAQ = FAQ_DATA.filter(item =>
@@ -128,14 +117,16 @@ export default function Support() {
             <span className="support-side-desc">Step-by-step tutorials & resources</span>
             <button className="btn-support-side">VIEW GUIDES</button>
           </div>
-          <div className="settings-card support-side-card">
-            <div className="support-side-icon">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" /><polyline points="22,6 12,13 2,6" /></svg>
+          <a href="mailto:umrqulov8@gmail.com" style={{ textDecoration: 'none', color: 'inherit' }}>
+            <div className="settings-card support-side-card">
+              <div className="support-side-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" /><polyline points="22,6 12,13 2,6" /></svg>
+              </div>
+              <span className="support-side-title">CONTACT US</span>
+              <span className="support-side-desc">umrqulov8@gmail.com</span>
+              <button className="btn-support-side">SEND EMAIL</button>
             </div>
-            <span className="support-side-title">CONTACT US</span>
-            <span className="support-side-desc">support@satapacademy.com</span>
-            <button className="btn-support-side">SEND EMAIL</button>
-          </div>
+          </a>
         </div>
       </div>
 
