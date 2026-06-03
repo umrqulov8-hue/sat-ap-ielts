@@ -15,7 +15,6 @@ function authHeaders() {
     Authorization: `Bearer ${token || SUPABASE_ANON_KEY}`,
     'Content-Type': 'application/json',
     Accept: 'application/json',
-    Prefer: 'return=representation',
   }
 }
 
@@ -83,7 +82,7 @@ function queryBuilder(table) {
         const url = `${SUPABASE_URL}/rest/v1/${table}`
         const res = await fetch(url, {
           method: 'POST',
-          headers: { ...headers, Accept: 'application/vnd.pgrst.object+json' },
+          headers: { ...headers, Prefer: 'return=representation', Accept: 'application/vnd.pgrst.object+json' },
           body: JSON.stringify(Array.isArray(bodyData) ? bodyData : [bodyData]),
         })
         if (!res.ok) return { data: null, error: await res.json().catch(() => ({ message: res.statusText })) }
@@ -91,7 +90,7 @@ function queryBuilder(table) {
       }
       case 'PATCH': {
         const url = buildUrl(table, filters)
-        const res = await fetch(url.toString(), { method: 'PATCH', headers, body: JSON.stringify(bodyData) })
+        const res = await fetch(url.toString(), { method: 'PATCH', headers: { ...headers, Prefer: 'return=representation' }, body: JSON.stringify(bodyData) })
         if (!res.ok) return { data: null, error: await res.json().catch(() => ({ message: res.statusText })) }
         return { data: await res.json(), error: null }
       }
