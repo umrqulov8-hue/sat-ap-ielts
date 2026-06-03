@@ -14,6 +14,7 @@ function authHeaders() {
     apikey: SUPABASE_ANON_KEY,
     Authorization: `Bearer ${token || SUPABASE_ANON_KEY}`,
     'Content-Type': 'application/json',
+    Accept: 'application/json',
     Prefer: 'return=representation',
   }
 }
@@ -56,6 +57,8 @@ function queryBuilder(table) {
   let bodyData = null
 
   async function exec() {
+    const token = getAccessToken()
+    if (!token) return { data: null, error: { message: 'No session' } }
     const headers = authHeaders()
     switch (method) {
       case 'UPSERT': {
@@ -185,9 +188,12 @@ class SupabaseRealtimeChannel {
   unsubscribe() { this._subscribed = false; if (this._pollTimer) clearTimeout(this._pollTimer) }
   _startPolling() {
     if (!this._pgConfig) return
+    let failCount = 0
     const poll = async () => {
       if (!this._subscribed) return
       try {
+        const token = getAccessToken()
+        if (!token) return
         const uid = this.name.replace('notif-', '')
         const url = new URL(`${SUPABASE_URL}/rest/v1/notifications`)
         url.searchParams.set('select', '*')
@@ -196,13 +202,17 @@ class SupabaseRealtimeChannel {
         url.searchParams.set('limit', '1')
         const res = await fetch(url.toString(), { headers: authHeaders() })
         if (res.ok) {
+          failCount = 0
           const data = await res.json()
           if (data.length > 0 && data[0].id !== this._lastId) {
             this._lastId = data[0].id
             if (this._pgCallback) this._pgCallback(data[0])
           }
+        } else {
+          failCount++
+          if (failCount >= 3) return
         }
-      } catch (e) { /* silent */ }
+      } catch (e) { failCount++; if (failCount >= 3) return }
       this._pollTimer = setTimeout(poll, 10000)
     }
     poll()

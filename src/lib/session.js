@@ -110,9 +110,12 @@ export async function getSession() {
       if (session.refresh_token) {
         if (!refreshPromise) refreshPromise = doRefresh(session.refresh_token).finally(() => { refreshPromise = null })
         const result = await refreshPromise
+        if (!result) { currentSession = null; persist(null); notify('SIGNED_OUT', null) }
         return { data: { session: result || null } }
       }
+      currentSession = null
       persist(null)
+      notify('SIGNED_OUT', null)
       return { data: { session: null } }
     }
     currentSession = session

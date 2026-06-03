@@ -12,7 +12,10 @@ export default function StudyReminder() {
 
   const checkUpcoming = useCallback(async () => {
     const { data: { session } } = await supabase.auth.getSession()
-    if (!session?.user) return
+    if (!session?.user) {
+      if (timerRef.current) { clearInterval(timerRef.current); timerRef.current = null }
+      return
+    }
 
     const { data: settings } = await supabase.from('user_settings').select('reminder_time,push_notifications').eq('user_id', session.user.id).maybeSingle()
     if (settings?.reminder_time === null || settings?.reminder_time === false) {
