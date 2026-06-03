@@ -1,5 +1,6 @@
 import { Outlet, useLocation, useNavigate } from 'react-router-dom'
 import { createContext, useContext, useState, useRef, useEffect } from 'react'
+import '../styles/dashboard-style.css'
 import Sidebar from './Sidebar'
 import CalendarModal from './CalendarModal'
 import StudyReminder from './StudyReminder'

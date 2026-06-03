@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { useLayout } from '../components/DashLayout'
 import { supabase } from '../lib/supabaseClient'
 import { useToast } from '../components/Toast'
@@ -22,32 +22,10 @@ export default function Support() {
   const [contact, setContact] = useState({ name: '', email: '', subject: '', message: '' })
   const toast = useToast()
   const [msg, setMsg] = useState('')
-  const wrapRefs = useRef([])
 
   const toggleFAQ = (i) => {
-    if (openIndex === i) {
-      const el = wrapRefs.current[i]
-      if (el) el.style.maxHeight = '0px'
-      setOpenIndex(null)
-    } else {
-      const prev = wrapRefs.current[openIndex]
-      if (prev) prev.style.maxHeight = '0px'
-      setOpenIndex(i)
-    }
+    setOpenIndex(openIndex === i ? null : i)
   }
-
-  useEffect(() => {
-    if (openIndex !== null) {
-      const el = wrapRefs.current[openIndex]
-      if (el) {
-        el.style.maxHeight = 'none'
-        const h = el.scrollHeight
-        el.style.maxHeight = '0px'
-        void el.offsetHeight
-        el.style.maxHeight = h + 'px'
-      }
-    }
-  }, [openIndex])
 
   const submitContact = async () => {
     if (!contact.name || !contact.email || !contact.message) {
@@ -91,7 +69,7 @@ export default function Support() {
                     <span className="faq-q">{item.q}</span>
                     <svg className="faq-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="6 9 12 15 18 9" /></svg>
                   </div>
-                  <div className="faq-a-wrap" ref={el => wrapRefs.current[realIndex] = el}>
+                  <div className={`faq-a-wrap${openIndex === realIndex ? ' open' : ''}`}>
                     <span className="faq-a">{item.a}</span>
                   </div>
                 </div>

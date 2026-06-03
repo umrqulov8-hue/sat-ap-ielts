@@ -1,6 +1,6 @@
 import { lazy, Suspense } from 'react'
 import { Routes, Route, Outlet } from 'react-router-dom'
-import DashLayout from './components/DashLayout'
+const DashLayout = lazy(() => import('./components/DashLayout'))
 
 const Home = lazy(() => import('./pages/Home'))
 const Auth = lazy(() => import('./pages/Auth'))
@@ -46,7 +46,7 @@ export default function App() {
         <Route path="/" element={null} />
         <Route path="/auth" element={<SuspenseWrap><Auth /></SuspenseWrap>} />
       </Route>
-      <Route element={<DashLayout />}>
+      <Route element={<SuspenseWrap><DashLayout /></SuspenseWrap>}>
         <Route path="/dashboard" element={<SuspenseWrap><Dashboard /></SuspenseWrap>} />
         <Route path="/sat-math" element={<SuspenseWrap><SatMath /></SuspenseWrap>} />
         <Route path="/sat-rw" element={<SuspenseWrap><SatRW /></SuspenseWrap>} />

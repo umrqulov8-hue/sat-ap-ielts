@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from 'react'
 import { createPortal } from 'react-dom'
+import '../styles/profile-style.css'
 import { useLayout } from '../components/DashLayout'
 import { supabase } from '../lib/supabaseClient'
 import { useUser } from '../context/UserContext'
