@@ -344,11 +344,13 @@ a, button { text-decoration: none; color: inherit; font-family: inherit; cursor:
     justify-content: center;
     width: 34px;
     height: 34px;
-    background: var(--dark);
-    color: var(--yellow);
+    background: var(--lavender);
+    color: var(--dark);
     font-size: 1rem;
     font-weight: 900;
     flex-shrink: 0;
+    border: 2.5px solid var(--dark);
+    box-shadow: 2px 2px 0 var(--dark);
 }
 .unitap-nav-links { display: flex; gap: 0.2rem; align-items: center; flex: 1; justify-content: center; }
 .unitap-nav-link {

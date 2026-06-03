@@ -78,8 +78,13 @@ export default function DashLayout() {
                 <button className="hamburger" onClick={() => setMobileOpen(o => !o)} aria-label="Menu">
                   <span /><span /><span />
                 </button>
-                <h1 className="header-title">{pageTitle || 'DASHBOARD'}</h1>
-                <p className="header-sub">{pageSub || 'Welcome back'}</p>
+                <div className="header-logo-icon">
+                  <span>S</span>
+                </div>
+                <div>
+                  <h1 className="header-title">{pageTitle || 'DASHBOARD'}</h1>
+                  <p className="header-sub">{pageSub || 'Welcome back'}</p>
+                </div>
               </div>
               <div className="header-right">
                 <span

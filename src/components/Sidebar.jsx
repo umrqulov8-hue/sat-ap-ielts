@@ -1,6 +1,22 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { useCallback } from 'react'
 import { supabase } from '../lib/supabaseClient'
 import { useUser } from '../context/UserContext'
+
+const ROUTE_PREFETCH = {
+  '/dashboard': () => import('../pages/Dashboard'),
+  '/sat-math': () => import('../pages/SatMath'),
+  '/sat-rw': () => import('../pages/SatRW'),
+  '/ap-bio': () => import('../pages/ApBio'),
+  '/ap-calc': () => import('../pages/ApCalc'),
+  '/practice-tests': () => import('../pages/PracticeTests'),
+  '/practice/sat-tests': () => import('../pages/SatTestList'),
+  '/test-history': () => import('../pages/TestHistory'),
+  '/study-plan': () => import('../pages/StudyPlan'),
+  '/profile': () => import('../pages/Profile'),
+  '/settings': () => import('../pages/Settings'),
+  '/support': () => import('../pages/Support'),
+}
 
 const NAV_ITEMS = [
   {
@@ -49,10 +65,18 @@ export default function Sidebar() {
     ? profile.display_name.charAt(0).toUpperCase()
     : 'S'
 
+  const prefetch = useCallback((path) => {
+    const fn = ROUTE_PREFETCH[path]
+    if (fn) fn()
+  }, [])
+
   return (
     <aside className="dash-sidebar">
       <div className="sidebar-header">
-        <Link to="/dashboard" className="sidebar-logo">SATAP</Link>
+        <Link to="/dashboard" className="sidebar-logo-wrap">
+          <div className="sidebar-logo-icon"><span>S</span></div>
+          <span className="sidebar-logo-text">SATAP</span>
+        </Link>
         <span className="sidebar-badge">ACADEMY</span>
       </div>
 
@@ -78,6 +102,7 @@ export default function Sidebar() {
                       <Link
                         to={item.path}
                         className={`snav-item${isActive ? ' active' : ''}`}
+                        onMouseEnter={() => prefetch(item.path)}
                       >
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" dangerouslySetInnerHTML={{ __html: item.icon }} />
                         <span>{item.label}</span>
