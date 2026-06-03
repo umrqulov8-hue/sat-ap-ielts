@@ -17,7 +17,7 @@ export default function StudyReminder() {
       return
     }
 
-    const { data: settings } = await supabase.from('user_settings').select('reminder_time,push_notifications').eq('user_id', session.user.id).maybeSingle()
+    const { data: settings } = await supabase.from('user_settings').select('reminder_time,push_notifications').eq('user_id', session.user.id).maybeSingle().catch(() => ({ data: null }))
     if (settings?.reminder_time === null || settings?.reminder_time === false) {
       setNotifEnabled(false)
       return
@@ -42,6 +42,7 @@ export default function StudyReminder() {
       .eq('user_id', session.user.id)
       .eq('done', false)
       .eq('day_of_week', today)
+      .catch(() => ({ data: null }))
 
     if (!tasks?.length) return
 

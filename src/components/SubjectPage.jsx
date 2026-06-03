@@ -44,7 +44,7 @@ export default function SubjectPage({ slug, title, subtitle, tag }) {
       supabase.from('practice_tests').select('id', { count: 'exact', head: true }).eq('user_id', uid),
       supabase.from('practice_tests').select('score, total').eq('user_id', uid),
       supabase.from('topics').select('id, module_id').in('module_id', moduleIds),
-      supabase.from('practice_tests').select('topic_id').eq('user_id', uid).not('topic_id', 'is', null),
+      supabase.from('practice_tests').select('topic_id').eq('user_id', uid),
     ])
 
     if (scRes.data) setScore(scRes.data.score)
@@ -64,7 +64,7 @@ export default function SubjectPage({ slug, title, subtitle, tag }) {
         if (!topicsByModule[t.module_id]) topicsByModule[t.module_id] = []
         topicsByModule[t.module_id].push(t.id)
       })
-      const doneTopics = new Set(doneRes.data?.map(d => d.topic_id) || [])
+      const doneTopics = new Set((doneRes.data?.filter(d => d.topic_id != null) || []).map(d => d.topic_id))
       setTotalTests(modRes.data.length)
       mods = modRes.data.map((m) => {
         const topicIds = topicsByModule[m.id] || []

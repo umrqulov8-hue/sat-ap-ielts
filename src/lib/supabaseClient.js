@@ -75,7 +75,7 @@ function queryBuilder(table) {
       case 'DELETE': {
         const url = buildUrl(table, filters)
         const res = await fetch(url.toString(), { method: 'DELETE', headers })
-        if (!res.ok) return { data: null, error: await res.json().catch(() => ({ message: res.statusText })) }
+        if (!res.ok) { if (res.status === 406 || res.status === 404) return { data: null, error: null }; return { data: null, error: await res.json().catch(() => ({ message: res.statusText })) } }
         return { data: await res.json().catch(() => null), error: null }
       }
       case 'INSERT': {
@@ -109,6 +109,7 @@ function queryBuilder(table) {
           : {}
         const res = await fetch(url.toString(), { headers: { ...headers, ...acceptHeader } })
         if (!res.ok) {
+          if (res.status === 406 || res.status === 404) return { data: null, error: null }
           const err = await res.json().catch(() => ({ message: res.statusText }))
           if (err.code === 'PGRST116' && filters.single === 'maybe') {
             return { data: null, error: null }
@@ -209,7 +210,7 @@ class SupabaseRealtimeChannel {
           }
         } else {
           failCount++
-          if (failCount >= 3) return
+          if (failCount >= 2) return
         }
       } catch (e) { failCount++; if (failCount >= 3) return }
       this._pollTimer = setTimeout(poll, 10000)
