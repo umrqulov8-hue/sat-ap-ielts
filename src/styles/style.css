@@ -37,7 +37,7 @@ a, button { text-decoration: none; color: inherit; font-family: inherit; cursor:
     --peach: #ffb89a;
     --green: #a8e6a3;
     --yellow: #ffe066;
-    --pink: #ff5b7e;
+    --pink: #c73e5a;
     --mint: #c5e8d1;
     --blue: #a8c5e8;
     --muted: #5a5a72;
@@ -991,7 +991,7 @@ a, button { text-decoration: none; color: inherit; font-family: inherit; cursor:
     font-size: 1rem;
 }
 .unitap-footer-tag { font-size: 0.85rem; color: var(--gray-300); line-height: 1.5; max-width: 320px; }
-.unitap-footer-col h4 { font-size: 0.7rem; font-weight: 800; letter-spacing: 0.18em; color: var(--yellow); margin-bottom: 1rem; text-transform: uppercase; }
+.unitap-footer-heading { font-size: 0.7rem; font-weight: 800; letter-spacing: 0.18em; color: var(--yellow); margin-bottom: 1rem; text-transform: uppercase; display: block; }
 .unitap-footer-col a { display: block; font-size: 0.8rem; color: var(--gray-300); padding: 0.3rem 0; transition: color 0.18s var(--ease); }
 .unitap-footer-col a:hover { color: var(--yellow); }
 .unitap-footer-bottom {

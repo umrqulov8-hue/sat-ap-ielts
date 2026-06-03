@@ -1,6 +1,7 @@
 const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL
 const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY
 const STORAGE_KEY = 'satap_session'
+const OLD_STORAGE_KEY = 'sb-dbxuanrvfhvljivrglkr-auth-token'
 
 let currentSession = null
 let listeners = []
@@ -21,34 +22,49 @@ function persist(session) {
   }
 }
 
+function readStoredSession() {
+  const stored = localStorage.getItem(STORAGE_KEY)
+  if (stored) {
+    try { return JSON.parse(stored) } catch (e) { localStorage.removeItem(STORAGE_KEY) }
+  }
+  const old = localStorage.getItem(OLD_STORAGE_KEY)
+  if (old) {
+    try {
+      const parsed = JSON.parse(old)
+      if (parsed?.access_token) {
+        persist(parsed)
+        return parsed
+      }
+    } catch (e) { localStorage.removeItem(OLD_STORAGE_KEY) }
+  }
+  return null
+}
+
 async function fetchUser(accessToken) {
-  const res = await fetch(`${SUPABASE_URL}/auth/v1/user`, {
-    headers: {
-      apikey: SUPABASE_ANON_KEY,
-      Authorization: `Bearer ${accessToken}`,
-    },
-  })
-  if (!res.ok) return null
-  return res.json()
+  try {
+    const res = await fetch(`${SUPABASE_URL}/auth/v1/user`, {
+      headers: { apikey: SUPABASE_ANON_KEY, Authorization: `Bearer ${accessToken}` },
+    })
+    if (!res.ok) return null
+    return res.json()
+  } catch (e) { return null }
 }
 
 async function doRefresh(refreshToken) {
-  const res = await fetch(`${SUPABASE_URL}/auth/v1/token?grant_type=refresh_token`, {
-    method: 'POST',
-    headers: { apikey: SUPABASE_ANON_KEY, 'Content-Type': 'application/json' },
-    body: JSON.stringify({ refresh_token: refreshToken }),
-  })
-  if (!res.ok) {
-    currentSession = null
-    persist(null)
-    return null
-  }
-  const data = await res.json()
-  if (!data.user) data.user = await fetchUser(data.access_token)
-  currentSession = data
-  persist(data)
-  scheduleRefresh(data)
-  return data
+  try {
+    const res = await fetch(`${SUPABASE_URL}/auth/v1/token?grant_type=refresh_token`, {
+      method: 'POST',
+      headers: { apikey: SUPABASE_ANON_KEY, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ refresh_token: refreshToken }),
+    })
+    if (!res.ok) { currentSession = null; persist(null); return null }
+    const data = await res.json()
+    if (!data.user) data.user = await fetchUser(data.access_token)
+    currentSession = data
+    persist(data)
+    scheduleRefresh(data)
+    return data
+  } catch (e) { return null }
 }
 
 function scheduleRefresh(session) {
@@ -57,9 +73,7 @@ function scheduleRefresh(session) {
   const ms = (session.expires_in - 60) * 1000
   refreshTimer = setTimeout(() => {
     if (session.refresh_token) {
-      doRefresh(session.refresh_token).then(s => {
-        if (s) notify('TOKEN_REFRESHED', s)
-      })
+      doRefresh(session.refresh_token).then(s => { if (s) notify('TOKEN_REFRESHED', s) })
     }
   }, Math.max(ms, 10000))
 }
@@ -72,9 +86,8 @@ function parseHash() {
   const refresh_token = params.get('refresh_token')
   const expires_in = params.get('expires_in')
   const expires_at = params.get('expires_at')
-  const token_type = params.get('token_type')
   if (!access_token) return null
-  return { access_token, refresh_token, expires_in: expires_in ? parseInt(expires_in) : 3600, expires_at: expires_at ? parseInt(expires_at) : null, token_type }
+  return { access_token, refresh_token, expires_in: expires_in ? parseInt(expires_in) : 3600, expires_at: expires_at ? parseInt(expires_at) : null, token_type: params.get('token_type') || 'bearer' }
 }
 
 export async function getSession() {
@@ -91,25 +104,20 @@ export async function getSession() {
       return { data: { session } }
     }
   }
-  const stored = localStorage.getItem(STORAGE_KEY)
-  if (stored) {
-    try {
-      const parsed = JSON.parse(stored)
-      if (parsed.expires_at && parsed.expires_at * 1000 < Date.now()) {
-        if (parsed.refresh_token) {
-          if (!refreshPromise) refreshPromise = doRefresh(parsed.refresh_token).finally(() => { refreshPromise = null })
-          const result = await refreshPromise
-          return { data: { session: result || null } }
-        }
-        persist(null)
-        return { data: { session: null } }
+  const session = readStoredSession()
+  if (session) {
+    if (session.expires_at && session.expires_at * 1000 < Date.now()) {
+      if (session.refresh_token) {
+        if (!refreshPromise) refreshPromise = doRefresh(session.refresh_token).finally(() => { refreshPromise = null })
+        const result = await refreshPromise
+        return { data: { session: result || null } }
       }
-      currentSession = parsed
-      scheduleRefresh(parsed)
-      return { data: { session: parsed } }
-    } catch (e) {
       persist(null)
+      return { data: { session: null } }
     }
+    currentSession = session
+    scheduleRefresh(session)
+    return { data: { session } }
   }
   return { data: { session: null } }
 }
@@ -131,9 +139,7 @@ export function setSession(session) {
   }
 }
 
-export function clearSession() {
-  setSession(null)
-}
+export function clearSession() { setSession(null) }
 
 export function onAuthStateChange(callback) {
   listeners.push(callback)
@@ -143,14 +149,10 @@ export function onAuthStateChange(callback) {
   return {
     data: {
       subscription: {
-        unsubscribe: () => {
-          listeners = listeners.filter(l => l !== callback)
-        },
+        unsubscribe: () => { listeners = listeners.filter(l => l !== callback) },
       },
     },
   }
 }
 
-export function getCurrentSession() {
-  return currentSession
-}
+export function getCurrentSession() { return currentSession }

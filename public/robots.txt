@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /profile
+Disallow: /settings
+Disallow: /study-plan
+Disallow: /support
+Disallow: /test-history
+Disallow: /test-review/
+
+Sitemap: https://satap.vercel.app/sitemap.xml

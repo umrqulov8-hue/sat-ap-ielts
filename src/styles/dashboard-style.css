@@ -3015,3 +3015,79 @@ select.settings-input {
 .admin-activity-text { font-size: 0.75rem; line-height: 1.4; color: var(--dark); }
 .admin-activity-text strong { font-weight: 800; }
 .admin-activity-time { font-size: 0.6rem; color: var(--muted); font-weight: 600; margin-top: 0.15rem; letter-spacing: 0.03em; }
+
+.ai-badge {
+  font-size: 0.55rem;
+  font-weight: 900;
+  background: var(--lavender);
+  color: var(--dark);
+  padding: 0.15rem 0.5rem;
+  border-radius: 3px;
+  letter-spacing: 0.08em;
+}
+.ai-forecast-card, .ai-advice-card { border: 2px solid var(--lavender); }
+.ai-forecast-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.75rem;
+  margin: 1rem 0;
+}
+.ai-forecast-item { text-align: center; }
+.ai-forecast-label { display: block; font-size: 0.6rem; font-weight: 800; letter-spacing: 0.08em; color: var(--muted); margin-bottom: 0.25rem; }
+.ai-forecast-value { display: block; font-size: 1.5rem; font-weight: 900; }
+.ai-forecast-value.lavender { color: var(--lavender); }
+.ai-forecast-value.peach { color: var(--peach); }
+.ai-forecast-value.green { color: var(--green); }
+.ai-forecast-value.yellow { color: var(--yellow); }
+.ai-advice-text { font-size: 0.75rem; color: var(--gray-500); line-height: 1.5; padding: 0.5rem 0; border-top: 1px solid var(--gray-200); }
+.ai-advice-greeting { font-size: 0.85rem; font-weight: 800; color: var(--dark); margin-bottom: 0.5rem; }
+.ai-advice-focus { font-size: 0.75rem; font-weight: 600; color: var(--lavender); margin-bottom: 0.75rem; }
+.ai-advice-tasks { list-style: none; padding: 0; margin: 0 0 0.75rem 0; }
+.ai-advice-tasks li {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--gray-500);
+  padding: 0.35rem 0.5rem;
+  margin-bottom: 0.25rem;
+  background: var(--cream);
+  border-radius: 4px;
+  border-left: 3px solid var(--lavender);
+}
+.ai-advice-tip { font-size: 0.7rem; font-weight: 600; color: var(--green); padding: 0.5rem; background: rgba(168, 230, 163, 0.1); border-radius: 4px; margin-bottom: 0.5rem; }
+.ai-advice-motivation { font-size: 0.75rem; font-weight: 800; color: var(--dark); text-align: center; padding: 0.75rem; background: var(--cream); border-radius: 4px; border: 2px solid var(--yellow); }
+.ai-loading-spinner {
+  width: 24px;
+  height: 24px;
+  border: 3px solid var(--gray-200);
+  border-top-color: var(--lavender);
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+  margin: 0 auto;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.ai-analyze-btn {
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  padding: 0.3rem 0.6rem;
+  background: var(--lavender);
+  color: var(--dark);
+  border: 2px solid var(--dark);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.ai-analyze-btn:hover { background: var(--dark); color: white; }
+.ai-analyze-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.ai-analysis-box {
+  margin-top: 0.75rem;
+  padding: 0.75rem;
+  background: var(--cream);
+  border: 2px solid var(--lavender);
+  border-radius: 4px;
+}
+.ai-analysis-box h4 { font-size: 0.7rem; font-weight: 900; letter-spacing: 0.05em; color: var(--dark); margin: 0 0 0.5rem 0; }
+.ai-analysis-box p { font-size: 0.7rem; color: var(--gray-500); line-height: 1.5; margin: 0.25rem 0; }
+.ai-analysis-recs { list-style: none; padding: 0; margin: 0.5rem 0 0 0; }
+.ai-analysis-recs li { font-size: 0.68rem; color: var(--gray-500); padding: 0.2rem 0; border-bottom: 1px solid var(--gray-200); }
+.ai-analysis-recs li:last-child { border-bottom: none; }

@@ -2,6 +2,7 @@ import { useEffect, useState, useCallback } from 'react'
 import { useLayout } from '../components/DashLayout'
 import { useToast } from '../components/Toast'
 import { supabase } from '../lib/supabaseClient'
+import { generateStudyPlan } from '../lib/ai'
 
 const DAYS_SHORT = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT']
 const DAYS_FULL = ['SUNDAY', 'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY']
@@ -38,12 +39,17 @@ export default function StudyPlan() {
   const [showModal, setShowModal] = useState(false)
   const [editing, setEditing] = useState(null)
   const [form, setForm] = useState({ day: todayNum(), subject: 'MATH', activity: '', duration: '30 min', time: '09:00', notes: '', priority: 2 })
+  const [aiPlanLoading, setAiPlanLoading] = useState(false)
+  const [autoGenerating, setAutoGenerating] = useState(false)
 
   useEffect(() => {
     setPageTitle('STUDY PLAN')
     setPageSub('Rejalashtir va natijangni kuzat')
     setPageClass('')
-    loadData().finally(() => setLoading(false))
+    loadData().then(planData => {
+      setLoading(false)
+      if (!planData || planData.length === 0) autoGeneratePlan()
+    }).catch(() => setLoading(false))
   }, [])
 
   const loadData = async () => {
@@ -83,12 +89,94 @@ export default function StudyPlan() {
       }
       setStreak(curStreak)
     }
+
+    return planRes.data || []
   }
 
   const openAdd = (day) => {
     setEditing(null)
     setForm({ day: day ?? todayNum(), subject: 'MATH', activity: '', duration: '30 min', time: '09:00', notes: '', priority: 2 })
     setShowModal(true)
+  }
+
+  const autoGeneratePlan = async () => {
+    setAutoGenerating(true)
+    try {
+      const { data: { session } } = await supabase.auth.getSession()
+      const uid = session?.user?.id
+      if (!uid) { setAutoGenerating(false); return }
+
+      const [scRes, testRes, profRes] = await Promise.all([
+        supabase.from('user_scores').select('*, subjects(title)').eq('user_id', uid),
+        supabase.from('practice_tests').select('*').eq('user_id', uid).order('taken_at', { ascending: false }).limit(10),
+        supabase.from('profiles').select('exam_date').eq('id', uid).maybeSingle(),
+      ])
+
+      const plan = await generateStudyPlan(scRes.data || [], testRes.data || [], [], profRes.data?.exam_date)
+      if (!plan.plan?.length) { setAutoGenerating(false); return }
+
+      const dayMap = { SUNDAY: 0, MONDAY: 1, TUESDAY: 2, WEDNESDAY: 3, THURSDAY: 4, FRIDAY: 5, SATURDAY: 6 }
+      const newTasks = []
+      for (const day of plan.plan) {
+        const dayNum = dayMap[day.day]
+        if (dayNum === undefined) continue
+        for (const task of (day.tasks || [])) {
+          const { data } = await supabase.from('study_plans').insert({
+            user_id: uid, day_of_week: dayNum, subject: task.subject || 'MATH',
+            activity: task.activity, duration: task.duration || '30 min', time_slot: '09:00', priority: task.priority || 2,
+          }).select().single()
+          if (data) newTasks.push(data)
+        }
+      }
+      if (newTasks.length > 0) {
+        setTasks(prev => [...prev, ...newTasks].sort((a, b) => a.day_of_week - b.day_of_week || minFromTime(a.time_slot) - minFromTime(b.time_slot)))
+        toast.success(`AI ${newTasks.length} ta topshiriq yaratdi!`)
+      }
+    } catch (e) { /* silent */ }
+    setAutoGenerating(false)
+  }
+
+  const handleAiPlan = async () => {
+    setAiPlanLoading(true)
+    try {
+      const { data: { session } } = await supabase.auth.getSession()
+      const uid = session?.user?.id
+      if (!uid) { toast.error('Avval tizimga kiring'); setAiPlanLoading(false); return }
+
+      const [scRes, testRes, profRes] = await Promise.all([
+        supabase.from('user_scores').select('*, subjects(title)').eq('user_id', uid),
+        supabase.from('practice_tests').select('*').eq('user_id', uid).order('taken_at', { ascending: false }).limit(10),
+        supabase.from('profiles').select('exam_date').eq('id', uid).maybeSingle(),
+      ])
+
+      const plan = await generateStudyPlan(scRes.data || [], testRes.data || [], [], profRes.data?.exam_date)
+      if (!plan.plan?.length) { toast.error('AI reja yarata olmadi'); setAiPlanLoading(false); return }
+
+      const dayMap = { SUNDAY: 0, MONDAY: 1, TUESDAY: 2, WEDNESDAY: 3, THURSDAY: 4, FRIDAY: 5, SATURDAY: 6 }
+      let count = 0
+      const newTasks = []
+      for (const day of plan.plan) {
+        const dayNum = dayMap[day.day]
+        if (dayNum === undefined) continue
+        for (const task of (day.tasks || [])) {
+          const { data, error } = await supabase.from('study_plans').insert({
+            user_id: uid, day_of_week: dayNum, subject: task.subject || 'MATH',
+            activity: task.activity, duration: task.duration || '30 min', time_slot: '09:00', priority: task.priority || 2,
+          }).select().single()
+          if (error) { toast.error('Xatolik: ' + error.message); continue }
+          if (data) { newTasks.push(data); count++ }
+        }
+      }
+      if (count > 0) {
+        setTasks(prev => [...prev, ...newTasks].sort((a, b) => a.day_of_week - b.day_of_week || minFromTime(a.time_slot) - minFromTime(b.time_slot)))
+        toast.success(`AI ${count} ta topshiriq yaratdi!`)
+      } else {
+        toast.error('Hech qanday topshiriq yaratilmadi')
+      }
+    } catch (e) {
+      toast.error('AI xatosi: ' + e.message)
+    }
+    setAiPlanLoading(false)
   }
 
   const openEdit = (t) => {
@@ -286,8 +374,20 @@ export default function StudyPlan() {
 
     <div className="section-header">
       <h2 className="section-title">HAFTALIK REJA</h2>
-      <button className="btn-module" onClick={() => openAdd(todayNum())}>+ QO'SHISH</button>
+      <div style={{ display: 'flex', gap: '0.5rem' }}>
+        <button className="ai-analyze-btn" disabled={aiPlanLoading} onClick={handleAiPlan}>
+          {aiPlanLoading ? 'AI TYAYYORLANMOQDA...' : 'AI REJA TUZISH'}
+        </button>
+        <button className="btn-module" onClick={() => openAdd(todayNum())}>+ QO'SHISH</button>
+      </div>
     </div>
+
+    {autoGenerating && (
+      <div className="dash-card" style={{ textAlign: 'center', padding: '1.5rem', marginBottom: '1rem' }}>
+        <div className="ai-loading-spinner" />
+        <span style={{ fontSize: '0.75rem', color: 'var(--gray-400)', marginTop: '0.5rem' }}>AI reja tayyorlanmoqda...</span>
+      </div>
+    )}
 
     <div className="study-week-grid">
       {dayOrder.map(d => {

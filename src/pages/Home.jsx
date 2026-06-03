@@ -46,6 +46,7 @@ export default function Home() {
         </div>
       </nav>
 
+      <main>
       <section className="unitap-hero" id="home" ref={heroRef}>
         <div className="unitap-hero-inner">
           <div className="unitap-hero-text u-hero u-stagger">
@@ -470,21 +471,21 @@ export default function Home() {
               </p>
             </div>
             <div className="unitap-footer-col">
-              <h4>PLATFORM</h4>
+              <span className="unitap-footer-heading">PLATFORM</span>
               <a href="#methodology">Methodology</a>
               <a href="#curriculum">Curriculum</a>
               <a href="#results">Results</a>
               <a href="#pricing">Pricing</a>
             </div>
             <div className="unitap-footer-col">
-              <h4>SUBJECTS</h4>
+              <span className="unitap-footer-heading">SUBJECTS</span>
               <Link to="/sat-math">SAT Math</Link>
               <Link to="/sat-rw">SAT R&amp;W</Link>
               <Link to="/ap-bio">AP Biology</Link>
               <Link to="/ap-calc">AP Calculus</Link>
             </div>
             <div className="unitap-footer-col">
-              <h4>SUPPORT</h4>
+              <span className="unitap-footer-heading">SUPPORT</span>
               <Link to="/support">Help Center</Link>
               <Link to="/auth">Sign In</Link>
               <Link to="/auth">Sign Up</Link>
@@ -497,6 +498,7 @@ export default function Home() {
           </div>
         </div>
       </footer>
+      </main>
     </>
   )
 }
