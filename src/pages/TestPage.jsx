@@ -548,7 +548,7 @@ export default function TestPage() {
       <div className="bb-body bb-body-split">
         <div className="bb-left">
           {effectivePassage ? (
-            <div className="bb-passage-split" dangerouslySetInnerHTML={{ __html: effectivePassage.replace(/\n/g, '<br/>') }} />
+            <div className="bb-passage-split" dangerouslySetInnerHTML={{ __html: effectivePassage.replace(/\n+/g, ' ') }} />
           ) : currentQuestion?.image_url && (
             <img src={currentQuestion.image_url} alt="" className="bb-left-img" draggable="false" onContextMenu={e => e.preventDefault()} />
           )}
