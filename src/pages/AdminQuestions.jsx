@@ -57,6 +57,20 @@ export default function AdminQuestions() {
   const [userRoleFilter, setUserRoleFilter] = useState('all')
   const [notifTarget, setNotifTarget] = useState('all')
   const [activity, setActivity] = useState([])
+  const [dbMigrationNeeded, setDbMigrationNeeded] = useState(false)
+  const [dbColumns, setDbColumns] = useState(false)
+
+  useEffect(() => {
+    ;(async () => {
+      const { data, error } = await supabase.from('questions').select('id, passage_text, layout').limit(1)
+      if (error || (data && data.length > 0 && !('passage_text' in data[0]))) {
+        setDbMigrationNeeded(true)
+        setDbColumns(false)
+      } else {
+        setDbColumns(true)
+      }
+    })()
+  }, [])
 
   const sendNotification = async () => {
     if (!notifTitle.trim() || !notifBody.trim()) { toast.error('Fill title and body'); return }
@@ -387,7 +401,7 @@ export default function AdminQuestions() {
       ? await supabase.from('questions').update(payload).eq('id', editingQ.id)
       : await supabase.from('questions').insert({ topic_id: selTopic, ...payload })
     setUploading(false)
-    if (error) { setMsg('Error: ' + error.message); toast.error('Error saving question') } else {
+    if (error) { console.error('SAVE ERROR:', error); setMsg('Error: ' + (error.message || JSON.stringify(error))); toast.error('Error saving: ' + (error.message || 'Unknown error')) } else {
       setMsg(editingQ ? 'Question updated!' : 'Question saved!')
       toast.success(editingQ ? 'Question updated!' : 'Question saved!')
       resetQForm()
@@ -460,6 +474,18 @@ export default function AdminQuestions() {
         </div>
       ) : (<>
       {msg && <div className="admin-msg-toast"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polyline points="20 6 9 17 4 12"/></svg>{msg}<button className="admin-msg-close" onClick={() => setMsg('')}>×</button></div>}
+
+      {dbMigrationNeeded && (
+        <div style={{ background:'#fff3cd', border:'2px solid #ffc107', borderRadius:0, padding:'16px 20px', marginBottom:16, color:'#333' }}>
+          <div style={{ fontWeight:700, fontSize:15, marginBottom:8 }}>⚠ Database Migration Required</div>
+          <p style={{ margin:'0 0 8px', fontSize:13 }}>Passage/split layout columns missing. Run this SQL in <b>Supabase Dashboard → SQL Editor</b>:</p>
+          <pre style={{ background:'#1a1a2e', color:'#a8e6a3', padding:'12px 16px', borderRadius:0, fontSize:12, overflow:'auto', margin:'0 0 8px', border:'1.5px solid var(--dark)' }}>ALTER TABLE questions ADD COLUMN IF NOT EXISTS passage_text text;
+ALTER TABLE questions ADD COLUMN IF NOT EXISTS layout text default 'centered';</pre>
+          <button onClick={async () => {
+            try { await navigator.clipboard.writeText('ALTER TABLE questions ADD COLUMN IF NOT EXISTS passage_text text;\nALTER TABLE questions ADD COLUMN IF NOT EXISTS layout text default \'centered\';'); toast.success('Copied! Paste in Supabase SQL Editor and click Run') } catch { toast.error('Copy manually from above') }
+          }} style={{ background:'var(--dark)', color:'#fff', border:'none', padding:'8px 16px', cursor:'pointer', fontWeight:600, fontSize:13 }}>Copy SQL to Clipboard</button>
+        </div>
+      )}
 
       <div className="admin-tabs">
         <button className={'admin-tab' + (tab === 'questions' ? ' active' : '')} onClick={() => setTab('questions')}>
