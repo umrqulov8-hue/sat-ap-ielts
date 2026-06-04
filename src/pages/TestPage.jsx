@@ -572,26 +572,6 @@ export default function TestPage() {
           {effectiveQText && (
             <div className="bb-q-text" dangerouslySetInnerHTML={{ __html: effectiveQText }} />
           )}
-        </div>
-        <div className="bb-right">
-          <div className="bb-q-header">
-            <div className="bb-q-header-left">
-              <div className="bb-q-num">{current + 1}</div>
-              <button className={'bb-mark-btn' + (reviewMarked.includes(current) ? ' marked' : '')} onClick={markReview}>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill={reviewMarked.includes(current) ? 'currentColor' : 'none'} stroke="currentColor" strokeWidth="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                Mark for Review
-              </button>
-            </div>
-            {!isWrittenQ(currentQuestion) && (
-              <button className={'bb-abc-btn' + (abcMode ? ' active' : '')} onClick={() => setAbcMode(v => !v)}>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="3" y1="12" x2="21" y2="12"/></svg>
-                ABC
-              </button>
-            )}
-          </div>
-          {currentQuestion?.question_text && !currentQuestion?.passage_text && (
-            <div className="bb-q-text" dangerouslySetInnerHTML={{ __html: currentQuestion.question_text }} />
-          )}
           {isWrittenQ(currentQuestion) ? (
           <div className="bb-choices">
             <textarea className="bb-written-input" rows={1} value={selected || ''} onChange={e => setSelected(e.target.value)} placeholder="Type your answer..." />
