@@ -2912,10 +2912,13 @@ select.settings-input {
 .admin-q-preview-wrap { position: sticky; top: 0; }
 .admin-q-preview-label { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.6rem; font-weight: 800; letter-spacing: 0.1em; padding: 0.3rem 0.6rem; background: var(--dark); color: var(--yellow); margin-bottom: 0.5rem; }
 .admin-q-preview { background: var(--cream); border: 2.5px solid var(--dark); padding: 1rem; box-shadow: 4px 4px 0 var(--dark); }
-.admin-q-preview.split { padding: 0; overflow: hidden; }
-.admin-q-preview.split .admin-q-preview-img { background: var(--cream); border-bottom: 2.5px solid var(--dark); padding: 0.5rem; text-align: center; }
-.admin-q-preview.split .admin-q-preview-img img { max-width: 100%; max-height: 200px; mix-blend-mode: multiply; }
-.admin-q-preview.split .admin-q-preview-body { padding: 1rem; }
+.admin-q-preview.split { padding: 0; overflow: hidden; display: grid; grid-template-columns: 1fr 1fr; }
+.admin-q-preview.split .admin-q-preview-body { border-left: 2.5px solid var(--dark); }
+.admin-q-preview-passage { padding: 1rem; border-bottom: 2.5px solid var(--dark); max-height: 400px; overflow-y: auto; }
+.admin-q-preview-passage-label { font-size: 0.55rem; font-weight: 800; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 0.5rem; padding-bottom: 0.3rem; border-bottom: 1px solid var(--gray-300); }
+.admin-q-preview-passage-text { font-size: 0.75rem; line-height: 1.7; color: var(--dark); white-space: pre-wrap; }
+.admin-q-preview.split .admin-q-preview-passage { border-bottom: none; border-right: 2.5px solid var(--dark); }
+.admin-textarea-passage { min-height: 250px; font-size: 0.8rem; line-height: 1.7; }
 .admin-q-preview-img img { max-width: 100%; max-height: 200px; mix-blend-mode: multiply; }
 .admin-q-preview-body { }
 .admin-q-preview-header { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.6rem; padding-bottom: 0.4rem; border-bottom: 1.5px solid var(--dark); }
@@ -2976,6 +2979,9 @@ select.settings-input {
 @media (max-width: 1100px) {
   .admin-q-editor-grid { grid-template-columns: 1fr; }
   .admin-q-preview-wrap { position: static; }
+  .admin-q-preview.split { grid-template-columns: 1fr; }
+  .admin-q-preview.split .admin-q-preview-body { border-left: none; border-top: 2.5px solid var(--dark); }
+  .admin-q-preview.split .admin-q-preview-passage { border-right: none; border-bottom: 2.5px solid var(--dark); max-height: 200px; }
 }
 
 /* ─── Admin Notify Redesign ─── */

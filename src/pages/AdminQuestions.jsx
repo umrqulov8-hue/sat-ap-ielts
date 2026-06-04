@@ -24,6 +24,7 @@ export default function AdminQuestions() {
   const [editingTopic, setEditingTopic] = useState(null)
 
   const [qText, setQText] = useState('')
+  const [passageText, setPassageText] = useState('')
   const [noText, setNoText] = useState(false)
   const [layoutSplit, setLayoutSplit] = useState(localStorage.getItem('testLayout') === 'split')
   const [qType, setQType] = useState('mc')
@@ -1024,36 +1025,70 @@ export default function AdminQuestions() {
               {selTopic && (
                 <div className="admin-q-editor-grid">
                   <div className="admin-q-editor-form">
-                    <div className="admin-layer">
-                      <label className="admin-label">IMAGE (optional)</label>
-                      <div className={'admin-dropzone' + (dragOver ? ' drag-over' : '')}
-                        onDragOver={e => { e.preventDefault(); setDragOver(true) }}
-                        onDragLeave={() => setDragOver(false)} onDrop={handleDropImg}>
-                        {imagePreview ? (
-                          <div className="admin-dropzone-preview">
-                            <img src={imagePreview} alt="" className="admin-preview" />
-                            <button className="admin-dropzone-remove" onClick={(e) => { e.stopPropagation(); setImageFile(null); setImagePreview(''); if (fileRef.current) fileRef.current.value = '' }}>
-                              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-                            </button>
+                    {layoutSplit ? (
+                      <>
+                        <div className="admin-layer">
+                          <label className="admin-label">PASSAGE / READING TEXT</label>
+                          <textarea className="admin-textarea admin-textarea-passage" rows={12} value={passageText} onChange={e => setPassageText(e.target.value)}
+                            placeholder="Paste or type the reading passage here. This will appear on the left side of the split layout..." />
+                        </div>
+                        <div className="admin-layer">
+                          <label className="admin-label">QUESTION IMAGE (optional)</label>
+                          <div className={'admin-dropzone' + (dragOver ? ' drag-over' : '')}
+                            onDragOver={e => { e.preventDefault(); setDragOver(true) }}
+                            onDragLeave={() => setDragOver(false)} onDrop={handleDropImg}>
+                            {imagePreview ? (
+                              <div className="admin-dropzone-preview">
+                                <img src={imagePreview} alt="" className="admin-preview" />
+                                <button className="admin-dropzone-remove" onClick={(e) => { e.stopPropagation(); setImageFile(null); setImagePreview(''); if (fileRef.current) fileRef.current.value = '' }}>
+                                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                                </button>
+                              </div>
+                            ) : (
+                              <div className="admin-dropzone-text">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                                <span>Drop image here or click to browse</span>
+                                <span className="admin-dropzone-hint">PNG, JPG, WEBP, SVG up to 5MB</span>
+                              </div>
+                            )}
+                            <input type="file" accept="image/*" onChange={handleImageSelect} className="admin-file-input" ref={fileRef} />
                           </div>
-                        ) : (
-                          <div className="admin-dropzone-text">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-                            <span>Drop image here or click to browse</span>
-                            <span className="admin-dropzone-hint">PNG, JPG, WEBP, SVG up to 5MB</span>
+                        </div>
+                      </>
+                    ) : (
+                      <>
+                        <div className="admin-layer">
+                          <label className="admin-label">IMAGE (optional)</label>
+                          <div className={'admin-dropzone' + (dragOver ? ' drag-over' : '')}
+                            onDragOver={e => { e.preventDefault(); setDragOver(true) }}
+                            onDragLeave={() => setDragOver(false)} onDrop={handleDropImg}>
+                            {imagePreview ? (
+                              <div className="admin-dropzone-preview">
+                                <img src={imagePreview} alt="" className="admin-preview" />
+                                <button className="admin-dropzone-remove" onClick={(e) => { e.stopPropagation(); setImageFile(null); setImagePreview(''); if (fileRef.current) fileRef.current.value = '' }}>
+                                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                                </button>
+                              </div>
+                            ) : (
+                              <div className="admin-dropzone-text">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                                <span>Drop image here or click to browse</span>
+                                <span className="admin-dropzone-hint">PNG, JPG, WEBP, SVG up to 5MB</span>
+                              </div>
+                            )}
+                            <input type="file" accept="image/*" onChange={handleImageSelect} className="admin-file-input" ref={fileRef} />
                           </div>
-                        )}
-                        <input type="file" accept="image/*" onChange={handleImageSelect} className="admin-file-input" ref={fileRef} />
-                      </div>
-                    </div>
+                        </div>
+                      </>
+                    )}
 
                     <div className="admin-layer">
-                      <label className="admin-label">QUESTION TEXT</label>
+                      <label className="admin-label">{layoutSplit ? 'QUESTION TEXT' : 'QUESTION TEXT'}</label>
                       <div className={'admin-textarea-wrap' + (textDragOver ? ' drag-over' : '')}
                         onDragOver={e => { e.preventDefault(); setTextDragOver(true) }}
                         onDragLeave={() => setTextDragOver(false)} onDrop={handleDropToText}>
-                        <textarea className="admin-textarea admin-textarea-q" rows={5} value={qText} onChange={e => setQText(e.target.value)}
-                          placeholder={noText ? 'Optional — question is in the image' : 'Enter question... You can use <img src="..."/> tags for inline images.'} disabled={noText} />
+                        <textarea className="admin-textarea admin-textarea-q" rows={layoutSplit ? 3 : 5} value={qText} onChange={e => setQText(e.target.value)}
+                          placeholder={noText ? 'Optional — question is in the image' : 'Enter the question based on the passage...'} disabled={noText} />
                       </div>
                       <div className="admin-q-toggles">
                         <label className="admin-toggle-label">
@@ -1144,7 +1179,13 @@ export default function AdminQuestions() {
                       LIVE PREVIEW
                     </div>
                     <div className={'admin-q-preview' + ((imagePreview || layoutSplit) ? ' split' : '')}>
-                      {(imagePreview || layoutSplit) && imagePreview && (
+                      {layoutSplit && passageText && (
+                        <div className="admin-q-preview-passage">
+                          <div className="admin-q-preview-passage-label">PASSAGE</div>
+                          <div className="admin-q-preview-passage-text">{passageText}</div>
+                        </div>
+                      )}
+                      {!layoutSplit && imagePreview && (
                         <div className="admin-q-preview-img"><img src={imagePreview} alt="" /></div>
                       )}
                       <div className="admin-q-preview-body">
