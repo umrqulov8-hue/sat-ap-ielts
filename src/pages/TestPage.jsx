@@ -504,10 +504,10 @@ export default function TestPage() {
       <hr className="bb-divider" />
 
       {/* BODY */}
-      {(currentQuestion?.image_url || hasInlineImg || (currentQuestion?.layout === 'split' && currentQuestion?.passage_text)) ? (
+      {(currentQuestion?.image_url || hasInlineImg || currentQuestion?.passage_text) ? (
       <div className="bb-body bb-body-split">
         <div className="bb-left">
-          {currentQuestion?.layout === 'split' && currentQuestion?.passage_text ? (
+          {currentQuestion?.passage_text ? (
             <div className="bb-passage-split" dangerouslySetInnerHTML={{ __html: currentQuestion.passage_text.replace(/\n/g, '<br/>') }} />
           ) : currentQuestion?.image_url && (
             <img src={currentQuestion.image_url} alt="" className="bb-left-img" draggable="false" onContextMenu={e => e.preventDefault()} />
@@ -529,7 +529,7 @@ export default function TestPage() {
               </button>
             )}
           </div>
-          {currentQuestion?.question_text && (
+          {currentQuestion?.question_text && !currentQuestion?.passage_text && (
             <div className="bb-q-text" dangerouslySetInnerHTML={{ __html: currentQuestion.question_text }} />
           )}
           {isWrittenQ(currentQuestion) ? (
