@@ -138,12 +138,22 @@ export default function TestPage() {
 
   const effectiveQText = useMemo(() => {
     if (!questionBodyText) return null
-    if (effectivePassage && questionBodyText.startsWith(effectivePassage.trim())) {
-      return questionBodyText.slice(effectivePassage.trim().length).trim()
+    if (!effectivePassage) return questionBodyText
+    const passWords = effectivePassage.trim().split(/\s+/).filter(Boolean)
+    const qWords = questionBodyText.trim().split(/\s+/).filter(Boolean)
+    let matchCount = 0
+    for (let i = 0; i < Math.min(passWords.length, qWords.length); i++) {
+      if (passWords[i].replace(/[""]/g, '"').toLowerCase() === qWords[i].replace(/[""]/g, '"').toLowerCase()) matchCount++
+      else break
     }
-    const trimmed = effectivePassage?.trim()
-    if (trimmed && questionBodyText.includes(trimmed)) {
-      return questionBodyText.replace(trimmed, '').trim()
+    if (matchCount >= Math.min(passWords.length, qWords.length) * 0.7) {
+      const raw = questionBodyText.trim()
+      const rawWords = raw.split(/\s+/)
+      let charIdx = 0
+      for (let i = 0; i < matchCount && i < rawWords.length; i++) {
+        charIdx += rawWords[i].length + 1
+      }
+      return raw.slice(charIdx).trim() || null
     }
     return questionBodyText
   }, [questionBodyText, effectivePassage])
