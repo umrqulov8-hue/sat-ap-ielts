@@ -122,6 +122,21 @@ export default function TestPage() {
 
   const currentQuestion = useMemo(() => questions[current] || null, [questions, current])
 
+  const passageFromText = useMemo(() => {
+    if (!currentQuestion?.question_text) return null
+    const m = currentQuestion.question_text.match(/<!--PASSAGE_START-->([\s\S]*?)<!--PASSAGE_END-->/)
+    return m ? m[1] : null
+  }, [currentQuestion])
+
+  const questionBodyText = useMemo(() => {
+    if (!currentQuestion?.question_text) return null
+    if (passageFromText) return currentQuestion.question_text.replace(/<!--PASSAGE_START-->[\s\S]*?<!--PASSAGE_END-->/, '').trim()
+    return currentQuestion.question_text
+  }, [currentQuestion, passageFromText])
+
+  const effectivePassage = currentQuestion?.passage_text || passageFromText
+  const effectiveQText = questionBodyText
+
   const handleSelect = (idx) => {
     if (abcMode) {
       const key = 'q' + current
@@ -273,13 +288,13 @@ export default function TestPage() {
   }
 
   const hasInlineImg = useMemo(
-    () => /<img\s[^>]*src=/i.test(currentQuestion?.question_text || ''),
-    [currentQuestion]
+    () => /<img\s[^>]*src=/i.test(effectiveQText || ''),
+    [effectiveQText]
   )
 
   const renderedQuestionText = useMemo(
     () => {
-      const text = currentQuestion?.question_text
+      const text = effectiveQText
       if (!text) return null
       if (!hasInlineImg) return <div className="bb-q-text" dangerouslySetInnerHTML={{ __html: text }} />
       const parts = text.split(/(<img[^>]+>)/g)
@@ -292,7 +307,7 @@ export default function TestPage() {
         return <span key={i} dangerouslySetInnerHTML={{ __html: part }} />
       })
     },
-    [currentQuestion, hasInlineImg]
+    [effectiveQText, hasInlineImg]
   )
 
   const correctCount = useMemo(() => answers.filter(a => a.correct).length, [answers])
@@ -504,13 +519,33 @@ export default function TestPage() {
       <hr className="bb-divider" />
 
       {/* BODY */}
-      {(currentQuestion?.image_url || hasInlineImg || currentQuestion?.passage_text) ? (
+      {(currentQuestion?.image_url || hasInlineImg || effectivePassage) ? (
       <div className="bb-body bb-body-split">
         <div className="bb-left">
-          {currentQuestion?.passage_text ? (
-            <div className="bb-passage-split" dangerouslySetInnerHTML={{ __html: currentQuestion.passage_text.replace(/\n/g, '<br/>') }} />
+          {effectivePassage ? (
+            <div className="bb-passage-split" dangerouslySetInnerHTML={{ __html: effectivePassage.replace(/\n/g, '<br/>') }} />
           ) : currentQuestion?.image_url && (
             <img src={currentQuestion.image_url} alt="" className="bb-left-img" draggable="false" onContextMenu={e => e.preventDefault()} />
+          )}
+        </div>
+        <div className="bb-right">
+          <div className="bb-q-header">
+            <div className="bb-q-header-left">
+              <div className="bb-q-num">{current + 1}</div>
+              <button className={'bb-mark-btn' + (reviewMarked.includes(current) ? ' marked' : '')} onClick={markReview}>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill={reviewMarked.includes(current) ? 'currentColor' : 'none'} stroke="currentColor" strokeWidth="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                Mark for Review
+              </button>
+            </div>
+            {!isWrittenQ(currentQuestion) && (
+              <button className={'bb-abc-btn' + (abcMode ? ' active' : '')} onClick={() => setAbcMode(v => !v)}>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="3" y1="12" x2="21" y2="12"/></svg>
+                ABC
+              </button>
+            )}
+          </div>
+          {effectiveQText && (
+            <div className="bb-q-text" dangerouslySetInnerHTML={{ __html: effectiveQText }} />
           )}
         </div>
         <div className="bb-right">
@@ -571,11 +606,11 @@ export default function TestPage() {
               {currentQuestion?.image_url && (
                 <img src={currentQuestion.image_url} alt="" className="bb-q-img" draggable="false" onContextMenu={e => e.preventDefault()} />
               )}
-              {currentQuestion?.question_text && !hasInlineImg && (
-                <div className="bb-passage" dangerouslySetInnerHTML={{ __html: currentQuestion.question_text }} />
+              {effectiveQText && !hasInlineImg && (
+                <div className="bb-passage" dangerouslySetInnerHTML={{ __html: effectiveQText }} />
               )}
-              {currentQuestion?.question_text && hasInlineImg && (
-                <div className="bb-q-text">{renderQuestionText(currentQuestion.question_text)}</div>
+              {effectiveQText && hasInlineImg && (
+                <div className="bb-q-text">{renderQuestionText(effectiveQText)}</div>
               )}
               {isWrittenQ(currentQuestion) ? (
               <div className="bb-choices">

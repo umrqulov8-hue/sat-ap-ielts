@@ -388,14 +388,16 @@ export default function AdminQuestions() {
       imageUrl = publicUrl
     }
     const payload = {
-      question_text: qText.trim(), options: qType === 'mc' ? opts : [],
+      options: qType === 'mc' ? opts : [],
       correct_index: qType === 'mc' ? correct : -1, image_url: imageUrl,
       explanation: qType === 'written' ? correctAnswer.trim() : explanation.trim(),
       order_index: editingQ ? editingQ.order_index : questions.length,
     }
-    if (layoutSplit) {
-      payload.passage_text = passageText.trim()
+    if (layoutSplit && passageText.trim()) {
+      payload.question_text = '<!--PASSAGE_START-->' + passageText.trim() + '<!--PASSAGE_END-->' + (qText.trim() || '')
       payload.layout = 'split'
+    } else {
+      payload.question_text = qText.trim()
     }
     const { error } = editingQ
       ? await supabase.from('questions').update(payload).eq('id', editingQ.id)
@@ -412,9 +414,16 @@ export default function AdminQuestions() {
 
   const editQuestion = (q) => {
     setEditingQ(q)
-    setQText(q.question_text)
-    setPassageText(q.passage_text || '')
-    setLayoutSplit(q.layout === 'split')
+    if (q.question_text?.includes('<!--PASSAGE_START-->')) {
+      const pMatch = q.question_text.match(/<!--PASSAGE_START-->([\s\S]*?)<!--PASSAGE_END-->/)
+      setPassageText(pMatch ? pMatch[1] : '')
+      setLayoutSplit(true)
+      setQText(q.question_text.replace(/<!--PASSAGE_START-->[\s\S]*?<!--PASSAGE_END-->/, ''))
+    } else {
+      setQText(q.question_text)
+      setPassageText(q.passage_text || '')
+      setLayoutSplit(q.layout === 'split')
+    }
     setQType(q.correct_index === -1 ? 'written' : 'mc')
     setOpts(Array.isArray(q.options) ? [...q.options] : ['', '', '', ''])
     setCorrect(q.correct_index >= 0 ? q.correct_index : 0)
@@ -1037,7 +1046,7 @@ ALTER TABLE questions ADD COLUMN IF NOT EXISTS layout text default 'centered';</
                             </span>}
                           </div>
                           <div className="admin-q-list-text">
-                            {q.question_text ? <span dangerouslySetInnerHTML={{ __html: q.question_text.replace(/<img[^>]+>/g, '🖼') }} /> : <em>No text</em>}
+                            {q.question_text ? <span dangerouslySetInnerHTML={{ __html: q.question_text.replace(/<!--PASSAGE_START-->[\s\S]*?<!--PASSAGE_END-->/g, '').replace(/<img[^>]+>/g, '🖼') }} /> : <em>No text</em>}
                           </div>
                           {q.correct_index >= 0 && Array.isArray(q.options) && q.options[q.correct_index] && (
                             <div className="admin-q-list-ans">✓ {String.fromCharCode(65 + q.correct_index)}. {q.options[q.correct_index]}</div>
