@@ -115,8 +115,9 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
     display: flex;
     align-items: center;
     gap: 0.6rem;
-    padding: 1.25rem 1rem 1rem;
+    padding: 1.25rem 1rem 1.25rem;
     border-bottom: 2.5px solid var(--dark);
+    position: relative;
 }
 
 .sidebar-logo-wrap {
@@ -174,22 +175,6 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
     text-decoration: none;
 }
 
-.sidebar-logo::before {
-    content: 'S';
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 32px;
-    height: 32px;
-    background: var(--lavender);
-    border: 2px solid var(--dark);
-    font-size: 0.95rem;
-    font-weight: 900;
-    color: var(--dark);
-    box-shadow: 2px 2px 0 var(--dark);
-    flex-shrink: 0;
-}
-
 .sidebar-badge {
     font-size: 0.55rem;
     font-weight: 800;
@@ -206,6 +191,7 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
     flex: 1;
     overflow-y: auto;
     overflow-x: hidden;
+    padding: 0.5rem 0;
     padding-right: 0.4rem;
     margin-right: -0.4rem;
     margin-bottom: 1.25rem;
