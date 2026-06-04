@@ -139,21 +139,25 @@ export default function TestPage() {
   const effectiveQText = useMemo(() => {
     if (!questionBodyText) return null
     if (!effectivePassage) return questionBodyText
-    const passWords = effectivePassage.trim().split(/\s+/).filter(Boolean)
-    const qWords = questionBodyText.trim().split(/\s+/).filter(Boolean)
-    let matchCount = 0
-    for (let i = 0; i < Math.min(passWords.length, qWords.length); i++) {
-      if (passWords[i].replace(/[""]/g, '"').toLowerCase() === qWords[i].replace(/[""]/g, '"').toLowerCase()) matchCount++
-      else break
+    const qMarkers = ['which choice', 'which sentence', 'which revision', 'the writer wants', 'the student wants', 'the author']
+    const raw = questionBodyText.trim()
+    const rawLower = raw.toLowerCase()
+    for (const marker of qMarkers) {
+      const idx = rawLower.indexOf(marker)
+      if (idx > 50) return raw.slice(idx).trim()
     }
-    if (matchCount >= Math.min(passWords.length, qWords.length) * 0.7) {
-      const raw = questionBodyText.trim()
-      const rawWords = raw.split(/\s+/)
-      let charIdx = 0
-      for (let i = 0; i < matchCount && i < rawWords.length; i++) {
-        charIdx += rawWords[i].length + 1
+    const passNorm = effectivePassage.trim().replace(/[\s\u00a0]+/g, ' ').replace(/[\u201c\u201d\u2018\u2019]/g, '"').toLowerCase()
+    const qNorm = raw.replace(/[\s\u00a0]+/g, ' ').replace(/[\u201c\u201d\u2018\u2019]/g, '"').toLowerCase()
+    if (qNorm.startsWith(passNorm)) {
+      let i = 0
+      const pw = passNorm.split(' ')
+      const qw = qNorm.split(' ')
+      for (let j = 0; j < pw.length && j < qw.length; j++) {
+        if (pw[j] !== qw[j]) break
+        i += qw[j].length + 1
       }
-      return raw.slice(charIdx).trim() || null
+      while (i < raw.length && /\s/.test(raw[i])) i++
+      return raw.slice(i).trim() || null
     }
     return questionBodyText
   }, [questionBodyText, effectivePassage])
