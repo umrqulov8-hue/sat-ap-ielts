@@ -8,38 +8,6 @@ import { useUser } from '../context/UserContext'
 const TAG_LABEL = { math: 'MATH', rw: 'R&W', ap: 'AP' }
 const TARGET_MAP = { math: 800, rw: 800, ap: 5 }
 
-function Skeleton() {
-  return (
-    <div className="subject-skeleton">
-      <div className="stats-grid">
-        {[1,2,3,4].map(i => (
-          <div key={i} className="stat-card" style={{ minHeight: 120 }}>
-            <div style={{ background: 'var(--gray-100)', borderRadius: 4, height: 14, width: '40%', marginBottom: 12 }} />
-            <div style={{ background: 'var(--gray-100)', borderRadius: 4, height: 32, width: '60%', marginBottom: 12 }} />
-            <div style={{ background: 'var(--gray-100)', borderRadius: 4, height: 6, width: '100%' }} />
-          </div>
-        ))}
-      </div>
-      <h2 className="section-title" style={{ opacity: 0.4 }}>MODULES</h2>
-      <div className="module-list">
-        {[1,2,3].map(i => (
-          <div key={i} className="module-row">
-            <div className="module-inner" style={{ opacity: 0.4 }}>
-              <div className="module-left">
-                <span className="module-tag math" style={{ background: 'var(--gray-100)' }}>MOD</span>
-                <div className="module-info">
-                  <div className="module-name" style={{ background: 'var(--gray-100)', height: 14, width: 180, borderRadius: 4 }} />
-                  <div className="module-desc" style={{ background: 'var(--gray-100)', height: 10, width: 120, borderRadius: 4, marginTop: 6 }} />
-                </div>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  )
-}
-
 export default function SubjectPage({ slug, title, subtitle, tag }) {
   const navigate = useNavigate()
   const { setPageTitle, setPageSub, setPageClass } = useLayout()
@@ -51,7 +19,7 @@ export default function SubjectPage({ slug, title, subtitle, tag }) {
   const [accuracy, setAccuracy] = useState(cached?.accuracy ?? 0)
   const [time] = useState(cached?.time ?? 0)
   const [modules, setModules] = useState(cached?.modules ?? [])
-  const [loading, setLoading] = useState(!cached)
+  const [loading, setLoading] = useState(false)
   const target = TARGET_MAP[tag] || 800
 
   useEffect(() => {
@@ -117,10 +85,9 @@ export default function SubjectPage({ slug, title, subtitle, tag }) {
   const isAp = tag === 'ap'
   const pct = totalTests > 0 ? Math.round(tests / totalTests * 100) : 0
 
-  if (loading) return <Skeleton />
-
   return (
-    <><div className="stats-grid">
+    <>{loading && <div style={{ position: 'fixed', top: 0, left: 220, right: 0, height: 3, background: 'var(--lavender)', zIndex: 100, animation: 'sub-progress 1.2s ease infinite' }} />}
+    <div className="stats-grid">
       <div className="stat-card">
         <div className="stat-card-top">
           <div className="stat-label-row">

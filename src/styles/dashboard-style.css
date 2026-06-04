@@ -3112,9 +3112,8 @@ select.settings-input {
 .ai-analysis-recs li:last-child { border-bottom: none; }
 
 /* ─── SUBJECT PAGE SKELETON ─── */
-.subject-skeleton .stat-card { min-height: 120px; }
-.subject-skeleton .stat-card > div:not(.stat-card-top):not(.stat-value):not(.stat-footer) {
-  animation: skeleton-pulse 1.5s ease-in-out infinite;
+@keyframes sub-progress {
+  0% { width: 0; margin-left: 0; }
+  50% { width: 60%; margin-left: 20%; }
+  100% { width: 0; margin-left: 100%; }
 }
-.subject-skeleton .module-row { opacity: 0.5; animation: skeleton-pulse 1.5s ease-in-out infinite; }
-@keyframes skeleton-pulse { 0%, 100% { opacity: 0.5; } 50% { opacity: 0.8; } }
