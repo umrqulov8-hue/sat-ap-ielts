@@ -370,10 +370,11 @@ export default function AdminQuestions() {
   }
 
   const handleSaveQuestion = async () => {
+    const hasPassage = layoutSplit && passageText.trim()
     if (qType === 'mc') {
-      if ((!qText.trim() && !noText) || opts.some(o => !o.trim())) { setMsg('Fill question text and all options'); return }
+      if (((!qText.trim() && !hasPassage) || opts.some(o => !o.trim())) && !noText) { setMsg('Fill question text (or passage) and all options'); return }
     } else {
-      if ((!qText.trim() && !noText) || !correctAnswer.trim()) { setMsg('Fill question text and correct answer'); return }
+      if (((!qText.trim() && !hasPassage) || !correctAnswer.trim()) && !noText) { setMsg('Fill question text (or passage) and correct answer'); return }
     }
     setUploading(true)
     let imageUrl = editingQ?.image_url || ''
