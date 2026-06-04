@@ -703,3 +703,7 @@ using (bucket_id = 'avav2' and auth.uid()::text = (storage.foldername(name))[1])
 create policy "Public can view avatars"
 on storage.objects for select
 using (bucket_id = 'avav2');
+
+-- Add passage_text and layout columns for split writing questions
+ALTER TABLE questions ADD COLUMN IF NOT EXISTS passage_text text;
+ALTER TABLE questions ADD COLUMN IF NOT EXISTS layout text default 'centered';

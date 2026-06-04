@@ -69,14 +69,17 @@ function queryBuilder(table) {
           headers: { ...headers, Prefer: 'return=representation,resolution=merge-duplicates' },
           body: JSON.stringify(Array.isArray(bodyData) ? bodyData : [bodyData]),
         })
-        if (!res.ok) return { data: null, error: await res.json().catch(() => ({ message: res.statusText })) }
+        if (!res.ok) {
+          if (res.status === 406) return { data: null, error: { message: 'Permission denied (RLS policy may be blocking this operation)' } }
+          return { data: null, error: await res.json().catch(() => ({ message: res.statusText })) }
+        }
         return { data: await res.json(), error: null }
       }
       case 'DELETE': {
         const url = buildUrl(table, filters)
         const res = await fetch(url.toString(), { method: 'DELETE', headers })
-        if (!res.ok) { if (res.status === 406 || res.status === 404) return { data: null, error: null }; return { data: null, error: await res.json().catch(() => ({ message: res.statusText })) } }
-        return { data: await res.json().catch(() => null), error: null }
+        if (!res.ok) { return { data: null, error: await res.json().catch(() => ({ message: res.statusText })) } }
+        return { data: null, error: null }
       }
       case 'INSERT': {
         const url = `${SUPABASE_URL}/rest/v1/${table}`
@@ -85,13 +88,19 @@ function queryBuilder(table) {
           headers: { ...headers, Prefer: 'return=representation', Accept: 'application/vnd.pgrst.object+json' },
           body: JSON.stringify(Array.isArray(bodyData) ? bodyData : [bodyData]),
         })
-        if (!res.ok) return { data: null, error: await res.json().catch(() => ({ message: res.statusText })) }
+        if (!res.ok) {
+          if (res.status === 406) return { data: null, error: { message: 'Permission denied (RLS policy may be blocking this operation)' } }
+          return { data: null, error: await res.json().catch(() => ({ message: res.statusText })) }
+        }
         return { data: await res.json(), error: null }
       }
       case 'PATCH': {
         const url = buildUrl(table, filters)
         const res = await fetch(url.toString(), { method: 'PATCH', headers: { ...headers, Prefer: 'return=representation' }, body: JSON.stringify(bodyData) })
-        if (!res.ok) return { data: null, error: await res.json().catch(() => ({ message: res.statusText })) }
+        if (!res.ok) {
+          if (res.status === 406 || res.status === 404) return { data: null, error: { message: 'Permission denied or not found (RLS policy may be blocking this operation)' } }
+          return { data: null, error: await res.json().catch(() => ({ message: res.statusText })) }
+        }
         return { data: await res.json(), error: null }
       }
       default: {

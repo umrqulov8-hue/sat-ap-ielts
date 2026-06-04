@@ -236,7 +236,7 @@ export default function AdminQuestions() {
   }, [selTopic])
 
   const resetQForm = () => {
-    setQText(''); setNoText(false); setQType('mc'); setOpts(['', '', '', ''])
+    setQText(''); setPassageText(''); setNoText(false); setQType('mc'); setOpts(['', '', '', ''])
     setCorrect(0); setCorrectAnswer(''); setImageFile(null); setImagePreview('')
     setExplanation(''); setEditingQ(null)
     if (fileRef.current) fileRef.current.value = ''
@@ -248,14 +248,15 @@ export default function AdminQuestions() {
     setSavingMod(true)
     if (editingMod) {
       const { error } = await supabase.from('modules').update({ title: modTitle.trim(), description: modDesc.trim(), lesson_count: modLessons, duration: modDuration }).eq('id', editingMod)
-      if (error) { setMsg('Error: ' + error.message); setSavingMod(false); return }
+      if (error) { setMsg('Error: ' + error.message); toast.error('Update failed: ' + error.message); setSavingMod(false); return }
       setEditingMod(null)
     } else {
       const { error } = await supabase.from('modules').insert({ subject_id: selSubject, title: modTitle.trim(), description: modDesc.trim(), lesson_count: modLessons, duration: modDuration, order_index: modules.length })
-      if (error) { setMsg('Error: ' + error.message); setSavingMod(false); return }
+      if (error) { setMsg('Error: ' + error.message); toast.error('Insert failed: ' + error.message); setSavingMod(false); return }
     }
     setModTitle(''); setModDesc(''); setModLessons(0); setModDuration('')
     const { data, error } = await supabase.from('modules').select('*').eq('subject_id', selSubject).order('order_index')
+    if (error) { setMsg('Error reloading: ' + error.message); setSavingMod(false); return }
     if (data) setModules(data)
     toast.success(editingMod ? 'Module updated!' : 'Module added!')
     setMsg(editingMod ? 'Module updated!' : 'Module added!')
@@ -270,13 +271,14 @@ export default function AdminQuestions() {
   const deleteModule = async (id) => {
     if (!window.confirm('Delete this module and all its topics/questions?')) return
     const { error: tErr } = await supabase.from('topics').delete().eq('module_id', id)
-    if (tErr) { setMsg('Error deleting topics: ' + tErr.message); return }
+    if (tErr) { setMsg('Error deleting topics: ' + tErr.message); toast.error('Delete failed: ' + tErr.message); return }
     const { error: mErr } = await supabase.from('modules').delete().eq('id', id)
-    if (mErr) { setMsg('Error deleting module: ' + mErr.message); return }
+    if (mErr) { setMsg('Error deleting module: ' + mErr.message); toast.error('Delete failed: ' + mErr.message); return }
     const { data } = await supabase.from('modules').select('*').eq('subject_id', selSubject).order('order_index')
     if (data) setModules(data)
     if (selModule === id) { setSelModule(''); setTopics([]); setSelTopic('') }
     setMsg('Module deleted')
+    toast.success('Module deleted')
   }
 
   const handleAddTopic = async () => {
@@ -285,11 +287,11 @@ export default function AdminQuestions() {
     setSavingTopic(true)
     if (editingTopic) {
       const { error } = await supabase.from('topics').update({ title: topicTitle.trim(), description: topicDesc.trim() }).eq('id', editingTopic)
-      if (error) { setMsg('Error: ' + error.message); setSavingTopic(false); return }
+      if (error) { setMsg('Error: ' + error.message); toast.error('Update failed: ' + error.message); setSavingTopic(false); return }
       setEditingTopic(null)
     } else {
       const { error } = await supabase.from('topics').insert({ module_id: selModule, title: topicTitle.trim(), description: topicDesc.trim(), order_index: topics.length })
-      if (error) { setMsg('Error: ' + error.message); setSavingTopic(false); return }
+      if (error) { setMsg('Error: ' + error.message); toast.error('Insert failed: ' + error.message); setSavingTopic(false); return }
     }
     setTopicTitle(''); setTopicDesc('')
     const { data, error } = await supabase.from('topics').select('*').eq('module_id', selModule).order('order_index')
@@ -308,13 +310,14 @@ export default function AdminQuestions() {
   const deleteTopic = async (id) => {
     if (!window.confirm('Delete this topic and all its questions?')) return
     const { error: qErr } = await supabase.from('questions').delete().eq('topic_id', id)
-    if (qErr) { setMsg('Error deleting questions: ' + qErr.message); return }
+    if (qErr) { setMsg('Error deleting questions: ' + qErr.message); toast.error('Delete failed: ' + qErr.message); return }
     const { error: tErr } = await supabase.from('topics').delete().eq('id', id)
-    if (tErr) { setMsg('Error deleting topic: ' + tErr.message); return }
+    if (tErr) { setMsg('Error deleting topic: ' + tErr.message); toast.error('Delete failed: ' + tErr.message); return }
     const { data } = await supabase.from('topics').select('*').eq('module_id', selModule).order('order_index')
     if (data) setTopics(data)
     if (selTopic === id) { setSelTopic(''); setQuestions([]) }
     setMsg('Topic deleted')
+    toast.success('Topic deleted')
   }
 
   const handleImageSelect = (e) => {
@@ -376,6 +379,10 @@ export default function AdminQuestions() {
       explanation: qType === 'written' ? correctAnswer.trim() : explanation.trim(),
       order_index: editingQ ? editingQ.order_index : questions.length,
     }
+    if (layoutSplit) {
+      payload.passage_text = passageText.trim()
+      payload.layout = 'split'
+    }
     const { error } = editingQ
       ? await supabase.from('questions').update(payload).eq('id', editingQ.id)
       : await supabase.from('questions').insert({ topic_id: selTopic, ...payload })
@@ -392,6 +399,8 @@ export default function AdminQuestions() {
   const editQuestion = (q) => {
     setEditingQ(q)
     setQText(q.question_text)
+    setPassageText(q.passage_text || '')
+    setLayoutSplit(q.layout === 'split')
     setQType(q.correct_index === -1 ? 'written' : 'mc')
     setOpts(Array.isArray(q.options) ? [...q.options] : ['', '', '', ''])
     setCorrect(q.correct_index >= 0 ? q.correct_index : 0)
