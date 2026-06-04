@@ -135,7 +135,18 @@ export default function TestPage() {
   }, [currentQuestion, passageFromText])
 
   const effectivePassage = currentQuestion?.passage_text || passageFromText
-  const effectiveQText = questionBodyText
+
+  const effectiveQText = useMemo(() => {
+    if (!questionBodyText) return null
+    if (effectivePassage && questionBodyText.startsWith(effectivePassage.trim())) {
+      return questionBodyText.slice(effectivePassage.trim().length).trim()
+    }
+    const trimmed = effectivePassage?.trim()
+    if (trimmed && questionBodyText.includes(trimmed)) {
+      return questionBodyText.replace(trimmed, '').trim()
+    }
+    return questionBodyText
+  }, [questionBodyText, effectivePassage])
 
   const handleSelect = (idx) => {
     if (abcMode) {
