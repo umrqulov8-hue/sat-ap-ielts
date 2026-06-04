@@ -1,6 +1,5 @@
 import { lazy, Suspense } from 'react'
 import { Routes, Route, Outlet } from 'react-router-dom'
-import LogoIcon from './components/LogoIcon'
 const DashLayout = lazy(() => import('./components/DashLayout'))
 
 const Home = lazy(() => import('./pages/Home'))
@@ -29,7 +28,6 @@ function HomeLayout() {
   return (
     <>
       <Suspense fallback={null}>
-        <LogoIcon />
         <Home />
       </Suspense>
       <Outlet />
@@ -66,9 +64,9 @@ export default function App() {
         <Route path="/test-review/:testId" element={<SuspenseWrap><TestReview /></SuspenseWrap>} />
         <Route path="/admin/sat-tests" element={<SuspenseWrap><SatTestAdmin /></SuspenseWrap>} />
       </Route>
-      <Route path="/sat-test/:testId" element={<SuspenseWrap><LogoIcon /><SatTestPage /></SuspenseWrap>} />
-      <Route path="/test/:topicId" element={<SuspenseWrap><LogoIcon /><TestPage /></SuspenseWrap>} />
-      <Route path="*" element={<SuspenseWrap><LogoIcon /><NotFound /></SuspenseWrap>} />
+      <Route path="/sat-test/:testId" element={<SuspenseWrap><SatTestPage /></SuspenseWrap>} />
+      <Route path="/test/:topicId" element={<SuspenseWrap><TestPage /></SuspenseWrap>} />
+      <Route path="*" element={<SuspenseWrap><NotFound /></SuspenseWrap>} />
     </Routes>
   )
 }
