@@ -110,11 +110,11 @@ export default function CalendarModal({ active, onClose, dateRef }) {
       <div className="calendar-wrap" ref={wrapRef}>
         <div className="calendar-container">
           <div className="calendar-header">
-            <button className="cal-nav" onClick={prevMonth}>
+            <button className="cal-nav" onClick={prevMonth} aria-label="Previous month">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="15 18 9 12 15 6" /></svg>
             </button>
             <span className="cal-month">{MONTHS[month]} {year}</span>
-            <button className="cal-nav" onClick={nextMonth}>
+            <button className="cal-nav" onClick={nextMonth} aria-label="Next month">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="9 18 15 12 9 6" /></svg>
             </button>
           </div>

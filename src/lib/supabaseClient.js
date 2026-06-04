@@ -157,6 +157,13 @@ function queryBuilder(table) {
     async then(resolve, reject) {
       try { resolve(await exec()) } catch (e) { reject(e) }
     },
+    async catch(fn) {
+      try {
+        const result = await exec()
+        if (result?.error) return fn(result.error)
+        return result
+      } catch (e) { return fn(e) }
+    },
   }
   return q
 }
