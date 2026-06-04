@@ -396,7 +396,6 @@ export default function AdminQuestions() {
     }
     if (layoutSplit && passageText.trim()) {
       payload.question_text = '<!--PASSAGE_START-->' + passageText.trim() + '<!--PASSAGE_END-->' + (qText.trim() || '')
-      payload.layout = 'split'
     } else {
       payload.question_text = qText.trim()
     }
