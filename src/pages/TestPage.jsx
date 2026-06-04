@@ -504,10 +504,12 @@ export default function TestPage() {
       <hr className="bb-divider" />
 
       {/* BODY */}
-      {(currentQuestion?.image_url || hasInlineImg) ? (
+      {(currentQuestion?.image_url || hasInlineImg || (currentQuestion?.layout === 'split' && currentQuestion?.passage_text)) ? (
       <div className="bb-body bb-body-split">
         <div className="bb-left">
-          {currentQuestion?.image_url && (
+          {currentQuestion?.layout === 'split' && currentQuestion?.passage_text ? (
+            <div className="bb-passage-split" dangerouslySetInnerHTML={{ __html: currentQuestion.passage_text.replace(/\n/g, '<br/>') }} />
+          ) : currentQuestion?.image_url && (
             <img src={currentQuestion.image_url} alt="" className="bb-left-img" draggable="false" onContextMenu={e => e.preventDefault()} />
           )}
         </div>
