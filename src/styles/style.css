@@ -2284,6 +2284,35 @@ a, button { text-decoration: none; color: inherit; font-family: inherit; cursor:
 .bb-body-inner .bb-passage img, .bb-inline-img { max-width: 100%; display: block; margin: 0.5rem 0; }
 .test-done-q-text img { max-width: 100%; display: block; margin: 0.3rem 0; }
 
+.hl-toolbar {
+  position: absolute; transform: translateX(-50%); top: 0; z-index: 10;
+  display: flex; gap: 4px; padding: 6px 8px; background: var(--dark);
+  border-radius: 8px; box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+  animation: hlPopIn 0.15s ease;
+}
+@keyframes hlPopIn { from { opacity: 0; transform: translateX(-50%) translateY(4px) scale(0.9); } to { opacity: 1; transform: translateX(-50%) translateY(0) scale(1); } }
+.hl-btn {
+  width: 30px; height: 30px; border: none; border-radius: 6px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.hl-btn:hover { transform: scale(1.15); box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
+.hl-btn-close { background: #555 !important; border-bottom: none !important; }
+.hl-btn-close svg { stroke: #fff; }
+.hl-btn-close:hover { background: #e74c3c !important; }
+.hl-list { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+.hl-chip {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 3px 8px; border-radius: 4px; font-size: 12px; font-weight: 600;
+  border-bottom: 2px solid; cursor: default; line-height: 1.4;
+}
+.hl-chip-x {
+  background: none; border: none; cursor: pointer; font-size: 14px; line-height: 1;
+  color: var(--dark); opacity: 0.5; padding: 0; margin-left: 2px;
+}
+.hl-chip-x:hover { opacity: 1; }
+mark.hl-mark { background: transparent; padding: 0; border-radius: 0; }
+
 .bb-q-header {
   display: flex; align-items: center; justify-content: space-between;
   background: var(--cream); border-bottom: 1px solid var(--dark);

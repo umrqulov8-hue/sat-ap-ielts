@@ -42,6 +42,9 @@ export default function TestPage() {
   const [showNav, setShowNav] = useState(false)
   const [abcMode, setAbcMode] = useState(false)
   const [strikethrough, setStrikethrough] = useState({})
+  const [highlights, setHighlights] = useState({})
+  const [hlMenu, setHlMenu] = useState(null)
+  const passageRef = useRef(null)
   const [showCalc, setShowCalc] = useState(false)
   const [showRef, setShowRef] = useState(false)
   const [showAITutor, setShowAITutor] = useState(false)
@@ -546,9 +549,33 @@ export default function TestPage() {
       {/* BODY */}
       {(currentQuestion?.image_url || hasInlineImg || effectivePassage) ? (
       <div className="bb-body bb-body-split">
-        <div className="bb-left">
+        <div className="bb-left" ref={passageRef} onMouseUp={handlePassageMouseUp} style={{ position: 'relative' }}>
           {effectivePassage ? (
-            <div className="bb-passage-split" dangerouslySetInnerHTML={{ __html: effectivePassage.replace(/\n+/g, ' ') }} />
+            <>
+              <div className="bb-passage-split" dangerouslySetInnerHTML={{ __html: getHighlightedHTML(effectivePassage.replace(/\n+/g, ' ')) }} />
+              {hlMenu && (
+                <div className="hl-toolbar" style={{ left: hlMenu.x, top: hlMenu.y }}>
+                  {HL_COLORS.map(c => (
+                    <button key={c.name} className="hl-btn" title={c.name} onClick={() => applyHighlight(c)} style={{ background: c.color, borderBottom: `2px solid ${c.border}` }}>
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={c.border} strokeWidth="2.5"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+                    </button>
+                  ))}
+                  <button className="hl-btn hl-btn-close" onClick={() => { window.getSelection()?.removeAllRanges(); setHlMenu(null) }}>
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                  </button>
+                </div>
+              )}
+              {(highlights['q' + current] || []).length > 0 && (
+                <div className="hl-list">
+                  {highlights['q' + current].map((h, i) => (
+                    <span key={i} className="hl-chip" style={{ background: h.color, borderBottomColor: h.border }}>
+                      {h.text}
+                      <button className="hl-chip-x" onClick={() => removeHighlight(i)}>&times;</button>
+                    </span>
+                  ))}
+                </div>
+              )}
+            </>
           ) : currentQuestion?.image_url && (
             <img src={currentQuestion.image_url} alt="" className="bb-left-img" draggable="false" onContextMenu={e => e.preventDefault()} />
           )}
