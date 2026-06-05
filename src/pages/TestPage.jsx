@@ -165,6 +165,57 @@ export default function TestPage() {
     return questionBodyText
   }, [questionBodyText, effectivePassage])
 
+  const HL_COLORS = [
+    { name: 'yellow', color: '#ffe066', border: '#d4b800' },
+    { name: 'green', color: '#a8e6a3', border: '#5ab052' },
+    { name: 'blue', color: '#a8d4f5', border: '#5a9fd4' },
+    { name: 'pink', color: '#f5a8c7', border: '#d45a8a' },
+    { name: 'purple', color: '#c7a8f5', border: '#8a5ad4' },
+  ]
+
+  const getHighlightedHTML = (text) => {
+    const qHighlights = highlights['q' + current] || []
+    if (!qHighlights.length || !text) return text
+    let html = text
+    qHighlights.forEach(h => {
+      try {
+        const escaped = h.text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+        html = html.replace(new RegExp(escaped, 'gi'), `<mark class="hl-mark" style="background:${h.color};border-bottom:2px solid ${h.border};padding:1px 2px;border-radius:2px;">${h.text}</mark>`)
+      } catch { /* skip invalid */ }
+    })
+    return html
+  }
+
+  const applyHighlight = (color) => {
+    const sel = window.getSelection()
+    if (!sel || sel.isCollapsed) return
+    const text = sel.toString().trim()
+    if (!text) return
+    const key = 'q' + current
+    setHighlights(prev => ({ ...prev, [key]: [...(prev[key] || []), { text, color: color.color, border: color.border }] }))
+    sel.removeAllRanges()
+    setHlMenu(null)
+  }
+
+  const removeHighlight = (idx) => {
+    const key = 'q' + current
+    setHighlights(prev => {
+      const arr = [...(prev[key] || [])]
+      arr.splice(idx, 1)
+      return { ...prev, [key]: arr }
+    })
+  }
+
+  const handlePassageMouseUp = () => {
+    const sel = window.getSelection()
+    if (!sel || sel.isCollapsed || !sel.toString().trim()) { setHlMenu(null); return }
+    const rect = passageRef.current?.getBoundingClientRect()
+    if (!rect) return
+    const range = sel.getRangeAt(0)
+    const rangeRect = range.getBoundingClientRect()
+    setHlMenu({ x: rangeRect.left - rect.left + rangeRect.width / 2 - 120, y: rangeRect.top - rect.top - 50 })
+  }
+
   const handleSelect = (idx) => {
     if (abcMode) {
       const key = 'q' + current
@@ -552,7 +603,7 @@ export default function TestPage() {
         <div className="bb-left" ref={passageRef} onMouseUp={handlePassageMouseUp} style={{ position: 'relative' }}>
           {effectivePassage ? (
             <>
-              <div className="bb-passage-split" dangerouslySetInnerHTML={{ __html: getHighlightedHTML(effectivePassage.replace(/\n+/g, ' ')) }} />
+              <div className="bb-passage-split" dangerouslySetInnerHTML={{ __html: getHighlightedHTML(effectivePassage.replace(/\s+/g, ' ').trim()) }} />
               {hlMenu && (
                 <div className="hl-toolbar" style={{ left: hlMenu.x, top: hlMenu.y }}>
                   {HL_COLORS.map(c => (
