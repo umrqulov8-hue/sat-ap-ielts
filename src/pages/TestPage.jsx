@@ -44,6 +44,7 @@ export default function TestPage() {
   const [strikethrough, setStrikethrough] = useState({})
   const [highlights, setHighlights] = useState({})
   const [hlMenu, setHlMenu] = useState(null)
+  const hlSelectedRef = useRef('')
   const passageRef = useRef(null)
   const [showCalc, setShowCalc] = useState(false)
   const [showRef, setShowRef] = useState(false)
@@ -187,13 +188,11 @@ export default function TestPage() {
   }
 
   const applyHighlight = (color) => {
-    const sel = window.getSelection()
-    if (!sel || sel.isCollapsed) return
-    const text = sel.toString().trim()
+    const text = hlSelectedRef.current
     if (!text) return
     const key = 'q' + current
     setHighlights(prev => ({ ...prev, [key]: [...(prev[key] || []), { text, color: color.color, border: color.border }] }))
-    sel.removeAllRanges()
+    window.getSelection()?.removeAllRanges()
     setHlMenu(null)
   }
 
@@ -209,10 +208,12 @@ export default function TestPage() {
   const handlePassageMouseUp = () => {
     const sel = window.getSelection()
     if (!sel || sel.isCollapsed || !sel.toString().trim()) { setHlMenu(null); return }
+    const text = sel.toString().trim()
     const rect = passageRef.current?.getBoundingClientRect()
     if (!rect) return
     const range = sel.getRangeAt(0)
     const rangeRect = range.getBoundingClientRect()
+    hlSelectedRef.current = text
     setHlMenu({ x: rangeRect.left - rect.left + rangeRect.width / 2 - 120, y: rangeRect.top - rect.top - 50 })
   }
 
