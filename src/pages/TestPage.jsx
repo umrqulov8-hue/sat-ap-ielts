@@ -44,7 +44,7 @@ export default function TestPage() {
   const [strikethrough, setStrikethrough] = useState({})
   const [highlights, setHighlights] = useState({})
   const [hlMenu, setHlMenu] = useState(null)
-  const hlSelectedRef = useRef('')
+  const hlSelectedRef = useRef({ text: '', start: -1 })
   const passageRef = useRef(null)
   const [showCalc, setShowCalc] = useState(false)
   const [showRef, setShowRef] = useState(false)
@@ -182,9 +182,9 @@ export default function TestPage() {
     const colorMap = new Array(len).fill(null)
 
     qHighlights.forEach((h, i) => {
-      const idx = text.indexOf(h.text)
-      if (idx === -1) return
-      for (let j = idx; j < idx + h.text.length && j < len; j++) {
+      const start = h.start ?? text.indexOf(h.text)
+      if (start === -1) return
+      for (let j = start; j < start + h.text.length && j < len; j++) {
         colorMap[j] = { color: h.color, border: h.border, idx: i }
       }
     })
@@ -230,10 +230,10 @@ export default function TestPage() {
   }, [effectivePassage, highlights, current])
 
   const applyHighlight = (color) => {
-    const text = hlSelectedRef.current
+    const { text, start } = hlSelectedRef.current
     if (!text) return
     const key = 'q' + current
-    setHighlights(prev => ({ ...prev, [key]: [...(prev[key] || []), { text, color: color.color, border: color.border }] }))
+    setHighlights(prev => ({ ...prev, [key]: [...(prev[key] || []), { text, start, color: color.color, border: color.border }] }))
     window.getSelection()?.removeAllRanges()
     setHlMenu(null)
   }
@@ -250,12 +250,20 @@ export default function TestPage() {
   const handlePassageMouseUp = () => {
     const sel = window.getSelection()
     if (!sel || sel.isCollapsed || !sel.toString().trim()) { setHlMenu(null); return }
-    const text = sel.toString().trim()
+    const selText = sel.toString().trim()
     const rect = passageRef.current?.getBoundingClientRect()
     if (!rect) return
     const range = sel.getRangeAt(0)
     const rangeRect = range.getBoundingClientRect()
-    hlSelectedRef.current = text
+
+    const passageEl = passageRef.current?.querySelector('.bb-passage-split')
+    const fullText = passageEl?.textContent || ''
+    const preRange = document.createRange()
+    preRange.setStart(passageEl, 0)
+    preRange.setEnd(range.startContainer, range.startOffset)
+    const startOffset = preRange.toString().length
+
+    hlSelectedRef.current = { text: selText, start: startOffset }
     setHlMenu({ x: rangeRect.left - rect.left + rangeRect.width / 2 - 120, y: rangeRect.top - rect.top - 50 })
   }
 
