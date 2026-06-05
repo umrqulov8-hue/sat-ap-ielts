@@ -178,13 +178,20 @@ export default function TestPage() {
     const qHighlights = highlights['q' + current] || []
     if (!qHighlights.length || !text) return text
     let html = text
-    qHighlights.forEach(h => {
+    qHighlights.forEach((h, i) => {
       try {
         const escaped = h.text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
-        html = html.replace(new RegExp(escaped, 'gi'), `<mark class="hl-mark" style="background:${h.color};border-bottom:2px solid ${h.border};padding:1px 2px;border-radius:2px;">${h.text}</mark>`)
+        html = html.replace(new RegExp(escaped, 'gi'), `<mark class="hl-mark" data-hl-idx="${i}" style="background:${h.color};border-bottom:2px solid ${h.border};padding:1px 2px;border-radius:2px;cursor:pointer;" title="Click to remove highlight">${h.text} <span style="opacity:0.5;font-size:0.8em;vertical-align:super;">×</span></mark>`)
       } catch { /* skip invalid */ }
     })
     return html
+  }
+
+  const handlePassageClick = (e) => {
+    const mark = e.target.closest('.hl-mark')
+    if (!mark) return
+    const idx = parseInt(mark.dataset.hlIdx)
+    if (!isNaN(idx)) removeHighlight(idx)
   }
 
   const passageHtmlStr = useMemo(() => {
@@ -609,7 +616,7 @@ export default function TestPage() {
         <div className="bb-left" ref={passageRef} onMouseUp={handlePassageMouseUp} style={{ position: 'relative' }}>
           {effectivePassage ? (
             <>
-              <div className="bb-passage-split" dangerouslySetInnerHTML={{ __html: passageHtmlStr }} />
+              <div className="bb-passage-split" dangerouslySetInnerHTML={{ __html: passageHtmlStr }} onClick={handlePassageClick} />
               {hlMenu && (
                 <div className="hl-toolbar" style={{ left: hlMenu.x, top: hlMenu.y }} onMouseDown={e => e.stopPropagation()} onMouseUp={e => e.stopPropagation()}>
                   {HL_COLORS.map(c => (
