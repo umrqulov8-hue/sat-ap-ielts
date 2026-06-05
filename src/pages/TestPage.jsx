@@ -622,16 +622,6 @@ export default function TestPage() {
                   </button>
                 </div>
               )}
-              {(highlights['q' + current] || []).length > 0 && (
-                <div className="hl-list">
-                  {highlights['q' + current].map((h, i) => (
-                    <span key={i} className="hl-chip" style={{ background: h.color, borderBottomColor: h.border }}>
-                      {h.text}
-                      <button className="hl-chip-x" onClick={() => removeHighlight(i)}>&times;</button>
-                    </span>
-                  ))}
-                </div>
-              )}
             </>
           ) : currentQuestion?.image_url && (
             <img src={currentQuestion.image_url} alt="" className="bb-left-img" draggable="false" onContextMenu={e => e.preventDefault()} />
