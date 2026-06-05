@@ -177,13 +177,43 @@ export default function TestPage() {
   const getHighlightedHTML = (text) => {
     const qHighlights = highlights['q' + current] || []
     if (!qHighlights.length || !text) return text
-    let html = text
+
+    const len = text.length
+    const colorMap = new Array(len).fill(null)
+
     qHighlights.forEach((h, i) => {
-      try {
-        const escaped = h.text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
-        html = html.replace(new RegExp(escaped, 'gi'), `<mark class="hl-mark" data-hl-idx="${i}" style="background:${h.color};border-bottom:2px solid ${h.border};padding:1px 2px;border-radius:2px;cursor:pointer;" title="Click to remove highlight">${h.text} <span style="opacity:0.5;font-size:0.8em;vertical-align:super;">×</span></mark>`)
-      } catch { /* skip invalid */ }
+      const idx = text.indexOf(h.text)
+      if (idx === -1) return
+      for (let j = idx; j < idx + h.text.length && j < len; j++) {
+        colorMap[j] = { color: h.color, border: h.border, idx: i }
+      }
     })
+
+    let html = ''
+    let buf = ''
+    let cur = null
+
+    for (let i = 0; i < len; i++) {
+      const cm = colorMap[i]
+      const same = cm && cur && cm.color === cur.color && cm.idx === cur.idx
+      if (same) {
+        buf += text[i]
+      } else {
+        if (cur) {
+          html += `<mark class="hl-mark" data-hl-idx="${cur.idx}" style="background:${cur.color};border-bottom:2px solid ${cur.border};padding:1px 2px;border-radius:2px;cursor:pointer;">${buf}</mark>`
+        } else if (buf) {
+          html += buf
+        }
+        buf = text[i]
+        cur = cm
+      }
+    }
+    if (cur) {
+      html += `<mark class="hl-mark" data-hl-idx="${cur.idx}" style="background:${cur.color};border-bottom:2px solid ${cur.border};padding:1px 2px;border-radius:2px;cursor:pointer;">${buf}</mark>`
+    } else if (buf) {
+      html += buf
+    }
+
     return html
   }
 
