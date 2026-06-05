@@ -187,10 +187,10 @@ export default function TestPage() {
     return html
   }
 
-  const highlightVersion = useMemo(() => {
-    const qHighlights = highlights['q' + current] || []
-    return qHighlights.length
-  }, [highlights, current])
+  const passageHtmlStr = useMemo(() => {
+    if (!effectivePassage) return ''
+    return getHighlightedHTML(effectivePassage.replace(/\s+/g, ' ').trim())
+  }, [effectivePassage, highlights, current])
 
   const applyHighlight = (color) => {
     const text = hlSelectedRef.current
@@ -609,15 +609,15 @@ export default function TestPage() {
         <div className="bb-left" ref={passageRef} onMouseUp={handlePassageMouseUp} style={{ position: 'relative' }}>
           {effectivePassage ? (
             <>
-              <div key={highlightVersion} className="bb-passage-split" dangerouslySetInnerHTML={{ __html: getHighlightedHTML(effectivePassage.replace(/\s+/g, ' ').trim()) }} />
+              <div className="bb-passage-split" dangerouslySetInnerHTML={{ __html: passageHtmlStr }} />
               {hlMenu && (
-                <div className="hl-toolbar" style={{ left: hlMenu.x, top: hlMenu.y }}>
+                <div className="hl-toolbar" style={{ left: hlMenu.x, top: hlMenu.y }} onMouseDown={e => e.stopPropagation()} onMouseUp={e => e.stopPropagation()}>
                   {HL_COLORS.map(c => (
-                    <button key={c.name} className="hl-btn" title={c.name} onClick={() => applyHighlight(c)} style={{ background: c.color, borderBottom: `2px solid ${c.border}` }}>
+                    <button key={c.name} className="hl-btn" title={c.name} onMouseDown={e => { e.preventDefault(); e.stopPropagation(); applyHighlight(c); }} style={{ background: c.color, borderBottom: `2px solid ${c.border}` }}>
                       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={c.border} strokeWidth="2.5"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
                     </button>
                   ))}
-                  <button className="hl-btn hl-btn-close" onClick={() => { window.getSelection()?.removeAllRanges(); setHlMenu(null) }}>
+                  <button className="hl-btn hl-btn-close" onMouseDown={e => { e.preventDefault(); e.stopPropagation(); window.getSelection()?.removeAllRanges(); setHlMenu(null) }}>
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
                   </button>
                 </div>
