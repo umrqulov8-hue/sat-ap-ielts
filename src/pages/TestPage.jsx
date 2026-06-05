@@ -176,7 +176,6 @@ export default function TestPage() {
 
   const getHighlightedHTML = (text) => {
     const qHighlights = highlights['q' + current] || []
-    console.log('[HL] getHighlightedHTML:', { qKey: 'q' + current, count: qHighlights.length, textLen: text?.length })
     if (!qHighlights.length || !text) return text
     let html = text
     qHighlights.forEach(h => {
@@ -185,20 +184,19 @@ export default function TestPage() {
         html = html.replace(new RegExp(escaped, 'gi'), `<mark class="hl-mark" style="background:${h.color};border-bottom:2px solid ${h.border};padding:1px 2px;border-radius:2px;">${h.text}</mark>`)
       } catch { /* skip invalid */ }
     })
-    console.log('[HL] result has mark:', html.includes('<mark'))
     return html
   }
 
+  const highlightVersion = useMemo(() => {
+    const qHighlights = highlights['q' + current] || []
+    return qHighlights.length
+  }, [highlights, current])
+
   const applyHighlight = (color) => {
     const text = hlSelectedRef.current
-    console.log('[HL] applyHighlight called:', { text, color: color.name, current })
     if (!text) return
     const key = 'q' + current
-    setHighlights(prev => {
-      const next = { ...prev, [key]: [...(prev[key] || []), { text, color: color.color, border: color.border }] }
-      console.log('[HL] new highlights:', next[key])
-      return next
-    })
+    setHighlights(prev => ({ ...prev, [key]: [...(prev[key] || []), { text, color: color.color, border: color.border }] }))
     window.getSelection()?.removeAllRanges()
     setHlMenu(null)
   }
@@ -216,7 +214,6 @@ export default function TestPage() {
     const sel = window.getSelection()
     if (!sel || sel.isCollapsed || !sel.toString().trim()) { setHlMenu(null); return }
     const text = sel.toString().trim()
-    console.log('[HL] mouseUp selected text:', text.substring(0, 50))
     const rect = passageRef.current?.getBoundingClientRect()
     if (!rect) return
     const range = sel.getRangeAt(0)
@@ -612,7 +609,7 @@ export default function TestPage() {
         <div className="bb-left" ref={passageRef} onMouseUp={handlePassageMouseUp} style={{ position: 'relative' }}>
           {effectivePassage ? (
             <>
-              <div className="bb-passage-split" dangerouslySetInnerHTML={{ __html: getHighlightedHTML(effectivePassage.replace(/\s+/g, ' ').trim()) }} />
+              <div key={highlightVersion} className="bb-passage-split" dangerouslySetInnerHTML={{ __html: getHighlightedHTML(effectivePassage.replace(/\s+/g, ' ').trim()) }} />
               {hlMenu && (
                 <div className="hl-toolbar" style={{ left: hlMenu.x, top: hlMenu.y }}>
                   {HL_COLORS.map(c => (

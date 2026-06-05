@@ -2311,7 +2311,7 @@ a, button { text-decoration: none; color: inherit; font-family: inherit; cursor:
   color: var(--dark); opacity: 0.5; padding: 0; margin-left: 2px;
 }
 .hl-chip-x:hover { opacity: 1; }
-mark.hl-mark { background: transparent; padding: 0; border-radius: 0; }
+mark.hl-mark { padding: 1px 2px; border-radius: 2px; }
 
 .bb-q-header {
   display: flex; align-items: center; justify-content: space-between;
