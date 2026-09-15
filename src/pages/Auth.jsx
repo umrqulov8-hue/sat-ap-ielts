@@ -80,16 +80,21 @@ export default function Auth() {
     setErrors(errs)
     if (Object.keys(errs).length) return
     setSubmitting(true)
-    const { error } = await supabase.auth.signUp({
-      email: signUp.email,
-      password: signUp.password,
-      options: { emailRedirectTo: window.location.origin }
-    })
-    setSubmitting(false)
-    if (error) {
-      setErrors({ general: error.message })
-    } else {
-      setSignedUp(true)
+    try {
+      const { error } = await supabase.auth.signUp({
+        email: signUp.email,
+        password: signUp.password,
+        options: { emailRedirectTo: window.location.origin }
+      })
+      if (error) {
+        setErrors({ general: error.message })
+      } else {
+        setSignedUp(true)
+      }
+    } catch (err) {
+      setErrors({ general: 'Xatolik yuz berdi. Qaytadan urinib ko\'ring.' })
+    } finally {
+      setSubmitting(false)
     }
   }
 
@@ -99,13 +104,18 @@ export default function Auth() {
     setErrors(errs)
     if (Object.keys(errs).length) return
     setSubmitting(true)
-    const { error } = await supabase.auth.signInWithPassword({
-      email: signIn.email,
-      password: signIn.password
-    })
-    setSubmitting(false)
-    if (error) {
-      setErrors({ general: 'Email yoki parol noto\'g\'ri' })
+    try {
+      const { error } = await supabase.auth.signInWithPassword({
+        email: signIn.email,
+        password: signIn.password
+      })
+      if (error) {
+        setErrors({ general: 'Email yoki parol noto\'g\'ri' })
+      }
+    } catch (err) {
+      setErrors({ general: 'Xatolik yuz berdi. Qaytadan urinib ko\'ring.' })
+    } finally {
+      setSubmitting(false)
     }
   }
 
@@ -116,13 +126,17 @@ export default function Auth() {
       setForgotErr('Email noto\'g\'ri')
       return
     }
-    const { error } = await supabase.auth.resetPasswordForEmail(forgotEmail, {
-      redirectTo: window.location.origin + '/auth'
-    })
-    if (error) {
-      setForgotErr(error.message)
-    } else {
-      setForgotSent(true)
+    try {
+      const { error } = await supabase.auth.resetPasswordForEmail(forgotEmail, {
+        redirectTo: window.location.origin + '/auth'
+      })
+      if (error) {
+        setForgotErr(error.message)
+      } else {
+        setForgotSent(true)
+      }
+    } catch (err) {
+      setForgotErr('Xatolik yuz berdi. Qaytadan urinib ko\'ring.')
     }
   }
 
