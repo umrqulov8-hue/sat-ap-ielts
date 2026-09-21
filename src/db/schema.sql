@@ -55,15 +55,6 @@ create table user_progress (
   unique(user_id, module_id)
 );
 
--- Topics per module
-create table if not exists topics (
-  id uuid default gen_random_uuid() primary key,
-  module_id uuid references modules(id) on delete cascade,
-  title text not null,
-  description text default '',
-  order_index int default 0,
-  created_at timestamptz default now()
-);
 
 -- User scores per subject
 create table user_scores (
@@ -152,7 +143,6 @@ create table practice_tests (
   id uuid default gen_random_uuid() primary key,
   user_id uuid references auth.users(id) on delete cascade,
   title text not null,
-  topic_id uuid,
   subject text default '',
   score int default 0,
   total int default 0,
@@ -217,7 +207,6 @@ create or replace trigger on_auth_user_created
 -- =====================
 alter table profiles enable row level security;
 alter table user_progress enable row level security;
-alter table topics enable row level security;
 alter table user_scores enable row level security;
 alter table user_total_scores enable row level security;
 alter table study_plans enable row level security;
@@ -252,17 +241,6 @@ create policy "Anyone can update modules" on modules for update using (true);
 drop policy if exists "Anyone can delete modules" on modules;
 create policy "Anyone can delete modules" on modules for delete using (true);
 
--- Topics: public read
-drop policy if exists "Anyone can view topics" on topics;
-create policy "Anyone can view topics"
-  on topics for select
-  using (true);
-drop policy if exists "Anyone can insert topics" on topics;
-create policy "Anyone can insert topics" on topics for insert with check (true);
-drop policy if exists "Anyone can update topics" on topics;
-create policy "Anyone can update topics" on topics for update using (true);
-drop policy if exists "Anyone can delete topics" on topics;
-create policy "Anyone can delete topics" on topics for delete using (true);
 
 -- User progress: own only
 create policy "Users can view own progress"
@@ -420,107 +398,12 @@ select id, 'Word Problems', 'Age, motion, and work problems', 2, 6, '1.5 weeks' 
 insert into modules (subject_id, title, description, order_index, lesson_count, duration)
 select id, 'Estimation & Logic', 'Estimation strategies and logical reasoning', 3, 6, '1.5 weeks' from subjects where slug = 'problem-solving';
 
--- =====================
--- TOPICS
--- =====================
-
--- Advanced Math → Quadratic Functions
-insert into topics (module_id, title, description, order_index)
-select id, 'Solving Quadratics', 'Factoring and quadratic formula', 1 from modules where title = 'Quadratic Functions' and not exists (select 1 from topics where title = 'Solving Quadratics');
-insert into topics (module_id, title, description, order_index)
-select id, 'Parabolas & Vertex', 'Vertex form and graphing parabolas', 2 from modules where title = 'Quadratic Functions' and not exists (select 1 from topics where title = 'Parabolas & Vertex');
-
--- Advanced Math → Advanced Equations
-insert into topics (module_id, title, description, order_index)
-select id, 'Rational Equations', 'Equations with fractions', 1 from modules where title = 'Advanced Equations' and not exists (select 1 from topics where title = 'Rational Equations');
-insert into topics (module_id, title, description, order_index)
-select id, 'Radical Equations', 'Square roots in equations', 2 from modules where title = 'Advanced Equations' and not exists (select 1 from topics where title = 'Radical Equations');
-
--- Advanced Math → Exponentials & Logarithms
-insert into topics (module_id, title, description, order_index)
-select id, 'Exponential Growth', 'Doubling, decay, and applications', 1 from modules where title = 'Exponentials & Logarithms' and not exists (select 1 from topics where title = 'Exponential Growth');
-insert into topics (module_id, title, description, order_index)
-select id, 'Logarithm Basics', 'Log rules and evaluation', 2 from modules where title = 'Exponentials & Logarithms' and not exists (select 1 from topics where title = 'Logarithm Basics');
-
--- Algebra → Expressions & Equations
-insert into topics (module_id, title, description, order_index)
-select id, 'Evaluating Expressions', 'Substitute values and simplify', 1 from modules where title = 'Expressions & Equations' and not exists (select 1 from topics where title = 'Evaluating Expressions');
-insert into topics (module_id, title, description, order_index)
-select id, 'Solving Inequalities', 'Linear inequalities and number lines', 2 from modules where title = 'Expressions & Equations' and not exists (select 1 from topics where title = 'Solving Inequalities');
-
--- Algebra → Functions & Graphs
-insert into topics (module_id, title, description, order_index)
-select id, 'Function Notation', 'Evaluating f(x) and domain basics', 1 from modules where title = 'Functions & Graphs' and not exists (select 1 from topics where title = 'Function Notation');
-insert into topics (module_id, title, description, order_index)
-select id, 'Graphing Lines', 'Slope, intercepts, and equations of lines', 2 from modules where title = 'Functions & Graphs' and not exists (select 1 from topics where title = 'Graphing Lines');
-
--- Algebra → Factoring & Polynomials
-insert into topics (module_id, title, description, order_index)
-select id, 'Factoring Quadratics', 'Factor trinomials and special products', 1 from modules where title = 'Factoring & Polynomials' and not exists (select 1 from topics where title = 'Factoring Quadratics');
-insert into topics (module_id, title, description, order_index)
-select id, 'Polynomial Operations', 'Add, subtract, and multiply polynomials', 2 from modules where title = 'Factoring & Polynomials' and not exists (select 1 from topics where title = 'Polynomial Operations');
-
--- Geometry → Angles & Triangles
-insert into topics (module_id, title, description, order_index)
-select id, 'Angle Relationships', 'Complementary, supplementary, and vertical angles', 1 from modules where title = 'Angles & Triangles' and not exists (select 1 from topics where title = 'Angle Relationships');
-insert into topics (module_id, title, description, order_index)
-select id, 'Triangle Congruence', 'SSS, SAS, ASA, and AAS postulates', 2 from modules where title = 'Angles & Triangles' and not exists (select 1 from topics where title = 'Triangle Congruence');
-
--- Geometry → Circles & Measurement
-insert into topics (module_id, title, description, order_index)
-select id, 'Circle Theorems', 'Circumference, arcs, and central angles', 1 from modules where title = 'Circles & Measurement' and not exists (select 1 from topics where title = 'Circle Theorems');
-insert into topics (module_id, title, description, order_index)
-select id, 'Area & Perimeter', 'Polygons, trapezoids, and composite shapes', 2 from modules where title = 'Circles & Measurement' and not exists (select 1 from topics where title = 'Area & Perimeter');
-
--- Geometry → Solid & Coordinate Geometry
-insert into topics (module_id, title, description, order_index)
-select id, 'Volume & Surface Area', 'Prisms, cylinders, cones, and spheres', 1 from modules where title = 'Solid & Coordinate Geometry' and not exists (select 1 from topics where title = 'Volume & Surface Area');
-insert into topics (module_id, title, description, order_index)
-select id, 'Coordinate Geometry', 'Distance, midpoint, and slope on the plane', 2 from modules where title = 'Solid & Coordinate Geometry' and not exists (select 1 from topics where title = 'Coordinate Geometry');
-
--- Data Analysis → Descriptive Statistics
-insert into topics (module_id, title, description, order_index)
-select id, 'Mean, Median & Mode', 'Measures of center', 1 from modules where title = 'Descriptive Statistics' and not exists (select 1 from topics where title = 'Mean, Median & Mode');
-insert into topics (module_id, title, description, order_index)
-select id, 'Spread & Box Plots', 'Range, IQR, and box plots', 2 from modules where title = 'Descriptive Statistics' and not exists (select 1 from topics where title = 'Spread & Box Plots');
-
--- Data Analysis → Probability
-insert into topics (module_id, title, description, order_index)
-select id, 'Basic Probability', 'Single-event probability', 1 from modules where title = 'Probability' and not exists (select 1 from topics where title = 'Basic Probability');
-insert into topics (module_id, title, description, order_index)
-select id, 'Conditional Probability', 'Probability given conditions', 2 from modules where title = 'Probability' and not exists (select 1 from topics where title = 'Conditional Probability');
-
--- Data Analysis → Data Interpretation
-insert into topics (module_id, title, description, order_index)
-select id, 'Tables & Charts', 'Reading pie charts and tables', 1 from modules where title = 'Data Interpretation' and not exists (select 1 from topics where title = 'Tables & Charts');
-insert into topics (module_id, title, description, order_index)
-select id, 'Scatterplots & Trend', 'Correlation and trend lines', 2 from modules where title = 'Data Interpretation' and not exists (select 1 from topics where title = 'Scatterplots & Trend');
-
--- Problem Solving → Ratios & Rates
-insert into topics (module_id, title, description, order_index)
-select id, 'Unit Rates', 'Price per unit and speed', 1 from modules where title = 'Ratios & Rates' and not exists (select 1 from topics where title = 'Unit Rates');
-insert into topics (module_id, title, description, order_index)
-select id, 'Percent Problems', 'Discounts, tax, and percent change', 2 from modules where title = 'Ratios & Rates' and not exists (select 1 from topics where title = 'Percent Problems');
-
--- Problem Solving → Word Problems
-insert into topics (module_id, title, description, order_index)
-select id, 'Age & Motion Problems', 'Age puzzles and distance problems', 1 from modules where title = 'Word Problems' and not exists (select 1 from topics where title = 'Age & Motion Problems');
-insert into topics (module_id, title, description, order_index)
-select id, 'Work Problems', 'Rates of work and combined effort', 2 from modules where title = 'Word Problems' and not exists (select 1 from topics where title = 'Work Problems');
-
--- Problem Solving → Estimation & Logic
-insert into topics (module_id, title, description, order_index)
-select id, 'Estimation Strategies', 'Rounding and quick estimates', 1 from modules where title = 'Estimation & Logic' and not exists (select 1 from topics where title = 'Estimation Strategies');
-insert into topics (module_id, title, description, order_index)
-select id, 'Logical Reasoning', 'Deduction and logical puzzles', 2 from modules where title = 'Estimation & Logic' and not exists (select 1 from topics where title = 'Logical Reasoning');
-
--- =====================
 -- QUESTIONS
 -- =====================
 create table if not exists questions (
   id uuid default gen_random_uuid() primary key,
   subject_id uuid references subjects(id) on delete cascade,
-  topic_id uuid references topics(id) on delete set null,
+  difficulty text default 'medium' check (difficulty in ('easy', 'medium', 'hard', 'elite', 'mixing')),
   question_text text not null,
   options jsonb not null,
   correct_index int not null,
@@ -579,154 +462,154 @@ from subjects where slug = 'geometry' and not exists (select 1 from questions wh
 -- =====================
 
 -- Solving Quadratics (Advanced Math)
-insert into questions (subject_id, topic_id, question_text, options, correct_index, explanation, order_index)
-select s.id, t.id, 'Solve: x² - 9 = 0', '["3","-3","±3","9"]'::jsonb, 2, 'x² = 9 → x = ±3', 1
-from subjects s, topics t where s.slug = 'advanced-math' and t.title = 'Solving Quadratics' and not exists (select 1 from questions where question_text like 'Solve: x² - 9 = 0%');
+insert into questions (subject_id, difficulty, question_text, options, correct_index, explanation, order_index)
+select s.id, 'medium', 'Solve: x² - 9 = 0', '["3","-3","±3","9"]'::jsonb, 2, 'x² = 9 → x = ±3', 1
+from subjects s where s.slug = 'advanced-math' and not exists (select 1 from questions where question_text like 'Solve: x² - 9 = 0%');
 
 -- Parabolas & Vertex (Advanced Math)
-insert into questions (subject_id, topic_id, question_text, options, correct_index, explanation, order_index)
-select s.id, t.id, 'What is the vertex of y = (x - 1)² + 2?', '["(1, 2)","(-1, 2)","(1, -2)","(0, 2)"]'::jsonb, 0, 'Vertex form y = (x - h)² + k → (1, 2)', 1
-from subjects s, topics t where s.slug = 'advanced-math' and t.title = 'Parabolas & Vertex' and not exists (select 1 from questions where question_text like 'What is the vertex of y = (x - 1)%');
+insert into questions (subject_id, difficulty, question_text, options, correct_index, explanation, order_index)
+select s.id, 'medium', 'What is the vertex of y = (x - 1)² + 2?', '["(1, 2)","(-1, 2)","(1, -2)","(0, 2)"]'::jsonb, 0, 'Vertex form y = (x - h)² + k → (1, 2)', 1
+from subjects s where s.slug = 'advanced-math' and not exists (select 1 from questions where question_text like 'What is the vertex of y = (x - 1)%');
 
 -- Rational Equations (Advanced Math)
-insert into questions (subject_id, topic_id, question_text, options, correct_index, explanation, order_index)
-select s.id, t.id, 'Solve: 2/x = 4', '["2","1/2","8","4"]'::jsonb, 1, '2 = 4x → x = 1/2', 1
-from subjects s, topics t where s.slug = 'advanced-math' and t.title = 'Rational Equations' and not exists (select 1 from questions where question_text like 'Solve: 2/x = 4%');
+insert into questions (subject_id, difficulty, question_text, options, correct_index, explanation, order_index)
+select s.id, 'medium', 'Solve: 2/x = 4', '["2","1/2","8","4"]'::jsonb, 1, '2 = 4x → x = 1/2', 1
+from subjects s where s.slug = 'advanced-math' and not exists (select 1 from questions where question_text like 'Solve: 2/x = 4%');
 
 -- Radical Equations (Advanced Math)
-insert into questions (subject_id, topic_id, question_text, options, correct_index, explanation, order_index)
-select s.id, t.id, 'Solve: √(x + 5) = 3', '["2","4","9","14"]'::jsonb, 1, 'Square both sides: x + 5 = 9 → x = 4', 1
-from subjects s, topics t where s.slug = 'advanced-math' and t.title = 'Radical Equations' and not exists (select 1 from questions where question_text like 'Solve: √(x + 5) = 3%');
+insert into questions (subject_id, difficulty, question_text, options, correct_index, explanation, order_index)
+select s.id, 'medium', 'Solve: √(x + 5) = 3', '["2","4","9","14"]'::jsonb, 1, 'Square both sides: x + 5 = 9 → x = 4', 1
+from subjects s where s.slug = 'advanced-math' and not exists (select 1 from questions where question_text like 'Solve: √(x + 5) = 3%');
 
 -- Exponential Growth (Advanced Math)
-insert into questions (subject_id, topic_id, question_text, options, correct_index, explanation, order_index)
-select s.id, t.id, 'A population of 50 doubles every year. How many after 3 years?', '["150","200","400","800"]'::jsonb, 2, '50 × 2³ = 400', 1
-from subjects s, topics t where s.slug = 'advanced-math' and t.title = 'Exponential Growth' and not exists (select 1 from questions where question_text like 'A population of 50 doubles%');
+insert into questions (subject_id, difficulty, question_text, options, correct_index, explanation, order_index)
+select s.id, 'medium', 'A population of 50 doubles every year. How many after 3 years?', '["150","200","400","800"]'::jsonb, 2, '50 × 2³ = 400', 1
+from subjects s where s.slug = 'advanced-math' and not exists (select 1 from questions where question_text like 'A population of 50 doubles%');
 
 -- Logarithm Basics (Advanced Math)
-insert into questions (subject_id, topic_id, question_text, options, correct_index, explanation, order_index)
-select s.id, t.id, 'What is log₁₀(1000)?', '["2","3","10","100"]'::jsonb, 1, '10³ = 1000 → log = 3', 1
-from subjects s, topics t where s.slug = 'advanced-math' and t.title = 'Logarithm Basics' and not exists (select 1 from questions where question_text like 'What is log₁₀(1000)%');
+insert into questions (subject_id, difficulty, question_text, options, correct_index, explanation, order_index)
+select s.id, 'medium', 'What is log₁₀(1000)?', '["2","3","10","100"]'::jsonb, 1, '10³ = 1000 → log = 3', 1
+from subjects s where s.slug = 'advanced-math' and not exists (select 1 from questions where question_text like 'What is log₁₀(1000)%');
 
 -- Mean, Median & Mode (Data Analysis)
-insert into questions (subject_id, topic_id, question_text, options, correct_index, explanation, order_index)
-select s.id, t.id, 'What is the mode of {2, 3, 3, 5, 7}?', '["2","3","5","7"]'::jsonb, 1, '3 appears most often', 1
-from subjects s, topics t where s.slug = 'data-analysis' and t.title = 'Mean, Median & Mode' and not exists (select 1 from questions where question_text like 'What is the mode of {2, 3, 3, 5, 7}%');
+insert into questions (subject_id, difficulty, question_text, options, correct_index, explanation, order_index)
+select s.id, 'medium', 'What is the mode of {2, 3, 3, 5, 7}?', '["2","3","5","7"]'::jsonb, 1, '3 appears most often', 1
+from subjects s where s.slug = 'data-analysis' and not exists (select 1 from questions where question_text like 'What is the mode of {2, 3, 3, 5, 7}%');
 
 -- Spread & Box Plots (Data Analysis)
-insert into questions (subject_id, topic_id, question_text, options, correct_index, explanation, order_index)
-select s.id, t.id, 'What does the IQR describe?', '["Average","Middle 50% spread","Maximum","Total range"]'::jsonb, 1, 'IQR = middle 50% of the data', 1
-from subjects s, topics t where s.slug = 'data-analysis' and t.title = 'Spread & Box Plots' and not exists (select 1 from questions where question_text like 'What does the IQR describe%');
+insert into questions (subject_id, difficulty, question_text, options, correct_index, explanation, order_index)
+select s.id, 'medium', 'What does the IQR describe?', '["Average","Middle 50% spread","Maximum","Total range"]'::jsonb, 1, 'IQR = middle 50% of the data', 1
+from subjects s where s.slug = 'data-analysis' and not exists (select 1 from questions where question_text like 'What does the IQR describe%');
 
 -- Basic Probability (Data Analysis)
-insert into questions (subject_id, topic_id, question_text, options, correct_index, explanation, order_index)
-select s.id, t.id, 'A bag has 3 red and 2 blue marbles. What is P(red)?', '["1/2","3/5","2/5","1/3"]'::jsonb, 1, '3 favorable out of 5 total', 1
-from subjects s, topics t where s.slug = 'data-analysis' and t.title = 'Basic Probability' and not exists (select 1 from questions where question_text like 'A bag has 3 red and 2 blue marbles%');
+insert into questions (subject_id, difficulty, question_text, options, correct_index, explanation, order_index)
+select s.id, 'medium', 'A bag has 3 red and 2 blue marbles. What is P(red)?', '["1/2","3/5","2/5","1/3"]'::jsonb, 1, '3 favorable out of 5 total', 1
+from subjects s where s.slug = 'data-analysis' and not exists (select 1 from questions where question_text like 'A bag has 3 red and 2 blue marbles%');
 
 -- Conditional Probability (Data Analysis)
-insert into questions (subject_id, topic_id, question_text, options, correct_index, explanation, order_index)
-select s.id, t.id, 'P(A|B) means the probability of:', '["A and B","A given B","A or B","Not A"]'::jsonb, 1, 'Vertical bar reads as "given"', 1
-from subjects s, topics t where s.slug = 'data-analysis' and t.title = 'Conditional Probability' and not exists (select 1 from questions where question_text like 'P(A|B) means%');
+insert into questions (subject_id, difficulty, question_text, options, correct_index, explanation, order_index)
+select s.id, 'medium', 'P(A|B) means the probability of:', '["A and B","A given B","A or B","Not A"]'::jsonb, 1, 'Vertical bar reads as "given"', 1
+from subjects s where s.slug = 'data-analysis' and not exists (select 1 from questions where question_text like 'P(A|B) means%');
 
 -- Tables & Charts (Data Analysis)
-insert into questions (subject_id, topic_id, question_text, options, correct_index, explanation, order_index)
-select s.id, t.id, 'In a pie chart, what percent is one quarter?', '["20%","25%","50%","75%"]'::jsonb, 1, '100% ÷ 4 = 25%', 1
-from subjects s, topics t where s.slug = 'data-analysis' and t.title = 'Tables & Charts' and not exists (select 1 from questions where question_text like 'In a pie chart, what percent is one quarter%');
+insert into questions (subject_id, difficulty, question_text, options, correct_index, explanation, order_index)
+select s.id, 'medium', 'In a pie chart, what percent is one quarter?', '["20%","25%","50%","75%"]'::jsonb, 1, '100% ÷ 4 = 25%', 1
+from subjects s where s.slug = 'data-analysis' and not exists (select 1 from questions where question_text like 'In a pie chart, what percent is one quarter%');
 
 -- Scatterplots & Trend (Data Analysis)
-insert into questions (subject_id, topic_id, question_text, options, correct_index, explanation, order_index)
-select s.id, t.id, 'A downward-trending scatterplot shows what correlation?', '["Positive","Negative","Zero","Perfect"]'::jsonb, 1, 'As x rises, y falls → negative', 1
-from subjects s, topics t where s.slug = 'data-analysis' and t.title = 'Scatterplots & Trend' and not exists (select 1 from questions where question_text like 'A downward-trending scatterplot%');
+insert into questions (subject_id, difficulty, question_text, options, correct_index, explanation, order_index)
+select s.id, 'medium', 'A downward-trending scatterplot shows what correlation?', '["Positive","Negative","Zero","Perfect"]'::jsonb, 1, 'As x rises, y falls → negative', 1
+from subjects s where s.slug = 'data-analysis' and not exists (select 1 from questions where question_text like 'A downward-trending scatterplot%');
 
 -- Unit Rates (Problem Solving)
-insert into questions (subject_id, topic_id, question_text, options, correct_index, explanation, order_index)
-select s.id, t.id, 'If 4 apples cost $2, what is the unit price?', '["$0.25","$0.50","$2.00","$8.00"]'::jsonb, 1, '2 ÷ 4 = $0.50 per apple', 1
-from subjects s, topics t where s.slug = 'problem-solving' and t.title = 'Unit Rates' and not exists (select 1 from questions where question_text like 'If 4 apples cost $2%');
+insert into questions (subject_id, difficulty, question_text, options, correct_index, explanation, order_index)
+select s.id, 'medium', 'If 4 apples cost $2, what is the unit price?', '["$0.25","$0.50","$2.00","$8.00"]'::jsonb, 1, '2 ÷ 4 = $0.50 per apple', 1
+from subjects s where s.slug = 'problem-solving' and not exists (select 1 from questions where question_text like 'If 4 apples cost $2%');
 
 -- Percent Problems (Problem Solving)
-insert into questions (subject_id, topic_id, question_text, options, correct_index, explanation, order_index)
-select s.id, t.id, 'What is 20% of 150?', '["20","25","30","35"]'::jsonb, 2, '0.20 × 150 = 30', 1
-from subjects s, topics t where s.slug = 'problem-solving' and t.title = 'Percent Problems' and not exists (select 1 from questions where question_text like 'What is 20% of 150%');
+insert into questions (subject_id, difficulty, question_text, options, correct_index, explanation, order_index)
+select s.id, 'medium', 'What is 20% of 150?', '["20","25","30","35"]'::jsonb, 2, '0.20 × 150 = 30', 1
+from subjects s where s.slug = 'problem-solving' and not exists (select 1 from questions where question_text like 'What is 20% of 150%');
 
 -- Age & Motion Problems (Problem Solving)
-insert into questions (subject_id, topic_id, question_text, options, correct_index, explanation, order_index)
-select s.id, t.id, 'Ali is 3 times as old as Vali. Their ages sum to 24. How old is Ali?', '["6","8","12","18"]'::jsonb, 3, '3x + x = 24 → x = 6 → Ali is 18', 1
-from subjects s, topics t where s.slug = 'problem-solving' and t.title = 'Age & Motion Problems' and not exists (select 1 from questions where question_text like 'Ali is 3 times as old%');
+insert into questions (subject_id, difficulty, question_text, options, correct_index, explanation, order_index)
+select s.id, 'medium', 'Ali is 3 times as old as Vali. Their ages sum to 24. How old is Ali?', '["6","8","12","18"]'::jsonb, 3, '3x + x = 24 → x = 6 → Ali is 18', 1
+from subjects s where s.slug = 'problem-solving' and not exists (select 1 from questions where question_text like 'Ali is 3 times as old%');
 
 -- Work Problems (Problem Solving)
-insert into questions (subject_id, topic_id, question_text, options, correct_index, explanation, order_index)
-select s.id, t.id, 'A tap fills a tank in 6 hours. What fraction is filled in 2 hours?', '["1/6","1/3","1/2","2/3"]'::jsonb, 1, 'Rate = 1/6 per hour → 2/6 = 1/3', 1
-from subjects s, topics t where s.slug = 'problem-solving' and t.title = 'Work Problems' and not exists (select 1 from questions where question_text like 'A tap fills a tank in 6 hours%');
+insert into questions (subject_id, difficulty, question_text, options, correct_index, explanation, order_index)
+select s.id, 'medium', 'A tap fills a tank in 6 hours. What fraction is filled in 2 hours?', '["1/6","1/3","1/2","2/3"]'::jsonb, 1, 'Rate = 1/6 per hour → 2/6 = 1/3', 1
+from subjects s where s.slug = 'problem-solving' and not exists (select 1 from questions where question_text like 'A tap fills a tank in 6 hours%');
 
 -- Estimation Strategies (Problem Solving)
-insert into questions (subject_id, topic_id, question_text, options, correct_index, explanation, order_index)
-select s.id, t.id, 'Estimate 49 × 21', '["600","800","1000","1200"]'::jsonb, 2, 'Round: 50 × 20 = 1000', 1
-from subjects s, topics t where s.slug = 'problem-solving' and t.title = 'Estimation Strategies' and not exists (select 1 from questions where question_text like 'Estimate 49 × 21%');
+insert into questions (subject_id, difficulty, question_text, options, correct_index, explanation, order_index)
+select s.id, 'medium', 'Estimate 49 × 21', '["600","800","1000","1200"]'::jsonb, 2, 'Round: 50 × 20 = 1000', 1
+from subjects s where s.slug = 'problem-solving' and not exists (select 1 from questions where question_text like 'Estimate 49 × 21%');
 
 -- Logical Reasoning (Problem Solving)
-insert into questions (subject_id, topic_id, question_text, options, correct_index, explanation, order_index)
-select s.id, t.id, 'All squares are rectangles. Figure X is a square. So X is a:', '["square","rectangle","circle","triangle"]'::jsonb, 1, 'Every square belongs to the rectangle family', 1
-from subjects s, topics t where s.slug = 'problem-solving' and t.title = 'Logical Reasoning' and not exists (select 1 from questions where question_text like 'All squares are rectangles%');
+insert into questions (subject_id, difficulty, question_text, options, correct_index, explanation, order_index)
+select s.id, 'medium', 'All squares are rectangles. Figure X is a square. So X is a:', '["square","rectangle","circle","triangle"]'::jsonb, 1, 'Every square belongs to the rectangle family', 1
+from subjects s where s.slug = 'problem-solving' and not exists (select 1 from questions where question_text like 'All squares are rectangles%');
 
 -- Evaluating Expressions (Algebra)
-insert into questions (subject_id, topic_id, question_text, options, correct_index, explanation, order_index)
-select s.id, t.id, 'If x = 3 and y = -2, what is the value of 2x + 3y?', '["0","1","-1","12"]'::jsonb, 0, '2(3) + 3(-2) = 6 - 6 = 0', 1
-from subjects s, topics t where s.slug = 'algebra' and t.title = 'Evaluating Expressions' and not exists (select 1 from questions where question_text like 'If x = 3 and y = -2%');
+insert into questions (subject_id, difficulty, question_text, options, correct_index, explanation, order_index)
+select s.id, 'medium', 'If x = 3 and y = -2, what is the value of 2x + 3y?', '["0","1","-1","12"]'::jsonb, 0, '2(3) + 3(-2) = 6 - 6 = 0', 1
+from subjects s where s.slug = 'algebra' and not exists (select 1 from questions where question_text like 'If x = 3 and y = -2%');
 
 -- Solving Inequalities (Algebra)
-insert into questions (subject_id, topic_id, question_text, options, correct_index, explanation, order_index)
-select s.id, t.id, 'Solve: 5x - 3 > 12', '["x > 3","x < 3","x > 2","x < 2"]'::jsonb, 0, '5x > 15 → x > 3', 1
-from subjects s, topics t where s.slug = 'algebra' and t.title = 'Solving Inequalities' and not exists (select 1 from questions where question_text like 'Solve: 5x - 3 > 12%');
+insert into questions (subject_id, difficulty, question_text, options, correct_index, explanation, order_index)
+select s.id, 'medium', 'Solve: 5x - 3 > 12', '["x > 3","x < 3","x > 2","x < 2"]'::jsonb, 0, '5x > 15 → x > 3', 1
+from subjects s where s.slug = 'algebra' and not exists (select 1 from questions where question_text like 'Solve: 5x - 3 > 12%');
 
 -- Function Notation (Algebra)
-insert into questions (subject_id, topic_id, question_text, options, correct_index, explanation, order_index)
-select s.id, t.id, 'If f(x) = 2x - 5, what is f(4)?', '["3","8","13","-3"]'::jsonb, 0, 'f(4) = 2(4) - 5 = 3', 1
-from subjects s, topics t where s.slug = 'algebra' and t.title = 'Function Notation' and not exists (select 1 from questions where question_text like 'If f(x) = 2x - 5%');
+insert into questions (subject_id, difficulty, question_text, options, correct_index, explanation, order_index)
+select s.id, 'medium', 'If f(x) = 2x - 5, what is f(4)?', '["3","8","13","-3"]'::jsonb, 0, 'f(4) = 2(4) - 5 = 3', 1
+from subjects s where s.slug = 'algebra' and not exists (select 1 from questions where question_text like 'If f(x) = 2x - 5%');
 
 -- Graphing Lines (Algebra)
-insert into questions (subject_id, topic_id, question_text, options, correct_index, explanation, order_index)
-select s.id, t.id, 'What is the y-intercept of y = -3x + 7?', '["-3","7","3","-7"]'::jsonb, 1, 'In y = mx + b, b = 7 is the y-intercept', 1
-from subjects s, topics t where s.slug = 'algebra' and t.title = 'Graphing Lines' and not exists (select 1 from questions where question_text like 'What is the y-intercept of y = -3x%');
+insert into questions (subject_id, difficulty, question_text, options, correct_index, explanation, order_index)
+select s.id, 'medium', 'What is the y-intercept of y = -3x + 7?', '["-3","7","3","-7"]'::jsonb, 1, 'In y = mx + b, b = 7 is the y-intercept', 1
+from subjects s where s.slug = 'algebra' and not exists (select 1 from questions where question_text like 'What is the y-intercept of y = -3x%');
 
 -- Factoring Quadratics (Algebra)
-insert into questions (subject_id, topic_id, question_text, options, correct_index, explanation, order_index)
-select s.id, t.id, 'Factor: x² + 7x + 12', '["(x+3)(x+4)","(x+2)(x+6)","(x+1)(x+12)","(x-3)(x-4)"]'::jsonb, 0, 'Find two numbers with product 12 and sum 7: 3 and 4', 1
-from subjects s, topics t where s.slug = 'algebra' and t.title = 'Factoring Quadratics' and not exists (select 1 from questions where question_text like 'Factor: x² + 7x + 12%');
+insert into questions (subject_id, difficulty, question_text, options, correct_index, explanation, order_index)
+select s.id, 'medium', 'Factor: x² + 7x + 12', '["(x+3)(x+4)","(x+2)(x+6)","(x+1)(x+12)","(x-3)(x-4)"]'::jsonb, 0, 'Find two numbers with product 12 and sum 7: 3 and 4', 1
+from subjects s where s.slug = 'algebra' and not exists (select 1 from questions where question_text like 'Factor: x² + 7x + 12%');
 
 -- Polynomial Operations (Algebra)
-insert into questions (subject_id, topic_id, question_text, options, correct_index, explanation, order_index)
-select s.id, t.id, 'Add: (3x² + 2x - 1) + (x² - 5x + 4)', '["4x² - 3x + 3","4x² + 7x + 3","2x² - 3x + 3","4x² - 3x - 5"]'::jsonb, 0, 'Combine like terms: 4x² - 3x + 3', 1
-from subjects s, topics t where s.slug = 'algebra' and t.title = 'Polynomial Operations' and not exists (select 1 from questions where question_text like 'Add: (3x² + 2x - 1)%');
+insert into questions (subject_id, difficulty, question_text, options, correct_index, explanation, order_index)
+select s.id, 'medium', 'Add: (3x² + 2x - 1) + (x² - 5x + 4)', '["4x² - 3x + 3","4x² + 7x + 3","2x² - 3x + 3","4x² - 3x - 5"]'::jsonb, 0, 'Combine like terms: 4x² - 3x + 3', 1
+from subjects s where s.slug = 'algebra' and not exists (select 1 from questions where question_text like 'Add: (3x² + 2x - 1)%');
 
 -- Angle Relationships (Geometry)
-insert into questions (subject_id, topic_id, question_text, options, correct_index, explanation, order_index)
-select s.id, t.id, 'Two angles are complementary. If one is 35°, what is the other?', '["45°","55°","145°","125°"]'::jsonb, 1, 'Complementary angles sum to 90° → 90 - 35 = 55', 1
-from subjects s, topics t where s.slug = 'geometry' and t.title = 'Angle Relationships' and not exists (select 1 from questions where question_text like 'Two angles are complementary%');
+insert into questions (subject_id, difficulty, question_text, options, correct_index, explanation, order_index)
+select s.id, 'medium', 'Two angles are complementary. If one is 35°, what is the other?', '["45°","55°","145°","125°"]'::jsonb, 1, 'Complementary angles sum to 90° → 90 - 35 = 55', 1
+from subjects s where s.slug = 'geometry' and not exists (select 1 from questions where question_text like 'Two angles are complementary%');
 
 -- Triangle Congruence (Geometry)
-insert into questions (subject_id, topic_id, question_text, options, correct_index, explanation, order_index)
-select s.id, t.id, 'Which postulate proves congruence when three sides are equal?', '["SAS","ASA","SSS","AAS"]'::jsonb, 2, 'Side-Side-Side (SSS) proves congruence', 1
-from subjects s, topics t where s.slug = 'geometry' and t.title = 'Triangle Congruence' and not exists (select 1 from questions where question_text like 'Which postulate proves congruence%');
+insert into questions (subject_id, difficulty, question_text, options, correct_index, explanation, order_index)
+select s.id, 'medium', 'Which postulate proves congruence when three sides are equal?', '["SAS","ASA","SSS","AAS"]'::jsonb, 2, 'Side-Side-Side (SSS) proves congruence', 1
+from subjects s where s.slug = 'geometry' and not exists (select 1 from questions where question_text like 'Which postulate proves congruence%');
 
 -- Circle Theorems (Geometry)
-insert into questions (subject_id, topic_id, question_text, options, correct_index, explanation, order_index)
-select s.id, t.id, 'What is the circumference of a circle with radius 5?', '["5π","10π","25π","20π"]'::jsonb, 1, 'C = 2πr = 2π(5) = 10π', 1
-from subjects s, topics t where s.slug = 'geometry' and t.title = 'Circle Theorems' and not exists (select 1 from questions where question_text like 'What is the circumference of a circle with radius 5%');
+insert into questions (subject_id, difficulty, question_text, options, correct_index, explanation, order_index)
+select s.id, 'medium', 'What is the circumference of a circle with radius 5?', '["5π","10π","25π","20π"]'::jsonb, 1, 'C = 2πr = 2π(5) = 10π', 1
+from subjects s where s.slug = 'geometry' and not exists (select 1 from questions where question_text like 'What is the circumference of a circle with radius 5%');
 
 -- Area & Perimeter (Geometry)
-insert into questions (subject_id, topic_id, question_text, options, correct_index, explanation, order_index)
-select s.id, t.id, 'What is the area of a trapezoid with bases 6 and 10, height 4?', '["28","32","40","20"]'::jsonb, 1, 'A = (6+10)/2 × 4 = 32', 1
-from subjects s, topics t where s.slug = 'geometry' and t.title = 'Area & Perimeter' and not exists (select 1 from questions where question_text like 'What is the area of a trapezoid%');
+insert into questions (subject_id, difficulty, question_text, options, correct_index, explanation, order_index)
+select s.id, 'medium', 'What is the area of a trapezoid with bases 6 and 10, height 4?', '["28","32","40","20"]'::jsonb, 1, 'A = (6+10)/2 × 4 = 32', 1
+from subjects s where s.slug = 'geometry' and not exists (select 1 from questions where question_text like 'What is the area of a trapezoid%');
 
 -- Volume & Surface Area (Geometry)
-insert into questions (subject_id, topic_id, question_text, options, correct_index, explanation, order_index)
-select s.id, t.id, 'What is the volume of a cube with side length 4?', '["16","48","64","24"]'::jsonb, 2, 'V = s³ = 4³ = 64', 1
-from subjects s, topics t where s.slug = 'geometry' and t.title = 'Volume & Surface Area' and not exists (select 1 from questions where question_text like 'What is the volume of a cube%');
+insert into questions (subject_id, difficulty, question_text, options, correct_index, explanation, order_index)
+select s.id, 'medium', 'What is the volume of a cube with side length 4?', '["16","48","64","24"]'::jsonb, 2, 'V = s³ = 4³ = 64', 1
+from subjects s where s.slug = 'geometry' and not exists (select 1 from questions where question_text like 'What is the volume of a cube%');
 
 -- Coordinate Geometry (Geometry)
-insert into questions (subject_id, topic_id, question_text, options, correct_index, explanation, order_index)
-select s.id, t.id, 'What is the distance between (0, 0) and (3, 4)?', '["3","4","5","7"]'::jsonb, 2, 'd = √(3² + 4²) = 5', 1
-from subjects s, topics t where s.slug = 'geometry' and t.title = 'Coordinate Geometry' and not exists (select 1 from questions where question_text like 'What is the distance between (0, 0)%');
+insert into questions (subject_id, difficulty, question_text, options, correct_index, explanation, order_index)
+select s.id, 'medium', 'What is the distance between (0, 0) and (3, 4)?', '["3","4","5","7"]'::jsonb, 2, 'd = √(3² + 4²) = 5', 1
+from subjects s where s.slug = 'geometry' and not exists (select 1 from questions where question_text like 'What is the distance between (0, 0)%');
 
 -- =====================
 -- QUESTIONS — FULL COVERAGE (every topic gets at least 1 question)

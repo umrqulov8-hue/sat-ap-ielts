@@ -4,6 +4,7 @@ import { supabase } from '../lib/supabaseClient'
 import { getCache, setCache } from '../lib/dataCache'
 import { useToast } from '../components/Toast'
 import AITutor from '../components/AITutor'
+import DrawingCanvas from '../components/DrawingCanvas'
 
 const IS_PRACTICE = true
 
@@ -25,12 +26,12 @@ const QuestionTimer = memo(function QuestionTimer({ startTime }) {
 })
 
 export default function TestPage() {
-  const { topicId } = useParams()
+  const { subjectSlug, difficulty } = useParams()
   const navigate = useNavigate()
   const location = useLocation()
   const locState = location.state
-  const cachedQuestions = locState?.questions || getCache('test-questions-' + topicId)
-  const cachedTopic = locState?.topic || getCache('test-topic-' + topicId)
+  const cachedQuestions = locState?.questions || getCache('test-questions-' + subjectSlug + '-' + difficulty)
+  const cachedTopic = locState?.topic || getCache('test-topic-' + subjectSlug + '-' + difficulty)
 
   const [topic, setTopic] = useState(() => cachedTopic || null)
   const [questions, setQuestions] = useState(() => cachedQuestions || [])
@@ -50,6 +51,7 @@ export default function TestPage() {
   const hlSelectedRef = useRef({ text: '', start: -1 })
   const passageRef = useRef(null)
   const [showCalc, setShowCalc] = useState(false)
+  const [isDrawingMode, setIsDrawingMode] = useState(false)
   const [showRef, setShowRef] = useState(false)
   const [showAITutor, setShowAITutor] = useState(false)
   const [displayName, setDisplayName] = useState('STUDENT')
@@ -86,8 +88,8 @@ export default function TestPage() {
       const [tpResult, qsResult, profResult] = await Promise.all([
         supabase.from('topics')
           .select('*, modules!inner(subject_id, title, subjects!inner(id, title, slug))')
-          .eq('id', topicId).maybeSingle(),
-        !cachedQuestions ? supabase.from('questions').select('*').eq('topic_id', topicId).order('order_index') : Promise.resolve({ data: null }),
+          .eq('id', subjectSlug + '-' + difficulty).maybeSingle(),
+        !cachedQuestions ? supabase.from('questions').select('*').eq('topic_id', subjectSlug + '-' + difficulty).order('order_index') : Promise.resolve({ data: null }),
         session?.user ? supabase.from('profiles').select('display_name').eq('id', session.user.id).maybeSingle() : Promise.resolve({ data: null }),
       ])
 
@@ -96,7 +98,7 @@ export default function TestPage() {
       const tp = tpResult.data
       if (tp) {
         setTopic(tp)
-        setCache('test-topic-' + topicId, tp)
+        setCache('test-topic-' + subjectSlug + '-' + difficulty, tp)
         if (!cachedQuestions) {
           setStartedAt(new Date().toISOString())
           const now = Date.now()
@@ -110,13 +112,13 @@ export default function TestPage() {
       if (!cachedQuestions && qsResult.data?.length) {
         const shuffled = [...qsResult.data].sort(() => Math.random() - 0.5)
         setQuestions(shuffled)
-        setCache('test-questions-' + topicId, shuffled)
+        setCache('test-questions-' + subjectSlug + '-' + difficulty, shuffled)
       }
       setLoading(false)
     })()
 
     return () => { active = false }
-  }, [topicId, cachedQuestions])
+  }, [subjectSlug + '-' + difficulty, cachedQuestions])
 
   useEffect(() => {
     if (!questions[current] || !IS_PRACTICE) return
@@ -696,6 +698,11 @@ export default function TestPage() {
           <div className="bb-q-header">
             <div className="bb-q-header-left">
               <div className="bb-q-num">{current + 1}</div>
+              {currentQuestion?.difficulty && (
+                <div style={{ marginLeft: '12px', background: '#eaeaea', color: '#555', padding: '2px 8px', borderRadius: '4px', fontSize: '12px', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                  {currentQuestion.difficulty}
+                </div>
+              )}
               <button className={'bb-mark-btn' + (reviewMarked.includes(current) ? ' marked' : '')} onClick={markReview}>
                 <svg width="14" height="14" viewBox="0 0 24 24" fill={reviewMarked.includes(current) ? 'currentColor' : 'none'} stroke="currentColor" strokeWidth="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
                 Mark for Review
@@ -735,6 +742,11 @@ export default function TestPage() {
               <div className="bb-q-header">
                 <div className="bb-q-header-left">
                   <div className="bb-q-num">{current + 1}</div>
+              {currentQuestion?.difficulty && (
+                <div style={{ marginLeft: '12px', background: '#eaeaea', color: '#555', padding: '2px 8px', borderRadius: '4px', fontSize: '12px', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                  {currentQuestion.difficulty}
+                </div>
+              )}
                   <button className={'bb-mark-btn' + (reviewMarked.includes(current) ? ' marked' : '')} onClick={markReview}>
                     <svg width="14" height="14" viewBox="0 0 24 24" fill={reviewMarked.includes(current) ? 'currentColor' : 'none'} stroke="currentColor" strokeWidth="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
                     Mark for Review
@@ -879,6 +891,8 @@ export default function TestPage() {
       </div>
 
       {/* CALCULATOR — draggable + resizable, closes ONLY via X */}
+      {isDrawingMode && <DrawingCanvas onClose={() => setIsDrawingMode(false)} />}
+
       {showCalc && (
         <div className="bb-calc-overlay">
           <div

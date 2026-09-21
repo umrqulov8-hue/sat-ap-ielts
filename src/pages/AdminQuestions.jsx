@@ -8,21 +8,18 @@ export default function AdminQuestions() {
   const { setPageTitle, setPageSub, setPageClass } = useLayout()
   const [subjects, setSubjects] = useState([])
   const [modules, setModules] = useState([])
-  const [topics, setTopics] = useState([])
-  const [questions, setQuestions] = useState([])
+    const [questions, setQuestions] = useState([])
   const [selSubject, setSelSubject] = useState('')
   const [selModule, setSelModule] = useState('')
-  const [selTopic, setSelTopic] = useState('')
+    const [selDifficulty, setSelDifficulty] = useState('')
+  const [qDifficulty, setQDifficulty] = useState('easy')
   const [tab, setTab] = useState('questions')
   const [qtab, setQtab] = useState('topic')
   const fileRef = useRef(null)
   const [users, setUsers] = useState([])
   const [stats, setStats] = useState(null)
 
-  const [topicTitle, setTopicTitle] = useState('')
-  const [topicDesc, setTopicDesc] = useState('')
-  const [editingTopic, setEditingTopic] = useState(null)
-
+      
   const [qText, setQText] = useState('')
   const [passageText, setPassageText] = useState('')
   const [noText, setNoText] = useState(false)
@@ -48,8 +45,7 @@ export default function AdminQuestions() {
   const [modDuration, setModDuration] = useState('')
   const [editingMod, setEditingMod] = useState(null)
   const [savingMod, setSavingMod] = useState(false)
-  const [savingTopic, setSavingTopic] = useState(false)
-
+  
   const [userSearch, setUserSearch] = useState('')
   const [userRoleFilter, setUserRoleFilter] = useState('all')
   const [activity, setActivity] = useState([])
@@ -264,46 +260,7 @@ export default function AdminQuestions() {
     toast.success('Module deleted')
   }
 
-  const handleAddTopic = async () => {
-    if (!topicTitle.trim()) { setMsg('Enter topic title'); return }
-    if (!selModule) { setMsg('Select a module first'); return }
-    setSavingTopic(true)
-    if (editingTopic) {
-      const { error } = await supabase.from('topics').update({ title: topicTitle.trim(), description: topicDesc.trim() }).eq('id', editingTopic)
-      if (error) { setMsg('Error: ' + error.message); toast.error('Update failed: ' + error.message); setSavingTopic(false); return }
-      setEditingTopic(null)
-    } else {
-      const { error } = await supabase.from('topics').insert({ module_id: selModule, title: topicTitle.trim(), description: topicDesc.trim(), order_index: topics.length })
-      if (error) { setMsg('Error: ' + error.message); toast.error('Insert failed: ' + error.message); setSavingTopic(false); return }
-    }
-    setTopicTitle(''); setTopicDesc('')
-    const { data, error } = await supabase.from('topics').select('*').eq('module_id', selModule).order('order_index')
-    if (error) { setMsg('Error loading topics: ' + error.message); setSavingTopic(false); return }
-    if (data) setTopics(data)
-    toast.success(editingTopic ? 'Topic updated!' : 'Topic added!')
-    setMsg(editingTopic ? 'Topic updated!' : 'Topic added!')
-    setSavingTopic(false)
-  }
-
-  const editTopic = (t) => {
-    setEditingTopic(t.id); setTopicTitle(t.title); setTopicDesc(t.description || '')
-    window.scrollTo({ top: 0, behavior: 'smooth' })
-  }
-
-  const deleteTopic = async (id) => {
-    if (!window.confirm('Delete this topic and all its questions?')) return
-    const { error: qErr } = await supabase.from('questions').delete().eq('topic_id', id)
-    if (qErr) { setMsg('Error deleting questions: ' + qErr.message); toast.error('Delete failed: ' + qErr.message); return }
-    const { error: tErr } = await supabase.from('topics').delete().eq('id', id)
-    if (tErr) { setMsg('Error deleting topic: ' + tErr.message); toast.error('Delete failed: ' + tErr.message); return }
-    const { data } = await supabase.from('topics').select('*').eq('module_id', selModule).order('order_index')
-    if (data) setTopics(data)
-    if (selTopic === id) { setSelTopic(''); setQuestions([]) }
-    setMsg('Topic deleted')
-    toast.success('Topic deleted')
-  }
-
-  const handleImageSelect = (e) => {
+    const handleImageSelect = (e) => {
     const file = e.target.files[0]
     if (!file) return
     setImageFile(file)
@@ -370,7 +327,7 @@ export default function AdminQuestions() {
     }
     const { error } = editingQ
       ? await supabase.from('questions').update(payload).eq('id', editingQ.id)
-      : await supabase.from('questions').insert({ topic_id: selTopic, ...payload })
+      : await supabase.from('questions').insert({ difficulty: qDifficulty, ...payload })
     setUploading(false)
     if (error) { console.error('SAVE ERROR:', error); setMsg('Error: ' + (error.message || JSON.stringify(error))); toast.error('Error saving: ' + (error.message || 'Unknown error')) } else {
       setMsg(editingQ ? 'Question updated!' : 'Question saved!')
@@ -765,12 +722,7 @@ ALTER TABLE questions ADD COLUMN IF NOT EXISTS layout text default 'centered';</
               MODULES
               {modules.length > 0 && <span className="admin-tab-badge">{modules.length}</span>}
             </button>
-            <button className={'admin-tab' + (qtab === 'topic' ? ' active' : '')} onClick={() => setQtab('topic')}>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-              TOPICS
-              {topics.length > 0 && <span className="admin-tab-badge">{topics.length}</span>}
-            </button>
-            <button className={'admin-tab' + (qtab === 'question' ? ' active' : '')} onClick={() => setQtab('question')}>
+                        <button className={'admin-tab' + (qtab === 'question' ? ' active' : '')} onClick={() => setQtab('question')}>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
               QUESTIONS
               {questions.length > 0 && <span className="admin-tab-badge">{questions.length}</span>}
@@ -900,18 +852,18 @@ ALTER TABLE questions ADD COLUMN IF NOT EXISTS layout text default 'centered';</
           {qtab === 'question' && (
             <div className="admin-q-section">
               <div className="admin-layer">
-                <label className="admin-label">SELECT TOPIC</label>
-                {topics.length === 0 ? (
-                  <div className="admin-empty">No topics yet.</div>
-                ) : (
-                  <select className="admin-select" value={selTopic} onChange={e => { setSelTopic(e.target.value); resetQForm() }}>
-                    <option value="">— Select Topic —</option>
-                    {topics.map(t => <option key={t.id} value={t.id}>{t.title}</option>)}
-                  </select>
-                )}
+                <label className="admin-label">DIFFICULTY FILTER</label>
+                <select className="admin-select" value={selDifficulty} onChange={e => { setSelDifficulty(e.target.value); resetQForm() }}>
+                  <option value="">— All Difficulties —</option>
+                  <option value="easy">Easy</option>
+                  <option value="medium">Medium</option>
+                  <option value="hard">Hard</option>
+                  <option value="elite">Elite</option>
+                  <option value="mixing">Mixing</option>
+                </select>
               </div>
 
-              {selTopic && questions.length > 0 && (
+              {questions.length > 0 && (
                 <div className="admin-layer admin-q-list-section">
                   <label className="admin-label">EXISTING QUESTIONS ({questions.length})</label>
                   <div className="admin-q-list">
@@ -922,6 +874,9 @@ ALTER TABLE questions ADD COLUMN IF NOT EXISTS layout text default 'centered';</
                           <div className="admin-q-list-meta">
                             <span className={'admin-q-list-type ' + (q.correct_index === -1 ? 'written' : 'mc')}>
                               {q.correct_index === -1 ? 'WRITTEN' : 'MC'}
+                            </span>
+                            <span className="admin-q-list-type" style={{background: '#eee', color: '#333'}}>
+                              {q.difficulty?.toUpperCase() || 'MEDIUM'}
                             </span>
                             {q.image_url && <span className="admin-q-list-img-badge" title="Has image">
                               <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5" fill="currentColor"/><polyline points="21 15 16 10 5 21"/></svg>
@@ -948,7 +903,7 @@ ALTER TABLE questions ADD COLUMN IF NOT EXISTS layout text default 'centered';</
                 </div>
               )}
 
-              {selTopic && (
+              {true && (
                 <div className="admin-q-editor-grid">
                   <div className="admin-q-editor-form">
                     {layoutSplit ? (
@@ -983,6 +938,16 @@ ALTER TABLE questions ADD COLUMN IF NOT EXISTS layout text default 'centered';</
                       </>
                     ) : (
                       <>
+                        <div className="admin-layer">
+                          <label className="admin-label">DIFFICULTY</label>
+                          <select className="admin-select" value={qDifficulty} onChange={e => setQDifficulty(e.target.value)}>
+                            <option value="easy">Easy</option>
+                            <option value="medium">Medium</option>
+                            <option value="hard">Hard</option>
+                            <option value="elite">Elite</option>
+                            <option value="mixing">Mixing</option>
+                          </select>
+                        </div>
                         <div className="admin-layer">
                           <label className="admin-label">IMAGE (optional)</label>
                           <div className={'admin-dropzone' + (dragOver ? ' drag-over' : '')}

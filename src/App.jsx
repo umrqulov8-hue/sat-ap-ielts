@@ -72,13 +72,12 @@ export default function App() {
             <Route path="/profile" element={<SuspenseWrap><Profile /></SuspenseWrap>} />
             <Route path="/settings" element={<SuspenseWrap><Settings /></SuspenseWrap>} />
             <Route path="/support" element={<SuspenseWrap><Support /></SuspenseWrap>} />
-            <Route path="/topics/:moduleId" element={<SuspenseWrap><TopicsPage /></SuspenseWrap>} />
-            <Route path="/admin/questions" element={<SuspenseWrap><AdminQuestions /></SuspenseWrap>} />
+                        <Route path="/admin/questions" element={<SuspenseWrap><AdminQuestions /></SuspenseWrap>} />
             <Route path="/test-review/:testId" element={<SuspenseWrap><TestReview /></SuspenseWrap>} />
             <Route path="/admin/sat-tests" element={<SuspenseWrap><SatTestAdmin /></SuspenseWrap>} />
           </Route>
           <Route path="/sat-test/:testId" element={<SuspenseWrap><SatTestPage /></SuspenseWrap>} />
-          <Route path="/test/:topicId" element={<SuspenseWrap><TestPage /></SuspenseWrap>} />
+          <Route path="/test/:subjectSlug/:difficulty" element={<SuspenseWrap><TestPage /></SuspenseWrap>} />
           <Route path="*" element={<SuspenseWrap><NotFound /></SuspenseWrap>} />
         </Routes>
       </ToastProvider>

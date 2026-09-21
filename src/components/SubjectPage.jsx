@@ -37,13 +37,11 @@ export default function SubjectPage({ slug, title, subtitle, tag }) {
     }
     if (sub.color) setAccent(sub.color)
 
-    const [modRes, scRes, ptRes, accRes, topicRes, doneRes] = await Promise.all([
-      supabase.from('modules').select('id, order_index').eq('subject_id', sub.id).order('order_index'),
+    const [scRes, ptRes, accRes, qRes] = await Promise.all([
       supabase.from('user_scores').select('*').eq('user_id', uid).eq('subject_id', sub.id).maybeSingle(),
-      supabase.from('practice_tests').select('id', { count: 'exact', head: true }).eq('user_id', uid),
-      supabase.from('practice_tests').select('score, total, taken_at').eq('user_id', uid),
-      supabase.from('topics').select('id, title, description, module_id, order_index'),
-      supabase.from('practice_tests').select('topic_id').eq('user_id', uid),
+      supabase.from('practice_tests').select('id', { count: 'exact', head: true }).eq('user_id', uid).eq('subject', sub.id),
+      supabase.from('practice_tests').select('score, total, taken_at').eq('user_id', uid).eq('subject', sub.id),
+      supabase.from('questions').select('difficulty').eq('subject_id', sub.id),
     ])
 
     if (scRes.data) setScore(scRes.data.score)
@@ -59,18 +57,22 @@ export default function SubjectPage({ slug, title, subtitle, tag }) {
       setAccuracy(acc)
     }
 
-    let list = []
-    if (modRes.data?.length) {
-      const modOrder = {}
-      modRes.data.forEach((m, i) => { modOrder[m.id] = i })
-      const doneTopics = new Set((doneRes.data?.filter(d => d.topic_id != null) || []).map(d => d.topic_id))
-      list = (topicRes.data || [])
-        .filter(t => t.module_id in modOrder)
-        .sort((a, b) => (modOrder[a.module_id] - modOrder[b.module_id]) || ((a.order_index || 0) - (b.order_index || 0)))
-        .map(t => ({ id: t.id, name: t.title, desc: t.description || 'Practice test', done: doneTopics.has(t.id) }))
-      setTotalTests(list.length)
-      setTopics(list)
+    const counts = { easy: 0, medium: 0, hard: 0, elite: 0, mixing: 0 }
+    if (qRes.data) {
+      qRes.data.forEach(q => {
+        counts[q.difficulty || 'medium']++
+        counts['mixing']++
+      })
     }
+    const diffList = [
+      { id: 'easy', name: 'Easy', count: counts.easy, color: 'var(--green)' },
+      { id: 'medium', name: 'Medium', count: counts.medium, color: 'var(--yellow)' },
+      { id: 'hard', name: 'Hard', count: counts.hard, color: 'var(--peach)' },
+      { id: 'elite', name: 'Elite', count: counts.elite, color: 'var(--pink)' },
+      { id: 'mixing', name: 'Mixing', count: counts.mixing, color: 'var(--lavender)' }
+    ]
+    setTopics(diffList)
+    setTotalTests(diffList.length)
 
     setCache('subj-' + slug, {
       score: scRes.data?.score ?? 0,
@@ -92,7 +94,7 @@ export default function SubjectPage({ slug, title, subtitle, tag }) {
   }, [title, subtitle, setPageTitle, setPageSub, setPageClass, refreshData])
 
   const handleStart = (t) => {
-    navigate('/test/' + t.id)
+    navigate('/test/' + slug + '/' + t.id)
   }
 
   const pct = totalTests > 0 ? Math.round((tests / totalTests) * 100) : 0
@@ -160,17 +162,16 @@ export default function SubjectPage({ slug, title, subtitle, tag }) {
 
       {topics.length > 0 && (
         <>
-          <h2 className="section-title">TOPICS</h2>
+          <h2 className="section-title">PRACTICE BY DIFFICULTY</h2>
           <div className="study-grid study-grid-3">
             {topics.map((t, i) => (
               <div key={t.id} className="study-card shadow-wrap" onClick={() => handleStart(t)}>
                 <div className="shadow-box" />
                 <div className="study-card-inner" style={{ '--sc': accent }}>
-                  <span className="study-card-num">{(i + 1).toString().padStart(2, '0')}</span>
-                  <div className="study-card-name">{t.name}</div>
-                  <div className="study-card-count">{t.done ? 'Completed — retake?' : (t.desc || 'Practice test')}</div>
+                  <div className="study-card-name" style={{ color: t.color }}>{t.name}</div>
+                  <div className="study-card-count">{t.count} questions available</div>
                   <button className="btn-module study-card-btn" onClick={(e) => { e.stopPropagation(); handleStart(t) }}>
-                    {t.done ? 'RETAKE' : 'START'}
+                    START
                   </button>
                 </div>
               </div>

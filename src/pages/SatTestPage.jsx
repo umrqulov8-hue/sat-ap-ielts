@@ -2,6 +2,7 @@ import { useState, useEffect, useRef, useCallback } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { supabase } from '../lib/supabaseClient'
 import { useToast } from '../components/Toast'
+import DrawingCanvas from '../components/DrawingCanvas'
 
 const TIMER = { rw: { m1: 32, m2: 32 }, math: { m1: 35, m2: 35 } }
 
@@ -21,6 +22,7 @@ export default function SatTestPage() {
   const [phase, setPhase] = useState('loading')
   const [timeLeft, setTimeLeft] = useState(0)
   const [showNav, setShowNav] = useState(false)
+  const [isDrawingMode, setIsDrawingMode] = useState(false)
   const timerRef = useRef(null)
 
   const currentMod = modules[modIdx]
@@ -229,11 +231,16 @@ export default function SatTestPage() {
         </div>
         <div className={`sat-timer ${timeLeft < 60 ? 'sat-timer-warn' : ''}`}>{formatTime(timeLeft)}</div>
         <div className="sat-header-right">
+          <button className={'sat-icon-btn' + (isDrawingMode ? ' active' : '')} onClick={() => setIsDrawingMode(!isDrawingMode)} title="Draw on Screen">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+          </button>
           <button className="sat-icon-btn" onClick={() => setShowNav(!showNav)}>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
           </button>
         </div>
       </div>
+
+      {isDrawingMode && <DrawingCanvas onClose={() => setIsDrawingMode(false)} />}
 
       {showNav && (
         <div className="sat-nav-overlay" onClick={() => setShowNav(false)}>
