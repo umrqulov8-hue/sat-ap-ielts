@@ -14,7 +14,7 @@ export default function AdminQuestions() {
     const [selDifficulty, setSelDifficulty] = useState('')
   const [qDifficulty, setQDifficulty] = useState('easy')
   const [tab, setTab] = useState('questions')
-  const [qtab, setQtab] = useState('topic')
+  const [qtab, setQtab] = useState('question')
   const fileRef = useRef(null)
   const [users, setUsers] = useState([])
   const [stats, setStats] = useState(null)
@@ -232,14 +232,12 @@ export default function AdminQuestions() {
   }
 
   const deleteModule = async (id) => {
-    if (!window.confirm('Delete this module and all its topics/questions?')) return
-    const { error: tErr } = await supabase.from('topics').delete().eq('module_id', id)
-    if (tErr) { setMsg('Error deleting topics: ' + tErr.message); toast.error('Delete failed: ' + tErr.message); return }
-    const { error: mErr } = await supabase.from('modules').delete().eq('id', id)
-    if (mErr) { setMsg('Error deleting module: ' + mErr.message); toast.error('Delete failed: ' + mErr.message); return }
+    if (!window.confirm('Delete this module and all its questions?')) return
+    const { error } = await supabase.from('modules').delete().eq('id', id)
+    if (error) { setMsg('Error deleting module: ' + error.message); toast.error('Delete failed: ' + error.message); return }
     const { data } = await supabase.from('modules').select('*').eq('subject_id', selSubject).order('order_index')
     if (data) setModules(data)
-    if (selModule === id) { setSelModule(''); setTopics([]); setSelTopic('') }
+    if (selModule === id) { setSelModule('') }
     setMsg('Module deleted')
     toast.success('Module deleted')
   }
@@ -787,51 +785,6 @@ ALTER TABLE questions ADD COLUMN IF NOT EXISTS layout text default 'centered';</
                   </div>
                 )}
               </div>
-            </div>
-          )}
-
-          {qtab === 'topic' && (
-            <div className="admin-topic-section">
-              <div className="admin-layer">
-                <label className="admin-label">{editingTopic ? 'EDIT TOPIC' : 'NEW TOPIC'}</label>
-                <input className="admin-input" value={topicTitle} onChange={e => setTopicTitle(e.target.value)} placeholder="Topic title" />
-                <input className="admin-input" value={topicDesc} onChange={e => setTopicDesc(e.target.value)} placeholder="Description (optional)" style={{ marginTop: '0.5rem' }} />
-                <div style={{ display: 'flex', gap: '0.5rem', marginTop: '0.5rem' }}>
-                  <button className="btn-solid-black" onClick={handleAddTopic} disabled={savingTopic}>
-                    {savingTopic ? 'SAVING...' : (editingTopic ? 'UPDATE TOPIC' : 'ADD TOPIC')}
-                  </button>
-                  {editingTopic && <button className="btn-solid-black" style={{ background: 'transparent', color: '#000' }} onClick={() => { setEditingTopic(null); setTopicTitle(''); setTopicDesc('') }}>CANCEL</button>}
-                </div>
-              </div>
-
-              {topics.length > 0 && (
-                <div className="admin-layer">
-                  <label className="admin-label">EXISTING TOPICS ({topics.length})</label>
-                  <div className="admin-card-list">
-                    {topics.map((t, idx) => {
-                      const colors = ['admin-stat-lavender', 'admin-stat-peach', 'admin-stat-green', 'admin-stat-yellow', 'admin-stat-pink']
-                      const colorClass = colors[idx % colors.length]
-                      return (
-                        <div key={t.id} className={'admin-card-item ' + colorClass} onClick={() => { setSelTopic(t.id); setQtab('question') }} style={{ cursor: 'pointer' }}>
-                          <div className="admin-card-num">#{idx + 1}</div>
-                          <div className="admin-card-body">
-                            <div className="admin-card-title">{t.title}</div>
-                            <div className="admin-card-desc">{t.description || 'Click to manage questions →'}</div>
-                          </div>
-                          <div className="admin-card-actions" onClick={e => e.stopPropagation()}>
-                            <button className="admin-icon-btn" onClick={() => editTopic(t)} title="Edit">
-                              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
-                            </button>
-                            <button className="admin-icon-btn admin-icon-btn-danger" onClick={() => deleteTopic(t.id)} title="Delete">
-                              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg>
-                            </button>
-                          </div>
-                        </div>
-                      )
-                    })}
-                  </div>
-                </div>
-              )}
             </div>
           )}
 
