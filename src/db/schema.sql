@@ -179,45 +179,14 @@ create table login_streaks (
   unique(user_id, login_date)
 );
 
--- Push notification subscriptions
-create table if not exists push_subscriptions (
-  id uuid default gen_random_uuid() primary key,
-  user_id uuid references auth.users(id) on delete cascade unique,
-  subscription jsonb not null,
-  created_at timestamptz default now()
-);
 
--- Notifications (in-app)
-create table notifications (
-  id uuid default gen_random_uuid() primary key,
-  user_id uuid references auth.users(id) on delete cascade,
-  title text not null,
-  body text not null,
-  type text default 'info',
-  read boolean default false,
-  created_at timestamptz default now()
-);
 
-alter table notifications enable row level security;
 
-create policy "Users can view own notifications"
-  on notifications for select using (auth.uid() = user_id);
-
-create policy "Users can update own notifications"
-  on notifications for update using (auth.uid() = user_id);
-
-create policy "Admins can insert notifications"
-  on notifications for insert with check (
-    auth.uid() in (select id from profiles where role in ('admin','owner'))
-    or auth.uid() = user_id
-  );
 
 -- User settings
 create table user_settings (
   id uuid default gen_random_uuid() primary key,
   user_id uuid references auth.users(id) on delete cascade unique,
-  email_notifications boolean default true,
-  push_notifications boolean default true,
   reminder_time text default '10:00',
   show_profile boolean default true,
   two_factor boolean default false,
@@ -255,7 +224,7 @@ alter table study_plans enable row level security;
 alter table practice_tests enable row level security;
 alter table user_activity enable row level security;
 alter table login_streaks enable row level security;
-alter table push_subscriptions enable row level security;
+
 alter table user_settings enable row level security;
 
 -- Profiles: users can read/update their own
@@ -377,20 +346,6 @@ create policy "Users can view own streaks"
 create policy "Users can insert own streaks"
   on login_streaks for insert
   with check (auth.uid() = user_id);
-
--- Push subscriptions: own only
-create policy "Users can manage own push subscriptions"
-  on push_subscriptions for insert
-  with check (auth.uid() = user_id);
-create policy "Users can update own push subscriptions"
-  on push_subscriptions for update
-  using (auth.uid() = user_id);
-create policy "Users can delete own push subscriptions"
-  on push_subscriptions for delete
-  using (auth.uid() = user_id);
-create policy "Users can view own push subscriptions"
-  on push_subscriptions for select
-  using (auth.uid() = user_id);
 
 -- Settings: own only
 create policy "Users can view own settings"

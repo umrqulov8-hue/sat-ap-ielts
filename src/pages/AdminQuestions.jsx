@@ -50,12 +50,8 @@ export default function AdminQuestions() {
   const [savingMod, setSavingMod] = useState(false)
   const [savingTopic, setSavingTopic] = useState(false)
 
-  const [notifTitle, setNotifTitle] = useState('')
-  const [notifBody, setNotifBody] = useState('')
-  const [sending, setSending] = useState(false)
   const [userSearch, setUserSearch] = useState('')
   const [userRoleFilter, setUserRoleFilter] = useState('all')
-  const [notifTarget, setNotifTarget] = useState('all')
   const [activity, setActivity] = useState([])
   const [dbMigrationNeeded, setDbMigrationNeeded] = useState(false)
 
@@ -67,23 +63,6 @@ export default function AdminQuestions() {
       }
     })()
   }, [])
-
-  const sendNotification = async () => {
-    if (!notifTitle.trim() || !notifBody.trim()) { toast.error('Fill title and body'); return }
-    setSending(true)
-    let query = supabase.from('profiles').select('id')
-    if (notifTarget !== 'all') {
-      query = query.eq('role', notifTarget)
-    }
-    const { data: profiles } = await query
-    if (!profiles?.length) { toast.error('No users match target'); setSending(false); return }
-    const notifs = profiles.map(p => ({ user_id: p.id, title: notifTitle.trim(), body: notifBody.trim() }))
-    const { error } = await supabase.from('notifications').insert(notifs)
-    if (error) { toast.error('Error: ' + error.message); setSending(false); return }
-    toast.success('Sent to ' + notifs.length + ' users')
-    setNotifTitle(''); setNotifBody('')
-    setSending(false)
-  }
 
   useEffect(() => {
     setPageTitle('ADMIN')
@@ -114,11 +93,10 @@ export default function AdminQuestions() {
   useEffect(() => {
     if (tab !== 'activity') return
     ;(async () => {
-      const [testsRes, profilesRes, questionsRes, notifsRes] = await Promise.all([
+      const [testsRes, profilesRes, questionsRes] = await Promise.all([
         supabase.rpc('get_all_practice_tests'),
         supabase.rpc('get_all_profiles'),
-        supabase.from('questions').select('id, created_at, subject_id, subjects(title)').order('created_at', { ascending: false }).limit(20),
-        supabase.from('notifications').select('id, title, body, created_at').order('created_at', { ascending: false }).limit(20),
+        supabase.from('questions').select('id, created_at, subject_id, subjects(title)').order('created_at', { ascending: false }).limit(20)
       ])
       const events = []
       for (const t of (testsRes.data || []).slice(0, 20)) {
@@ -139,12 +117,7 @@ export default function AdminQuestions() {
           text: <>New user signed up: <strong>{p.display_name || p.email || 'unknown'}</strong></>,
         })
       }
-      for (const n of (notifsRes.data || []).slice(0, 10)) {
-        events.push({
-          type: 'notif', ts: n.created_at, icon: 'bell', color: 'yellow',
-          text: <>Notification sent: <strong>{n.title}</strong></>,
-        })
-      }
+
       events.sort((a, b) => new Date(b.ts || 0) - new Date(a.ts || 0))
       setActivity(events.slice(0, 30))
     })()
@@ -512,10 +485,6 @@ ALTER TABLE questions ADD COLUMN IF NOT EXISTS layout text default 'centered';</
           ACTIVITY
           {activity.length > 0 && <span className="admin-tab-badge">{activity.length}</span>}
         </button>
-        <button className={'admin-tab' + (tab === 'notify' ? ' active' : '')} onClick={() => setTab('notify')}>
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M3 11l18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg>
-          NOTIFY
-        </button>
       </div>
 
       {tab === 'users' && (
@@ -784,89 +753,6 @@ ALTER TABLE questions ADD COLUMN IF NOT EXISTS layout text default 'centered';</
                 })}
               </div>
             )}
-          </div>
-        </div>
-      )}
-
-      {tab === 'notify' && (
-        <div className="admin-notify-grid">
-          <div className="admin-notify-form">
-            <div className="admin-layer">
-              <label className="admin-label">SEND NOTIFICATION</label>
-
-              <div style={{ marginTop: '0.5rem' }}>
-                <label className="admin-label" style={{ fontSize: '0.6rem', marginBottom: '0.3rem', display: 'block' }}>TARGET AUDIENCE</label>
-                <div className="admin-target-grid">
-                  {[
-                    { v: 'all', label: 'All Users', desc: 'Everyone', color: 'admin-stat-lavender', count: users.length },
-                    { v: 'owner', label: 'Owners', desc: 'Admins only', color: 'admin-stat-pink', count: users.filter(u => u.role === 'owner').length },
-                    { v: 'admin', label: 'Admins', desc: 'Mod + Owners', color: 'admin-stat-peach', count: users.filter(u => u.role === 'admin' || u.role === 'owner').length },
-                    { v: 'user', label: 'Students', desc: 'Regular users', color: 'admin-stat-green', count: users.filter(u => !u.role || u.role === 'user').length },
-                  ].map(t => (
-                    <button
-                      key={t.v}
-                      className={'admin-target-btn ' + t.color + (notifTarget === t.v ? ' active' : '')}
-                      onClick={() => setNotifTarget(t.v)}
-                    >
-                      <div className="admin-target-label">{t.label}</div>
-                      <div className="admin-target-desc">{t.desc}</div>
-                      <div className="admin-target-count">{t.count} users</div>
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              <label className="admin-label" style={{ fontSize: '0.6rem', marginTop: '0.7rem', marginBottom: '0.3rem', display: 'block' }}>TITLE</label>
-              <input className="admin-input" placeholder="e.g. New SAT Math questions added!" value={notifTitle} onChange={e => setNotifTitle(e.target.value)} maxLength={100} />
-              <div className="admin-char-count">{notifTitle.length}/100</div>
-
-              <label className="admin-label" style={{ fontSize: '0.6rem', marginTop: '0.7rem', marginBottom: '0.3rem', display: 'block' }}>MESSAGE BODY</label>
-              <textarea className="admin-textarea" rows={4} placeholder="Write your message here..." value={notifBody} onChange={e => setNotifBody(e.target.value)} maxLength={500} />
-              <div className="admin-char-count">{notifBody.length}/500</div>
-
-              <button className="btn-solid-black admin-notify-send" onClick={sendNotification} disabled={sending || !notifTitle.trim() || !notifBody.trim()}>
-                {sending ? <><span className="admin-btn-spinner" /> SENDING...</> : <><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg> SEND TO {users.filter(u => notifTarget === 'all' || u.role === notifTarget || (notifTarget === 'admin' && (u.role === 'admin' || u.role === 'owner'))).length} USERS</>}
-              </button>
-            </div>
-          </div>
-
-          <div className="admin-notify-preview">
-            <div className="admin-notify-preview-label">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-              LIVE PREVIEW
-            </div>
-            <div className="admin-notify-preview-phone">
-              <div className="admin-notify-bell-icon">
-                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
-              </div>
-              <div className="admin-notify-card">
-                <div className="admin-notify-card-header">
-                  <div className="admin-notify-card-dot"></div>
-                  <div className="admin-notify-card-app">SATAP Academy</div>
-                  <div className="admin-notify-card-time">now</div>
-                </div>
-                <div className="admin-notify-card-title">
-                  {notifTitle || <span className="admin-notify-placeholder">Notification title...</span>}
-                </div>
-                <div className="admin-notify-card-body">
-                  {notifBody || <span className="admin-notify-placeholder">Message body...</span>}
-                </div>
-              </div>
-            </div>
-            <div className="admin-notify-stats">
-              <div className="admin-notify-stat">
-                <div className="admin-notify-stat-val">{notifTitle.length}</div>
-                <div className="admin-notify-stat-lbl">Title chars</div>
-              </div>
-              <div className="admin-notify-stat">
-                <div className="admin-notify-stat-val">{notifBody.length}</div>
-                <div className="admin-notify-stat-lbl">Body chars</div>
-              </div>
-              <div className="admin-notify-stat">
-                <div className="admin-notify-stat-val">{users.filter(u => notifTarget === 'all' || u.role === notifTarget || (notifTarget === 'admin' && (u.role === 'admin' || u.role === 'owner'))).length}</div>
-                <div className="admin-notify-stat-lbl">Recipients</div>
-              </div>
-            </div>
           </div>
         </div>
       )}

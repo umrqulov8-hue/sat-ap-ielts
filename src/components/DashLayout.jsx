@@ -4,7 +4,7 @@ import '../styles/dashboard-style.css'
 import Sidebar from './Sidebar'
 import CalendarModal from './CalendarModal'
 import StudyReminder from './StudyReminder'
-import NotificationBell from './NotificationBell'
+
 import { supabase } from '../lib/supabaseClient'
 
 const LayoutCtx = createContext({
@@ -85,7 +85,7 @@ export default function DashLayout() {
               </div>
             </div>
             <div className="header-right" style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-              <NotificationBell />
+
               <span
                 ref={dateRef}
                 className={`header-date small-caps${calActive ? ' hidden' : ''}`}

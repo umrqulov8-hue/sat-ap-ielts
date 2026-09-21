@@ -1,7 +1,6 @@
 import { useEffect, useState, useCallback } from 'react'
 import { useLayout } from '../components/DashLayout'
 import { supabase } from '../lib/supabaseClient'
-import { registerServiceWorker, subscribeToPush, unsubscribeFromPush } from '../lib/pushNotifications'
 import { useToast } from '../components/Toast'
 import { useUser } from '../context/UserContext'
 
@@ -10,7 +9,7 @@ export default function Settings() {
   const { refreshUser } = useUser()
 
   const [account, setAccount] = useState({ name: 'STUDENT', email: '', lang: 'EN' })
-  const [notifs, setNotifs] = useState({ email_notifications: true, push_notifications: true, digest: false, reminders: true })
+  const [notifs, setNotifs] = useState({ digest: false, reminders: true })
   const [pwd, setPwd] = useState({ current: '', newPwd: '', confirm: '' })
   const [twoFA, setTwoFA] = useState({ enabled: false, method: 'AUTH', requireLogin: false })
   const [msg, setMsg] = useState('')
@@ -29,8 +28,6 @@ export default function Settings() {
 
     const { data: settings } = await supabase.from('user_settings').select('*').eq('user_id', user.id).maybeSingle()
     if (settings) setNotifs({
-      email_notifications: settings.email_notifications ?? true,
-      push_notifications: settings.push_notifications ?? true,
       digest: settings.weekly_digest ?? false,
       reminders: settings.reminder_time ? true : false,
     })
@@ -45,29 +42,7 @@ export default function Settings() {
 
   const showMsg = (text) => { setMsg(text); setTimeout(() => setMsg(''), 2500) }
 
-  const togglePush = useCallback(async (enabled) => {
-    setNotifs(prev => ({ ...prev, push_notifications: enabled }))
-    const { data: { session } } = await supabase.auth.getSession()
-    const user = session?.user
-    if (!user) return
 
-    if (enabled) {
-      if ('Notification' in window && Notification.permission === 'default') {
-        await Notification.requestPermission()
-      }
-      const reg = await registerServiceWorker()
-      if (reg) await subscribeToPush(reg)
-      showMsg('Push notifications enabled!')
-    } else {
-      await unsubscribeFromPush()
-      showMsg('Push notifications disabled')
-    }
-
-    await supabase.from('user_settings').upsert({
-      user_id: user.id,
-      push_notifications: enabled,
-    }, { onConflict: 'user_id' })
-  }, [])
 
   const saveAccount = async () => {
     showMsg('Account info saved!')
@@ -84,8 +59,6 @@ export default function Settings() {
     if (!user) return
     const { error } = await supabase.from('user_settings').upsert({
       user_id: user.id,
-      email_notifications: notifs.email_notifications,
-      push_notifications: notifs.push_notifications,
       weekly_digest: notifs.digest,
       reminder_time: notifs.reminders ? '10:00' : null,
     }, { onConflict: 'user_id' })
@@ -155,20 +128,7 @@ export default function Settings() {
           <span>NOTIFICATIONS</span>
         </div>
         <div className="settings-toggles">
-          <div className="settings-toggle-row">
-            <span className="settings-toggle-label">EMAIL NOTIFICATIONS</span>
-            <label className="toggle-switch">
-              <input type="checkbox" checked={notifs.email_notifications} onChange={e => setNotifs({ ...notifs, email_notifications: e.target.checked })} />
-              <span className="toggle-slider" />
-            </label>
-          </div>
-          <div className="settings-toggle-row">
-            <span className="settings-toggle-label">PUSH NOTIFICATIONS</span>
-            <label className="toggle-switch">
-              <input type="checkbox" checked={notifs.push_notifications} onChange={e => togglePush(e.target.checked)} />
-              <span className="toggle-slider" />
-            </label>
-          </div>
+
           <div className="settings-toggle-row">
             <span className="settings-toggle-label">WEEKLY DIGEST</span>
             <label className="toggle-switch">

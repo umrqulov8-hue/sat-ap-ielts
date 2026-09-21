@@ -1,6 +1,5 @@
 import { useEffect, useState, useCallback, useRef } from 'react'
 import { supabase } from '../lib/supabaseClient'
-import { registerServiceWorker, subscribeToPush } from '../lib/pushNotifications'
 
 const DAYS = ['SUNDAY', 'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY']
 
@@ -15,19 +14,6 @@ export default function StudyReminder() {
     if (!session?.user) {
       if (timerRef.current) { clearInterval(timerRef.current); timerRef.current = null }
       return
-    }
-
-    const { data: settings } = await supabase.from('user_settings').select('reminder_time,push_notifications').eq('user_id', session.user.id).maybeSingle().catch(() => ({ data: null }))
-    if (settings?.reminder_time === null || settings?.reminder_time === false) {
-      setNotifEnabled(false)
-      return
-    }
-    setNotifEnabled(true)
-
-    if (!swInitRef.current && settings?.push_notifications) {
-      swInitRef.current = true
-      const reg = await registerServiceWorker()
-      if (reg) subscribeToPush(reg)
     }
 
     const now = new Date()
