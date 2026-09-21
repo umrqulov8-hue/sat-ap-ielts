@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useMemo, memo } from 'react'
+import { useState, useEffect, useRef, useMemo, useCallback, memo } from 'react'
 import { useParams, useNavigate, useLocation } from 'react-router-dom'
 import { supabase } from '../lib/supabaseClient'
 import { getCache, setCache } from '../lib/dataCache'
@@ -18,10 +18,10 @@ const QuestionTimer = memo(function QuestionTimer({ startTime }) {
   useEffect(() => {
     const tick = () => setElapsed(Math.floor((Date.now() - startTime) / 1000))
     tick()
-    const id = setInterval(tick, 1000)
-    return () => clearInterval(id)
+    const timer = setInterval(tick, 1000)
+    return () => clearInterval(timer)
   }, [startTime])
-  return <div className="bb-timer">{formatTime(elapsed)}</div>
+  return <span>{formatTime(elapsed)}</span>
 })
 
 export default function TestPage() {
@@ -29,16 +29,19 @@ export default function TestPage() {
   const navigate = useNavigate()
   const location = useLocation()
   const locState = location.state
-  const [topic, setTopic] = useState(locState?.topic || null)
-  const [questions, setQuestions] = useState([])
+  const cachedQuestions = locState?.questions || getCache('test-questions-' + topicId)
+  const cachedTopic = locState?.topic || getCache('test-topic-' + topicId)
+
+  const [topic, setTopic] = useState(() => cachedTopic || null)
+  const [questions, setQuestions] = useState(() => cachedQuestions || [])
   const [current, setCurrent] = useState(0)
   const [selected, setSelected] = useState(null)
   const [answers, setAnswers] = useState([])
   const [reviewMarked, setReviewMarked] = useState([])
   const [step, setStep] = useState('taking')
   const [saving, setSaving] = useState(false)
-  const [startedAt, setStartedAt] = useState(null)
-  const [loading, setLoading] = useState(!(locState?.questions || getCache('test-questions-' + topicId)))
+  const [startedAt, setStartedAt] = useState(() => cachedQuestions ? new Date().toISOString() : null)
+  const [loading, setLoading] = useState(!cachedQuestions)
   const [showNav, setShowNav] = useState(false)
   const [abcMode, setAbcMode] = useState(false)
   const [strikethrough, setStrikethrough] = useState({})
@@ -56,18 +59,15 @@ export default function TestPage() {
   const [calcPos, setCalcPos] = useState({ x: 80, y: 60 })
   const [calcSize, setCalcSize] = useState({ w: 640, h: 520 })
   const [totalElapsed, setTotalElapsed] = useState(0)
-  const qStartRef = useRef(null)
+  const [qStartTime, setQStartTime] = useState(0)
+  const qStartRef = useRef(0)
   const toast = useToast()
 
-
   useEffect(() => {
-    const cached = locState?.questions || getCache('test-questions-' + topicId)
-    if (cached) {
-      setQuestions(cached)
-      if (!topic) setTopic(getCache('test-topic-' + topicId) || null)
-      setStartedAt(new Date().toISOString())
-      qStartRef.current = Date.now()
-      setLoading(false)
+    if (!qStartRef.current) {
+      const now = Date.now()
+      qStartRef.current = now
+      setQStartTime(now)
     }
 
     // Eager-load Desmos script so it's ready when user clicks calculator
@@ -79,30 +79,35 @@ export default function TestPage() {
       document.body.appendChild(s)
     }
 
+    let active = true
     ;(async () => {
       const { data: { session } } = await supabase.auth.getSession()
 
       const [tpResult, qsResult, profResult] = await Promise.all([
         supabase.from('topics')
-          .select('*, modules!inner(subject_id, title, subjects!inner(id, title))')
+          .select('*, modules!inner(subject_id, title, subjects!inner(id, title, slug))')
           .eq('id', topicId).maybeSingle(),
-        !cached ? supabase.from('questions').select('*').eq('topic_id', topicId).order('order_index') : Promise.resolve({ data: null }),
+        !cachedQuestions ? supabase.from('questions').select('*').eq('topic_id', topicId).order('order_index') : Promise.resolve({ data: null }),
         session?.user ? supabase.from('profiles').select('display_name').eq('id', session.user.id).maybeSingle() : Promise.resolve({ data: null }),
       ])
+
+      if (!active) return
 
       const tp = tpResult.data
       if (tp) {
         setTopic(tp)
         setCache('test-topic-' + topicId, tp)
-        if (!cached) {
+        if (!cachedQuestions) {
           setStartedAt(new Date().toISOString())
-          qStartRef.current = Date.now()
+          const now = Date.now()
+          qStartRef.current = now
+          setQStartTime(now)
         }
       }
 
       if (profResult.data?.display_name) setDisplayName(profResult.data.display_name)
 
-      if (!cached && qsResult.data?.length) {
+      if (!cachedQuestions && qsResult.data?.length) {
         const shuffled = [...qsResult.data].sort(() => Math.random() - 0.5)
         setQuestions(shuffled)
         setCache('test-questions-' + topicId, shuffled)
@@ -110,7 +115,8 @@ export default function TestPage() {
       setLoading(false)
     })()
 
-  }, [topicId])
+    return () => { active = false }
+  }, [topicId, cachedQuestions])
 
   useEffect(() => {
     if (!questions[current] || !IS_PRACTICE) return
@@ -174,7 +180,7 @@ export default function TestPage() {
     { name: 'purple', color: '#c7a8f5', border: '#8a5ad4' },
   ]
 
-  const getHighlightedHTML = (text) => {
+  const getHighlightedHTML = useCallback((text) => {
     const qHighlights = highlights['q' + current] || []
     if (!qHighlights.length || !text) return text
 
@@ -215,7 +221,7 @@ export default function TestPage() {
     }
 
     return html
-  }
+  }, [highlights, current])
 
   const handlePassageClick = (e) => {
     const mark = e.target.closest('.hl-mark')
@@ -227,7 +233,7 @@ export default function TestPage() {
   const passageHtmlStr = useMemo(() => {
     if (!effectivePassage) return ''
     return getHighlightedHTML(effectivePassage.replace(/\s+/g, ' ').trim())
-  }, [effectivePassage, highlights, current])
+  }, [effectivePassage, getHighlightedHTML])
 
   const applyHighlight = (color) => {
     const { text, start } = hlSelectedRef.current
@@ -257,7 +263,6 @@ export default function TestPage() {
     const rangeRect = range.getBoundingClientRect()
 
     const passageEl = passageRef.current?.querySelector('.bb-passage-split')
-    const fullText = passageEl?.textContent || ''
     const preRange = document.createRange()
     preRange.setStart(passageEl, 0)
     preRange.setEnd(range.startContainer, range.startOffset)
@@ -281,12 +286,12 @@ export default function TestPage() {
 
   const isWrittenQ = (q) => q && (q.correct_index === -1 || !q.options?.length)
 
-  const checkCorrect = (q, sel) => {
+  const checkCorrect = useCallback((q, sel) => {
     if (isWrittenQ(q)) {
       return String(sel).trim().toLowerCase() === String(q.explanation).trim().toLowerCase()
     }
     return sel === q.correct_index
-  }
+  }, [])
 
   const handleNext = () => {
     const isCorrect = checkCorrect(currentQuestion, selected)
@@ -301,7 +306,9 @@ export default function TestPage() {
     setAnswers(newAnswers)
     setSelected(null)
     setTotalElapsed(t => t + Math.floor((Date.now() - qStartRef.current) / 1000))
-    qStartRef.current = Date.now()
+    const now = Date.now()
+    qStartRef.current = now
+    setQStartTime(now)
 
     if (current + 1 >= questions.length) {
       setStep('review')
@@ -312,27 +319,29 @@ export default function TestPage() {
     }
   }
 
-  const handleJump = (idx) => {
+  const handleJump = useCallback((idx) => {
     if (selected !== null && step === 'taking') {
       const isCorrect = checkCorrect(currentQuestion, selected)
       const already = answers.findIndex(a => a.qIdx === current)
       let newAnswers
       if (already >= 0) {
         newAnswers = [...answers]
-        newAnswers[already] = { qIdx: current, selected, correct: isCorrect, question: q }
+        newAnswers[already] = { qIdx: current, selected, correct: isCorrect, question: currentQuestion }
       } else {
-        newAnswers = [...answers, { qIdx: current, selected, correct: isCorrect, question: q }]
+        newAnswers = [...answers, { qIdx: current, selected, correct: isCorrect, question: currentQuestion }]
       }
       setAnswers(newAnswers)
     }
     setCurrent(idx)
-    setTotalElapsed(t => t + Math.floor((Date.now() - qStartRef.current) / 1000))
-    qStartRef.current = new Date().getTime()
+    const nowJump = Date.now()
+    setTotalElapsed(t => t + Math.floor((nowJump - (qStartRef.current || nowJump)) / 1000))
+    qStartRef.current = nowJump
+    setQStartTime(nowJump)
     setAbcMode(false)
     const jumpAns = (step === 'taking' && answers.find(a => a.qIdx === idx))
     setSelected(jumpAns ? jumpAns.selected : null)
     setShowNav(false)
-  }
+  }, [selected, step, currentQuestion, answers, current, checkCorrect])
 
   const markReview = () => {
     setReviewMarked(prev =>
@@ -343,6 +352,7 @@ export default function TestPage() {
   const handleFinish = async () => {
     setSaving(true)
     const score = answers.filter(a => a.correct).length
+    const pct = answers.length ? score / answers.length : 0
 
     const { data: { session } } = await supabase.auth.getSession()
     const uid = session?.user?.id
@@ -361,17 +371,45 @@ export default function TestPage() {
           answers: ansData,
         }).select('id').single()
         if (testRes) setSavedTestId(testRes.id)
-        await Promise.all([
+
+        const maxScale = 800
+        const scaledScore = Math.round(pct * maxScale)
+
+        const updates = [
           supabase.from('user_progress').upsert({
             user_id: uid, module_id: topic.module_id,
             status: 'completed', score,
             completed_at: new Date().toISOString(),
           }, { onConflict: 'user_id,module_id' }),
-          ...(subjectId ? [supabase.from('user_scores').upsert({
-            user_id: uid, subject_id: subjectId,
-            score, last_updated: new Date().toISOString(),
-          }, { onConflict: 'user_id,subject_id' })] : []),
-        ])
+          supabase.from('user_activity').insert({
+            user_id: uid, action: 'Test completed',
+            detail: `${topic.title} — ${score}/${answers.length} (${Math.round(pct * 100)}%)`,
+          }),
+        ]
+
+        if (subjectId) {
+          const { data: existing } = await supabase.from('user_scores')
+            .select('score').eq('user_id', uid).eq('subject_id', subjectId).maybeSingle()
+          if (!existing || scaledScore > existing.score) {
+            updates.push(supabase.from('user_scores').upsert({
+              user_id: uid, subject_id: subjectId,
+              score: scaledScore, max_score: maxScale,
+              last_updated: new Date().toISOString(),
+            }, { onConflict: 'user_id,subject_id' }))
+          }
+        }
+
+        await Promise.all(updates)
+
+        const { data: scoreRows } = await supabase.from('user_scores')
+          .select('score').eq('user_id', uid)
+        if (scoreRows?.length) {
+          const total = Math.round(scoreRows.reduce((s, r) => s + (r.score || 0), 0) / scoreRows.length)
+          await supabase.from('user_total_scores').upsert({
+            user_id: uid, total_score: total,
+            last_updated: new Date().toISOString(),
+          }, { onConflict: 'user_id' })
+        }
       } catch {
         toast.error('Error saving results')
         setSaving(false)
@@ -420,24 +458,6 @@ export default function TestPage() {
   const hasInlineImg = useMemo(
     () => /<img\s[^>]*src=/i.test(effectiveQText || ''),
     [effectiveQText]
-  )
-
-  const renderedQuestionText = useMemo(
-    () => {
-      const text = effectiveQText
-      if (!text) return null
-      if (!hasInlineImg) return <div className="bb-q-text" dangerouslySetInnerHTML={{ __html: text }} />
-      const parts = text.split(/(<img[^>]+>)/g)
-      return parts.map((part, i) => {
-        if (part.startsWith('<img')) {
-          const match = part.match(/src="([^"]+)"/)
-          const src = match ? match[1] : ''
-          return <img key={i} src={src} alt="" className="bb-inline-img" draggable="false" onContextMenu={e => e.preventDefault()} />
-        }
-        return <span key={i} dangerouslySetInnerHTML={{ __html: part }} />
-      })
-    },
-    [effectiveQText, hasInlineImg]
   )
 
   const correctCount = useMemo(() => answers.filter(a => a.correct).length, [answers])
@@ -627,7 +647,7 @@ export default function TestPage() {
       {/* TOP NAV */}
       <div className="bb-top">
         <div className="bb-top-title">{topic.modules?.title || 'Test'} &mdash; {topic.title}</div>
-        <QuestionTimer key={current} startTime={qStartRef.current} />
+        <QuestionTimer key={current} startTime={qStartTime} />
         <div className="bb-top-right">
           <button className="bb-icon-btn" title="Reference" onClick={() => setShowRef(true)}>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>

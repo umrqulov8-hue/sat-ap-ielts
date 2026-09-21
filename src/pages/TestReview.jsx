@@ -23,13 +23,15 @@ export default function TestReview() {
     setPageTitle('TEST REVIEW')
     setPageSub('Detailed answer review')
     setPageClass('test-review')
-  }, [])
+  }, [setPageTitle, setPageSub, setPageClass])
 
   useEffect(() => {
+    let active = true
     ;(async () => {
-      const { data } = await supabase.from('practice_tests').select('*').eq('id', testId).single()
-      if (data) setTest(data)
+      const { data } = await supabase.from('practice_tests').select('*').eq('id', testId).maybeSingle()
+      if (active && data) setTest(data)
     })()
+    return () => { active = false }
   }, [testId])
 
   if (!test) return null
@@ -75,6 +77,8 @@ export default function TestReview() {
           const q = a.question
           const isCorrect = a.correct
           const isOpen = expExplain === i
+          const writtenCorrect = q?.options?.[q?.correct_index || 0] || q?.correct_answer || '—'
+
           return (
             <div key={i} className={'tr-q' + (isCorrect ? ' correct' : ' wrong')}>
               <div className="tr-q-header">
@@ -84,7 +88,7 @@ export default function TestReview() {
                 </span>
               </div>
               <div className="tr-q-text">{renderQuestionText(q?.question_text)}</div>
-              {q?.question_type === 'written' ? (
+              {q?.question_type === 'written' || q?.question_type === 'short_answer' ? (
                 <div className="tr-q-options">
                   <div className="tr-written-review">
                     <div className="tr-written-row">
@@ -94,7 +98,7 @@ export default function TestReview() {
                     {!isCorrect && (
                       <div className="tr-written-row">
                         <span className="tr-written-label">Correct answer:</span>
-                        <span className="tr-written-val correct">{q?.explanation}</span>
+                        <span className="tr-written-val correct">{writtenCorrect}</span>
                       </div>
                     )}
                   </div>
@@ -118,12 +122,12 @@ export default function TestReview() {
                   })}
                 </div>
               )}
-              {q && q.question_type !== 'written' && !isCorrect && (
+              {q?.explanation && !isCorrect && (
                 <div className="tr-explain-wrap">
                   <button className="tr-explain-btn" onClick={() => setExpExplain(isOpen ? null : i)}>
                     {isOpen ? 'HIDE EXPLANATION' : 'VIEW EXPLANATION'}
                   </button>
-                  {isOpen && q?.explanation && (
+                  {isOpen && (
                     <div className="tr-explain">{q.explanation}</div>
                   )}
                 </div>

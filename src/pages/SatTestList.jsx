@@ -17,7 +17,7 @@ export default function SatTestList() {
       if (data) setTests(data)
       setLoading(false)
     })
-  }, [])
+  }, [setPageTitle, setPageSub, setPageClass])
 
   if (loading) return <div className="page-loading" />
 

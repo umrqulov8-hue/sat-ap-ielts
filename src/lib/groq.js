@@ -12,7 +12,7 @@ export async function explainQuestion(question, userAnswer = null) {
     ? `Foydalanuvchi javobi: ${String.fromCharCode(65 + userAnswer)} (${question.options?.[userAnswer] || ''})`
     : 'Foydalanuvchi hali javob bermagan.'
 
-  const prompt = `Siz SAT Math o'qituvchisiz. Quyidagi savolga qisqa va aniq tushuntirish bering (max 200 so'z).
+  const prompt = `Siz matematika o'qituvchisiz. Quyidagi savolga qisqa va aniq tushuntirish bering (max 200 so'z).
 
 Savol: ${question.question_text || '(matn yo\'q)'}
 Variantlar:
@@ -36,7 +36,7 @@ Matematik formulalar uchun LaTeX ishlating: $x^2$ inline, $$x^2$$ display. O'zbe
     body: JSON.stringify({
       model: MODEL,
       messages: [
-        { role: 'system', content: 'You are a helpful SAT Math tutor. Reply in Uzbek with English math terms. Use LaTeX for math. Be concise.' },
+        { role: 'system', content: 'You are a helpful math tutor. Reply in Uzbek with English math terms. Use LaTeX for math. Be concise.' },
         { role: 'user', content: prompt }
       ],
       temperature: 0.3,

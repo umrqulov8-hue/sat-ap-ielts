@@ -89,7 +89,7 @@ export default function StudyReminder() {
     return () => {
       if (timerRef.current) clearInterval(timerRef.current)
     }
-  }, [])
+  }, [checkUpcoming])
 
   if (!banner || !notifEnabled) return null
 

@@ -16,7 +16,7 @@ export default function TestHistory() {
     setPageTitle('TEST HISTORY')
     setPageSub('Your practice test results')
     setPageClass('test-history')
-  }, [])
+  }, [setPageTitle, setPageSub, setPageClass])
 
   useEffect(() => {
     ;(async () => {
@@ -64,7 +64,7 @@ export default function TestHistory() {
       {tests.length === 0 ? (
         <div className="th-empty">
           <p>No test results yet.</p>
-          <button className="btn btn-primary" onClick={() => navigate('/practice-tests')}>
+          <button className="btn btn-primary" onClick={() => navigate('/algebra')}>
             Take a Practice Test
           </button>
         </div>

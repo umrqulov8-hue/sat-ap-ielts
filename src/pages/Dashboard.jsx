@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useLayout } from '../components/DashLayout'
 import { supabase } from '../lib/supabaseClient'
@@ -6,27 +6,18 @@ import { supabase } from '../lib/supabaseClient'
 export default function Dashboard() {
   const { setPageTitle, setPageSub, setPageClass } = useLayout()
   const navigate = useNavigate()
-  const [profile, setProfile] = useState(null)
-  const [totalScore, setTotalScore] = useState(null)
   const [scores, setScores] = useState([])
   const [tests, setTests] = useState([])
   const [activity, setActivity] = useState([])
   const [modules, setModules] = useState([])
 
-  useEffect(() => {
-    setPageTitle('DASHBOARD')
-    setPageClass('')
-    loadData()
-  }, [])
-
-  const loadData = async () => {
+  const loadData = useCallback(async () => {
     const { data: { session } } = await supabase.auth.getSession()
     const user = session?.user
     if (!user) return navigate('/auth', { replace: true })
 
-    const [profRes, tsRes, scRes, actsRes, modsRes, testRes] = await Promise.all([
+    const [profRes, scRes, actsRes, modsRes, testRes] = await Promise.all([
       supabase.from('profiles').select('*').eq('id', user.id).maybeSingle(),
-      supabase.from('user_total_scores').select('*').eq('user_id', user.id).maybeSingle(),
       supabase.from('user_scores').select('*, subjects(slug, title)').eq('user_id', user.id),
       supabase.from('user_activity').select('*').eq('user_id', user.id).order('created_at', { ascending: false }).limit(4),
       supabase.from('user_progress').select('*, modules(title, description, order_index, lesson_count, duration)').eq('user_id', user.id).in('status', ['started', 'available']).limit(3),
@@ -34,15 +25,19 @@ export default function Dashboard() {
     ])
 
     if (profRes.data) {
-      setProfile(profRes.data)
       setPageSub(`Welcome back, ${profRes.data.display_name || 'Student'}`)
     }
-    if (tsRes.data) setTotalScore(tsRes.data)
     if (scRes.data) setScores(scRes.data)
     if (actsRes.data) setActivity(actsRes.data)
     if (modsRes.data) setModules(modsRes.data)
     if (testRes.data) setTests(testRes.data)
-  }
+  }, [navigate, setPageSub])
+
+  useEffect(() => {
+    setPageTitle('DASHBOARD')
+    setPageClass('')
+    loadData()
+  }, [setPageTitle, setPageClass, loadData])
 
   const getScore = (slug) => {
     const s = scores.find(sc => sc.subjects?.slug === slug)
@@ -54,9 +49,11 @@ export default function Dashboard() {
     return s ? s.max_score : 800
   }
 
-  const satScore = totalScore?.total_score || 0
-  const mathScore = getScore('sat-math') || 0
-  const rwScore = getScore('sat-rw') || 0
+  const advScore = getScore('advanced-math') || 0
+  const dataScore = getScore('data-analysis') || 0
+  const probScore = getScore('problem-solving') || 0
+  const algebraScore = getScore('algebra') || 0
+  const geometryScore = getScore('geometry') || 0
   const testCount = tests.length || 0
   const completedTests = tests.filter(t => t.score > 0).length || 0
 
@@ -65,43 +62,71 @@ export default function Dashboard() {
       <div className="stat-card">
         <div className="stat-card-top">
           <div className="stat-label-row">
-            <span className="stat-tag lavender">SAT</span>
-            <span className="stat-label">SAT SCORE</span>
+            <span className="stat-tag lavender">ADV</span>
+            <span className="stat-label">ADVANCED MATH</span>
           </div>
-          {satScore > 0 && <span className="stat-trend up">+{Math.floor(satScore / 40)}</span>}
+          {advScore > 0 && <span className="stat-trend up">+{Math.floor(advScore / 50)}</span>}
         </div>
-        <div className="stat-value">{satScore || '—'}</div>
+        <div className="stat-value">{advScore || '—'}</div>
         <div className="stat-footer">
-          <span className="stat-footer-label">TARGET: 1500</span>
-          <div className="stat-bar"><div className="stat-bar-fill lavender" style={{ width: `${satScore ? Math.min(100, (satScore / 1600) * 100) : 0}%` }} /></div>
+          <span className="stat-footer-label">OF {getMaxScore('advanced-math')}</span>
+          <div className="stat-bar"><div className="stat-bar-fill lavender" style={{ width: `${advScore ? (advScore / getMaxScore('advanced-math')) * 100 : 0}%` }} /></div>
         </div>
       </div>
       <div className="stat-card">
         <div className="stat-card-top">
           <div className="stat-label-row">
-            <span className="stat-tag peach">MATH</span>
-            <span className="stat-label">SAT MATH</span>
+            <span className="stat-tag peach">DATA</span>
+            <span className="stat-label">DATA ANALYSIS</span>
           </div>
-          {mathScore > 0 && <span className="stat-trend up">+{Math.floor(mathScore / 50)}</span>}
+          {dataScore > 0 && <span className="stat-trend up">+{Math.floor(dataScore / 40)}</span>}
         </div>
-        <div className="stat-value">{mathScore || '—'}</div>
+        <div className="stat-value">{dataScore || '—'}</div>
         <div className="stat-footer">
-          <span className="stat-footer-label">OF {getMaxScore('sat-math')}</span>
-          <div className="stat-bar"><div className="stat-bar-fill peach" style={{ width: `${mathScore ? (mathScore / getMaxScore('sat-math')) * 100 : 0}%` }} /></div>
+          <span className="stat-footer-label">OF {getMaxScore('data-analysis')}</span>
+          <div className="stat-bar"><div className="stat-bar-fill peach" style={{ width: `${dataScore ? (dataScore / getMaxScore('data-analysis')) * 100 : 0}%` }} /></div>
         </div>
       </div>
       <div className="stat-card">
         <div className="stat-card-top">
           <div className="stat-label-row">
-            <span className="stat-tag green">R&W</span>
-            <span className="stat-label">SAT R&W</span>
+            <span className="stat-tag pink">PROB</span>
+            <span className="stat-label">PROBLEM SOLVING</span>
           </div>
-          {rwScore > 0 && <span className="stat-trend up">+{Math.floor(rwScore / 40)}</span>}
+          {probScore > 0 && <span className="stat-trend up">+{Math.floor(probScore / 40)}</span>}
         </div>
-        <div className="stat-value">{rwScore || '—'}</div>
+        <div className="stat-value">{probScore || '—'}</div>
         <div className="stat-footer">
-          <span className="stat-footer-label">OF {getMaxScore('sat-rw')}</span>
-          <div className="stat-bar"><div className="stat-bar-fill green" style={{ width: `${rwScore ? (rwScore / getMaxScore('sat-rw')) * 100 : 0}%` }} /></div>
+          <span className="stat-footer-label">OF {getMaxScore('problem-solving')}</span>
+          <div className="stat-bar"><div className="stat-bar-fill green" style={{ width: `${probScore ? (probScore / getMaxScore('problem-solving')) * 100 : 0}%` }} /></div>
+        </div>
+      </div>
+      <div className="stat-card">
+        <div className="stat-card-top">
+          <div className="stat-label-row">
+            <span className="stat-tag green">ALG</span>
+            <span className="stat-label">ALGEBRA</span>
+          </div>
+          {algebraScore > 0 && <span className="stat-trend up">+{Math.floor(algebraScore / 40)}</span>}
+        </div>
+        <div className="stat-value">{algebraScore || '—'}</div>
+        <div className="stat-footer">
+          <span className="stat-footer-label">OF {getMaxScore('algebra')}</span>
+          <div className="stat-bar"><div className="stat-bar-fill green" style={{ width: `${algebraScore ? (algebraScore / getMaxScore('algebra')) * 100 : 0}%` }} /></div>
+        </div>
+      </div>
+      <div className="stat-card">
+        <div className="stat-card-top">
+          <div className="stat-label-row">
+            <span className="stat-tag yellow">GEO</span>
+            <span className="stat-label">GEOMETRY</span>
+          </div>
+          {geometryScore > 0 && <span className="stat-trend up">+{Math.floor(geometryScore / 40)}</span>}
+        </div>
+        <div className="stat-value">{geometryScore || '—'}</div>
+        <div className="stat-footer">
+          <span className="stat-footer-label">OF {getMaxScore('geometry')}</span>
+          <div className="stat-bar"><div className="stat-bar-fill yellow" style={{ width: `${geometryScore ? (geometryScore / getMaxScore('geometry')) * 100 : 0}%` }} /></div>
         </div>
       </div>
       <div className="stat-card">
@@ -153,9 +178,9 @@ export default function Dashboard() {
       <div className="dash-card">
         <div className="card-header"><h2 className="card-title">QUICK ACTIONS</h2></div>
         <div className="quick-actions">
-          <button className="qa-btn" onClick={() => navigate('/practice-tests')}>
-            <span className="qa-btn-icon lavender"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" /><line x1="12" y1="18" x2="12" y2="12" /><line x1="9" y1="15" x2="15" y2="15" /></svg></span>
-            <span className="qa-btn-text">NEW PRACTICE TEST</span>
+          <button className="qa-btn" onClick={() => navigate('/study')}>
+            <span className="qa-btn-icon lavender"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2"><polygon points="6 3 20 12 6 21 6 3" /></svg></span>
+            <span className="qa-btn-text">WATCH LESSONS</span>
             <span className="qa-btn-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" /></svg></span>
           </button>
           <button className="qa-btn" onClick={() => navigate('/profile')}>
@@ -168,7 +193,7 @@ export default function Dashboard() {
             <span className="qa-btn-text">STUDY PLANNER</span>
             <span className="qa-btn-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" /></svg></span>
           </button>
-          <button className="qa-btn" onClick={() => navigate('/sat-math')}>
+          <button className="qa-btn" onClick={() => navigate('/algebra')}>
             <span className="qa-btn-icon yellow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2"><path d="M12 20h9" /><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" /></svg></span>
             <span className="qa-btn-text">REVIEW WEAK AREAS</span>
             <span className="qa-btn-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" /></svg></span>

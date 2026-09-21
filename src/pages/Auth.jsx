@@ -50,7 +50,7 @@ export default function Auth() {
       if (event === 'SIGNED_IN' && session) navigate('/dashboard', { replace: true })
     })
     return () => subscription?.unsubscribe()
-  }, [])
+  }, [navigate])
 
   useEffect(() => {
     const onKey = (e) => { if (e.key === 'Escape') navigate('/') }
@@ -91,7 +91,7 @@ export default function Auth() {
       } else {
         setSignedUp(true)
       }
-    } catch (err) {
+    } catch {
       setErrors({ general: 'Xatolik yuz berdi. Qaytadan urinib ko\'ring.' })
     } finally {
       setSubmitting(false)
@@ -112,7 +112,7 @@ export default function Auth() {
       if (error) {
         setErrors({ general: 'Email yoki parol noto\'g\'ri' })
       }
-    } catch (err) {
+    } catch {
       setErrors({ general: 'Xatolik yuz berdi. Qaytadan urinib ko\'ring.' })
     } finally {
       setSubmitting(false)
@@ -135,7 +135,7 @@ export default function Auth() {
       } else {
         setForgotSent(true)
       }
-    } catch (err) {
+    } catch {
       setForgotErr('Xatolik yuz berdi. Qaytadan urinib ko\'ring.')
     }
   }
@@ -151,7 +151,7 @@ export default function Auth() {
               {displayedMode === 'signin' ? (
                 <>
                   <h2 className="modal-marketing-heading">YANGI<br />MISIZ?</h2>
-                  <p className="modal-marketing-sub">Ro'yxatdan o'ting va professional SAT/AP tayyorlovni boshlang.</p>
+                  <p className="modal-marketing-sub">Ro'yxatdan o'ting va professional matematika tayyorlovni boshlang.</p>
                 </>
               ) : (
                 <>

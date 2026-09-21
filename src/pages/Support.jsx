@@ -1,14 +1,13 @@
 import { useState, useEffect } from 'react'
 import { useLayout } from '../components/DashLayout'
-import { supabase } from '../lib/supabaseClient'
 import { useToast } from '../components/Toast'
 
 const FAQ_DATA = [
-  { q: 'How do I start a practice test?', a: 'Navigate to Practice Tests in the sidebar and select any available test to begin. You can choose from full-length SAT tests, AP subject tests, or individual module practices.' },
-  { q: 'How is my SAT score calculated?', a: 'Your SAT score is calculated based on the number of correct answers in the Math section (200-800) and the Reading & Writing section (200-800). These two section scores are added together for your total score (400-1600).' },
+  { q: 'How do I start a practice test?', a: 'Navigate to Practice Tests in the sidebar and select any available test to begin. You can choose from full-length SAT tests or individual module practices.' },
+  { q: 'How is my math score calculated?', a: 'Your math score is calculated per track (Advanced Math, Data Analysis, Problem Solving, Algebra, Geometry) on a 0-800 scale based on your accuracy. Your best score per track is saved, and your overall math score is the average of your track scores.' },
   { q: 'Can I retake a practice test?', a: 'Yes, all practice tests can be retaken as many times as you want. Your highest score is automatically saved to your profile, and you can track your progress over time.' },
   { q: 'How do I upgrade to PRO?', a: 'Go to your Profile page from the sidebar and click "Upgrade to PRO". You will get access to unlimited practice tests, detailed analytics, personalized study plans, and priority support.' },
-  { q: 'What subjects are available?', a: 'We currently offer SAT Math, SAT Reading & Writing, AP Biology, and AP Calculus. Each subject includes multiple modules, practice tests, and progress tracking.' },
+  { q: 'What subjects are available?', a: 'We currently offer Advanced Math, Data Analysis, Problem Solving, Algebra, and Geometry. Each track includes multiple modules, practice tests, and progress tracking.' },
   { q: 'How long does a full SAT test take?', a: 'A full digital SAT practice test takes approximately 2 hours and 14 minutes. The Math section is 70 minutes and the Reading & Writing section is 64 minutes.' },
   { q: 'Can I pause a test and resume later?', a: 'Yes, your progress is automatically saved. You can exit a test at any time and continue from where you left off by selecting the same test from Practice Tests.' },
   { q: 'How do I track my progress?', a: 'Your Dashboard shows your current scores, recent activity, and upcoming modules. The Profile page provides detailed analytics including skill breakdowns and score trends.' },
@@ -16,7 +15,11 @@ const FAQ_DATA = [
 
 export default function Support() {
   const { setPageTitle, setPageSub, setPageClass } = useLayout()
-  useEffect(() => { setPageTitle('SUPPORT'); setPageSub("We're here to help you succeed"); setPageClass('') }, [])
+  useEffect(() => {
+    setPageTitle('SUPPORT')
+    setPageSub("We're here to help you succeed")
+    setPageClass('')
+  }, [setPageTitle, setPageSub, setPageClass])
   const [openIndex, setOpenIndex] = useState(null)
   const [search, setSearch] = useState('')
   const [contact, setContact] = useState({ name: '', email: '', subject: '', message: '' })
@@ -85,7 +88,7 @@ export default function Support() {
             </div>
             <span className="support-side-title">LIVE CHAT</span>
             <span className="support-side-desc">Chat with our team in real time</span>
-            <button className="btn-support-side">START CHAT</button>
+            <button className="btn-support-side" onClick={() => window.open('https://t.me/satap_support', '_blank', 'noopener,noreferrer')}>START CHAT</button>
           </div>
           <div className="settings-card support-side-card">
             <div className="support-side-icon">
@@ -93,7 +96,7 @@ export default function Support() {
             </div>
             <span className="support-side-title">GUIDES</span>
             <span className="support-side-desc">Step-by-step tutorials & resources</span>
-            <button className="btn-support-side">VIEW GUIDES</button>
+            <button className="btn-support-side" onClick={() => { const el = document.querySelector('.support-search'); el?.focus(); el?.scrollIntoView({ behavior: 'smooth' }) }}>VIEW GUIDES</button>
           </div>
           <a href="mailto:umrqulov8@gmail.com" style={{ textDecoration: 'none', color: 'inherit' }}>
             <div className="settings-card support-side-card">

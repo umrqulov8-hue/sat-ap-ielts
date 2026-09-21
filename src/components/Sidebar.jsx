@@ -5,11 +5,12 @@ import { useUser } from '../context/UserContext'
 
 const ROUTE_PREFETCH = {
   '/dashboard': () => import('../pages/Dashboard'),
-  '/sat-math': () => import('../pages/SatMath'),
-  '/sat-rw': () => import('../pages/SatRW'),
-  '/ap-bio': () => import('../pages/ApBio'),
-  '/ap-calc': () => import('../pages/ApCalc'),
-  '/practice-tests': () => import('../pages/PracticeTests'),
+  '/algebra': () => import('../pages/Algebra'),
+  '/geometry': () => import('../pages/Geometry'),
+  '/advanced-math': () => import('../pages/AdvancedMath'),
+  '/data-analysis': () => import('../pages/DataAnalysis'),
+  '/problem-solving': () => import('../pages/ProblemSolving'),
+  '/study': () => import('../pages/Study'),
   '/practice/sat-tests': () => import('../pages/SatTestList'),
   '/test-history': () => import('../pages/TestHistory'),
   '/study-plan': () => import('../pages/StudyPlan'),
@@ -24,23 +25,19 @@ const NAV_ITEMS = [
     items: [{ label: 'DASHBOARD', path: '/dashboard', icon: '<rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/>' }]
   },
   {
-    section: 'SAT',
+    section: 'MATH',
     items: [
-      { label: 'SAT MATH', path: '/sat-math', icon: '<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>', badge: '12 TESTS' },
-      { label: 'SAT R&W', path: '/sat-rw', icon: '<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/>', badge: '10 TESTS' }
-    ]
-  },
-  {
-    section: 'AP',
-    items: [
-      { label: 'AP BIO', path: '/ap-bio', icon: '<path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>', badge: '15 TESTS' },
-      { label: 'AP CALC', path: '/ap-calc', icon: '<path d="M22 12h-4l-3 9L9 3l-3 9H2"/>', badge: '8 TESTS' }
+      { label: 'ADVANCED MATH', path: '/advanced-math', icon: '<path d="M22 12h-4l-3 9L9 3l-3 9H2"/>' },
+      { label: 'DATA ANALYSIS', path: '/data-analysis', icon: '<path d="M12 20V10"/><path d="M18 20V4"/><path d="M6 20v-4"/>' },
+      { label: 'PROBLEM SOLVING', path: '/problem-solving', icon: '<circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/>' },
+      { label: 'ALGEBRA', path: '/algebra', icon: '<path d="M18 4H6l6 8-6 8h12"/>' },
+      { label: 'GEOMETRY', path: '/geometry', icon: '<path d="M12 3l9 18H3z"/>' }
     ]
   },
   {
     section: 'PRACTICE',
     items: [
-      { label: 'PRACTICE TESTS', path: '/practice-tests', icon: '<path d="M12 20V10"/><path d="M18 20V4"/><path d="M6 20v-4"/>' },
+      { label: 'STUDY', path: '/study', icon: '<polygon points="6 3 20 12 6 21 6 3"/>' },
       { label: 'SAT TESTS', path: '/practice/sat-tests', icon: '<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/>' },
       { label: 'TEST HISTORY', path: '/test-history', icon: '<path d="M3 3v18h18"/><path d="M7 16l4-4 4 4 5-5"/>' },
       { label: 'STUDY PLAN', path: '/study-plan', icon: '<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>' }
@@ -140,6 +137,11 @@ export default function Sidebar() {
                 <Link to="/admin/sat-tests" className={'snav-item' + (currentPath === '/admin/sat-tests' ? ' active' : '')}>
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
                   TEST ADMIN
+                </Link></div>
+                <div className="snav-wrap">
+                <Link to="/admin/videos" className={'snav-item' + (currentPath === '/admin/videos' ? ' active' : '')}>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polygon points="6 3 20 12 6 21 6 3"/></svg>
+                  VIDEO ADMIN
                 </Link></div></>
               : null}
           </div>

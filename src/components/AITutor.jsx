@@ -1,5 +1,46 @@
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
+import katex from 'katex'
 import { explainQuestion } from '../lib/groq'
+
+function renderMathText(raw) {
+  if (!raw) return ''
+  let text = raw
+  // Display math $$...$$ or \[...\]
+  text = text.replace(/\$\$([\s\S]+?)\$\$/g, (_, math) => {
+    try {
+      return `<div class="aitutor-math-block">${katex.renderToString(math.trim(), { displayMode: true, throwOnError: false })}</div>`
+    } catch {
+      return `<div class="aitutor-math-block">${math}</div>`
+    }
+  }).replace(/\\\[([\s\S]+?)\\\]/g, (_, math) => {
+    try {
+      return `<div class="aitutor-math-block">${katex.renderToString(math.trim(), { displayMode: true, throwOnError: false })}</div>`
+    } catch {
+      return `<div class="aitutor-math-block">${math}</div>`
+    }
+  })
+
+  // Inline math $...$ or \(...\)
+  text = text.replace(/\$([^$\n]+?)\$/g, (_, math) => {
+    try {
+      return `<span class="aitutor-math-inline">${katex.renderToString(math.trim(), { displayMode: false, throwOnError: false })}</span>`
+    } catch {
+      return `<span class="aitutor-math-inline">${math}</span>`
+    }
+  }).replace(/\\\(([\s\S]+?)\\\)/g, (_, math) => {
+    try {
+      return `<span class="aitutor-math-inline">${katex.renderToString(math.trim(), { displayMode: false, throwOnError: false })}</span>`
+    } catch {
+      return `<span class="aitutor-math-inline">${math}</span>`
+    }
+  })
+
+  // Markdown bold
+  text = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+  // Newlines
+  text = text.replace(/\n/g, '<br/>')
+  return text
+}
 
 export default function AITutor({ question, userAnswer, onClose }) {
   const [explanation, setExplanation] = useState('')
@@ -19,10 +60,7 @@ export default function AITutor({ question, userAnswer, onClose }) {
     }
   }
 
-  const html = explanation
-    .replace(/\$\$([^$]+)\$\$/g, '<div class="aitutor-math">$1</div>')
-    .replace(/\$([^$]+)\$/g, '<span class="aitutor-math">$1</span>')
-    .replace(/\n/g, '<br/>')
+  const html = useMemo(() => renderMathText(explanation), [explanation])
 
   return (
     <div className="aitutor-overlay" onClick={onClose}>

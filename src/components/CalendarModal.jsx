@@ -41,14 +41,14 @@ export default function CalendarModal({ active, onClose, dateRef }) {
       saveToday()
       loadLoginDates()
     }
-  }, [active])
+  }, [active, saveToday, loadLoginDates])
 
-  const handleDayClick = (d) => {
+  const handleDayClick = useCallback((d) => {
     setSelectedDate(d)
     const str = `${MONTHS[month].substring(0, 3)} ${d}, ${year}`
     if (dateRef?.current) dateRef.current.textContent = str
     onClose()
-  }
+  }, [month, year, dateRef, onClose])
 
   const renderDays = useCallback(() => {
     const firstDay = new Date(year, month, 1)

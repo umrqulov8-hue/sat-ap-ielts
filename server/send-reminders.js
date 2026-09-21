@@ -15,7 +15,7 @@
  */
 
 import { createClient } from '@supabase/supabase-js'
-import { readFileSync, writeFileSync, existsSync } from 'fs'
+import { readFileSync, existsSync } from 'fs'
 import { join, dirname } from 'path'
 import { fileURLToPath } from 'url'
 import webpush from 'web-push'

@@ -286,6 +286,7 @@
 .module-icon.peach { background: var(--peach); }
 .module-icon.green { background: var(--green); }
 .module-icon.yellow { background: var(--yellow); }
+.module-icon.pink { background: var(--pink, #ff5b7e); }
 
 .module-text {
   display: flex;
@@ -337,6 +338,7 @@
 .module-progress-bar.peach-bar { background: var(--peach); }
 .module-progress-bar.green-bar { background: var(--green); }
 .module-progress-bar.yellow-bar { background: var(--yellow); }
+.module-progress-bar.pink-bar { background: var(--pink, #ff5b7e); }
 
 /* ─── PERSONAL DETAILS ─────────────────────── */
 .personal-details,

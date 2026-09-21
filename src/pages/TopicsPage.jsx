@@ -24,7 +24,7 @@ export default function TopicsPage() {
       const { data: tops } = await supabase.from('topics').select('*').eq('module_id', moduleId).order('order_index')
       if (tops?.length) setTopics(tops)
     })()
-  }, [moduleId])
+  }, [moduleId, setPageTitle, setPageSub, setPageClass])
 
   const handleStart = async (topic) => {
     let cached = getCache('test-questions-' + topic.id)

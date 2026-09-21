@@ -39,7 +39,7 @@ export default function AdminQuestions() {
   const [uploading, setUploading] = useState(false)
   const [editingQ, setEditingQ] = useState(null)
   const toast = useToast()
-  const { isAdmin, isOwner, userRole, refreshUser, profile: userProfile } = useUser()
+  const { isAdmin, isOwner, refreshUser, profile: userProfile } = useUser()
   const [msg, setMsg] = useState('')
 
   const [modTitle, setModTitle] = useState('')
@@ -58,16 +58,12 @@ export default function AdminQuestions() {
   const [notifTarget, setNotifTarget] = useState('all')
   const [activity, setActivity] = useState([])
   const [dbMigrationNeeded, setDbMigrationNeeded] = useState(false)
-  const [dbColumns, setDbColumns] = useState(false)
 
   useEffect(() => {
     ;(async () => {
       const { data, error } = await supabase.from('questions').select('id, passage_text, layout').limit(1)
       if (error || (data && data.length > 0 && !('passage_text' in data[0]))) {
         setDbMigrationNeeded(true)
-        setDbColumns(false)
-      } else {
-        setDbColumns(true)
       }
     })()
   }, [])
@@ -93,7 +89,7 @@ export default function AdminQuestions() {
     setPageTitle('ADMIN')
     setPageSub('Manage Questions')
     setPageClass('')
-  }, [])
+  }, [setPageTitle, setPageSub, setPageClass])
 
   useEffect(() => {
     if (tab !== 'users') return

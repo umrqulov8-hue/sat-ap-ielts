@@ -7,7 +7,7 @@ export default function Home() {
   useScrollReveal()
   const heroRef = useHeroParallax()
 
-  useEffect(() => { document.title = 'SATAP Academy — SAT & AP Prep' }, [])
+  useEffect(() => { document.title = 'SATAP Academy — Math Prep' }, [])
 
   useEffect(() => {
     const handleClick = (e) => {
@@ -59,7 +59,7 @@ export default function Home() {
               <em>uch barobar</em> oshir.
             </h1>
             <p className="unitap-hero-sub">
-              Bizning ekzotik tayyorlov platformamiz SAT va AP imtihonlariga tayyorgarlik ko'rishning
+              Bizning ekzotik tayyorlov platformamiz matematika imtihonlariga tayyorgarlik ko'rishning
               yangi usulini taklif etadi. Maqsadli darslar, real imtihon simulyatsiyalari va AI-yordam.
             </p>
             <div className="unitap-hero-actions">
@@ -186,18 +186,19 @@ export default function Home() {
 
       <div className="unitap-marquee">
         <div className="unitap-marquee-track">
-          <span className="unitap-marquee-item">SAT MATH <span className="unitap-marquee-dot">✦</span></span>
-          <span className="unitap-marquee-item">SAT R&amp;W <span className="unitap-marquee-dot">✦</span></span>
-          <span className="unitap-marquee-item">AP BIOLOGY <span className="unitap-marquee-dot">✦</span></span>
-          <span className="unitap-marquee-item">AP CALCULUS <span className="unitap-marquee-dot">✦</span></span>
+          <span className="unitap-marquee-item">ALGEBRA <span className="unitap-marquee-dot">✦</span></span>
+          <span className="unitap-marquee-item">GEOMETRY <span className="unitap-marquee-dot">✦</span></span>
+          <span className="unitap-marquee-item">ADVANCED MATH <span className="unitap-marquee-dot">✦</span></span>
+          <span className="unitap-marquee-item">DATA ANALYSIS <span className="unitap-marquee-dot">✦</span></span>
+          <span className="unitap-marquee-item">PROBLEM SOLVING <span className="unitap-marquee-dot">✦</span></span>
           <span className="unitap-marquee-item">PRACTICE TESTS <span className="unitap-marquee-dot">✦</span></span>
           <span className="unitap-marquee-item">AI TUTOR <span className="unitap-marquee-dot">✦</span></span>
           <span className="unitap-marquee-item">STUDY PLAN <span className="unitap-marquee-dot">✦</span></span>
-          <span className="unitap-marquee-item">PROCTORED EXAMS <span className="unitap-marquee-dot">✦</span></span>
-          <span className="unitap-marquee-item">SAT MATH <span className="unitap-marquee-dot">✦</span></span>
-          <span className="unitap-marquee-item">SAT R&amp;W <span className="unitap-marquee-dot">✦</span></span>
-          <span className="unitap-marquee-item">AP BIOLOGY <span className="unitap-marquee-dot">✦</span></span>
-          <span className="unitap-marquee-item">AP CALCULUS <span className="unitap-marquee-dot">✦</span></span>
+          <span className="unitap-marquee-item">ALGEBRA <span className="unitap-marquee-dot">✦</span></span>
+          <span className="unitap-marquee-item">GEOMETRY <span className="unitap-marquee-dot">✦</span></span>
+          <span className="unitap-marquee-item">ADVANCED MATH <span className="unitap-marquee-dot">✦</span></span>
+          <span className="unitap-marquee-item">DATA ANALYSIS <span className="unitap-marquee-dot">✦</span></span>
+          <span className="unitap-marquee-item">PROBLEM SOLVING <span className="unitap-marquee-dot">✦</span></span>
           <span className="unitap-marquee-item">PRACTICE TESTS <span className="unitap-marquee-dot">✦</span></span>
           <span className="unitap-marquee-item">AI TUTOR <span className="unitap-marquee-dot">✦</span></span>
           <span className="unitap-marquee-item">STUDY PLAN <span className="unitap-marquee-dot">✦</span></span>
@@ -220,7 +221,7 @@ export default function Home() {
             <div className="unitap-step">
               <span className="unitap-step-num">01 / DIAGNOSE</span>
               <h3 className="unitap-step-title">Darajangizni aniqlang</h3>
-              <p className="unitap-step-desc">5 daqiqalik diagnostik test orqali hozirgi SAT/AP darajangiz va kuchli/zaif tomonlaringiz aniqlanadi.</p>
+              <p className="unitap-step-desc">5 daqiqalik diagnostik test orqali hozirgi matematika darajangiz va kuchli/zaif tomonlaringiz aniqlanadi.</p>
               <div className="unitap-step-bar" />
             </div>
             <div className="unitap-step">
@@ -283,7 +284,7 @@ export default function Home() {
                 </span>
                 <div>
                   <strong>5,000+ amaliy savollar</strong>
-                  <span>SAT Math, R&amp;W, AP Bio, AP Calc — barchasi real imtihon formatida</span>
+                  <span>Algebra, Geometry, Advanced Math, Data Analysis, Problem Solving — barchasi real imtihon formatida</span>
                 </div>
               </div>
               <div className="unitap-empower-item">
@@ -415,12 +416,12 @@ export default function Home() {
                   </svg>
                 ))}
               </span>
-              <p className="unitap-testi-quote">"AP Biology'da 5 oldim! Mock imtihonlar va batafsil tushuntirishlar juda foydali bo'ldi. Repetitorga pul sarflash kerak emas edi."</p>
+              <p className="unitap-testi-quote">"Algebra'da 800 oldim! Mock imtihonlar va batafsil tushuntirishlar juda foydali bo'ldi. Repetitorga pul sarflash kerak emas edi."</p>
               <div className="unitap-testi-author">
                 <div className="unitap-testi-avatar">M</div>
                 <div className="unitap-testi-meta">
                   <span className="unitap-testi-name">MADINA Y.</span>
-                  <span className="unitap-testi-role">AP BIO — SCORE 5</span>
+                  <span className="unitap-testi-role">ALGEBRA — SCORE 800</span>
                 </div>
               </div>
             </div>
@@ -466,7 +467,7 @@ export default function Home() {
                 SATAP Academy
               </div>
               <p className="unitap-footer-tag">
-                SAT va AP imtihonlariga tayyorlanish uchun eng zamonaviy platforma.
+                Matematika imtihonlariga tayyorlanish uchun eng zamonaviy platforma.
                 Maqsadingizga biz bilan erishing.
               </p>
             </div>
@@ -479,10 +480,11 @@ export default function Home() {
             </div>
             <div className="unitap-footer-col">
               <span className="unitap-footer-heading">SUBJECTS</span>
-              <Link to="/sat-math">SAT Math</Link>
-              <Link to="/sat-rw">SAT R&amp;W</Link>
-              <Link to="/ap-bio">AP Biology</Link>
-              <Link to="/ap-calc">AP Calculus</Link>
+              <Link to="/advanced-math">Advanced Math</Link>
+              <Link to="/data-analysis">Data Analysis</Link>
+              <Link to="/problem-solving">Problem Solving</Link>
+              <Link to="/algebra">Algebra</Link>
+              <Link to="/geometry">Geometry</Link>
             </div>
             <div className="unitap-footer-col">
               <span className="unitap-footer-heading">SUPPORT</span>

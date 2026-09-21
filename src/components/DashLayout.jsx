@@ -4,12 +4,15 @@ import '../styles/dashboard-style.css'
 import Sidebar from './Sidebar'
 import CalendarModal from './CalendarModal'
 import StudyReminder from './StudyReminder'
-
-import { UserProvider } from '../context/UserContext'
-import { ToastProvider } from './Toast'
+import NotificationBell from './NotificationBell'
 import { supabase } from '../lib/supabaseClient'
 
-const LayoutCtx = createContext()
+const LayoutCtx = createContext({
+  setPageTitle: () => {},
+  setPageSub: () => {},
+  setPageClass: () => {},
+})
+
 export const useLayout = () => useContext(LayoutCtx)
 
 export default function DashLayout() {
@@ -21,14 +24,12 @@ export default function DashLayout() {
   const [pageClass, setPageClass] = useState('')
   const dateRef = useRef(null)
   const location = useLocation()
-  const pageKey = useRef(location.key)
-  if (location.key !== pageKey.current) pageKey.current = location.key
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
       if (!session) navigate('/', { replace: true })
     })
-  }, [])
+  }, [navigate])
 
   useEffect(() => {
     const trackLogin = async () => {
@@ -50,8 +51,10 @@ export default function DashLayout() {
   const today = new Date()
   const dateStr = `${today.toLocaleString('en-US', { month: 'long' }).toUpperCase()} ${today.getDate()}, ${today.getFullYear()}`
 
-  useEffect(() => { window.scrollTo(0, 0) }, [location.pathname])
-  useEffect(() => { setMobileOpen(false) }, [location.pathname])
+  useEffect(() => {
+    window.scrollTo(0, 0)
+    setMobileOpen(false)
+  }, [location.pathname])
 
   useEffect(() => {
     document.title = pageTitle ? `${pageTitle} — SATAP Academy` : 'SATAP Academy'
@@ -65,42 +68,39 @@ export default function DashLayout() {
   }, [pageTitle])
 
   return (
-    <UserProvider>
-      <ToastProvider>
-      <LayoutCtx.Provider value={{ setPageTitle, setPageSub, setPageClass }}>
-        <div className={`dash-layout${pageClass ? ` ${pageClass}` : ''}${mobileOpen ? ' mobile-open' : ''}`}>
-          <div className="mobile-overlay" onClick={() => setMobileOpen(false)} />
-          <Sidebar />
-          <StudyReminder />
-          <main className="dash-main">
-            <header className="dash-header">
-              <div className="header-left">
-                <button className="hamburger" onClick={() => setMobileOpen(o => !o)} aria-label="Menu">
-                  <span /><span /><span />
-                </button>
-                <div>
-                  <h1 className="header-title">{pageTitle || 'DASHBOARD'}</h1>
-                  <p className="header-sub">{pageSub || 'Welcome back'}</p>
-                </div>
+    <LayoutCtx.Provider value={{ setPageTitle, setPageSub, setPageClass }}>
+      <div className={`dash-layout${pageClass ? ` ${pageClass}` : ''}${mobileOpen ? ' mobile-open' : ''}`}>
+        <div className="mobile-overlay" onClick={() => setMobileOpen(false)} />
+        <Sidebar />
+        <StudyReminder />
+        <main className="dash-main">
+          <header className="dash-header">
+            <div className="header-left">
+              <button className="hamburger" onClick={() => setMobileOpen(o => !o)} aria-label="Menu">
+                <span /><span /><span />
+              </button>
+              <div>
+                <h1 className="header-title">{pageTitle || 'DASHBOARD'}</h1>
+                <p className="header-sub">{pageSub || 'Welcome back'}</p>
               </div>
-              <div className="header-right">
-                <span
-                  ref={dateRef}
-                  className={`header-date small-caps${calActive ? ' hidden' : ''}`}
-                  onClick={() => setCalActive(true)}
-                >
-                  {dateStr}
-                </span>
-              </div>
-            </header>
-            <div key={pageKey.current} className="page-content">
-              <Outlet />
             </div>
-          </main>
-          <CalendarModal active={calActive} onClose={() => setCalActive(false)} dateRef={dateRef} />
-        </div>
-      </LayoutCtx.Provider>
-      </ToastProvider>
-    </UserProvider>
+            <div className="header-right" style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+              <NotificationBell />
+              <span
+                ref={dateRef}
+                className={`header-date small-caps${calActive ? ' hidden' : ''}`}
+                onClick={() => setCalActive(true)}
+              >
+                {dateStr}
+              </span>
+            </div>
+          </header>
+          <div key={location.pathname} className="page-content">
+            <Outlet />
+          </div>
+        </main>
+        <CalendarModal active={calActive} onClose={() => setCalActive(false)} dateRef={dateRef} />
+      </div>
+    </LayoutCtx.Provider>
   )
 }

@@ -182,7 +182,7 @@ create table login_streaks (
 -- Push notification subscriptions
 create table if not exists push_subscriptions (
   id uuid default gen_random_uuid() primary key,
-  user_id uuid references auth.users(id) on delete cascade,
+  user_id uuid references auth.users(id) on delete cascade unique,
   subscription jsonb not null,
   created_at timestamptz default now()
 );
@@ -401,121 +401,163 @@ create policy "Users can update own settings"
   on user_settings for update
   using (auth.uid() = user_id);
 
+create policy "Users can insert own settings"
+  on user_settings for insert
+  with check (auth.uid() = user_id);
+
 -- =====================
 -- SEED DATA: Subjects + Modules
 -- =====================
 insert into subjects (slug, title, description, icon, color, order_index) values
-  ('sat-math', 'SAT Math', 'Algebra, geometry, trigonometry, and data analysis', '📐', '#1a1a2e', 1),
-  ('sat-rw', 'SAT Reading & Writing', 'Critical reading, grammar, and essay writing', '📖', '#16213e', 2),
-  ('ap-bio', 'AP Biology', 'Cell biology, genetics, evolution, and ecology', '🧬', '#0f3460', 3),
-  ('ap-calc', 'AP Calculus', 'Limits, derivatives, integrals, and series', '∫', '#533483', 4);
+  ('advanced-math', 'Advanced Math', 'Quadratics, exponentials, logarithms, and advanced equations', '🧮', '#059669', 1),
+  ('algebra', 'Algebra', 'Equations, inequalities, functions, and polynomials', '∑', '#7c3aed', 2),
+  ('geometry', 'Geometry', 'Angles, shapes, area, volume, and proofs', '△', '#0ea5e9', 3),
+  ('data-analysis', 'Data Analysis', 'Statistics, probability, and data interpretation', '📊', '#d97706', 4),
+  ('problem-solving', 'Problem Solving', 'Ratios, word problems, estimation, and logic', '🧩', '#db2777', 5);
 
--- SAT Math modules
+-- Advanced Math modules
 insert into modules (subject_id, title, description, order_index, lesson_count, duration)
-select id, 'Heart of Algebra', 'Linear equations, inequalities, and systems', 1, 8, '2 weeks' from subjects where slug = 'sat-math';
-
-insert into modules (subject_id, title, description, order_index, lesson_count, duration)
-select id, 'Problem Solving & Data Analysis', 'Ratios, percentages, statistics', 2, 6, '1.5 weeks' from subjects where slug = 'sat-math';
+select id, 'Quadratic Functions', 'Solving quadratics and parabola graphs', 1, 6, '1.5 weeks' from subjects where slug = 'advanced-math';
 
 insert into modules (subject_id, title, description, order_index, lesson_count, duration)
-select id, 'Passport to Advanced Math', 'Quadratic, exponential, and polynomial functions', 3, 8, '2 weeks' from subjects where slug = 'sat-math';
+select id, 'Advanced Equations', 'Rational and radical equations', 2, 6, '1.5 weeks' from subjects where slug = 'advanced-math';
 
 insert into modules (subject_id, title, description, order_index, lesson_count, duration)
-select id, 'Additional Topics', 'Geometry, trigonometry, complex numbers', 4, 5, '1 week' from subjects where slug = 'sat-math';
+select id, 'Exponentials & Logarithms', 'Exponential growth and log basics', 3, 6, '1.5 weeks' from subjects where slug = 'advanced-math';
 
--- SAT RW modules
+-- Algebra modules
 insert into modules (subject_id, title, description, order_index, lesson_count, duration)
-select id, 'Reading Comprehension', 'Passage analysis and main idea identification', 1, 10, '2.5 weeks' from subjects where slug = 'sat-rw';
-
-insert into modules (subject_id, title, description, order_index, lesson_count, duration)
-select id, 'Writing & Language', 'Grammar, punctuation, and sentence structure', 2, 8, '2 weeks' from subjects where slug = 'sat-rw';
+select id, 'Expressions & Equations', 'Simplifying expressions and solving equations', 1, 6, '1.5 weeks' from subjects where slug = 'algebra';
 
 insert into modules (subject_id, title, description, order_index, lesson_count, duration)
-select id, 'Essay Writing', 'Argumentative essay structure and rhetoric', 3, 5, '1 week' from subjects where slug = 'sat-rw';
-
--- AP Bio modules
-insert into modules (subject_id, title, description, order_index, lesson_count, duration)
-select id, 'Cell Biology', 'Cell structure, membrane transport, cell division', 1, 8, '2 weeks' from subjects where slug = 'ap-bio';
+select id, 'Functions & Graphs', 'Function notation and graphing lines', 2, 6, '1.5 weeks' from subjects where slug = 'algebra';
 
 insert into modules (subject_id, title, description, order_index, lesson_count, duration)
-select id, 'Genetics', 'DNA replication, transcription, translation', 2, 6, '1.5 weeks' from subjects where slug = 'ap-bio';
+select id, 'Factoring & Polynomials', 'Factoring techniques and polynomial operations', 3, 6, '1.5 weeks' from subjects where slug = 'algebra';
+
+-- Geometry modules
+insert into modules (subject_id, title, description, order_index, lesson_count, duration)
+select id, 'Angles & Triangles', 'Angle relationships and triangle properties', 1, 6, '1.5 weeks' from subjects where slug = 'geometry';
 
 insert into modules (subject_id, title, description, order_index, lesson_count, duration)
-select id, 'Evolution & Ecology', 'Natural selection, ecosystems, biodiversity', 3, 7, '2 weeks' from subjects where slug = 'ap-bio';
-
--- AP Calc modules
-insert into modules (subject_id, title, description, order_index, lesson_count, duration)
-select id, 'Limits & Continuity', 'Limit laws, continuity, asymptotes', 1, 6, '1.5 weeks' from subjects where slug = 'ap-calc';
+select id, 'Circles & Measurement', 'Circles, area, and perimeter', 2, 6, '1.5 weeks' from subjects where slug = 'geometry';
 
 insert into modules (subject_id, title, description, order_index, lesson_count, duration)
-select id, 'Derivatives', 'Derivative rules, implicit differentiation, applications', 2, 10, '2.5 weeks' from subjects where slug = 'ap-calc';
+select id, 'Solid & Coordinate Geometry', 'Volume, surface area, and the coordinate plane', 3, 6, '1.5 weeks' from subjects where slug = 'geometry';
+
+-- Data Analysis modules
+insert into modules (subject_id, title, description, order_index, lesson_count, duration)
+select id, 'Descriptive Statistics', 'Averages, spread, and distributions', 1, 6, '1.5 weeks' from subjects where slug = 'data-analysis';
 
 insert into modules (subject_id, title, description, order_index, lesson_count, duration)
-select id, 'Integrals', 'Integration techniques, definite integrals, area', 3, 8, '2 weeks' from subjects where slug = 'ap-calc';
+select id, 'Probability', 'Basic and conditional probability', 2, 6, '1.5 weeks' from subjects where slug = 'data-analysis';
+
+insert into modules (subject_id, title, description, order_index, lesson_count, duration)
+select id, 'Data Interpretation', 'Tables, charts, and scatterplots', 3, 6, '1.5 weeks' from subjects where slug = 'data-analysis';
+
+-- Problem Solving modules
+insert into modules (subject_id, title, description, order_index, lesson_count, duration)
+select id, 'Ratios & Rates', 'Unit rates and percent problems', 1, 6, '1.5 weeks' from subjects where slug = 'problem-solving';
+
+insert into modules (subject_id, title, description, order_index, lesson_count, duration)
+select id, 'Word Problems', 'Age, motion, and work problems', 2, 6, '1.5 weeks' from subjects where slug = 'problem-solving';
+
+insert into modules (subject_id, title, description, order_index, lesson_count, duration)
+select id, 'Estimation & Logic', 'Estimation strategies and logical reasoning', 3, 6, '1.5 weeks' from subjects where slug = 'problem-solving';
 
 -- =====================
 -- TOPICS
 -- =====================
 
--- SAT Math → Heart of Algebra
+-- Advanced Math → Quadratic Functions
 insert into topics (module_id, title, description, order_index)
-select id, 'Linear Equations', 'Solving linear equations and inequalities', 1 from modules where title = 'Heart of Algebra' and not exists (select 1 from topics where title = 'Linear Equations');
+select id, 'Solving Quadratics', 'Factoring and quadratic formula', 1 from modules where title = 'Quadratic Functions' and not exists (select 1 from topics where title = 'Solving Quadratics');
 insert into topics (module_id, title, description, order_index)
-select id, 'Systems of Equations', 'Solving systems of linear equations', 2 from modules where title = 'Heart of Algebra' and not exists (select 1 from topics where title = 'Systems of Equations');
+select id, 'Parabolas & Vertex', 'Vertex form and graphing parabolas', 2 from modules where title = 'Quadratic Functions' and not exists (select 1 from topics where title = 'Parabolas & Vertex');
 
--- SAT Math → Problem Solving & Data Analysis
+-- Advanced Math → Advanced Equations
 insert into topics (module_id, title, description, order_index)
-select id, 'Ratios & Proportions', 'Ratios, rates, and proportional relationships', 1 from modules where title = 'Problem Solving & Data Analysis' and not exists (select 1 from topics where title = 'Ratios & Proportions');
+select id, 'Rational Equations', 'Equations with fractions', 1 from modules where title = 'Advanced Equations' and not exists (select 1 from topics where title = 'Rational Equations');
 insert into topics (module_id, title, description, order_index)
-select id, 'Statistics', 'Mean, median, mode, and data interpretation', 2 from modules where title = 'Problem Solving & Data Analysis' and not exists (select 1 from topics where title = 'Statistics');
+select id, 'Radical Equations', 'Square roots in equations', 2 from modules where title = 'Advanced Equations' and not exists (select 1 from topics where title = 'Radical Equations');
 
--- SAT Math → Passport to Advanced Math
+-- Advanced Math → Exponentials & Logarithms
 insert into topics (module_id, title, description, order_index)
-select id, 'Quadratics', 'Quadratic functions and equations', 1 from modules where title = 'Passport to Advanced Math' and not exists (select 1 from topics where title = 'Quadratics');
+select id, 'Exponential Growth', 'Doubling, decay, and applications', 1 from modules where title = 'Exponentials & Logarithms' and not exists (select 1 from topics where title = 'Exponential Growth');
 insert into topics (module_id, title, description, order_index)
-select id, 'Polynomials', 'Polynomial operations and functions', 2 from modules where title = 'Passport to Advanced Math' and not exists (select 1 from topics where title = 'Polynomials');
+select id, 'Logarithm Basics', 'Log rules and evaluation', 2 from modules where title = 'Exponentials & Logarithms' and not exists (select 1 from topics where title = 'Logarithm Basics');
 
--- SAT Math → Additional Topics
+-- Algebra → Expressions & Equations
 insert into topics (module_id, title, description, order_index)
-select id, 'Geometry', 'Angles, triangles, circles, and area', 1 from modules where title = 'Additional Topics' and not exists (select 1 from topics where title = 'Geometry');
+select id, 'Evaluating Expressions', 'Substitute values and simplify', 1 from modules where title = 'Expressions & Equations' and not exists (select 1 from topics where title = 'Evaluating Expressions');
 insert into topics (module_id, title, description, order_index)
-select id, 'Trigonometry', 'Right triangle trig and the unit circle', 2 from modules where title = 'Additional Topics' and not exists (select 1 from topics where title = 'Trigonometry');
+select id, 'Solving Inequalities', 'Linear inequalities and number lines', 2 from modules where title = 'Expressions & Equations' and not exists (select 1 from topics where title = 'Solving Inequalities');
 
--- SAT RW → Reading Comprehension
+-- Algebra → Functions & Graphs
 insert into topics (module_id, title, description, order_index)
-select id, 'Main Idea', 'Identifying central themes and purposes', 1 from modules where title = 'Reading Comprehension' and not exists (select 1 from topics where title = 'Main Idea');
+select id, 'Function Notation', 'Evaluating f(x) and domain basics', 1 from modules where title = 'Functions & Graphs' and not exists (select 1 from topics where title = 'Function Notation');
 insert into topics (module_id, title, description, order_index)
-select id, 'Vocabulary in Context', 'Understanding word meanings in passages', 2 from modules where title = 'Reading Comprehension' and not exists (select 1 from topics where title = 'Vocabulary in Context');
+select id, 'Graphing Lines', 'Slope, intercepts, and equations of lines', 2 from modules where title = 'Functions & Graphs' and not exists (select 1 from topics where title = 'Graphing Lines');
 
--- SAT RW → Writing & Language
+-- Algebra → Factoring & Polynomials
 insert into topics (module_id, title, description, order_index)
-select id, 'Grammar', 'Subject-verb agreement, tenses, punctuation', 1 from modules where title = 'Writing & Language' and not exists (select 1 from topics where title = 'Grammar');
+select id, 'Factoring Quadratics', 'Factor trinomials and special products', 1 from modules where title = 'Factoring & Polynomials' and not exists (select 1 from topics where title = 'Factoring Quadratics');
 insert into topics (module_id, title, description, order_index)
-select id, 'Sentence Structure', 'Clauses, modifiers, and parallelism', 2 from modules where title = 'Writing & Language' and not exists (select 1 from topics where title = 'Sentence Structure');
+select id, 'Polynomial Operations', 'Add, subtract, and multiply polynomials', 2 from modules where title = 'Factoring & Polynomials' and not exists (select 1 from topics where title = 'Polynomial Operations');
 
--- AP Bio → Cell Biology
+-- Geometry → Angles & Triangles
 insert into topics (module_id, title, description, order_index)
-select id, 'Cell Structure', 'Organelles and their functions', 1 from modules where title = 'Cell Biology' and not exists (select 1 from topics where title = 'Cell Structure');
+select id, 'Angle Relationships', 'Complementary, supplementary, and vertical angles', 1 from modules where title = 'Angles & Triangles' and not exists (select 1 from topics where title = 'Angle Relationships');
 insert into topics (module_id, title, description, order_index)
-select id, 'Cell Division', 'Mitosis and meiosis', 2 from modules where title = 'Cell Biology' and not exists (select 1 from topics where title = 'Cell Division');
+select id, 'Triangle Congruence', 'SSS, SAS, ASA, and AAS postulates', 2 from modules where title = 'Angles & Triangles' and not exists (select 1 from topics where title = 'Triangle Congruence');
 
--- AP Bio → Genetics
+-- Geometry → Circles & Measurement
 insert into topics (module_id, title, description, order_index)
-select id, 'DNA & RNA', 'Replication, transcription, translation', 1 from modules where title = 'Genetics' and not exists (select 1 from topics where title = 'DNA & RNA');
+select id, 'Circle Theorems', 'Circumference, arcs, and central angles', 1 from modules where title = 'Circles & Measurement' and not exists (select 1 from topics where title = 'Circle Theorems');
 insert into topics (module_id, title, description, order_index)
-select id, 'Mendelian Genetics', 'Punnett squares and inheritance patterns', 2 from modules where title = 'Genetics' and not exists (select 1 from topics where title = 'Mendelian Genetics');
+select id, 'Area & Perimeter', 'Polygons, trapezoids, and composite shapes', 2 from modules where title = 'Circles & Measurement' and not exists (select 1 from topics where title = 'Area & Perimeter');
 
--- AP Calc → Limits & Continuity
+-- Geometry → Solid & Coordinate Geometry
 insert into topics (module_id, title, description, order_index)
-select id, 'Limits', 'Limit laws and evaluating limits', 1 from modules where title = 'Limits & Continuity' and not exists (select 1 from topics where title = 'Limits');
+select id, 'Volume & Surface Area', 'Prisms, cylinders, cones, and spheres', 1 from modules where title = 'Solid & Coordinate Geometry' and not exists (select 1 from topics where title = 'Volume & Surface Area');
 insert into topics (module_id, title, description, order_index)
-select id, 'Continuity', 'Continuity conditions and IVT', 2 from modules where title = 'Limits & Continuity' and not exists (select 1 from topics where title = 'Continuity');
+select id, 'Coordinate Geometry', 'Distance, midpoint, and slope on the plane', 2 from modules where title = 'Solid & Coordinate Geometry' and not exists (select 1 from topics where title = 'Coordinate Geometry');
 
--- AP Calc → Derivatives
+-- Data Analysis → Descriptive Statistics
 insert into topics (module_id, title, description, order_index)
-select id, 'Derivative Rules', 'Power, product, quotient, chain rule', 1 from modules where title = 'Derivatives' and not exists (select 1 from topics where title = 'Derivative Rules');
+select id, 'Mean, Median & Mode', 'Measures of center', 1 from modules where title = 'Descriptive Statistics' and not exists (select 1 from topics where title = 'Mean, Median & Mode');
 insert into topics (module_id, title, description, order_index)
-select id, 'Applications', 'Related rates, optimization, curve sketching', 2 from modules where title = 'Derivatives' and not exists (select 1 from topics where title = 'Applications');
+select id, 'Spread & Box Plots', 'Range, IQR, and box plots', 2 from modules where title = 'Descriptive Statistics' and not exists (select 1 from topics where title = 'Spread & Box Plots');
+
+-- Data Analysis → Probability
+insert into topics (module_id, title, description, order_index)
+select id, 'Basic Probability', 'Single-event probability', 1 from modules where title = 'Probability' and not exists (select 1 from topics where title = 'Basic Probability');
+insert into topics (module_id, title, description, order_index)
+select id, 'Conditional Probability', 'Probability given conditions', 2 from modules where title = 'Probability' and not exists (select 1 from topics where title = 'Conditional Probability');
+
+-- Data Analysis → Data Interpretation
+insert into topics (module_id, title, description, order_index)
+select id, 'Tables & Charts', 'Reading pie charts and tables', 1 from modules where title = 'Data Interpretation' and not exists (select 1 from topics where title = 'Tables & Charts');
+insert into topics (module_id, title, description, order_index)
+select id, 'Scatterplots & Trend', 'Correlation and trend lines', 2 from modules where title = 'Data Interpretation' and not exists (select 1 from topics where title = 'Scatterplots & Trend');
+
+-- Problem Solving → Ratios & Rates
+insert into topics (module_id, title, description, order_index)
+select id, 'Unit Rates', 'Price per unit and speed', 1 from modules where title = 'Ratios & Rates' and not exists (select 1 from topics where title = 'Unit Rates');
+insert into topics (module_id, title, description, order_index)
+select id, 'Percent Problems', 'Discounts, tax, and percent change', 2 from modules where title = 'Ratios & Rates' and not exists (select 1 from topics where title = 'Percent Problems');
+
+-- Problem Solving → Word Problems
+insert into topics (module_id, title, description, order_index)
+select id, 'Age & Motion Problems', 'Age puzzles and distance problems', 1 from modules where title = 'Word Problems' and not exists (select 1 from topics where title = 'Age & Motion Problems');
+insert into topics (module_id, title, description, order_index)
+select id, 'Work Problems', 'Rates of work and combined effort', 2 from modules where title = 'Word Problems' and not exists (select 1 from topics where title = 'Work Problems');
+
+-- Problem Solving → Estimation & Logic
+insert into topics (module_id, title, description, order_index)
+select id, 'Estimation Strategies', 'Rounding and quick estimates', 1 from modules where title = 'Estimation & Logic' and not exists (select 1 from topics where title = 'Estimation Strategies');
+insert into topics (module_id, title, description, order_index)
+select id, 'Logical Reasoning', 'Deduction and logical puzzles', 2 from modules where title = 'Estimation & Logic' and not exists (select 1 from topics where title = 'Logical Reasoning');
 
 -- =====================
 -- QUESTIONS
@@ -544,143 +586,196 @@ create policy "Anyone can update questions" on questions for update using (true)
 drop policy if exists "Anyone can delete questions" on questions;
 create policy "Anyone can delete questions" on questions for delete using (true);
 
--- Seed questions for SAT Math
+-- Seed questions for Advanced Math
 insert into questions (subject_id, question_text, options, correct_index)
-select id, 'If 3x + 7 = 22, what is the value of x?', '["3","5","7","9"]'::jsonb, 1
-from subjects where slug = 'sat-math' and not exists (select 1 from questions);
+select id, 'What is i²?', '["1","-1","i","0"]'::jsonb, 1
+from subjects where slug = 'advanced-math' and not exists (select 1 from questions where question_text like 'What is i²%');
+
+-- Seed questions for Data Analysis
+insert into questions (subject_id, question_text, options, correct_index)
+select id, 'What is the range of {4, 9, 2, 7}?', '["5","6","7","9"]'::jsonb, 2
+from subjects where slug = 'data-analysis' and not exists (select 1 from questions where question_text like 'What is the range of {4, 9, 2, 7}%');
+
+-- Seed questions for Problem Solving
+insert into questions (subject_id, question_text, options, correct_index)
+select id, 'A train travels 120 km in 2 hours. What is its speed?', '["40","50","60","80"]'::jsonb, 2
+from subjects where slug = 'problem-solving' and not exists (select 1 from questions where question_text like 'A train travels 120 km%');
+
+-- Seed questions for Algebra
+insert into questions (subject_id, question_text, options, correct_index)
+select id, 'Solve for x: 4x + 9 = 25', '["2","4","6","8"]'::jsonb, 1
+from subjects where slug = 'algebra' and not exists (select 1 from questions where question_text like 'Solve for x: 4x + 9%');
 
 insert into questions (subject_id, question_text, options, correct_index)
-select id, 'What is the slope of the line y = 2x + 3?', '["1","2","3","-2"]'::jsonb, 1
-from subjects where slug = 'sat-math' and not exists (select 1 from questions where question_text like 'What is the slope%');
+select id, 'If 2(x + 3) = 16, what is x?', '["3","5","8","13"]'::jsonb, 1
+from subjects where slug = 'algebra' and not exists (select 1 from questions where question_text like 'If 2(x + 3) = 16%');
+
+-- Seed questions for Geometry
+insert into questions (subject_id, question_text, options, correct_index)
+select id, 'What is the sum of the interior angles of a pentagon?', '["360°","540°","720°","900°"]'::jsonb, 1
+from subjects where slug = 'geometry' and not exists (select 1 from questions where question_text like 'What is the sum of the interior angles of a pentagon%');
 
 insert into questions (subject_id, question_text, options, correct_index)
-select id, 'If a rectangle has length 8 and width 5, what is its area?', '["13","26","40","80"]'::jsonb, 2
-from subjects where slug = 'sat-math' and not exists (select 1 from questions where question_text like 'If a rectangle%');
-
-insert into questions (subject_id, question_text, options, correct_index)
-select id, 'What is 15% of 200?', '["15","20","30","35"]'::jsonb, 2
-from subjects where slug = 'sat-math' and not exists (select 1 from questions where question_text like 'What is 15%');
-
-insert into questions (subject_id, question_text, options, correct_index)
-select id, 'Simplify: (x²)(x³)', '["x⁵","x⁶","2x⁵","x"]'::jsonb, 0
-from subjects where slug = 'sat-math' and not exists (select 1 from questions where question_text like 'Simplify:%');
-
--- Seed questions for SAT RW
-insert into questions (subject_id, question_text, options, correct_index)
-select id, 'Choose the correct word: The professor was ___ for his groundbreaking research.', '["renowned","renounced","announced","denounced"]'::jsonb, 0
-from subjects where slug = 'sat-rw' and not exists (select 1 from questions where question_text like 'Choose the correct word%');
-
-insert into questions (subject_id, question_text, options, correct_index)
-select id, 'The author''s tone in the passage can best be described as:', '["critical","supportive","neutral","sarcastic"]'::jsonb, 1
-from subjects where slug = 'sat-rw' and not exists (select 1 from questions where question_text like 'The author''s tone%');
-
-insert into questions (subject_id, question_text, options, correct_index)
-select id, 'Which sentence is grammatically correct?', '["He go to school every day","He goes to school every day","He going to school every day","He went to school every day"]'::jsonb, 1
-from subjects where slug = 'sat-rw' and not exists (select 1 from questions where question_text like 'Which sentence is grammatically%');
-
-insert into questions (subject_id, question_text, options, correct_index)
-select id, 'The word "benevolent" most nearly means:', '["cruel","generous","angry","quick"]'::jsonb, 1
-from subjects where slug = 'sat-rw' and not exists (select 1 from questions where question_text like 'The word benevolent%');
-
-insert into questions (subject_id, question_text, options, correct_index)
-select id, 'What is the main purpose of a thesis statement?', '["To entertain","To introduce the main argument","To conclude the essay","To provide evidence"]'::jsonb, 1
-from subjects where slug = 'sat-rw' and not exists (select 1 from questions where question_text like 'What is the main purpose%');
-
--- Seed questions for AP Bio
-insert into questions (subject_id, question_text, options, correct_index)
-select id, 'What organelle is responsible for protein synthesis?', '["Mitochondria","Ribosome","Nucleus","Golgi apparatus"]'::jsonb, 1
-from subjects where slug = 'ap-bio' and not exists (select 1 from questions where question_text like 'What organelle%');
-
-insert into questions (subject_id, question_text, options, correct_index)
-select id, 'DNA replication occurs during which phase of the cell cycle?', '["G1","S","G2","M"]'::jsonb, 1
-from subjects where slug = 'ap-bio' and not exists (select 1 from questions where question_text like 'DNA replication%');
-
-insert into questions (subject_id, question_text, options, correct_index)
-select id, 'What is the primary function of mitochondria?', '["Protein synthesis","Energy production","Lipid storage","DNA replication"]'::jsonb, 1
-from subjects where slug = 'ap-bio' and not exists (select 1 from questions where question_text like 'What is the primary function of mitochondria%');
-
-insert into questions (subject_id, question_text, options, correct_index)
-select id, 'Which of the following is a prokaryote?', '["Human cell","Bacteria","Plant cell","Fungi"]'::jsonb, 1
-from subjects where slug = 'ap-bio' and not exists (select 1 from questions where question_text like 'Which of the following is a prokaryote%');
-
-insert into questions (subject_id, question_text, options, correct_index)
-select id, 'Photosynthesis takes place in the:', '["Mitochondria","Chloroplast","Nucleus","Ribosome"]'::jsonb, 1
-from subjects where slug = 'ap-bio' and not exists (select 1 from questions where question_text like 'Photosynthesis takes place%');
-
--- Seed questions for AP Calc
-insert into questions (subject_id, question_text, options, correct_index)
-select id, 'What is the derivative of x²?', '["x","2x","2","x²"]'::jsonb, 1
-from subjects where slug = 'ap-calc' and not exists (select 1 from questions where question_text like 'What is the derivative of x²%');
-
-insert into questions (subject_id, question_text, options, correct_index)
-select id, 'What is the limit of 1/x as x approaches infinity?', '["1","Infinity","0","-1"]'::jsonb, 2
-from subjects where slug = 'ap-calc' and not exists (select 1 from questions where question_text like 'What is the limit%');
-
-insert into questions (subject_id, question_text, options, correct_index)
-select id, 'The integral of 2x dx is:', '["x² + C","2 + C","x + C","2x² + C"]'::jsonb, 0
-from subjects where slug = 'ap-calc' and not exists (select 1 from questions where question_text like 'The integral of 2x%');
-
-insert into questions (subject_id, question_text, options, correct_index)
-select id, 'What is the derivative of sin(x)?', '["cos(x)","-sin(x)","tan(x)","-cos(x)"]'::jsonb, 0
-from subjects where slug = 'ap-calc' and not exists (select 1 from questions where question_text like 'What is the derivative of sin%');
-
-insert into questions (subject_id, question_text, options, correct_index)
-select id, 'If f(x) = 3x + 2, what is f(x)?', '["3x","3","2","3x + 2"]'::jsonb, 1
-from subjects where slug = 'ap-calc' and not exists (select 1 from questions where question_text like 'If f(x) = 3x%');
+select id, 'A square has side length 9. What is its perimeter?', '["18","27","36","81"]'::jsonb, 2
+from subjects where slug = 'geometry' and not exists (select 1 from questions where question_text like 'A square has side length 9%');
 
 -- =====================
 -- QUESTIONS PER TOPIC
 -- =====================
 
--- Linear Equations (SAT Math)
+-- Solving Quadratics (Advanced Math)
 insert into questions (subject_id, topic_id, question_text, options, correct_index, explanation, order_index)
-select s.id, t.id, 'If 3x + 7 = 22, what is the value of x?', '["3","5","7","9"]'::jsonb, 1, 'Subtract 7 from both sides: 3x = 15, then divide by 3: x = 5', 1
-from subjects s, topics t where s.slug = 'sat-math' and t.title = 'Linear Equations' and not exists (select 1 from questions where question_text like 'If 3x + 7 = 22%');
-insert into questions (subject_id, topic_id, question_text, options, correct_index, explanation, order_index)
-select s.id, t.id, 'Solve: 2(x - 3) = 12', '["x = 3","x = 6","x = 9","x = 12"]'::jsonb, 2, '2x - 6 = 12 → 2x = 18 → x = 9', 2
-from subjects s, topics t where s.slug = 'sat-math' and t.title = 'Linear Equations' and not exists (select 1 from questions where question_text like 'Solve: 2(x - 3) = 12%');
+select s.id, t.id, 'Solve: x² - 9 = 0', '["3","-3","±3","9"]'::jsonb, 2, 'x² = 9 → x = ±3', 1
+from subjects s, topics t where s.slug = 'advanced-math' and t.title = 'Solving Quadratics' and not exists (select 1 from questions where question_text like 'Solve: x² - 9 = 0%');
 
--- Quadratics (SAT Math)
+-- Parabolas & Vertex (Advanced Math)
 insert into questions (subject_id, topic_id, question_text, options, correct_index, explanation, order_index)
-select s.id, t.id, 'What are the solutions to x² - 5x + 6 = 0?', '["x = 2, 3","x = -2, -3","x = 1, 6","x = -1, -6"]'::jsonb, 0, '(x - 2)(x - 3) = 0 → x = 2 or x = 3', 1
-from subjects s, topics t where s.slug = 'sat-math' and t.title = 'Quadratics' and not exists (select 1 from questions where question_text like 'What are the solutions to x² - 5x%');
-insert into questions (subject_id, topic_id, question_text, options, correct_index, explanation, order_index)
-select s.id, t.id, 'What is the vertex of y = x² - 4x + 3?', '["(2, -1)","(-2, 3)","(4, 3)","(0, 3)"]'::jsonb, 0, 'Vertex x = -b/2a = 2, y = 4 - 8 + 3 = -1', 2
-from subjects s, topics t where s.slug = 'sat-math' and t.title = 'Quadratics' and not exists (select 1 from questions where question_text like 'What is the vertex of y = x²%');
+select s.id, t.id, 'What is the vertex of y = (x - 1)² + 2?', '["(1, 2)","(-1, 2)","(1, -2)","(0, 2)"]'::jsonb, 0, 'Vertex form y = (x - h)² + k → (1, 2)', 1
+from subjects s, topics t where s.slug = 'advanced-math' and t.title = 'Parabolas & Vertex' and not exists (select 1 from questions where question_text like 'What is the vertex of y = (x - 1)%');
 
--- Geometry (SAT Math)
+-- Rational Equations (Advanced Math)
 insert into questions (subject_id, topic_id, question_text, options, correct_index, explanation, order_index)
-select s.id, t.id, 'A triangle has sides 3, 4, and 5. What is its area?', '["6","12","15","20"]'::jsonb, 0, 'It''s a right triangle. Area = ½ × 3 × 4 = 6', 1
-from subjects s, topics t where s.slug = 'sat-math' and t.title = 'Geometry' and not exists (select 1 from questions where question_text like 'A triangle has sides 3, 4, and 5%');
+select s.id, t.id, 'Solve: 2/x = 4', '["2","1/2","8","4"]'::jsonb, 1, '2 = 4x → x = 1/2', 1
+from subjects s, topics t where s.slug = 'advanced-math' and t.title = 'Rational Equations' and not exists (select 1 from questions where question_text like 'Solve: 2/x = 4%');
 
--- Grammar (SAT RW)
+-- Radical Equations (Advanced Math)
 insert into questions (subject_id, topic_id, question_text, options, correct_index, explanation, order_index)
-select s.id, t.id, 'Choose the correct form: Neither the teacher nor the students ___ aware of the change.', '["was","were","is","are"]'::jsonb, 1, 'With "neither...nor", the verb agrees with the closer subject (students → were)', 1
-from subjects s, topics t where s.slug = 'sat-rw' and t.title = 'Grammar' and not exists (select 1 from questions where question_text like 'Neither the teacher nor the students%');
-insert into questions (subject_id, topic_id, question_text, options, correct_index, explanation, order_index)
-select s.id, t.id, 'Which sentence is correct?', '["He go to school yesterday","He goes to school yesterday","He went to school yesterday","He going to school yesterday"]'::jsonb, 2, 'Past tense requires "went"', 2
-from subjects s, topics t where s.slug = 'sat-rw' and t.title = 'Grammar' and not exists (select 1 from questions where question_text like 'He go to school yesterday%');
+select s.id, t.id, 'Solve: √(x + 5) = 3', '["2","4","9","14"]'::jsonb, 1, 'Square both sides: x + 5 = 9 → x = 4', 1
+from subjects s, topics t where s.slug = 'advanced-math' and t.title = 'Radical Equations' and not exists (select 1 from questions where question_text like 'Solve: √(x + 5) = 3%');
 
--- Main Idea (SAT RW)
+-- Exponential Growth (Advanced Math)
 insert into questions (subject_id, topic_id, question_text, options, correct_index, explanation, order_index)
-select s.id, t.id, 'The author''s primary purpose is to:', '["entertain","inform","persuade","criticize"]'::jsonb, 1, 'The passage presents factual information objectively', 1
-from subjects s, topics t where s.slug = 'sat-rw' and t.title = 'Main Idea' and not exists (select 1 from questions where question_text like 'The author''s primary purpose is to:%');
+select s.id, t.id, 'A population of 50 doubles every year. How many after 3 years?', '["150","200","400","800"]'::jsonb, 2, '50 × 2³ = 400', 1
+from subjects s, topics t where s.slug = 'advanced-math' and t.title = 'Exponential Growth' and not exists (select 1 from questions where question_text like 'A population of 50 doubles%');
 
--- Cell Structure (AP Bio)
+-- Logarithm Basics (Advanced Math)
 insert into questions (subject_id, topic_id, question_text, options, correct_index, explanation, order_index)
-select s.id, t.id, 'Which organelle is the site of ATP production?', '["Nucleus","Ribosome","Mitochondria","Golgi"]'::jsonb, 2, 'Mitochondria are the powerhouses of the cell', 1
-from subjects s, topics t where s.slug = 'ap-bio' and t.title = 'Cell Structure' and not exists (select 1 from questions where question_text like 'Which organelle is the site of ATP%');
-insert into questions (subject_id, topic_id, question_text, options, correct_index, explanation, order_index)
-select s.id, t.id, 'What is the function of the Golgi apparatus?', '["Protein synthesis","Energy production","Packaging and transport","DNA replication"]'::jsonb, 2, 'The Golgi modifies, sorts, and packages proteins', 2
-from subjects s, topics t where s.slug = 'ap-bio' and t.title = 'Cell Structure' and not exists (select 1 from questions where question_text like 'What is the function of the Golgi%');
+select s.id, t.id, 'What is log₁₀(1000)?', '["2","3","10","100"]'::jsonb, 1, '10³ = 1000 → log = 3', 1
+from subjects s, topics t where s.slug = 'advanced-math' and t.title = 'Logarithm Basics' and not exists (select 1 from questions where question_text like 'What is log₁₀(1000)%');
 
--- Limits (AP Calc)
+-- Mean, Median & Mode (Data Analysis)
 insert into questions (subject_id, topic_id, question_text, options, correct_index, explanation, order_index)
-select s.id, t.id, 'What is the limit of (x² - 1)/(x - 1) as x approaches 1?', '["0","1","2","undefined"]'::jsonb, 2, 'Factor: (x-1)(x+1)/(x-1) = x+1 → limit = 2', 1
-from subjects s, topics t where s.slug = 'ap-calc' and t.title = 'Limits' and not exists (select 1 from questions where question_text like 'What is the limit of (x² - 1)%');
+select s.id, t.id, 'What is the mode of {2, 3, 3, 5, 7}?', '["2","3","5","7"]'::jsonb, 1, '3 appears most often', 1
+from subjects s, topics t where s.slug = 'data-analysis' and t.title = 'Mean, Median & Mode' and not exists (select 1 from questions where question_text like 'What is the mode of {2, 3, 3, 5, 7}%');
+
+-- Spread & Box Plots (Data Analysis)
 insert into questions (subject_id, topic_id, question_text, options, correct_index, explanation, order_index)
-select s.id, t.id, 'What is lim(x→0) sin(x)/x?', '["0","1","π","undefined"]'::jsonb, 1, 'This is a fundamental trigonometric limit = 1', 2
-from subjects s, topics t where s.slug = 'ap-calc' and t.title = 'Limits' and not exists (select 1 from questions where question_text like 'What is lim(x→0) sin(x)/x%');
+select s.id, t.id, 'What does the IQR describe?', '["Average","Middle 50% spread","Maximum","Total range"]'::jsonb, 1, 'IQR = middle 50% of the data', 1
+from subjects s, topics t where s.slug = 'data-analysis' and t.title = 'Spread & Box Plots' and not exists (select 1 from questions where question_text like 'What does the IQR describe%');
+
+-- Basic Probability (Data Analysis)
+insert into questions (subject_id, topic_id, question_text, options, correct_index, explanation, order_index)
+select s.id, t.id, 'A bag has 3 red and 2 blue marbles. What is P(red)?', '["1/2","3/5","2/5","1/3"]'::jsonb, 1, '3 favorable out of 5 total', 1
+from subjects s, topics t where s.slug = 'data-analysis' and t.title = 'Basic Probability' and not exists (select 1 from questions where question_text like 'A bag has 3 red and 2 blue marbles%');
+
+-- Conditional Probability (Data Analysis)
+insert into questions (subject_id, topic_id, question_text, options, correct_index, explanation, order_index)
+select s.id, t.id, 'P(A|B) means the probability of:', '["A and B","A given B","A or B","Not A"]'::jsonb, 1, 'Vertical bar reads as "given"', 1
+from subjects s, topics t where s.slug = 'data-analysis' and t.title = 'Conditional Probability' and not exists (select 1 from questions where question_text like 'P(A|B) means%');
+
+-- Tables & Charts (Data Analysis)
+insert into questions (subject_id, topic_id, question_text, options, correct_index, explanation, order_index)
+select s.id, t.id, 'In a pie chart, what percent is one quarter?', '["20%","25%","50%","75%"]'::jsonb, 1, '100% ÷ 4 = 25%', 1
+from subjects s, topics t where s.slug = 'data-analysis' and t.title = 'Tables & Charts' and not exists (select 1 from questions where question_text like 'In a pie chart, what percent is one quarter%');
+
+-- Scatterplots & Trend (Data Analysis)
+insert into questions (subject_id, topic_id, question_text, options, correct_index, explanation, order_index)
+select s.id, t.id, 'A downward-trending scatterplot shows what correlation?', '["Positive","Negative","Zero","Perfect"]'::jsonb, 1, 'As x rises, y falls → negative', 1
+from subjects s, topics t where s.slug = 'data-analysis' and t.title = 'Scatterplots & Trend' and not exists (select 1 from questions where question_text like 'A downward-trending scatterplot%');
+
+-- Unit Rates (Problem Solving)
+insert into questions (subject_id, topic_id, question_text, options, correct_index, explanation, order_index)
+select s.id, t.id, 'If 4 apples cost $2, what is the unit price?', '["$0.25","$0.50","$2.00","$8.00"]'::jsonb, 1, '2 ÷ 4 = $0.50 per apple', 1
+from subjects s, topics t where s.slug = 'problem-solving' and t.title = 'Unit Rates' and not exists (select 1 from questions where question_text like 'If 4 apples cost $2%');
+
+-- Percent Problems (Problem Solving)
+insert into questions (subject_id, topic_id, question_text, options, correct_index, explanation, order_index)
+select s.id, t.id, 'What is 20% of 150?', '["20","25","30","35"]'::jsonb, 2, '0.20 × 150 = 30', 1
+from subjects s, topics t where s.slug = 'problem-solving' and t.title = 'Percent Problems' and not exists (select 1 from questions where question_text like 'What is 20% of 150%');
+
+-- Age & Motion Problems (Problem Solving)
+insert into questions (subject_id, topic_id, question_text, options, correct_index, explanation, order_index)
+select s.id, t.id, 'Ali is 3 times as old as Vali. Their ages sum to 24. How old is Ali?', '["6","8","12","18"]'::jsonb, 3, '3x + x = 24 → x = 6 → Ali is 18', 1
+from subjects s, topics t where s.slug = 'problem-solving' and t.title = 'Age & Motion Problems' and not exists (select 1 from questions where question_text like 'Ali is 3 times as old%');
+
+-- Work Problems (Problem Solving)
+insert into questions (subject_id, topic_id, question_text, options, correct_index, explanation, order_index)
+select s.id, t.id, 'A tap fills a tank in 6 hours. What fraction is filled in 2 hours?', '["1/6","1/3","1/2","2/3"]'::jsonb, 1, 'Rate = 1/6 per hour → 2/6 = 1/3', 1
+from subjects s, topics t where s.slug = 'problem-solving' and t.title = 'Work Problems' and not exists (select 1 from questions where question_text like 'A tap fills a tank in 6 hours%');
+
+-- Estimation Strategies (Problem Solving)
+insert into questions (subject_id, topic_id, question_text, options, correct_index, explanation, order_index)
+select s.id, t.id, 'Estimate 49 × 21', '["600","800","1000","1200"]'::jsonb, 2, 'Round: 50 × 20 = 1000', 1
+from subjects s, topics t where s.slug = 'problem-solving' and t.title = 'Estimation Strategies' and not exists (select 1 from questions where question_text like 'Estimate 49 × 21%');
+
+-- Logical Reasoning (Problem Solving)
+insert into questions (subject_id, topic_id, question_text, options, correct_index, explanation, order_index)
+select s.id, t.id, 'All squares are rectangles. Figure X is a square. So X is a:', '["square","rectangle","circle","triangle"]'::jsonb, 1, 'Every square belongs to the rectangle family', 1
+from subjects s, topics t where s.slug = 'problem-solving' and t.title = 'Logical Reasoning' and not exists (select 1 from questions where question_text like 'All squares are rectangles%');
+
+-- Evaluating Expressions (Algebra)
+insert into questions (subject_id, topic_id, question_text, options, correct_index, explanation, order_index)
+select s.id, t.id, 'If x = 3 and y = -2, what is the value of 2x + 3y?', '["0","1","-1","12"]'::jsonb, 0, '2(3) + 3(-2) = 6 - 6 = 0', 1
+from subjects s, topics t where s.slug = 'algebra' and t.title = 'Evaluating Expressions' and not exists (select 1 from questions where question_text like 'If x = 3 and y = -2%');
+
+-- Solving Inequalities (Algebra)
+insert into questions (subject_id, topic_id, question_text, options, correct_index, explanation, order_index)
+select s.id, t.id, 'Solve: 5x - 3 > 12', '["x > 3","x < 3","x > 2","x < 2"]'::jsonb, 0, '5x > 15 → x > 3', 1
+from subjects s, topics t where s.slug = 'algebra' and t.title = 'Solving Inequalities' and not exists (select 1 from questions where question_text like 'Solve: 5x - 3 > 12%');
+
+-- Function Notation (Algebra)
+insert into questions (subject_id, topic_id, question_text, options, correct_index, explanation, order_index)
+select s.id, t.id, 'If f(x) = 2x - 5, what is f(4)?', '["3","8","13","-3"]'::jsonb, 0, 'f(4) = 2(4) - 5 = 3', 1
+from subjects s, topics t where s.slug = 'algebra' and t.title = 'Function Notation' and not exists (select 1 from questions where question_text like 'If f(x) = 2x - 5%');
+
+-- Graphing Lines (Algebra)
+insert into questions (subject_id, topic_id, question_text, options, correct_index, explanation, order_index)
+select s.id, t.id, 'What is the y-intercept of y = -3x + 7?', '["-3","7","3","-7"]'::jsonb, 1, 'In y = mx + b, b = 7 is the y-intercept', 1
+from subjects s, topics t where s.slug = 'algebra' and t.title = 'Graphing Lines' and not exists (select 1 from questions where question_text like 'What is the y-intercept of y = -3x%');
+
+-- Factoring Quadratics (Algebra)
+insert into questions (subject_id, topic_id, question_text, options, correct_index, explanation, order_index)
+select s.id, t.id, 'Factor: x² + 7x + 12', '["(x+3)(x+4)","(x+2)(x+6)","(x+1)(x+12)","(x-3)(x-4)"]'::jsonb, 0, 'Find two numbers with product 12 and sum 7: 3 and 4', 1
+from subjects s, topics t where s.slug = 'algebra' and t.title = 'Factoring Quadratics' and not exists (select 1 from questions where question_text like 'Factor: x² + 7x + 12%');
+
+-- Polynomial Operations (Algebra)
+insert into questions (subject_id, topic_id, question_text, options, correct_index, explanation, order_index)
+select s.id, t.id, 'Add: (3x² + 2x - 1) + (x² - 5x + 4)', '["4x² - 3x + 3","4x² + 7x + 3","2x² - 3x + 3","4x² - 3x - 5"]'::jsonb, 0, 'Combine like terms: 4x² - 3x + 3', 1
+from subjects s, topics t where s.slug = 'algebra' and t.title = 'Polynomial Operations' and not exists (select 1 from questions where question_text like 'Add: (3x² + 2x - 1)%');
+
+-- Angle Relationships (Geometry)
+insert into questions (subject_id, topic_id, question_text, options, correct_index, explanation, order_index)
+select s.id, t.id, 'Two angles are complementary. If one is 35°, what is the other?', '["45°","55°","145°","125°"]'::jsonb, 1, 'Complementary angles sum to 90° → 90 - 35 = 55', 1
+from subjects s, topics t where s.slug = 'geometry' and t.title = 'Angle Relationships' and not exists (select 1 from questions where question_text like 'Two angles are complementary%');
+
+-- Triangle Congruence (Geometry)
+insert into questions (subject_id, topic_id, question_text, options, correct_index, explanation, order_index)
+select s.id, t.id, 'Which postulate proves congruence when three sides are equal?', '["SAS","ASA","SSS","AAS"]'::jsonb, 2, 'Side-Side-Side (SSS) proves congruence', 1
+from subjects s, topics t where s.slug = 'geometry' and t.title = 'Triangle Congruence' and not exists (select 1 from questions where question_text like 'Which postulate proves congruence%');
+
+-- Circle Theorems (Geometry)
+insert into questions (subject_id, topic_id, question_text, options, correct_index, explanation, order_index)
+select s.id, t.id, 'What is the circumference of a circle with radius 5?', '["5π","10π","25π","20π"]'::jsonb, 1, 'C = 2πr = 2π(5) = 10π', 1
+from subjects s, topics t where s.slug = 'geometry' and t.title = 'Circle Theorems' and not exists (select 1 from questions where question_text like 'What is the circumference of a circle with radius 5%');
+
+-- Area & Perimeter (Geometry)
+insert into questions (subject_id, topic_id, question_text, options, correct_index, explanation, order_index)
+select s.id, t.id, 'What is the area of a trapezoid with bases 6 and 10, height 4?', '["28","32","40","20"]'::jsonb, 1, 'A = (6+10)/2 × 4 = 32', 1
+from subjects s, topics t where s.slug = 'geometry' and t.title = 'Area & Perimeter' and not exists (select 1 from questions where question_text like 'What is the area of a trapezoid%');
+
+-- Volume & Surface Area (Geometry)
+insert into questions (subject_id, topic_id, question_text, options, correct_index, explanation, order_index)
+select s.id, t.id, 'What is the volume of a cube with side length 4?', '["16","48","64","24"]'::jsonb, 2, 'V = s³ = 4³ = 64', 1
+from subjects s, topics t where s.slug = 'geometry' and t.title = 'Volume & Surface Area' and not exists (select 1 from questions where question_text like 'What is the volume of a cube%');
+
+-- Coordinate Geometry (Geometry)
+insert into questions (subject_id, topic_id, question_text, options, correct_index, explanation, order_index)
+select s.id, t.id, 'What is the distance between (0, 0) and (3, 4)?', '["3","4","5","7"]'::jsonb, 2, 'd = √(3² + 4²) = 5', 1
+from subjects s, topics t where s.slug = 'geometry' and t.title = 'Coordinate Geometry' and not exists (select 1 from questions where question_text like 'What is the distance between (0, 0)%');
+
+-- =====================
+-- QUESTIONS — FULL COVERAGE (every topic gets at least 1 question)
+-- =====================
 
 -- =====================
 -- STORAGE POLICIES
@@ -707,3 +802,114 @@ using (bucket_id = 'avav2');
 -- Add passage_text and layout columns for split writing questions
 ALTER TABLE questions ADD COLUMN IF NOT EXISTS passage_text text;
 ALTER TABLE questions ADD COLUMN IF NOT EXISTS layout text default 'centered';
+
+-- =====================
+-- USER SETTINGS EXTRAS
+-- =====================
+ALTER TABLE user_settings ADD COLUMN IF NOT EXISTS weekly_digest boolean default false;
+
+-- =====================
+-- ADMIN RPC FUNCTIONS
+-- =====================
+
+-- List all profiles with auth emails (owner/admin only)
+create or replace function get_all_profiles()
+returns table (
+  id uuid,
+  display_name text,
+  email text,
+  role text,
+  plan_type text,
+  created_at timestamptz
+)
+language plpgsql security definer stable
+as $$
+begin
+  if not exists (select 1 from public.profiles p where p.id = auth.uid() and p.role in ('owner','admin')) then
+    raise exception 'Not authorized';
+  end if;
+  return query
+    select p.id, p.display_name, u.email::text, p.role, p.plan_type, p.created_at
+    from public.profiles p
+    left join auth.users u on u.id = p.id
+    order by p.created_at desc;
+end;
+$$;
+
+-- List all practice tests across users (owner/admin only)
+create or replace function get_all_practice_tests()
+returns table (
+  id uuid,
+  user_id uuid,
+  user_name text,
+  title text,
+  subject text,
+  score int,
+  total int,
+  taken_at timestamptz
+)
+language plpgsql security definer stable
+as $$
+begin
+  if not exists (select 1 from public.profiles p where p.id = auth.uid() and p.role in ('owner','admin')) then
+    raise exception 'Not authorized';
+  end if;
+  return query
+    select t.id, t.user_id, coalesce(p.display_name, '')::text, t.title, t.subject, t.score, t.total, t.taken_at
+    from public.practice_tests t
+    left join public.profiles p on p.id = t.user_id
+    order by t.taken_at desc;
+end;
+$$;
+
+-- Change a user's role (only owner/admin can call)
+create or replace function set_user_role(target_user_id uuid, new_role text)
+returns void
+language plpgsql security definer
+as $$
+begin
+  if not exists (select 1 from public.profiles where id = auth.uid() and role in ('owner','admin')) then
+    raise exception 'Not authorized';
+  end if;
+  if new_role not in ('user','admin','owner') then
+    raise exception 'Invalid role';
+  end if;
+  update public.profiles set role = new_role, updated_at = now()
+  where id = target_user_id;
+end;
+$$;
+
+-- =====================
+-- STORAGE BUCKET
+-- =====================
+
+-- Create avav2 bucket (used for avatars and question images)
+insert into storage.buckets (id, name, public)
+values ('avav2', 'avav2', true)
+on conflict (id) do nothing;
+
+-- =====================
+-- VIDEO LESSONS (STUDY section)
+-- =====================
+create table if not exists videos (
+  id uuid default gen_random_uuid() primary key,
+  topic_id uuid references topics(id) on delete cascade,
+  subject_id uuid references subjects(id) on delete cascade,
+  title text not null,
+  description text default '',
+  video_url text not null,
+  video_type text default 'youtube' check (video_type in ('youtube', 'file')),
+  thumbnail_url text default '',
+  order_index int default 0,
+  created_at timestamptz default now()
+);
+
+alter table videos enable row level security;
+
+drop policy if exists "Anyone can view videos" on videos;
+create policy "Anyone can view videos"
+  on videos for select using (true);
+
+drop policy if exists "Admins can manage videos" on videos;
+create policy "Admins can manage videos"
+  on videos for all using (auth.uid() in (select id from profiles where role in ('admin','owner')));

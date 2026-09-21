@@ -31,7 +31,7 @@ async function handleAuthResponse(res) {
       access_token: data.access_token,
       token_type: data.token_type || 'bearer',
       expires_in: data.expires_in,
-      expires_at: data.expires_at,
+      expires_at: data.expires_at ?? (data.expires_in ? Math.floor(Date.now() / 1000) + data.expires_in : undefined),
       refresh_token: data.refresh_token,
       user: data.user,
     }

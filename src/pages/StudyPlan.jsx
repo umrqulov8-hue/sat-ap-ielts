@@ -6,7 +6,7 @@ import { generateStudyPlan } from '../lib/ai'
 
 const DAYS_SHORT = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT']
 const DAYS_FULL = ['SUNDAY', 'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY']
-const TAG_MAP = { MATH: 'math', 'R&W': 'rw', AP: 'ap' }
+const TAG_MAP = { MATH: 'math', 'ADVANCED MATH': 'math', 'DATA ANALYSIS': 'math', 'PROBLEM SOLVING': 'math', ALGEBRA: 'math', GEOMETRY: 'math' }
 const PRIORITY_LABEL = { 1: 'PAST', 2: 'O\'RTA', 3: 'MUHIM' }
 
 function todayNum() { return new Date().getDay() }
@@ -38,24 +38,14 @@ export default function StudyPlan() {
   const [loading, setLoading] = useState(true)
   const [showModal, setShowModal] = useState(false)
   const [editing, setEditing] = useState(null)
-  const [form, setForm] = useState({ day: todayNum(), subject: 'MATH', activity: '', duration: '30 min', time: '09:00', notes: '', priority: 2 })
+  const [form, setForm] = useState({ day: todayNum(), subject: 'ADVANCED MATH', activity: '', duration: '30 min', time: '09:00', notes: '', priority: 2 })
   const [aiPlanLoading, setAiPlanLoading] = useState(false)
   const [autoGenerating, setAutoGenerating] = useState(false)
 
-  useEffect(() => {
-    setPageTitle('STUDY PLAN')
-    setPageSub('Rejalashtir va natijangni kuzat')
-    setPageClass('')
-    loadData().then(planData => {
-      setLoading(false)
-      if (!planData || planData.length === 0) autoGeneratePlan()
-    }).catch(() => setLoading(false))
-  }, [])
-
-  const loadData = async () => {
+  const loadData = useCallback(async () => {
     const { data: { session } } = await supabase.auth.getSession()
     const uid = session?.user?.id
-    if (!uid) return
+    if (!uid) return []
 
     const [planRes, streakRes, profRes] = await Promise.all([
       supabase.from('study_plans').select('*').eq('user_id', uid).order('day_of_week'),
@@ -91,15 +81,9 @@ export default function StudyPlan() {
     }
 
     return planRes.data || []
-  }
+  }, [])
 
-  const openAdd = (day) => {
-    setEditing(null)
-    setForm({ day: day ?? todayNum(), subject: 'MATH', activity: '', duration: '30 min', time: '09:00', notes: '', priority: 2 })
-    setShowModal(true)
-  }
-
-  const autoGeneratePlan = async () => {
+  const autoGeneratePlan = useCallback(async () => {
     setAutoGenerating(true)
     try {
       const { data: { session } } = await supabase.auth.getSession()
@@ -121,19 +105,46 @@ export default function StudyPlan() {
         const dayNum = dayMap[day.day]
         if (dayNum === undefined) continue
         for (const task of (day.tasks || [])) {
-          const { data } = await supabase.from('study_plans').insert({
-            user_id: uid, day_of_week: dayNum, subject: task.subject || 'MATH',
-            activity: task.activity, duration: task.duration || '30 min', time_slot: '09:00', priority: task.priority || 2,
-          }).select().single()
-          if (data) newTasks.push(data)
+          newTasks.push({
+            user_id: uid,
+            day_of_week: dayNum,
+            subject: task.subject || 'MATH',
+            activity: task.activity,
+            duration: task.duration || '30 min',
+            time_slot: '09:00',
+            priority: task.priority || 2,
+          })
         }
       }
+
       if (newTasks.length > 0) {
-        setTasks(prev => [...prev, ...newTasks].sort((a, b) => a.day_of_week - b.day_of_week || minFromTime(a.time_slot) - minFromTime(b.time_slot)))
-        toast.success(`AI ${newTasks.length} ta topshiriq yaratdi!`)
+        const { data: inserted } = await supabase.from('study_plans').insert(newTasks).select()
+        if (inserted?.length) {
+          setTasks(prev => [...prev, ...inserted].sort((a, b) => a.day_of_week - b.day_of_week || minFromTime(a.time_slot) - minFromTime(b.time_slot)))
+          toast.success(`AI ${inserted.length} ta topshiriq yaratdi!`)
+        }
       }
-    } catch (e) { /* silent */ }
-    setAutoGenerating(false)
+    } catch {
+      // silent
+    } finally {
+      setAutoGenerating(false)
+    }
+  }, [toast])
+
+  useEffect(() => {
+    setPageTitle('STUDY PLAN')
+    setPageSub('Rejalashtir va natijangni kuzat')
+    setPageClass('')
+    loadData().then(planData => {
+      setLoading(false)
+      if (!planData || planData.length === 0) autoGeneratePlan()
+    }).catch(() => setLoading(false))
+  }, [setPageTitle, setPageSub, setPageClass, loadData, autoGeneratePlan])
+
+  const openAdd = (day) => {
+    setEditing(null)
+    setForm({ day: day ?? todayNum(), subject: 'ADVANCED MATH', activity: '', duration: '30 min', time: '09:00', notes: '', priority: 2 })
+    setShowModal(true)
   }
 
   const handleAiPlan = async () => {
@@ -216,7 +227,7 @@ export default function StudyPlan() {
       }
     }
     setShowModal(false)
-  }, [form, editing])
+  }, [form, editing, toast])
 
   const toggleDone = async (task) => {
     const { data: { session } } = await supabase.auth.getSession()
@@ -453,9 +464,11 @@ export default function StudyPlan() {
             <div>
               <label className="sp-label">FAN</label>
               <select className="onboarding-input" value={form.subject} onChange={e => setForm({ ...form, subject: e.target.value })}>
-                <option value="MATH">MATH</option>
-                <option value="R&W">R&W</option>
-                <option value="AP">AP</option>
+                <option value="ADVANCED MATH">ADVANCED MATH</option>
+                <option value="DATA ANALYSIS">DATA ANALYSIS</option>
+                <option value="PROBLEM SOLVING">PROBLEM SOLVING</option>
+                <option value="ALGEBRA">ALGEBRA</option>
+                <option value="GEOMETRY">GEOMETRY</option>
               </select>
             </div>
             <div>

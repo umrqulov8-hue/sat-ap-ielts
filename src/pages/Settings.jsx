@@ -3,9 +3,11 @@ import { useLayout } from '../components/DashLayout'
 import { supabase } from '../lib/supabaseClient'
 import { registerServiceWorker, subscribeToPush, unsubscribeFromPush } from '../lib/pushNotifications'
 import { useToast } from '../components/Toast'
+import { useUser } from '../context/UserContext'
 
 export default function Settings() {
   const { setPageTitle, setPageSub, setPageClass } = useLayout()
+  const { refreshUser } = useUser()
 
   const [account, setAccount] = useState({ name: 'STUDENT', email: '', lang: 'EN' })
   const [notifs, setNotifs] = useState({ email_notifications: true, push_notifications: true, digest: false, reminders: true })
@@ -15,14 +17,7 @@ export default function Settings() {
   const toast = useToast()
   const [loading, setLoading] = useState(true)
 
-  useEffect(() => {
-    setPageTitle('SETTINGS')
-    setPageSub('Manage your account preferences')
-    setPageClass('')
-    loadSettings().finally(() => setLoading(false))
-  }, [])
-
-  const loadSettings = async () => {
+  const loadSettings = useCallback(async () => {
     const { data: { session } } = await supabase.auth.getSession()
     const user = session?.user
     if (!user) return
@@ -39,7 +34,14 @@ export default function Settings() {
       digest: settings.weekly_digest ?? false,
       reminders: settings.reminder_time ? true : false,
     })
-  }
+  }, [])
+
+  useEffect(() => {
+    setPageTitle('SETTINGS')
+    setPageSub('Manage your account preferences')
+    setPageClass('')
+    loadSettings().finally(() => setLoading(false))
+  }, [setPageTitle, setPageSub, setPageClass, loadSettings])
 
   const showMsg = (text) => { setMsg(text); setTimeout(() => setMsg(''), 2500) }
 
@@ -61,17 +63,18 @@ export default function Settings() {
       showMsg('Push notifications disabled')
     }
 
-    await supabase.from('user_settings').update({
+    await supabase.from('user_settings').upsert({
+      user_id: user.id,
       push_notifications: enabled,
-    }).eq('user_id', user.id)
+    }, { onConflict: 'user_id' })
   }, [])
 
   const saveAccount = async () => {
     showMsg('Account info saved!')
     const { data: { session } } = await supabase.auth.getSession()
     const user = session?.user
-    if (!user) return
-    await supabase.from('profiles').update({ display_name: account.name }).eq('id', user.id)
+    await supabase.from('profiles').update({ display_name: account.name, lang: account.lang }).eq('id', user.id)
+    refreshUser()
   }
 
   const saveNotifs = async () => {
@@ -79,11 +82,13 @@ export default function Settings() {
     const { data: { session } } = await supabase.auth.getSession()
     const user = session?.user
     if (!user) return
-    const { error } = await supabase.from('user_settings').update({
+    const { error } = await supabase.from('user_settings').upsert({
+      user_id: user.id,
       email_notifications: notifs.email_notifications,
       push_notifications: notifs.push_notifications,
+      weekly_digest: notifs.digest,
       reminder_time: notifs.reminders ? '10:00' : null,
-    }).eq('user_id', user.id)
+    }, { onConflict: 'user_id' })
     if (error) {
       toast.error(error.message)
     } else {

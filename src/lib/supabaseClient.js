@@ -228,7 +228,7 @@ class SupabaseRealtimeChannel {
           failCount++
           if (failCount >= 2) return
         }
-      } catch (e) { failCount++; if (failCount >= 3) return }
+      } catch { failCount++; if (failCount >= 3) return }
       this._pollTimer = setTimeout(poll, 10000)
     }
     poll()

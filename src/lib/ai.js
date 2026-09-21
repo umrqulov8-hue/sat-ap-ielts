@@ -25,27 +25,30 @@ async function callGroq(systemPrompt, userPrompt, maxTokens = 1000) {
   return data.choices?.[0]?.message?.content || ''
 }
 
-export async function forecastScore(userScores, tests, targetScore = 1500) {
+export async function forecastScore(userScores, tests, targetScore = 700) {
   const scoresText = userScores.map(s => `${s.subjects?.title || 'Unknown'}: ${s.score}/${s.max_score || 800}`).join('\n')
   const testsText = tests.slice(0, 10).map(t => `${t.title || t.subject}: ${t.score}/${t.total} (${Math.round(t.score / t.total * 100)}%)`).join('\n')
   const avgScore = tests.length > 0 ? Math.round(tests.reduce((a, t) => a + (t.score / t.total), 0) / tests.length * 100) : 0
 
-  const system = 'You are an SAT score prediction expert. Reply in Uzbek with English terms. Be concise and data-driven.'
-  const prompt = `Foydalanuvchi SAT natijalari:
+  const system = 'You are a math score prediction expert. Reply in Uzbek with English terms. Be concise and data-driven.'
+  const prompt = `Foydalanuvchi matematika natijalari:
 
-Fan bo'yicha ballar:
+Yo'nalish bo'yicha ballar:
 ${scoresText || 'Ma\'lumot yo\'q'}
 
 Oxirgi testlar (${tests.length} ta):
 ${testsText || 'Ma\'lumot yo\'q'}
 
-O\'rtacha ball: ${avgScore}%
+O'rtacha ball: ${avgScore}%
 Maqsad: ${targetScore}
 
 JSON formatda javob bering:
 {
-  "predicted_math": <son>,
-  "predicted_rw": <son>,
+  "predicted_advanced_math": <son>,
+  "predicted_data_analysis": <son>,
+  "predicted_problem_solving": <son>,
+  "predicted_algebra": <son>,
+  "predicted_geometry": <son>,
   "predicted_total": <son>,
   "confidence": <foiz 0-100>,
   "trend": "up" yoki "down" yoki "stable",
@@ -59,13 +62,23 @@ Faqat JSON yozing, boshqa hech narsa yo'q.`
     const json = raw.replace(/```json/g, '').replace(/```/g, '').trim()
     return JSON.parse(json)
   } catch {
-    return { predicted_math: 0, predicted_rw: 0, predicted_total: 0, confidence: 0, trend: 'stable', advice: 'Natijani tahlil qilib bo\'lmadi' }
+    return { predicted_advanced_math: 0, predicted_data_analysis: 0, predicted_problem_solving: 0, predicted_algebra: 0, predicted_geometry: 0, predicted_total: 0, confidence: 0, trend: 'stable', advice: 'Natijani tahlil qilib bo\'lmadi' }
   }
 }
 
 export async function analyzeTest(test, questions, userAnswers) {
-  const qStats = questions.map((q, i) => {
-    const userAns = userAnswers?.[q.id]
+  const ansMap = {}
+  if (Array.isArray(userAnswers)) {
+    for (const a of userAnswers) {
+      const qid = a?.question?.id
+      if (qid !== undefined && qid !== null) ansMap[qid] = a.selected
+    }
+  } else if (userAnswers) {
+    Object.assign(ansMap, userAnswers)
+  }
+
+  const qStats = questions.map(q => {
+    const userAns = ansMap[q.id]
     const correct = userAns === q.correct_index
     const topic = q.topic_id || 'unknown'
     return { id: q.id, correct, topic, question: q.question_text?.slice(0, 80) }
@@ -116,10 +129,10 @@ export async function generateStudyPlan(userScores, tests, subjects, examDate) {
   const testsText = tests.slice(0, 5).map(t => `${t.title}: ${Math.round(t.score / t.total * 100)}%`).join('\n')
   const daysLeft = examDate ? Math.max(1, Math.ceil((new Date(examDate) - new Date()) / (1000 * 60 * 60 * 24))) : 90
 
-  const system = 'You are an SAT study plan expert. Be concise, practical, and direct. No motivational phrases, no fluff, no advertising. Just assign specific study tasks.'
-  const prompt = `Foydalanuvchi uchun haftalik SAT o'quv rejasini tuzing.
+  const system = 'You are a math study plan expert. Be concise, practical, and direct. No motivational phrases, no fluff, no advertising. Just assign specific study tasks.'
+  const prompt = `Foydalanuvchi uchun haftalik matematika o'quv rejasini tuzing.
 
-Fan bo'yicha ballar:
+Yo'nalish bo'yicha ballar:
 ${scoresText || 'Ma\'lumot yo\'q'}
 
 Oxirgi testlar:
@@ -129,14 +142,15 @@ Imtihon sanasi: ${examDate || 'Noma\'lum'}
 Qolgan kunlar: ${daysLeft}
 
 Har bir kun uchun 2-4 ta aniq vazifa tuzing. Faqat vazifalar, motivatsiya gapirmang.
+Subject faqat quyidagilardan biri bo'lsin: "ADVANCED MATH", "DATA ANALYSIS", "PROBLEM SOLVING", "ALGEBRA", "GEOMETRY".
 JSON formatda:
 {
   "plan": [
     {
       "day": "MONDAY",
       "tasks": [
-        {"subject": "MATH", "activity": "Heart of Algebra — 20 ta masala hal qilish", "duration": "45 min", "priority": 3},
-        {"subject": "R&W", "activity": "Reading passage — main idea topish mashqi", "duration": "30 min", "priority": 2}
+        {"subject": "ADVANCED MATH", "activity": "Solving Quadratics — 20 ta masala hal qilish", "duration": "45 min", "priority": 3},
+        {"subject": "GEOMETRY", "activity": "Triangle Congruence — 15 ta masala hal qilish", "duration": "30 min", "priority": 2}
       ]
     }
   ]
@@ -157,13 +171,15 @@ export async function dailyAdvice(userScores, tests, streak, studyPlan) {
   const scoresText = userScores.map(s => `${s.subjects?.title || 'Unknown'}: ${s.score}`).join('\n')
   const recentTests = tests.slice(0, 3).map(t => `${t.title}: ${Math.round(t.score / t.total * 100)}%`).join('\n')
   const today = new Date().toLocaleDateString('en-US', { weekday: 'long' }).toUpperCase()
+  const planInfo = studyPlan?.focus_areas?.length ? studyPlan.focus_areas.join(', ') : 'Reja mavjud'
 
   const system = 'You are a friendly SAT study advisor. Reply in Uzbek with English terms. Be motivating and concise.'
-  const prompt = `Bugungi o\'quv maslahati.
+  const prompt = `Bugungi o'quv maslahati.
 
 Fan ballari: ${scoresText || 'Ma\'lumot yo\'q'}
 Oxirgi testlar: ${recentTests || 'Ma\'lumot yo\'q'}
 Streak: ${streak} kun
+Fokus: ${planInfo}
 Bugun: ${today}
 
 JSON formatda javob bering:

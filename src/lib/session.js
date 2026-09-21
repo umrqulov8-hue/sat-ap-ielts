@@ -25,7 +25,7 @@ function persist(session) {
 function readStoredSession() {
   const stored = localStorage.getItem(STORAGE_KEY)
   if (stored) {
-    try { return JSON.parse(stored) } catch (e) { localStorage.removeItem(STORAGE_KEY) }
+    try { return JSON.parse(stored) } catch { localStorage.removeItem(STORAGE_KEY) }
   }
   const old = localStorage.getItem(OLD_STORAGE_KEY)
   if (old) {
@@ -35,7 +35,7 @@ function readStoredSession() {
         persist(parsed)
         return parsed
       }
-    } catch (e) { localStorage.removeItem(OLD_STORAGE_KEY) }
+    } catch { localStorage.removeItem(OLD_STORAGE_KEY) }
   }
   return null
 }
@@ -47,7 +47,7 @@ async function fetchUser(accessToken) {
     })
     if (!res.ok) return null
     return res.json()
-  } catch (e) { return null }
+  } catch { return null }
 }
 
 async function doRefresh(refreshToken) {
@@ -64,7 +64,7 @@ async function doRefresh(refreshToken) {
     persist(data)
     scheduleRefresh(data)
     return data
-  } catch (e) { return null }
+  } catch { return null }
 }
 
 function scheduleRefresh(session) {
