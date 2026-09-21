@@ -85,11 +85,20 @@ export default function TestPage() {
     ;(async () => {
       const { data: { session } } = await supabase.auth.getSession()
 
+      const { data: subjectData } = await supabase.from('subjects').select('id, title, slug').eq('slug', subjectSlug).maybeSingle()
+      
+      let qPromise = Promise.resolve({ data: null })
+      if (!cachedQuestions && subjectData) {
+        let qQuery = supabase.from('questions').select('*').eq('subject_id', subjectData.id)
+        if (difficulty && difficulty !== 'mixing') {
+          qQuery = qQuery.eq('difficulty', difficulty)
+        }
+        qPromise = qQuery.order('order_index')
+      }
+
       const [tpResult, qsResult, profResult] = await Promise.all([
-        supabase.from('topics')
-          .select('*, modules!inner(subject_id, title, subjects!inner(id, title, slug))')
-          .eq('id', subjectSlug + '-' + difficulty).maybeSingle(),
-        !cachedQuestions ? supabase.from('questions').select('*').eq('topic_id', subjectSlug + '-' + difficulty).order('order_index') : Promise.resolve({ data: null }),
+        Promise.resolve({ data: subjectData ? { id: subjectSlug + '-' + difficulty, title: difficulty.toUpperCase() + ' PRACTICE', subject: subjectData, modules: { title: subjectData.title } } : null }),
+        qPromise,
         session?.user ? supabase.from('profiles').select('display_name').eq('id', session.user.id).maybeSingle() : Promise.resolve({ data: null }),
       ])
 
@@ -366,8 +375,8 @@ export default function TestPage() {
           question: { id: a.question?.id, question_text: a.question?.question_text, options: a.question?.options, correct_index: a.question?.correct_index, explanation: a.question?.explanation, question_type: a.question?.question_type }
         }))
         const { data: testRes } = await supabase.from('practice_tests').insert({
-          user_id: uid, title: topic.title, topic_id: topic.id,
-          subject: topic.modules?.subjects?.title || '',
+          user_id: uid, title: topic.title,
+          subject: topic.subject?.title || 'General',
           score, total: answers.length,
           duration: Math.round((Date.now() - new Date(startedAt).getTime()) / 60000).toString(),
           answers: ansData,
@@ -379,7 +388,7 @@ export default function TestPage() {
 
         const updates = [
           supabase.from('user_progress').upsert({
-            user_id: uid, module_id: topic.module_id,
+            user_id: uid, module_id: topic.id,
             status: 'completed', score,
             completed_at: new Date().toISOString(),
           }, { onConflict: 'user_id,module_id' }),
