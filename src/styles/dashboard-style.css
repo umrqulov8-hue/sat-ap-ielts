@@ -502,7 +502,6 @@ button.snav-item {
     cursor: pointer;
     transition: transform 0.3s var(--u-ease), box-shadow 0.3s var(--u-ease), border-color 0.3s var(--u-ease);
     position: relative;
-    top: -4px;
     display: inline-flex;
     align-items: center;
     height: 2.2rem;
@@ -2750,10 +2749,33 @@ select.settings-input {
 .admin-notify .admin-layer { max-width: 500px; }
 
 /* ─── Notification Bell ─── */
-.notif-bell-btn { background: none; border: 2px solid var(--black); padding: 0.5rem 0.8rem; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; line-height: 1; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.12em; transition: all 0.2s var(--ease); height: 2.2rem; }
-.notif-bell-btn:hover { background: var(--black); color: var(--white); }
+.notif-bell-btn { 
+    background: #fff; 
+    border: 2px solid var(--dark); 
+    padding: 0.5rem 0.8rem; 
+    cursor: pointer; 
+    display: inline-flex; 
+    align-items: center; 
+    justify-content: center; 
+    line-height: 1; 
+    font-size: 0.65rem; 
+    font-weight: 700; 
+    letter-spacing: 0.12em; 
+    transition: transform 0.3s var(--u-ease), box-shadow 0.3s var(--u-ease), border-color 0.3s var(--u-ease); 
+    height: 2.2rem; 
+    box-shadow: 2px 2px 0 var(--dark);
+}
+.notif-bell-btn:hover { 
+    background: var(--black); 
+    color: var(--white); 
+    transform: translate(-2px, -2px);
+    box-shadow: 4px 4px 0 var(--dark);
+}
 .notif-bell-btn:hover svg { stroke: var(--white); }
-.notif-bell-btn:active { transform: scale(0.97); }
+.notif-bell-btn:active { 
+    transform: translate(0, 0); 
+    box-shadow: 2px 2px 0 var(--dark);
+}
 .notif-badge { position: absolute; top: -5px; right: -5px; background: #a31a1a; color: white; font-size: 0.5rem; font-weight: 800; padding: 0.1rem 0.3rem; border-radius: 0; line-height: 1; min-width: 14px; text-align: center; }
 .notif-panel { position: absolute; top: 100%; right: 0; margin-top: 0.25rem; width: 320px; background: var(--white); border: 2px solid var(--black); box-shadow: 4px 4px 0 var(--gray-700); z-index: 300; max-height: 70vh; display: flex; flex-direction: column; }
 .notif-panel-header { display: flex; justify-content: space-between; align-items: center; padding: 0.6rem 0.8rem; border-bottom: 2px solid var(--black); }
