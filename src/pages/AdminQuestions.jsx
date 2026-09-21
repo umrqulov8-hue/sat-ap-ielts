@@ -189,30 +189,14 @@ export default function AdminQuestions() {
 
   useEffect(() => {
     if (!selSubject) return
-    supabase.from('modules').select('*').eq('subject_id', selSubject).order('order_index').then(({ data }) => {
-      setModules(data || [])
-      setSelModule('')
-      setTopics([])
-      setSelTopic('')
-      setQuestions([])
-    })
-  }, [selSubject])
-
-  useEffect(() => {
-    if (!selModule) return
-    supabase.from('topics').select('*').eq('module_id', selModule).order('order_index').then(({ data }) => {
-      setTopics(data || [])
-      setSelTopic('')
-      setQuestions([])
-    })
-  }, [selModule])
-
-  useEffect(() => {
-    if (!selTopic) return
-    supabase.from('questions').select('*').eq('topic_id', selTopic).order('order_index').then(({ data }) => {
+    let query = supabase.from('questions').select('*').eq('subject_id', selSubject).order('order_index')
+    if (selDifficulty && selDifficulty !== 'all') {
+      query = query.eq('difficulty', selDifficulty)
+    }
+    query.then(({ data }) => {
       setQuestions(data || [])
     })
-  }, [selTopic])
+  }, [selSubject, selDifficulty])
 
   const resetQForm = () => {
     setQText(''); setPassageText(''); setNoText(false); setQType('mc'); setOpts(['', '', '', ''])
@@ -333,7 +317,9 @@ export default function AdminQuestions() {
       setMsg(editingQ ? 'Question updated!' : 'Question saved!')
       toast.success(editingQ ? 'Question updated!' : 'Question saved!')
       resetQForm()
-      const { data } = await supabase.from('questions').select('*').eq('topic_id', selTopic).order('order_index')
+      let query = supabase.from('questions').select('*').eq('subject_id', selSubject).order('order_index')
+      if (selDifficulty && selDifficulty !== 'all') { query = query.eq('difficulty', selDifficulty) }
+      const { data } = await query
       if (data) setQuestions(data)
     }
   }
@@ -858,7 +844,6 @@ ALTER TABLE questions ADD COLUMN IF NOT EXISTS layout text default 'centered';</
                   <option value="easy">Easy</option>
                   <option value="medium">Medium</option>
                   <option value="hard">Hard</option>
-                  <option value="elite">Elite</option>
                   <option value="mixing">Mixing</option>
                 </select>
               </div>
@@ -944,7 +929,7 @@ ALTER TABLE questions ADD COLUMN IF NOT EXISTS layout text default 'centered';</
                             <option value="easy">Easy</option>
                             <option value="medium">Medium</option>
                             <option value="hard">Hard</option>
-                            <option value="elite">Elite</option>
+                            
                             <option value="mixing">Mixing</option>
                           </select>
                         </div>

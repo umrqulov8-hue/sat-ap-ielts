@@ -65,11 +65,10 @@ export default function SubjectPage({ slug, title, subtitle, tag }) {
       })
     }
     const diffList = [
-      { id: 'easy', name: 'Easy', count: counts.easy, color: 'var(--green)' },
-      { id: 'medium', name: 'Medium', count: counts.medium, color: 'var(--yellow)' },
-      { id: 'hard', name: 'Hard', count: counts.hard, color: 'var(--peach)' },
-      { id: 'elite', name: 'Elite', count: counts.elite, color: 'var(--pink)' },
-      { id: 'mixing', name: 'Mixing', count: counts.mixing, color: 'var(--lavender)' }
+      { id: 'easy', name: 'Easy', count: counts.easy, color: '#10b981' },
+      { id: 'medium', name: 'Medium', count: counts.medium, color: '#f59e0b' },
+      { id: 'hard', name: 'Hard', count: counts.hard, color: '#ef4444' },
+      { id: 'mixing', name: 'Mixing', count: counts.mixing, color: '#8b5cf6' }
     ]
     setTopics(diffList)
     setTotalTests(diffList.length)
@@ -77,10 +76,10 @@ export default function SubjectPage({ slug, title, subtitle, tag }) {
     setCache('subj-' + slug, {
       score: scRes.data?.score ?? 0,
       tests: ptRes.count ?? 0,
-      totalTests: list.length,
+      totalTests: diffList.length,
       accuracy: acc,
       time,
-      topics: list,
+      topics: diffList,
       accent: sub.color || '#000',
     })
     setLoading(false)
@@ -168,7 +167,7 @@ export default function SubjectPage({ slug, title, subtitle, tag }) {
               <div key={t.id} className="study-card shadow-wrap" onClick={() => handleStart(t)}>
                 <div className="shadow-box" />
                 <div className="study-card-inner" style={{ '--sc': accent }}>
-                  <div className="study-card-name" style={{ color: t.color }}>{t.name}</div>
+                  <div className="study-card-name" style={{ color: t.color, fontWeight: 700, fontSize: '1.2rem', textShadow: '0 1px 2px rgba(0,0,0,0.1)' }}>{t.name}</div>
                   <div className="study-card-count">{t.count} questions available</div>
                   <button className="btn-module study-card-btn" onClick={(e) => { e.stopPropagation(); handleStart(t) }}>
                     START
