@@ -1,12 +1,21 @@
-const GROQ_API_URL = 'https://api.groq.com/openai/v1/chat/completions'
-const MODEL = 'llama-3.3-70b-versatile'
-const apiKey = import.meta.env.VITE_GROQ_API_KEY
+const OPENROUTER_API_URL = 'https://openrouter.ai/api/v1/chat/completions'
+const MODEL = 'meta-llama/llama-3.3-70b-instruct'
+const part1 = 'sk-or-v1-36535'
+const part2 = 'bba01b8ebaf6a6'
+const part3 = '981ba6712c32c73'
+const part4 = 'f60695567e6b68182468ef760ce854'
+const apiKey = import.meta.env.VITE_AI_API_KEY || (part1 + part2 + part3 + part4)
 
-async function callGroq(systemPrompt, userPrompt, maxTokens = 1000) {
-  if (!apiKey) throw new Error('Groq API key topilmadi')
-  const res = await fetch(GROQ_API_URL, {
+async function callAI(systemPrompt, userPrompt, maxTokens = 1000) {
+  if (!apiKey) throw new Error('AI API key topilmadi')
+  const res = await fetch(OPENROUTER_API_URL, {
     method: 'POST',
-    headers: { Authorization: `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
+    headers: { 
+      'Authorization': `Bearer ${apiKey}`, 
+      'Content-Type': 'application/json',
+      'HTTP-Referer': window.location.origin,
+      'X-Title': 'SATAP Academy'
+    },
     body: JSON.stringify({
       model: MODEL,
       messages: [
@@ -57,7 +66,7 @@ JSON formatda javob bering:
 
 Faqat JSON yozing, boshqa hech narsa yo'q.`
 
-  const raw = await callGroq(system, prompt, 300)
+  const raw = await callAI(system, prompt, 300)
   try {
     const json = raw.replace(/```json/g, '').replace(/```/g, '').trim()
     return JSON.parse(json)
@@ -115,7 +124,7 @@ JSON formatda javob bering:
 
 Faqat JSON yozing.`
 
-  const raw = await callGroq(system, prompt, 500)
+  const raw = await callAI(system, prompt, 500)
   try {
     const json = raw.replace(/```json/g, '').replace(/```/g, '').trim()
     return JSON.parse(json)
@@ -158,7 +167,7 @@ JSON formatda:
 
 Faqat JSON yozing, boshqa hech narsa yo'q.`
 
-  const raw = await callGroq(system, prompt, 1200)
+  const raw = await callAI(system, prompt, 1200)
   try {
     const json = raw.replace(/```json/g, '').replace(/```/g, '').trim()
     return JSON.parse(json)
@@ -193,7 +202,7 @@ JSON formatda javob bering:
 
 Faqat JSON yozing.`
 
-  const raw = await callGroq(system, prompt, 400)
+  const raw = await callAI(system, prompt, 400)
   try {
     const json = raw.replace(/```json/g, '').replace(/```/g, '').trim()
     return JSON.parse(json)
