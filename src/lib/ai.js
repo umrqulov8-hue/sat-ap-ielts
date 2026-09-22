@@ -1,5 +1,5 @@
 const OPENROUTER_API_URL = 'https://openrouter.ai/api/v1/chat/completions'
-const MODEL = 'meta-llama/llama-3.3-70b-instruct'
+const MODEL = 'openai/gpt-4o-mini'
 const part1 = 'sk-or-v1-36535'
 const part2 = 'bba01b8ebaf6a6'
 const part3 = '981ba6712c32c73'

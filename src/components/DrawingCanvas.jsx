@@ -6,9 +6,14 @@ export default function DrawingCanvas({ onClose }) {
   const [isDrawing, setIsDrawing] = useState(false)
   const [color, setColor] = useState('#000000')
   const [lineWidth, setLineWidth] = useState(3)
-  const [isEraser, setIsEraser] = useState(false)
+  const [tool, setTool] = useState('draw') // draw, eraser, line, rect, circle, triangle, axes
+  const [startPos, setStartPos] = useState(null)
+  const savedImageData = useRef(null)
+  
+  const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
+    setMounted(true)
     const canvas = canvasRef.current
     if (!canvas) return
 
@@ -18,12 +23,9 @@ export default function DrawingCanvas({ onClose }) {
     const ctx = canvas.getContext('2d')
     ctx.lineCap = 'round'
     ctx.lineJoin = 'round'
-    ctx.strokeStyle = color
-    ctx.lineWidth = lineWidth
     ctxRef.current = ctx
 
     const handleResize = () => {
-      // Create a temporary canvas to save drawing
       const tempCanvas = document.createElement('canvas')
       tempCanvas.width = canvas.width
       tempCanvas.height = canvas.height
@@ -34,9 +36,6 @@ export default function DrawingCanvas({ onClose }) {
       canvas.height = window.innerHeight
       ctx.lineCap = 'round'
       ctx.lineJoin = 'round'
-      ctx.strokeStyle = isEraser ? 'rgba(0,0,0,1)' : color
-      ctx.lineWidth = lineWidth
-      ctx.globalCompositeOperation = isEraser ? 'destination-out' : 'source-over'
       ctx.drawImage(tempCanvas, 0, 0)
     }
 
@@ -47,42 +46,79 @@ export default function DrawingCanvas({ onClose }) {
   useEffect(() => {
     if (!ctxRef.current) return
     ctxRef.current.strokeStyle = color
-    ctxRef.current.lineWidth = isEraser ? 20 : lineWidth
-    ctxRef.current.globalCompositeOperation = isEraser ? 'destination-out' : 'source-over'
-  }, [color, lineWidth, isEraser])
+    ctxRef.current.lineWidth = tool === 'eraser' ? 20 : lineWidth
+    ctxRef.current.globalCompositeOperation = tool === 'eraser' ? 'destination-out' : 'source-over'
+  }, [color, lineWidth, tool])
 
   const getCoordinates = (e) => {
     if (e.touches && e.touches.length > 0) {
-      return {
-        x: e.touches[0].clientX,
-        y: e.touches[0].clientY
-      }
+      return { x: e.touches[0].clientX, y: e.touches[0].clientY }
     }
-    return {
-      x: e.clientX,
-      y: e.clientY
-    }
+    return { x: e.clientX, y: e.clientY }
   }
 
   const startDrawing = (e) => {
     setIsDrawing(true)
     const { x, y } = getCoordinates(e)
-    ctxRef.current.beginPath()
-    ctxRef.current.moveTo(x, y)
-    if (e.cancelable) e.preventDefault() // Prevent scrolling on touch
+    setStartPos({ x, y })
+    
+    if (tool === 'draw' || tool === 'eraser') {
+      ctxRef.current.beginPath()
+      ctxRef.current.moveTo(x, y)
+    } else {
+      // Save canvas state for shape preview
+      savedImageData.current = ctxRef.current.getImageData(0, 0, canvasRef.current.width, canvasRef.current.height)
+    }
+    if (e.cancelable) e.preventDefault()
   }
 
   const draw = (e) => {
     if (!isDrawing) return
     const { x, y } = getCoordinates(e)
-    ctxRef.current.lineTo(x, y)
-    ctxRef.current.stroke()
+    
+    if (tool === 'draw' || tool === 'eraser') {
+      ctxRef.current.lineTo(x, y)
+      ctxRef.current.stroke()
+    } else if (startPos && savedImageData.current) {
+      const ctx = ctxRef.current
+      ctx.putImageData(savedImageData.current, 0, 0)
+      ctx.beginPath()
+      if (tool === 'line') {
+        ctx.moveTo(startPos.x, startPos.y)
+        ctx.lineTo(x, y)
+      } else if (tool === 'rect') {
+        ctx.rect(startPos.x, startPos.y, x - startPos.x, y - startPos.y)
+      } else if (tool === 'circle') {
+        const radius = Math.sqrt(Math.pow(x - startPos.x, 2) + Math.pow(y - startPos.y, 2))
+        ctx.arc(startPos.x, startPos.y, radius, 0, 2 * Math.PI)
+      } else if (tool === 'triangle') {
+        ctx.moveTo(startPos.x + (x - startPos.x) / 2, startPos.y)
+        ctx.lineTo(x, y)
+        ctx.lineTo(startPos.x, y)
+        ctx.closePath()
+      } else if (tool === 'axes') {
+        const midX = startPos.x + (x - startPos.x) / 2
+        const midY = startPos.y + (y - startPos.y) / 2
+        // X axis
+        ctx.moveTo(startPos.x, midY)
+        ctx.lineTo(x, midY)
+        // Y axis
+        ctx.moveTo(midX, startPos.y)
+        ctx.lineTo(midX, y)
+      }
+      ctx.stroke()
+    }
     if (e.cancelable) e.preventDefault()
   }
 
   const stopDrawing = () => {
     if (!isDrawing) return
-    ctxRef.current.closePath()
+    if (tool === 'draw' || tool === 'eraser') {
+      ctxRef.current.closePath()
+    } else {
+      savedImageData.current = null
+      setStartPos(null)
+    }
     setIsDrawing(false)
   }
 
@@ -95,7 +131,7 @@ export default function DrawingCanvas({ onClose }) {
     <div style={{ position: 'fixed', inset: 0, zIndex: 9999, pointerEvents: 'none' }}>
       <canvas
         ref={canvasRef}
-        style={{ position: 'absolute', inset: 0, touchAction: 'none', pointerEvents: 'auto', cursor: isEraser ? 'cell' : 'crosshair' }}
+        style={{ position: 'absolute', inset: 0, touchAction: 'none', pointerEvents: 'auto', cursor: tool === 'eraser' ? 'cell' : 'crosshair' }}
         onMouseDown={startDrawing}
         onMouseMove={draw}
         onMouseUp={stopDrawing}
@@ -108,77 +144,65 @@ export default function DrawingCanvas({ onClose }) {
       <div style={{
         position: 'absolute',
         top: '20px',
-        left: '50%',
-        transform: 'translateX(-50%)',
+        right: '80px',
+        transform: mounted ? 'translateY(0) scale(1)' : 'translateY(-20px) scale(0.9)',
+        opacity: mounted ? 1 : 0,
+        transition: 'all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+        transformOrigin: 'top right',
         display: 'flex',
         alignItems: 'center',
         gap: '12px',
-        background: '#fff',
+        background: '#1a1f36',
         padding: '10px 16px',
         borderRadius: '30px',
-        boxShadow: '0 4px 15px rgba(0,0,0,0.1)',
+        boxShadow: '0 8px 30px rgba(0,0,0,0.3)',
         pointerEvents: 'auto',
-        border: '1px solid #eaeaea'
+        border: '1px solid rgba(255,255,255,0.1)',
+        color: '#fff'
       }}>
-        <div style={{ fontSize: '12px', fontWeight: 600, color: '#666', marginRight: '4px' }}>DRAW</div>
+        <div style={{ fontSize: '13px', fontWeight: 600, color: '#aaa', marginRight: '4px' }}>DRAW</div>
         
-        <button 
-          onClick={() => { setIsEraser(false); setColor('#000000') }}
-          style={{ width: '24px', height: '24px', borderRadius: '50%', background: '#000', border: (!isEraser && color === '#000000') ? '3px solid #ccc' : 'none', cursor: 'pointer' }}
-          title="Black"
-        />
-        <button 
-          onClick={() => { setIsEraser(false); setColor('#ff3b30') }}
-          style={{ width: '24px', height: '24px', borderRadius: '50%', background: '#ff3b30', border: (!isEraser && color === '#ff3b30') ? '3px solid #ccc' : 'none', cursor: 'pointer' }}
-          title="Red"
-        />
-        <button 
-          onClick={() => { setIsEraser(false); setColor('#007aff') }}
-          style={{ width: '24px', height: '24px', borderRadius: '50%', background: '#007aff', border: (!isEraser && color === '#007aff') ? '3px solid #ccc' : 'none', cursor: 'pointer' }}
-          title="Blue"
-        />
+        {/* Colors */}
+        <button onClick={() => setColor('#ffffff')} style={{ width: '22px', height: '22px', borderRadius: '50%', background: '#ffffff', border: color === '#ffffff' ? '2px solid #007aff' : 'none', cursor: 'pointer' }} title="White" />
+        <button onClick={() => setColor('#000000')} style={{ width: '22px', height: '22px', borderRadius: '50%', background: '#000000', border: color === '#000000' ? '2px solid #007aff' : '2px solid #333', cursor: 'pointer' }} title="Black" />
+        <button onClick={() => setColor('#ff3b30')} style={{ width: '22px', height: '22px', borderRadius: '50%', background: '#ff3b30', border: color === '#ff3b30' ? '2px solid #fff' : 'none', cursor: 'pointer' }} title="Red" />
+        <button onClick={() => setColor('#007aff')} style={{ width: '22px', height: '22px', borderRadius: '50%', background: '#007aff', border: color === '#007aff' ? '2px solid #fff' : 'none', cursor: 'pointer' }} title="Blue" />
 
-        <div style={{ width: '1px', height: '20px', background: '#ddd', margin: '0 4px' }} />
+        <div style={{ width: '1px', height: '20px', background: 'rgba(255,255,255,0.2)', margin: '0 4px' }} />
 
-        <button 
-          onClick={() => setIsEraser(true)}
-          style={{ 
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            background: isEraser ? '#f0f0f0' : 'transparent',
-            border: 'none', borderRadius: '6px', padding: '4px', cursor: 'pointer',
-            color: isEraser ? '#000' : '#666'
-          }}
-          title="Eraser"
-        >
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M20 20H7L3 16C2.5 15.5 2.5 14.5 3 14L13 4C13.5 3.5 14.5 3.5 15 4L20 9C20.5 9.5 20.5 10.5 20 11L11 20H20V20Z"/></svg>
+        {/* Tools */}
+        <button onClick={() => setTool('draw')} style={{ background: tool === 'draw' ? 'rgba(255,255,255,0.15)' : 'transparent', border: 'none', borderRadius: '6px', padding: '6px', cursor: 'pointer', color: tool === 'draw' ? '#fff' : '#888' }} title="Pen">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/><path d="m15 5 4 4"/></svg>
+        </button>
+        <button onClick={() => setTool('line')} style={{ background: tool === 'line' ? 'rgba(255,255,255,0.15)' : 'transparent', border: 'none', borderRadius: '6px', padding: '6px', cursor: 'pointer', color: tool === 'line' ? '#fff' : '#888' }} title="Line">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="5" y1="19" x2="19" y2="5"/></svg>
+        </button>
+        <button onClick={() => setTool('rect')} style={{ background: tool === 'rect' ? 'rgba(255,255,255,0.15)' : 'transparent', border: 'none', borderRadius: '6px', padding: '6px', cursor: 'pointer', color: tool === 'rect' ? '#fff' : '#888' }} title="Rectangle">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/></svg>
+        </button>
+        <button onClick={() => setTool('circle')} style={{ background: tool === 'circle' ? 'rgba(255,255,255,0.15)' : 'transparent', border: 'none', borderRadius: '6px', padding: '6px', cursor: 'pointer', color: tool === 'circle' ? '#fff' : '#888' }} title="Circle">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"/></svg>
+        </button>
+        <button onClick={() => setTool('triangle')} style={{ background: tool === 'triangle' ? 'rgba(255,255,255,0.15)' : 'transparent', border: 'none', borderRadius: '6px', padding: '6px', cursor: 'pointer', color: tool === 'triangle' ? '#fff' : '#888' }} title="Triangle">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/></svg>
+        </button>
+        <button onClick={() => setTool('axes')} style={{ background: tool === 'axes' ? 'rgba(255,255,255,0.15)' : 'transparent', border: 'none', borderRadius: '6px', padding: '6px', cursor: 'pointer', color: tool === 'axes' ? '#fff' : '#888' }} title="XY Axes">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 2v20M2 12h20M12 2l-4 4M12 2l4 4M22 12l-4-4M22 12l-4 4"/></svg>
+        </button>
+        
+        <div style={{ width: '1px', height: '20px', background: 'rgba(255,255,255,0.2)', margin: '0 4px' }} />
+
+        <button onClick={() => setTool('eraser')} style={{ background: tool === 'eraser' ? 'rgba(255,255,255,0.15)' : 'transparent', border: 'none', borderRadius: '6px', padding: '6px', cursor: 'pointer', color: tool === 'eraser' ? '#fff' : '#888' }} title="Eraser">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M20 20H7L3 16C2.5 15.5 2.5 14.5 3 14L13 4C13.5 3.5 14.5 3.5 15 4L20 9C20.5 9.5 20.5 10.5 20 11L11 20H20V20Z"/></svg>
+        </button>
+        <button onClick={clearCanvas} style={{ background: 'transparent', border: 'none', borderRadius: '6px', padding: '6px', cursor: 'pointer', color: '#ff4d4f' }} title="Clear All">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
         </button>
 
-        <button 
-          onClick={clearCanvas}
-          style={{ 
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            background: 'transparent',
-            border: 'none', borderRadius: '6px', padding: '4px', cursor: 'pointer',
-            color: '#666'
-          }}
-          title="Clear All"
-        >
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
-        </button>
+        <div style={{ width: '1px', height: '20px', background: 'rgba(255,255,255,0.2)', margin: '0 4px' }} />
 
-        <div style={{ width: '1px', height: '20px', background: '#ddd', margin: '0 4px' }} />
-
-        <button 
-          onClick={onClose}
-          style={{ 
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            background: '#ff3b30', color: '#fff',
-            border: 'none', borderRadius: '50%', padding: '4px', cursor: 'pointer',
-            width: '24px', height: '24px'
-          }}
-          title="Close Drawing Mode"
-        >
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        <button onClick={() => { setMounted(false); setTimeout(onClose, 300) }} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#ff3b30', color: '#fff', border: 'none', borderRadius: '50%', padding: '6px', cursor: 'pointer', width: '28px', height: '28px' }} title="Close">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
         </button>
       </div>
     </div>
