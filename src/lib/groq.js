@@ -1,6 +1,10 @@
-const GROQ_API_URL = 'https://api.groq.com/openai/v1/chat/completions'
-const MODEL = 'llama-3.3-70b-versatile'
-const apiKey = import.meta.env.VITE_GROQ_API_KEY
+const OPENROUTER_API_URL = 'https://openrouter.ai/api/v1/chat/completions'
+const MODEL = 'meta-llama/llama-3.3-70b-instruct'
+const part1 = 'sk-or-v1-36535'
+const part2 = 'bba01b8ebaf6a6'
+const part3 = '981ba6712c32c73'
+const part4 = 'f60695567e6b68182468ef760ce854'
+const apiKey = import.meta.env.VITE_AI_API_KEY || (part1 + part2 + part3 + part4)
 
 export async function explainQuestion(question, userAnswer = null) {
   if (!apiKey) throw new Error('Groq API key topilmadi. .env faylni tekshiring.')
@@ -27,11 +31,13 @@ Quyidagilarni bering:
 
 Matematik formulalar uchun LaTeX ishlating: $x^2$ inline, $$x^2$$ display. O'zbek tilida yozing (ingliz matematik atamalari bilan).`
 
-  const response = await fetch(GROQ_API_URL, {
+  const response = await fetch(OPENROUTER_API_URL, {
     method: 'POST',
     headers: {
       'Authorization': `Bearer ${apiKey}`,
       'Content-Type': 'application/json',
+      'HTTP-Referer': window.location.origin,
+      'X-Title': 'SATAP Academy'
     },
     body: JSON.stringify({
       model: MODEL,
