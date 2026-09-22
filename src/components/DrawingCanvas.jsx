@@ -148,8 +148,9 @@ export default function DrawingCanvas({ onClose }) {
     ctxRef.current.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height)
   }
 
-  const ShapeButton = ({ t, icon, title }) => (
+  const renderShapeButton = (t, icon, title) => (
     <button 
+      key={t}
       onClick={() => { setTool(t); setShowShapes(false) }} 
       style={{
         background: tool === t ? 'rgba(255,255,255,0.15)' : 'transparent',
@@ -257,14 +258,14 @@ export default function DrawingCanvas({ onClose }) {
               <style>{`
                 @keyframes fadeInDown { from { opacity: 0; transform: translate(-50%, -10px); } to { opacity: 1; transform: translate(-50%, 0); } }
               `}</style>
-              <ShapeButton t="line" title="Line" icon={<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="5" y1="19" x2="19" y2="5"/></svg>} />
-              <ShapeButton t="arrow" title="Arrow" icon={<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>} />
-              <ShapeButton t="rect" title="Rectangle" icon={<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>} />
-              <ShapeButton t="circle" title="Circle" icon={<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"/></svg>} />
-              <ShapeButton t="ellipse" title="Ellipse" icon={<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><ellipse cx="12" cy="12" rx="10" ry="6"/></svg>} />
-              <ShapeButton t="triangle" title="Triangle" icon={<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/></svg>} />
-              <ShapeButton t="right-triangle" title="Right Triangle" icon={<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 21h18L3 3v18z"/></svg>} />
-              <ShapeButton t="axes" title="XY Axes" icon={<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 2v20M2 12h20M12 2l-4 4M12 2l4 4M22 12l-4-4M22 12l-4 4"/></svg>} />
+              {renderShapeButton("line", <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="5" y1="19" x2="19" y2="5"/></svg>, "Line")}
+              {renderShapeButton("arrow", <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>, "Arrow")}
+              {renderShapeButton("rect", <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>, "Rectangle")}
+              {renderShapeButton("circle", <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"/></svg>, "Circle")}
+              {renderShapeButton("ellipse", <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><ellipse cx="12" cy="12" rx="10" ry="6"/></svg>, "Ellipse")}
+              {renderShapeButton("triangle", <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/></svg>, "Triangle")}
+              {renderShapeButton("right-triangle", <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 21h18L3 3v18z"/></svg>, "Right Triangle")}
+              {renderShapeButton("axes", <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 2v20M2 12h20M12 2l-4 4M12 2l4 4M22 12l-4-4M22 12l-4 4"/></svg>, "XY Axes")}
             </div>
           )}
         </div>

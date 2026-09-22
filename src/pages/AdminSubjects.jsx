@@ -28,7 +28,7 @@ export default function AdminSubjects() {
     fetchSubjects()
   }, [setPageTitle, setPageSub])
 
-  const fetchSubjects = async () => {
+  async function fetchSubjects() {
     setLoading(true)
     const { data, error } = await supabase
       .from('subjects')
