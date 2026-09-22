@@ -152,9 +152,9 @@ export default function DrawingCanvas({ onClose }) {
     <button 
       onClick={() => { setTool(t); setShowShapes(false) }} 
       style={{
-        background: tool === t ? '#f0f0f0' : 'transparent',
+        background: tool === t ? 'rgba(255,255,255,0.15)' : 'transparent',
         border: 'none', borderRadius: '8px', padding: '8px', cursor: 'pointer',
-        color: tool === t ? '#007aff' : '#666',
+        color: tool === t ? '#fff' : '#a1a1aa',
         display: 'flex', alignItems: 'center', justifyContent: 'center',
         transition: 'all 0.2s'
       }} 
@@ -193,26 +193,26 @@ export default function DrawingCanvas({ onClose }) {
           display: 'flex',
           alignItems: 'center',
           gap: '12px',
-          background: '#ffffff',
+          background: '#1a1f36',
           padding: '10px 16px',
           borderRadius: '30px',
-          boxShadow: '0 4px 15px rgba(0,0,0,0.1)',
+          boxShadow: '0 8px 30px rgba(0,0,0,0.3)',
           pointerEvents: 'auto',
-          border: '1px solid #eaeaea',
-          color: '#333'
+          border: '1px solid rgba(255,255,255,0.1)',
+          color: '#fff'
         }}
       >
-        <div style={{ fontSize: '13px', fontWeight: 600, color: '#666', marginRight: '4px' }}>DRAW</div>
+        <div style={{ fontSize: '13px', fontWeight: 600, color: '#a1a1aa', marginRight: '4px' }}>DRAW</div>
         
         {/* Colors */}
-        <div style={{ display: 'flex', gap: '8px', paddingRight: '12px', borderRight: '1px solid #eaeaea' }}>
-          {['#000000', '#ff3b30', '#007aff'].map(c => (
+        <div style={{ display: 'flex', gap: '8px', paddingRight: '12px', borderRight: '1px solid rgba(255,255,255,0.1)' }}>
+          {['#ffffff', '#000000', '#ff3b30', '#007aff'].map(c => (
             <button 
               key={c}
               onClick={() => setColor(c)} 
               style={{ 
                 width: '24px', height: '24px', borderRadius: '50%', background: c, 
-                border: color === c ? '3px solid #ccc' : 'none',
+                border: color === c ? '2px solid #007aff' : c === '#000000' ? '1px solid #555' : '1px solid rgba(0,0,0,0.1)',
                 cursor: 'pointer' 
               }} 
             />
@@ -220,7 +220,7 @@ export default function DrawingCanvas({ onClose }) {
         </div>
 
         {/* Tools */}
-        <button onClick={() => { setTool('draw'); setShowShapes(false) }} style={{ background: tool === 'draw' ? '#f0f0f0' : 'transparent', border: 'none', borderRadius: '6px', padding: '6px', cursor: 'pointer', color: tool === 'draw' ? '#000' : '#666' }} title="Draw">
+        <button onClick={() => { setTool('draw'); setShowShapes(false) }} style={{ background: tool === 'draw' ? 'rgba(255,255,255,0.15)' : 'transparent', border: 'none', borderRadius: '6px', padding: '6px', cursor: 'pointer', color: tool === 'draw' ? '#fff' : '#a1a1aa' }} title="Draw">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/><path d="m15 5 4 4"/></svg>
         </button>
 
@@ -228,7 +228,7 @@ export default function DrawingCanvas({ onClose }) {
         <div style={{ position: 'relative' }}>
           <button 
             onClick={() => setShowShapes(!showShapes)} 
-            style={{ background: isShapeTool ? '#f0f0f0' : 'transparent', border: 'none', borderRadius: '6px', padding: '6px', cursor: 'pointer', color: isShapeTool ? '#000' : '#666', display: 'flex' }} 
+            style={{ background: isShapeTool ? 'rgba(255,255,255,0.15)' : 'transparent', border: 'none', borderRadius: '6px', padding: '6px', cursor: 'pointer', color: isShapeTool ? '#fff' : '#a1a1aa', display: 'flex' }} 
             title="Shapes"
           >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -244,14 +244,14 @@ export default function DrawingCanvas({ onClose }) {
               left: '50%',
               transform: 'translateX(-50%)',
               marginTop: '12px',
-              background: '#ffffff',
-              border: '1px solid #eaeaea',
+              background: '#1a1f36',
+              border: '1px solid rgba(255,255,255,0.1)',
               borderRadius: '12px',
               padding: '12px',
               display: 'grid',
               gridTemplateColumns: 'repeat(4, 1fr)',
               gap: '8px',
-              boxShadow: '0 10px 30px rgba(0,0,0,0.15)',
+              boxShadow: '0 10px 30px rgba(0,0,0,0.5)',
               animation: 'fadeInDown 0.2s ease-out forwards'
             }}>
               <style>{`
@@ -269,16 +269,16 @@ export default function DrawingCanvas({ onClose }) {
           )}
         </div>
 
-        <div style={{ width: '1px', height: '24px', background: '#eaeaea', margin: '0 4px' }} />
+        <div style={{ width: '1px', height: '24px', background: 'rgba(255,255,255,0.1)', margin: '0 4px' }} />
 
-        <button onClick={() => { setTool('eraser'); setShowShapes(false) }} style={{ background: tool === 'eraser' ? '#f0f0f0' : 'transparent', border: 'none', borderRadius: '6px', padding: '6px', cursor: 'pointer', color: tool === 'eraser' ? '#000' : '#666' }} title="Eraser">
+        <button onClick={() => { setTool('eraser'); setShowShapes(false) }} style={{ background: tool === 'eraser' ? 'rgba(255,255,255,0.15)' : 'transparent', border: 'none', borderRadius: '6px', padding: '6px', cursor: 'pointer', color: tool === 'eraser' ? '#fff' : '#a1a1aa' }} title="Eraser">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 20H7L3 16C2.5 15.5 2.5 14.5 3 14L13 4C13.5 3.5 14.5 3.5 15 4L20 9C20.5 9.5 20.5 10.5 20 11L11 20H20V20Z"/></svg>
         </button>
-        <button onClick={clearCanvas} style={{ background: 'transparent', border: 'none', borderRadius: '6px', padding: '6px', cursor: 'pointer', color: '#666' }} title="Clear All">
+        <button onClick={clearCanvas} style={{ background: 'transparent', border: 'none', borderRadius: '6px', padding: '6px', cursor: 'pointer', color: '#ff4d4f' }} title="Clear All">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
         </button>
 
-        <div style={{ width: '1px', height: '24px', background: '#eaeaea', margin: '0 4px' }} />
+        <div style={{ width: '1px', height: '24px', background: 'rgba(255,255,255,0.1)', margin: '0 4px' }} />
 
         <button 
           onClick={onClose} 
