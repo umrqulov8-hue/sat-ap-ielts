@@ -15,14 +15,16 @@ export default function Study() {
     setPageClass('')
     ;(async () => {
       const [subRes, vidRes] = await Promise.all([
-        supabase.from('subjects').select('id, slug, title, color').order('order_index'),
+        supabase.from('subjects').select('*').order('order_index'),
         supabase.from('videos').select('id, subject_id'),
       ])
       const countBySubject = {}
       for (const v of vidRes.data || []) {
         if (v.subject_id) countBySubject[v.subject_id] = (countBySubject[v.subject_id] || 0) + 1
       }
-      setGroups((subRes.data || []).map(s => ({ subject: s, totalVideos: countBySubject[s.id] || 0 })))
+      
+      const activeSubjects = (subRes.data || []).filter(s => s.is_active !== false)
+      setGroups(activeSubjects.map(s => ({ subject: s, totalVideos: countBySubject[s.id] || 0 })))
       setLoading(false)
     })()
   }, [setPageTitle, setPageSub, setPageClass])

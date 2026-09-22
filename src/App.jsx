@@ -14,9 +14,9 @@ const AdvancedMath = lazy(() => import('./pages/AdvancedMath'))
 const DataAnalysis = lazy(() => import('./pages/DataAnalysis'))
 const ProblemSolving = lazy(() => import('./pages/ProblemSolving'))
 const Study = lazy(() => import('./pages/Study'))
-const StudySubject = lazy(() => import('./pages/StudySubject'))
 const StudyWatch = lazy(() => import('./pages/StudyWatch'))
 const AdminVideos = lazy(() => import('./pages/AdminVideos'))
+const AdminSubjects = lazy(() => import('./pages/AdminSubjects'))
 const TestHistory = lazy(() => import('./pages/TestHistory'))
 const StudyPlan = lazy(() => import('./pages/StudyPlan'))
 const Profile = lazy(() => import('./pages/Profile'))
@@ -66,6 +66,7 @@ export default function App() {
             <Route path="/study/subject/:subjectId" element={<SuspenseWrap><StudySubject /></SuspenseWrap>} />
             <Route path="/study/subject/:subjectId/watch/:videoId" element={<SuspenseWrap><StudyWatch /></SuspenseWrap>} />
             <Route path="/admin/videos" element={<SuspenseWrap><AdminVideos /></SuspenseWrap>} />
+            <Route path="/admin/subjects" element={<SuspenseWrap><AdminSubjects /></SuspenseWrap>} />
             <Route path="/practice/sat-tests" element={<SuspenseWrap><SatTestList /></SuspenseWrap>} />
             <Route path="/test-history" element={<SuspenseWrap><TestHistory /></SuspenseWrap>} />
             <Route path="/study-plan" element={<SuspenseWrap><StudyPlan /></SuspenseWrap>} />

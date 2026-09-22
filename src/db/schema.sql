@@ -27,6 +27,7 @@ create table subjects (
   icon text default '',
   color text default '#000',
   order_index int default 0,
+  is_active boolean default true,
   created_at timestamptz default now()
 );
 
