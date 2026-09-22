@@ -4,10 +4,11 @@ export default function DrawingCanvas({ onClose }) {
   const canvasRef = useRef(null)
   const ctxRef = useRef(null)
   const [isDrawing, setIsDrawing] = useState(false)
-  const [color, setColor] = useState('#000000')
+  const [color, setColor] = useState('#007aff')
   const [lineWidth, setLineWidth] = useState(3)
-  const [tool, setTool] = useState('draw') // draw, eraser, line, rect, circle, triangle, axes
+  const [tool, setTool] = useState('draw') // draw, eraser, line, arrow, rect, circle, ellipse, triangle, right-triangle, axes
   const [startPos, setStartPos] = useState(null)
+  const [showShapes, setShowShapes] = useState(false)
   const savedImageData = useRef(null)
   
   const [mounted, setMounted] = useState(false)
@@ -58,7 +59,9 @@ export default function DrawingCanvas({ onClose }) {
   }
 
   const startDrawing = (e) => {
+    if (e.target.closest('.draw-toolbar')) return // Prevent drawing when clicking toolbar
     setIsDrawing(true)
+    setShowShapes(false) // Close shapes dropdown if open
     const { x, y } = getCoordinates(e)
     setStartPos({ x, y })
     
@@ -66,7 +69,6 @@ export default function DrawingCanvas({ onClose }) {
       ctxRef.current.beginPath()
       ctxRef.current.moveTo(x, y)
     } else {
-      // Save canvas state for shape preview
       savedImageData.current = ctxRef.current.getImageData(0, 0, canvasRef.current.width, canvasRef.current.height)
     }
     if (e.cancelable) e.preventDefault()
@@ -83,26 +85,45 @@ export default function DrawingCanvas({ onClose }) {
       const ctx = ctxRef.current
       ctx.putImageData(savedImageData.current, 0, 0)
       ctx.beginPath()
+      
+      const width = x - startPos.x
+      const height = y - startPos.y
+
       if (tool === 'line') {
         ctx.moveTo(startPos.x, startPos.y)
         ctx.lineTo(x, y)
+      } else if (tool === 'arrow') {
+        const headlen = 15
+        const angle = Math.atan2(y - startPos.y, x - startPos.x)
+        ctx.moveTo(startPos.x, startPos.y)
+        ctx.lineTo(x, y)
+        ctx.lineTo(x - headlen * Math.cos(angle - Math.PI / 6), y - headlen * Math.sin(angle - Math.PI / 6))
+        ctx.moveTo(x, y)
+        ctx.lineTo(x - headlen * Math.cos(angle + Math.PI / 6), y - headlen * Math.sin(angle + Math.PI / 6))
       } else if (tool === 'rect') {
-        ctx.rect(startPos.x, startPos.y, x - startPos.x, y - startPos.y)
+        ctx.rect(startPos.x, startPos.y, width, height)
       } else if (tool === 'circle') {
-        const radius = Math.sqrt(Math.pow(x - startPos.x, 2) + Math.pow(y - startPos.y, 2))
+        const radius = Math.sqrt(width * width + height * height)
         ctx.arc(startPos.x, startPos.y, radius, 0, 2 * Math.PI)
+      } else if (tool === 'ellipse') {
+        const midX = startPos.x + width / 2
+        const midY = startPos.y + height / 2
+        ctx.ellipse(midX, midY, Math.abs(width / 2), Math.abs(height / 2), 0, 0, 2 * Math.PI)
       } else if (tool === 'triangle') {
-        ctx.moveTo(startPos.x + (x - startPos.x) / 2, startPos.y)
+        ctx.moveTo(startPos.x + width / 2, startPos.y)
         ctx.lineTo(x, y)
         ctx.lineTo(startPos.x, y)
         ctx.closePath()
+      } else if (tool === 'right-triangle') {
+        ctx.moveTo(startPos.x, startPos.y)
+        ctx.lineTo(startPos.x, y)
+        ctx.lineTo(x, y)
+        ctx.closePath()
       } else if (tool === 'axes') {
-        const midX = startPos.x + (x - startPos.x) / 2
-        const midY = startPos.y + (y - startPos.y) / 2
-        // X axis
+        const midX = startPos.x + width / 2
+        const midY = startPos.y + height / 2
         ctx.moveTo(startPos.x, midY)
         ctx.lineTo(x, midY)
-        // Y axis
         ctx.moveTo(midX, startPos.y)
         ctx.lineTo(midX, y)
       }
@@ -127,6 +148,24 @@ export default function DrawingCanvas({ onClose }) {
     ctxRef.current.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height)
   }
 
+  const ShapeButton = ({ t, icon, title }) => (
+    <button 
+      onClick={() => { setTool(t); setShowShapes(false) }} 
+      style={{
+        background: tool === t ? 'rgba(0,122,255,0.15)' : 'transparent',
+        border: 'none', borderRadius: '8px', padding: '8px', cursor: 'pointer',
+        color: tool === t ? '#007aff' : '#a1a1aa',
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+        transition: 'all 0.2s'
+      }} 
+      title={title}
+    >
+      {icon}
+    </button>
+  )
+
+  const isShapeTool = ['line', 'arrow', 'rect', 'circle', 'ellipse', 'triangle', 'right-triangle', 'axes'].includes(tool)
+
   return (
     <div style={{ position: 'fixed', inset: 0, zIndex: 9999, pointerEvents: 'none' }}>
       <canvas
@@ -141,68 +180,111 @@ export default function DrawingCanvas({ onClose }) {
         onTouchEnd={stopDrawing}
         onTouchCancel={stopDrawing}
       />
-      <div style={{
-        position: 'absolute',
-        top: '20px',
-        right: '80px',
-        transform: mounted ? 'translateY(0) scale(1)' : 'translateY(-20px) scale(0.9)',
-        opacity: mounted ? 1 : 0,
-        transition: 'all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
-        transformOrigin: 'top right',
-        display: 'flex',
-        alignItems: 'center',
-        gap: '12px',
-        background: '#1a1f36',
-        padding: '10px 16px',
-        borderRadius: '30px',
-        boxShadow: '0 8px 30px rgba(0,0,0,0.3)',
-        pointerEvents: 'auto',
-        border: '1px solid rgba(255,255,255,0.1)',
-        color: '#fff'
-      }}>
-        <div style={{ fontSize: '13px', fontWeight: 600, color: '#aaa', marginRight: '4px' }}>DRAW</div>
-        
+      
+      <div 
+        className="draw-toolbar"
+        style={{
+          position: 'absolute',
+          bottom: '40px',
+          left: '50%',
+          transform: mounted ? 'translateX(-50%) translateY(0)' : 'translateX(-50%) translateY(40px)',
+          opacity: mounted ? 1 : 0,
+          transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '12px',
+          background: 'rgba(24, 24, 27, 0.85)',
+          backdropFilter: 'blur(16px)',
+          WebkitBackdropFilter: 'blur(16px)',
+          padding: '12px 20px',
+          borderRadius: '100px',
+          boxShadow: '0 20px 40px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.1)',
+          pointerEvents: 'auto',
+          color: '#fff'
+        }}
+      >
         {/* Colors */}
-        <button onClick={() => setColor('#ffffff')} style={{ width: '22px', height: '22px', borderRadius: '50%', background: '#ffffff', border: color === '#ffffff' ? '2px solid #007aff' : 'none', cursor: 'pointer' }} title="White" />
-        <button onClick={() => setColor('#000000')} style={{ width: '22px', height: '22px', borderRadius: '50%', background: '#000000', border: color === '#000000' ? '2px solid #007aff' : '2px solid #333', cursor: 'pointer' }} title="Black" />
-        <button onClick={() => setColor('#ff3b30')} style={{ width: '22px', height: '22px', borderRadius: '50%', background: '#ff3b30', border: color === '#ff3b30' ? '2px solid #fff' : 'none', cursor: 'pointer' }} title="Red" />
-        <button onClick={() => setColor('#007aff')} style={{ width: '22px', height: '22px', borderRadius: '50%', background: '#007aff', border: color === '#007aff' ? '2px solid #fff' : 'none', cursor: 'pointer' }} title="Blue" />
-
-        <div style={{ width: '1px', height: '20px', background: 'rgba(255,255,255,0.2)', margin: '0 4px' }} />
+        <div style={{ display: 'flex', gap: '8px', paddingRight: '12px', borderRight: '1px solid rgba(255,255,255,0.1)' }}>
+          {['#ffffff', '#000000', '#ff3b30', '#34c759', '#007aff'].map(c => (
+            <button 
+              key={c}
+              onClick={() => setColor(c)} 
+              style={{ 
+                width: '24px', height: '24px', borderRadius: '50%', background: c, 
+                border: color === c ? '2px solid #007aff' : c === '#000000' ? '1px solid #333' : '1px solid rgba(0,0,0,0.1)',
+                transform: color === c ? 'scale(1.1)' : 'scale(1)',
+                transition: 'transform 0.2s', cursor: 'pointer' 
+              }} 
+            />
+          ))}
+        </div>
 
         {/* Tools */}
-        <button onClick={() => setTool('draw')} style={{ background: tool === 'draw' ? 'rgba(255,255,255,0.15)' : 'transparent', border: 'none', borderRadius: '6px', padding: '6px', cursor: 'pointer', color: tool === 'draw' ? '#fff' : '#888' }} title="Pen">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/><path d="m15 5 4 4"/></svg>
-        </button>
-        <button onClick={() => setTool('line')} style={{ background: tool === 'line' ? 'rgba(255,255,255,0.15)' : 'transparent', border: 'none', borderRadius: '6px', padding: '6px', cursor: 'pointer', color: tool === 'line' ? '#fff' : '#888' }} title="Line">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="5" y1="19" x2="19" y2="5"/></svg>
-        </button>
-        <button onClick={() => setTool('rect')} style={{ background: tool === 'rect' ? 'rgba(255,255,255,0.15)' : 'transparent', border: 'none', borderRadius: '6px', padding: '6px', cursor: 'pointer', color: tool === 'rect' ? '#fff' : '#888' }} title="Rectangle">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/></svg>
-        </button>
-        <button onClick={() => setTool('circle')} style={{ background: tool === 'circle' ? 'rgba(255,255,255,0.15)' : 'transparent', border: 'none', borderRadius: '6px', padding: '6px', cursor: 'pointer', color: tool === 'circle' ? '#fff' : '#888' }} title="Circle">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"/></svg>
-        </button>
-        <button onClick={() => setTool('triangle')} style={{ background: tool === 'triangle' ? 'rgba(255,255,255,0.15)' : 'transparent', border: 'none', borderRadius: '6px', padding: '6px', cursor: 'pointer', color: tool === 'triangle' ? '#fff' : '#888' }} title="Triangle">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/></svg>
-        </button>
-        <button onClick={() => setTool('axes')} style={{ background: tool === 'axes' ? 'rgba(255,255,255,0.15)' : 'transparent', border: 'none', borderRadius: '6px', padding: '6px', cursor: 'pointer', color: tool === 'axes' ? '#fff' : '#888' }} title="XY Axes">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 2v20M2 12h20M12 2l-4 4M12 2l4 4M22 12l-4-4M22 12l-4 4"/></svg>
-        </button>
-        
-        <div style={{ width: '1px', height: '20px', background: 'rgba(255,255,255,0.2)', margin: '0 4px' }} />
-
-        <button onClick={() => setTool('eraser')} style={{ background: tool === 'eraser' ? 'rgba(255,255,255,0.15)' : 'transparent', border: 'none', borderRadius: '6px', padding: '6px', cursor: 'pointer', color: tool === 'eraser' ? '#fff' : '#888' }} title="Eraser">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M20 20H7L3 16C2.5 15.5 2.5 14.5 3 14L13 4C13.5 3.5 14.5 3.5 15 4L20 9C20.5 9.5 20.5 10.5 20 11L11 20H20V20Z"/></svg>
-        </button>
-        <button onClick={clearCanvas} style={{ background: 'transparent', border: 'none', borderRadius: '6px', padding: '6px', cursor: 'pointer', color: '#ff4d4f' }} title="Clear All">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+        <button onClick={() => { setTool('draw'); setShowShapes(false) }} style={{ background: tool === 'draw' ? 'rgba(255,255,255,0.15)' : 'transparent', border: 'none', borderRadius: '50%', padding: '8px', cursor: 'pointer', color: tool === 'draw' ? '#fff' : '#a1a1aa' }} title="Draw">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/><path d="m15 5 4 4"/></svg>
         </button>
 
-        <div style={{ width: '1px', height: '20px', background: 'rgba(255,255,255,0.2)', margin: '0 4px' }} />
+        {/* Shapes Menu */}
+        <div style={{ position: 'relative' }}>
+          <button 
+            onClick={() => setShowShapes(!showShapes)} 
+            style={{ background: isShapeTool ? 'rgba(255,255,255,0.15)' : 'transparent', border: 'none', borderRadius: '50%', padding: '8px', cursor: 'pointer', color: isShapeTool ? '#fff' : '#a1a1aa', display: 'flex' }} 
+            title="Shapes"
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M2 12A10 10 0 1 0 12 2v10z"/>
+              <path d="M12 2A10 10 0 1 1 2 12h10z"/>
+            </svg>
+          </button>
 
-        <button onClick={() => { setMounted(false); setTimeout(onClose, 300) }} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#ff3b30', color: '#fff', border: 'none', borderRadius: '50%', padding: '6px', cursor: 'pointer', width: '28px', height: '28px' }} title="Close">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          {showShapes && (
+            <div style={{
+              position: 'absolute',
+              bottom: '100%',
+              left: '50%',
+              transform: 'translateX(-50%)',
+              marginBottom: '16px',
+              background: 'rgba(24, 24, 27, 0.95)',
+              backdropFilter: 'blur(16px)',
+              border: '1px solid rgba(255,255,255,0.1)',
+              borderRadius: '16px',
+              padding: '12px',
+              display: 'grid',
+              gridTemplateColumns: 'repeat(4, 1fr)',
+              gap: '8px',
+              boxShadow: '0 10px 30px rgba(0,0,0,0.5)',
+              animation: 'fadeInUp 0.2s ease-out forwards'
+            }}>
+              <style>{`
+                @keyframes fadeInUp { from { opacity: 0; transform: translate(-50%, 10px); } to { opacity: 1; transform: translate(-50%, 0); } }
+              `}</style>
+              <ShapeButton t="line" title="Line" icon={<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="5" y1="19" x2="19" y2="5"/></svg>} />
+              <ShapeButton t="arrow" title="Arrow" icon={<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>} />
+              <ShapeButton t="rect" title="Rectangle" icon={<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>} />
+              <ShapeButton t="circle" title="Circle" icon={<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"/></svg>} />
+              <ShapeButton t="ellipse" title="Ellipse" icon={<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><ellipse cx="12" cy="12" rx="10" ry="6"/></svg>} />
+              <ShapeButton t="triangle" title="Triangle" icon={<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/></svg>} />
+              <ShapeButton t="right-triangle" title="Right Triangle" icon={<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 21h18L3 3v18z"/></svg>} />
+              <ShapeButton t="axes" title="XY Axes" icon={<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 2v20M2 12h20M12 2l-4 4M12 2l4 4M22 12l-4-4M22 12l-4 4"/></svg>} />
+            </div>
+          )}
+        </div>
+
+        <button onClick={() => { setTool('eraser'); setShowShapes(false) }} style={{ background: tool === 'eraser' ? 'rgba(255,255,255,0.15)' : 'transparent', border: 'none', borderRadius: '50%', padding: '8px', cursor: 'pointer', color: tool === 'eraser' ? '#fff' : '#a1a1aa' }} title="Eraser">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 20H7L3 16C2.5 15.5 2.5 14.5 3 14L13 4C13.5 3.5 14.5 3.5 15 4L20 9C20.5 9.5 20.5 10.5 20 11L11 20H20V20Z"/></svg>
+        </button>
+        <button onClick={clearCanvas} style={{ background: 'transparent', border: 'none', borderRadius: '50%', padding: '8px', cursor: 'pointer', color: '#ff453a' }} title="Clear All">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+        </button>
+
+        <div style={{ width: '1px', height: '24px', background: 'rgba(255,255,255,0.1)', margin: '0 8px' }} />
+
+        <button 
+          onClick={() => { setMounted(false); setTimeout(onClose, 400) }} 
+          style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#ff453a', color: '#fff', border: 'none', borderRadius: '50%', cursor: 'pointer', width: '36px', height: '36px', boxShadow: '0 4px 12px rgba(255, 69, 58, 0.4)' }} 
+          title="Close Drawing Mode"
+        >
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
         </button>
       </div>
     </div>
