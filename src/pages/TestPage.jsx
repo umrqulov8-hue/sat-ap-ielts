@@ -655,11 +655,16 @@ export default function TestPage() {
 
   return (
     <div className="bb">
+      {isDrawingMode && <DrawingCanvas onClose={() => setIsDrawingMode(false)} />}
+      
       {/* TOP NAV */}
       <div className="bb-top">
         <div className="bb-top-title">{topic.modules?.title || 'Test'} &mdash; {topic.title}</div>
         <QuestionTimer key={current} startTime={qStartTime} />
         <div className="bb-top-right">
+          <button className="bb-icon-btn" title="Draw" onClick={() => setIsDrawingMode(true)}>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/><path d="m15 5 4 4"/></svg>
+          </button>
           <button className="bb-icon-btn" title="Reference" onClick={() => setShowRef(true)}>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
           </button>
