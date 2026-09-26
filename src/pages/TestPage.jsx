@@ -85,7 +85,8 @@ export default function TestPage() {
     ;(async () => {
       const { data: { session } } = await supabase.auth.getSession()
 
-      const { data: subjectData } = await supabase.from('subjects').select('id, title, slug').eq('slug', subjectSlug).maybeSingle()
+      const { data: subjectData } = await supabase.from('subjects').select('id, title, slug, is_active').eq('slug', subjectSlug).maybeSingle()
+      if (subjectData && !subjectData.is_active) { navigate('/study'); return }
       
       let qPromise = Promise.resolve({ data: null })
       if (!cachedQuestions && subjectData) {
@@ -127,7 +128,7 @@ export default function TestPage() {
     })()
 
     return () => { active = false }
-  }, [subjectSlug + '-' + difficulty, cachedQuestions])
+  }, [subjectSlug, difficulty, cachedQuestions])
 
   useEffect(() => {
     if (!questions[current] || !IS_PRACTICE) return
@@ -655,14 +656,14 @@ export default function TestPage() {
 
   return (
     <div className="bb">
-      {isDrawingMode && <DrawingCanvas onClose={() => setIsDrawingMode(false)} />}
+      <DrawingCanvas isOpen={isDrawingMode} onClose={() => setIsDrawingMode(false)} onOpen={() => setIsDrawingMode(true)} />
       
       {/* TOP NAV */}
       <div className="bb-top">
         <div className="bb-top-title">{topic.modules?.title || 'Test'} &mdash; {topic.title}</div>
         <QuestionTimer key={current} startTime={qStartTime} />
         <div className="bb-top-right">
-          <button className="bb-icon-btn" title="Draw" onClick={() => setIsDrawingMode(true)}>
+          <button className={'bb-icon-btn' + (isDrawingMode ? ' active' : '')} title="Draw" onClick={() => setIsDrawingMode(prev => !prev)}>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/><path d="m15 5 4 4"/></svg>
           </button>
           <button className="bb-icon-btn" title="Reference" onClick={() => setShowRef(true)}>
@@ -904,8 +905,7 @@ export default function TestPage() {
         </div>
       </div>
 
-      {/* CALCULATOR — draggable + resizable, closes ONLY via X */}
-      {isDrawingMode && <DrawingCanvas onClose={() => setIsDrawingMode(false)} />}
+
 
       {showCalc && (
         <div className="bb-calc-overlay">

@@ -240,7 +240,7 @@ export default function SatTestPage() {
         </div>
       </div>
 
-      {isDrawingMode && <DrawingCanvas onClose={() => setIsDrawingMode(false)} />}
+      <DrawingCanvas isOpen={isDrawingMode} onClose={() => setIsDrawingMode(false)} onOpen={() => setIsDrawingMode(true)} />
 
       {showNav && (
         <div className="sat-nav-overlay" onClick={() => setShowNav(false)}>
