@@ -72,6 +72,9 @@ export default function TestPage() {
       setQStartTime(now)
     }
 
+    // Auto-close drawing mode on question change
+    setIsDrawingMode(false)
+
     // Eager-load Desmos script so it's ready when user clicks calculator
     if (!window.Desmos && !document.getElementById('desmos-api')) {
       const s = document.createElement('script')
@@ -128,7 +131,7 @@ export default function TestPage() {
     })()
 
     return () => { active = false }
-  }, [subjectSlug, difficulty, cachedQuestions])
+  }, [subjectSlug, difficulty, cachedQuestions, navigate])
 
   useEffect(() => {
     if (!questions[current] || !IS_PRACTICE) return
@@ -196,43 +199,66 @@ export default function TestPage() {
     const qHighlights = highlights['q' + current] || []
     if (!qHighlights.length || !text) return text
 
-    const len = text.length
-    const colorMap = new Array(len).fill(null)
+    // Offsets are based on rendered text, so apply them to text nodes instead
+    // of the raw HTML string. This preserves passage formatting and entities.
+    const template = document.createElement('template')
+    template.innerHTML = String(text)
 
-    qHighlights.forEach((h, i) => {
-      const start = h.start ?? text.indexOf(h.text)
-      if (start === -1) return
-      for (let j = start; j < start + h.text.length && j < len; j++) {
-        colorMap[j] = { color: h.color, border: h.border, idx: i }
+    const passageText = template.content.textContent || ''
+    const ranges = qHighlights.map((highlight, idx) => {
+      const start = Number.isInteger(highlight.start) ? highlight.start : passageText.indexOf(highlight.text)
+      return { start, end: start + (highlight.text || '').length, idx, color: highlight.color, border: highlight.border }
+    }).filter(range => range.start >= 0 && range.end > range.start)
+
+    const walker = document.createTreeWalker(template.content, NodeFilter.SHOW_TEXT)
+    const textNodes = []
+    while (walker.nextNode()) textNodes.push(walker.currentNode)
+
+    let textOffset = 0
+    textNodes.forEach(node => {
+      const value = node.nodeValue || ''
+      const nodeStart = textOffset
+      const nodeEnd = nodeStart + value.length
+      textOffset = nodeEnd
+
+      const overlapping = ranges.filter(range => range.start < nodeEnd && range.end > nodeStart)
+      if (!overlapping.length) return
+
+      const boundaries = new Set([0, value.length])
+      overlapping.forEach(range => {
+        boundaries.add(Math.max(0, range.start - nodeStart))
+        boundaries.add(Math.min(value.length, range.end - nodeStart))
+      })
+      const points = [...boundaries].sort((a, b) => a - b)
+      const fragment = document.createDocumentFragment()
+
+      for (let i = 0; i < points.length - 1; i++) {
+        const from = points[i]
+        const to = points[i + 1]
+        if (from === to) continue
+        const active = overlapping.filter(range => range.start <= nodeStart + from && range.end >= nodeStart + to).at(-1)
+        const segment = value.slice(from, to)
+        if (!active) {
+          fragment.appendChild(document.createTextNode(segment))
+          continue
+        }
+
+        const mark = document.createElement('mark')
+        mark.className = 'hl-mark'
+        mark.dataset.hlIdx = String(active.idx)
+        mark.style.backgroundColor = active.color
+        mark.style.borderBottom = `2px solid ${active.border}`
+        mark.style.padding = '1px 2px'
+        mark.style.borderRadius = '2px'
+        mark.style.cursor = 'pointer'
+        mark.textContent = segment
+        fragment.appendChild(mark)
       }
+
+      node.parentNode?.replaceChild(fragment, node)
     })
 
-    let html = ''
-    let buf = ''
-    let cur = null
-
-    for (let i = 0; i < len; i++) {
-      const cm = colorMap[i]
-      const same = cm && cur && cm.color === cur.color && cm.idx === cur.idx
-      if (same) {
-        buf += text[i]
-      } else {
-        if (cur) {
-          html += `<mark class="hl-mark" data-hl-idx="${cur.idx}" style="background:${cur.color};border-bottom:2px solid ${cur.border};padding:1px 2px;border-radius:2px;cursor:pointer;">${buf}</mark>`
-        } else if (buf) {
-          html += buf
-        }
-        buf = text[i]
-        cur = cm
-      }
-    }
-    if (cur) {
-      html += `<mark class="hl-mark" data-hl-idx="${cur.idx}" style="background:${cur.color};border-bottom:2px solid ${cur.border};padding:1px 2px;border-radius:2px;cursor:pointer;">${buf}</mark>`
-    } else if (buf) {
-      html += buf
-    }
-
-    return html
+    return template.innerHTML
   }, [highlights, current])
 
   const handlePassageClick = (e) => {
@@ -244,7 +270,7 @@ export default function TestPage() {
 
   const passageHtmlStr = useMemo(() => {
     if (!effectivePassage) return ''
-    return getHighlightedHTML(effectivePassage.replace(/\s+/g, ' ').trim())
+    return getHighlightedHTML(effectivePassage)
   }, [effectivePassage, getHighlightedHTML])
 
   const applyHighlight = (color) => {
@@ -267,21 +293,29 @@ export default function TestPage() {
 
   const handlePassageMouseUp = () => {
     const sel = window.getSelection()
-    if (!sel || sel.isCollapsed || !sel.toString().trim()) { setHlMenu(null); return }
-    const selText = sel.toString().trim()
-    const rect = passageRef.current?.getBoundingClientRect()
-    if (!rect) return
-    const range = sel.getRangeAt(0)
-    const rangeRect = range.getBoundingClientRect()
-
     const passageEl = passageRef.current?.querySelector('.bb-passage-split')
+    if (!sel || sel.isCollapsed || !passageEl) { setHlMenu(null); return }
+    const range = sel.getRangeAt(0)
+    if (!passageEl.contains(range.startContainer) || !passageEl.contains(range.endContainer)) { setHlMenu(null); return }
+    const selectedText = range.toString()
+    const selText = selectedText.trim()
+    if (!selText) { setHlMenu(null); return }
+
+    const rangeRect = range.getBoundingClientRect()
+    const rect = passageRef.current.getBoundingClientRect()
     const preRange = document.createRange()
     preRange.setStart(passageEl, 0)
     preRange.setEnd(range.startContainer, range.startOffset)
-    const startOffset = preRange.toString().length
+    const leadingWhitespace = selectedText.length - selectedText.trimStart().length
+    const startOffset = preRange.toString().length + leadingWhitespace
 
     hlSelectedRef.current = { text: selText, start: startOffset }
-    setHlMenu({ x: rangeRect.left - rect.left + rangeRect.width / 2 - 120, y: rangeRect.top - rect.top - 50 })
+    const scrollTop = passageRef.current.scrollTop
+    const scrollLeft = passageRef.current.scrollLeft
+    let menuY = rangeRect.top - rect.top + scrollTop - 50
+    if (menuY < scrollTop + 8) menuY = rangeRect.bottom - rect.top + scrollTop + 8
+    const menuX = Math.max(110, Math.min(rect.width - 110, rangeRect.left - rect.left + scrollLeft + rangeRect.width / 2))
+    setHlMenu({ x: menuX, y: menuY })
   }
 
   const handleSelect = (idx) => {
@@ -440,8 +474,11 @@ export default function TestPage() {
     const el = document.getElementById('desmos-container')
     if (!el) return
 
+    // Prevent re-initialization if already initialized
+    if (el.innerHTML !== '') return
+
     const init = () => {
-      if (window.Desmos && el) {
+      if (window.Desmos && el && el.innerHTML === '') {
         window.Desmos.GraphingCalculator(el, {
           expressions: true, settingsMenu: true, zoomButtons: true, border: false,
         })
@@ -656,7 +693,7 @@ export default function TestPage() {
 
   return (
     <div className="bb">
-      <DrawingCanvas isOpen={isDrawingMode} onClose={() => setIsDrawingMode(false)} onOpen={() => setIsDrawingMode(true)} />
+      <DrawingCanvas isOpen={isDrawingMode} onClose={() => setIsDrawingMode(false)} onOpen={() => setIsDrawingMode(true)} pageId={currentQuestion?.id || 'default'} />
       
       {/* TOP NAV */}
       <div className="bb-top">
@@ -907,50 +944,48 @@ export default function TestPage() {
 
 
 
-      {showCalc && (
-        <div className="bb-calc-overlay">
+      <div className="bb-calc-overlay" style={{ display: showCalc ? 'block' : 'none' }}>
+        <div
+          className="bb-calc-modal"
+          style={{ left: calcPos.x + 'px', top: calcPos.y + 'px', width: calcSize.w + 'px', height: calcSize.h + 'px' }}
+        >
           <div
-            className="bb-calc-modal"
-            style={{ left: calcPos.x + 'px', top: calcPos.y + 'px', width: calcSize.w + 'px', height: calcSize.h + 'px' }}
+            className="bb-calc-header"
+            onMouseDown={(e) => {
+              const startX = e.clientX
+              const startY = e.clientY
+              const startPos = { ...calcPos }
+              const onMove = (ev) => {
+                setCalcPos({ x: startPos.x + ev.clientX - startX, y: startPos.y + ev.clientY - startY })
+              }
+              const onUp = () => { document.removeEventListener('mousemove', onMove); document.removeEventListener('mouseup', onUp) }
+              document.addEventListener('mousemove', onMove)
+              document.addEventListener('mouseup', onUp)
+            }}
           >
-            <div
-              className="bb-calc-header"
-              onMouseDown={(e) => {
-                const startX = e.clientX
-                const startY = e.clientY
-                const startPos = { ...calcPos }
-                const onMove = (ev) => {
-                  setCalcPos({ x: startPos.x + ev.clientX - startX, y: startPos.y + ev.clientY - startY })
-                }
-                const onUp = () => { document.removeEventListener('mousemove', onMove); document.removeEventListener('mouseup', onUp) }
-                document.addEventListener('mousemove', onMove)
-                document.addEventListener('mouseup', onUp)
-              }}
-            >
-              <span>Desmos Graphing Calculator</span>
-              <button className="bb-modal-close" onClick={() => setShowCalc(false)}>&times;</button>
-            </div>
-            <div id="desmos-container" className="bb-calc-frame" />
-            <div
-              className="bb-calc-resize"
-              onMouseDown={(e) => {
-                e.stopPropagation()
-                const startX = e.clientX
-                const startY = e.clientY
-                const startSize = { ...calcSize }
-                const onMove = (ev) => {
-                  setCalcSize({ w: Math.max(200, startSize.w + ev.clientX - startX), h: Math.max(200, startSize.h + ev.clientY - startY) })
-                }
-                const onUp = () => { document.removeEventListener('mousemove', onMove); document.removeEventListener('mouseup', onUp) }
-                document.addEventListener('mousemove', onMove)
-                document.addEventListener('mouseup', onUp)
-              }}
-            >
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/></svg>
-            </div>
+            <span>Desmos Graphing Calculator</span>
+            <button className="bb-modal-close" onClick={() => setShowCalc(false)}>&times;</button>
+          </div>
+          <div id="desmos-container" className="bb-calc-frame" />
+          <div
+            className="bb-calc-resize"
+            onMouseDown={(e) => {
+              e.stopPropagation()
+              const startX = e.clientX
+              const startY = e.clientY
+              const startSize = { ...calcSize }
+              const onMove = (ev) => {
+                setCalcSize({ w: Math.max(200, startSize.w + ev.clientX - startX), h: Math.max(200, startSize.h + ev.clientY - startY) })
+              }
+              const onUp = () => { document.removeEventListener('mousemove', onMove); document.removeEventListener('mouseup', onUp) }
+              document.addEventListener('mousemove', onMove)
+              document.addEventListener('mouseup', onUp)
+            }}
+          >
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/></svg>
           </div>
         </div>
-      )}
+      </div>
 
       {/* MODAL */}
       {showNav && (

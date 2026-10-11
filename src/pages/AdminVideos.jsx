@@ -117,7 +117,7 @@ export default function AdminVideos() {
           </div>
         </div>
 
-        <div className="admin-layer" style={{ marginTop: '1rem' }}>
+        <form className="admin-layer" style={{ marginTop: '1rem' }} onSubmit={(e) => { e.preventDefault(); handleSave(); }}>
           <label className="admin-label">{editing ? 'EDIT VIDEO' : 'NEW VIDEO'}</label>
           <input className="admin-input" value={vTitle} onChange={e => setVTitle(e.target.value)} placeholder="Video title" />
           <input className="admin-input" value={vUrl} onChange={e => setVUrl(e.target.value)} placeholder="YouTube link or direct file URL (mp4...)" style={{ marginTop: '0.5rem' }} />
@@ -130,12 +130,12 @@ export default function AdminVideos() {
           <input className="admin-input" value={vDesc} onChange={e => setVDesc(e.target.value)} placeholder="Description (optional)" style={{ marginTop: '0.5rem' }} />
           <div style={{ display: 'flex', gap: '0.5rem', marginTop: '0.5rem' }}>
             <input className="admin-input" type="number" min="0" value={vOrder} onChange={e => setVOrder(Number(e.target.value))} placeholder="Order" style={{ width: '40%' }} />
-            <button className="btn-solid-black" onClick={handleSave} disabled={saving} style={{ flex: 1 }}>
+            <button type="submit" className="btn-solid-black" disabled={saving} style={{ flex: 1 }}>
               {saving ? 'SAVING...' : (editing ? 'UPDATE VIDEO' : 'ADD VIDEO')}
             </button>
-            {editing && <button className="btn-solid-black" style={{ background: 'transparent', color: '#000' }} onClick={resetForm}>CANCEL</button>}
+            {editing && <button type="button" className="btn-solid-black" style={{ background: 'transparent', color: '#000' }} onClick={resetForm}>CANCEL</button>}
           </div>
-        </div>
+        </form>
 
         <div className="admin-layer" style={{ marginTop: '1rem' }}>
           <label className="admin-label">VIDEOS IN THIS SUBJECT ({videos.length})</label>

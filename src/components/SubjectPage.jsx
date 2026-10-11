@@ -163,7 +163,7 @@ export default function SubjectPage({ slug, title, subtitle, tag }) {
         <>
           <h2 className="section-title">PRACTICE BY DIFFICULTY</h2>
           <div className="study-grid study-grid-3">
-            {topics.map((t, i) => (
+            {topics.map((t) => (
               <div key={t.id} className="study-card shadow-wrap" onClick={() => handleStart(t)}>
                 <div className="shadow-box" />
                 <div className="study-card-inner" style={{ '--sc': accent }}>

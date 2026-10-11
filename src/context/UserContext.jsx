@@ -1,6 +1,7 @@
 import { createContext, useContext, useState, useEffect, useCallback } from 'react'
 import { supabase } from '../lib/supabaseClient'
 import { clearCache } from '../lib/dataCache'
+import i18n from '../i18n'
 
 const defaultUser = {
   profile: null,
@@ -27,7 +28,10 @@ export function UserProvider({ children }) {
         return
       }
       const { data } = await supabase.from('profiles').select('*').eq('id', session.user.id).maybeSingle()
-      if (data) setProfile(data)
+      if (data) {
+        setProfile(data)
+        if (data.lang) i18n.changeLanguage(data.lang)
+      }
     } catch {
       // ignore fetch errors
     } finally {
@@ -46,7 +50,10 @@ export function UserProvider({ children }) {
       }
       supabase.from('profiles').select('*').eq('id', session.user.id).maybeSingle().then(({ data }) => {
         if (!mounted) return
-        if (data) setProfile(data)
+        if (data) {
+          setProfile(data)
+          if (data.lang) i18n.changeLanguage(data.lang)
+        }
         setProfileLoading(false)
       })
     })

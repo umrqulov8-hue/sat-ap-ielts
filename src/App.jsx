@@ -24,7 +24,7 @@ const Profile = lazy(() => import('./pages/Profile'))
 const Settings = lazy(() => import('./pages/Settings'))
 const Support = lazy(() => import('./pages/Support'))
 const AdminQuestions = lazy(() => import('./pages/AdminQuestions'))
-const TopicsPage = lazy(() => import('./pages/TopicsPage'))
+
 const TestPage = lazy(() => import('./pages/TestPage'))
 const TestReview = lazy(() => import('./pages/TestReview'))
 const SatTestAdmin = lazy(() => import('./pages/SatTestAdmin'))

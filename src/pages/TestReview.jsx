@@ -18,6 +18,7 @@ export default function TestReview() {
   const { setPageTitle, setPageSub, setPageClass } = useLayout()
   const [test, setTest] = useState(null)
   const [expExplain, setExpExplain] = useState(null)
+  const [desmosExplain, setDesmosExplain] = useState(null)
 
   useEffect(() => {
     setPageTitle('TEST REVIEW')
@@ -122,13 +123,28 @@ export default function TestReview() {
                   })}
                 </div>
               )}
-              {q?.explanation && !isCorrect && (
-                <div className="tr-explain-wrap">
-                  <button className="tr-explain-btn" onClick={() => setExpExplain(isOpen ? null : i)}>
-                    {isOpen ? 'HIDE EXPLANATION' : 'VIEW EXPLANATION'}
-                  </button>
-                  {isOpen && (
+              {(q?.explanation || q?.desmos_text || q?.desmos_image_url) && !isCorrect && (
+                <div className="tr-explain-wrap" style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                  <div style={{ display: 'flex', gap: '1rem' }}>
+                    {q?.explanation && (
+                      <button className="tr-explain-btn" onClick={() => { setExpExplain(isOpen ? null : i); setDesmosExplain(null) }}>
+                        {isOpen ? 'HIDE EXPLANATION' : 'VIEW EXPLANATION'}
+                      </button>
+                    )}
+                    {(q?.desmos_text || q?.desmos_image_url) && (
+                      <button className="tr-explain-btn" style={{ background: '#3b82f6', color: '#fff', borderColor: '#3b82f6' }} onClick={() => { setDesmosExplain(desmosExplain === i ? null : i); setExpExplain(null) }}>
+                        {desmosExplain === i ? 'HIDE DESMOS' : 'VIEW DESMOS'}
+                      </button>
+                    )}
+                  </div>
+                  {isOpen && q?.explanation && (
                     <div className="tr-explain">{q.explanation}</div>
+                  )}
+                  {desmosExplain === i && (
+                    <div className="tr-explain desmos-explain" style={{ background: '#eff6ff', borderColor: '#bfdbfe' }}>
+                      {q.desmos_image_url && <img src={q.desmos_image_url} alt="Desmos" style={{ maxWidth: '100%', borderRadius: '8px', marginBottom: '1rem' }} />}
+                      {q.desmos_text && <div style={{ whiteSpace: 'pre-wrap' }}>{q.desmos_text}</div>}
+                    </div>
                   )}
                 </div>
               )}

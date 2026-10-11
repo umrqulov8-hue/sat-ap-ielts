@@ -91,6 +91,10 @@ export default function SatTestPage() {
       if (timerRef.current) clearInterval(timerRef.current)
     }
   }, [currentMod, phase])
+  useEffect(() => {
+    setIsDrawingMode(false)
+  }, [current])
+
 
   const formatTime = (s) => {
     const m = Math.floor(s / 60)
@@ -240,7 +244,7 @@ export default function SatTestPage() {
         </div>
       </div>
 
-      <DrawingCanvas isOpen={isDrawingMode} onClose={() => setIsDrawingMode(false)} onOpen={() => setIsDrawingMode(true)} />
+      <DrawingCanvas isOpen={isDrawingMode} onClose={() => setIsDrawingMode(false)} onOpen={() => setIsDrawingMode(true)} pageId={q?.id || 'default'} />
 
       {showNav && (
         <div className="sat-nav-overlay" onClick={() => setShowNav(false)}>

@@ -19,7 +19,7 @@ export default function AdminQuestions() {
   const [users, setUsers] = useState([])
   const [stats, setStats] = useState(null)
 
-      
+
   const [qText, setQText] = useState('')
   const [passageText, setPassageText] = useState('')
   const [noText, setNoText] = useState(false)
@@ -33,6 +33,11 @@ export default function AdminQuestions() {
   const [dragOver, setDragOver] = useState(false)
   const [textDragOver, setTextDragOver] = useState(false)
   const [explanation, setExplanation] = useState('')
+  const [desmosImageFile, setDesmosImageFile] = useState(null)
+  const [desmosImagePreview, setDesmosImagePreview] = useState('')
+  const [desmosText, setDesmosText] = useState('')
+  const desmosFileRef = useRef(null)
+  const [desmosDragOver, setDesmosDragOver] = useState(false)
   const [uploading, setUploading] = useState(false)
   const [editingQ, setEditingQ] = useState(null)
   const toast = useToast()
@@ -45,7 +50,7 @@ export default function AdminQuestions() {
   const [modDuration, setModDuration] = useState('')
   const [editingMod, setEditingMod] = useState(null)
   const [savingMod, setSavingMod] = useState(false)
-  
+
   const [userSearch, setUserSearch] = useState('')
   const [userRoleFilter, setUserRoleFilter] = useState('all')
   const [activity, setActivity] = useState([])
@@ -202,7 +207,9 @@ export default function AdminQuestions() {
     setQText(''); setPassageText(''); setNoText(false); setQType('mc'); setOpts(['', '', '', ''])
     setCorrect(0); setCorrectAnswer(''); setImageFile(null); setImagePreview('')
     setExplanation(''); setEditingQ(null)
+    setDesmosImageFile(null); setDesmosImagePreview(''); setDesmosText('')
     if (fileRef.current) fileRef.current.value = ''
+    if (desmosFileRef.current) desmosFileRef.current.value = ''
   }
 
   const handleAddModule = async () => {
@@ -242,11 +249,18 @@ export default function AdminQuestions() {
     toast.success('Module deleted')
   }
 
-    const handleImageSelect = (e) => {
+  const handleImageSelect = (e) => {
     const file = e.target.files[0]
     if (!file) return
     setImageFile(file)
     setImagePreview(URL.createObjectURL(file))
+  }
+
+  const handleDesmosImageSelect = (e) => {
+    const file = e.target.files[0]
+    if (!file) return
+    setDesmosImageFile(file)
+    setDesmosImagePreview(URL.createObjectURL(file))
   }
 
   const handleDropImg = async (e) => {
@@ -286,6 +300,7 @@ export default function AdminQuestions() {
     }
     setUploading(true)
     let imageUrl = editingQ?.image_url || ''
+    let desmosImageUrl = editingQ?.desmos_image_url || ''
     if (imageFile) {
       const { data: { session } } = await supabase.auth.getSession()
       const uid = session?.user?.id
@@ -296,10 +311,22 @@ export default function AdminQuestions() {
       const { data: { publicUrl } } = supabase.storage.from('avav2').getPublicUrl(path)
       imageUrl = publicUrl
     }
+    if (desmosImageFile) {
+      const { data: { session } } = await supabase.auth.getSession()
+      const uid = session?.user?.id
+      const ext = desmosImageFile.name.split('.').pop()
+      const path = uid + '/desmos-images/' + Date.now() + '.' + ext
+      const { error: upErr } = await supabase.storage.from('avav2').upload(path, desmosImageFile, { upsert: true })
+      if (upErr) { setMsg('Desmos upload error: ' + upErr.message); setUploading(false); return }
+      const { data: { publicUrl } } = supabase.storage.from('avav2').getPublicUrl(path)
+      desmosImageUrl = publicUrl
+    }
     const payload = {
       options: qType === 'mc' ? opts : [],
       correct_index: qType === 'mc' ? correct : -1, image_url: imageUrl,
       explanation: qType === 'written' ? correctAnswer.trim() : explanation.trim(),
+      desmos_image_url: desmosImageUrl,
+      desmos_text: desmosText.trim(),
       order_index: editingQ ? editingQ.order_index : questions.length,
     }
     if (layoutSplit && passageText.trim()) {
@@ -339,6 +366,8 @@ export default function AdminQuestions() {
     setCorrect(q.correct_index >= 0 ? q.correct_index : 0)
     setCorrectAnswer(q.correct_index === -1 ? q.explanation || '' : '')
     setExplanation(q.correct_index >= 0 ? q.explanation || '' : '')
+    setDesmosImagePreview(q.desmos_image_url || '')
+    setDesmosText(q.desmos_text || '')
     setImagePreview(q.image_url || '')
     setImageFile(null)
     setNoText(false)
@@ -347,13 +376,29 @@ export default function AdminQuestions() {
 
   const handleDeleteQuestion = async (id) => {
     if (!window.confirm('Delete this question?')) return
+    const q = questions.find(q => q.id === id)
+    if (q) {
+      const pathsToDelete = []
+      if (q.image_url) {
+        const parts = q.image_url.split('/avav2/')
+        if (parts.length === 2) pathsToDelete.push(parts[1])
+      }
+      if (q.desmos_image_url) {
+        const parts = q.desmos_image_url.split('/avav2/')
+        if (parts.length === 2) pathsToDelete.push(parts[1])
+      }
+      if (pathsToDelete.length > 0) {
+        await supabase.storage.from('avav2').remove(pathsToDelete)
+      }
+    }
+
     const { error } = await supabase.from('questions').delete().eq('id', id)
     if (error) {
-      toast.error('Error deleting question')
+      toast.error(error.message)
     } else {
       toast.success('Question deleted!')
+      setQuestions(questions.filter(q => q.id !== id))
     }
-    setQuestions(questions.filter(q => q.id !== id))
   }
 
   const updateOpt = (i, v) => {
@@ -841,9 +886,8 @@ ALTER TABLE questions ADD COLUMN IF NOT EXISTS layout text default 'centered';</
                 </div>
               )}
 
-              {true && (
                 <div className="admin-q-editor-grid">
-                  <div className="admin-q-editor-form">
+                  <form className="admin-q-editor-form" onSubmit={(e) => { e.preventDefault(); handleSaveQuestion() }}>
                     {layoutSplit ? (
                       <>
                         <div className="admin-layer">
@@ -882,7 +926,7 @@ ALTER TABLE questions ADD COLUMN IF NOT EXISTS layout text default 'centered';</
                             <option value="easy">Easy</option>
                             <option value="medium">Medium</option>
                             <option value="hard">Hard</option>
-                            
+
                             <option value="mixing">Mixing</option>
                           </select>
                         </div>
@@ -994,13 +1038,50 @@ ALTER TABLE questions ADD COLUMN IF NOT EXISTS layout text default 'centered';</
                       <textarea className="admin-textarea" rows={2} value={explanation} onChange={e => setExplanation(e.target.value)} placeholder="Explain why the answer is correct..." />
                     </div>
 
+                    <div className="admin-layer">
+                      <label className="admin-label">DESMOS EXPLANATION</label>
+                      <div className="admin-row" style={{ gap: '1rem', alignItems: 'flex-start' }}>
+                        <div
+                          className={`admin-image-upload ${desmosDragOver ? 'drag-over' : ''}`}
+                          onDragOver={e => { e.preventDefault(); setDesmosDragOver(true) }}
+                          onDragLeave={() => setDesmosDragOver(false)}
+                          onDrop={e => {
+                            e.preventDefault(); setDesmosDragOver(false)
+                            const file = e.dataTransfer.files[0]
+                            if (file && file.type.startsWith('image/')) {
+                              setDesmosImageFile(file)
+                              setDesmosImagePreview(URL.createObjectURL(file))
+                            }
+                          }}
+                          onClick={() => desmosFileRef.current?.click()}
+                          style={{ flex: 1 }}
+                        >
+                            {desmosImagePreview ? (
+                              <div className="admin-image-preview-wrap">
+                                <img src={desmosImagePreview} alt="" className="admin-preview" />
+                                <div className="admin-remove-image" onClick={(e) => { e.stopPropagation(); setDesmosImageFile(null); setDesmosImagePreview(''); if (desmosFileRef.current) desmosFileRef.current.value = '' }}>&times;</div>
+                              </div>
+                            ) : (
+                              <div className="admin-upload-prompt">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                                <span>Drop Desmos image or browse</span>
+                              </div>
+                            )}
+                            <input type="file" accept="image/*" onChange={handleDesmosImageSelect} className="admin-file-input" ref={desmosFileRef} />
+                        </div>
+                        <div style={{ flex: 2 }}>
+                          <textarea className="admin-textarea" rows={3} value={desmosText} onChange={e => setDesmosText(e.target.value)} placeholder="Desmos explanation text..." style={{ height: '100%' }} />
+                        </div>
+                      </div>
+                    </div>
+
                     <div className="admin-q-actions">
-                      <button className="btn-solid-black" onClick={handleSaveQuestion} disabled={uploading}>
+                      <button type="submit" className="btn-solid-black" disabled={uploading}>
                         {uploading ? <><span className="admin-btn-spinner" /> SAVING...</> : (editingQ ? 'UPDATE QUESTION' : 'SAVE QUESTION')}
                       </button>
-                      {editingQ && <button className="btn-solid-black" style={{ background: 'transparent', color: '#000' }} onClick={resetQForm}>CANCEL</button>}
+                      {editingQ && <button type="button" className="btn-solid-black" style={{ background: 'transparent', color: '#000' }} onClick={resetQForm}>CANCEL</button>}
                     </div>
-                  </div>
+                  </form>
 
                   <div className="admin-q-preview-wrap">
                     <div className="admin-q-preview-label">
@@ -1051,7 +1132,7 @@ ALTER TABLE questions ADD COLUMN IF NOT EXISTS layout text default 'centered';</
                     </div>
                   </div>
                 </div>
-              )}
+
             </div>
           )}
         </>

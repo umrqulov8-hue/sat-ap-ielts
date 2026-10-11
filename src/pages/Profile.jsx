@@ -112,16 +112,22 @@ export default function Profile() {
     if (file) uploadAvatar(file)
   }
 
-  const saveEdit = async () => {
-    setProfile(p => ({ ...p, name: edit.name, avatar_url: edit.avatar_url }))
+  const saveEdit = async (e) => {
+    if (e) e.preventDefault()
+    setProfile(p => ({ ...p, name: edit.name, avatar_url: edit.avatar_url, lang: edit.lang }))
     setPageTitle(`HI, ${edit.name.toUpperCase()}`)
     setEditOpen(false)
 
     const { data: { session } } = await supabase.auth.getSession()
     const user = session?.user
     if (!user) return
-    await supabase.from('profiles').update({ display_name: edit.name, avatar_url: edit.avatar_url, lang: edit.lang }).eq('id', user.id)
-    refreshUser()
+    const { error } = await supabase.from('profiles').update({ display_name: edit.name, avatar_url: edit.avatar_url, lang: edit.lang }).eq('id', user.id)
+    if (error) {
+      setMsg(error.message)
+      setTimeout(() => setMsg(''), 3000)
+    } else {
+      refreshUser()
+    }
   }
 
   const overallScore = totalScore?.total_score || 0
@@ -306,8 +312,8 @@ export default function Profile() {
 
       {editOpen && createPortal(
         <div className="edit-modal-overlay" onClick={() => setEditOpen(false)}>
-          <div className="edit-modal" onClick={e => e.stopPropagation()}>
-            <button className="edit-modal-close" onClick={() => setEditOpen(false)}>&times;</button>
+          <form className="edit-modal" onClick={e => e.stopPropagation()} onSubmit={saveEdit}>
+            <button type="button" className="edit-modal-close" onClick={() => setEditOpen(false)}>&times;</button>
             <h3 className="edit-modal-title">EDIT PROFILE</h3>
 
             <div className="settings-field" style={{ alignItems: 'center', gap: '1rem' }}>
@@ -334,8 +340,8 @@ export default function Profile() {
                 <option value="RU">RU</option>
               </select>
             </div>
-            <button className="btn-settings" style={{ marginTop: '1rem', width: '100%' }} onClick={saveEdit}>SAVE CHANGES</button>
-          </div>
+            <button type="submit" className="btn-settings" style={{ marginTop: '1rem', width: '100%' }}>SAVE CHANGES</button>
+          </form>
         </div>,
         document.body
       )}

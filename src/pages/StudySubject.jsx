@@ -15,8 +15,8 @@ export default function StudySubject() {
   useEffect(() => {
     setPageClass('')
     ;(async () => {
-      const { data: s } = await supabase.from('subjects').select('id, title, color').eq('id', subjectId).maybeSingle()
-      if (!s) { navigate('/study'); return }
+      const { data: s } = await supabase.from('subjects').select('id, title, color, is_active').eq('id', subjectId).maybeSingle()
+      if (!s || !s.is_active) { navigate('/study'); return }
       setSubject(s)
       setPageTitle(s.title.toUpperCase())
       setPageSub('Video lessons')

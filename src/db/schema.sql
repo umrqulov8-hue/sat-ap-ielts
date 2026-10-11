@@ -224,7 +224,8 @@ create policy "Users can view own profile"
 
 create policy "Users can update own profile"
   on profiles for update
-  using (auth.uid() = id);
+  using ((select auth.uid()) = id)
+  with check ((select auth.uid()) = id);
 
 -- Subjects: public read
 create policy "Anyone can view subjects"
@@ -236,11 +237,18 @@ create policy "Anyone can view modules"
   on modules for select
   using (true);
 drop policy if exists "Anyone can insert modules" on modules;
-create policy "Anyone can insert modules" on modules for insert with check (true);
+drop policy if exists "Admins can insert modules" on modules;
+create policy "Admins can insert modules" on modules for insert to authenticated
+  with check (exists (select 1 from public.profiles p where p.id = (select auth.uid()) and p.role in ('admin', 'owner')));
 drop policy if exists "Anyone can update modules" on modules;
-create policy "Anyone can update modules" on modules for update using (true);
+drop policy if exists "Admins can update modules" on modules;
+create policy "Admins can update modules" on modules for update to authenticated
+  using (exists (select 1 from public.profiles p where p.id = (select auth.uid()) and p.role in ('admin', 'owner')))
+  with check (exists (select 1 from public.profiles p where p.id = (select auth.uid()) and p.role in ('admin', 'owner')));
 drop policy if exists "Anyone can delete modules" on modules;
-create policy "Anyone can delete modules" on modules for delete using (true);
+drop policy if exists "Admins can delete modules" on modules;
+create policy "Admins can delete modules" on modules for delete to authenticated
+  using (exists (select 1 from public.profiles p where p.id = (select auth.uid()) and p.role in ('admin', 'owner')));
 
 
 -- User progress: own only
@@ -410,6 +418,8 @@ create table if not exists questions (
   correct_index int not null,
   image_url text default '',
   explanation text default '',
+  desmos_image_url text default '',
+  desmos_text text default '',
   order_index int default 0,
   question_type text default 'multiple_choice' check (question_type in ('multiple_choice', 'written')),
   created_at timestamptz default now()
@@ -419,11 +429,18 @@ alter table questions enable row level security;
 drop policy if exists "Anyone can view questions" on questions;
 create policy "Anyone can view questions" on questions for select using (true);
 drop policy if exists "Anyone can insert questions" on questions;
-create policy "Anyone can insert questions" on questions for insert with check (true);
+drop policy if exists "Admins can insert questions" on questions;
+create policy "Admins can insert questions" on questions for insert to authenticated
+  with check (exists (select 1 from public.profiles p where p.id = (select auth.uid()) and p.role in ('admin', 'owner')));
 drop policy if exists "Anyone can update questions" on questions;
-create policy "Anyone can update questions" on questions for update using (true);
+drop policy if exists "Admins can update questions" on questions;
+create policy "Admins can update questions" on questions for update to authenticated
+  using (exists (select 1 from public.profiles p where p.id = (select auth.uid()) and p.role in ('admin', 'owner')))
+  with check (exists (select 1 from public.profiles p where p.id = (select auth.uid()) and p.role in ('admin', 'owner')));
 drop policy if exists "Anyone can delete questions" on questions;
-create policy "Anyone can delete questions" on questions for delete using (true);
+drop policy if exists "Admins can delete questions" on questions;
+create policy "Admins can delete questions" on questions for delete to authenticated
+  using (exists (select 1 from public.profiles p where p.id = (select auth.uid()) and p.role in ('admin', 'owner')));
 
 -- Seed questions for Advanced Math
 insert into questions (subject_id, question_text, options, correct_index)

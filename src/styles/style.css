@@ -31,6 +31,7 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
+    overscroll-behavior: none;
 }
 
 ::selection { background: var(--dark); color: var(--yellow); }
@@ -2478,11 +2479,13 @@ mark.hl-mark:hover { opacity: 0.6; }
 .bb-calc-overlay {
   position: fixed; inset: 0; z-index: 1000;
   background: transparent;
+  pointer-events: none;
 }
 .bb-calc-modal {
   position: fixed; z-index: 1001;
   background: #fff; border: 1px solid var(--dark);
   display: flex; flex-direction: column; overflow: hidden;
+  pointer-events: auto;
 }
 .bb-calc-header {
   display: flex; align-items: center; justify-content: space-between;
@@ -3316,4 +3319,33 @@ mark.hl-mark:hover { opacity: 0.6; }
 .study-info-inner .btn-module { align-self: flex-start; margin-top: auto; }
 @media (max-width: 640px) {
   .study-info-grid { grid-template-columns: 1fr; }
+}
+
+/* Animations and Polish */
+@keyframes fadeInSlideUp {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInScale {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.aitutor-modal {
+  animation: fadeInSlideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.desmos-explain {
+  animation: fadeInScale 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.tr-explain-btn {
+  transition: all 0.2s ease;
+}
+
+.tr-explain-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }

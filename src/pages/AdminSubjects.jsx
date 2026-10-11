@@ -25,8 +25,11 @@ export default function AdminSubjects() {
   useEffect(() => {
     setPageTitle('TRACK ADMIN')
     setPageSub('Manage study tracks & subjects')
-    fetchSubjects()
   }, [setPageTitle, setPageSub])
+
+  useEffect(() => {
+    fetchSubjects()
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   async function fetchSubjects() {
     setLoading(true)

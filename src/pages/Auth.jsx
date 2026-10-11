@@ -2,6 +2,41 @@ import { useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { supabase } from '../lib/supabaseClient'
 
+function getAuthErrorMessage(error, action = 'signin') {
+  const message = String(error?.message || '').toLowerCase()
+  const code = String(error?.code || '').toLowerCase()
+  const name = String(error?.name || '').toLowerCase()
+
+  if (action === 'signin' && (code === 'invalid_credentials' || message.includes('invalid login credentials') || message.includes('invalid email or password'))) {
+    return 'Email yoki parol noto\'g\'ri.'
+  }
+  if (code === 'email_exists' || message.includes('user already registered') || message.includes('email already registered')) {
+    return 'Bu email bilan hisob allaqachon mavjud. Kirishga urinib ko\'ring.'
+  }
+  if (code === 'email_not_confirmed' || message.includes('email not confirmed')) {
+    return 'Email manzilingiz tasdiqlanmagan. Pochtangizni tekshiring.'
+  }
+  if (error?.status === 429 || message.includes('rate limit') || message.includes('too many requests')) {
+    return 'Juda ko\'p urinish bo\'ldi. Biroz kutib, qayta urinib ko\'ring.'
+  }
+  if (name === 'typeerror' || name === 'aborterror' || name === 'timeouterror' || ['failed to fetch', 'networkerror', 'load failed', 'timed out', 'timeout', 'aborted', 'connection refused'].some((part) => message.includes(part))) {
+    return 'Kirish xizmati bilan aloqa uzildi. Internetni tekshiring va birozdan so\'ng qayta urinib ko\'ring.'
+  }
+  if (message.includes('invalid response')) {
+    return 'Kirish serveridan noto\'g\'ri javob keldi. Birozdan so\'ng qayta urinib ko\'ring.'
+  }
+  if (message.includes('api key') || message.includes('project not found') || message.includes('project is disabled')) {
+    return 'Kirish xizmati hozircha mavjud emas. Keyinroq qayta urinib ko\'ring.'
+  }
+  if (error?.status >= 500 || message.includes('project is paused') || message.includes('service unavailable')) {
+    return 'Kirish serverida vaqtinchalik uzilish bor. Birozdan so\'ng qayta urinib ko\'ring.'
+  }
+
+  return action === 'signin'
+    ? 'Kirish amalga oshmadi. Email va parolni tekshirib, qayta urinib ko\'ring.'
+    : 'So\'rov bajarilmadi. Ma\'lumotlarni tekshirib, qayta urinib ko\'ring.'
+}
+
 export default function Auth() {
   const [mode, setMode] = useState('signin')
   const [displayedMode, setDisplayedMode] = useState('signin')
@@ -87,12 +122,12 @@ export default function Auth() {
         options: { emailRedirectTo: window.location.origin }
       })
       if (error) {
-        setErrors({ general: error.message })
+        setErrors({ general: getAuthErrorMessage(error, 'signup') })
       } else {
         setSignedUp(true)
       }
-    } catch {
-      setErrors({ general: 'Xatolik yuz berdi. Qaytadan urinib ko\'ring.' })
+    } catch (error) {
+      setErrors({ general: getAuthErrorMessage(error, 'signup') })
     } finally {
       setSubmitting(false)
     }
@@ -110,10 +145,11 @@ export default function Auth() {
         password: signIn.password
       })
       if (error) {
-        setErrors({ general: 'Email yoki parol noto\'g\'ri' })
+        setErrors({ general: getAuthErrorMessage(error) })
       }
-    } catch {
-      setErrors({ general: 'Xatolik yuz berdi. Qaytadan urinib ko\'ring.' })
+    } catch (error) {
+      console.error('Sign-in request failed:', error?.name, error?.message)
+      setErrors({ general: getAuthErrorMessage(error) })
     } finally {
       setSubmitting(false)
     }
@@ -131,12 +167,12 @@ export default function Auth() {
         redirectTo: window.location.origin + '/auth'
       })
       if (error) {
-        setForgotErr(error.message)
+        setForgotErr(getAuthErrorMessage(error, 'recovery'))
       } else {
         setForgotSent(true)
       }
-    } catch {
-      setForgotErr('Xatolik yuz berdi. Qaytadan urinib ko\'ring.')
+    } catch (error) {
+      setForgotErr(getAuthErrorMessage(error, 'recovery'))
     }
   }
 

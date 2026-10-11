@@ -50,9 +50,12 @@ export default function AITutor({ question, userAnswer, onClose }) {
   async function handleExplain() {
     setLoading(true)
     setError('')
+    setExplanation('')
     try {
-      const text = await explainQuestion(question, userAnswer)
-      setExplanation(text)
+      await explainQuestion(question, userAnswer, (text) => {
+        setExplanation(text)
+        setLoading(false) // stop showing loading spinner as soon as first token arrives
+      })
     } catch (e) {
       setError(e.message || 'Xato yuz berdi')
     } finally {

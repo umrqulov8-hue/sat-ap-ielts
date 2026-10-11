@@ -1,16 +1,6 @@
-import React, { useRef, useState, useEffect, useCallback } from 'react'
+import { useRef, useState, useEffect, useCallback } from 'react';
 
-// Global cache so drawn items survive unmounting/remounting
-let persistedElementsCache = []
-try {
-  const saved = sessionStorage.getItem('satap_drawing_elements')
-  if (saved) {
-    persistedElementsCache = JSON.parse(saved)
-  }
-} catch (e) {
-  console.error('Failed to load drawing cache', e)
-}
-
+// Math Helper
 function distToSegment(p, v, w) {
   const l2 = (v.x - w.x) * (v.x - w.x) + (v.y - w.y) * (v.y - w.y)
   if (l2 === 0) return Math.hypot(p.x - v.x, p.y - v.y)
@@ -20,892 +10,418 @@ function distToSegment(p, v, w) {
 }
 
 function normalizeRect(x1, y1, x2, y2) {
-  const x = Math.min(x1, x2)
-  const y = Math.min(y1, y2)
-  const width = Math.max(Math.abs(x2 - x1), 8)
-  const height = Math.max(Math.abs(y2 - y1), 8)
-  return { x, y, width, height }
+  return {
+    x: Math.min(x1, x2),
+    y: Math.min(y1, y2),
+    width: Math.max(Math.abs(x2 - x1), 8),
+    height: Math.max(Math.abs(y2 - y1), 8)
+  }
 }
 
-export default function DrawingCanvas({ isOpen = true, onClose, onOpen }) {
-  const canvasRef = useRef(null)
-  const [elements, setElements] = useState(() => persistedElementsCache)
-  const [history, setHistory] = useState([])
-  const [tool, setTool] = useState('select') // select, draw, eraser, shapes
-  const [shapeCategory, setShapeCategory] = useState('3d') // '2d' | '3d'
-  const [currentShape, setCurrentShape] = useState('cube')
-  const [color, setColor] = useState('#007aff')
-  const [lineWidth, setLineWidth] = useState(3)
-  const [showShapes, setShowShapes] = useState(false)
-  const [selectedId, setSelectedId] = useState(null)
-  const [hoveredId, setHoveredId] = useState(null)
-  
-  // Dragging / Drawing state refs to avoid state sync lag
-  const isInteracting = useRef(false)
-  const interactionMode = useRef(null) // 'draw' | 'create-shape' | 'drag-element' | 'erasing'
-  const dragStartPos = useRef({ x: 0, y: 0 })
-  const currentDragPos = useRef({ x: 0, y: 0 })
-  const activeStrokeRef = useRef(null)
-  const tempShapeRef = useRef(null)
-  const draggedElementInitial = useRef(null)
+const IconWrapper = ({ active, onClick, children, title }) => (
+  <button
+    onClick={onClick}
+    title={title}
+    className={active ? 'active' : ''}
+    style={{
+      width: '40px', height: '40px', display: 'flex', alignItems: 'center', justifyContent: 'center',
+      borderRadius: '8px', border: 'none', cursor: 'pointer',
+      background: active ? '#007aff' : 'transparent',
+      color: active ? '#fff' : '#333',
+      transition: 'all 0.2s ease',
+      position: 'relative'
+    }}
+  >
+    {children}
+  </button>
+);
 
-  // Sync to cache and session storage
+export default function DrawingCanvas({ isOpen, pageId = 'default' }) {
+  const canvasRef = useRef(null);
+
+  // State for UI (mirrors refs for drawing)
+  const [tool, setTool] = useState('draw'); // 'select', 'draw', 'eraser', 'shape'
+  const [color, setColor] = useState('#007aff');
+  const [lineWidth] = useState(3);
+  const [shapeType, setShapeType] = useState('cube');
+  const [showShapeMenu, setShowShapeMenu] = useState(false);
+  const [uiSelectedId, setUiSelectedId] = useState(null);
+
+  // Persistent data refs
+  const elementsRef = useRef([]);
+  const historyRef = useRef([]);
+
+  // Interaction refs
+  const stateRefs = useRef({ tool, color, lineWidth, shapeType });
+  const interactionMode = useRef(null);
+  const isInteracting = useRef(false);
+  const dragStart = useRef({x: 0, y: 0});
+  const currentDrag = useRef({x: 0, y: 0});
+
+  const activeStroke = useRef(null);
+  const activeShape = useRef(null);
+  const dragElementInit = useRef(null);
+  const dragElementTemp = useRef(null);
+  const selectedId = useRef(null);
+
+  // Sync state to refs to avoid closure staleness
   useEffect(() => {
-    persistedElementsCache = elements
+    stateRefs.current = { tool, color, lineWidth, shapeType };
+  }, [tool, color, lineWidth, shapeType]);
+
+  // Load from session storage
+  useEffect(() => {
     try {
-      sessionStorage.setItem('satap_drawing_elements', JSON.stringify(elements))
-    } catch (e) {
-      // storage error ignore
-    }
-  }, [elements])
-
-  // Canvas redraw trigger
-  const redrawCanvas = useCallback(() => {
-    const canvas = canvasRef.current
-    if (!canvas) return
-    const ctx = canvas.getContext('2d')
-    if (!ctx) return
-
-    ctx.clearRect(0, 0, canvas.width, canvas.height)
-
-    // Render all committed elements
-    elements.forEach(el => {
-      renderElement(ctx, el, el.id === selectedId)
-    })
-
-    // Render in-progress drawing stroke
-    if (activeStrokeRef.current) {
-      renderElement(ctx, activeStrokeRef.current, false)
-    }
-
-    // Render in-progress shape preview
-    if (tempShapeRef.current) {
-      renderElement(ctx, tempShapeRef.current, false, true)
-    }
-
-    // Draw selection highlight if in select mode
-    if (selectedId && isOpen) {
-      const selectedEl = elements.find(e => e.id === selectedId)
-      if (selectedEl) {
-        drawSelectionBox(ctx, selectedEl)
+      const saved = sessionStorage.getItem('satap_draw_' + pageId);
+      if (saved) {
+        elementsRef.current = JSON.parse(saved);
       }
+    } catch {
+      // The drawing tool can still be used when browser storage is unavailable.
     }
-  }, [elements, selectedId, isOpen])
+  }, [pageId]);
 
-  // Resize listener
-  useEffect(() => {
-    const canvas = canvasRef.current
-    if (!canvas) return
 
-    const updateSize = () => {
-      canvas.width = window.innerWidth
-      canvas.height = window.innerHeight
-      redrawCanvas()
+
+  const saveElements = useCallback(() => {
+    try {
+      sessionStorage.setItem('satap_draw_' + pageId, JSON.stringify(elementsRef.current));
+    } catch {
+      // Keep the drawing session usable when storage is unavailable or full.
     }
+  }, [pageId]);
 
-    updateSize()
-    window.addEventListener('resize', updateSize)
-    return () => window.removeEventListener('resize', updateSize)
-  }, [redrawCanvas])
-
-  useEffect(() => {
-    redrawCanvas()
-  }, [redrawCanvas])
-
-  // Keyboard shortcut: Delete / Backspace removes selected element
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (!isOpen) return
-      if ((e.key === 'Delete' || e.key === 'Backspace') && selectedId) {
-        // Prevent deleting if focus is inside an input/textarea
-        if (['INPUT', 'TEXTAREA'].includes(document.activeElement?.tagName)) return
-        setHistory(prev => [...prev, elements])
-        setElements(prev => prev.filter(el => el.id !== selectedId))
-        setSelectedId(null)
-      }
-      if (e.key === 'Escape') {
-        setSelectedId(null)
-        setShowShapes(false)
-      }
-    }
-    window.addEventListener('keydown', handleKeyDown)
-    return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [isOpen, selectedId, elements])
-
-  // Hit-testing helper
-  const getElementAtPosition = useCallback((x, y) => {
-    // Reverse order so topmost element is selected first
-    for (let i = elements.length - 1; i >= 0; i--) {
-      const el = elements[i]
-      if (isPointInsideElement(x, y, el)) {
-        return el
-      }
-    }
-    return null
-  }, [elements])
-
-  // Mouse / Touch coordinate getter
   const getCoords = (e) => {
-    const rect = canvasRef.current.getBoundingClientRect()
+    const canvas = canvasRef.current;
+    if (!canvas) return {x: 0, y: 0};
+    const rect = canvas.getBoundingClientRect();
+    const scaleX = rect.width ? (canvas.width / rect.width) : 1;
+    const scaleY = rect.height ? (canvas.height / rect.height) : 1;
+
     if (e.touches && e.touches.length > 0) {
       return {
-        x: e.touches[0].clientX - rect.left,
-        y: e.touches[0].clientY - rect.top
-      }
+        x: (e.touches[0].clientX - rect.left) * scaleX,
+        y: (e.touches[0].clientY - rect.top) * scaleY
+      };
     }
     return {
-      x: e.clientX - rect.left,
-      y: e.clientY - rect.top
+      x: (e.clientX - rect.left) * scaleX,
+      y: (e.clientY - rect.top) * scaleY
+    };
+  };
+
+  const redraw = useCallback(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    elementsRef.current.forEach(el => {
+      // skip original if dragging
+      if (interactionMode.current === 'drag' && dragElementTemp.current && el.id === dragElementTemp.current.id) return;
+      renderElement(ctx, el);
+      if (el.id === selectedId.current && interactionMode.current !== 'drag') {
+        drawSelectionBox(ctx, el);
+      }
+    });
+
+    if (activeStroke.current) renderElement(ctx, activeStroke.current);
+    if (activeShape.current) renderElement(ctx, activeShape.current, true);
+    if (interactionMode.current === 'drag' && dragElementTemp.current) {
+      renderElement(ctx, dragElementTemp.current);
     }
-  }
+  }, []);
 
-  // Pointer interactions
-  const handlePointerDown = (e) => {
-    if (!isOpen) return
-    if (e.target.closest('.draw-toolbar') || e.target.closest('.shape-picker-menu') || e.target.closest('.draw-quick-actions')) {
-      return
+  // Redraw when isOpen changes (e.g. reopening panel)
+  useEffect(() => {
+    if (isOpen) {
+      setTimeout(redraw, 10);
     }
+  }, [isOpen, pageId, redraw]);
 
-    const { x, y } = getCoords(e)
-    isInteracting.current = true
-    dragStartPos.current = { x, y }
-    currentDragPos.current = { x, y }
-
-    if (tool === 'eraser') {
-      interactionMode.current = 'erasing'
-      eraseAtPoint(x, y)
-    } else if (tool === 'select') {
-      const hit = getElementAtPosition(x, y)
-      if (hit) {
-        setSelectedId(hit.id)
-        interactionMode.current = 'drag-element'
-        draggedElementInitial.current = JSON.parse(JSON.stringify(hit))
-      } else {
-        setSelectedId(null)
-        interactionMode.current = null
-      }
-    } else if (tool === 'draw') {
-      interactionMode.current = 'draw'
-      activeStrokeRef.current = {
-        id: 'stroke_' + Date.now(),
-        type: 'draw',
-        points: [{ x, y }],
-        color,
-        lineWidth
-      }
-      setSelectedId(null)
-    } else if (tool === 'shape') {
-      interactionMode.current = 'create-shape'
-      tempShapeRef.current = {
-        id: 'shape_' + Date.now(),
-        type: currentShape,
-        x1: x,
-        y1: y,
-        x2: x,
-        y2: y,
-        color,
-        lineWidth
-      }
-      setSelectedId(null)
-    }
-
-    redrawCanvas()
-    if (e.cancelable && e.type.startsWith('touch')) e.preventDefault()
-  }
-
-  const handlePointerMove = (e) => {
-    if (!isOpen) return
-    const { x, y } = getCoords(e)
-    currentDragPos.current = { x, y }
-
-    // Hover effect when in select mode
-    if (tool === 'select' && !isInteracting.current) {
-      const hit = getElementAtPosition(x, y)
-      setHoveredId(hit ? hit.id : null)
-    }
-
-    if (!isInteracting.current) return
-
-    if (interactionMode.current === 'erasing') {
-      eraseAtPoint(x, y)
-    } else if (interactionMode.current === 'drag-element') {
-      const dx = x - dragStartPos.current.x
-      const dy = y - dragStartPos.current.y
-      if (selectedId && draggedElementInitial.current) {
-        const init = draggedElementInitial.current
-        setElements(prev => prev.map(el => {
-          if (el.id !== selectedId) return el
-          return applyOffsetToElement(init, dx, dy)
-        }))
-      }
-    } else if (interactionMode.current === 'draw') {
-      if (activeStrokeRef.current) {
-        activeStrokeRef.current.points.push({ x, y })
-        redrawCanvas()
-      }
-    } else if (interactionMode.current === 'create-shape') {
-      if (tempShapeRef.current) {
-        tempShapeRef.current.x2 = x
-        tempShapeRef.current.y2 = y
-        redrawCanvas()
+  const getHitElement = (x, y) => {
+    for (let i = elementsRef.current.length - 1; i >= 0; i--) {
+      if (isPointInsideElement(x, y, elementsRef.current[i])) {
+        return elementsRef.current[i];
       }
     }
+    return null;
+  };
 
-    if (e.cancelable && e.type.startsWith('touch')) e.preventDefault()
-  }
-
-  const handlePointerUp = () => {
-    if (!isInteracting.current) return
-    isInteracting.current = false
-
-    if (interactionMode.current === 'draw' && activeStrokeRef.current) {
-      if (activeStrokeRef.current.points.length > 1) {
-        setHistory(prev => [...prev, elements])
-        setElements(prev => [...prev, activeStrokeRef.current])
-      }
-      activeStrokeRef.current = null
-    } else if (interactionMode.current === 'create-shape' && tempShapeRef.current) {
-      const shape = tempShapeRef.current
-      const dx = Math.abs(shape.x2 - shape.x1)
-      const dy = Math.abs(shape.y2 - shape.y1)
-      
-      // Ensure shape has meaningful size
-      if (dx > 5 || dy > 5) {
-        let finalShape = null
-        if (shape.type === 'line' || shape.type === 'arrow') {
-          finalShape = {
-            id: shape.id,
-            type: shape.type,
-            x1: shape.x1,
-            y1: shape.y1,
-            x2: shape.x2,
-            y2: shape.y2,
-            color: shape.color,
-            lineWidth: shape.lineWidth
-          }
-        } else {
-          const norm = normalizeRect(shape.x1, shape.y1, shape.x2, shape.y2)
-          finalShape = {
-            id: shape.id,
-            type: shape.type,
-            x: norm.x,
-            y: norm.y,
-            width: norm.width,
-            height: norm.height,
-            color: shape.color,
-            lineWidth: shape.lineWidth
-          }
-        }
-        setHistory(prev => [...prev, elements])
-        setElements(prev => [...prev, finalShape])
-        // Automatically switch to select tool to allow immediate moving
-        setSelectedId(finalShape.id)
-        setTool('select')
-      }
-      tempShapeRef.current = null
-    } else if (interactionMode.current === 'drag-element') {
-      if (draggedElementInitial.current) {
-        setHistory(prev => [...prev, elements])
-      }
-      draggedElementInitial.current = null
-    }
-
-    interactionMode.current = null
-    redrawCanvas()
-  }
-
-  const eraseAtPoint = (x, y) => {
-    const hit = getElementAtPosition(x, y)
+  const eraseAt = (x, y) => {
+    const hit = getHitElement(x, y);
     if (hit) {
-      setHistory(prev => [...prev, elements])
-      setElements(prev => prev.filter(el => el.id !== hit.id))
-      if (selectedId === hit.id) setSelectedId(null)
+      historyRef.current.push([...elementsRef.current]);
+      elementsRef.current = elementsRef.current.filter(e => e.id !== hit.id);
+      if (selectedId.current === hit.id) {
+        selectedId.current = null;
+        setUiSelectedId(null);
+      }
+      saveElements();
+      redraw();
     }
-  }
+  };
 
-  const handleUndo = () => {
-    if (history.length === 0) return
-    const prev = history[history.length - 1]
-    setHistory(h => h.slice(0, h.length - 1))
-    setElements(prev)
-    setSelectedId(null)
-  }
+  const onPointerDown = (e) => {
+    if (e.target.closest('.draw-toolbar') || e.target.closest('.shape-picker-menu')) return;
+    const {x, y} = getCoords(e);
+    isInteracting.current = true;
+    dragStart.current = {x, y};
+    currentDrag.current = {x, y};
 
-  const handleClearAll = () => {
-    if (elements.length === 0) return
-    if (window.confirm("Barcha chizilgan shakllar va chiziqlarni tozalashni xohlaysizmi?")) {
-      setHistory(prev => [...prev, elements])
-      setElements([])
-      setSelectedId(null)
+    const { tool: currentTool, color: c, lineWidth: lw, shapeType: st } = stateRefs.current;
+
+    if (currentTool === 'eraser') {
+      interactionMode.current = 'erase';
+      eraseAt(x, y);
+    } else if (currentTool === 'select') {
+      const hit = getHitElement(x, y);
+      if (hit) {
+        selectedId.current = hit.id;
+        setUiSelectedId(hit.id);
+        interactionMode.current = 'drag';
+        dragElementInit.current = JSON.parse(JSON.stringify(hit));
+        dragElementTemp.current = JSON.parse(JSON.stringify(hit));
+      } else {
+        selectedId.current = null;
+        setUiSelectedId(null);
+        interactionMode.current = null;
+      }
+    } else if (currentTool === 'draw') {
+      interactionMode.current = 'draw';
+      activeStroke.current = { id: 'st_' + Date.now(), type: 'draw', points: [{x, y}], color: c, lineWidth: lw };
+      selectedId.current = null;
+      setUiSelectedId(null);
+    } else if (currentTool === 'shape') {
+      interactionMode.current = 'shape';
+      activeShape.current = { id: 'sh_' + Date.now(), type: st, x1: x, y1: y, x2: x, y2: y, color: c, lineWidth: lw };
+      selectedId.current = null;
+      setUiSelectedId(null);
     }
-  }
+    redraw();
+    if (e.cancelable && e.type.startsWith('touch')) e.preventDefault();
+  };
 
-  const handleDeleteSelected = () => {
-    if (!selectedId) return
-    setHistory(prev => [...prev, elements])
-    setElements(prev => prev.filter(el => el.id !== selectedId))
-    setSelectedId(null)
-  }
+  const onPointerMove = (e) => {
+    if (!isInteracting.current) return;
+    const {x, y} = getCoords(e);
+    currentDrag.current = {x, y};
 
-  // Quick color change for selected element
-  const handleColorChange = (c) => {
-    setColor(c)
-    if (selectedId) {
-      setElements(prev => prev.map(el => el.id === selectedId ? { ...el, color: c } : el))
+    if (interactionMode.current === 'erase') {
+      eraseAt(x, y);
+    } else if (interactionMode.current === 'drag' && dragElementInit.current) {
+      const dx = x - dragStart.current.x;
+      const dy = y - dragStart.current.y;
+      dragElementTemp.current = applyOffsetToElement(dragElementInit.current, dx, dy);
+      redraw();
+    } else if (interactionMode.current === 'draw' && activeStroke.current) {
+      activeStroke.current.points.push({x, y});
+      redraw();
+    } else if (interactionMode.current === 'shape' && activeShape.current) {
+      activeShape.current.x2 = x;
+      activeShape.current.y2 = y;
+      redraw();
     }
-  }
+    if (e.cancelable && e.type.startsWith('touch')) e.preventDefault();
+  };
 
-  // Get cursor based on active tool and state
-  let canvasCursor = 'crosshair'
-  if (!isOpen) {
-    canvasCursor = 'default'
-  } else if (tool === 'eraser') {
-    canvasCursor = 'not-allowed'
-  } else if (tool === 'select') {
-    canvasCursor = hoveredId ? 'move' : 'default'
-  }
+  const onPointerUp = () => {
+    if (!isInteracting.current) return;
+    isInteracting.current = false;
 
-  // Get selected element coordinates for floating badge
-  const selectedElement = elements.find(e => e.id === selectedId)
-  const selectedBounds = selectedElement ? getElementBounds(selectedElement) : null
+    if (interactionMode.current === 'draw' && activeStroke.current) {
+      if (activeStroke.current.points.length > 1) {
+        historyRef.current.push([...elementsRef.current]);
+        elementsRef.current.push(activeStroke.current);
+        saveElements();
+      }
+      activeStroke.current = null;
+    } else if (interactionMode.current === 'shape' && activeShape.current) {
+      const s = activeShape.current;
+      const dx = Math.abs(s.x2 - s.x1);
+      const dy = Math.abs(s.y2 - s.y1);
+      if (dx > 5 || dy > 5) {
+        let fs;
+        if (s.type === 'line' || s.type === 'arrow') {
+          fs = { ...s };
+        } else {
+          const norm = normalizeRect(s.x1, s.y1, s.x2, s.y2);
+          fs = { id: s.id, type: s.type, x: norm.x, y: norm.y, width: norm.width, height: norm.height, color: s.color, lineWidth: s.lineWidth };
+        }
+        historyRef.current.push([...elementsRef.current]);
+        elementsRef.current.push(fs);
+        selectedId.current = fs.id;
+        setUiSelectedId(fs.id);
+        setTool('select');
+        saveElements();
+      }
+      activeShape.current = null;
+    } else if (interactionMode.current === 'drag' && dragElementTemp.current) {
+      const dx = currentDrag.current.x - dragStart.current.x;
+      const dy = currentDrag.current.y - dragStart.current.y;
+      if (Math.abs(dx) > 1 || Math.abs(dy) > 1) {
+        historyRef.current.push([...elementsRef.current]);
+        const sid = selectedId.current;
+        elementsRef.current = elementsRef.current.map(el => el.id === sid ? dragElementTemp.current : el);
+        saveElements();
+      }
+      dragElementInit.current = null;
+      dragElementTemp.current = null;
+    }
+
+    interactionMode.current = null;
+    redraw();
+  };
+
+  const undo = () => {
+    if (historyRef.current.length > 0) {
+      elementsRef.current = historyRef.current.pop();
+      selectedId.current = null;
+      setUiSelectedId(null);
+      saveElements();
+      redraw();
+    }
+  };
+
+  const clearAll = () => {
+    if (elementsRef.current.length > 0) {
+      historyRef.current.push([...elementsRef.current]);
+      elementsRef.current = [];
+      selectedId.current = null;
+      setUiSelectedId(null);
+      saveElements();
+      redraw();
+    }
+  };
+
+  const deleteSelected = useCallback(() => {
+    if (selectedId.current) {
+      historyRef.current.push([...elementsRef.current]);
+      elementsRef.current = elementsRef.current.filter(e => e.id !== selectedId.current);
+      selectedId.current = null;
+      setUiSelectedId(null);
+      saveElements();
+      redraw();
+    }
+  }, [redraw, saveElements]);
+
+  useEffect(() => {
+    const handleKey = (e) => {
+      if (!isOpen) return;
+      if ((e.key === 'Delete' || e.key === 'Backspace') && selectedId.current) {
+        if (['INPUT', 'TEXTAREA'].includes(document.activeElement?.tagName)) return;
+        deleteSelected();
+      }
+    };
+    window.addEventListener('keydown', handleKey);
+    return () => window.removeEventListener('keydown', handleKey);
+  }, [isOpen, deleteSelected]);
+
+  // ResizeObserver for canvas
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ro = new ResizeObserver(() => {
+      const rect = canvas.getBoundingClientRect();
+      if (canvas.width !== rect.width || canvas.height !== rect.height) {
+        canvas.width = rect.width;
+        canvas.height = rect.height;
+        redraw();
+      }
+    });
+    ro.observe(canvas);
+    return () => ro.disconnect();
+  }, [redraw]);
 
   return (
-    <div style={{ position: 'fixed', inset: 0, zIndex: 9999, pointerEvents: 'none' }}>
-      {/* FULLSCREEN CANVAS — ALWAYS PRESENT TO KEEP DRAWINGS VISIBLE */}
+    <div style={{ position: 'fixed', inset: 0, zIndex: 9999, pointerEvents: isOpen ? 'auto' : 'none' }}>
       <canvas
         ref={canvasRef}
-        style={{
-          position: 'absolute',
-          inset: 0,
-          touchAction: 'none',
-          pointerEvents: isOpen ? 'auto' : 'none',
-          cursor: canvasCursor
-        }}
-        onMouseDown={handlePointerDown}
-        onMouseMove={handlePointerMove}
-        onMouseUp={handlePointerUp}
-        onMouseLeave={handlePointerUp}
-        onTouchStart={handlePointerDown}
-        onTouchMove={handlePointerMove}
-        onTouchEnd={handlePointerUp}
-        onTouchCancel={handlePointerUp}
+        style={{ position: 'absolute', inset: 0, touchAction: 'none', display: isOpen ? 'block' : 'none', cursor: tool === 'draw' ? 'crosshair' : tool === 'eraser' ? 'cell' : 'default' }}
+        onMouseDown={onPointerDown}
+        onMouseMove={onPointerMove}
+        onMouseUp={onPointerUp}
+        onMouseLeave={onPointerUp}
+        onTouchStart={onPointerDown}
+        onTouchMove={onPointerMove}
+        onTouchEnd={onPointerUp}
+        onTouchCancel={onPointerUp}
       />
 
-      {/* FLOATING RESTORE PILL WHEN DRAW TOOL IS CLOSED (X CLICKED) */}
-      {!isOpen && (
-        <button
-          onClick={() => {
-            if (onOpen) onOpen()
-          }}
-          style={{
-            position: 'absolute',
-            top: '16px',
-            right: '180px',
-            pointerEvents: 'auto',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '8px',
-            background: 'rgba(26, 31, 54, 0.92)',
-            color: '#fff',
-            border: '1px solid rgba(255, 255, 255, 0.15)',
-            padding: '8px 16px',
-            borderRadius: '24px',
-            fontSize: '13px',
-            fontWeight: 600,
-            cursor: 'pointer',
-            boxShadow: '0 8px 24px rgba(0,0,0,0.3)',
-            backdropFilter: 'blur(8px)',
-            transition: 'all 0.2s cubic-bezier(0.16, 1, 0.3, 1)',
-            animation: 'fadeInDown 0.25s ease-out'
-          }}
-          title="Chizish panelini ochish"
-        >
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#007aff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" />
-            <path d="m15 5 4 4" />
-          </svg>
-          <span>Chizish paneli ({elements.length})</span>
-        </button>
-      )}
-
-      {/* FLOATING ACTION TOOLTIP FOR SELECTED ELEMENT */}
-      {isOpen && selectedBounds && (
-        <div
-          className="draw-quick-actions"
-          style={{
-            position: 'absolute',
-            left: `${selectedBounds.x + selectedBounds.width / 2}px`,
-            top: `${Math.max(20, selectedBounds.y - 42)}px`,
-            transform: 'translateX(-50%)',
-            pointerEvents: 'auto',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '6px',
-            background: '#141829',
-            padding: '4px 8px',
-            borderRadius: '16px',
-            boxShadow: '0 4px 18px rgba(0,0,0,0.4)',
-            border: '1px solid rgba(255,255,255,0.15)',
-            zIndex: 10000,
-            fontSize: '11px',
-            color: '#cbd5e1',
-            whiteSpace: 'nowrap'
-          }}
-        >
-          <span style={{ opacity: 0.8, marginRight: '4px' }}>✥ Surish mumkin</span>
-          <button
-            onClick={handleDeleteSelected}
-            style={{
-              background: '#ef4444',
-              color: '#fff',
-              border: 'none',
-              borderRadius: '12px',
-              padding: '3px 8px',
-              cursor: 'pointer',
-              fontWeight: 600,
-              display: 'flex',
-              alignItems: 'center',
-              gap: '4px'
-            }}
-            title="Ushbu shaklni o'chirish"
-          >
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-              <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
-            </svg>
-            O'chirish
-          </button>
-        </div>
-      )}
-
-      {/* MAIN DRAW TOOLBAR */}
       {isOpen && (
-        <div
-          className="draw-toolbar"
-          style={{
-            position: 'absolute',
-            top: '18px',
-            left: '50%',
-            transform: 'translateX(-50%)',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '8px',
-            background: 'rgba(26, 31, 54, 0.95)',
-            padding: '8px 16px',
-            borderRadius: '32px',
-            boxShadow: '0 10px 32px rgba(0,0,0,0.45)',
-            pointerEvents: 'auto',
-            border: '1px solid rgba(255,255,255,0.14)',
-            color: '#fff',
-            backdropFilter: 'blur(12px)',
-            userSelect: 'none',
-            zIndex: 10000
-          }}
-        >
-          {/* LOGO / LABEL */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginRight: '6px' }}>
-            <span style={{ fontSize: '12px', fontWeight: 800, letterSpacing: '0.8px', color: '#007aff' }}>DRAW</span>
-          </div>
-
-          {/* COLOR PALETTE */}
-          <div style={{ display: 'flex', gap: '6px', paddingRight: '10px', borderRight: '1px solid rgba(255,255,255,0.12)' }}>
-            {['#007aff', '#ff3b30', '#34c759', '#af52de', '#ffffff', '#000000'].map(c => (
-              <button
-                key={c}
-                onClick={() => handleColorChange(c)}
-                style={{
-                  width: '22px',
-                  height: '22px',
-                  borderRadius: '50%',
-                  background: c,
-                  border: color === c ? '2.5px solid #fff' : c === '#000000' ? '1px solid #555' : '1px solid rgba(255,255,255,0.2)',
-                  cursor: 'pointer',
-                  transform: color === c ? 'scale(1.15)' : 'scale(1)',
-                  transition: 'transform 0.15s ease'
-                }}
-                title={`Rang: ${c}`}
-              />
+        <div className="draw-toolbar" style={{
+          position: 'absolute', bottom: '24px', left: '50%', transform: 'translateX(-50%)',
+          display: 'flex', alignItems: 'center', gap: '8px', padding: '8px',
+          background: 'rgba(255, 255, 255, 0.95)', backdropFilter: 'blur(10px)',
+          borderRadius: '16px', boxShadow: '0 8px 32px rgba(0,0,0,0.1)', border: '1px solid rgba(0,0,0,0.05)'
+        }}>
+          {/* Colors */}
+          <div style={{ display: 'flex', gap: '4px', marginRight: '8px' }}>
+            {['#007aff', '#ff3b30', '#34c759', '#ffcc00', '#1c1c1e'].map(c => (
+              <button key={c} onClick={() => setColor(c)} style={{
+                width: '24px', height: '24px', borderRadius: '50%', background: c, border: color === c ? '2px solid #000' : 'none', cursor: 'pointer'
+              }} />
             ))}
           </div>
 
-          {/* SELECT & MOVE TOOL */}
-          <button
-            onClick={() => {
-              setTool('select')
-              setShowShapes(false)
-            }}
-            style={{
-              background: tool === 'select' ? '#007aff' : 'transparent',
-              color: tool === 'select' ? '#fff' : '#cbd5e1',
-              border: 'none',
-              borderRadius: '8px',
-              padding: '6px 10px',
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '6px',
-              fontSize: '12px',
-              fontWeight: 600,
-              transition: 'all 0.15s ease'
-            }}
-            title="Tanlash va surish (har qanday shakl yoki chiziqni siljitish)"
-          >
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M5 9l-3 3 3 3M9 5l3-3 3 3M15 19l-3 3-3-3M19 9l3 3-3 3M2 12h20M12 2v20" />
-            </svg>
-            <span>Surish</span>
-          </button>
+          <div style={{ width: '1px', height: '24px', background: '#e5e5ea', margin: '0 4px' }} />
 
-          {/* FREEHAND DRAW TOOL */}
-          <button
-            onClick={() => {
-              setTool('draw')
-              setSelectedId(null)
-              setShowShapes(false)
-            }}
-            style={{
-              background: tool === 'draw' ? '#007aff' : 'transparent',
-              color: tool === 'draw' ? '#fff' : '#cbd5e1',
-              border: 'none',
-              borderRadius: '8px',
-              padding: '6px 10px',
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '6px',
-              fontSize: '12px',
-              fontWeight: 600,
-              transition: 'all 0.15s ease'
-            }}
-            title="Erkin chizish (qalam)"
-          >
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" />
-              <path d="m15 5 4 4" />
-            </svg>
-            <span>Chizish</span>
-          </button>
-
-          {/* SHAPES DROPDOWN (2D & 3D) */}
-          <div style={{ position: 'relative' }}>
-            <button
-              onClick={() => setShowShapes(!showShapes)}
-              style={{
-                background: tool === 'shape' ? '#007aff' : showShapes ? 'rgba(255,255,255,0.15)' : 'transparent',
-                color: tool === 'shape' ? '#fff' : '#cbd5e1',
-                border: 'none',
-                borderRadius: '8px',
-                padding: '6px 10px',
-                cursor: 'pointer',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '6px',
-                fontSize: '12px',
-                fontWeight: 600,
-                transition: 'all 0.15s ease'
-              }}
-              title="Shakllar (3D va 2D shakllar)"
-            >
-              {/* Active shape preview icon */}
-              <ShapeIcon shape={currentShape} size={17} />
-              <span style={{ textTransform: 'capitalize' }}>
-                {getShapeName(currentShape)}
-              </span>
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                <polyline points="6 9 12 15 18 9" />
-              </svg>
-            </button>
-
-            {/* SHAPES PICKER POPOVER */}
-            {showShapes && (
-              <div
-                className="shape-picker-menu"
-                style={{
-                  position: 'absolute',
-                  top: 'calc(100% + 12px)',
-                  left: '50%',
-                  transform: 'translateX(-50%)',
-                  background: '#161b2e',
-                  border: '1px solid rgba(255,255,255,0.16)',
-                  borderRadius: '16px',
-                  padding: '14px',
-                  boxShadow: '0 16px 40px rgba(0,0,0,0.6)',
-                  width: '320px',
-                  zIndex: 10001,
-                  animation: 'fadeInDown 0.18s ease-out'
-                }}
-              >
-                {/* CATEGORY TABS (3D vs 2D) */}
-                <div
-                  style={{
-                    display: 'flex',
-                    background: 'rgba(0,0,0,0.25)',
-                    padding: '3px',
-                    borderRadius: '10px',
-                    marginBottom: '12px'
-                  }}
-                >
-                  <button
-                    onClick={() => setShapeCategory('3d')}
-                    style={{
-                      flex: 1,
-                      padding: '6px 0',
-                      border: 'none',
-                      borderRadius: '8px',
-                      background: shapeCategory === '3d' ? '#007aff' : 'transparent',
-                      color: shapeCategory === '3d' ? '#fff' : '#94a3b8',
-                      fontSize: '12px',
-                      fontWeight: 700,
-                      cursor: 'pointer',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      gap: '6px'
-                    }}
-                  >
-                    <span>🧊 3D Shakllar</span>
+          <IconWrapper active={tool === 'select'} onClick={() => setTool('select')} title="Select">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="m3 3 7.07 16.97 2.51-7.39 7.39-2.51L3 3z"/></svg>
+          </IconWrapper>
+          <IconWrapper active={tool === 'draw'} onClick={() => setTool('draw')} title="Draw">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></svg>
+          </IconWrapper>
+          <div style={{position: 'relative'}}>
+            <IconWrapper active={tool === 'shape'} onClick={() => { setTool('shape'); setShowShapeMenu(!showShapeMenu); }} title="Shapes">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/></svg>
+            </IconWrapper>
+            {showShapeMenu && tool === 'shape' && (
+              <div className="shape-picker-menu" style={{
+                position: 'absolute', bottom: '100%', left: '50%', transform: 'translateX(-50%)', marginBottom: '12px',
+                background: '#fff', borderRadius: '12px', padding: '8px', boxShadow: '0 8px 32px rgba(0,0,0,0.15)',
+                display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '4px'
+              }}>
+                {['line','arrow','rect','circle','triangle','cube','cylinder','cone','sphere','pyramid','prism','ellipse'].map(s => (
+                  <button key={s} onClick={() => { setShapeType(s); setShowShapeMenu(false); }} style={{
+                    width: '32px', height: '32px', border: 'none', background: shapeType === s ? '#f0f0f0' : 'transparent',
+                    borderRadius: '6px', cursor: 'pointer', fontSize: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center'
+                  }} title={s}>
+                    {s.slice(0, 2).toUpperCase()}
                   </button>
-                  <button
-                    onClick={() => setShapeCategory('2d')}
-                    style={{
-                      flex: 1,
-                      padding: '6px 0',
-                      border: 'none',
-                      borderRadius: '8px',
-                      background: shapeCategory === '2d' ? '#007aff' : 'transparent',
-                      color: shapeCategory === '2d' ? '#fff' : '#94a3b8',
-                      fontSize: '12px',
-                      fontWeight: 700,
-                      cursor: 'pointer',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      gap: '6px'
-                    }}
-                  >
-                    <span>📐 2D Shakllar</span>
-                  </button>
-                </div>
-
-                {/* 3D SHAPES GRID */}
-                {shapeCategory === '3d' && (
-                  <div>
-                    <div style={{ fontSize: '11px', color: '#94a3b8', marginBottom: '8px', fontWeight: 600 }}>
-                      SAT/Math 3D Geometrik Shakllar:
-                    </div>
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '8px' }}>
-                      {[
-                        { id: 'cube', label: 'Kub (Box)', icon: 'cube' },
-                        { id: 'cylinder', label: 'Silindr', icon: 'cylinder' },
-                        { id: 'cone', label: 'Konus', icon: 'cone' },
-                        { id: 'sphere', label: 'Sfera', icon: 'sphere' },
-                        { id: 'pyramid', label: 'Piramida', icon: 'pyramid' },
-                        { id: 'prism', label: 'Prizma', icon: 'prism' }
-                      ].map(s => (
-                        <button
-                          key={s.id}
-                          onClick={() => {
-                            setCurrentShape(s.id)
-                            setTool('shape')
-                            setSelectedId(null)
-                            setShowShapes(false)
-                          }}
-                          style={{
-                            background: currentShape === s.id && tool === 'shape' ? '#007aff' : 'rgba(255,255,255,0.06)',
-                            border: '1px solid rgba(255,255,255,0.08)',
-                            borderRadius: '10px',
-                            padding: '10px 4px',
-                            cursor: 'pointer',
-                            display: 'flex',
-                            flexDirection: 'column',
-                            alignItems: 'center',
-                            gap: '6px',
-                            color: '#fff',
-                            transition: 'all 0.15s'
-                          }}
-                        >
-                          <ShapeIcon shape={s.id} size={26} />
-                          <span style={{ fontSize: '11px', fontWeight: 500 }}>{s.label}</span>
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-                )}
-
-                {/* 2D SHAPES GRID */}
-                {shapeCategory === '2d' && (
-                  <div>
-                    <div style={{ fontSize: '11px', color: '#94a3b8', marginBottom: '8px', fontWeight: 600 }}>
-                      2D Geometriya va Chiziqlar:
-                    </div>
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '8px' }}>
-                      {[
-                        { id: 'line', label: 'Chiziq' },
-                        { id: 'arrow', label: 'Strelka' },
-                        { id: 'rect', label: 'To\'rtburchak' },
-                        { id: 'circle', label: 'Aylana' },
-                        { id: 'ellipse', label: 'Ellips' },
-                        { id: 'triangle', label: 'Uchburchak' },
-                        { id: 'right-triangle', label: 'To\'g\'ri burchak' },
-                        { id: 'axes', label: 'XY O\'qlari' }
-                      ].map(s => (
-                        <button
-                          key={s.id}
-                          onClick={() => {
-                            setCurrentShape(s.id)
-                            setTool('shape')
-                            setSelectedId(null)
-                            setShowShapes(false)
-                          }}
-                          style={{
-                            background: currentShape === s.id && tool === 'shape' ? '#007aff' : 'rgba(255,255,255,0.06)',
-                            border: '1px solid rgba(255,255,255,0.08)',
-                            borderRadius: '10px',
-                            padding: '8px 2px',
-                            cursor: 'pointer',
-                            display: 'flex',
-                            flexDirection: 'column',
-                            alignItems: 'center',
-                            gap: '4px',
-                            color: '#fff',
-                            transition: 'all 0.15s'
-                          }}
-                        >
-                          <ShapeIcon shape={s.id} size={20} />
-                          <span style={{ fontSize: '10px', textAlign: 'center', lineHeight: 1.2 }}>{s.label}</span>
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-                )}
+                ))}
               </div>
             )}
           </div>
+          <IconWrapper active={tool === 'eraser'} onClick={() => setTool('eraser')} title="Eraser">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="m7 21-4.3-4.3c-1-1-1-2.5 0-3.4l9.6-9.6c1-1 2.5-1 3.4 0l5.6 5.6c1 1 1 2.5 0 3.4L13 21"/><path d="M22 21H7"/><path d="m5 11 9 9"/></svg>
+          </IconWrapper>
 
-          {/* STROKE WIDTH TOGGLE */}
-          <div style={{ display: 'flex', gap: '3px', paddingLeft: '4px', paddingRight: '10px', borderRight: '1px solid rgba(255,255,255,0.12)' }}>
-            {[2, 4, 7].map(w => (
-              <button
-                key={w}
-                onClick={() => setLineWidth(w)}
-                style={{
-                  width: '24px',
-                  height: '24px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  background: lineWidth === w ? 'rgba(255,255,255,0.2)' : 'transparent',
-                  border: 'none',
-                  borderRadius: '6px',
-                  cursor: 'pointer'
-                }}
-                title={`Qalinlik: ${w}px`}
-              >
-                <div style={{ width: `${w * 2 + 2}px`, height: `${w * 2 + 2}px`, borderRadius: '50%', background: '#fff' }} />
-              </button>
-            ))}
-          </div>
+          <div style={{ width: '1px', height: '24px', background: '#e5e5ea', margin: '0 4px' }} />
 
-          {/* UNDO BUTTON */}
-          <button
-            onClick={handleUndo}
-            disabled={history.length === 0}
-            style={{
-              background: 'transparent',
-              border: 'none',
-              borderRadius: '8px',
-              padding: '6px 8px',
-              cursor: history.length === 0 ? 'not-allowed' : 'pointer',
-              color: history.length === 0 ? '#64748b' : '#cbd5e1'
-            }}
-            title="Orqaga qaytarish (Undo)"
-          >
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M3 7v6h6" />
-              <path d="M21 17a9 9 0 0 0-9-9 9 9 0 0 0-6 2.3L3 13" />
-            </svg>
-          </button>
+          <IconWrapper onClick={undo} title="Undo">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 7v6h6"/><path d="M21 17a9 9 0 0 0-9-9 9 9 0 0 0-6 2.3L3 13"/></svg>
+          </IconWrapper>
+          <IconWrapper onClick={clearAll} title="Clear All">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
+          </IconWrapper>
 
-          {/* ERASER BUTTON */}
-          <button
-            onClick={() => {
-              setTool('eraser')
-              setSelectedId(null)
-              setShowShapes(false)
-            }}
-            style={{
-              background: tool === 'eraser' ? '#ff3b30' : 'transparent',
-              border: 'none',
-              borderRadius: '8px',
-              padding: '6px 8px',
-              cursor: 'pointer',
-              color: tool === 'eraser' ? '#fff' : '#cbd5e1'
-            }}
-            title="O'chirg'ich (ustiga bosib o'chirish)"
-          >
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M20 20H7L3 16C2.5 15.5 2.5 14.5 3 14L13 4C13.5 3.5 14.5 3.5 15 4L20 9C20.5 9.5 20.5 10.5 20 11L11 20H20V20Z" />
-            </svg>
-          </button>
-
-          {/* CLEAR ALL (TRASH CAN) — ONLY THIS WILL CLEAR ALL DRAWINGS */}
-          <button
-            onClick={handleClearAll}
-            style={{
-              background: 'transparent',
-              border: 'none',
-              borderRadius: '8px',
-              padding: '6px 8px',
-              cursor: 'pointer',
-              color: '#ef4444'
-            }}
-            title="Hammasini tozalash (faqat shuni bosganda o'chadi)"
-          >
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-              <polyline points="3 6 5 6 21 6" />
-              <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
-            </svg>
-          </button>
-
-          <div style={{ width: '1px', height: '20px', background: 'rgba(255,255,255,0.12)', margin: '0 4px' }} />
-
-          {/* CLOSE (X) BUTTON — WILL NEVER DELETE DRAWINGS! */}
-          <button
-            onClick={() => {
-              setShowShapes(false)
-              setSelectedId(null)
-              if (onClose) onClose()
-            }}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              background: '#ef4444',
-              color: '#fff',
-              border: 'none',
-              borderRadius: '50%',
-              cursor: 'pointer',
-              width: '26px',
-              height: '26px',
-              transition: 'transform 0.15s ease'
-            }}
-            title="Chizish rejimini yopish (chizilganlar saqlanib qoladi)"
-          >
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-              <line x1="18" y1="6" x2="6" y2="18" />
-              <line x1="6" y1="6" x2="18" y2="18" />
-            </svg>
-          </button>
+          {uiSelectedId && (
+            <IconWrapper onClick={deleteSelected} title="Delete Selected">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ff3b30" strokeWidth="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+            </IconWrapper>
+          )}
         </div>
       )}
     </div>
-  )
+  );
 }
 
-/* =========================================================================
-   ELEMENT RENDERING FUNCTIONS
-   ========================================================================= */
+// ==========================================
+// PURE FUNCTIONS EXTRACTED FROM OLD FILE
+// ==========================================
 
-function renderElement(ctx, el, isSelected = false, isPreview = false) {
+function renderElement(ctx, el, isPreview = false) {
   ctx.save()
   ctx.strokeStyle = el.color
   ctx.lineWidth = el.lineWidth || 3
@@ -1010,7 +526,7 @@ function renderElement(ctx, el, isSelected = false, isPreview = false) {
     ctx.lineTo(midX, norm.y)
     ctx.lineTo(midX + 5, norm.y + aLen)
     ctx.stroke()
-  } 
+  }
   /* --- 3D SHAPES --- */
   else if (type === 'cube') {
     const norm = el.width !== undefined ? el : normalizeRect(el.x1, el.y1, el.x2, el.y2)
@@ -1347,7 +863,7 @@ function drawSelectionBox(ctx, el) {
    SVG ICONS HELPER
    ========================================================================= */
 
-function ShapeIcon({ shape, size = 20 }) {
+export function ShapeIcon({ shape, size = 20 }) {
   if (shape === 'cube') {
     return (
       <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -1456,7 +972,7 @@ function ShapeIcon({ shape, size = 20 }) {
   return null
 }
 
-function getShapeName(shape) {
+export function getShapeName(shape) {
   const map = {
     cube: 'Kub',
     cylinder: 'Silindr',

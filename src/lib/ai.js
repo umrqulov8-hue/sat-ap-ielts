@@ -1,37 +1,7 @@
-const OPENROUTER_API_URL = 'https://openrouter.ai/api/v1/chat/completions'
-const MODEL = 'openai/gpt-4o-mini'
-const part1 = 'sk-or-v1-36535'
-const part2 = 'bba01b8ebaf6a6'
-const part3 = '981ba6712c32c73'
-const part4 = 'f60695567e6b68182468ef760ce854'
-const apiKey = import.meta.env.VITE_AI_API_KEY || (part1 + part2 + part3 + part4)
+import { requestAI } from './aiClient'
 
 async function callAI(systemPrompt, userPrompt, maxTokens = 1000) {
-  if (!apiKey) throw new Error('AI API key topilmadi')
-  const res = await fetch(OPENROUTER_API_URL, {
-    method: 'POST',
-    headers: { 
-      'Authorization': `Bearer ${apiKey}`, 
-      'Content-Type': 'application/json',
-      'HTTP-Referer': window.location.origin,
-      'X-Title': 'SATAP Academy'
-    },
-    body: JSON.stringify({
-      model: MODEL,
-      messages: [
-        { role: 'system', content: systemPrompt },
-        { role: 'user', content: userPrompt },
-      ],
-      temperature: 0.4,
-      max_tokens: maxTokens,
-    }),
-  })
-  if (!res.ok) {
-    const t = await res.text()
-    throw new Error(`AI xatosi: ${res.status} ${t.slice(0, 200)}`)
-  }
-  const data = await res.json()
-  return data.choices?.[0]?.message?.content || ''
+  return requestAI(systemPrompt, userPrompt, maxTokens)
 }
 
 export async function forecastScore(userScores, tests, targetScore = 700) {

@@ -19,12 +19,30 @@ function authHeaders(accessToken) {
   }
 }
 
+async function authFetch(url, options) {
+  const controller = new AbortController()
+  const timeoutId = setTimeout(() => controller.abort(), 15000)
+  try {
+    return await fetch(url, { ...options, signal: controller.signal })
+  } catch (error) {
+    if (error?.name === 'AbortError') {
+      throw new Error('Authentication request timed out', { cause: error })
+    }
+    throw error
+  } finally {
+    clearTimeout(timeoutId)
+  }
+}
+
 async function handleAuthResponse(res) {
-  const data = await res.json()
+  const data = await res.json().catch(() => null)
+  if (!data) {
+    return { data: null, error: { message: 'Authentication service returned an invalid response', status: res.status } }
+  }
   if (!res.ok) {
     const msg =
       data.msg || data.error_description || data.error || data.message || 'Authentication error'
-    return { data: null, error: { message: msg } }
+    return { data: null, error: { message: msg, status: res.status, code: data.error_code || data.code } }
   }
   if (data.access_token) {
     const session = {
@@ -41,7 +59,7 @@ async function handleAuthResponse(res) {
 }
 
 export async function signUp({ email, password, options }) {
-  const res = await fetch(`${SUPABASE_URL}/auth/v1/signup`, {
+  const res = await authFetch(`${SUPABASE_URL}/auth/v1/signup`, {
     method: 'POST',
     headers: anonHeaders(),
     body: JSON.stringify({ email, password, data: options?.data }),
@@ -50,7 +68,7 @@ export async function signUp({ email, password, options }) {
 }
 
 export async function signInWithPassword({ email, password }) {
-  const res = await fetch(`${SUPABASE_URL}/auth/v1/token?grant_type=password`, {
+  const res = await authFetch(`${SUPABASE_URL}/auth/v1/token?grant_type=password`, {
     method: 'POST',
     headers: anonHeaders(),
     body: JSON.stringify({ email, password }),
@@ -61,7 +79,7 @@ export async function signInWithPassword({ email, password }) {
 export async function signOut() {
   const { data: { session } } = await getSession()
   if (session?.access_token) {
-    await fetch(`${SUPABASE_URL}/auth/v1/logout`, {
+    await authFetch(`${SUPABASE_URL}/auth/v1/logout`, {
       method: 'POST',
       headers: authHeaders(session.access_token),
     })
@@ -73,7 +91,7 @@ export async function signOut() {
 export async function updateUser(attributes) {
   const { data: { session } } = await getSession()
   if (!session?.access_token) return { data: null, error: { message: 'No session' } }
-  const res = await fetch(`${SUPABASE_URL}/auth/v1/user`, {
+  const res = await authFetch(`${SUPABASE_URL}/auth/v1/user`, {
     method: 'PUT',
     headers: authHeaders(session.access_token),
     body: JSON.stringify(attributes),
@@ -90,7 +108,7 @@ export async function updateUser(attributes) {
 }
 
 export async function resetPasswordForEmail(email, options = {}) {
-  const res = await fetch(`${SUPABASE_URL}/auth/v1/recover`, {
+  const res = await authFetch(`${SUPABASE_URL}/auth/v1/recover`, {
     method: 'POST',
     headers: anonHeaders(),
     body: JSON.stringify({ email, redirect_to: options.redirectTo }),

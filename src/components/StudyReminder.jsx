@@ -5,9 +5,9 @@ const DAYS = ['SUNDAY', 'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 
 
 export default function StudyReminder() {
   const [banner, setBanner] = useState(null)
-  const [notifEnabled, setNotifEnabled] = useState(true)
+  const [notifEnabled] = useState(true)
   const timerRef = useRef(null)
-  const swInitRef = useRef(false)
+
 
   const checkUpcoming = useCallback(async () => {
     const { data: { session } } = await supabase.auth.getSession()

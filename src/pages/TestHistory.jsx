@@ -35,12 +35,8 @@ export default function TestHistory() {
   const handleAnalyze = async (test) => {
     setAnalyzing(test.id)
     try {
-      let questions = []
-      if (test.topic_id) {
-        const { data } = await supabase.from('questions').select('*').eq('topic_id', test.topic_id).order('order_index')
-        questions = data || []
-      }
-      const answers = test.answers || {}
+      const answers = test.answers || []
+      const questions = (Array.isArray(answers) ? answers : Object.values(answers)).map(a => a.question).filter(Boolean)
       const result = await analyzeTest(test, questions, answers)
       setAnalysis(prev => ({ ...prev, [test.id]: result }))
     } catch (e) {
