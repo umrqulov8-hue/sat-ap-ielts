@@ -20,23 +20,18 @@ function normalizeRect(x1, y1, x2, y2) {
 
 const IconWrapper = ({ active, onClick, children, title }) => (
   <button
+    type="button"
     onClick={onClick}
     title={title}
-    className={active ? 'active' : ''}
-    style={{
-      width: '40px', height: '40px', display: 'flex', alignItems: 'center', justifyContent: 'center',
-      borderRadius: '8px', border: 'none', cursor: 'pointer',
-      background: active ? '#007aff' : 'transparent',
-      color: active ? '#fff' : '#333',
-      transition: 'all 0.2s ease',
-      position: 'relative'
-    }}
+    aria-label={title}
+    aria-pressed={active || undefined}
+    className={`draw-tool-button${active ? ' active' : ''}`}
   >
     {children}
   </button>
 );
 
-export default function DrawingCanvas({ isOpen, pageId = 'default' }) {
+export default function DrawingCanvas({ isOpen, onClose, pageId = 'default' }) {
   const canvasRef = useRef(null);
 
   // State for UI (mirrors refs for drawing)
@@ -308,6 +303,10 @@ export default function DrawingCanvas({ isOpen, pageId = 'default' }) {
   useEffect(() => {
     const handleKey = (e) => {
       if (!isOpen) return;
+      if (e.key === 'Escape') {
+        onClose?.();
+        return;
+      }
       if ((e.key === 'Delete' || e.key === 'Backspace') && selectedId.current) {
         if (['INPUT', 'TEXTAREA'].includes(document.activeElement?.tagName)) return;
         deleteSelected();
@@ -315,7 +314,7 @@ export default function DrawingCanvas({ isOpen, pageId = 'default' }) {
     };
     window.addEventListener('keydown', handleKey);
     return () => window.removeEventListener('keydown', handleKey);
-  }, [isOpen, deleteSelected]);
+  }, [isOpen, onClose, deleteSelected]);
 
   // ResizeObserver for canvas
   useEffect(() => {
@@ -349,22 +348,24 @@ export default function DrawingCanvas({ isOpen, pageId = 'default' }) {
       />
 
       {isOpen && (
-        <div className="draw-toolbar" style={{
-          position: 'absolute', bottom: '24px', left: '50%', transform: 'translateX(-50%)',
-          display: 'flex', alignItems: 'center', gap: '8px', padding: '8px',
-          background: 'rgba(255, 255, 255, 0.95)', backdropFilter: 'blur(10px)',
-          borderRadius: '16px', boxShadow: '0 8px 32px rgba(0,0,0,0.1)', border: '1px solid rgba(0,0,0,0.05)'
-        }}>
+        <div className="draw-toolbar" role="toolbar" aria-label="Drawing tools">
           {/* Colors */}
-          <div style={{ display: 'flex', gap: '4px', marginRight: '8px' }}>
-            {['#007aff', '#ff3b30', '#34c759', '#ffcc00', '#1c1c1e'].map(c => (
-              <button key={c} onClick={() => setColor(c)} style={{
-                width: '24px', height: '24px', borderRadius: '50%', background: c, border: color === c ? '2px solid #000' : 'none', cursor: 'pointer'
-              }} />
+          <div className="draw-color-group" aria-label="Drawing color">
+            {['#007aff', '#ff3b30', '#34c759', '#ffcc00', '#1c1c1e'].map((c, index) => (
+              <button
+                type="button"
+                key={c}
+                onClick={() => setColor(c)}
+                title={`${['Blue', 'Red', 'Green', 'Yellow', 'Black'][index]} color`}
+                aria-label={`${['Blue', 'Red', 'Green', 'Yellow', 'Black'][index]} color`}
+                aria-pressed={color === c}
+                className={`draw-color-button${color === c ? ' selected' : ''}`}
+                style={{ '--draw-color': c }}
+              />
             ))}
           </div>
 
-          <div style={{ width: '1px', height: '24px', background: '#e5e5ea', margin: '0 4px' }} />
+          <div className="draw-toolbar-separator" aria-hidden="true" />
 
           <IconWrapper active={tool === 'select'} onClick={() => setTool('select')} title="Select">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="m3 3 7.07 16.97 2.51-7.39 7.39-2.51L3 3z"/></svg>
@@ -372,16 +373,12 @@ export default function DrawingCanvas({ isOpen, pageId = 'default' }) {
           <IconWrapper active={tool === 'draw'} onClick={() => setTool('draw')} title="Draw">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></svg>
           </IconWrapper>
-          <div style={{position: 'relative'}}>
+          <div className="draw-shape-control">
             <IconWrapper active={tool === 'shape'} onClick={() => { setTool('shape'); setShowShapeMenu(!showShapeMenu); }} title="Shapes">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/></svg>
             </IconWrapper>
             {showShapeMenu && tool === 'shape' && (
-              <div className="shape-picker-menu" style={{
-                position: 'absolute', bottom: '100%', left: '50%', transform: 'translateX(-50%)', marginBottom: '12px',
-                background: '#fff', borderRadius: '12px', padding: '8px', boxShadow: '0 8px 32px rgba(0,0,0,0.15)',
-                display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '4px'
-              }}>
+              <div className="shape-picker-menu">
                 {['line','arrow','rect','circle','triangle','cube','cylinder','cone','sphere','pyramid','prism','ellipse'].map(s => (
                   <button key={s} onClick={() => { setShapeType(s); setShowShapeMenu(false); }} style={{
                     width: '32px', height: '32px', border: 'none', background: shapeType === s ? '#f0f0f0' : 'transparent',
@@ -397,7 +394,7 @@ export default function DrawingCanvas({ isOpen, pageId = 'default' }) {
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="m7 21-4.3-4.3c-1-1-1-2.5 0-3.4l9.6-9.6c1-1 2.5-1 3.4 0l5.6 5.6c1 1 1 2.5 0 3.4L13 21"/><path d="M22 21H7"/><path d="m5 11 9 9"/></svg>
           </IconWrapper>
 
-          <div style={{ width: '1px', height: '24px', background: '#e5e5ea', margin: '0 4px' }} />
+          <div className="draw-toolbar-separator" aria-hidden="true" />
 
           <IconWrapper onClick={undo} title="Undo">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 7v6h6"/><path d="M21 17a9 9 0 0 0-9-9 9 9 0 0 0-6 2.3L3 13"/></svg>
@@ -409,6 +406,11 @@ export default function DrawingCanvas({ isOpen, pageId = 'default' }) {
           {uiSelectedId && (
             <IconWrapper onClick={deleteSelected} title="Delete Selected">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ff3b30" strokeWidth="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+            </IconWrapper>
+          )}
+          {onClose && (
+            <IconWrapper onClick={onClose} title="Close drawing tools">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="m18 6-12 12M6 6l12 12"/></svg>
             </IconWrapper>
           )}
         </div>
