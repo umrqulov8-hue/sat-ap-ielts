@@ -336,7 +336,7 @@ export default function DrawingCanvas({ isOpen, onClose, pageId = 'default' }) {
     <div style={{ position: 'fixed', inset: 0, zIndex: 9999, pointerEvents: isOpen ? 'auto' : 'none' }}>
       <canvas
         ref={canvasRef}
-        style={{ position: 'absolute', inset: 0, touchAction: 'none', display: isOpen ? 'block' : 'none', cursor: tool === 'draw' ? 'crosshair' : tool === 'eraser' ? 'cell' : 'default' }}
+        style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', touchAction: 'none', display: isOpen ? 'block' : 'none', cursor: tool === 'draw' ? 'crosshair' : tool === 'eraser' ? 'cell' : 'default' }}
         onMouseDown={onPointerDown}
         onMouseMove={onPointerMove}
         onMouseUp={onPointerUp}
