@@ -143,6 +143,7 @@ create policy "Admins can manage SAT questions"
 create table practice_tests (
   id uuid default gen_random_uuid() primary key,
   user_id uuid references auth.users(id) on delete cascade,
+  subject_id uuid references subjects(id) on delete set null,
   title text not null,
   subject text default '',
   score int default 0,
@@ -151,6 +152,7 @@ create table practice_tests (
   answers jsonb default null,
   taken_at timestamptz default now()
 );
+create index practice_tests_user_subject_idx on practice_tests (user_id, subject_id);
 
 -- User activity log
 create table user_activity (
@@ -197,7 +199,7 @@ begin
   values (new.id);
   return new;
 end;
-$$ language plpgsql security definer;
+$$ language plpgsql security definer set search_path = '';
 
 create or replace trigger on_auth_user_created
   after insert on auth.users
@@ -207,6 +209,8 @@ create or replace trigger on_auth_user_created
 -- ROW LEVEL SECURITY
 -- =====================
 alter table profiles enable row level security;
+alter table subjects enable row level security;
+alter table modules enable row level security;
 alter table user_progress enable row level security;
 alter table user_scores enable row level security;
 alter table user_total_scores enable row level security;
@@ -219,22 +223,33 @@ alter table user_settings enable row level security;
 
 -- Profiles: users can read/update their own
 create policy "Users can view own profile"
-  on profiles for select
-  using (auth.uid() = id);
+  on profiles for select to authenticated
+  using ((select auth.uid()) = id);
 
 create policy "Users can update own profile"
-  on profiles for update
+  on profiles for update to authenticated
   using ((select auth.uid()) = id)
   with check ((select auth.uid()) = id);
 
+revoke insert, update, delete on table profiles from anon, authenticated;
+grant select on table profiles to authenticated;
+grant update (display_name, avatar_url, lang, exam_date) on table profiles to authenticated;
+
 -- Subjects: public read
 create policy "Anyone can view subjects"
-  on subjects for select
+  on subjects for select to anon, authenticated
   using (true);
+create policy "Admins can insert subjects" on subjects for insert to authenticated
+  with check (exists (select 1 from public.profiles p where p.id = (select auth.uid()) and p.role in ('admin', 'owner')));
+create policy "Admins can update subjects" on subjects for update to authenticated
+  using (exists (select 1 from public.profiles p where p.id = (select auth.uid()) and p.role in ('admin', 'owner')))
+  with check (exists (select 1 from public.profiles p where p.id = (select auth.uid()) and p.role in ('admin', 'owner')));
+create policy "Admins can delete subjects" on subjects for delete to authenticated
+  using (exists (select 1 from public.profiles p where p.id = (select auth.uid()) and p.role in ('admin', 'owner')));
 
 -- Modules: public read
 create policy "Anyone can view modules"
-  on modules for select
+  on modules for select to anon, authenticated
   using (true);
 drop policy if exists "Anyone can insert modules" on modules;
 drop policy if exists "Admins can insert modules" on modules;
@@ -250,6 +265,9 @@ drop policy if exists "Admins can delete modules" on modules;
 create policy "Admins can delete modules" on modules for delete to authenticated
   using (exists (select 1 from public.profiles p where p.id = (select auth.uid()) and p.role in ('admin', 'owner')));
 
+grant select on table subjects, modules to anon, authenticated;
+grant insert, update, delete on table subjects, modules to authenticated;
+
 
 -- User progress: own only
 create policy "Users can view own progress"
@@ -261,8 +279,9 @@ create policy "Users can insert own progress"
   with check (auth.uid() = user_id);
 
 create policy "Users can update own progress"
-  on user_progress for update
-  using (auth.uid() = user_id);
+  on user_progress for update to authenticated
+  using ((select auth.uid()) = user_id)
+  with check ((select auth.uid()) = user_id);
 
 -- Scores: own only
 create policy "Users can view own scores"
@@ -274,8 +293,9 @@ create policy "Users can upsert own scores"
   with check (auth.uid() = user_id);
 
 create policy "Users can update own scores"
-  on user_scores for update
-  using (auth.uid() = user_id);
+  on user_scores for update to authenticated
+  using ((select auth.uid()) = user_id)
+  with check ((select auth.uid()) = user_id);
 
 -- Total scores: own only
 create policy "Users can view own total score"
@@ -287,8 +307,9 @@ create policy "Users can upsert own total score"
   with check (auth.uid() = user_id);
 
 create policy "Users can update own total score"
-  on user_total_scores for update
-  using (auth.uid() = user_id);
+  on user_total_scores for update to authenticated
+  using ((select auth.uid()) = user_id)
+  with check ((select auth.uid()) = user_id);
 
 -- Study plans: own only
 create policy "Users can view own study plans"
@@ -426,8 +447,9 @@ create table if not exists questions (
 );
 
 alter table questions enable row level security;
+grant select, insert, update, delete on table questions to authenticated;
 drop policy if exists "Anyone can view questions" on questions;
-create policy "Anyone can view questions" on questions for select using (true);
+create policy "Anyone can view questions" on questions for select to authenticated using (true);
 drop policy if exists "Anyone can insert questions" on questions;
 drop policy if exists "Admins can insert questions" on questions;
 create policy "Admins can insert questions" on questions for insert to authenticated
@@ -678,7 +700,8 @@ returns table (
   plan_type text,
   created_at timestamptz
 )
-language plpgsql security definer stable
+language plpgsql stable security definer
+set search_path = ''
 as $$
 begin
   if not exists (select 1 from public.profiles p where p.id = auth.uid() and p.role in ('owner','admin')) then
@@ -704,7 +727,8 @@ returns table (
   total int,
   taken_at timestamptz
 )
-language plpgsql security definer stable
+language plpgsql stable security definer
+set search_path = ''
 as $$
 begin
   if not exists (select 1 from public.profiles p where p.id = auth.uid() and p.role in ('owner','admin')) then
@@ -722,18 +746,38 @@ $$;
 create or replace function set_user_role(target_user_id uuid, new_role text)
 returns void
 language plpgsql security definer
+set search_path = ''
 as $$
+declare
+  caller_role text;
+  target_role text;
 begin
-  if not exists (select 1 from public.profiles where id = auth.uid() and role in ('owner','admin')) then
+  select p.role into caller_role from public.profiles p where p.id = (select auth.uid());
+  if caller_role not in ('owner', 'admin') or caller_role is null then
     raise exception 'Not authorized';
   end if;
-  if new_role not in ('user','admin','owner') then
+  if new_role is null or new_role not in ('user', 'admin', 'owner') then
     raise exception 'Invalid role';
   end if;
-  update public.profiles set role = new_role, updated_at = now()
+  select p.role into target_role from public.profiles p where p.id = target_user_id;
+  if target_role is null then
+    raise exception 'User not found';
+  end if;
+  if caller_role = 'admin' and (new_role <> 'user' or target_role <> 'user') then
+    raise exception 'Only an owner can change admin or owner roles';
+  end if;
+  update public.profiles set role = new_role, updated_at = pg_catalog.now()
   where id = target_user_id;
 end;
 $$;
+
+revoke all on function public.get_all_profiles() from public, anon, authenticated;
+revoke all on function public.get_all_practice_tests() from public, anon, authenticated;
+revoke all on function public.set_user_role(uuid, text) from public, anon, authenticated;
+revoke all on function public.handle_new_user() from public, anon, authenticated;
+grant execute on function public.get_all_profiles() to authenticated;
+grant execute on function public.get_all_practice_tests() to authenticated;
+grant execute on function public.set_user_role(uuid, text) to authenticated;
 
 -- =====================
 -- STORAGE BUCKET

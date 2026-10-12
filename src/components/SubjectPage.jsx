@@ -14,7 +14,6 @@ export default function SubjectPage({ slug, title, subtitle, tag }) {
   const cached = getCache('subj-' + slug)
   const [score, setScore] = useState(cached?.score ?? 0)
   const [tests, setTests] = useState(cached?.tests ?? 0)
-  const [totalTests, setTotalTests] = useState(cached?.totalTests ?? 0)
   const [accuracy, setAccuracy] = useState(cached?.accuracy ?? 0)
   const [time] = useState(cached?.time ?? 0)
   const [topics, setTopics] = useState(cached?.topics ?? [])
@@ -39,8 +38,8 @@ export default function SubjectPage({ slug, title, subtitle, tag }) {
 
     const [scRes, ptRes, accRes, qRes] = await Promise.all([
       supabase.from('user_scores').select('*').eq('user_id', uid).eq('subject_id', sub.id).maybeSingle(),
-      supabase.from('practice_tests').select('id', { count: 'exact', head: true }).eq('user_id', uid).eq('subject', sub.id),
-      supabase.from('practice_tests').select('score, total, taken_at').eq('user_id', uid).eq('subject', sub.id),
+      supabase.from('practice_tests').select('id', { count: 'exact', head: true }).eq('user_id', uid).eq('subject_id', sub.id),
+      supabase.from('practice_tests').select('score, total, taken_at').eq('user_id', uid).eq('subject_id', sub.id),
       supabase.from('questions').select('difficulty').eq('subject_id', sub.id),
     ])
 
@@ -55,7 +54,7 @@ export default function SubjectPage({ slug, title, subtitle, tag }) {
       const pct = recent.reduce((s, t) => s + (t.total > 0 ? t.score / t.total : 0), 0)
       acc = Math.round((pct / recent.length) * 100)
       setAccuracy(acc)
-    }
+    } else setAccuracy(0)
 
     const counts = { easy: 0, medium: 0, hard: 0, elite: 0, mixing: 0 }
     if (qRes.data) {
@@ -71,12 +70,10 @@ export default function SubjectPage({ slug, title, subtitle, tag }) {
       { id: 'mixing', name: 'Mixing', count: counts.mixing, color: '#8b5cf6' }
     ]
     setTopics(diffList)
-    setTotalTests(diffList.length)
 
     setCache('subj-' + slug, {
       score: scRes.data?.score ?? 0,
       tests: ptRes.count ?? 0,
-      totalTests: diffList.length,
       accuracy: acc,
       time,
       topics: diffList,
@@ -93,10 +90,9 @@ export default function SubjectPage({ slug, title, subtitle, tag }) {
   }, [title, subtitle, setPageTitle, setPageSub, setPageClass, refreshData])
 
   const handleStart = (t) => {
+    if (!t.count) return
     navigate('/test/' + slug + '/' + t.id)
   }
-
-  const pct = totalTests > 0 ? Math.round((tests / totalTests) * 100) : 0
 
   return (
     <>
@@ -123,12 +119,11 @@ export default function SubjectPage({ slug, title, subtitle, tag }) {
               <span className="stat-tag green">TEST</span>
               <span className="stat-label">TESTS COMPLETED</span>
             </div>
-            <span className="stat-trend">{tests}/{totalTests || '—'}</span>
+            <span className="stat-trend">ALL TIME</span>
           </div>
           <div className="stat-value tests">{tests}</div>
           <div className="stat-footer">
-            <span className="stat-footer-label">{pct}% COMPLETE</span>
-            <div className="stat-bar"><div className="stat-bar-fill green" style={{ width: `${pct}%` }} /></div>
+            <span className="stat-footer-label">ALL-TIME COMPLETIONS</span>
           </div>
         </div>
         <div className="stat-card">
@@ -164,13 +159,13 @@ export default function SubjectPage({ slug, title, subtitle, tag }) {
           <h2 className="section-title">PRACTICE BY DIFFICULTY</h2>
           <div className="study-grid study-grid-3">
             {topics.map((t) => (
-              <div key={t.id} className="study-card shadow-wrap" onClick={() => handleStart(t)}>
+              <div key={t.id} className={'study-card shadow-wrap' + (!t.count ? ' disabled' : '')} onClick={() => handleStart(t)} aria-disabled={!t.count}>
                 <div className="shadow-box" />
                 <div className="study-card-inner" style={{ '--sc': accent }}>
                   <div className="study-card-name" style={{ color: t.color, fontWeight: 700, fontSize: '1.2rem', textShadow: '0 1px 2px rgba(0,0,0,0.1)' }}>{t.name}</div>
                   <div className="study-card-count">{t.count} questions available</div>
-                  <button className="btn-module study-card-btn" onClick={(e) => { e.stopPropagation(); handleStart(t) }}>
-                    START
+                  <button className="btn-module study-card-btn" disabled={!t.count} onClick={(e) => { e.stopPropagation(); handleStart(t) }}>
+                    {t.count ? 'START' : 'COMING SOON'}
                   </button>
                 </div>
               </div>
