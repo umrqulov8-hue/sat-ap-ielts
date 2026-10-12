@@ -43,6 +43,7 @@ export default function DrawingCanvas({ isOpen, onClose, pageId = 'default' }) {
   const [showShapeMenu, setShowShapeMenu] = useState(false);
   const [shapeMenuPosition, setShapeMenuPosition] = useState({ left: 12, bottom: 80 });
   const [uiSelectedId, setUiSelectedId] = useState(null);
+  const [canvasBounds, setCanvasBounds] = useState({ top: 56, left: 0, width: window.innerWidth, height: Math.max(0, window.innerHeight - 112), toolbarBottom: 68 });
 
   // Persistent data refs
   const elementsRef = useRef([]);
@@ -54,6 +55,8 @@ export default function DrawingCanvas({ isOpen, onClose, pageId = 'default' }) {
   const isInteracting = useRef(false);
   const dragStart = useRef({x: 0, y: 0});
   const currentDrag = useRef({x: 0, y: 0});
+  const passThroughTarget = useRef(null);
+  const passThroughStart = useRef(null);
 
   const activeStroke = useRef(null);
   const activeShape = useRef(null);
@@ -178,6 +181,22 @@ export default function DrawingCanvas({ isOpen, onClose, pageId = 'default' }) {
 
   const onPointerDown = (e) => {
     if (e.target.closest('.draw-toolbar') || e.target.closest('.shape-picker-menu')) return;
+    const canvas = canvasRef.current;
+    if (canvas) {
+      const { clientX, clientY } = e.touches?.[0] || e;
+      canvas.style.pointerEvents = 'none';
+      const underneath = document.elementFromPoint(clientX, clientY);
+      canvas.style.pointerEvents = 'auto';
+      const interactive = underneath?.closest('button, a, input, textarea, select, [role="button"], .bb-choice');
+      if (interactive) {
+        isInteracting.current = true;
+        interactionMode.current = 'pass-through';
+        passThroughTarget.current = interactive;
+        passThroughStart.current = { x: clientX, y: clientY };
+        if (e.cancelable && e.type.startsWith('touch')) e.preventDefault();
+        return;
+      }
+    }
     const {x, y} = getCoords(e);
     isInteracting.current = true;
     dragStart.current = {x, y};
@@ -239,9 +258,20 @@ export default function DrawingCanvas({ isOpen, onClose, pageId = 'default' }) {
     if (e.cancelable && e.type.startsWith('touch')) e.preventDefault();
   };
 
-  const onPointerUp = () => {
+  const onPointerUp = (e) => {
     if (!isInteracting.current) return;
     isInteracting.current = false;
+
+    if (interactionMode.current === 'pass-through') {
+      const point = e.changedTouches?.[0] || e;
+      const start = passThroughStart.current;
+      const target = passThroughTarget.current;
+      if (e.type !== 'mouseleave' && target?.isConnected && start && Math.hypot(point.clientX - start.x, point.clientY - start.y) < 10) target.click();
+      passThroughTarget.current = null;
+      passThroughStart.current = null;
+      interactionMode.current = null;
+      return;
+    }
 
     if (interactionMode.current === 'draw' && activeStroke.current) {
       if (activeStroke.current.points.length > 1) {
@@ -351,6 +381,29 @@ export default function DrawingCanvas({ isOpen, onClose, pageId = 'default' }) {
     return () => ro.disconnect();
   }, [redraw]);
 
+  // Keep the drawing surface inside the question area so the test header and
+  // navigation remain usable. The toolbar sits just above the bottom bar.
+  useEffect(() => {
+    if (!isOpen) return undefined;
+    const updateBounds = () => {
+      const body = canvasRef.current?.closest('.bb')?.querySelector('.bb-body');
+      if (!body) return;
+      const rect = body.getBoundingClientRect();
+      setCanvasBounds({ top: rect.top, left: rect.left, width: rect.width, height: rect.height, toolbarBottom: Math.max(8, window.innerHeight - rect.bottom + 8) });
+    };
+    updateBounds();
+    const body = canvasRef.current?.closest('.bb')?.querySelector('.bb-body');
+    const observer = body ? new ResizeObserver(updateBounds) : null;
+    if (body) observer.observe(body);
+    window.addEventListener('resize', updateBounds);
+    window.addEventListener('scroll', updateBounds, true);
+    return () => {
+      observer?.disconnect();
+      window.removeEventListener('resize', updateBounds);
+      window.removeEventListener('scroll', updateBounds, true);
+    };
+  }, [isOpen]);
+
   const textSelectionMode = tool === 'text';
 
   const shapeGroups = [
@@ -359,10 +412,10 @@ export default function DrawingCanvas({ isOpen, onClose, pageId = 'default' }) {
   ];
 
   return (
-    <div style={{ position: 'fixed', inset: 0, zIndex: 9999, pointerEvents: isOpen && !textSelectionMode ? 'auto' : 'none' }}>
+    <div style={{ position: 'fixed', inset: 0, zIndex: 9999, pointerEvents: 'none' }}>
       <canvas
         ref={canvasRef}
-        style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', touchAction: 'none', display: isOpen && !textSelectionMode ? 'block' : 'none', pointerEvents: textSelectionMode ? 'none' : 'auto', cursor: tool === 'draw' ? 'crosshair' : tool === 'eraser' ? 'cell' : 'default' }}
+        style={{ position: 'absolute', top: canvasBounds.top, left: canvasBounds.left, width: canvasBounds.width, height: canvasBounds.height, touchAction: 'none', display: isOpen && !textSelectionMode ? 'block' : 'none', pointerEvents: isOpen && !textSelectionMode ? 'auto' : 'none', cursor: tool === 'draw' ? 'crosshair' : tool === 'eraser' ? 'cell' : 'default' }}
         onMouseDown={onPointerDown}
         onMouseMove={onPointerMove}
         onMouseUp={onPointerUp}
@@ -374,7 +427,7 @@ export default function DrawingCanvas({ isOpen, onClose, pageId = 'default' }) {
       />
 
       {isOpen && (
-        <div className="draw-toolbar" role="toolbar" aria-label="Drawing tools" style={{ pointerEvents: 'auto' }}>
+        <div className="draw-toolbar" role="toolbar" aria-label="Drawing tools" style={{ pointerEvents: 'auto', bottom: `calc(${canvasBounds.toolbarBottom}px + env(safe-area-inset-bottom, 0px))` }}>
           {/* Colors */}
           <div className="draw-color-group" aria-label="Drawing color">
             {['#007aff', '#ff3b30', '#34c759', '#ffcc00', '#1c1c1e'].map((c, index) => (
