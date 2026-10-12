@@ -58,6 +58,7 @@ export default function DrawingCanvas({ isOpen, onClose, pageId = 'default' }) {
   const dragElementInit = useRef(null);
   const dragElementTemp = useRef(null);
   const selectedId = useRef(null);
+  const previousPageId = useRef(pageId);
 
   // Sync state to refs to avoid closure staleness
   useEffect(() => {
@@ -66,6 +67,22 @@ export default function DrawingCanvas({ isOpen, onClose, pageId = 'default' }) {
 
   // Load from session storage
   useEffect(() => {
+    if (previousPageId.current !== pageId) {
+      try {
+        sessionStorage.removeItem('satap_draw_' + previousPageId.current);
+        sessionStorage.removeItem('satap_draw_' + pageId);
+      } catch {
+        // Clearing the in-memory drawing still works when storage is unavailable.
+      }
+      previousPageId.current = pageId;
+      elementsRef.current = [];
+      historyRef.current = [];
+      selectedId.current = null;
+      setUiSelectedId(null);
+      setShowShapeMenu(false);
+      setTool('draw');
+      return;
+    }
     try {
       const saved = sessionStorage.getItem('satap_draw_' + pageId);
       if (saved) {
@@ -332,11 +349,18 @@ export default function DrawingCanvas({ isOpen, onClose, pageId = 'default' }) {
     return () => ro.disconnect();
   }, [redraw]);
 
+  const textSelectionMode = tool === 'text';
+
+  const shapeGroups = [
+    { label: 'BASIC SHAPES', shapes: [['line', 'Line'], ['arrow', 'Arrow'], ['rect', 'Rectangle'], ['circle', 'Circle'], ['ellipse', 'Ellipse'], ['triangle', 'Triangle'], ['right-triangle', 'Right triangle'], ['axes', 'Coordinate axes']] },
+    { label: '3D SHAPES', shapes: [['cube', 'Cube'], ['cylinder', 'Cylinder'], ['cone', 'Cone'], ['sphere', 'Sphere'], ['pyramid', 'Pyramid'], ['prism', 'Prism']] },
+  ];
+
   return (
-    <div style={{ position: 'fixed', inset: 0, zIndex: 9999, pointerEvents: isOpen ? 'auto' : 'none' }}>
+    <div style={{ position: 'fixed', inset: 0, zIndex: 9999, pointerEvents: isOpen && !textSelectionMode ? 'auto' : 'none' }}>
       <canvas
         ref={canvasRef}
-        style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', touchAction: 'none', display: isOpen ? 'block' : 'none', cursor: tool === 'draw' ? 'crosshair' : tool === 'eraser' ? 'cell' : 'default' }}
+        style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', touchAction: 'none', display: isOpen && !textSelectionMode ? 'block' : 'none', pointerEvents: textSelectionMode ? 'none' : 'auto', cursor: tool === 'draw' ? 'crosshair' : tool === 'eraser' ? 'cell' : 'default' }}
         onMouseDown={onPointerDown}
         onMouseMove={onPointerMove}
         onMouseUp={onPointerUp}
@@ -348,7 +372,7 @@ export default function DrawingCanvas({ isOpen, onClose, pageId = 'default' }) {
       />
 
       {isOpen && (
-        <div className="draw-toolbar" role="toolbar" aria-label="Drawing tools">
+        <div className="draw-toolbar" role="toolbar" aria-label="Drawing tools" style={{ pointerEvents: 'auto' }}>
           {/* Colors */}
           <div className="draw-color-group" aria-label="Drawing color">
             {['#007aff', '#ff3b30', '#34c759', '#ffcc00', '#1c1c1e'].map((c, index) => (
@@ -373,19 +397,27 @@ export default function DrawingCanvas({ isOpen, onClose, pageId = 'default' }) {
           <IconWrapper active={tool === 'draw'} onClick={() => setTool('draw')} title="Draw">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></svg>
           </IconWrapper>
+          <IconWrapper active={textSelectionMode} onClick={() => { setTool('text'); setShowShapeMenu(false); }} title="Highlight text">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 7V4h16v3"/><path d="M9 20h6"/><path d="M12 4v16"/><path d="m5 20 3-7h8l3 7"/></svg>
+          </IconWrapper>
           <div className="draw-shape-control">
-            <IconWrapper active={tool === 'shape'} onClick={() => { setTool('shape'); setShowShapeMenu(!showShapeMenu); }} title="Shapes">
+            <IconWrapper active={tool === 'shape'} onClick={() => { setTool('shape'); setShowShapeMenu(value => !value); }} title="Basic and 3D shapes">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/></svg>
             </IconWrapper>
             {showShapeMenu && tool === 'shape' && (
-              <div className="shape-picker-menu">
-                {['line','arrow','rect','circle','triangle','cube','cylinder','cone','sphere','pyramid','prism','ellipse'].map(s => (
-                  <button key={s} onClick={() => { setShapeType(s); setShowShapeMenu(false); }} style={{
-                    width: '32px', height: '32px', border: 'none', background: shapeType === s ? '#f0f0f0' : 'transparent',
-                    borderRadius: '6px', cursor: 'pointer', fontSize: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center'
-                  }} title={s}>
-                    {s.slice(0, 2).toUpperCase()}
-                  </button>
+              <div className="shape-picker-menu" role="group" aria-label="Choose a shape">
+                {shapeGroups.map(group => (
+                  <div className="shape-picker-group" key={group.label}>
+                    <div className="shape-picker-heading">{group.label}</div>
+                    <div className="shape-picker-options">
+                      {group.shapes.map(([value, label]) => (
+                        <button type="button" key={value} aria-pressed={shapeType === value} className={shapeType === value ? 'selected' : ''} onClick={() => { setShapeType(value); setShowShapeMenu(false); setTool('shape'); }} title={label}>
+                          <span className="shape-picker-symbol" aria-hidden="true">{label.slice(0, 1)}</span>
+                          <span>{label}</span>
+                        </button>
+                      ))}
+                    </div>
+                  </div>
                 ))}
               </div>
             )}

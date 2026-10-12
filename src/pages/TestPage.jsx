@@ -7,6 +7,7 @@ import AITutor from '../components/AITutor'
 import DrawingCanvas from '../components/DrawingCanvas'
 
 const IS_PRACTICE = true
+const escapeHTML = (value) => String(value).replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[char])
 
 const formatTime = (s) => {
   const m = Math.floor(s / 60)
@@ -147,6 +148,12 @@ export default function TestPage() {
 
   const currentQuestion = useMemo(() => questions[current] || null, [questions, current])
 
+  useEffect(() => {
+    setIsDrawingMode(false)
+    setHlMenu(null)
+    window.getSelection()?.removeAllRanges()
+  }, [currentQuestion?.id])
+
   const passageFromText = useMemo(() => {
     if (!currentQuestion?.question_text) return null
     const m = currentQuestion.question_text.match(/<!--PASSAGE_START-->([\s\S]*?)<!--PASSAGE_END-->/)
@@ -195,8 +202,10 @@ export default function TestPage() {
     { name: 'purple', color: '#c7a8f5', border: '#8a5ad4' },
   ]
 
-  const getHighlightedHTML = useCallback((text) => {
-    const qHighlights = highlights['q' + current] || []
+  const getHighlightedHTML = useCallback((text, target = 'passage') => {
+    const qHighlights = (highlights['q' + current] || [])
+      .map((highlight, index) => ({ ...highlight, index }))
+      .filter(highlight => (highlight.target || 'passage') === target)
     if (!qHighlights.length || !text) return text
 
     // Offsets are based on rendered text, so apply them to text nodes instead
@@ -205,9 +214,9 @@ export default function TestPage() {
     template.innerHTML = String(text)
 
     const passageText = template.content.textContent || ''
-    const ranges = qHighlights.map((highlight, idx) => {
+    const ranges = qHighlights.map(highlight => {
       const start = Number.isInteger(highlight.start) ? highlight.start : passageText.indexOf(highlight.text)
-      return { start, end: start + (highlight.text || '').length, idx, color: highlight.color, border: highlight.border }
+      return { start, end: start + (highlight.text || '').length, idx: highlight.index, color: highlight.color, border: highlight.border }
     }).filter(range => range.start >= 0 && range.end > range.start)
 
     const walker = document.createTreeWalker(template.content, NodeFilter.SHOW_TEXT)
@@ -270,14 +279,17 @@ export default function TestPage() {
 
   const passageHtmlStr = useMemo(() => {
     if (!effectivePassage) return ''
-    return getHighlightedHTML(effectivePassage)
+    return getHighlightedHTML(effectivePassage, 'passage')
   }, [effectivePassage, getHighlightedHTML])
+
+  const questionHtmlStr = useMemo(() => getHighlightedHTML(effectiveQText || '', 'question'), [effectiveQText, getHighlightedHTML])
 
   const applyHighlight = (color) => {
     const { text, start } = hlSelectedRef.current
     if (!text) return
     const key = 'q' + current
-    setHighlights(prev => ({ ...prev, [key]: [...(prev[key] || []), { text, start, color: color.color, border: color.border }] }))
+    const { target = 'passage' } = hlSelectedRef.current
+    setHighlights(prev => ({ ...prev, [key]: [...(prev[key] || []), { text, start, target, color: color.color, border: color.border }] }))
     window.getSelection()?.removeAllRanges()
     setHlMenu(null)
   }
@@ -291,34 +303,34 @@ export default function TestPage() {
     })
   }
 
-  const handlePassageMouseUp = () => {
+  const handleTextSelection = (event) => {
+    if (event.target.closest('.hl-toolbar')) return
     const sel = window.getSelection()
-    const passageEl = passageRef.current?.querySelector('.bb-passage-split')
-    if (!sel || sel.isCollapsed || !passageEl) { setHlMenu(null); return }
+    if (!sel || sel.isCollapsed || !sel.rangeCount) { setHlMenu(null); return }
     const range = sel.getRangeAt(0)
-    if (!passageEl.contains(range.startContainer) || !passageEl.contains(range.endContainer)) { setHlMenu(null); return }
+    const startElement = range.startContainer.nodeType === Node.ELEMENT_NODE ? range.startContainer : range.startContainer.parentElement
+    const endElement = range.endContainer.nodeType === Node.ELEMENT_NODE ? range.endContainer : range.endContainer.parentElement
+    const target = startElement?.closest('[data-highlight-target]')
+    if (!target || !target.contains(endElement) || !target.contains(range.startContainer) || !target.contains(range.endContainer)) { setHlMenu(null); return }
     const selectedText = range.toString()
     const selText = selectedText.trim()
     if (!selText) { setHlMenu(null); return }
 
     const rangeRect = range.getBoundingClientRect()
-    const rect = passageRef.current.getBoundingClientRect()
     const preRange = document.createRange()
-    preRange.setStart(passageEl, 0)
+    preRange.selectNodeContents(target)
     preRange.setEnd(range.startContainer, range.startOffset)
     const leadingWhitespace = selectedText.length - selectedText.trimStart().length
     const startOffset = preRange.toString().length + leadingWhitespace
 
-    hlSelectedRef.current = { text: selText, start: startOffset }
-    const scrollTop = passageRef.current.scrollTop
-    const scrollLeft = passageRef.current.scrollLeft
-    let menuY = rangeRect.top - rect.top + scrollTop - 50
-    if (menuY < scrollTop + 8) menuY = rangeRect.bottom - rect.top + scrollTop + 8
-    const menuX = Math.max(110, Math.min(rect.width - 110, rangeRect.left - rect.left + scrollLeft + rangeRect.width / 2))
+    hlSelectedRef.current = { text: selText, start: startOffset, target: target.dataset.highlightTarget }
+    const menuX = Math.max(100, Math.min(window.innerWidth - 100, rangeRect.left + rangeRect.width / 2))
+    const menuY = rangeRect.top > 58 ? rangeRect.top - 48 : rangeRect.bottom + 8
     setHlMenu({ x: menuX, y: menuY })
   }
 
   const handleSelect = (idx) => {
+    if (window.getSelection()?.toString().trim()) return
     if (abcMode) {
       const key = 'q' + current
       setStrikethrough(prev => {
@@ -692,8 +704,20 @@ export default function TestPage() {
   }
 
   return (
-    <div className="bb">
+    <div className="bb" onMouseUp={handleTextSelection} onClick={handlePassageClick}>
       <DrawingCanvas isOpen={isDrawingMode} onClose={() => setIsDrawingMode(false)} onOpen={() => setIsDrawingMode(true)} pageId={currentQuestion?.id || 'default'} />
+      {hlMenu && (
+        <div className="hl-toolbar" style={{ left: hlMenu.x, top: hlMenu.y }} role="toolbar" aria-label="Highlight selected text" onMouseDown={e => e.preventDefault()}>
+          {HL_COLORS.map(c => (
+            <button key={c.name} className="hl-btn" title={'Highlight ' + c.name} aria-label={'Highlight ' + c.name} onClick={() => applyHighlight(c)} style={{ background: c.color, borderBottom: `2px solid ${c.border}` }}>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={c.border} strokeWidth="2.5"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+            </button>
+          ))}
+          <button className="hl-btn hl-btn-close" aria-label="Close highlight tools" onClick={() => { window.getSelection()?.removeAllRanges(); setHlMenu(null) }}>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><path d="m18 6-12 12M6 6l12 12"/></svg>
+          </button>
+        </div>
+      )}
       
       {/* TOP NAV */}
       <div className="bb-top">
@@ -725,23 +749,9 @@ export default function TestPage() {
       {/* BODY */}
       {(currentQuestion?.image_url || hasInlineImg || effectivePassage) ? (
       <div className="bb-body bb-body-split">
-        <div className="bb-left" ref={passageRef} onMouseUp={handlePassageMouseUp} style={{ position: 'relative' }}>
+        <div className="bb-left" ref={passageRef} style={{ position: 'relative' }}>
           {effectivePassage ? (
-            <>
-              <div className="bb-passage-split" dangerouslySetInnerHTML={{ __html: passageHtmlStr }} onClick={handlePassageClick} />
-              {hlMenu && (
-                <div className="hl-toolbar" style={{ left: hlMenu.x, top: hlMenu.y }} onMouseDown={e => e.stopPropagation()} onMouseUp={e => e.stopPropagation()}>
-                  {HL_COLORS.map(c => (
-                    <button key={c.name} className="hl-btn" title={c.name} onMouseDown={e => { e.preventDefault(); e.stopPropagation(); applyHighlight(c); }} style={{ background: c.color, borderBottom: `2px solid ${c.border}` }}>
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={c.border} strokeWidth="2.5"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
-                    </button>
-                  ))}
-                  <button className="hl-btn hl-btn-close" onMouseDown={e => { e.preventDefault(); e.stopPropagation(); window.getSelection()?.removeAllRanges(); setHlMenu(null) }}>
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-                  </button>
-                </div>
-              )}
-            </>
+            <div className="bb-passage-split" data-highlight-target="passage" dangerouslySetInnerHTML={{ __html: passageHtmlStr }} />
           ) : currentQuestion?.image_url && (
             <img src={currentQuestion.image_url} alt="" className="bb-left-img" draggable="false" onContextMenu={e => e.preventDefault()} />
           )}
@@ -768,7 +778,7 @@ export default function TestPage() {
             )}
           </div>
           {effectiveQText && (
-            <div className="bb-q-text" dangerouslySetInnerHTML={{ __html: effectiveQText }} />
+            <div className="bb-q-text" data-highlight-target="question" dangerouslySetInnerHTML={{ __html: questionHtmlStr }} />
           )}
           {isWrittenQ(currentQuestion) ? (
           <div className="bb-choices">
@@ -779,7 +789,7 @@ export default function TestPage() {
             {currentQuestion.options.map((opt, i) => (
               <div key={i} className={'bb-choice' + (selected === i ? ' selected' : '') + ((strikethrough['q' + current] || []).includes(i) ? ' struck' : '')} onClick={() => handleSelect(i)}>
                 <div className="bb-choice-letter">{String.fromCharCode(65 + i)}</div>
-                <div className="bb-choice-text">{opt}</div>
+                <div className="bb-choice-text" data-highlight-target={'choice-' + i} dangerouslySetInnerHTML={{ __html: getHighlightedHTML(escapeHTML(opt), 'choice-' + i) }} />
               </div>
             ))}
           </div>
@@ -815,10 +825,10 @@ export default function TestPage() {
                 <img src={currentQuestion.image_url} alt="" className="bb-q-img" draggable="false" onContextMenu={e => e.preventDefault()} />
               )}
               {effectiveQText && !hasInlineImg && (
-                <div className="bb-passage" dangerouslySetInnerHTML={{ __html: effectiveQText }} />
+                <div className="bb-passage" data-highlight-target="question" dangerouslySetInnerHTML={{ __html: questionHtmlStr }} />
               )}
               {effectiveQText && hasInlineImg && (
-                <div className="bb-q-text">{renderQuestionText(effectiveQText)}</div>
+                <div className="bb-q-text" data-highlight-target="question" dangerouslySetInnerHTML={{ __html: questionHtmlStr }} />
               )}
               {isWrittenQ(currentQuestion) ? (
               <div className="bb-choices">
@@ -829,7 +839,7 @@ export default function TestPage() {
                 {currentQuestion.options.map((opt, i) => (
                   <div key={i} className={'bb-choice' + (selected === i ? ' selected' : '') + ((strikethrough['q' + current] || []).includes(i) ? ' struck' : '')} onClick={() => handleSelect(i)}>
                     <div className="bb-choice-letter">{String.fromCharCode(65 + i)}</div>
-                    <div className="bb-choice-text">{opt}</div>
+                    <div className="bb-choice-text" data-highlight-target={'choice-' + i} dangerouslySetInnerHTML={{ __html: getHighlightedHTML(escapeHTML(opt), 'choice-' + i) }} />
                   </div>
                 ))}
               </div>
