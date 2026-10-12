@@ -1,4 +1,5 @@
 import { useRef, useState, useEffect, useCallback } from 'react';
+import { createPortal } from 'react-dom';
 
 // Math Helper
 function distToSegment(p, v, w) {
@@ -40,6 +41,7 @@ export default function DrawingCanvas({ isOpen, onClose, pageId = 'default' }) {
   const [lineWidth] = useState(3);
   const [shapeType, setShapeType] = useState('cube');
   const [showShapeMenu, setShowShapeMenu] = useState(false);
+  const [shapeMenuPosition, setShapeMenuPosition] = useState({ left: 12, bottom: 80 });
   const [uiSelectedId, setUiSelectedId] = useState(null);
 
   // Persistent data refs
@@ -401,26 +403,18 @@ export default function DrawingCanvas({ isOpen, onClose, pageId = 'default' }) {
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 7V4h16v3"/><path d="M9 20h6"/><path d="M12 4v16"/><path d="m5 20 3-7h8l3 7"/></svg>
           </IconWrapper>
           <div className="draw-shape-control">
-            <IconWrapper active={tool === 'shape'} onClick={() => { setTool('shape'); setShowShapeMenu(value => !value); }} title="Basic and 3D shapes">
+            <IconWrapper active={tool === 'shape'} onClick={event => {
+              const anchor = event.currentTarget.getBoundingClientRect();
+              const menuWidth = Math.min(330, window.innerWidth - 24);
+              setShapeMenuPosition({
+                left: Math.max(12, Math.min(window.innerWidth - menuWidth - 12, anchor.left)),
+                bottom: Math.max(12, window.innerHeight - anchor.top + 8),
+              });
+              setTool('shape');
+              setShowShapeMenu(value => !value);
+            }} title="Basic and 3D shapes">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/></svg>
             </IconWrapper>
-            {showShapeMenu && tool === 'shape' && (
-              <div className="shape-picker-menu" role="group" aria-label="Choose a shape">
-                {shapeGroups.map(group => (
-                  <div className="shape-picker-group" key={group.label}>
-                    <div className="shape-picker-heading">{group.label}</div>
-                    <div className="shape-picker-options">
-                      {group.shapes.map(([value, label]) => (
-                        <button type="button" key={value} aria-pressed={shapeType === value} className={shapeType === value ? 'selected' : ''} onClick={() => { setShapeType(value); setShowShapeMenu(false); setTool('shape'); }} title={label}>
-                          <span className="shape-picker-symbol" aria-hidden="true">{label.slice(0, 1)}</span>
-                          <span>{label}</span>
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
           </div>
           <IconWrapper active={tool === 'eraser'} onClick={() => setTool('eraser')} title="Eraser">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="m7 21-4.3-4.3c-1-1-1-2.5 0-3.4l9.6-9.6c1-1 2.5-1 3.4 0l5.6 5.6c1 1 1 2.5 0 3.4L13 21"/><path d="M22 21H7"/><path d="m5 11 9 9"/></svg>
@@ -446,6 +440,24 @@ export default function DrawingCanvas({ isOpen, onClose, pageId = 'default' }) {
             </IconWrapper>
           )}
         </div>
+      )}
+      {isOpen && showShapeMenu && tool === 'shape' && createPortal(
+        <div className="shape-picker-menu" role="group" aria-label="Choose a shape" style={shapeMenuPosition}>
+          {shapeGroups.map(group => (
+            <div className="shape-picker-group" key={group.label}>
+              <div className="shape-picker-heading">{group.label}</div>
+              <div className="shape-picker-options">
+                {group.shapes.map(([value, label]) => (
+                  <button type="button" key={value} aria-pressed={shapeType === value} className={shapeType === value ? 'selected' : ''} onClick={() => { setShapeType(value); setShowShapeMenu(false); setTool('shape'); }} title={label}>
+                    <span className="shape-picker-symbol" aria-hidden="true">{label.slice(0, 1)}</span>
+                    <span>{label}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>,
+        document.body
       )}
     </div>
   );
