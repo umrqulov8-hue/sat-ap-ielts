@@ -1,6 +1,7 @@
 import { useState, useMemo } from 'react'
 import katex from 'katex'
 import { explainQuestion } from '../lib/groq'
+import { sanitizeHtml } from '../lib/sanitizeHtml'
 
 function renderMathText(raw) {
   if (!raw) return ''
@@ -64,20 +65,9 @@ export default function AITutor({ question, userAnswer, onClose }) {
   }
 
   const html = useMemo(() => renderMathText(explanation), [explanation])
+  const safeExplanationHtml = useMemo(() => sanitizeHtml(html), [html])
 
-  // Custom renderer to support images in standard explanation
-  const renderStandardExplanation = (text) => {
-    if (!text) return null
-    const parts = text.split(/(<img[^>]+>)/g)
-    return parts.map((part, i) => {
-      if (part.startsWith('<img')) {
-        const match = part.match(/src="([^"]+)"/)
-        const src = match ? match[1] : ''
-        return <img key={i} src={src} alt="" style={{ maxWidth: '100%', borderRadius: '8px', margin: '10px 0' }} draggable="false" />
-      }
-      return <span key={i} dangerouslySetInnerHTML={{ __html: part }} />
-    })
-  }
+  const safeStandardExplanation = useMemo(() => sanitizeHtml(question?.explanation || ''), [question?.explanation])
 
   return (
     <div className="aitutor-overlay" onClick={onClose}>
@@ -98,7 +88,7 @@ export default function AITutor({ question, userAnswer, onClose }) {
                 Standard Tushuntirish
               </h4>
               <div style={{ lineHeight: '1.6' }}>
-                {renderStandardExplanation(question.explanation)}
+                <div dangerouslySetInnerHTML={{ __html: safeStandardExplanation }} />
               </div>
             </div>
           )}
@@ -130,7 +120,7 @@ export default function AITutor({ question, userAnswer, onClose }) {
                 <h4 style={{ margin: '0 0 10px 0', color: '#8a2be2', fontSize: '14px', display: 'flex', alignItems: 'center', gap: '6px' }}>
                   ✨ AI Tushuntirish
                 </h4>
-                <div className="aitutor-explanation" dangerouslySetInnerHTML={{ __html: html }} />
+                <div className="aitutor-explanation" dangerouslySetInnerHTML={{ __html: safeExplanationHtml }} />
               </div>
               <button className="aitutor-rebtn" onClick={handleExplain}>
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="square" strokeLinejoin="miter">

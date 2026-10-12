@@ -3,6 +3,7 @@ import { useLayout } from '../components/DashLayout'
 import { useUser } from '../context/UserContext'
 import { supabase } from '../lib/supabaseClient'
 import { useToast } from '../components/Toast'
+import { sanitizeHtml } from '../lib/sanitizeHtml'
 
 export default function AdminQuestions() {
   const { setPageTitle, setPageSub, setPageClass } = useLayout()
@@ -866,7 +867,7 @@ ALTER TABLE questions ADD COLUMN IF NOT EXISTS layout text default 'centered';</
                             </span>}
                           </div>
                           <div className="admin-q-list-text">
-                            {q.question_text ? <span dangerouslySetInnerHTML={{ __html: q.question_text.replace(/<!--PASSAGE_START-->[\s\S]*?<!--PASSAGE_END-->/g, '').replace(/<img[^>]+>/g, '🖼') }} /> : <em>No text</em>}
+                            {q.question_text ? <span dangerouslySetInnerHTML={{ __html: sanitizeHtml(q.question_text.replace(/<!--PASSAGE_START-->[\s\S]*?<!--PASSAGE_END-->/g, '').replace(/<img[^>]+>/g, '🖼')) }} /> : <em>No text</em>}
                           </div>
                           {q.correct_index >= 0 && Array.isArray(q.options) && q.options[q.correct_index] && (
                             <div className="admin-q-list-ans">✓ {String.fromCharCode(65 + q.correct_index)}. {q.options[q.correct_index]}</div>
@@ -1104,7 +1105,7 @@ ALTER TABLE questions ADD COLUMN IF NOT EXISTS layout text default 'centered';</
                           <span className="admin-q-preview-type">{qType === 'mc' ? 'MULTIPLE CHOICE' : 'WRITTEN'}</span>
                         </div>
                         <div className="admin-q-preview-text">
-                          {qText ? <div dangerouslySetInnerHTML={{ __html: qText }} /> : <span className="admin-q-preview-placeholder">Your question text will appear here...</span>}
+                          {qText ? <div dangerouslySetInnerHTML={{ __html: sanitizeHtml(qText) }} /> : <span className="admin-q-preview-placeholder">Your question text will appear here...</span>}
                         </div>
                         {qType === 'mc' ? (
                           <div className="admin-q-preview-opts">

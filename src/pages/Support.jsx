@@ -6,10 +6,10 @@ const FAQ_DATA = [
   { q: 'How do I start a practice test?', a: 'Navigate to Practice Tests in the sidebar and select any available test to begin. You can choose from full-length SAT tests or individual module practices.' },
   { q: 'How is my math score calculated?', a: 'Your math score is calculated per track (Advanced Math, Data Analysis, Problem Solving, Algebra, Geometry) on a 0-800 scale based on your accuracy. Your best score per track is saved, and your overall math score is the average of your track scores.' },
   { q: 'Can I retake a practice test?', a: 'Yes, all practice tests can be retaken as many times as you want. Your highest score is automatically saved to your profile, and you can track your progress over time.' },
-  { q: 'How do I upgrade to PRO?', a: 'Go to your Profile page from the sidebar and click "Upgrade to PRO". You will get access to unlimited practice tests, detailed analytics, personalized study plans, and priority support.' },
+  { q: 'How do I upgrade to PRO?', a: 'Self-service PRO upgrades are not available yet. Contact support to ask about current plan options.' },
   { q: 'What subjects are available?', a: 'We currently offer Advanced Math, Data Analysis, Problem Solving, Algebra, and Geometry. Each track includes multiple modules, practice tests, and progress tracking.' },
   { q: 'How long does a full SAT test take?', a: 'A full digital SAT practice test takes approximately 2 hours and 14 minutes. The Math section is 70 minutes and the Reading & Writing section is 64 minutes.' },
-  { q: 'Can I pause a test and resume later?', a: 'Yes, your progress is automatically saved. You can exit a test at any time and continue from where you left off by selecting the same test from Practice Tests.' },
+  { q: 'Can I pause a test and resume later?', a: 'Not yet. A test is saved to your history after you finish it; unfinished answers are not saved if you leave the page.' },
   { q: 'How do I track my progress?', a: 'Your Dashboard shows your current scores, recent activity, and upcoming modules. The Profile page provides detailed analytics including skill breakdowns and score trends.' },
 ]
 
@@ -40,8 +40,8 @@ export default function Support() {
     const body = `Name: ${contact.name}\nEmail: ${contact.email}\nSubject: ${contact.subject || 'N/A'}\n\nMessage:\n${contact.message}`
     window.location.href = `mailto:umrqulov8@gmail.com?subject=${encodeURIComponent(contact.subject || 'Support Request')}&body=${encodeURIComponent(body)}`
     setMsg('Redirecting to your email client...')
-    setContact({ name: '', email: '', subject: '', message: '' })
-    setTimeout(() => setMsg(''), 4000)
+    setMsg('An email draft is opening. Send it from your email app to contact support.')
+    setTimeout(() => setMsg(''), 6000)
   }
 
   const filteredFAQ = FAQ_DATA.filter(item =>
@@ -60,7 +60,7 @@ export default function Support() {
 
       <div className="support-layout">
         <div className="support-faq">
-          <h3 className="section-title" style={{ fontSize: '0.85rem', marginBottom: '1rem' }}>FREQUENTLY ASKED QUESTIONS</h3>
+          <h3 id="support-faqs" className="section-title" style={{ fontSize: '0.85rem', marginBottom: '1rem' }}>FREQUENTLY ASKED QUESTIONS</h3>
           <div className="faq-list settings-card" style={{ padding: 0 }}>
             {filteredFAQ.length === 0 ? (
               <div className="faq-empty">No results found for &quot;{search}&quot;</div>
@@ -95,8 +95,8 @@ export default function Support() {
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12" /></svg>
             </div>
             <span className="support-side-title">GUIDES</span>
-            <span className="support-side-desc">Step-by-step tutorials & resources</span>
-            <button className="btn-support-side" onClick={() => { const el = document.querySelector('.support-search'); el?.focus(); el?.scrollIntoView({ behavior: 'smooth' }) }}>VIEW GUIDES</button>
+            <span className="support-side-desc">Search answers in our help topics</span>
+            <button className="btn-support-side" onClick={() => document.querySelector('#support-faqs')?.scrollIntoView({ behavior: 'smooth' })}>BROWSE FAQS</button>
           </div>
           <a href="mailto:umrqulov8@gmail.com" style={{ textDecoration: 'none', color: 'inherit' }}>
             <div className="settings-card support-side-card">
@@ -111,7 +111,7 @@ export default function Support() {
         </div>
       </div>
 
-      <h2 className="section-title" style={{ marginTop: '2.5rem' }}>SEND US A MESSAGE</h2>
+      <h2 className="section-title" style={{ marginTop: '2.5rem' }}>EMAIL SUPPORT</h2>
 
       <div className="settings-card support-contact">
         <div className="contact-form-grid">
@@ -132,7 +132,7 @@ export default function Support() {
           <label className="settings-label">MESSAGE</label>
           <textarea className="settings-input support-textarea" rows={4} placeholder="Describe your issue or question in detail..." value={contact.message} onChange={e => setContact({ ...contact, message: e.target.value })} />
         </div>
-        <button className="btn-settings" style={{ marginTop: '1.25rem' }} onClick={submitContact}>SUBMIT TICKET</button>
+        <button className="btn-settings" style={{ marginTop: '1.25rem' }} onClick={submitContact}>OPEN EMAIL DRAFT</button>
       </div>
     </>
   )

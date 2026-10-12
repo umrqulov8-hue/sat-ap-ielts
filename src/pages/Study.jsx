@@ -52,13 +52,13 @@ export default function Study() {
         <>
           <div className="study-grid study-grid-5">
             {groups.map((g, gi) => (
-              <div key={g.subject.id} className="study-card shadow-wrap" onClick={() => navigate('/study/subject/' + g.subject.id)}>
+              <div key={g.subject.id} className={'study-card shadow-wrap' + (!g.totalVideos ? ' disabled' : '')} onClick={() => g.totalVideos && navigate('/study/subject/' + g.subject.id)} aria-disabled={!g.totalVideos}>
                 <div className="shadow-box" />
                 <div className="study-card-inner" style={{ '--sc': g.subject.color || '#000' }}>
                   <span className="study-card-num">{(gi + 1).toString().padStart(2, '0')}</span>
                   <div className="study-card-name">{g.subject.title.toUpperCase()}</div>
                   <div className="study-card-count">{g.totalVideos} video{g.totalVideos !== 1 ? 's' : ''}</div>
-                  <button className="btn-module study-card-btn" onClick={(e) => { e.stopPropagation(); navigate('/study/subject/' + g.subject.id) }}>OPEN</button>
+                  <button className="btn-module study-card-btn" disabled={!g.totalVideos} onClick={(e) => { e.stopPropagation(); navigate('/study/subject/' + g.subject.id) }}>{g.totalVideos ? 'OPEN' : 'COMING SOON'}</button>
                 </div>
               </div>
             ))}
@@ -83,7 +83,10 @@ export default function Study() {
                   <div className="study-total"><span className="study-total-num">{groups.length}</span><span className="study-total-lbl">TRACKS</span></div>
                   <div className="study-total"><span className="study-total-num">{totalVideos}</span><span className="study-total-lbl">VIDEOS</span></div>
                 </div>
-                <button className="btn-module" onClick={() => groups.length && navigate('/study/subject/' + groups[0].subject.id)}>START LEARNING</button>
+                <button className="btn-module" disabled={!groups.some(g => g.totalVideos)} onClick={() => {
+                  const firstWithVideos = groups.find(g => g.totalVideos)
+                  if (firstWithVideos) navigate('/study/subject/' + firstWithVideos.subject.id)
+                }}>{totalVideos ? 'START LEARNING' : 'LESSONS COMING SOON'}</button>
               </div>
             </div>
           </div>

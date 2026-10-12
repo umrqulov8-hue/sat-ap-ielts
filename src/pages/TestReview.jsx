@@ -2,12 +2,13 @@ import { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { supabase } from '../lib/supabaseClient'
 import { useLayout } from '../components/DashLayout'
+import { sanitizeHtml } from '../lib/sanitizeHtml'
 
 function renderQuestionText(text) {
   if (!text) return ''
   const parts = text.split(/(<[^>]+>)/g)
   return parts.map((part, i) => {
-    if (part.startsWith('<')) return <span key={i} dangerouslySetInnerHTML={{ __html: part }} />
+    if (part.startsWith('<')) return <span key={i} dangerouslySetInnerHTML={{ __html: sanitizeHtml(part) }} />
     return <span key={i}>{part}</span>
   })
 }

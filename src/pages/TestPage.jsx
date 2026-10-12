@@ -5,6 +5,7 @@ import { getCache, setCache } from '../lib/dataCache'
 import { useToast } from '../components/Toast'
 import AITutor from '../components/AITutor'
 import DrawingCanvas from '../components/DrawingCanvas'
+import { sanitizeHtml } from '../lib/sanitizeHtml'
 
 const IS_PRACTICE = true
 const escapeHTML = (value) => String(value).replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[char])
@@ -102,7 +103,7 @@ export default function TestPage() {
       }
 
       const [tpResult, qsResult, profResult] = await Promise.all([
-        Promise.resolve({ data: subjectData ? { id: subjectSlug + '-' + difficulty, title: difficulty.toUpperCase() + ' PRACTICE', subject: subjectData, modules: { title: subjectData.title } } : null }),
+        Promise.resolve({ data: subjectData ? { id: subjectSlug + '-' + difficulty, title: difficulty.toUpperCase() + ' PRACTICE', subject: subjectData, modules: { title: subjectData.title, subject_id: subjectData.id } } : null }),
         qPromise,
         session?.user ? supabase.from('profiles').select('display_name').eq('id', session.user.id).maybeSingle() : Promise.resolve({ data: null }),
       ])
@@ -283,6 +284,8 @@ export default function TestPage() {
   }, [effectivePassage, getHighlightedHTML])
 
   const questionHtmlStr = useMemo(() => getHighlightedHTML(effectiveQText || '', 'question'), [effectiveQText, getHighlightedHTML])
+  const safePassageHtml = useMemo(() => sanitizeHtml(passageHtmlStr), [passageHtmlStr])
+  const safeQuestionHtml = useMemo(() => sanitizeHtml(questionHtmlStr), [questionHtmlStr])
 
   const applyHighlight = (color) => {
     const { text, start } = hlSelectedRef.current
@@ -408,76 +411,78 @@ export default function TestPage() {
   }
 
   const handleFinish = async () => {
+    if (saving) return
     setSaving(true)
     const score = answers.filter(a => a.correct).length
     const pct = answers.length ? score / answers.length : 0
+    let resultSaved = false
+    try {
+      const { data: { session } } = await supabase.auth.getSession()
+      const uid = session?.user?.id
+      if (!uid || !topic) throw new Error('Sessiya topilmadi')
 
-    const { data: { session } } = await supabase.auth.getSession()
-    const uid = session?.user?.id
-    if (uid && topic) {
-      const subjectId = topic.modules?.subject_id
-      try {
-        const ansData = answers.map(a => ({
-          qIdx: a.qIdx, selected: a.selected, correct: a.correct,
-          question: { id: a.question?.id, question_text: a.question?.question_text, options: a.question?.options, correct_index: a.question?.correct_index, explanation: a.question?.explanation, question_type: a.question?.question_type }
-        }))
-        const { data: testRes } = await supabase.from('practice_tests').insert({
-          user_id: uid, title: topic.title,
-          subject: topic.subject?.title || 'General',
-          score, total: answers.length,
-          duration: Math.round((Date.now() - new Date(startedAt).getTime()) / 60000).toString(),
-          answers: ansData,
-        }).select('id').single()
-        if (testRes) setSavedTestId(testRes.id)
+      const subjectId = topic.subject?.id || topic.modules?.subject_id || null
+      const ansData = answers.map(a => ({
+        qIdx: a.qIdx, selected: a.selected, correct: a.correct,
+        question: { id: a.question?.id, question_text: a.question?.question_text, options: a.question?.options, correct_index: a.question?.correct_index, explanation: a.question?.explanation, question_type: a.question?.question_type }
+      }))
+      const { data: testRes, error: testError } = await supabase.from('practice_tests').insert({
+        user_id: uid, subject_id: subjectId, title: topic.title,
+        subject: topic.subject?.title || 'General',
+        score, total: answers.length,
+        duration: Math.round((Date.now() - new Date(startedAt).getTime()) / 60000).toString(),
+        answers: ansData,
+      }).select('id').single()
+      if (testError) throw testError
+      setSavedTestId(testRes.id)
+      resultSaved = true
 
-        const maxScale = 800
-        const scaledScore = Math.round(pct * maxScale)
-
-        const updates = [
-          supabase.from('user_progress').upsert({
-            user_id: uid, module_id: topic.id,
-            status: 'completed', score,
-            completed_at: new Date().toISOString(),
-          }, { onConflict: 'user_id,module_id' }),
-          supabase.from('user_activity').insert({
-            user_id: uid, action: 'Test completed',
-            detail: `${topic.title} — ${score}/${answers.length} (${Math.round(pct * 100)}%)`,
-          }),
-        ]
-
-        if (subjectId) {
-          const { data: existing } = await supabase.from('user_scores')
-            .select('score').eq('user_id', uid).eq('subject_id', subjectId).maybeSingle()
-          if (!existing || scaledScore > existing.score) {
-            updates.push(supabase.from('user_scores').upsert({
-              user_id: uid, subject_id: subjectId,
-              score: scaledScore, max_score: maxScale,
-              last_updated: new Date().toISOString(),
-            }, { onConflict: 'user_id,subject_id' }))
-          }
-        }
-
-        await Promise.all(updates)
-
-        const { data: scoreRows } = await supabase.from('user_scores')
-          .select('score').eq('user_id', uid)
-        if (scoreRows?.length) {
-          const total = Math.round(scoreRows.reduce((s, r) => s + (r.score || 0), 0) / scoreRows.length)
-          await supabase.from('user_total_scores').upsert({
-            user_id: uid, total_score: total,
+      const updates = [supabase.from('user_activity').insert({
+        user_id: uid, action: 'Test completed',
+        detail: `${topic.title} — ${score}/${answers.length} (${Math.round(pct * 100)}%)`,
+      })]
+      if (subjectId) {
+        const { data: existing, error: existingError } = await supabase.from('user_scores')
+          .select('score').eq('user_id', uid).eq('subject_id', subjectId).maybeSingle()
+        if (existingError) throw existingError
+        const scaledScore = Math.round(pct * 800)
+        if (!existing || scaledScore > existing.score) {
+          updates.push(supabase.from('user_scores').upsert({
+            user_id: uid, subject_id: subjectId, score: scaledScore, max_score: 800,
             last_updated: new Date().toISOString(),
-          }, { onConflict: 'user_id' })
+          }, { onConflict: 'user_id,subject_id' }))
         }
-      } catch {
-        toast.error('Error saving results')
-        setSaving(false)
-        return
       }
+
+      const updateResults = await Promise.all(updates)
+      const updateError = updateResults.find(result => result.error)?.error
+      if (updateError) throw updateError
+
+      const { data: scoreRows, error: scoreError } = await supabase.from('user_scores')
+        .select('score').eq('user_id', uid)
+      if (scoreError) throw scoreError
+      if (scoreRows?.length) {
+        const total = Math.round(scoreRows.reduce((s, r) => s + (r.score || 0), 0) / scoreRows.length)
+        const { error: totalError } = await supabase.from('user_total_scores').upsert({
+          user_id: uid, total_score: total, last_updated: new Date().toISOString(),
+        }, { onConflict: 'user_id' })
+        if (totalError) throw totalError
+      }
+
+      setTotalElapsed(t => t + Math.floor((Date.now() - qStartRef.current) / 1000))
+      setStep('done')
+      toast.success('Natija saqlandi')
+    } catch (error) {
+      console.error('Error saving test result:', error)
+      if (resultSaved) {
+        setStep('done')
+        toast.error('Test tarixi saqlandi, lekin fan bali yangilanmadi.')
+      } else {
+        toast.error('Natijani saqlab bo‘lmadi. Qayta urinib ko‘ring.')
+      }
+    } finally {
+      setSaving(false)
     }
-    setSaving(false)
-    setTotalElapsed(t => t + Math.floor((Date.now() - qStartRef.current) / 1000))
-    setStep('done')
-    toast.success('Natija saqlandi')
   }
 
   // Desmos: render via API when script is ready, show placeholder otherwise
@@ -512,7 +517,7 @@ export default function TestPage() {
         const src = match ? match[1] : ''
         return <img key={i} src={src} alt="" className="bb-inline-img" draggable="false" onContextMenu={e => e.preventDefault()} />
       }
-      return <span key={i} dangerouslySetInnerHTML={{ __html: part }} />
+      return <span key={i} dangerouslySetInnerHTML={{ __html: sanitizeHtml(part) }} />
     })
   }
 
@@ -751,7 +756,7 @@ export default function TestPage() {
       <div className="bb-body bb-body-split">
         <div className="bb-left" ref={passageRef} style={{ position: 'relative' }}>
           {effectivePassage ? (
-            <div className="bb-passage-split" data-highlight-target="passage" dangerouslySetInnerHTML={{ __html: passageHtmlStr }} />
+            <div className="bb-passage-split" data-highlight-target="passage" dangerouslySetInnerHTML={{ __html: safePassageHtml }} />
           ) : currentQuestion?.image_url && (
             <img src={currentQuestion.image_url} alt="" className="bb-left-img" draggable="false" onContextMenu={e => e.preventDefault()} />
           )}
@@ -778,7 +783,7 @@ export default function TestPage() {
             )}
           </div>
           {effectiveQText && (
-            <div className="bb-q-text" data-highlight-target="question" dangerouslySetInnerHTML={{ __html: questionHtmlStr }} />
+            <div className="bb-q-text" data-highlight-target="question" dangerouslySetInnerHTML={{ __html: safeQuestionHtml }} />
           )}
           {isWrittenQ(currentQuestion) ? (
           <div className="bb-choices">
@@ -825,10 +830,10 @@ export default function TestPage() {
                 <img src={currentQuestion.image_url} alt="" className="bb-q-img" draggable="false" onContextMenu={e => e.preventDefault()} />
               )}
               {effectiveQText && !hasInlineImg && (
-                <div className="bb-passage" data-highlight-target="question" dangerouslySetInnerHTML={{ __html: questionHtmlStr }} />
+                <div className="bb-passage" data-highlight-target="question" dangerouslySetInnerHTML={{ __html: safeQuestionHtml }} />
               )}
               {effectiveQText && hasInlineImg && (
-                <div className="bb-q-text" data-highlight-target="question" dangerouslySetInnerHTML={{ __html: questionHtmlStr }} />
+                <div className="bb-q-text" data-highlight-target="question" dangerouslySetInnerHTML={{ __html: safeQuestionHtml }} />
               )}
               {isWrittenQ(currentQuestion) ? (
               <div className="bb-choices">
