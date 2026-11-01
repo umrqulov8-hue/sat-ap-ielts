@@ -5,6 +5,7 @@ import { supabase } from '../lib/supabaseClient'
 import { useToast } from '../components/Toast'
 import { sanitizeHtml } from '../lib/sanitizeHtml'
 import { fetchAll } from '../lib/fetchAll'
+import { clearCache } from '../lib/dataCache'
 import BulkQuestionImport from '../components/BulkQuestionImport'
 
 export default function AdminQuestions() {
@@ -195,9 +196,9 @@ export default function AdminQuestions() {
     })
   }, [])
 
-  const loadQuestions = () => fetchAll(() => {
+  const loadQuestions = (difficulty = selDifficulty) => fetchAll(() => {
     let query = supabase.from('questions').select('*').eq('subject_id', selSubject).order('order_index').order('id')
-    if (selDifficulty && selDifficulty !== 'all') query = query.eq('difficulty', selDifficulty)
+    if (difficulty && difficulty !== 'all') query = query.eq('difficulty', difficulty)
     return query
   })
 
@@ -340,17 +341,26 @@ export default function AdminQuestions() {
     } else {
       payload.question_text = qText.trim()
     }
-    const { error } = editingQ
-      ? await supabase.from('questions').update(payload).eq('id', editingQ.id)
-      : await supabase.from('questions').insert({ difficulty: qDifficulty, ...payload })
+    const { data: savedRows, error } = editingQ
+      ? await supabase.from('questions').update(payload).eq('id', editingQ.id).select('id')
+      : await supabase.from('questions').insert({ subject_id: selSubject, difficulty: qDifficulty, ...payload }).select('id')
     setUploading(false)
-    if (error) { console.error('SAVE ERROR:', error); setMsg('Error: ' + (error.message || JSON.stringify(error))); toast.error('Error saving: ' + (error.message || 'Unknown error')) } else {
-      setMsg(editingQ ? 'Question updated!' : 'Question saved!')
-      toast.success(editingQ ? 'Question updated!' : 'Question saved!')
-      resetQForm()
-      const { data } = await loadQuestions()
-      if (data) setQuestions(data)
+    if (error) { console.error('SAVE ERROR:', error); setMsg('Error: ' + (error.message || JSON.stringify(error))); toast.error('Error saving: ' + (error.message || 'Unknown error')); return }
+    if (!savedRows?.length) {
+      // RLS can silently reject an update or hide an inserted row; do not report success.
+      const text = 'Not saved: the database accepted the request but returned no row. Check that your account has the admin/owner role.'
+      setMsg(text); toast.error(text); return
     }
+    clearCache()
+    resetQForm()
+    const saveDifficulty = editingQ ? undefined : qDifficulty
+    const hiddenByFilter = saveDifficulty && selDifficulty && selDifficulty !== 'all' && selDifficulty !== saveDifficulty
+    if (hiddenByFilter) setSelDifficulty('')
+    const { data } = await loadQuestions(hiddenByFilter ? '' : selDifficulty)
+    if (data) setQuestions(data)
+    const subjectTitle = subjects.find(s => s.id === selSubject)?.title || ''
+    const doneText = (editingQ ? 'Question updated' : 'Question saved') + (subjectTitle ? ` in ${subjectTitle}` : '') + (saveDifficulty ? ` (${saveDifficulty.toUpperCase()}). Total: ${data?.length ?? '?'}` : '')
+    setMsg(doneText); toast.success(doneText)
   }
 
   const editQuestion = (q) => {
@@ -401,6 +411,7 @@ export default function AdminQuestions() {
       toast.error(error.message)
     } else {
       toast.success('Question deleted!')
+      clearCache()
       setQuestions(questions.filter(q => q.id !== id))
     }
   }
@@ -847,7 +858,7 @@ ALTER TABLE questions ADD COLUMN IF NOT EXISTS layout text default 'centered';</
               subjectTitle={subjects.find(s => s.id === selSubject)?.title}
               startOrder={questions.length}
               defaultDifficulty={qDifficulty}
-              onDone={async () => { const { data } = await loadQuestions(); if (data) setQuestions(data) }}
+              onDone={async () => { clearCache(); const { data } = await loadQuestions(); if (data) setQuestions(data) }}
             />
           )}
 
