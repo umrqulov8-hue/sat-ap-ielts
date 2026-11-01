@@ -39,10 +39,7 @@ function buildUrl(table, filters) {
       sp.append(k, `not.${op}.${val}`)
     })
   }
-  if (filters.order) {
-    const dir = filters.ascending === false ? '.desc' : '.asc'
-    sp.append('order', `${filters.order}${dir}`)
-  }
+  if (filters.orders?.length) sp.append('order', filters.orders.join(','))
   if (filters.limit !== undefined) sp.set('limit', filters.limit)
   if (filters.offset !== undefined) sp.set('offset', filters.offset)
   return url
@@ -149,7 +146,8 @@ function queryBuilder(table) {
     not(col, op, val) { (filters.not ||= {})[col] = { [op]: val }; return q },
     like(col, val) { (filters.like ||= {})[col] = val; return q },
     ilike(col, val) { (filters.ilike ||= {})[col] = val; return q },
-    order(col, opts) { filters.order = col; if (opts) filters.ascending = opts.ascending !== false; return q },
+    order(col, opts) { (filters.orders ||= []).push(`${col}.${opts?.ascending === false ? 'desc' : 'asc'}`); return q },
+    range(from, to) { filters.offset = from; filters.limit = to - from + 1; return q },
     limit(n) { filters.limit = n; return q },
     offset(n) { filters.offset = n; return q },
     single() { filters.single = 'single'; return q },

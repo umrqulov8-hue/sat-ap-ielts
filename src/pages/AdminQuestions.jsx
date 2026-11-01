@@ -346,7 +346,8 @@ export default function AdminQuestions() {
       : await supabase.from('questions').insert({ subject_id: selSubject, difficulty: qDifficulty, ...payload }).select('id')
     setUploading(false)
     if (error) { console.error('SAVE ERROR:', error); setMsg('Error: ' + (error.message || JSON.stringify(error))); toast.error('Error saving: ' + (error.message || 'Unknown error')); return }
-    if (!savedRows?.length) {
+    // The REST client returns one object for a single insert and an array for an update.
+    if (!savedRows || (Array.isArray(savedRows) && savedRows.length === 0)) {
       // RLS can silently reject an update or hide an inserted row; do not report success.
       const text = 'Not saved: the database accepted the request but returned no row. Check that your account has the admin/owner role.'
       setMsg(text); toast.error(text); return
