@@ -2,6 +2,7 @@ import { useState, useEffect, useRef, useMemo, useCallback, memo } from 'react'
 import { useParams, useNavigate, useLocation } from 'react-router-dom'
 import { supabase } from '../lib/supabaseClient'
 import { getCache, setCache } from '../lib/dataCache'
+import { fetchAll } from '../lib/fetchAll'
 import { useToast } from '../components/Toast'
 import AITutor from '../components/AITutor'
 import DrawingCanvas from '../components/DrawingCanvas'
@@ -95,11 +96,13 @@ export default function TestPage() {
       
       let qPromise = Promise.resolve({ data: null })
       if (!cachedQuestions && subjectData) {
-        let qQuery = supabase.from('questions').select('*').eq('subject_id', subjectData.id)
-        if (difficulty && difficulty !== 'mixing') {
-          qQuery = qQuery.eq('difficulty', difficulty)
-        }
-        qPromise = qQuery.order('order_index')
+        qPromise = fetchAll(() => {
+          let qQuery = supabase.from('questions').select('*').eq('subject_id', subjectData.id)
+          if (difficulty && difficulty !== 'mixing') {
+            qQuery = qQuery.eq('difficulty', difficulty)
+          }
+          return qQuery.order('order_index').order('id')
+        })
       }
 
       const [tpResult, qsResult, profResult] = await Promise.all([
