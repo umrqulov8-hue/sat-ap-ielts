@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { useLayout } from './DashLayout'
 import { supabase } from '../lib/supabaseClient'
 import { getCache, setCache } from '../lib/dataCache'
+import { fetchAll } from '../lib/fetchAll'
 import { useUser } from '../context/UserContext'
 
 const TARGET_MAP = { math: 800 }
@@ -40,7 +41,7 @@ export default function SubjectPage({ slug, title, subtitle, tag }) {
       supabase.from('user_scores').select('*').eq('user_id', uid).eq('subject_id', sub.id).maybeSingle(),
       supabase.from('practice_tests').select('id', { count: 'exact', head: true }).eq('user_id', uid).eq('subject_id', sub.id),
       supabase.from('practice_tests').select('score, total, taken_at').eq('user_id', uid).eq('subject_id', sub.id),
-      supabase.from('questions').select('difficulty').eq('subject_id', sub.id),
+      fetchAll(() => supabase.from('questions').select('difficulty').eq('subject_id', sub.id).order('id')),
     ])
 
     if (scRes.data) setScore(scRes.data.score)

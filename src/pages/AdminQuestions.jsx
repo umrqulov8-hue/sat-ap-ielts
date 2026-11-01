@@ -4,6 +4,8 @@ import { useUser } from '../context/UserContext'
 import { supabase } from '../lib/supabaseClient'
 import { useToast } from '../components/Toast'
 import { sanitizeHtml } from '../lib/sanitizeHtml'
+import { fetchAll } from '../lib/fetchAll'
+import BulkQuestionImport from '../components/BulkQuestionImport'
 
 export default function AdminQuestions() {
   const { setPageTitle, setPageSub, setPageClass } = useLayout()
@@ -193,15 +195,18 @@ export default function AdminQuestions() {
     })
   }, [])
 
+  const loadQuestions = () => fetchAll(() => {
+    let query = supabase.from('questions').select('*').eq('subject_id', selSubject).order('order_index').order('id')
+    if (selDifficulty && selDifficulty !== 'all') query = query.eq('difficulty', selDifficulty)
+    return query
+  })
+
   useEffect(() => {
     if (!selSubject) return
-    let query = supabase.from('questions').select('*').eq('subject_id', selSubject).order('order_index')
-    if (selDifficulty && selDifficulty !== 'all') {
-      query = query.eq('difficulty', selDifficulty)
-    }
-    query.then(({ data }) => {
-      setQuestions(data || [])
-    })
+    let active = true
+    loadQuestions().then(({ data }) => { if (active) setQuestions(data || []) })
+    return () => { active = false }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selSubject, selDifficulty])
 
   const resetQForm = () => {
@@ -343,9 +348,7 @@ export default function AdminQuestions() {
       setMsg(editingQ ? 'Question updated!' : 'Question saved!')
       toast.success(editingQ ? 'Question updated!' : 'Question saved!')
       resetQForm()
-      let query = supabase.from('questions').select('*').eq('subject_id', selSubject).order('order_index')
-      if (selDifficulty && selDifficulty !== 'all') { query = query.eq('difficulty', selDifficulty) }
-      const { data } = await query
+      const { data } = await loadQuestions()
       if (data) setQuestions(data)
     }
   }
@@ -757,6 +760,10 @@ ALTER TABLE questions ADD COLUMN IF NOT EXISTS layout text default 'centered';</
               QUESTIONS
               {questions.length > 0 && <span className="admin-tab-badge">{questions.length}</span>}
             </button>
+            <button className={'admin-tab' + (qtab === 'import' ? ' active' : '')} onClick={() => setQtab('import')}>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+              BULK IMPORT
+            </button>
           </div>
 
           <div className="admin-layers">
@@ -832,6 +839,16 @@ ALTER TABLE questions ADD COLUMN IF NOT EXISTS layout text default 'centered';</
                 )}
               </div>
             </div>
+          )}
+
+          {qtab === 'import' && (
+            <BulkQuestionImport
+              subjectId={selSubject}
+              subjectTitle={subjects.find(s => s.id === selSubject)?.title}
+              startOrder={questions.length}
+              defaultDifficulty={qDifficulty}
+              onDone={async () => { const { data } = await loadQuestions(); if (data) setQuestions(data) }}
+            />
           )}
 
           {qtab === 'question' && (
