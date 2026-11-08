@@ -41,7 +41,7 @@ export default function DashLayout() {
       if (lastTracked === today) return
       const { error } = await supabase.from('login_streaks').upsert(
         { user_id: session.user.id, login_date: today },
-        { onConflict: 'user_id, login_date' }
+        { onConflict: 'user_id,login_date', ignoreDuplicates: true }
       )
       if (!error) localStorage.setItem('satap_last_login_tracked', today)
     }

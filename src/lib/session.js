@@ -57,9 +57,15 @@ async function doRefresh(refreshToken) {
       headers: { apikey: SUPABASE_ANON_KEY, 'Content-Type': 'application/json' },
       body: JSON.stringify({ refresh_token: refreshToken }),
     })
-    if (!res.ok) { currentSession = null; persist(null); return null }
+    if (!res.ok) {
+      // Only an explicit rejection (revoked/invalid refresh token) ends the session;
+      // a 5xx or rate limit must not sign the user out.
+      if (res.status >= 400 && res.status < 500 && res.status !== 429) { currentSession = null; persist(null) }
+      return null
+    }
     const data = await res.json()
     if (!data.user) data.user = await fetchUser(data.access_token)
+    if (!data.expires_at && data.expires_in) data.expires_at = Math.floor(Date.now() / 1000) + data.expires_in
     currentSession = data
     persist(data)
     scheduleRefresh(data)
@@ -67,10 +73,17 @@ async function doRefresh(refreshToken) {
   } catch { return null }
 }
 
+function msUntilExpiry(session) {
+  if (session?.expires_at) return session.expires_at * 1000 - Date.now()
+  if (session?.expires_in) return session.expires_in * 1000
+  return null
+}
+
 function scheduleRefresh(session) {
   if (refreshTimer) clearTimeout(refreshTimer)
-  if (!session?.expires_in) return
-  const ms = (session.expires_in - 60) * 1000
+  const remaining = msUntilExpiry(session)
+  if (remaining === null) return
+  const ms = remaining - 60 * 1000
   refreshTimer = setTimeout(() => {
     if (session.refresh_token) {
       doRefresh(session.refresh_token).then(s => { if (s) notify('TOKEN_REFRESHED', s) })
@@ -90,7 +103,18 @@ function parseHash() {
   return { access_token, refresh_token, expires_in: expires_in ? parseInt(expires_in) : 3600, expires_at: expires_at ? parseInt(expires_at) : null, token_type: params.get('token_type') || 'bearer' }
 }
 
+function isExpiring(session) {
+  return !!session?.expires_at && session.expires_at * 1000 - Date.now() < 30 * 1000
+}
+
 export async function getSession() {
+  if (currentSession && isExpiring(currentSession) && currentSession.refresh_token) {
+    if (!refreshPromise) refreshPromise = doRefresh(currentSession.refresh_token).finally(() => { refreshPromise = null })
+    const refreshed = await refreshPromise
+    if (refreshed) return { data: { session: refreshed } }
+    // Refresh failed (offline or revoked): fall through with whatever we have.
+    return { data: { session: currentSession } }
+  }
   if (currentSession) return { data: { session: currentSession } }
   if (window.location.hash && window.location.hash.includes('access_token')) {
     const partial = parseHash()
@@ -127,6 +151,22 @@ export async function getSession() {
 
 export function getAccessToken() {
   return currentSession?.access_token || null
+}
+
+// Always resolves with a token that is valid for at least ~30s, or null when
+// signed out. Use this (not getAccessToken) before any network call.
+export async function getFreshAccessToken() {
+  const { data: { session } } = await getSession()
+  return session?.access_token || null
+}
+
+// Force a refresh (used once after a 401 "JWT expired" response).
+export async function refreshAccessToken() {
+  const refresh = currentSession?.refresh_token
+  if (!refresh) return null
+  if (!refreshPromise) refreshPromise = doRefresh(refresh).finally(() => { refreshPromise = null })
+  const session = await refreshPromise
+  return session?.access_token || null
 }
 
 export function setSession(session) {

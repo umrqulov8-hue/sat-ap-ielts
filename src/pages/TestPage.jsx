@@ -46,6 +46,8 @@ export default function TestPage() {
   const [saving, setSaving] = useState(false)
   const [startedAt, setStartedAt] = useState(() => cachedQuestions ? new Date().toISOString() : null)
   const [loading, setLoading] = useState(!cachedQuestions)
+  const [loadError, setLoadError] = useState('')
+  const [reloadKey, setReloadKey] = useState(0)
   const [showNav, setShowNav] = useState(false)
   const [abcMode, setAbcMode] = useState(false)
   const [strikethrough, setStrikethrough] = useState({})
@@ -88,7 +90,9 @@ export default function TestPage() {
     }
 
     let active = true
+    setLoadError('')
     ;(async () => {
+     try {
       const { data: { session } } = await supabase.auth.getSession()
 
       const { data: subjectData } = await supabase.from('subjects').select('id, title, slug, is_active').eq('slug', subjectSlug).maybeSingle()
@@ -127,16 +131,22 @@ export default function TestPage() {
 
       if (profResult.data?.display_name) setDisplayName(profResult.data.display_name)
 
+      if (qsResult.error) throw qsResult.error
       if (!cachedQuestions && qsResult.data?.length) {
         const shuffled = [...qsResult.data].sort(() => Math.random() - 0.5)
         setQuestions(shuffled)
         setCache('test-questions-' + subjectSlug + '-' + difficulty, shuffled)
       }
-      setLoading(false)
+     } catch (err) {
+      console.error('Could not load test questions:', err)
+      if (active) setLoadError(err?.message || 'Network error')
+     } finally {
+      if (active) setLoading(false)
+     }
     })()
 
     return () => { active = false }
-  }, [subjectSlug, difficulty, cachedQuestions, navigate])
+  }, [subjectSlug, difficulty, cachedQuestions, navigate, reloadKey])
 
   useEffect(() => {
     if (!questions[current] || !IS_PRACTICE) return
@@ -417,7 +427,8 @@ export default function TestPage() {
     if (saving) return
     setSaving(true)
     const score = answers.filter(a => a.correct).length
-    const pct = answers.length ? score / answers.length : 0
+    const totalQuestions = questions.length || answers.length
+    const pct = totalQuestions ? score / totalQuestions : 0
     let resultSaved = false
     try {
       const { data: { session } } = await supabase.auth.getSession()
@@ -432,7 +443,7 @@ export default function TestPage() {
       const { data: testRes, error: testError } = await supabase.from('practice_tests').insert({
         user_id: uid, subject_id: subjectId, title: topic.title,
         subject: topic.subject?.title || 'General',
-        score, total: answers.length,
+        score, total: totalQuestions,
         duration: Math.round((Date.now() - new Date(startedAt).getTime()) / 60000).toString(),
         answers: ansData,
       }).select('id').single()
@@ -442,7 +453,7 @@ export default function TestPage() {
 
       const updates = [supabase.from('user_activity').insert({
         user_id: uid, action: 'Test completed',
-        detail: `${topic.title} — ${score}/${answers.length} (${Math.round(pct * 100)}%)`,
+        detail: `${topic.title} — ${score}/${totalQuestions} (${Math.round(pct * 100)}%)`,
       })]
       if (subjectId) {
         const { data: existing, error: existingError } = await supabase.from('user_scores')
@@ -532,6 +543,14 @@ export default function TestPage() {
   const correctCount = useMemo(() => answers.filter(a => a.correct).length, [answers])
 
   if (loading) return <div className="test-loading" />
+  if (loadError) return (
+    <div className="bb-empty-state">
+      <div className="bb-empty-icon">⚠️</div>
+      <h2 className="bb-empty-title">Savollarni yuklab bo'lmadi</h2>
+      <p className="bb-empty-text">{loadError}</p>
+      <button className="bb-empty-btn" onClick={() => { setLoading(true); setReloadKey(k => k + 1) }}>Qayta urinish</button>
+    </div>
+  )
   if (!topic) return <div className="test-loading"><div className="test-loading-text">TOPIC NOT FOUND</div></div>
   if (!questions.length) return (
     <div className="bb-empty-state">
@@ -543,7 +562,7 @@ export default function TestPage() {
   )
 
   if (step === 'done') {
-    const pct = answers.length ? Math.round(correctCount / answers.length * 100) : 0
+    const pct = questions.length ? Math.round(correctCount / questions.length * 100) : 0
     return (
       <div className="test-done">
         <div className="test-done-header">
@@ -552,7 +571,7 @@ export default function TestPage() {
           <div className="test-done-score">
             <span className="test-done-num">{correctCount}</span>
             <span className="test-done-sep">/</span>
-            <span className="test-done-total">{answers.length}</span>
+            <span className="test-done-total">{questions.length}</span>
           </div>
           <div className="test-done-bar-wrap"><div className="test-done-bar"><div className="test-done-fill" style={{ width: pct + '%' }} /></div></div>
           <div className="test-done-pct">{pct}% Correct</div>
@@ -566,7 +585,7 @@ export default function TestPage() {
               <span className="test-done-stat-label">Incorrect</span>
             </div>
             <div className="test-done-stat">
-              <span className="test-done-stat-num">{answers.length}</span>
+              <span className="test-done-stat-num">{questions.length}</span>
               <span className="test-done-stat-label">Total</span>
             </div>
           </div>
@@ -611,7 +630,7 @@ export default function TestPage() {
                 </div>
                 <div className="cert-score-divider">&times;</div>
                 <div className="cert-score-item">
-                  <div className="cert-score-num">{answers.length}</div>
+                  <div className="cert-score-num">{questions.length}</div>
                   <div className="cert-score-label">TOTAL</div>
                 </div>
                 <div className="cert-score-divider">&times;</div>

@@ -32,7 +32,7 @@ export default function CalendarModal({ active, onClose, dateRef }) {
     const today = dateStr(new Date())
     await supabase.from('login_streaks').upsert(
       { user_id: session.user.id, login_date: today },
-      { onConflict: 'user_id, login_date' }
+      { onConflict: 'user_id,login_date', ignoreDuplicates: true }
     )
   }, [])
 

@@ -1,4 +1,4 @@
-import { getSession, onAuthStateChange, getAccessToken } from './session'
+import { getSession, onAuthStateChange, getFreshAccessToken, refreshAccessToken } from './session'
 import { signUp, signInWithPassword, signOut, updateUser, resetPasswordForEmail } from './auth'
 
 const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL
@@ -8,130 +8,185 @@ if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
   throw new Error('Missing VITE_SUPABASE_URL or VITE_SUPABASE_ANON_KEY in .env')
 }
 
-function authHeaders() {
-  const token = getAccessToken()
+/**
+ * Minimal PostgREST / Storage client.
+ *
+ * Contract (matches supabase-js where it matters):
+ *  - Every call resolves to { data, error } and never throws.
+ *  - An HTTP failure is ALWAYS surfaced as `error` (nothing is swallowed).
+ *  - insert/upsert return an array of rows, or a single object after .single().
+ *  - update/delete ask PostgREST for the affected rows. When RLS (or a wrong
+ *    filter) makes the write touch 0 rows we return an error with code
+ *    NO_ROWS_AFFECTED instead of pretending it worked. That silent "success"
+ *    was why the admin panel reported saved/deleted rows that never changed.
+ */
+
+async function baseHeaders(forceRefresh = false) {
+  const token = forceRefresh ? await refreshAccessToken() : await getFreshAccessToken()
   return {
-    apikey: SUPABASE_ANON_KEY,
-    Authorization: `Bearer ${token || SUPABASE_ANON_KEY}`,
-    'Content-Type': 'application/json',
-    Accept: 'application/json',
+    hasToken: Boolean(token),
+    headers: {
+      apikey: SUPABASE_ANON_KEY,
+      // Signed-out visitors use the publishable key; RLS decides what they can read.
+      Authorization: `Bearer ${token || SUPABASE_ANON_KEY}`,
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+    },
+  }
+}
+
+async function readError(res) {
+  const body = await res.json().catch(() => null)
+  const message = body?.message || body?.error_description || body?.error || res.statusText || `HTTP ${res.status}`
+  return { ...(body && typeof body === 'object' ? body : {}), message, status: res.status }
+}
+
+// fetch wrapper: fresh token, one transparent retry after a 401 (expired JWT), network errors -> error object.
+async function send(url, init = {}) {
+  try {
+    let base = await baseHeaders()
+    let res = await fetch(url, { ...init, headers: { ...base.headers, ...(init.headers || {}) } })
+    if (res.status === 401 && base.hasToken) {
+      base = await baseHeaders(true)
+      res = await fetch(url, { ...init, headers: { ...base.headers, ...(init.headers || {}) } })
+    }
+    return { res }
+  } catch (e) {
+    return { networkError: { message: e?.message ? `Network error: ${e.message}` : 'Network error', status: 0 } }
   }
 }
 
 function buildUrl(table, filters) {
   const url = new URL(`${SUPABASE_URL}/rest/v1/${table}`)
   const sp = url.searchParams
-  if (filters.select) sp.set('select', filters.select)
-  else sp.set('select', '*')
-  if (filters.eq) Object.entries(filters.eq).forEach(([k, v]) => sp.append(k, `eq.${v}`))
-  if (filters.neq) Object.entries(filters.neq).forEach(([k, v]) => sp.append(k, `neq.${v}`))
-  if (filters.gt) Object.entries(filters.gt).forEach(([k, v]) => sp.append(k, `gt.${v}`))
-  if (filters.gte) Object.entries(filters.gte).forEach(([k, v]) => sp.append(k, `gte.${v}`))
-  if (filters.lt) Object.entries(filters.lt).forEach(([k, v]) => sp.append(k, `lt.${v}`))
-  if (filters.lte) Object.entries(filters.lte).forEach(([k, v]) => sp.append(k, `lte.${v}`))
-  if (filters.like) Object.entries(filters.like).forEach(([k, v]) => sp.append(k, `like.${v}`))
-  if (filters.ilike) Object.entries(filters.ilike).forEach(([k, v]) => sp.append(k, `ilike.${v}`))
-  if (filters.is) Object.entries(filters.is).forEach(([k, v]) => sp.append(k, `is.${v}`))
+  sp.set('select', filters.select || '*')
+  const simple = ['eq', 'neq', 'gt', 'gte', 'lt', 'lte', 'like', 'ilike', 'is']
+  for (const op of simple) {
+    if (filters[op]) Object.entries(filters[op]).forEach(([k, v]) => sp.append(k, `${op}.${v}`))
+  }
   if (filters.in) Object.entries(filters.in).forEach(([k, v]) => sp.append(k, `in.(${Array.isArray(v) ? v.join(',') : v})`))
   if (filters.not) {
     Object.entries(filters.not).forEach(([k, v]) => {
-      const op = Object.keys(v)[0]; const val = v[op]
-      sp.append(k, `not.${op}.${val}`)
+      const op = Object.keys(v)[0]
+      sp.append(k, `not.${op}.${v[op]}`)
     })
   }
-  if (filters.orders?.length) sp.append('order', filters.orders.join(','))
+  if (filters.or) filters.or.forEach(expr => sp.append('or', `(${expr})`))
+  if (filters.orders?.length) sp.set('order', filters.orders.join(','))
   if (filters.limit !== undefined) sp.set('limit', filters.limit)
   if (filters.offset !== undefined) sp.set('offset', filters.offset)
   return url
 }
 
+const OBJECT = 'application/vnd.pgrst.object+json'
+
 function queryBuilder(table) {
   const filters = {}
   let countOpts = null
   let selectStr = '*'
+  let selectCalled = false
   let method = 'GET'
   let bodyData = null
+  let allowEmpty = false
 
   async function exec() {
-    const token = getAccessToken()
-    if (!token) return { data: null, error: { message: 'No session' } }
-    const headers = authHeaders()
+    const wantsObject = Boolean(filters.single)
+    const withSelect = { ...filters, select: selectStr }
+
+    let url
+    let init
     switch (method) {
       case 'UPSERT': {
-        const onConflict = filters.upsertOpts?.onConflict
-        let url = `${SUPABASE_URL}/rest/v1/${table}`
-        if (onConflict) url += `?on_conflict=${onConflict}`
-        const res = await fetch(url, {
+        const u = new URL(`${SUPABASE_URL}/rest/v1/${table}`)
+        if (filters.upsertOpts?.onConflict) u.searchParams.set('on_conflict', String(filters.upsertOpts.onConflict).replace(/\s+/g, ''))
+        if (selectCalled) u.searchParams.set('select', selectStr)
+        const prefer = ['return=representation', filters.upsertOpts?.ignoreDuplicates ? 'resolution=ignore-duplicates' : 'resolution=merge-duplicates']
+        url = u.toString()
+        init = {
           method: 'POST',
-          headers: { ...headers, Prefer: 'return=representation,resolution=merge-duplicates' },
+          headers: { Prefer: prefer.join(','), ...(wantsObject ? { Accept: OBJECT } : {}) },
           body: JSON.stringify(Array.isArray(bodyData) ? bodyData : [bodyData]),
-        })
-        if (!res.ok) {
-          if (res.status === 406) return { data: null, error: { message: 'Permission denied (RLS policy may be blocking this operation)' } }
-          return { data: null, error: await res.json().catch(() => ({ message: res.statusText })) }
         }
-        return { data: await res.json(), error: null }
-      }
-      case 'DELETE': {
-        const url = buildUrl(table, filters)
-        const res = await fetch(url.toString(), { method: 'DELETE', headers })
-        if (!res.ok) { return { data: null, error: await res.json().catch(() => ({ message: res.statusText })) } }
-        return { data: null, error: null }
+        break
       }
       case 'INSERT': {
-        const url = `${SUPABASE_URL}/rest/v1/${table}`
-        const res = await fetch(url, {
+        const u = new URL(`${SUPABASE_URL}/rest/v1/${table}`)
+        if (selectCalled) u.searchParams.set('select', selectStr)
+        url = u.toString()
+        init = {
           method: 'POST',
-          headers: { ...headers, Prefer: 'return=representation', Accept: 'application/vnd.pgrst.object+json' },
+          headers: { Prefer: 'return=representation', ...(wantsObject ? { Accept: OBJECT } : {}) },
           body: JSON.stringify(Array.isArray(bodyData) ? bodyData : [bodyData]),
-        })
-        if (!res.ok) {
-          if (res.status === 406) return { data: null, error: { message: 'Permission denied (RLS policy may be blocking this operation)' } }
-          return { data: null, error: await res.json().catch(() => ({ message: res.statusText })) }
         }
-        return { data: await res.json(), error: null }
+        break
       }
-      case 'PATCH': {
-        const url = buildUrl(table, filters)
-        const res = await fetch(url.toString(), { method: 'PATCH', headers: { ...headers, Prefer: 'return=representation' }, body: JSON.stringify(bodyData) })
-        if (!res.ok) {
-          if (res.status === 406 || res.status === 404) return { data: null, error: { message: 'Permission denied or not found (RLS policy may be blocking this operation)' } }
-          return { data: null, error: await res.json().catch(() => ({ message: res.statusText })) }
+      case 'PATCH':
+      case 'DELETE': {
+        url = buildUrl(table, withSelect).toString()
+        init = {
+          method,
+          headers: { Prefer: 'return=representation', ...(wantsObject ? { Accept: OBJECT } : {}) },
+          ...(method === 'PATCH' ? { body: JSON.stringify(bodyData) } : {}),
         }
-        return { data: await res.json(), error: null }
+        break
       }
       default: {
-        // GET / SELECT
+        url = buildUrl(table, withSelect).toString()
         if (countOpts?.head) {
-          const url = buildUrl(table, { ...filters, select: selectStr })
-          const res = await fetch(url.toString(), { method: 'HEAD', headers: { ...headers, Prefer: 'count=exact' } })
-          if (!res.ok) return { data: null, error: await res.json().catch(() => ({ message: res.statusText })) }
-          const range = res.headers.get('content-range')
-          return { data: null, count: range ? parseInt(range.split('/')[1]) : 0, error: null }
-        }
-        const url = buildUrl(table, { ...filters, select: selectStr })
-        const acceptHeader = filters.single
-          ? { Accept: 'application/vnd.pgrst.object+json' }
-          : {}
-        const res = await fetch(url.toString(), { headers: { ...headers, ...acceptHeader } })
-        if (!res.ok) {
-          if (res.status === 406 || res.status === 404) return { data: null, error: null }
-          const err = await res.json().catch(() => ({ message: res.statusText }))
-          if (err.code === 'PGRST116' && filters.single === 'maybe') {
-            return { data: null, error: null }
+          init = { method: 'HEAD', headers: { Prefer: 'count=exact' } }
+        } else {
+          init = {
+            method: 'GET',
+            headers: {
+              ...(wantsObject ? { Accept: OBJECT } : {}),
+              ...(countOpts ? { Prefer: 'count=exact' } : {}),
+            },
           }
-          return { data: null, error: err }
         }
-        if (res.status === 204) return { data: null, error: null }
-        const body = await res.json()
-        return { data: body, error: null }
       }
     }
+
+    const { res, networkError } = await send(url, init)
+    if (networkError) return { data: null, error: networkError, count: null }
+
+    if (!res.ok) {
+      const err = await readError(res)
+      // maybeSingle(): zero rows is not an error.
+      if (filters.single === 'maybe' && (err.code === 'PGRST116' || res.status === 406)) {
+        return { data: null, error: null, count: null }
+      }
+      if (res.status === 403 || err.code === '42501') {
+        err.message = `Permission denied: ${err.message}`
+      }
+      return { data: null, error: err, count: null }
+    }
+
+    const range = res.headers.get('content-range')
+    const count = range && range.includes('/') && range.split('/')[1] !== '*' ? parseInt(range.split('/')[1], 10) : null
+
+    if (init.method === 'HEAD') return { data: null, error: null, count: count ?? 0 }
+    if (res.status === 204) return { data: null, error: null, count }
+
+    const body = await res.json().catch(() => null)
+
+    if ((method === 'PATCH' || method === 'DELETE') && !allowEmpty && Array.isArray(body) && body.length === 0) {
+      return {
+        data: null,
+        count: 0,
+        error: {
+          code: 'NO_ROWS_AFFECTED',
+          status: res.status,
+          message: `${method === 'DELETE' ? 'Delete' : 'Update'} on "${table}" changed 0 rows. The row does not exist or your account is not allowed to change it (admin/owner role required).`,
+        },
+      }
+    }
+    return { data: body, error: null, count }
   }
 
   const q = {
     select(cols, opts) {
-      selectStr = cols
+      selectStr = cols || '*'
+      selectCalled = true
       if (opts?.count === 'exact') countOpts = opts
       return q
     },
@@ -146,39 +201,45 @@ function queryBuilder(table) {
     not(col, op, val) { (filters.not ||= {})[col] = { [op]: val }; return q },
     like(col, val) { (filters.like ||= {})[col] = val; return q },
     ilike(col, val) { (filters.ilike ||= {})[col] = val; return q },
-    order(col, opts) { (filters.orders ||= []).push(`${col}.${opts?.ascending === false ? 'desc' : 'asc'}`); return q },
+    or(expr) { (filters.or ||= []).push(expr); return q },
+    match(obj) { Object.entries(obj || {}).forEach(([k, v]) => { (filters.eq ||= {})[k] = v }); return q },
+    order(col, opts) {
+      const dir = opts?.ascending === false ? 'desc' : 'asc'
+      const nulls = opts?.nullsFirst === true ? '.nullsfirst' : opts?.nullsFirst === false ? '.nullslast' : ''
+      ;(filters.orders ||= []).push(`${col}.${dir}${nulls}`)
+      return q
+    },
     range(from, to) { filters.offset = from; filters.limit = to - from + 1; return q },
     limit(n) { filters.limit = n; return q },
     offset(n) { filters.offset = n; return q },
     single() { filters.single = 'single'; return q },
     maybeSingle() { filters.single = 'maybe'; return q },
-    textSearch() { return q },
     filter(col, op, val) {
-      if (op === 'eq') (filters.eq ||= {})[col] = val
+      const allowed = ['eq', 'neq', 'gt', 'gte', 'lt', 'lte', 'like', 'ilike', 'is']
+      if (!allowed.includes(op)) throw new Error(`filter(): unsupported operator "${op}"`)
+      ;(filters[op] ||= {})[col] = val
       return q
     },
+    // Opt out of the "0 rows affected = error" guard for deliberate best-effort writes.
+    allowEmpty() { allowEmpty = true; return q },
     upsert(data, opts) { method = 'UPSERT'; bodyData = data; filters.upsertOpts = opts || {}; return q },
     insert(data) { method = 'INSERT'; bodyData = data; return q },
     update(data) { method = 'PATCH'; bodyData = data; return q },
     delete() { method = 'DELETE'; return q },
-    async then(resolve, reject) {
-      try { resolve(await exec()) } catch (e) { reject(e) }
-    },
-    async catch(fn) {
-      try {
-        const result = await exec()
-        if (result?.error) return fn(result.error)
-        return result
-      } catch (e) { return fn(e) }
-    },
+    then(onFulfilled, onRejected) { return exec().then(onFulfilled, onRejected) },
+    catch(onRejected) { return exec().catch(onRejected) },
+    finally(fn) { return exec().finally(fn) },
   }
   return q
 }
 
-async function handleStorageResponse(res) {
-  if (!res.ok) return { data: null, error: await res.json().catch(() => ({ message: res.statusText })) }
+async function storageResult(res, networkError) {
+  if (networkError) return { data: null, error: networkError }
+  if (!res.ok) return { data: null, error: await readError(res) }
   return { data: await res.json().catch(() => ({})), error: null }
 }
+
+const encodePath = path => String(path).split('/').map(encodeURIComponent).join('/')
 
 class SupabaseRealtimeChannel {
   constructor(name) {
@@ -206,7 +267,7 @@ class SupabaseRealtimeChannel {
     const poll = async () => {
       if (!this._subscribed) return
       try {
-        const token = getAccessToken()
+        const token = await getFreshAccessToken()
         if (!token) return
         const uid = this.name.replace('notif-', '')
         const url = new URL(`${SUPABASE_URL}/rest/v1/notifications`)
@@ -214,7 +275,7 @@ class SupabaseRealtimeChannel {
         url.searchParams.set('user_id', `eq.${uid}`)
         url.searchParams.set('order', 'created_at.desc')
         url.searchParams.set('limit', '1')
-        const res = await fetch(url.toString(), { headers: authHeaders() })
+        const res = await fetch(url.toString(), { headers: { apikey: SUPABASE_ANON_KEY, Authorization: `Bearer ${token}` } })
         if (res.ok) {
           failCount = 0
           const data = await res.json()
@@ -227,7 +288,7 @@ class SupabaseRealtimeChannel {
           if (failCount >= 2) return
         }
       } catch { failCount++; if (failCount >= 3) return }
-      this._pollTimer = setTimeout(poll, 10000)
+      if (this._subscribed) this._pollTimer = setTimeout(poll, 10000)
     }
     poll()
   }
@@ -247,51 +308,56 @@ export const supabase = {
   channel(name) { return new SupabaseRealtimeChannel(name) },
   removeChannel(sub) { if (sub?.unsubscribe) sub.unsubscribe() },
   async rpc(name, params) {
-    const url = `${SUPABASE_URL}/rest/v1/rpc/${name}`
-    const res = await fetch(url, {
+    const { res, networkError } = await send(`${SUPABASE_URL}/rest/v1/rpc/${name}`, {
       method: 'POST',
-      headers: authHeaders(),
       body: JSON.stringify(params || {}),
     })
-    return handleStorageResponse(res)
+    return storageResult(res, networkError)
   },
   storage: {
     from(bucket) {
       return {
-        async upload(path, file, opts) {
-          const token = getAccessToken()
-          const url = `${SUPABASE_URL}/storage/v1/object/${bucket}/${path}`
-          const res = await fetch(url, {
-            method: opts?.upsert ? 'PUT' : 'POST',
+        // supabase-js compatible: upload(path, file, { upsert, contentType, cacheControl })
+        async upload(path, file, opts = {}) {
+          const contentType = opts.contentType || file?.type || 'application/octet-stream'
+          const { res, networkError } = await send(`${SUPABASE_URL}/storage/v1/object/${bucket}/${encodePath(path)}`, {
+            method: 'POST',
             headers: {
-              apikey: SUPABASE_ANON_KEY,
-              Authorization: `Bearer ${token || SUPABASE_ANON_KEY}`,
-              ...(opts?.headers || {}),
+              'Content-Type': contentType,
+              'Cache-Control': `max-age=${opts.cacheControl || 3600}`,
+              // Correct way to overwrite: POST + x-upsert (PUT only updates an existing object).
+              ...(opts.upsert ? { 'x-upsert': 'true' } : {}),
             },
             body: file,
           })
-          return handleStorageResponse(res)
+          const result = await storageResult(res, networkError)
+          if (result.error) return result
+          return { data: { path, ...(result.data || {}) }, error: null }
         },
         getPublicUrl(path) {
-          return { data: { publicUrl: `${SUPABASE_URL}/storage/v1/object/public/${bucket}/${path}` } }
+          return { data: { publicUrl: `${SUPABASE_URL}/storage/v1/object/public/${bucket}/${encodePath(path)}` } }
         },
-        async list(prefix) {
-          const url = `${SUPABASE_URL}/storage/v1/object/list/${bucket}`
-          const res = await fetch(url, {
+        async list(prefix = '', opts = {}) {
+          const { res, networkError } = await send(`${SUPABASE_URL}/storage/v1/object/list/${bucket}`, {
             method: 'POST',
-            headers: authHeaders(),
-            body: JSON.stringify({ prefix, limit: 100, offset: 0 }),
+            body: JSON.stringify({ prefix, limit: opts.limit || 100, offset: opts.offset || 0 }),
           })
-          return handleStorageResponse(res)
+          return storageResult(res, networkError)
         },
+        // Resolves with the objects that were really removed. Without a DELETE policy
+        // storage answers 200 + [] — report that instead of pretending it worked.
         async remove(paths) {
-          const url = `${SUPABASE_URL}/storage/v1/object/${bucket}`
-          const res = await fetch(url, {
+          const list = Array.isArray(paths) ? paths : [paths]
+          const { res, networkError } = await send(`${SUPABASE_URL}/storage/v1/object/${bucket}`, {
             method: 'DELETE',
-            headers: authHeaders(),
-            body: JSON.stringify({ prefixes: Array.isArray(paths) ? paths : [paths] }),
+            body: JSON.stringify({ prefixes: list }),
           })
-          return handleStorageResponse(res)
+          const result = await storageResult(res, networkError)
+          if (result.error) return result
+          if (list.length > 0 && Array.isArray(result.data) && result.data.length === 0) {
+            return { data: [], error: { code: 'NO_OBJECTS_REMOVED', message: 'Storage removed 0 files (missing delete permission or file not found).' } }
+          }
+          return result
         },
       }
     },
