@@ -3,6 +3,7 @@ import { createPortal } from 'react-dom'
 import '../styles/profile-style.css'
 import { useLayout } from '../components/DashLayout'
 import { supabase } from '../lib/supabaseClient'
+import { validateImage } from '../lib/uploadImage'
 import { useUser } from '../context/UserContext'
 
 export default function Profile() {
@@ -89,18 +90,22 @@ export default function Profile() {
     const user = session?.user
     if (!user) { setUploading(false); return }
 
-    const { data: existing } = await supabase.storage.from('avav2').list(user.id)
-    if (existing?.length) {
-      await supabase.storage.from('avav2').remove(existing.map(f => `${user.id}/${f.name}`))
-    }
+    // Upload the new avatar FIRST under a unique name (also busts browser/CDN caches),
+    // and only then delete the old avatar files. Deleting first meant a failed upload
+    // left the user with no avatar at all.
+    const ext = file.type === 'image/jpeg' ? 'jpg' : file.type.split('/')[1]
+    const filePath = `${user.id}/avatar-${Date.now()}.${ext}`
 
-    const ext = file.name.split('.').pop()
-    const filePath = `${user.id}/avatar.${ext}`
-
-    const { error } = await supabase.storage.from('avav2').upload(filePath, file, { upsert: true })
+    const { error } = await supabase.storage.from('avav2').upload(filePath, file, { contentType: file.type })
     URL.revokeObjectURL(localUrl)
 
     if (error) { setMsg('Upload error: ' + error.message); setUploading(false); return }
+
+    const { data: existing } = await supabase.storage.from('avav2').list(user.id)
+    const stale = (existing || [])
+      .filter(f => f.name.startsWith('avatar') && `${user.id}/${f.name}` !== filePath)
+      .map(f => `${user.id}/${f.name}`)
+    if (stale.length) supabase.storage.from('avav2').remove(stale)
 
     const { data: { publicUrl } } = supabase.storage.from('avav2').getPublicUrl(filePath)
     setEdit(e => ({ ...e, avatar_url: publicUrl }))
@@ -109,7 +114,10 @@ export default function Profile() {
 
   const handleFileChange = (e) => {
     const file = e.target.files?.[0]
-    if (file) uploadAvatar(file)
+    if (!file) return
+    const problem = validateImage(file)
+    if (problem) { setMsg(problem); e.target.value = ''; return }
+    uploadAvatar(file)
   }
 
   const saveEdit = async (e) => {

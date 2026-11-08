@@ -4,6 +4,7 @@ import { useUser } from '../context/UserContext'
 import { supabase } from '../lib/supabaseClient'
 import { useToast } from '../components/Toast'
 import { sanitizeHtml } from '../lib/sanitizeHtml'
+import { uploadImage, validateImage, storagePathFromUrl } from '../lib/uploadImage'
 import { fetchAll } from '../lib/fetchAll'
 import { clearCache } from '../lib/dataCache'
 import BulkQuestionImport from '../components/BulkQuestionImport'
@@ -259,6 +260,8 @@ export default function AdminQuestions() {
   const handleImageSelect = (e) => {
     const file = e.target.files[0]
     if (!file) return
+    const problem = validateImage(file)
+    if (problem) { setMsg(problem); toast.error(problem); e.target.value = ''; return }
     setImageFile(file)
     setImagePreview(URL.createObjectURL(file))
   }
@@ -266,6 +269,8 @@ export default function AdminQuestions() {
   const handleDesmosImageSelect = (e) => {
     const file = e.target.files[0]
     if (!file) return
+    const problem = validateImage(file)
+    if (problem) { setMsg(problem); toast.error(problem); e.target.value = ''; return }
     setDesmosImageFile(file)
     setDesmosImagePreview(URL.createObjectURL(file))
   }
@@ -273,7 +278,8 @@ export default function AdminQuestions() {
   const handleDropImg = async (e) => {
     e.preventDefault(); setDragOver(false)
     const file = e.dataTransfer.files[0]
-    if (!file || !file.type.startsWith('image/')) { setMsg('Drop an image file'); return }
+    const problem = file ? validateImage(file) : 'Drop an image file'
+    if (problem) { setMsg(problem); toast.error(problem); return }
     setImageFile(file); setImagePreview(URL.createObjectURL(file))
   }
 
@@ -287,15 +293,9 @@ export default function AdminQuestions() {
   }
 
   const uploadImgFile = async (file) => {
-    const { data: { session } } = await supabase.auth.getSession()
-    const uid = session?.user?.id
-    if (!uid) { setMsg('Not authenticated'); return '' }
-    const ext = file.name.split('.').pop()
-    const path = uid + '/question-images/' + Date.now() + '.' + ext
-    const { error: upErr } = await supabase.storage.from('avav2').upload(path, file, { upsert: true })
-    if (upErr) { setMsg('Upload error: ' + upErr.message); return '' }
-    const { data: { publicUrl } } = supabase.storage.from('avav2').getPublicUrl(path)
-    return publicUrl
+    const { url, error } = await uploadImage(file, 'question-images')
+    if (error) { setMsg('Upload error: ' + error.message); toast.error('Upload failed: ' + error.message); return '' }
+    return url
   }
 
   const handleSaveQuestion = async () => {
@@ -308,25 +308,16 @@ export default function AdminQuestions() {
     setUploading(true)
     let imageUrl = editingQ?.image_url || ''
     let desmosImageUrl = editingQ?.desmos_image_url || ''
+    const previousImages = [editingQ?.image_url, editingQ?.desmos_image_url]
     if (imageFile) {
-      const { data: { session } } = await supabase.auth.getSession()
-      const uid = session?.user?.id
-      const ext = imageFile.name.split('.').pop()
-      const path = uid + '/question-images/' + Date.now() + '.' + ext
-      const { error: upErr } = await supabase.storage.from('avav2').upload(path, imageFile, { upsert: true })
-      if (upErr) { setMsg('Upload error: ' + upErr.message); setUploading(false); return }
-      const { data: { publicUrl } } = supabase.storage.from('avav2').getPublicUrl(path)
-      imageUrl = publicUrl
+      const { url, error: upErr } = await uploadImage(imageFile, 'question-images')
+      if (upErr) { setMsg('Upload error: ' + upErr.message); toast.error('Image upload failed: ' + upErr.message); setUploading(false); return }
+      imageUrl = url
     }
     if (desmosImageFile) {
-      const { data: { session } } = await supabase.auth.getSession()
-      const uid = session?.user?.id
-      const ext = desmosImageFile.name.split('.').pop()
-      const path = uid + '/desmos-images/' + Date.now() + '.' + ext
-      const { error: upErr } = await supabase.storage.from('avav2').upload(path, desmosImageFile, { upsert: true })
-      if (upErr) { setMsg('Desmos upload error: ' + upErr.message); setUploading(false); return }
-      const { data: { publicUrl } } = supabase.storage.from('avav2').getPublicUrl(path)
-      desmosImageUrl = publicUrl
+      const { url, error: upErr } = await uploadImage(desmosImageFile, 'desmos-images')
+      if (upErr) { setMsg('Desmos upload error: ' + upErr.message); toast.error('Desmos image upload failed: ' + upErr.message); setUploading(false); return }
+      desmosImageUrl = url
     }
     const payload = {
       options: qType === 'mc' ? opts : [],
@@ -346,12 +337,20 @@ export default function AdminQuestions() {
       : await supabase.from('questions').insert({ subject_id: selSubject, difficulty: qDifficulty, ...payload }).select('id')
     setUploading(false)
     if (error) { console.error('SAVE ERROR:', error); setMsg('Error: ' + (error.message || JSON.stringify(error))); toast.error('Error saving: ' + (error.message || 'Unknown error')); return }
-    if (!savedRows?.length) {
-      // RLS can silently reject an update or hide an inserted row; do not report success.
+    // The client returns the written rows. Zero rows means RLS rejected the write: never report success.
+    if (!Array.isArray(savedRows) || savedRows.length === 0) {
       const text = 'Not saved: the database accepted the request but returned no row. Check that your account has the admin/owner role.'
       setMsg(text); toast.error(text); return
     }
     clearCache()
+    // Editing with a new image: the old file is now unreferenced, remove it (best effort).
+    if (editingQ) {
+      const orphaned = [
+        imageFile && previousImages[0] !== imageUrl ? storagePathFromUrl(previousImages[0]) : null,
+        desmosImageFile && previousImages[1] !== desmosImageUrl ? storagePathFromUrl(previousImages[1]) : null,
+      ].filter(Boolean)
+      if (orphaned.length) supabase.storage.from('avav2').remove(orphaned)
+    }
     resetQForm()
     const saveDifficulty = editingQ ? undefined : qDifficulty
     const hiddenByFilter = saveDifficulty && selDifficulty && selDifficulty !== 'all' && selDifficulty !== saveDifficulty
@@ -391,29 +390,21 @@ export default function AdminQuestions() {
   const handleDeleteQuestion = async (id) => {
     if (!window.confirm('Delete this question?')) return
     const q = questions.find(q => q.id === id)
-    if (q) {
-      const pathsToDelete = []
-      if (q.image_url) {
-        const parts = q.image_url.split('/avav2/')
-        if (parts.length === 2) pathsToDelete.push(parts[1])
-      }
-      if (q.desmos_image_url) {
-        const parts = q.desmos_image_url.split('/avav2/')
-        if (parts.length === 2) pathsToDelete.push(parts[1])
-      }
-      if (pathsToDelete.length > 0) {
-        await supabase.storage.from('avav2').remove(pathsToDelete)
-      }
-    }
-
+    // Delete the row first. Only if that really happened do we remove its images,
+    // otherwise a failed delete would leave a question with broken pictures.
     const { error } = await supabase.from('questions').delete().eq('id', id)
     if (error) {
-      toast.error(error.message)
-    } else {
-      toast.success('Question deleted!')
-      clearCache()
-      setQuestions(questions.filter(q => q.id !== id))
+      toast.error('Delete failed: ' + error.message)
+      return
     }
+    const paths = [q?.image_url, q?.desmos_image_url].map(storagePathFromUrl).filter(Boolean)
+    if (paths.length > 0) {
+      const { error: rmErr } = await supabase.storage.from('avav2').remove(paths)
+      if (rmErr) console.warn('Question deleted, but its images could not be removed:', rmErr.message)
+    }
+    toast.success('Question deleted!')
+    clearCache()
+    setQuestions(prev => prev.filter(item => item.id !== id))
   }
 
   const updateOpt = (i, v) => {
@@ -556,14 +547,15 @@ ALTER TABLE questions ADD COLUMN IF NOT EXISTS layout text default 'centered';</
                           className="admin-role-select"
                           value={u.role || 'user'}
                           onChange={async (e) => {
-                            const { data } = await supabase.rpc('set_user_role', { target_user_id: u.id, new_role: e.target.value })
-                            if (data) {
-                              setUsers(prev => prev.map(p => p.id === u.id ? { ...p, role: e.target.value } : p))
-                              if (u.id === userProfile?.id) refreshUser()
-                              toast.success('Role updated')
-                            } else {
-                              toast.error('Only owner can change roles')
+                            const newRole = e.target.value
+                            const { error } = await supabase.rpc('set_user_role', { target_user_id: u.id, new_role: newRole })
+                            if (error) {
+                              toast.error('Role was NOT changed: ' + error.message)
+                              return
                             }
+                            setUsers(prev => prev.map(p => p.id === u.id ? { ...p, role: newRole } : p))
+                            if (u.id === userProfile?.id) refreshUser()
+                            toast.success('Role updated')
                           }}
                         >
                           <option value="user">User</option>
