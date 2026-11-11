@@ -1,0 +1,18 @@
+## 3261
+In triangle $RST$ above (right angle at $S$, $RS=12$, $ST=5$), point $W$ (not shown) lies on $\overline{RT}$. What is the value of $\cos(\angle RSW)-\sin(\angle WST)$?<p></p>[[fig:q3261]]
+## 3269
+In the figure above, $\tan B=\frac{3}{4}$. If $BC=15$ and $DA=4$, what is the length of $DE$?<p></p>[[fig:q3269]]
+## 3270
+In the figure, $\cos A=0.65$. What is the value of $\sin C$?<p></p>[[fig:q3270]]
+@ 0.87 | 0.65 | 0.35 | 0.13
+## 3322
+The figure above is the floor plan drawn by an architect for a small concert hall. The stage has depth 8 meters (m) and two walls each of length 10 m. If the seating portion of the hall has an area of 180 square meters, what is the value of $x$?<p></p>[[fig:q3322]]
+## 3324
+Note: Figure not drawn to scale. In triangle $QRS$ shown, $QR<RS$ and $RS=49$. Which expression represents the length of segment $\overline{QS}$?<p></p>[[fig:q3324]]
+@ $49\cos Q$ | $49\sin Q$ | $\frac{49}{\cos Q}$ | $\frac{49}{\sin Q}$
+## 3313
+Note: Figure not drawn to scale. In triangle $QRS$ (right angle at $R$, $QR=8$, $RS=9$), what is the value of $\tan y^\circ$?<p></p>[[fig:q3313]]
+@ $\frac{8}{9}$ | $\frac{9}{8}$ | $\frac{c}{8}$ | $\frac{c}{9}$
+## 3334
+In the figure above, $ABC$ is a right triangle and $AC=\frac{3}{2}AB$. If the quadrilateral $AFED$ is a square, the area of the shaded region is what fraction of the area of triangle $ABC$?<p></p>[[fig:q3334]]
+@ $\frac{3}{4}$ | $\frac{2}{3}$ | $\frac{13}{20}$ | $\frac{12}{25}$
