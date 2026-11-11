@@ -1,0 +1,17 @@
+## 1690
+The graph of the quadratic function $f$ is shown, where $y=f(x)$. What is the vertex of the graph?<p></p>[[fig:q1690]]
+@ $(2,0)$ | $(2,-1)$ | $(-2,0)$ | $(-2,1)$
+## 1697
+In the function $P(x)=(x-r)(x-s)(x-t)$, $r$ and $s$ are positive constants and $t$ is a negative constant. Which of the following could represent the graph of $y=P(x)$?<p></p>[[fig:q1697]]
+@ Graph A | Graph B | Graph C | Graph D
+## 1709
+The graph of the quadratic function $y=f(x)$ is shown. What is the vertex of the graph?<p></p>[[fig:q1709]]
+@ $(0,-2)$ | $(0,-4)$ | $(0,2)$ | $(0,4)$
+## 1722
+Which of the following could be the equation of the graph above?<p></p>[[fig:q1722]]
+@ $y=x(x-2)(x+3)$ | $y=x^2(x-2)(x+3)$ | $y=x(x+2)(x-3)$ | $y=x^2(x+2)(x-3)$
+## 1735
+The graph of $y=5x^2+bx+c$ is shown. What is $bc$?<p></p>[[fig:q1735]]
+## 1720
+<p style="text-align:center">$y=-\frac{1}{9}(x+18)(x^2-25)$</p><p>In the $xy$-plane, the graph of the given equation contains the point $(s,t)$. If $-5\le s\le5$, which of the following is NOT a possible value of $t$?</p>
+@ 18 | 5 | 0 | $-5$
