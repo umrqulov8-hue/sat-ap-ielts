@@ -1,0 +1,4 @@
+## 2694
+Note: Figure not drawn to scale. In the figure, lines $a$ and $b$ are parallel and line $c$ intersects both lines. If $r=9k-30$ and $s=7k-94$, what is the value of $t$?<p></p>[[fig:q2694]]
+## 2696
+Note: Figure not drawn to scale. In the figure, lines $a$ and $b$ are parallel and line $c$ intersects both lines. If $r=8k-20$ and $s=6k-66$, what is the value of $t$?<p></p>[[fig:q2696]]
