@@ -395,6 +395,10 @@ export default function TestPage() {
     }
   }
 
+  const handleBack = () => {
+    if (current > 0) handleJump(current - 1)
+  }
+
   const handleJump = useCallback((idx) => {
     if (selected !== null && step === 'taking') {
       const isCorrect = checkCorrect(currentQuestion, selected)
@@ -888,6 +892,7 @@ export default function TestPage() {
           Question {current + 1} of {questions.length}
         </button>
         <div className="bb-bottom-right">
+          <button className="bb-prev-btn" onClick={handleBack} disabled={current === 0}>Back</button>
           {step === 'taking' ? (
             <button className="bb-next-btn" onClick={handleNext}>
               {current + 1 >= questions.length ? 'Review' : 'Next'}
@@ -1047,6 +1052,7 @@ export default function TestPage() {
                 return (
                   <div
                     key={i}
+                    ref={isCurrent ? (el) => { if (el) el.scrollIntoView({ block: 'center' }) } : undefined}
                     className={'bb-grid-cell' + (isCurrent ? ' current' : '') + (isAnswered ? ' answered' : '') + (isReview ? ' review' : '')}
                     onClick={() => handleJump(i)}
                   >{i + 1}</div>
