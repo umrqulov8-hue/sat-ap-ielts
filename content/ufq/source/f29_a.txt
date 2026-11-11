@@ -1,0 +1,17 @@
+## 2651
+In the figure above, $\overline{AF}\parallel\overline{BD}$, and $\overline{CG}$ and $\overline{DH}$ intersect at $E$. If $HE=16$, $ED=24$, and $CG=20$, what is the length of $\overline{EG}$?<p></p>[[fig:q2651]]
+## 2680
+Note: Figure not drawn to scale. Two isosceles triangles are shown above. If $180-z=3y$ and $y=50$, what is the value of $x$?<p></p>[[fig:q2680]]
+## 2681
+In the diagram below, $OB=OA$, $AB=BC$, the measure of angle $FAO=30^\circ$, $DE$ is parallel to $AC$, and $AB=58$. What is the length of $BE$?<p></p>[[fig:q2681]]
+@ $\frac{116}{3}$ | 29 | $\frac{87}{2}$ | 58
+## 2685
+Note: Figure not drawn to scale. In the figure, $AC=CD$. The measure of angle $EBC$ is $29^\circ$, and the measure of angle $ACD$ is $108^\circ$. What is the value of $x$?<p></p>[[fig:q2685]]
+## 2686
+The angles of triangle $XYZ$ measure $x^\circ$, $y^\circ$, and $17^\circ$, where $x>y>17$. Knowing which expression below would NOT be sufficient to determine $x$ and $y$?
+@ $17-x-3y$ | $17+3x+y$ | $17-3x+3y$ | $17-3x-3y$
+## 2693
+In the figure, lines $a$, $b$, and $c$ are parallel and $201<x+y+z<212$. Which could equal $w-y$?<p>I. 22<br>II. 32</p><p></p>[[fig:q2693]]
+@ I only | II only | I and II | Neither I nor II
+## 2700
+Note: Figure not drawn to scale. In the figure below, lines $a$ and $b$ are parallel. What is the value of $x+y$?<p></p>[[fig:q2700]]
