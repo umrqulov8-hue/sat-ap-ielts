@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 430" width="640" height="430"><rect width="640" height="430" fill="#fff"/>
+<line x1="70.0" y1="370.0" x2="70.0" y2="30.0" stroke="#bbb" stroke-width="1"/>
+<text x="70.0" y="388" font-size="14" text-anchor="middle" font-family="Times,serif">0</text>
+<line x1="138.75" y1="370.0" x2="138.75" y2="30.0" stroke="#bbb" stroke-width="1"/>
+<text x="138.75" y="388" font-size="14" text-anchor="middle" font-family="Times,serif">10</text>
+<line x1="207.5" y1="370.0" x2="207.5" y2="30.0" stroke="#bbb" stroke-width="1"/>
+<text x="207.5" y="388" font-size="14" text-anchor="middle" font-family="Times,serif">20</text>
+<line x1="276.25" y1="370.0" x2="276.25" y2="30.0" stroke="#bbb" stroke-width="1"/>
+<text x="276.25" y="388" font-size="14" text-anchor="middle" font-family="Times,serif">30</text>
+<line x1="345.0" y1="370.0" x2="345.0" y2="30.0" stroke="#bbb" stroke-width="1"/>
+<text x="345.0" y="388" font-size="14" text-anchor="middle" font-family="Times,serif">40</text>
+<line x1="413.75" y1="370.0" x2="413.75" y2="30.0" stroke="#bbb" stroke-width="1"/>
+<text x="413.75" y="388" font-size="14" text-anchor="middle" font-family="Times,serif">50</text>
+<line x1="482.5" y1="370.0" x2="482.5" y2="30.0" stroke="#bbb" stroke-width="1"/>
+<text x="482.5" y="388" font-size="14" text-anchor="middle" font-family="Times,serif">60</text>
+<line x1="551.25" y1="370.0" x2="551.25" y2="30.0" stroke="#bbb" stroke-width="1"/>
+<text x="551.25" y="388" font-size="14" text-anchor="middle" font-family="Times,serif">70</text>
+<line x1="620.0" y1="370.0" x2="620.0" y2="30.0" stroke="#bbb" stroke-width="1"/>
+<text x="620.0" y="388" font-size="14" text-anchor="middle" font-family="Times,serif">80</text>
+<line x1="70.0" y1="370.0" x2="620.0" y2="370.0" stroke="#bbb" stroke-width="1"/>
+<text x="62" y="375.0" font-size="14" text-anchor="end" font-family="Times,serif">21</text>
+<line x1="70.0" y1="336.0" x2="620.0" y2="336.0" stroke="#bbb" stroke-width="1"/>
+<text x="62" y="341.0" font-size="14" text-anchor="end" font-family="Times,serif">22</text>
+<line x1="70.0" y1="302.0" x2="620.0" y2="302.0" stroke="#bbb" stroke-width="1"/>
+<text x="62" y="307.0" font-size="14" text-anchor="end" font-family="Times,serif">23</text>
+<line x1="70.0" y1="268.0" x2="620.0" y2="268.0" stroke="#bbb" stroke-width="1"/>
+<text x="62" y="273.0" font-size="14" text-anchor="end" font-family="Times,serif">24</text>
+<line x1="70.0" y1="234.0" x2="620.0" y2="234.0" stroke="#bbb" stroke-width="1"/>
+<text x="62" y="239.0" font-size="14" text-anchor="end" font-family="Times,serif">25</text>
+<line x1="70.0" y1="200.0" x2="620.0" y2="200.0" stroke="#bbb" stroke-width="1"/>
+<text x="62" y="205.0" font-size="14" text-anchor="end" font-family="Times,serif">26</text>
+<line x1="70.0" y1="166.0" x2="620.0" y2="166.0" stroke="#bbb" stroke-width="1"/>
+<text x="62" y="171.0" font-size="14" text-anchor="end" font-family="Times,serif">27</text>
+<line x1="70.0" y1="132.00000000000003" x2="620.0" y2="132.00000000000003" stroke="#bbb" stroke-width="1"/>
+<text x="62" y="137.00000000000003" font-size="14" text-anchor="end" font-family="Times,serif">28</text>
+<line x1="70.0" y1="98.0" x2="620.0" y2="98.0" stroke="#bbb" stroke-width="1"/>
+<text x="62" y="103.0" font-size="14" text-anchor="end" font-family="Times,serif">29</text>
+<line x1="70.0" y1="64.0" x2="620.0" y2="64.0" stroke="#bbb" stroke-width="1"/>
+<text x="62" y="69.0" font-size="14" text-anchor="end" font-family="Times,serif">30</text>
+<line x1="70.0" y1="30.0" x2="620.0" y2="30.0" stroke="#bbb" stroke-width="1"/>
+<text x="62" y="35.0" font-size="14" text-anchor="end" font-family="Times,serif">31</text>
+<rect x="70.0" y="30.0" width="550.0" height="340.0" fill="none" stroke="#000" stroke-width="1.5"/>
+<text x="345.0" y="422" font-size="15" text-anchor="middle" font-style="italic" font-family="Times,serif">Speed (miles per hour)</text>
+<text transform="translate(16,200.0) rotate(-90)" font-size="15" text-anchor="middle" font-style="italic" font-family="Times,serif">Average fuel economy (miles per gallon)</text>
+<path d="M159.375,359.83263999999997 L166.25,341.00445999999994 L173.125,322.7739999999999 L180.0,305.14125999999993 L186.875,288.10623999999996 L193.75,271.6689399999999 L200.625,255.82935999999992 L207.5,240.58749999999992 L214.375,225.94335999999987 L221.25,211.89693999999992 L228.125,198.4482399999999 L235.0,185.59726 L241.875,173.3439999999999 L248.75,161.6884599999999 L255.625,150.63064 L262.5,140.17054000000002 L269.375,130.30816000000002 L276.25,121.0435 L283.125,112.37656000000004 L290.0,104.30734000000001 L296.875,96.83584000000002 L303.75,89.96206000000001 L310.625,83.68600000000004 L317.5,78.00765999999999 L324.375,72.92704000000003 L331.25,68.44414 L338.125,64.55896000000001 L345.0,61.2715 L351.875,58.58176000000003 L358.75,56.48973999999998 L365.625,54.99544000000003 L372.5,54.09886 L379.375,53.80000000000001 L386.25,54.09886 L393.125,54.99544000000003 L400.0,56.48973999999998 L406.875,58.58176000000003 L413.75,61.2715 L420.625,64.55896000000001 L427.5,68.44414 L434.375,72.92704000000003 L441.25,78.00765999999999 L448.125,83.68600000000004 L455.0,89.96206000000001 L461.875,96.83584000000002 L468.75,104.30734000000001 L475.625,112.37656000000004 L482.5,121.0435 L489.375,130.30816000000002 L496.25,140.17054000000002 L503.125,150.63064 L510.0,161.6884599999999 L516.875,173.3439999999999 L523.75,185.59726 L530.625,198.4482399999999 L537.5,211.89693999999992 L544.375,225.94335999999987 L551.25,240.58749999999992 L558.125,255.82935999999992 L565.0,271.6689399999999 L571.875,288.10623999999996 L578.75,305.14125999999993 L585.625,322.7739999999999 L592.5,341.00445999999994 L599.375,359.83263999999997" fill="none" stroke="#000" stroke-width="2"/>
+<circle cx="166.25" cy="285.0" r="5" fill="#000"/>
+<circle cx="207.5" cy="220.40000000000006" r="5" fill="#000"/>
+<circle cx="241.875" cy="152.40000000000003" r="5" fill="#000"/>
+<circle cx="276.25" cy="98.0" r="5" fill="#000"/>
+<circle cx="310.625" cy="108.20000000000005" r="5" fill="#000"/>
+<circle cx="345.0" cy="50.400000000000034" r="5" fill="#000"/>
+<circle cx="379.375" cy="67.40000000000003" r="5" fill="#000"/>
+<circle cx="413.75" cy="53.80000000000001" r="5" fill="#000"/>
+<circle cx="448.125" cy="50.400000000000034" r="5" fill="#000"/>
+<circle cx="482.5" cy="104.80000000000001" r="5" fill="#000"/>
+<circle cx="516.875" cy="155.79999999999995" r="5" fill="#000"/>
+<circle cx="551.25" cy="268.0" r="5" fill="#000"/>
+</svg>

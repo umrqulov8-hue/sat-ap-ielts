@@ -1,0 +1,81 @@
+## 334
+A juice mixture has a total volume of 125 liters and is 45% juice by volume. The mixture was created by mixing two different solutions (solution A and solution B). Solution A was 24% juice by volume. Solution B was 64% juice by volume. The volume, in liters, of juice in solution A is equal to $a$. The volume, in liters, of juice in solution B is equal to $b$. The numbers $a$, $b$, and $p$ are all positive numbers. If $a$ is $p$% less than $b$, what is the value of $p$? (Round your answer to the nearest hundredth)
+## 335
+<table><thead><tr><th>Time (minutes)</th><th>Bacterial density (OD)</th></tr></thead><tbody><tr><td>0</td><td>0.032</td></tr><tr><td>16</td><td>0.048</td></tr><tr><td>32</td><td>0.072</td></tr><tr><td>48</td><td>0.108</td></tr><tr><td>64</td><td>0.162</td></tr><tr><td>80</td><td>0.243</td></tr></tbody></table><p>The bacterial density of a sample of a certain marine bacterium can be measured by its optical density. The table above gives the bacterial density of a sample, measured in optical density (OD), at 16-minute intervals.</p><p>According to the table, at the end of every 16-minute interval, the bacterial density is $p$ percent greater than the bacterial density at the beginning of the interval. At that rate, what will be the bacterial density, in optical density, 96 minutes after the first observation? (Round your answer to the nearest thousandth.)</p>
+## 336
+Levi and Marissa each have stamp collections. The number of stamps in Levi's collection is 125% of the number of stamps in Marissa's collection. If there are 400 stamps in Marissa's collection, how many stamps are in Levi's collection?
+@ 100 | 300 | 500 | 900
+## 338
+A clothing store buys shirts at a wholesale price of 4.00 dollars each and resells them each at a retail price that is 280% of the wholesale price. At the end of the season, any remaining shirts are marked at a discounted price that is 80% off the retail price. What is the discounted price of each remaining shirt, in dollars?
+## 339
+Ice cube floating: volume below surface is $12.28\ \text{cm}^3$ which makes up 91.67% of total volume. What is volume above surface?
+## 341
+The budget for a school band was \$8,000 in 2010. The budget decreased by 15% from 2010 to 2011 and then increased by 22% from 2011 to 2012. Which of the following expressions represents the budget, in dollars, for the school band in 2012?
+@ $(1.15)(1.22)(8{,}000)$ | $(0.85)(1.22)(8{,}000)$ | $(1.15)(0.78)(8{,}000)$ | $(0.85)(0.78)(8{,}000)$
+## 342
+On a plot of land, 52.0% of the square footage is farmland and the remaining square footage is pasture. There are buildings on exactly 21.5% of the square footage of the farmland, and there are buildings on exactly 14.0% of the square footage of the pasture. If there are buildings on exactly $p$% of the square footage of the plot of land, what is the value of $p$?
+## 343
+If the speed of an airplane is now 127% of its previous speed, which of the following must also be true?
+@ The speed of the airplane has increased by 27% from its previous speed. | The speed of the airplane has increased by 73% from its previous speed. | The speed of the airplane is now 127 miles per hour. | The speed of the airplane is now 27 miles per hour faster than its previous speed.
+## 344
+Alloy A contains 10% chromium by mass, and alloy B contains 15% chromium by mass. A mixture is made by combining some amount of alloy A with some amount of alloy B. The mixture has a total mass of 1,000 grams and contains 130 grams of chromium. How many grams of chromium in the mixture came from alloy A?
+## 345
+The speeds of particles $A$, $B$, and $C$ are $a$ meters per second, $b$ meters per second, and $c$ meters per second, respectively. If the speed of particle $A$ is 6,000% of the speed of particle $C$ and the speed of particle $C$ is 0.008% of the speed of particle $B$, which expression represents the value of $a+b$ in terms of $c$?
+@ $12{,}560c$ | $6{,}125c$ | $6{,}008c$ | $1{,}850c$
+## 346
+The percent increase in mass of a certain red kangaroo from 70 days old to 140 days old is 563%. If this red kangaroo's mass was $k$ grams at 70 days old, which expression represents its mass, in grams, at 140 days old?
+@ $6.63k$ | $5.63k$ | $1.08k$ | $0.08k$
+## 347
+The value of an autographed baseball increased by 173% from the end of 2013 to the end of 2014 and then decreased by 18% from the end of 2014 to the end of 2015. What was the net percentage increase in the value of the autographed baseball from the end of 2013 to the end of 2015?
+@ 123.86% | 141.86% | 155.00% | 222.14%
+## 348
+In 2005, Aster earned 12% more than in 2004, and in 2006 Aster earned 6% more than in 2005. If Aster earned $y$ times as much in 2004 as in 2006, which of the following is closest to the value of $y$?
+@ 0.5000 | 0.7200 | 0.8423 | 1.1872
+## 349
+On a plot of land, 52.0% of the square footage is farmland and the remaining square footage is pasture. There are buildings on exactly 23.5% of the square footage of the farmland, and there are buildings on exactly 11.0% of the square footage of the pasture. If there are buildings on exactly $p$% of the square footage of the plot of land, what is the value of $p$?
+## 350
+Starting in 1970, the population of a city doubled every 10 years until 2010. The population of the city was 36,000 in 1970. Which of the following expressions gives the population of the city in 2010?
+@ $36{,}000(2)^4$ | $36{,}000(2)^{10}$ | $36{,}000(2)^{40}$ | $36{,}000(2)(40)$
+## 351
+The population of a town was 8,247 in 1990. In 2000, the population of the town was 2.6% less than the population in 1990, and the population in 2010 was 2.2% less than the population in 2000. Which of the following was the population of this town in 2010?
+@ 4,763 | 7,855 | 8,026 | 8,066
+## 352
+<table><thead><tr><th>Class size</th><th>Number of classes</th></tr></thead><tbody><tr><td>23</td><td>1</td></tr><tr><td>28</td><td>2</td></tr><tr><td>29</td><td>6</td></tr><tr><td>30</td><td>6</td></tr><tr><td>31</td><td>5</td></tr></tbody></table><p>The table above shows the distribution of class sizes for the 20 math classes at a high school.</p><p>If a new student is randomly placed into one of the 20 math classes, what is the probability that the student will be in a math class that already has 30 or more students?</p>
+@ $\frac{1}{4}$ | $\frac{3}{10}$ | $\frac{9}{20}$ | $\frac{11}{20}$
+## 353
+The value of a collectible comic book increased by 167% from the end of 2011 to the end of 2012 and then decreased by 16% from the end of 2012 to the end of 2013. What was the net percentage increase in the value of the collectible comic book from the end of 2011 to the end of 2013?
+@ 124.28% | 140.28% | 151.00% | 209.72%
+## 354
+<table><caption>Energy Usage for Sorayda's Apartment (by month)</caption><thead><tr><th>Type</th><th>March</th><th>April</th><th>May</th><th>June</th></tr></thead><tbody><tr><td>Electricity (kWh)</td><td>222</td><td>225</td><td>240</td><td>253</td></tr><tr><td>Gas (kWh)</td><td>1,992</td><td>1,846</td><td>1,904</td><td>1,690</td></tr></tbody></table><p>The table above shows the total energy usage, in kilowatt-hours (kWh), in Sorayda's apartment during each of four months.</p><p>In April, the cost of electricity was \$0.154 per kilowatt-hour. What was the cost of electricity in April for Sorayda's apartment?</p>
+@ \$14.61 | \$34.65 | \$68.44 | \$146.10
+## 355
+<table><caption>Annual Production (thousands of units)</caption><thead><tr><th></th><th>Factory W</th><th>Factory Z</th></tr></thead><tbody><tr><td>Product P</td><td>21</td><td>32</td></tr><tr><td>Product Q</td><td>14</td><td>24</td></tr></tbody></table><p>A company makes and sells only two products, P and Q, and makes all products at factories W and Z. The table above shows the number of units of each product made at each factory during a year.</p><p>Which of the following is closest to the percent of the total number of units of products P and Q combined that are made at factory Z annually?</p>
+@ 38% | 56% | 62% | 91%
+## 356
+The percent increase in mass of a certain red kangaroo from 150 days old to 230 days old was 422%. If this red kangaroo's mass was $k$ grams at 150 days old, which expression represents its mass, in grams, at 230 days old?
+@ $0.05k$ | $1.05k$ | $4.22k$ | $5.22k$
+## 357
+<p style="text-align:center">$f(x)=1500\cdot 0.5^{\frac{x}{14}}$</p><p>The function $f$ models the intensity of a beam, $f(x)$, in number of photons, $x$ millimeters below the surface of a material. According to the model, how many photons are in the beam at the surface of the material?</p>
+@ 2 | 14 | 15 | 1,500
+## 358
+The population of a community was 2,000 in 2013, and the population was projected to increase by 50 people each year. Under these conditions, which of the following expressions models the population of the community $t$ years after 2013 ?
+@ $2{,}000+(1+0.05)^t$ | $2{,}000(1+0.025)^t$ | $2{,}000(1+0.025t)$ | $2{,}000(1+0.05t)$
+## 359
+The value of a video game console increased by 285% from the end of 2015 to the end of 2016. The value of the console then decreased by 21% from the end of 2016 to the end of 2017. Finally, the value of the console increased by 63% from the end of 2017 to the end of 2018. What was the net percentage increase in the value of the video game console from the end of 2015 to the end of 2018? (Round to the nearest hundredth of a percent)
+## 360
+<table><thead><tr><th>Temperature</th><th>Days</th></tr></thead><tbody><tr><td>5.5–10.4</td><td>4</td></tr><tr><td>12.8–15.4</td><td>6</td></tr><tr><td>16.2–25.7</td><td>10</td></tr><tr><td>26.1–30.4</td><td>3</td></tr><tr><td>30.5–40.0</td><td>5</td></tr><tr><td>43.1–45.0</td><td>2</td></tr></tbody></table><p>The table summarizes temperatures on 30 days. What is the greatest possible percentage of these days with a temperature greater than 18 degrees?</p>
+@ 10% | 20% | 33.3% | 66.7%
+## 361
+Ms. Engels took her 29 students to the library. If 12 students each checked out exactly 2 books, 3 students each checked out exactly 3 books, and the rest of the class each checked out only 1 book, how many total books did the students in Ms. Engels's class check out from the library?
+@ 27 | 29 | 43 | 47
+## 362
+While the mass of an object is the same everywhere, the weight of an object differs on different planets. An object has a weight of 170.00 pounds on Earth and 186.32 pounds on Neptune. The object's weight on Jupiter is 252.8% of its weight on Earth. If the object's weight on Neptune is $x$% of its weight on Jupiter, which of the following is closest to the value of $x$?
+@ 43.35 | 43.33 | 277.07 | 429.76
+## 363
+The population of town A grew by approximately 27% between 1996 and 2000 and then decreased by approximately 25% between 2000 and 2004. If the population was 26,400 in 2000, what was the approximate change in the number of people living in Town A between 1996 and 2004?
+@ Increase of 987 people | Increase of 528 people | Decrease of 528 people | Decrease of 987 people
+## 364
+<p><b>Ms. Simon's Workday Morning Drive</b></p><table><thead><tr><th>Segment of drive</th><th>Distance (miles)</th><th>Average driving speed with no traffic delay (mph)</th></tr></thead><tbody><tr><td>From home to freeway entrance</td><td>0.6</td><td>25</td></tr><tr><td>From freeway entrance to freeway exit</td><td>15.4</td><td>50</td></tr><tr><td>From freeway exit to workplace</td><td>1.4</td><td>35</td></tr></tbody></table><p>Ms. Simon drives her car from her home to her workplace every workday morning. The table above shows the distance, in miles, and her average driving speed, in miles per hour, when there is no traffic delay, for each segment of her drive.</p><p>If Ms. Simon starts her drive at 6:30 a.m., she can drive at her average driving speed with no traffic delay for each segment of the drive. If she starts her drive at 7:00 a.m., the travel time from the freeway entrance to the freeway exit increases by 33% due to slower traffic, but the travel time for each of the other two segments of her drive does not change. Based on the table, how many more minutes does Ms. Simon take to arrive at her workplace if she starts her drive at 7:00 a.m. than if she starts her drive at 6:30 a.m.? (Round your answer to the nearest minute.)</p>
+## 365
+<p style="text-align:center">$f(x)=18(2.10)^{\frac{x}{2}}$</p><p>The value of $f$ increases by $p$% for each increase of 4 in $x$. For which function does $g$ increase by $p$% for each increase of 1 in $x$, where $n$ is positive?</p>
+@ $g(x)=n(1.05)^x$ | $g(x)=n(2.10)^x$ | $g(x)=n(3.41)^x$ | $g(x)=n(4.41)^x$

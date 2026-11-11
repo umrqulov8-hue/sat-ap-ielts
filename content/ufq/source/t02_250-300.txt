@@ -1,0 +1,132 @@
+## 250
+At the start of a field study, populations of lions and antelopes were equal. By end of the week, antelopes increased by 2,106% of their starting number and lions increased by 300% of their starting number. At the end of the week, the number of antelopes was $p$% greater than the number of lions. What is the value of $p$?
+## 251
+The composition of a young swamp buffalo: 128.2 kg of muscle, comprising approximately 64.4% of its composition. Of the remaining composition, approximately 44.2% was bone. Based on these approximations, to the nearest tenth, how many kilograms of this buffalo's composition were bone?
+## 252
+A number $f$ is 180% greater than a positive number $g$. A number $h$ is 55% less than the number $f$. The number $h$ is how many times the number $g$?
+@ 0.99 | 1.26 | 1.54 | 2.80
+## 253
+A clothing store buys shirts at a wholesale price of 5.00 dollars each and resells them each at a price that is 270% of the wholesale price. At the end of the season, any remaining shirts are marked at a discounted price that is 70% of the retail price. What is the discounted price of each remaining shirt, in dollars?
+## 254
+A real estate company offers a series of three webinars. 1,250 people attended the first webinar. 68% of the people who attended the first webinar attended the second webinar, and 32% of the people who attended the first and second webinars attended the third webinar. How many people attended all three webinars?
+## 255
+The mean weight of the 9 manhole covers on Street B is 267 pounds. If an additional manhole and manhole cover are added to Street B, and if the mean weight, in pounds, for the 10 manhole covers on Street B is an integer greater than 267, what is one possible weight, in pounds, of the additional manhole cover?
+## 256
+<p>A researcher conducted a study of the effects of taking a specific vitamin once a day on the blood pressure of elderly people in the state of Vermont. The sample used for the study is all residents at the Chestnut Hills Nursing Home, located in Vermont. The sample is made up of 38 male participants and 56 female participants. The distribution of the ages of all participants in the study is shown in the table below.</p><table><thead><tr><th>Age range</th><th>Number of participants</th></tr></thead><tbody><tr><td>70 to 74</td><td>12</td></tr><tr><td>75 to 79</td><td>37</td></tr><tr><td>80 to 84</td><td>37</td></tr><tr><td>85 and older</td><td>8</td></tr><tr><td>Total</td><td>94</td></tr></tbody></table><p>If the ratio of male to female participants is 1 to 4 for participants who are 80 years or older, how many participants 80 years or older are male?</p>
+## 257
+A group of friends decided to divide the \$800 cost of a trip equally among themselves. When two of the friends decided not to go on the trip, those remaining still divided the \$800 cost equally, but each friend's share of the cost increased by \$20. How many friends were in the group originally?
+## 258
+A boy who is currently 51 inches tall was 45 inches tall 2 years ago. Of the following, which best approximates the percent increase in the boy's height over the 2-year period?
+@ 3.0% | 6.7% | 11.7% | 13.3%
+## 259
+<table><thead><tr><th>Class size</th><th>Number of classes</th></tr></thead><tbody><tr><td>23</td><td>1</td></tr><tr><td>28</td><td>2</td></tr><tr><td>29</td><td>6</td></tr><tr><td>30</td><td>6</td></tr><tr><td>31</td><td>5</td></tr></tbody></table><p>The table above shows the distribution of class sizes for the 20 math classes at a high school.</p><p>What is the mean math class size?</p>
+@ 28.2 | 28.5 | 29.4 | 30.0
+## 260
+Gisela would owe \$15,500 in taxes each year if she were not eligible for any tax deductions. This year, Gisela is eligible for tax deductions that reduce the amount of taxes she owes by \$2,325.00. If these tax deductions reduce the taxes Gisela owes this year by $d$%, what is the value of $d$?
+## 261
+The positive number $a$ is 2,106% of the sum of the positive numbers $b$ and $c$, and $b$ is 81% of $c$. What percent of $b$ is $a$?
+@ 4,706% | 2,600% | 38.12% | 21.87%
+## 262
+The graph of the exponential function $h$ in the $xy$-plane, where $y=h(x)$, has a $y$-intercept of $d$, where $d$ is a positive constant. Which of the following could define the function $h$?
+@ $h(x)=-3(d)^x$ | $h(x)=3(d)^x$ | $h(x)=d(-x)^3$ | $h(x)=d(3)^x$
+## 263
+A car dealership has only sedans, SUVs, and minivans for sale. On Monday, 20% of the vehicles for sale were sedans and 50% were SUVs. If there were 36 sedans for sale at the dealership on Monday, how many minivans were for sale?
+## 264
+Kim purchased a shirt that cost \$23.00 before a 6% sales tax was added. How many sales tax, in dollars, did Kim pay for this shirt? (Disregard the \$ sign when gridding your answer. For example, if your answer is \$4.97, grid 4.97)
+## 265
+<table><thead><tr><th>Class size</th><th>Number of classes</th></tr></thead><tbody><tr><td>23</td><td>1</td></tr><tr><td>28</td><td>2</td></tr><tr><td>29</td><td>6</td></tr><tr><td>30</td><td>6</td></tr><tr><td>31</td><td>5</td></tr></tbody></table><p>The table above shows the distribution of class sizes for the 20 math classes at a high school.</p><p>What effect would removing the outlier have on the mean math class size and the median math class size?</p>
+@ The mean would increase, and the median would stay the same. | The mean would increase, and the median would increase. | The mean would stay the same, and the median would stay the same. | The mean would stay the same, and the median would increase.
+## 266
+The function $f$ is defined by $f(x)=55(0.19)^x$. For any positive integer $n$, the value of $f(n)$ is $p$% less than the value of $f(n-1)$. What is the value of $p$?
+@ 19 | 45 | 55 | 81
+## 267
+The mass of object A is 444% of the mass of object B, and the mass of object A is 0.740% of the mass of object C. If the mass of object C is $p$% of the mass of object B, what is the value of $p$?
+## 268
+<p><b>Homeroom teacher</b></p><table><thead><tr><th>Number of pets</th><th>Ms. Wilcox</th><th>Mr. Xiong</th></tr></thead><tbody><tr><td>None</td><td>2</td><td>3</td></tr><tr><td>One</td><td>10</td><td>8</td></tr><tr><td>Two</td><td>8</td><td>9</td></tr><tr><td>Three</td><td>7</td><td>4</td></tr><tr><td>Four or more</td><td>3</td><td>6</td></tr></tbody></table><p>Teachers in two homerooms of 30 students each surveyed their students to find out the number of pets the students have. The results of the survey are shown in the table above.</p><p>What fraction of the 60 students indicated having four or more pets?</p>
+## 269
+A number $f$ is 120% greater than a positive number $g$. A number $h$ is 90% less than the number $f$. The number $h$ is how many times the number $g$?
+@ 0.12 | 0.22 | 1.08 | 1.98
+## 270
+A number $f$ is 120% greater than a positive number $g$. A number $h$ is 10% less than the number $f$. The number $h$ is how many times the number $g$?
+@ 0.12 | 0.22 | 1.08 | 1.98
+## 271
+A radioactive substance decays by approximately the same percentage each year. A function of which of the following forms best models the amount, in milligrams, $y$, of the substance remaining $x$ years from now, where $m$ and $p$ are positive constants?
+@ $y=px$ | $y=px-m$ | $y=(1+p)^x$ | $y=m(1-p)^x$
+## 272
+In June, 20 people enrolled in a cooking class. In July, the number of people who enrolled increased 150%. How many people enrolled in the cooking class in July?
+@ 30 | 50 | 70 | 170
+## 273
+<p style="text-align:center">$x(r-9)+4=17x+27$</p><p>In the equation, $r$ is a positive integer. If the equation has exactly one solution, what CANNOT be the value of $r$?</p>
+@ 4 | 9 | 23 | 26
+## 274
+The positive number $a$ is 220% of the number $b$, and $a$ is 70% of the number $c$. If $c$ is $p$% of the number $b$, which of the following is closest to the value of $p$?
+@ 154 | 171 | 214 | 314
+## 275
+In a box of drawing supplies, 30% are colored pencils, and the rest are markers. There are 280 markers in the box. How many colored pencils are in the box?
+@ 84 | 120 | 280 | 400
+## 276
+<p style="text-align:center">$d=2{,}565-500t$</p><p>An airplane flies directly from a city in Pennsylvania to a city in Ecuador. The equation above estimates the distance $d$, in miles, from the city in Ecuador of the airplane $t$ hours after taking off from the city in Pennsylvania.</p><p>According to the equation, approximately how many hours will it take the airplane to travel between the two cities?</p>
+@ 6.2 | 5.8 | 5.3 | 5.1
+## 277
+The value of a painting increased by 186% from the end of 2011 to the end of 2012 and then decreased by 21% from the end of 2012 to the end of 2013. What was the net percentage increase in the value of the painting from the end of 2011 to the end of 2013?
+@ 125.94% | 146.9% | 165.00% | 246.00%
+## 278
+<p>A certain alloy is a mixture of different components as given in the table below.</p><table><thead><tr><th>Component</th><th>Percentage (by weight)</th></tr></thead><tbody><tr><td>Chromium</td><td>18%</td></tr><tr><td>Nickel</td><td>10%</td></tr><tr><td>Steel (by weight, 98% iron and 2% carbon)</td><td>72%</td></tr></tbody></table><p>This alloy is $p$ percent carbon by weight. What is the value of $p$?</p>
+## 279
+On a farm, 62% of the total area is orchard and the remaining area is open field. Storage buildings cover exactly 18% of the orchard area and 9% of the open-field area. If storage buildings cover exactly $p$% of the total area of the farm, what is the value of $p$?
+## 280
+Kate bought a bus pass that had an initial value of \$90. For every bus ride Kate takes, \$1.80, the cost of one bus ride, is subtracted from the value of the pass. What percent of the initial value of Kate's bus pass is the cost of one bus ride?
+@ 1.8% | 2% | 5% | 98%
+## 281
+Julia purchased 600 feet of fencing. She used 90% of this fencing to surround a vegetable garden. How many feet of fencing did Julia use to surround the vegetable garden?
+@ 18 | 45 | 510 | 540
+## 282
+Julia purchased 800 feet of fencing. She used 60% of this fencing to surround a vegetable garden. How many feet of fencing did Julia use to surround the vegetable garden?
+@ 12 | 30 | 480 | 740
+## 283
+A fabric salesperson receives 5 percent of the amount of each sale as commission. What is the salesperson's commission on a sale of 400 square yards of fabric selling for \$8 per square yard?
+@ \$160 | \$200 | \$320 | \$1,600
+## 284
+<p style="text-align:center">$f(x)=25(1.40)^{x/3}$</p><p>For the given function $f$, the value of $f(x)$ increases by $p$% for every increase of $x$ by 6. What is the value of $p$?</p>
+@ 40 | 49 | 80 | 96
+## 285
+After 20% of the original number of objects in a group were removed from the group, 420 objects remained in the group. How many objects were removed from the group?
+@ 84 | 105 | 525 | 2,100
+## 286
+In 2014, quarterly sales for full-service restaurants and shoe stores in the United States each increased by a constant rate. For the first quarter of 2014, full-service restaurants had total sales of \$63,083 (in millions), and each quarter their sales increased approximately \$1,597 (in millions). For the first quarter of 2014, shoe stores had total sales of \$8,143 (in millions), and each quarter their sales increased approximately \$32 (in millions).<br><br>If the same linear trend for shoe store sales continues, how many quarters after the first quarter of 2014 will the total quarterly sales (in millions) for shoe stores in the United States first exceed \$8,500?
+@ 11 | 12 | 265 | 266
+## 287
+A customer's monthly water bill was \$75.74. Due to a rate increase, her monthly bill is now \$79.86. To the nearest tenth of a percent, by what percent did the amount of the customer's water bill increase?
+@ 4.1% | 5.1% | 5.2% | 5.4%
+## 288
+A stock increased in value by 7% on Wednesday and then decreased in value by 4% on Thursday. What was the net percentage increase in the value of the stock from the end of the day on Tuesday to the end of the day on Thursday?
+@ 2.72% | 2.88% | 3.00% | 3.28%
+## 289
+For the positive quantities $h$, $j$, and $k$, 11% of $h$ is equivalent to 33% of $j$, and $j$ is equivalent to 14% of $k$. What percentage of $k$ is $h$? (Disregard the % sign when entering your answer. For example, if your answer is 39%, enter 39)
+## 290
+A certain university's research farm is 1,000 acres, of which 72 acres contain rice. What percentage of the acres of this research farm contain rice?
+@ 0.72% | 7.2% | 72% | 720%
+## 291
+A scientist is creating a sugar water solution for his lab. If there are currently 10 liters of a 32% sugar solution in a bucket, how many liters of a 12% sugar solution need to be added to the bucket to create a 20% sugar solution?
+## 292
+Last year, 800 students attended the career fair at West High School. This year, the number of students who attended the career fair increased by 5%. How many students attended the career fair at West High School this year?
+@ 804 | 805 | 840 | 1,200
+## 293
+A certain university's research farm is 1,000 acres, of which 76 acres contain rice. What percentage of the acres of this research farm contain rice?
+@ 0.76% | 7.6% | 76% | 760%
+## 294
+In a certain ant colony, 10% of the ants are queen ants. Of the remaining ants, 60% are female worker ants, and the remaining ants are male ants. If there are 2,196 male ants in the colony, what is the total number of female worker ants in this colony?
+## 295
+On Monday, the price of a stock was \$15.80. On Friday, the price of the stock was \$18.17. The price of the stock on Friday was $p$% of the price of the stock on Monday. What is the value of $p$?
+@ 185 | 115 | 85 | 15
+## 296
+A school district is forming a committee to discuss plans for the construction of a new high school. Of those invited to join the committee, 15% are parents of students, 45% are teachers from the current high school, 25% are school and district administrators, and the remaining 6 individuals are students. How many more teachers were invited to join the committee than school and district administrators?
+## 297
+A car dealership sells only sedans, SUVs, and minivans. On Monday, 20% of its vehicles were sedans and 50% were SUVs. If there were 62 sedans, how many minivans were there?
+@ 31 | 62 | 93 | 155
+## 298
+A field study tracked two animal populations: lions and antelopes. At the start of a week, the two populations were equal in number. By the end of the week, the number of antelopes had increased by 2106% of its starting number, and the number of lions had increased by 300% of its starting number. At the end of the week, the number of antelopes was $p$% greater than the number of lions. What is the value of $p$?
+## 299
+<table><caption>Most Frequently Reported Prior Career Fields of the 535 Members of the 113th Congress</caption><thead><tr><th></th><th>House of Representatives</th><th>Senate</th></tr></thead><tbody><tr><td>Business</td><td>187</td><td>27</td></tr><tr><td>Education</td><td>77</td><td>15</td></tr><tr><td>Law</td><td>154</td><td>55</td></tr><tr><td>Public service</td><td>180</td><td>42</td></tr></tbody></table><p>The table above gives the distribution, by chamber, of fields in which members of the 113th Congress most frequently reported spending a portion of their careers before being elected to Congress. There were 435 members in the House of Representatives and 100 members in the Senate at the time these data were collected. Some members reported more than one career field.</p><p>If $x$ percent of members of the Senate reported education as a prior career field, what is the value of $x$ ?</p>
+## 300
+<p>Estimates of the number of living trees contained in the United States and their growing stock volumes are made by the Forest Inventory and Analysis National Program. Growing stock volume is the total volume of living trees that have a trunk diameter that falls into a specified range.</p><p>The partially completed table below shows the number of live trees reported to be in the US territory of American Samoa in 2007 sorted by diameter. No information was given about trees with a trunk diameter of less than 1 inch.</p><table><caption>Trees in American Samoa</caption><thead><tr><th>Tree trunk diameter, $x$ (inches)</th><th>Number of trees</th><th>Growing stock volume (cubic feet)</th></tr></thead><tbody><tr><td>$1\le x<5$</td><td>11,445</td><td>5,592,000</td></tr><tr><td>$5\le x<9$</td><td>3,944</td><td>16,850,000</td></tr><tr><td>$9\le x<13$</td><td>1,555</td><td>17,860,000</td></tr><tr><td>$13\le x<17$</td><td>565</td><td>11,505,000</td></tr><tr><td>$17\le x<21$</td><td></td><td></td></tr><tr><td>$21\le x$</td><td></td><td></td></tr><tr><td>Total</td><td>17,905</td><td>72,291,000</td></tr></tbody></table><p>To the nearest hundredth of a percent, 13.02% of the 17,905 trees reported to be in American Samoa in 2007 had a trunk diameter greater than or equal to 9 inches but less than 21 inches. To the nearest whole number, how many of the reported trees had a trunk diameter greater than or equal to 17 inches but less than 21 inches?</p>

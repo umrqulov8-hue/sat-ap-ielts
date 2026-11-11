@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 430" width="680" height="430"><rect width="680" height="430" fill="#fff"/>
+<text x="62" y="325.0" font-size="14" text-anchor="end" font-family="Times,serif">0</text>
+<text x="62" y="289.25" font-size="14" text-anchor="end" font-family="Times,serif">1,000</text>
+<text x="62" y="253.5" font-size="14" text-anchor="end" font-family="Times,serif">2,000</text>
+<text x="62" y="217.75" font-size="14" text-anchor="end" font-family="Times,serif">3,000</text>
+<text x="62" y="182.0" font-size="14" text-anchor="end" font-family="Times,serif">4,000</text>
+<text x="62" y="146.25" font-size="14" text-anchor="end" font-family="Times,serif">5,000</text>
+<text x="62" y="110.5" font-size="14" text-anchor="end" font-family="Times,serif">6,000</text>
+<text x="62" y="74.75" font-size="14" text-anchor="end" font-family="Times,serif">7,000</text>
+<text x="62" y="39.0" font-size="14" text-anchor="end" font-family="Times,serif">8,000</text>
+<rect x="70.0" y="34.0" width="590.0" height="286.0" fill="none" stroke="#000" stroke-width="1.5"/>
+<text x="365.0" y="422" font-size="15" text-anchor="middle" font-style="italic" font-family="Times,serif"></text>
+<text transform="translate(16,177.0) rotate(-90)" font-size="15" text-anchor="middle" font-style="italic" font-family="Times,serif">Number of guests</text>
+<text x="365.0" y="16" font-size="16" text-anchor="middle" font-weight="bold" font-family="Times,serif">Guests who rode the boat Ride in 2011 by Age</text>
+<rect x="74.72" y="302.125" width="29.893333333333334" height="17.875" fill="#000"/>
+<text transform="translate(93.66666666666667,330.0) rotate(-45)" font-size="13" text-anchor="end" font-family="Times,serif">Under 1 year</text>
+<rect x="114.05333333333334" y="141.25" width="29.893333333333334" height="178.75" fill="#000"/>
+<text transform="translate(133.0,330.0) rotate(-45)" font-size="13" text-anchor="end" font-family="Times,serif">1 to 4</text>
+<rect x="153.38666666666668" y="123.375" width="29.893333333333334" height="196.625" fill="#000"/>
+<text transform="translate(172.33333333333334,330.0) rotate(-45)" font-size="13" text-anchor="end" font-family="Times,serif">5 to 9</text>
+<rect x="192.72" y="130.525" width="29.893333333333334" height="189.475" fill="#000"/>
+<text transform="translate(211.66666666666666,330.0) rotate(-45)" font-size="13" text-anchor="end" font-family="Times,serif">10 to 14</text>
+<rect x="232.05333333333334" y="112.65" width="29.893333333333334" height="207.35" fill="#000"/>
+<text transform="translate(251.0,330.0) rotate(-45)" font-size="13" text-anchor="end" font-family="Times,serif">15 to 19</text>
+<rect x="271.38666666666666" y="59.025000000000034" width="29.893333333333334" height="260.97499999999997" fill="#000"/>
+<text transform="translate(290.3333333333333,330.0) rotate(-45)" font-size="13" text-anchor="end" font-family="Times,serif">20 to 24</text>
+<rect x="310.72" y="73.32499999999999" width="29.893333333333334" height="246.675" fill="#000"/>
+<text transform="translate(329.6666666666667,330.0) rotate(-45)" font-size="13" text-anchor="end" font-family="Times,serif">25 to 29</text>
+<rect x="350.05333333333334" y="141.25" width="29.893333333333334" height="178.75" fill="#000"/>
+<text transform="translate(369.0,330.0) rotate(-45)" font-size="13" text-anchor="end" font-family="Times,serif">30 to 34</text>
+<rect x="389.3866666666667" y="177.0" width="29.893333333333334" height="143.0" fill="#000"/>
+<text transform="translate(408.33333333333337,330.0) rotate(-45)" font-size="13" text-anchor="end" font-family="Times,serif">35 to 39</text>
+<rect x="428.72" y="209.175" width="29.893333333333334" height="110.82499999999999" fill="#000"/>
+<text transform="translate(447.6666666666667,330.0) rotate(-45)" font-size="13" text-anchor="end" font-family="Times,serif">40 to 44</text>
+<rect x="468.05333333333334" y="230.625" width="29.893333333333334" height="89.375" fill="#000"/>
+<text transform="translate(487.0,330.0) rotate(-45)" font-size="13" text-anchor="end" font-family="Times,serif">45 to 49</text>
+<rect x="507.38666666666666" y="255.64999999999998" width="29.893333333333334" height="64.35000000000002" fill="#000"/>
+<text transform="translate(526.3333333333333,330.0) rotate(-45)" font-size="13" text-anchor="end" font-family="Times,serif">50 to 54</text>
+<rect x="546.72" y="269.95" width="29.893333333333334" height="50.05000000000001" fill="#000"/>
+<text transform="translate(565.6666666666666,330.0) rotate(-45)" font-size="13" text-anchor="end" font-family="Times,serif">55 to 59</text>
+<rect x="586.0533333333334" y="284.25" width="29.893333333333334" height="35.75" fill="#000"/>
+<text transform="translate(605.0,330.0) rotate(-45)" font-size="13" text-anchor="end" font-family="Times,serif">60 to 64</text>
+<rect x="625.3866666666667" y="248.5" width="29.893333333333334" height="71.5" fill="#000"/>
+<text transform="translate(644.3333333333333,330.0) rotate(-45)" font-size="13" text-anchor="end" font-family="Times,serif">65 to over</text>
+</svg>

@@ -1,0 +1,84 @@
+## 301
+<table><caption>International Tourist Arrivals, in millions</caption><thead><tr><th>Country</th><th>2012</th><th>2013</th></tr></thead><tbody><tr><td>France</td><td>83.0</td><td>84.7</td></tr><tr><td>United States</td><td>66.7</td><td>69.8</td></tr><tr><td>Spain</td><td>57.5</td><td>60.7</td></tr><tr><td>China</td><td>57.5</td><td>55.7</td></tr><tr><td>Italy</td><td>46.4</td><td>47.7</td></tr><tr><td>Turkey</td><td>35.7</td><td>37.8</td></tr><tr><td>Germany</td><td>30.4</td><td>31.5</td></tr><tr><td>United Kingdom</td><td>26.3</td><td>32.2</td></tr><tr><td>Russia</td><td>24.7</td><td>28.4</td></tr></tbody></table><p>The table above shows the number of international tourist arrivals, rounded to the nearest tenth of a million, to the top nine tourist destinations in both 2012 and 2013.</p><p>The number of international tourist arrivals in Russia in 2012 was 13.5% greater than in 2011. The number of international tourist arrivals in Russia was $k$ million more in 2012 than in 2011. What is the value of $k$ to the nearest integer?</p>
+## 302
+[[fig:q302]]<p>Which of the following age-groups is approximately 25% larger in number than the 65 and over group?</p>
+@ 5 to 9 | 20 to 24 | 35 to 39 | 45 to 49
+## 303
+A mixture satisfies $0.10x+0.20y=0.19(x+y)$, where $x$ is gallons of 10% saltwater and $y$ is gallons of 20% saltwater. If $x=80$, how many gallons of 20% saltwater are needed? Assume volumes are additive.
+## 304
+<table><caption>Department</caption><thead><tr><th>Faculty</th><th>Math</th><th>Physics</th><th>Biology</th><th>Total</th></tr></thead><tbody><tr><td>Full-time</td><td>28</td><td>18</td><td>16</td><td>62</td></tr><tr><td>Part-time</td><td>32</td><td>25</td><td>39</td><td>96</td></tr><tr><td>Total</td><td>60</td><td>43</td><td>55</td><td>158</td></tr></tbody></table><p>The table above shows the number of full-time and part-time faculty in the math, physics, and biology departments at a university. What fraction of the math department faculty at the university is part-time?</p>
+## 305
+In 2008, Elijah earned 15% more than in 2007, and in 2009 Elijah earned 3% more than in 2008. If Elijah earned $y$ times as much in 2007 as in 2009, which of the following is closest to the value of $y$?
+@ 0.2000 | 0.4500 | 0.8442 | 1.1845
+## 306
+A sports agent, Ann, earns a commission equal to 10 percent of the salary of each athlete she represents. If her commission from an athlete she represents is \$4,575.00, what is that athlete's salary?
+@ \$45.75 | \$457.50 | \$45,750.00 | \$457,500.00
+## 307
+The calcium concentration in bottled water is 48% of that in tap water and 24% of that in mineral water. If the concentration in tap water is $\frac{36\text{ mg}}{\text{L}}$, what is the concentration, in $\frac{\text{mg}}{\text{L}}$, in mineral water?
+## 308
+There are 28 residents in a certain apartment building. 100% of these residents attended the first building meeting of the year. How many of these residents attended the first building meeting of the year?
+@ 0 | 28 | 280 | 2
+## 309
+A company offered three webinars. Of the 3,750 people who attended the first, 72% attended the second. Of those who attended both, 40% attended the third. Of those who attended the first but not the second, 32% attended the third. How many attended the first and third but not the second?
+## 310
+A researcher surveyed undergraduate, graduate, and postdoctoral students. The number of undergraduate students surveyed was 6,950% of the number of postdoctoral students surveyed, and the number of graduate students surveyed was 35% of the undergraduate students surveyed. If there were 4,865 graduate students surveyed, what was the sum of the number of undergraduate and postdoctoral students surveyed?
+## 311
+The result of increasing a positive quantity by 11% is $x$. Which expression represents the original quantity in terms of $x$?
+@ $1.11x$ | $\frac{x}{1.11}$ | $1.11\left(\frac{100+x}{100}\right)$ | $1.11\left(\frac{100}{100+x}\right)$
+## 312
+A furniture company is selling all tables with a 20% discount off their original price for the month of October. What is the discount, in dollars, on a table with an original price of \$170?
+@ 150 | 130 | 68 | 34
+## 313
+For the positive quantities $m$, $q$, and $r$, $m$ is 20% of $m+q+r$, $q$ is 30% of $q+r$, and the value of $r$ is 1,358. What is the value of $m$?
+## 314
+[[fig:q046]]<p>A combination of clay, sand, and silt is often used to create parts of a baseball field. An infield mixture is used to construct the infield, baselines, and home plate area. A different mixture is sometimes used to construct the pitcher's mound. A community recreation department is constructing a new baseball field using dirt mixtures in the volume ratios shown in the tables below.</p><table><caption>Infield Mixture (Infield, Baselines, and Home Plate Area)</caption><tbody><tr><td>Sand to clay</td><td>3 : 1</td></tr><tr><td>Sand to silt</td><td>3 : 1</td></tr><tr><td>Clay to silt</td><td>1 : 1</td></tr></tbody></table><table><caption>Pitcher's Mound Mixture</caption><tbody><tr><td>Sand to clay</td><td>2 : 1</td></tr><tr><td>Sand to silt</td><td>1 : 1</td></tr><tr><td>Clay to silt</td><td>1 : 2</td></tr></tbody></table><p>What is the difference in the percent of silt in the pitcher's mound mixture and the percent of silt in the infield mixture? (Ignore the percent sign when gridding your answer. For example, if your answer is 35%, grid 35)</p>
+## 315
+An instrument shows the number of revolutions per minute made by each tire of a car. In each revolution, the car travels a distance equal to the circumference of one of its tires. The circumference of each tire is equal to $2\pi r$, where $r$ is the radius of the tire.<br><br>Maria gets new tires for her car. The radius of each of her old tires is 0.30 meter, and the radius of each of her new tires is 11% larger than the radius of one of her old tires. What is the circumference of each new tire, to the nearest tenth of a meter?
+## 316
+[[fig:q101]]<p>The scatterplot above shows the average fuel economy for a certain class of car driven at 12 different speeds. The graph of a quadratic model for the data is also shown.</p><p>For what fraction of the 12 speeds does the model overestimate the average fuel economy?</p>
+## 317
+The function $M(t)=640(0.729)^{\frac{t}{3}}$ models the mass, in grams, of a substance $t$ hours after an experiment begins. By what percentage does its mass decrease each hour?
+@ 9% | 10% | 19% | 27.1%
+## 318
+A furniture company is selling all tables with a 20% discount off their original price for the month of February. What is the discount, in dollars, on a table with an original price of \$230?
+@ 46 | 92 | 190 | 210
+## 319
+In 2008, the island of Guam had a population of approximately 175,800 people and a population density of 830 people per square mile. Based on these approximations, if 9% of the island's area was suitable for growing crops, to the nearest whole number, what is the area, in square miles, of land in Guam that was suitable for growing crops?
+## 320
+A local gym is offering a 25% discount on an annual membership. The regular cost of an annual membership is \$288. How much less is the discounted cost of the membership than the regular cost of the membership?
+@ \$25 | \$72 | \$216 | \$288
+## 321
+A gallery had $x$ artifacts in a collection. When more artifacts were added to the collection, the number of artifacts increased by 149%. What is the resulting number of artifacts in the collection in terms of $x$?
+@ $5.10x$ | $0.51x$ | $1.49x$ | $2.49x$
+## 322
+The positive number $a$ is 220% of the number $b$, and $a$ is 70% of the number $c$. If $c$ is $p$% of the number $b$, which of the following is closest to the value of $p$?
+@ 154 | 171 | 214 | 314
+## 323
+A researcher surveyed undergraduate students, graduate students, and postgraduate students. The number of undergraduate students surveyed was 7450% of the number of postgraduate students surveyed, and the number of graduate students surveyed was 24% of the undergraduate students surveyed. If there were 3576 graduate students surveyed, what was the sum of the number of undergraduate students and postgraduate students surveyed?
+## 324
+A hotel offers two types of rooms: single and double. On a given night, the hotel has 120 rooms available. Single rooms cost \$90 per night and double rooms cost \$130 per night. On that night, all rooms were booked and the total revenue was \$13,400. How many double rooms were booked?
+@ 35 | 50 | 65 | 85
+## 325
+A biologist mixed a solution that is 0.3% sodium chloride by mass with a solution that is 0.15% sodium chloride by mass to obtain a new solution, which has a mass of 80 grams and contains 0.21 grams of sodium chloride. How many grams of the 0.3% sodium chloride solution did the biologist use?
+@ 0.14 | 20 | 60 | 79.86
+## 326
+The composition of an animal is defined as the muscles, bones, and fat of the animal. A scientist studied the composition of one young swamp buffalo and determined the buffalo had 133 kilograms of muscle, which made up approximately 65.9% of its composition. Of the remaining composition of this buffalo, approximately 46.2% was bone, and the remainder was fat. Based on these approximations, to the nearest tenth, how many kilograms of this buffalo's composition was bone?
+## 327
+<table><caption>Amount of Electricity Generated From Renewable Sources</caption><thead><tr><th>State</th><th>Amount (billions of kWh)</th></tr></thead><tbody><tr><td>California</td><td>42</td></tr><tr><td>Minnesota</td><td>12</td></tr><tr><td>Pennsylvania</td><td>6</td></tr></tbody></table><p>The table above shows the amount of electricity, in billions of kilowatt-hours (kWh), generated from renewable sources in three states in the United States in 2009.</p><p>The amount of electricity generated from renewable sources in California was 10% of the total amount of electricity generated from renewable sources in the United States. What fraction of the total amount of electricity generated from renewable sources in the United States was generated in Pennsylvania?</p>
+## 328
+<table><caption>Nutritional Information for 1-Ounce Servings of Seeds and Nuts</caption><thead><tr><th>Seed or nut</th><th>Calories</th><th>Total fat (grams)</th><th>Protein (grams)</th></tr></thead><tbody><tr><td>Pecan</td><td>198</td><td>20.2</td><td>3.0</td></tr><tr><td>Pistachio</td><td>80</td><td>6.5</td><td>3.0</td></tr><tr><td>Pumpkin</td><td>159</td><td>13.9</td><td>8.5</td></tr><tr><td>Sunflower</td><td>166</td><td>14.6</td><td>5.9</td></tr><tr><td>Walnut</td><td>185</td><td>18.5</td><td>4.3</td></tr></tbody></table><p>The table above shows the calories, grams of fat, and grams of protein in 1-ounce servings of selected seeds and nuts.</p><p>How many more grams of protein are in one pound of pumpkin seeds than are in one pound of pistachios? (1 pound $=$ 16 ounces)</p>
+@ 48 | 72 | 88 | 136
+## 329
+The function $h$ is defined by $h(x)=\frac{10x^2}{x^2-9k^2}-\frac{5x}{x+3k}$, where $k$ is a positive constant. What is the value of $h\left(\frac{21k}{8}\right)$?
+@ $-\frac{5}{3}$ | $-\frac{35}{12}$ | $-14$ | $-35$
+## 330
+For a certain pair of phalaropes, a type of bird, the mass of the female phalarope is 65 grams and the mass of the male phalarope is 51 grams. Approximately what percent greater is the mass of the female phalarope than the mass of the male phalarope?
+@ 1% | 14% | 27% | 116%
+## 331
+Alice took 60 minutes to complete a task on her first trial. The time it took Alice to complete the task decreased by 10% of the previous time for each additional trial. Approximately how many minutes will it take Alice to complete the task on her fifth trial?
+@ 50 | 42 | 39 | 35
+## 332
+The composition of an animal is defined as the muscles, bones, and fat of the animal. A scientist studied the composition of one young swamp buffalo and determined that the buffalo had 139.2 kilograms of muscle, which made up approximately 67.7% of its composition. Of the remaining composition of this buffalo, approximately 51.4% was bone, and the remainder was fat. Based on these approximations, to the nearest tenth, how many kilograms of this buffalo's composition was bone?
+## 333
+A sample of seawater is 3.5% salt by mass and contains 1,000 grams of salt. Which of the following is closest to the mass, in grams, of the sample of seawater?
+@ 28,600 | 27,600 | 965 | 35

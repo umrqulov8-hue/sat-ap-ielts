@@ -1,0 +1,114 @@
+## 201
+A jar has 570 buttons, and 20% of these buttons are red. How many buttons in the jar are red?
+## 202
+There are 16 full cartons of eggs in 2 full crates, and each full carton contains 12 eggs. How many eggs are needed to fill 11 crates?
+## 203
+The positive number $a$ is 3,700% of the number $c$, and $c$ is 20% of the number $b$. If $a-b=wc$, where $w$ is a constant, what is the value of $w$?
+## 204
+The result of increasing the quantity $x$ by 500% is 150. What is the value of $x$?
+@ 25 | 30 | 350 | 750
+## 205
+The expression $kx$ represents the result of decreasing a positive force, $x$, acting on an object by 0.34%. What is the value of $k$?
+## 206
+The result of increasing the quantity $x$ by 600% is 168. What is the value of $x$?
+@ 24 | 28 | 432 | 1,008
+## 207
+A number $m$ is 5% of $q-m+2r$, where $q$ is 12% of $q+3r$, and $q=500$. What is the value of $m$?
+## 208
+Jennifer is a 55-year-old woman. Her recommended calcium intake is 20% greater than that of her daughter. What is the youngest age her daughter could be, in years?
+## 209
+For positive quantities $m$, $q$, and $r$, $m$ is 20% of $m+q+r$, and $q$ is 30% of $q+r$. If $r=1{,}526$, what is $m$?
+## 210
+The mass of object A is 450% of the mass of object B, and the mass of object A is 0.090% of the mass of object C. If the mass of object C is $p$% of the mass of object B, what is the value of $\frac{p}{1{,}000}$?
+## 211
+A 180-gram metal alloy is 50% aluminum. It contains one metal alloy that is 30% aluminum and a second metal alloy that is 60% aluminum. What is the mass, in grams, of the second metal alloy?
+## 212
+If $x$ is a positive integer, the expression $0.35x$ represents what percent of $x$?
+@ 35 | 65 | 135 | 165
+## 213
+If $x$ is a positive integer, the expression $0.44x$ represents what percent of $x$?
+@ 44 | 56 | 144 | 156
+## 214
+The mass of object A is 144% of the mass of object B, and the mass of object A is 0.740% of the mass of object C. If the mass of object C is $p$% of the mass of object B, what is the value of $\frac{p}{1{,}000}$?
+## 215
+<table><caption>Energy Usage for Sorayda's Apartment</caption><thead><tr><th>Type</th><th>March</th><th>April</th><th>May</th><th>June</th></tr></thead><tbody><tr><td>Electricity (kWh)</td><td>222</td><td>225</td><td>240</td><td>253</td></tr><tr><td>Gas (kWh)</td><td>1,992</td><td>1,846</td><td>1,904</td><td>1,690</td></tr></tbody></table><p>The table above shows the total energy usage, in kilowatt-hours (kWh), in Sorayda's apartment during each of four months.</p><p>Which of the following best approximates the percent decrease in gas used from May to June in Sorayda's apartment?</p>
+@ 11% | 13% | 17% | 21%
+## 217
+The mass of object A is 483% of the mass of object B, and the mass of object A is 0.069% of the mass of object C. If the mass of object C is $p$% of the mass of object B, what is the value of $\frac{p}{1{,}000}$?
+## 218
+Lani spent 15% of her 8-hour workday in meetings. How many minutes of her workday did she spend in meetings?
+@ 1.2 | 15 | 48 | 72
+## 219
+<p>The table below compares features of the orbits of Earth and Pluto.</p><table><thead><tr><th></th><th>Earth</th><th>Pluto</th></tr></thead><tbody><tr><td>Semimajor axis (in $10^6$ kilometers)</td><td>149.60</td><td>5,906.38</td></tr><tr><td>Perihelion (in $10^6$ kilometers)</td><td>147.09</td><td>4,436.82</td></tr><tr><td>Aphelion (in $10^6$ kilometers)</td><td>152.10</td><td>7,365.93</td></tr></tbody></table><p>The ratio of Pluto's semimajor axis to Earth's semimajor axis is $p:1$, where $p$ is a constant. What is the value of $p$, rounded to the nearest tenth?</p>
+## 220
+When a collection of books is sorted, 20% are nonfiction and the remaining books are fiction. Of the fiction books, 55% are mysteries and the rest are romance. If there are 1,224 romance books, what is the total number of books in the collection?
+## 221
+On a plot of land, 52.0% of the square footage is farmland and the rest is pasture. Buildings cover exactly 21.5% of the farmland and 14.0% of the pasture. If buildings cover exactly $p$% of the total plot, what is the value of $p$?
+## 222
+For the positive quantities $h$, $j$, and $k$, 94% of $h$ is equivalent to 47% of $j$, and $j$ is equivalent to 30% of $k$. What percentage of $k$ is $h$? (Disregard the % sign when entering your answer. For example, if you answer is 39%, enter 39.)
+## 223
+An entomologist places 20 beetles in a habitat. When the population reaches 180% of its initial size, 75% of the beetles are moved to a second habitat. How many beetles are moved?
+## 224
+<p>To determine whether a certain author wrote a famous book, a researcher studied the works known to have been written by the author. The researcher collected a total of 5,000 distinct words of length 3, 4, 5, 6, or 7 letters from these works, and the table below summarizes information about these 5,000 words.</p><table><thead><tr><th>Length of word</th><th>Number of distinct words</th><th>Total number of letters</th></tr></thead><tbody><tr><td>3 letters</td><td>293</td><td>879</td></tr><tr><td>4 letters</td><td>731</td><td>2,924</td></tr><tr><td>5 letters</td><td>1,038</td><td>5,190</td></tr><tr><td>6 letters</td><td>1,350</td><td>8,100</td></tr><tr><td>7 letters</td><td>1,588</td><td>11,116</td></tr><tr><td>Total</td><td>5,000</td><td>28,209</td></tr></tbody></table><p>To the nearest percent, what percent of the 5,000 distinct words the researcher collected are 6 or 7 letters long?</p>
+@ 27% | 32% | 41% | 59%
+## 225
+Each month Luke earns a salary of \$3500 plus 15% of the total amount of his sales for the month. Luke earned \$4760 in March. What was the total amount of Luke's sales, in dollars, for March? (Disregard the \$ sign when gridding your answer.)
+## 226
+Rita's total bill at a restaurant was \$25.00, including tax. If she left a tip of 20% of the total bill, what was the amount of the tip?
+@ \$3.50 | \$4.00 | \$4.50 | \$5.00
+## 227
+There are 450 objects in a box. Of these objects, 8% are spheres. How many spheres are in the box?
+@ 8 | 36 | 180 | 442
+## 228
+The positive number $a$ is 2,800% of the number $c$, and $c$ is 20% of the number $b$. What is the value of $a-b$ in terms of $c$?
+@ $23c$ | $140c$ | $560c$ | $2{,}240c$
+## 229
+A certain colony of bacteria began with one cell, and the population doubled every 20 minutes. What was the population of the colony after 2 hours?
+@ 6 | 12 | 32 | 64
+## 230
+A set of five consecutive even integers is ordered from least to greatest. The sum of the first and fourth even integers is 5,860 more than the quotient of the fifth even integer and 30. The first even integer is $p$% less than the fifth even integer, where $p$ is a constant. What is the value of $p$?
+## 231
+<p>A researcher conducted a study of the effects of taking a specific vitamin once a day on the blood pressure of elderly people in the state of Vermont. The sample used for the study is all residents at the Chestnut Hills Nursing Home, located in Vermont. The sample is made up of 38 male participants and 56 female participants. The distribution of the ages of all participants in the study is shown in the table below.</p><table><thead><tr><th>Age range</th><th>Number of participants</th></tr></thead><tbody><tr><td>70 to 74</td><td>12</td></tr><tr><td>75 to 79</td><td>37</td></tr><tr><td>80 to 84</td><td>37</td></tr><tr><td>85 and older</td><td>8</td></tr><tr><td>Total</td><td>94</td></tr></tbody></table><p>The participants younger than 75 years old are $x$ percent of all participants. What is the value of $x$ to the nearest whole number?</p>
+## 232
+<p><b>Ratings Given to a Movie on Release Night</b></p><table><thead><tr><th></th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>Total</th></tr></thead><tbody><tr><td>Adults</td><td>13</td><td>35</td><td>103</td><td>82</td><td>17</td><td>250</td></tr><tr><td>Children</td><td>6</td><td>22</td><td>27</td><td>70</td><td>25</td><td>150</td></tr><tr><td>Total</td><td>19</td><td>57</td><td>130</td><td>152</td><td>42</td><td>400</td></tr></tbody></table><p>On the first night of a movie's release, the manager of a movie theater asks the people who saw the movie to rate it on a scale of 1 (worst) to 5 (best). The table above summarizes the responses of all 400 viewers of one particular movie.</p><p>What fraction of the adults surveyed gave a rating of 4 or 5 to the movie?</p>
+@ $\frac{82}{250}$ | $\frac{99}{250}$ | $\frac{194}{400}$ | $\frac{99}{194}$
+## 233
+The mass of object A is 481% of the mass of object B, and the mass of object A is 0.740% of the mass of object C. If the mass of object C is $p$% of the mass of object B, what is the value of $p$?
+## 234
+When a collection of books is sorted, 20% are nonfiction and the remaining books are fiction. Of those that are fiction books, 55% are mysteries and the remaining fiction books are romance. If there are 1,224 romance books in this collection, what is the total number of books in this collection?
+## 235
+If $x>0$ and $x$ is 24% of $y$, which expression represents $y$ in terms of $x$?
+@ $\frac{6x}{25}$ | $\frac{19x}{25}$ | $\frac{25}{6x}$ | $\frac{25x}{6}$
+## 236
+A collectible increases in value by the same percentage each year. It is worth \$40 in 2000 and \$48.40 in 2002. What is its value in 2007, in dollars, rounded to the nearest cent?
+## 237
+The positive number $a$ is 480% of the number $b$, and $a$ is 70% of the number $c$. If $c$ is $p$% of the number $b$, which of the following is closest to the value of $p$?
+@ 267 | 336 | 550 | 685
+## 238
+Last year, Gary's tomato plants produced 24 kilograms of tomatoes. This year, Gary increased the number of tomato plants in his garden by 25%. If his plants produce tomatoes this year at the same rate per plant as last year, how many kilograms of tomatoes can Gary expect the plants to produce this year?
+## 239
+In a set of four consecutive odd integers, where the integers are ordered from the least to the highest, the first integer is represented by $z$. The product of 24 and the third odd integer in the set is at most 86 less than the sum of the first and fourth odd integers in the set. What is the highest possible value of $z$?
+## 240
+How many liters of a 25% saline solution must be added to 3 liters of a 10% saline solution to obtain a 15% saline solution?
+## 241
+A customer paid \$53.00 for a jacket after a 6 percent sales tax was added. What was the price of the jacket before the sales tax was added?
+@ \$47.60 | \$50.00 | \$52.60 | \$52.84
+## 242
+<p>The table below compares features of the orbits of Earth and Pluto.</p><table><thead><tr><th></th><th>Earth</th><th>Pluto</th></tr></thead><tbody><tr><td>Semimajor axis (in $10^6$ kilometers)</td><td>149.60</td><td>5,906.38</td></tr><tr><td>Perihelion (in $10^6$ kilometers)</td><td>147.09</td><td>4,436.82</td></tr><tr><td>Aphelion (in $10^6$ kilometers)</td><td>152.10</td><td>7,365.93</td></tr></tbody></table><p>To the nearest hundredth, what percent of Pluto's perihelion distance is Earth's perihelion distance?</p><p>(Disregard the % sign when gridding your answer.)</p>
+## 243
+Between 1985 and 2003, data were collected every three years on the amount of plastic produced annually in the United States, in billions of pounds. The equation of the line of best fit is $y=3.39x+46.89$, where $x$ is the number of years since 1985 and $y$ is the amount of plastic produced annually, in billions of pounds.<br><br>Which of the following is closest to the percent increase in the billions of pounds of plastic produced in the United States from 2000 to 2003?
+@ 10% | 44% | 77% | 110%
+## 244
+A number $f$ is 100% greater than a positive number $g$. A number $h$ is 65% less than the number $f$. The number $h$ is how many times the number $g$?
+## 245
+A number $f$ is 100% greater than a positive number $g$. A number $h$ is 65% less than the number $f$. The number $g$ is how many times the number $h$?
+## 246
+Jeremy deposited $x$ dollars in his investment account on January 1, 2001. The amount of money in the account doubled each year until Jeremy had 480 dollars in his investment account on January 1, 2005. What is the value of $x$?
+## 247
+In a collection of items, 10% are red, 25% are green, 35% are blue, and 30% are yellow. If there are 40 green items, how many blue items are in the collection?
+@ 14 | 16 | 48 | 56
+## 248
+An inverter converts 86% of the direct current (DC) power generated by a solar panel into alternating current (AC) power. If the panel generates 350 watts of DC power, how many watts of AC power result from the conversion?
+## 249
+0.0036 is 0.6% of $a$, and 84 is 350% of $b$, where $a$ and $b$ are positive numbers. What percentage of $a$ is $b$?
+@ 40% | 144% | 1,440% | 4,000%

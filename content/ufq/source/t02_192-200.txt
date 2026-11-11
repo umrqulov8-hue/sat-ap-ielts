@@ -1,0 +1,20 @@
+## 192
+What is 5% of 220?
+@ 11 | 44 | 110 | 215
+## 193
+What is 5% of 320?
+@ 315 | 160 | 64 | 16
+## 194
+85 is $n$% greater than 1. What is the value of $n$?
+## 195
+The price of an item increased by $p$% from \$64 to \$68. What is the value of $p$?
+## 196
+How many liters of a 30% chlorine solution must be added to 12 liters of a 10% chlorine solution to obtain a 15% chlorine solution?
+## 197
+In a group of 400 people, 46% are adults and the rest are children. How many more children than adults are in the group?
+## 198
+In a typical elk herd in Yellowstone National Park, the ratio of males to females is 14 to 46.<br><br>If $P$ percent of a typical herd of elk is female, what is the value of $P$, rounded to the nearest whole number?
+## 199
+There are 850 objects in a bag. Of these objects, 8% are cubes. How many cubes are in the bag?
+## 200
+A jar has 510 buttons, and 20% of these buttons are red. How many buttons in the jar are red?
