@@ -1,0 +1,6 @@
+## 1819
+The graph of $y=g(x)$ is shown, where the function $g$ is defined by $g(x)=f(x+a)+b$. If the function $f$ is defined by $f(x)=x^3$, what is the value of $a+b$?<p></p>[[fig:q1819]]
+@ $-5$ | $-1$ | 1 | 5
+## 1836
+A toy car rolls along an elevated track. A quadratic model gives its height $y$, in inches, $x$ seconds after it starts moving. At $x=1$, its height is 11 inches. At $x=5$, it reaches a minimum height of 2 inches. Which graph could represent the model?<p></p>[[fig:q1836]]
+@ Graph A | Graph B | Graph C | Graph D
