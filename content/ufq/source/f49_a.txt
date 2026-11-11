@@ -1,0 +1,3 @@
+## 2032
+The graph of $y=f(x)+2$ is shown, where $f$ is defined by an equation of the form $f(x)=a(b)^x+c$. If $a$, $b$, and $c$ are integers and $c\le0$, which equation could define $f$?<p></p>[[fig:q2032]]
+@ $f(x)=-5(3)^x$ | $f(x)=-5(3)^x-1$ | $f(x)=-5(3)^x-3$ | $f(x)=-5(3)^x-5$
