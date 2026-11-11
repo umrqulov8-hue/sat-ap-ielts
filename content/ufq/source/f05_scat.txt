@@ -1,0 +1,39 @@
+## 2463
+A researcher is investigating the relationship between the price of a four-pack of AA batteries at a convenience store and the number of competitors the store has. She defines a store's competitor as another similar store within a 1-mile radius of the store she selects. She selects 32 convenience stores across a state at random, and for each store, she records the number of its competitors and its price for a four-pack of AA batteries. The results are shown, along with the line of best fit, in the scatterplot.<p>The line of best fit passes through the point $(18,-0.12)$. Which of the following can be concluded from this?</p><p></p>[[fig:q2463]]
+@ The line of best fit will not model the price well for a store with a large number of competitors. | A convenience store with 17 competitors can no longer sell four-packs of AA batteries. | A convenience store with 17 competitors cannot decrease its price any further. | A convenience store cannot have more than 17 competitors.
+## 2464
+Which equation is the most appropriate model for the data in the scatterplot?<p></p>[[fig:q2464]]
+@ $y=-(1.56)^{-x}+6$ | $y=-(1.56)^x+6$ | $y=(1.56)^{-x}-6$ | $y=(1.56)^{-x}+5$
+## 2465
+The scatterplot gives the latitude $L$, in degrees north, and annual mean temperature $T$, in degrees Fahrenheit (°F), for 19 different locations in Alaska. A line of best fit for the data is also shown. The equation of the line of best fit is $T=-1.71L+136$.<p>Saint Paul Island, Alaska, is one of the 19 locations shown in the scatterplot. It has a latitude of 57.2 degrees north and an annual mean temperature of 35°F. How many locations shown in the scatterplot have both a greater north latitude and a greater annual mean temperature, in °F, than Saint Paul Island?</p><p></p>[[fig:q2465]]
+@ Two | Four | Six | Nine
+## 2466
+The scatterplot above shows the perihelion distance, in astronomical units (AU), and the orbital eccentricity for a random sample of ten comets. The line of best fit for the data is also shown.<p>According to the line of best fit, which of the following best predicts the orbital eccentricity of a comet with a perihelion distance of 0.75 AU?</p><p></p>[[fig:q2466]]
+@ 0.61 | 0.78 | 0.87 | 0.95
+## 2467
+The scatterplot above shows the perihelion distance, in astronomical units (AU), and the orbital eccentricity for a random sample of ten comets. The line of best fit for the data is also shown.<p>A scientist reports the perihelion distance of an eleventh comet to be 0.23 AU and the orbital eccentricity to be 0.99. Which of the following statements best describes the orbital eccentricity?</p><p></p>[[fig:q2467]]
+@ It is approximately 0.08 greater than the value predicted by the line of best fit. | It is approximately 0.08 less than the value predicted by the line of best fit. | It is approximately 0.22 greater than the value predicted by the line of best fit. | It is the value predicted by the line of best fit.
+## 2468
+The scatter plot and the line of best fit of data set $A$ with the equation $y=0.07x^2+0.05x+6.33$ is shown. If the point $h$ is removed from data set $A$ to create data set $B$ with the equation $y=ax^2+bx+c$, which of the following is true?<p>I. $a>0.07$<br>II. $c<6.33$</p><p></p>[[fig:q2468]]
+@ I only | II only | I and II | Neither I nor II
+## 2469
+The scatterplot above shows the relationship between the number of tickets sold and the price per ticket for 9 different concerts. The line of best fit is also shown.<p>For a concert where the ticket price was \$100, the line of best fit correctly predicted the number of tickets sold. How many tickets were sold at that concert?</p><p></p>[[fig:q2469]]
+@ 6,000 | 8,000 | 10,000 | 12,000
+## 2470
+<p><b>Townsend Realty Group Investments</b></p><table><thead><tr><th>Property address</th><th>Purchase price (dollars)</th><th>Monthly rental price (dollars)</th></tr></thead><tbody><tr><td>Clearwater Lane</td><td>128,000</td><td>950</td></tr><tr><td>Driftwood Drive</td><td>176,000</td><td>1,310</td></tr><tr><td>Edgemont Street</td><td>70,000</td><td>515</td></tr><tr><td>Glenview Street</td><td>140,000</td><td>1,040</td></tr><tr><td>Hamilton Circle</td><td>450,000</td><td>3,365</td></tr></tbody></table><p>The Townsend Realty Group invested in the five properties listed in the table above. The table shows the amount, in dollars, the company paid for each property and the corresponding monthly rental price, in dollars, the company charges for the property at each of the five locations.</p><p>The relationship between the monthly rental price $r$, in dollars, and the property's purchase price $p$, in thousands of dollars, can be represented by a linear function. Which of the following functions represents the relationship?</p>
+@ $r(p)=2.5p-870$ | $r(p)=5p+165$ | $r(p)=6.5p+440$ | $r(p)=7.5p-10$
+## 2482
+A researcher is investigating the relationship between the price of a four-pack of AA batteries at a convenience store and the number of competitors the store has. She defines a store's competitor as another similar store within a 1-mile radius of the store she selects. She selects 32 convenience stores across a state at random, and for each store, she records the number of its competitors and its price for a four-pack of AA batteries. The results are shown, along with the line of best fit, in the scatterplot.<p>Another convenience store in the same state sells a four-pack of AA batteries for \$4.89. If the store's price is more than that predicted by the line of best fit, what is the <u>least</u> number of competitors the store could have?</p><p></p>[[fig:q2482]]
+@ 1 | 2 | 3 | 4
+## 2483
+Which linear equation best models the scatterplot?<p></p>[[fig:q2483]]
+@ $d=-65.1+2.02t$ | $d=165.1+2.02t$ | $d=354.8+2.02t$ | $d=389.8+2.02t$
+## 2484
+The scatterplot shows the relationship, in thousands of square feet, between the area of 12 clothing stores and their annual sales, in millions of dollars. Based on the trend, which is the best prediction for annual sales, in millions of dollars, for a store with an area of 4 thousand square feet?<p></p>[[fig:q2484]]
+@ 10.1 | 7.4 | 5.4 | 4.1
+## 2485
+The scatterplot shows temperatures and elevations at six mountain locations. A line of best fit is shown. At an elevation of 4,000 feet, what temperature, in °F, does the line predict?<p></p>[[fig:q2485]]
+@ 54 | 30 | 15 | 0
+## 2496
+The scatterplot shows the relationship between the square footage of 12 clothing stores and their annual sales, in millions of dollars. According to the trend shown by the data, which of the following is the best prediction for the annual sales, in millions of dollars, of a clothing store that has 4 thousand square feet?<p></p>[[fig:q2496]]
+@ 4.1 | 5.4 | 7.5 | 10.2
