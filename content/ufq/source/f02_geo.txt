@@ -1,0 +1,15 @@
+## 2661
+In the figure, parallel lines $p$ and $q$ are intersected by transversal $t$. What is $x$?<p></p>[[fig:q2661]]
+@ 57 | 90 | 147 | 33
+## 2672
+Note: Figure not drawn to scale. For triangle $ABC$, the length of $AB$ is 11 less than the length of $AC$. Point $D$ (not shown) lies on $AC$ such that $BD$ (not shown) is perpendicular to $AC$. What is the value of $\frac{BC}{BD}$?<p></p>[[fig:q2672]]
+## 2673
+Note: Figure not drawn to scale. In the triangle shown, $PQ=QR$. What is the value of $x$?<p></p>[[fig:q2673]]
+@ 159 | 69 | 42 | 21
+## 2674
+Note: Figure not drawn to scale. For triangle $ABC$, the length of $AB$ is 11 less than the length of $AC$. Point $D$ (not shown) lies on $AC$ such that $BD$ (not shown) is perpendicular to $AC$. What is the value of $\frac{BC}{BD}$?<p></p>[[fig:q2674]]
+## 2677
+Note: Figure not drawn to scale. In the triangle shown, $PQ=QR$. What is the value of $x$?<p></p>[[fig:q2677]]
+@ 162 | 72 | 36 | 18
+## 2678
+In the figure above, $MN=NP$ and $MQ=QP$ (the kite $MNPO$ with $MO=PO$). What is the value of $x$?<p></p>[[fig:q2678]]
