@@ -1,0 +1,6 @@
+## 3014
+Not drawn to scale. In the figure shown, $JM$ is the diameter and $LM$ is a radius of semicircle $L$, and point $K$ is the midpoint of $JL$. If the length of $KL$ is 14 units and the length of $MN$ is 16 units, which expression represents the area, in square units, of this figure?<p></p>[[fig:q3014]]
+@ $448+392\pi$ | $672+392\pi$ | $448+784\pi$ | $672+784\pi$
+## 3022
+Note: Figure not drawn to scale. In the figure shown, $\overline{JM}$ is the diameter and $\overline{LM}$ is a radius of semicircle $L$, and point $K$ is the midpoint of $\overline{JL}$. If the length of $\overline{KL}$ is 13 units and the length of $\overline{MN}$ is 14 units, which expression represents the area, in square units, of this figure?<p></p>[[fig:q3022]]
+@ $546+676\pi$ | $364+676\pi$ | $546+338\pi$ | $364+338\pi$
