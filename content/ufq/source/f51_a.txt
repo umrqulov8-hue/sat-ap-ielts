@@ -1,0 +1,8 @@
+## 2170
+Which of the following is the graph of $y=2x+3$ in the $xy$-plane?<p></p>[[fig:q2170]]
+@ Graph A | Graph B | Graph C | Graph D
+## 2182
+The function $F$ is defined by $F(x)=2x^2-8x+5$, the graph of $y=F(x-h)$ is shown in the $xy$-plane below. What is the value of $h$?<p></p>[[fig:q2182]]
+## 2189
+The graph of $y=f(x)$ is shown in the $xy$-plane. If the function $g$ is defined by $g(x)=(x+3)(x-1)$, for which of the following values of $x$ is $f(x)>g(x)$?<p></p>[[fig:q2189]]
+@ $-3$ | $-2$ | 1 | 2
