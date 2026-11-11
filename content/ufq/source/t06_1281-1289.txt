@@ -1,0 +1,24 @@
+## 1281
+Roberto is an insurance agent who sells two types of policies: a \$50,000 policy and a \$100,000 policy. Last month, his goal was to sell at least 57 insurance policies. While he did not meet his goal, the total value of the policies he sold was over \$3,000,000. Which of the following systems of inequalities describes $x$, the possible number of \$50,000 policies, and $y$, the possible number of \$100,000 policies, that Roberto sold last month?
+@ $x+y<57$ and $50{,}000x+100{,}000y<3{,}000{,}000$ | $x+y>57$ and $50{,}000x+100{,}000y>3{,}000{,}000$ | $x+y<57$ and $50{,}000x+100{,}000y>3{,}000{,}000$ | $x+y>57$ and $50{,}000x+100{,}000y<3{,}000{,}000$
+## 1282
+The manager of a toy store compares the cost of ordering model cars from two toy companies. Both companies charge a flat fee plus a fixed cost per car.<br>- Company A charges a total cost of $50+5n$ dollars for an order of $n$ cars (for $0<n\le30$).<br>- The total cost, in dollars, that Company C charges for an order of $n$ cars is given by the function $c(n)=4n+80$, where $n>0$.<br><br>The manager wants to order at least 12 cars from Company C but spend no more than \$250 on the order. Which of the following systems of inequalities represents these constraints?
+@ $n\ge12$ and $4n+80\le250$ | $n\ge12$ and $4n-80\le250$ | $n\le12$ and $4n+80\ge250$ | $n\le12$ and $4n+80\le250$
+## 1283
+A soccer team needs new supplies. The team will buy $x$ soccer balls at \$19.50 each and $y$ pairs of shin guards at \$12.25 per pair. The soccer team cannot spend more than \$350. Every player needs a pair of shin guards, so the team will buy at least 11 pairs. Which of the following systems of inequalities gives the possible number of soccer balls and pairs of shin guards the team can buy and meet the given condition?
+@ $12.25x+19.50\ge350$ and $x\ge11$ | $12.25x+19.50y\le350$ and $x\ge11$ | $19.50x+12.25y\ge350$ and $y\ge11$ | $19.50x+12.25y\le350$ and $y\ge11$
+## 1284
+Which of the following tables has all the values of $x$ and their corresponding values of $y$ as solutions to the inequality $y<15x+13$?
+@ Table A: $(2,26)$, $(4,90)$, $(6,86)$ | Table B: $(2,26)$, $(4,56)$, $(6,86)$ | Table C: $(2,43)$, $(4,73)$, $(6,103)$ | Table D: $(2,18)$, $(4,74)$, $(6,102)$
+## 1286
+Claire, a metalsmith, has 500 grams (g) of sterling silver. She wants to use the sterling silver to create at least 20 rings and at least 10 bracelets. She uses 3 g of sterling silver to create each ring and 40 g of sterling silver to create each bracelet. Which of the following systems of inequalities represents this situation, where $r$ is the number of rings and $b$ is the number of bracelets Claire can create with the sterling silver?
+@ $3r+40b\le500$, $r\ge3$, and $b\ge40$ | $3r+40b\le500$, $r\ge20$, and $b\ge10$ | $20r+10b\le500$, $r\ge3$, and $b\ge40$ | $20r+10b\le500$, $r\ge20$, and $b\ge10$
+## 1287
+Marisa needs to hire at least 10 staff members for an upcoming project. The staff members will be made up of junior directors, who will be paid \$640 per week, and senior directors, who will be paid \$880 per week. Her budget for paying the staff members is no more than \$9,700 per week. She must hire at least 3 junior directors and at least 1 senior director. Which of the following systems of inequalities represents the conditions described if $x$ is the number of junior directors and $y$ is the number of senior directors?
+@ $640x+880y\ge9{,}700$, $x+y\le10$, $x\ge3$, and $y\ge1$ | $640x+880y\le9{,}700$, $x+y\ge10$, $x\ge3$, and $y\ge1$ | $640x+880y\ge9{,}700$, $x+y\ge10$, $x\le3$, and $y\le1$ | $640x+880y\le9{,}700$, $x+y\le10$, $x\le3$, and $y\le1$
+## 1288
+A landscaper will plant two types of shrubs, hydrangeas and winter hazels, in a park. There will be no more than 244 total shrubs planted, and the number of hydrangeas planted will be at most three times the number of winter hazels planted. Which system of inequalities best represents this situation?
+@ $h+w\le244$ and $h\le3w$ | $h+w\le244$ and $3h\ge w$ | $h+w\ge244$ and $h\le3w$ | $h+w\ge244$ and $3h\ge w$
+## 1289
+A snack company advertises that bags of pretzels produced by the company weigh, on average, 1 pound each. To test this, Sam selected at random 40 bags of pretzels produced by the company and weighed each bag. Based on his measurements, Sam estimated that for all bags of pretzels produced by the company, the average weight per bag is 1.05 pounds, with a margin of error of 0.06 pounds. For all bags of pretzels produced by the company, which of the following is the most appropriate conclusion about the average weight $w$, in pounds, per bag?
+@ $0.99\le w\le1.05$ | $w=1.05$ | $1.05\le w\le1.11$ | $0.99\le w\le1.11$

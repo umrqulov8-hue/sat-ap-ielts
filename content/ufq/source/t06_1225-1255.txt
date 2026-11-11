@@ -1,0 +1,78 @@
+## 1225
+Pilar has spent \$183 on office supplies for her business this month. She does not want her total monthly expenses on office supplies to exceed her budget of \$266. What is the maximum amount of additional money Pilar can spend on office supplies this month and not exceed her budget?
+@ \$83 | \$183 | \$266 | \$449
+## 1227
+Ken is working this summer as part of a crew on a farm. He earned \$8 per hour for the first 10 hours he worked this week. Because of his performance, his crew leader raised his salary to \$10 per hour for the rest of the week. Ken saves 90% of his earnings from each week. What is the least number of hours he must work the rest of the week to save at least \$270 for the week?
+@ 38 | 33 | 22 | 16
+## 1228
+Every Saturday, Bob bakes loaves of bread to sell at the farmer's market. Each loaf costs him \$1 to make, and he sells the loaves for \$3 each. He also pays a vendor's fee of \$75 every Saturday to set up his booth. What is the least number of loaves of bread Bob needs to sell every Saturday to cover the cost of the vendor's fee?
+@ 38 | 37 | 25 | 19
+## 1229
+A car manufacturer is shipping two types of cars across the Atlantic Ocean on a car ferry. Car A is 3 tons and Car B is 6 tons. The car manufacturer wants to transfer at least 50% more of Car A than Car B. The ferry can transport up to 230 tons of cars and hold no more than 50 cars. What is the maximum number of Car B cars that can be transported on the ferry?
+## 1230
+<p style="text-align:center">$r>0.24t$</p><p>The inequality describes the total rainfall $r$, in inches, over $t$ hours, where $0<t\le4$. Which describes this rainfall?</p>
+@ More than 0.24 inches per hour | Exactly 0.24 inches per hour | Exactly 4 inches total | More than 4 inches total
+## 1231
+In a city transit system, bus rides cost \$2 each and subway rides cost \$3 each. Last month, Brianna spent no more than \$56 on bus and subway rides, and she paid for at least 20 bus rides. What is the greatest possible number of subway rides Brianna could have paid for last month?
+@ 3 | 4 | 5 | 6
+## 1232
+<p style="text-align:center">$r>0.54t$</p><p>The inequality describes the total rainfall $r$, in inches, over $t$ hours, where $0<t\le4$. Which describes this rainfall?</p>
+@ Exactly 0.54 inches per hour | More than 0.54 inches per hour | More than 4 inches total | Exactly 4 inches total
+## 1233
+A newborn panda weighs between $\frac{1}{950}$ and $\frac{1}{850}$ of its mother's weight. Its mother weighs 112,100 grams. Which inequality gives the range of possible weights $p$, in grams, of the newborn?
+@ $11.8\le p<13.189$ | $118\le p<131.89$ | $1180\le p<1318.9$ | $11800\le p<13189$
+## 1234
+At a Mexican restaurant tacos cost \$3 and burritos cost \$6. If a group of students spends at least \$30 but at most \$45 on 5 tacos and $n$ burritos, which of the following is true about $n$?
+@ $33\le n\le45$ | $18\le n\le30$ | $12\le n\le15$ | $3\le n\le5$
+## 1235
+A museum sells only three types of tickets: child, adult, and senior tickets. On Friday, 340 tickets were sold, of which 95 were child tickets. The number of child tickets sold was more than the number of senior tickets sold but less than the number of adult tickets sold. What is the least possible number of adult tickets sold on Friday?
+@ 149 | 151 | 244 | 245
+## 1236
+A biologist records coconut crabs' pinching forces. The minimum is 86.2 newtons and the maximum is 121.4 newtons. Which inequality is true for every recorded force $c$?
+@ $c<86.2$ | $c>121.4$ | $43.1\le c\le60.7$ | $86.2\le c\le121.4$
+## 1239
+A car travels at a speed of at least 40 miles per hour but no more than 50 miles per hour for a certain part of a trip. Which inequality represents this situation, where $x$ is the speed of the car, in miles per hour, on this part of the trip?
+@ $x\ge40$ | $x\ge50$ | $40\le x\le50$ | $x\le90$
+## 1240
+A biologist records coconut crabs' pinching forces. The minimum is 87.1 newtons and the maximum is 120.3 newtons. Which inequality is true for every recorded force $c$?
+@ $c<87.1$ | $c>120.3$ | $43.55\le c\le60.15$ | $87.1\le c\le120.3$
+## 1241
+At the beginning of a laboratory experiment, Miguel had 10 milliliters of a solution in a flask. The first step of the experiment consisted of Miguel pouring $x$ milliliters of the solution into a beaker and $y$ milliliters of the solution into a different beaker. There remained at least 4 milliliters of the solution in the flask after the first step. Which of the following inequalities can be used to correctly represent this situation?
+@ $10-x-y\ge4$ | $10-x+y\ge4$ | $4-x-y\ge5$ | $4-x+y\ge5$
+## 1242
+A group of teachers and students will take a bus trip to a museum, and each teacher will lead a group of no more than 4 students. The bus can hold a maximum of 54 teachers and students. If $t$ represents the number of teachers and $s$ represents the number of students, which of the following systems of inequalities best describes the possible numbers of teachers and students who can go on the trip?
+@ $t+s\ge54$ and $t\le4s$ | $t+s\le54$ and $t\ge4s$ | $t+s\le54$ and $t\le\frac{s}{4}$ | $t+s\le54$ and $t\ge\frac{s}{4}$
+## 1244
+A nursery classifies a perennial flower species as tall if its typical height when fully grown is more than 100 centimeters. Which inequality represents the possible heights $h$, in centimeters, of a tall perennial flower species?
+@ $18<h<94$ | $42<h<87$ | $75<h<100$ | $110<h<151$
+## 1245
+<table><thead><tr><th>$c$</th><th>$p$</th></tr></thead><tbody><tr><td>2</td><td>81</td></tr><tr><td>5</td><td>189</td></tr><tr><td>10</td><td>369</td></tr></tbody></table><p>The table shows the relationship between the number of cars $c$ on a train and the maximum number of passengers and crew $p$ it can carry. Which equation represents this relationship?</p>
+@ $36c-p=-9$ | $36c-p=9$ | $36p-c=-9$ | $36p-c=9$
+## 1246
+Imani starts the year with \$180 in an account. Each month she deposits at least \$15 and at most \$30. There are no other deposits, withdrawals, interest, or fees. Which inequality gives all possible account balances $x$, in dollars, after 10 monthly deposits?
+@ $x\le150$ | $x\ge300$ | $180\le x\le405$ | $330\le x\le480$
+## 1247
+In a set of four consecutive odd integers, where the integers are ordered from least to greatest, the first integer is represented by $x$. The product of 18 and the fourth odd integer is at most 22 less than the sum of the first and third odd integers. Which inequality represents this situation?
+@ $18(x+6)\le x+(x+4)-22$ | $18(x+6)\ge22-(x+(x+4))$ | $18(x+4)\le x+(x+3)-22$ | $18(x+4)\ge22-(x+(x+3))$
+## 1248
+Each 1-acre section of a farmer's field contains either wheat or corn. In one year, the farmer expects a yield of 40 to 44 bushels of wheat per acre of wheat planted. The yield of corn for each acre of corn planted is expected to be 4 times the yield of wheat for each acre of wheat. The farmer's goal for this year is to have a yield of at least 26,900 total bushels of wheat and corn. Based on the expected yields, if the farmer plants 80 acres of wheat, what is the minimum number of whole acres of corn the farmer must plant to ensure the goal is met?
+## 1249
+A student needs at least 80 signatures from classmates to run for class secretary. The student collects 35 signatures on Monday and collects enough additional signatures on Tuesday to run for class secretary. Which inequality represents the number of additional signatures, $s$, that the student collects on Tuesday?
+@ $s+35\le80$ | $s+35\ge80$ | $s-35\le80$ | $s-35\ge80$
+## 1250
+At the beginning of the year, Imani has \$170 in her account. Each month she deposits at least \$30 and at most \$60. She makes no withdrawals, and the account earns no interest. Which inequality gives all possible balances $x$, in dollars, after 10 months?
+@ $x\le300$ | $x\ge600$ | $170\le x\le620$ | $470\le x\le770$
+## 1251
+A student needs at least 100 signatures from classmates to run for class president. The student collects 60 signatures on Monday and collects enough additional signatures on Tuesday to run for class president. Which inequality represents the number of additional signatures, $s$, that the student collects on Tuesday?
+@ $s+60\le100$ | $s+60\ge100$ | $s-60\le100$ | $s-60\ge100$
+## 1252
+In a set of four consecutive odd integers, where the integers are ordered from least to greatest, the first integer is represented by $x$. The product of 28 and the third odd integer in the set is at most the value of 50 less than the sum of the first and fourth odd integers in the set. What is the greatest possible value of $x$?
+## 1253
+<p style="text-align:center">$y>2x-1$<br>$2x>5$</p><p>Which of the following consists of the $y$-coordinates of all the points that satisfy the system of inequalities above?</p>
+@ $y>6$ | $y>4$ | $y>\frac{5}{2}$ | $y>\frac{3}{2}$
+## 1254
+A local movie theater is holding a fund-raiser for the South School. For each child ticket sold, the theater will donate \$2.25. For each adult ticket sold, the theater will donate \$3.50. Assuming the theater will sell 150 child tickets, which inequality can be used to determine the number of adult tickets, $x$, that will need to sell in order to donate at least \$1,000 to South School?
+@ $3.5x\le662.5$ | $3.5x\ge662.5$ | $3.5x\le1{,}337.5$ | $3.5x\ge1{,}337.5$
+## 1255
+A soccer team's goal is to earn at least \$1,320 by selling coupon books. The team earns \$12 from selling each coupon book. Which of the following inequalities describes all possible values for the number of coupon books, $n$, the team can sell to meet the goal?
+@ $n+12\le1{,}320$ | $n+12\ge1{,}320$ | $12n\le1{,}320$ | $12n\ge1{,}320$

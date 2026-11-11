@@ -1,0 +1,98 @@
+## 1185
+When 9 is increased by $3x$, the result is greater than 36. What is the least possible integer value for $x$?
+## 1186
+If 3 times $k$ is equal to 15, what is 4 more than $k$?
+@ 7 | 9 | 19 | 49
+## 1187
+A number $x$ is at most 27 less than 3 times $y$. If $y=8$, what is the greatest possible value of $x$?
+## 1188
+3 consecutive even integers are ordered from smallest to largest. 5 times the first integer is at least 9 more than the sum of the second and third integers. What is the minimum possible value for the second integer?
+## 1189
+If $x\ge-8$ represents all solutions to the inequality $ax-16\le24$, where $a$ is a constant, what is the value of $a$?
+## 1190
+If $x\ge-8$ represents all solutions to the inequality $ax-12\le36$, where $a$ is a constant, what is the value of $a$?
+## 1192
+A store sells both large and small packages of pencils. The large package contains 50 pencils, which is 6 less than 7 times the number of pencils in the small package. How many pencils are in the small package?
+## 1193
+For a party, 41 hamburger buns are needed. Hamburger buns are sold in packages of 8. What is the minimum number of packages that should be bought for the party?
+## 1194
+For a workshop, 73 markers are needed. Markers are sold in packages of 12. What is the minimum number of packages that should be bought?
+## 1195
+<p style="text-align:center">$f(x)=(x-a)(x-b)$</p><p>The function $f$ is defined above, where $a$ and $b$ are integer constants. If $f(1)>0$, $f(4)<0$, and $f(7)>0$, what is one possible value of $a+b$?</p>
+## 1196
+For 5 consecutive even integers, the sum of the first and third integers is 20 less than 3 times the fourth integer. What is the fifth integer?
+@ 12 | 14 | 16 | 26
+## 1197
+To compete against other boxers in the welterweight class, a boxer must weigh at least 140 pounds but no more than 147 pounds. If 1 stone is equal to 14 pounds, what is one possible weight, in stones, for a welterweight boxer?
+## 1198
+<p style="text-align:center">$4x-2y>8$</p><p>Which of the following ordered pairs $(x,y)$ are in the solution set for the inequality above?</p><p>I. $(-1,-10)$<br>II. $(2,0)$<br>III. $(1,-2)$</p>
+@ I only | II only | III only | I and II only
+## 1199
+<p>Which of the following ordered pairs $(x,y)$ satisfies the inequality $5x-3y<4$?</p><p>I. $(1,1)$<br>II. $(2,5)$<br>III. $(3,2)$</p>
+@ I only | II only | I and II only | I and III only
+## 1200
+Which region contains no solutions to $7x-4y>28$?
+@ $x<0$ and $y>0$ | $x<0$ and $y<0$ | $x>0$ and $y>0$ | The $x$-axis
+## 1201
+<p style="text-align:center">$6x-9y>12$</p><p>Which of the following inequalities is equivalent to the inequality above?</p>
+@ $x-y>2$ | $2x-3y>4$ | $3x-2y>4$ | $3y-2x>2$
+## 1202
+Which region contains no solutions to $4x-9y>36$?
+@ $x<0$ and $y>0$ | $x<0$ and $y<0$ | $x>0$ and $y>0$ | The $x$-axis
+## 1203
+A recipe recommends cooking a roast between 35 and 45 minutes per pound. Which of the following cooking times for a 10-pound roast follows the recommendation?
+@ 100 minutes | 300 minutes | 400 minutes | 500 minutes
+## 1204
+A degree requires at least 120 credit hours. A student has completed 42 credit hours. What is the minimum number of additional credit hours needed?
+@ 162 | 120 | 84 | 78
+## 1205
+The minimum value of $x$ is 4 less than 7 times another number $n$. Which inequality shows the possible values of $x$?
+@ $x\le7n-4$ | $x\ge7n-4$ | $x\le4-7n$ | $x\ge4-7n$
+## 1206
+<p style="text-align:center">$(x-p)(x-3)>0$</p><p>In the inequality above, $p$ is a constant. If the solution set for the inequality consists of the values of $x$ such that $x<3$ or $x>5$, what is the value of $p$?</p>
+@ -5 | 0 | 2 | 5
+## 1207
+Carmen needs at least 100 signatures to submit a petition. If Carmen already has 76 signatures, what is the minimum number of additional signatures Carmen needs to submit the petition?
+@ 24 | 66 | 76 | 176
+## 1208
+A certain package requires 3 centimeters of tape to be closed securely. What is the maximum number of packages of this type that can be secured with 6 meters of tape? (1 meter $=$ 100 cm)
+@ 100 | 150 | 200 | 300
+## 1209
+The minimum value of $x$ is 9 less than 6 times another number $n$. Which inequality shows the possible values of $x$?
+@ $x\le6n-9$ | $x\ge6n-9$ | $x\le9-6n$ | $x\ge9-6n$
+## 1210
+The shaded region in the $xy$-plane lies above the solid boundary line that passes through the points $(0,6)$ and $(4,0)$, and includes that line. Which inequality represents the region?
+@ $3x+2y\le12$ | $3x-2y\ge12$ | $3x+2y\ge12$ | $2x+3y\ge12$
+## 1211
+The sum of 3 and $a$ is less than the product of $\frac{b}{2}$ and 4. The statement above is equivalent to which of the following inequalities?
+@ $3<a+2b$ | $3a<2+b$ | $a+3<2b$ | $a+3>2b$
+## 1212
+A small business owner budgets \$2,200 to purchase candles. The owner must purchase a minimum of 200 candles to maintain the discounted pricing. If the owner pays \$4.90 per candle to purchase small candles and \$11.60 per candle to purchase large candles, what is the maximum number of large candles the owner can purchase to stay within the budget and maintain the discounted pricing?
+## 1213
+A company decides to sponsor an employee bowling team. The cost to form the team is \$180 per team member plus a onetime \$25 team-registration fee. What is the maximum number of team members who can join the team, if the company can spend \$925 for the bowling team?
+## 1214
+<p style="text-align:center">$y\le3x+1$<br>$x-y>1$</p><p>Which of the following ordered pairs $(x,y)$ satisfies the system of inequalities above?</p>
+@ $(-2,-1)$ | $(-1,3)$ | $(1,5)$ | $(2,-1)$
+## 1215
+An event planner is planning an ice-skating event. It costs the event planner a onetime fee of \$50 to rent the skating rink and \$10.50 per attendee. The event planner has a budget of \$250. What is the greatest number of attendees possible without exceeding the budget?
+## 1216
+An event planner is planning an ice-skating event. It costs the event planner a onetime fee of \$35 to rent the skating rink and \$14.75 per attendee. The event planner has a budget of \$275. What is the greatest number of attendees possible without exceeding the budget?
+## 1217
+A school rents equipment for a one-time delivery fee of \$48 plus \$17 for each hour of use. There are no other charges. The equipment can be rented only for a whole number of hours. The school can spend at most \$250 on the rental. What is the maximum number of hours for which the school can rent the equipment?
+## 1218
+<p style="text-align:center">$y\ge-2x+11$<br>$y>3x-9$</p><p>In the $xy$-plane, point $A$ is contained in the graph of the solution set of the system of inequalities above. Which of the following could be the coordinates of point $A$?</p>
+@ $(2,1)$ | $(4,1)$ | $(4,5)$ | $(6,6)$
+## 1219
+A snack stand sells bags of popcorn for \$1 each and bags of peanuts for \$2 each. If no more than \$30 worth of bags of popcorn and bags of peanuts were sold one evening, and at least 8 of the bags sold were popcorn, what is the maximum number of bags of peanuts that could have been sold that evening?
+@ 7 | 11 | 14 | 16
+## 1220
+In the $xy$-plane, which of the following does NOT contain any points that are part of the solution set to $3x-4y>12$?
+@ The region where $x<0$ and $y>0$ | The region where $x<0$ and $y<0$ | The region where $x>0$ and $y>0$ | The $x$-axis
+## 1221
+Each variety A tomato plant yields between 9 and 15 pounds, and each variety B plant yields between 22 and 26 pounds, inclusive, in one growing season. Scientists will grow 18 variety A plants. What is the minimum number of variety B plants needed to guarantee a total yield of at least 656 pounds for every yield within these ranges?
+## 1222
+For a psychology class, a student's research paper needs to have no more than 5,000 words. If a student has already written 3,029 words, what is the maximum number of additional words the student can write for the research paper?
+@ 8,029 | 5,000 | 3,029 | 1,971
+## 1223
+The manager of a toy store compares the cost of ordering model cars from two toy companies. Both companies charge a flat fee plus a fixed cost per car.<br>- Company A charges a total cost of $50+5n$ dollars for an order of $n$ cars (for $0<n\le30$).<br>- The total cost, in dollars, that Company C charges for an order of $n$ cars is given by the function $c(n)=4n+80$, where $n>0$.<br><br>If the total cost of purchasing $n$ cars from Company C is less than the total cost of purchasing $n$ cars from Company A, which of the following inequalities represents all possible values of $n$?
+@ $0\le n<30$ | $0\le n<200$ | $30\le n<200$ | $30<n$

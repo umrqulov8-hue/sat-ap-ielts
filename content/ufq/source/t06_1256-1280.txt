@@ -1,0 +1,72 @@
+## 1256
+A soccer team's goal is to earn at least \$1,800 by selling coupon books. The team earns \$15 from selling each coupon book. Which of the following inequalities describes all possible values for the number of coupon books, $n$, the team can sell to meet the goal?
+@ $n+15\le1{,}800$ | $n+15\ge1{,}800$ | $15n\le1{,}800$ | $15n\ge1{,}800$
+## 1257
+A campaign organizer is setting up tables for an event. The tables come in two sizes: small and large. Each of the small tables can seat 4 people and each of the large tables can seat 8 people. The event needs to seat at least 85 people. Which inequality represents this situation, where $x$ is the number of small tables and $y$ is the number of large tables the organizer is setting up for the event?
+@ $4x+8y\ge85$ | $4x+8y\le85$ | $8x+4y\ge85$ | $8x+4y\le85$
+## 1258
+A restaurant can seat up to 120 people for an event using tables of two different sizes. The inequality $4S+8L\le120$ represents this situation, where $S$ is the number of small tables and $L$ is the number of large tables used for an event. What is the best interpretation of 4 in this context?
+@ Each small table can seat 4 people. | Each large table can seat 4 people. | The restaurant can hold at most 4 large tables. | The restaurant can hold at most 4 small tables.
+## 1259
+Eight resistors are connected in series in a circuit, and each resistor has a positive resistance. The total resistance is 116 ohms. The sum of the resistances of three of the resistors is 80 ohms. Which inequality represents all possible values of the resistance $x$, in ohms, of one of the remaining five resistors?
+@ $0<x<7.2$ | $0<x<36$ | $36<x<80$ | $36<x<116$
+## 1260
+Sam needs to rent a truck to move furniture. Rental Truck Company A charges \$29 per day plus \$0.60 per mile driven. Rental Truck Company B charges \$59 per day and has no charge per mile driven. Sam will rent the truck for 3 days and drive a total of $x$ miles. The solution to which of the following inequalities is all values of $x$ for which the total charge for renting from Company B will be less than the total charge for renting from Company A?
+@ $x>50$ | $x>107$ | $x>150$ | $x>440$
+## 1262
+Doctors recommend that a five-year-old child consume at least 1,000 milligrams (mg), but no more than 2,500 mg, of calcium per day. A slice of cheese contains 290 mg of calcium. If a five-year-old child's calcium consumption comes solely from $c$ slices of cheese and stays within the recommended daily allowance of calcium, which of the following inequalities must be true?
+@ $290\le1{,}000c\le2{,}500$ | $500\le290c\le1{,}000$ | $1{,}000\le290c\le2{,}500$ | $1{,}000c\ge2{,}500$
+## 1263
+A campaign organizer is setting up tables for an event. The tables come in two sizes: small and large. Each of the small tables can seat 6 people and each of the large tables can seat 8 people. The event needs to seat at least 95 people. Which inequality represents this situation, where $x$ is the number of small tables and $y$ is the number of large tables the organizer is setting up for the event?
+@ $6x+8y\ge95$ | $6x+8y\le95$ | $8x+6y\ge95$ | $8x+6y\le95$
+## 1264
+Fred wants to save enough money to pay for a car that costs \$7,500 and 12 months of insurance that costs \$110 per month. Fred has already saved \$6,000 and plans to save an additional \$350 per month. Which inequality can be used to determine the number of months, $x$, Fred could save in order to have enough money to buy the car and pay for 12 months of insurance?
+@ $7{,}500-110x\le6{,}000-250(12)$ | $7{,}500+110x\le6{,}000+250(12)$ | $7{,}500-110(12)\le6{,}000-350x$ | $7{,}500+110(12)\le6{,}000+350x$
+## 1265
+An electronics store offers its employees two different compensation plans. Employees on Plan A earn \$500 per week plus a 25% commission on their weekly sales of the products. Employees on Plan B earn \$750 per week plus a 15% commission on their weekly sales of the products. Which inequality describes the amount in sales each week, $x$ dollars, for which employees on Plan A earn more than employees on Plan B?
+@ $x<1{,}250$ | $x>1{,}250$ | $x<2{,}500$ | $x>2{,}500$
+## 1266
+<table><thead><tr><th>Speed (mph)</th><th>Pitchers</th></tr></thead><tbody><tr><td>$30\le$ speed $<35$</td><td>11</td></tr><tr><td>$35\le$ speed $<40$</td><td>5</td></tr><tr><td>$40\le$ speed $<45$</td><td>4</td></tr><tr><td>$45\le$ speed $<50$</td><td>1</td></tr></tbody></table><p>The table summarizes average pitching speeds for 21 pitchers in a youth softball league. How many pitchers had an average speed of at least 30 mph but less than 35 mph?</p>
+@ 11 | 5 | 4 | 1
+## 1267
+Ryan has 1,500 yards of yarn. He wants to knit at least 2 scarves and at least 3 hats. Each scarf requires 300 yards of yarn, and each hat requires 120 yards of yarn. If $s$ represents the number of scarves and $h$ represents the number of hats, which of the following systems of inequalities represents this situation?
+@ $s+h\le1{,}500$, $s\ge2$, and $h\ge3$ | $2s+3h\le1{,}500$, $s\ge2$, and $h\ge3$ | $2s+3h\le1{,}500$, $s\ge300$, and $h\ge120$ | $300s+120h\le1{,}500$, $s\ge2$, and $h\ge3$
+## 1268
+<table><thead><tr><th>Speed (mph)</th><th>Pitchers</th></tr></thead><tbody><tr><td>$30\le$ speed $<35$</td><td>12</td></tr><tr><td>$35\le$ speed $<40$</td><td>7</td></tr><tr><td>$40\le$ speed $<45$</td><td>4</td></tr><tr><td>$45\le$ speed $<50$</td><td>1</td></tr></tbody></table><p>The table summarizes average pitching speeds for 24 pitchers in a youth softball league. How many pitchers had an average speed of at least 30 mph but less than 35 mph?</p>
+@ 12 | 7 | 4 | 1
+## 1269
+To win a game show, a contestant needs to score at least 20 total points from two rounds. Correct responses in the first round are worth 4 points each, and correct responses in the second round are worth 9 points each. Which inequality models this situation, where $f$ is the number of correct responses in the first round and $s$ is the number of correct responses in the second round?
+@ $f+s\le20$ | $4f+9s\ge20$ | $9f+s\ge20$ | $9f+4s\le20$
+## 1270
+This week, Maxine can work a maximum of 30 hours and needs to earn at least \$425. Her job at a mall pays \$12 per hour, and her job at a college pays \$15 per hour. If $x$ represents the number of hours worked at the mall and $y$ represents the number of hours worked at the college, which of the following system of inequalities represents the situation?
+@ $x+y\le30$ and $x+y\ge425$ | $x+y\ge30$ and $12x+15y\le425$ | $x+y\le30$ and $15x+12y\ge425$ | $x+y\le30$ and $12x+15y\ge425$
+## 1271
+A school musical will be performed in an auditorium that can hold a maximum of 450 people. Ticket prices for the performance will be \$8 for students and \$15 for adults. The total ticket sales must be at least \$4,500 to cover the costs of the show. If $s$ is the number of student tickets sold and $a$ is the number of adult tickets sold, which of the following systems satisfies these conditions?
+@ $s+a=450$ and $8s+15a\le4{,}500$ | $s+a\ge450$ and $8s+15a=4{,}500$ | $s+a\le450$ and $8s+15a\ge4{,}500$ | $s+a\ge450$ and $8s+15a\ge4{,}500$
+## 1272
+A plant nursery classifies a perennial flower species as tall if its typical height when fully grown is more than 100 centimeters. Each of the following inequalities represents the possible heights $h$, in centimeters, for a specific perennial flower species when fully grown. Which inequality represents the possible heights $h$, in centimeters, for a tall perennial flower?
+@ $17<h<95$ | $44<h<92$ | $76<h<100$ | $113<h<151$
+## 1273
+A custom T-shirt company charges a onetime printing fee for any order plus a fee for each custom T-shirt ordered. The equation $392.60=23+11.20x$ represents an order with a total charge of \$392.60, where $x$ is the number of custom T-shirts ordered and $x\ge1$. Which of the following is the best interpretation of 23 in this context?
+@ The minimum number of custom T-shirts that must be ordered | The fee, in dollars, for each custom T-shirt ordered | The total charge, in dollars, for the smallest possible order | The onetime printing fee, in dollars, for any order
+## 1274
+A chef plans to cook a maximum of 100 entrees for a dinner party; each entree will include either chicken or fish. The cost of ingredients for each chicken entree is \$7, and the cost of ingredients for each fish entree is \$9. If no more than \$850 can be spent on ingredients for the entrees and the chef cooks $c$ chicken entrees and $f$ fish entrees, which of the following systems best represents the constraints on $c$ and $f$?
+@ $c+f=16$ and $7c+9f\le100$ | $c+f\le100$ and $7c+9f>850$ | $c+f\le100$ and $7c+9f\le850$ | $c+f=100$ and $7c+9f<850$
+## 1275
+Rebecca is collecting 40-milliliter samples of river water and 15-milliliter samples of lake water. She needs to collect a total of at least 770 milliliters of river water and lake water, where the number of samples of lake water is twice the number of samples of river water. Which inequality represents this situation, where $x$ is the number of samples of river water that Rebecca needs to collect?
+@ $40(2x)+15x\le770$ | $40(2x)+15x\ge770$ | $40x+15(2x)\le770$ | $40x+15(2x)\ge770$
+## 1276
+To win a trivia game, a player needs to earn at least 80 total points from responding correctly to questions in two rounds of play. Correct responses in the first round are worth 3 points each, and correct responses in the second round are worth 7 points each. Which inequality represents the situation where the player does not win the game, where $f$ is the number of correct responses in the first round and $s$ is the number of correct responses in the second round?
+@ $f+s<80$ | $3f+7s<80$ | $7f+s>80$ | $7f+3s>80$
+## 1277
+Jackie has two summer jobs. She works as a tutor, which pays \$12 per hour, and she works as a lifeguard, which pays \$9.50 per hour. She can work no more than 20 hours per week, but she wants to earn at least \$220 per week. Which of the following systems of inequalities represents this situation in terms of $x$ and $y$, where $x$ is the number of hours she tutors and $y$ is the number of hours she works as a lifeguard?
+@ $12x+9.5y\le220$ and $x+y\ge20$ | $12x+9.5y\le220$ and $x+y\le20$ | $12x+9.5y\ge220$ and $x+y\le20$ | $12x+9.5y\ge220$ and $x+y\ge20$
+## 1278
+When several resistors are connected in series in a circuit, the total resistance of the circuit is the sum of the resistances of these resistors. A certain circuit consists of 7 resistors connected in series, where the resistance of each resistor is positive. This circuit has a total resistance of 80 ohms. The total resistance of 3 resistors in this circuit is 60 ohms. Which inequality best represents all possible values of the resistance $x$, in ohms, of one of the other 4 resistors in this circuit?
+@ $20<x<80$ | $20<x<60$ | $0<x<20$ | $0<x<5$
+## 1279
+A laundry service is buying detergent and fabric softener from its supplier. The supplier will deliver no more than 300 pounds in a shipment. Each container of detergent weighs 7.35 pounds, and each container of fabric softener weighs 6.2 pounds. The service wants to buy at least twice as many containers of detergent as containers of fabric softener. Let $d$ represent the number of containers of detergent, and $s$ represent the number of containers of fabric softener, where $d$ and $s$ are nonnegative integers. Which of the following systems of inequalities best represents this situation?
+@ $7.35d+6.2s\le300$ and $d\ge2s$ | $7.35d+6.2s\le300$ and $2d\ge s$ | $14.7d+6.2s\le300$ and $d\ge2s$ | $14.7d+6.2s\le300$ and $2d\ge s$
+## 1280
+To cut a lawn, Antwan charges a fee of \$10.00 for his equipment and \$8.50 per hour spent cutting a lawn. Taylor charges a fee of \$7.00 for his equipment and \$9.50 per hour spent cutting a lawn. If $x$ represents the number of hours spent cutting a lawn, what are the values of $x$ for which Taylor's total charge is greater than Antwan's total charge?
+@ $2\le x\le3$ | $3\le x\le4$ | $x<2$ | $x>3$
