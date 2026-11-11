@@ -1,0 +1,70 @@
+## 3201
+A right rectangular prism has a base area of $28p$ square centimeters (cm$^2$). The length of the base of the rectangular prism is 12 cm, and the height of the rectangular prism is 4 cm. Which expression represents the surface area, in cm$^2$, of the right rectangular prism?
+@ $\frac{512p}{3}$ | $\frac{224p}{3}+96$ | $56p+192$ | $560p+96$
+## 3202
+<table><thead><tr><th></th><th>Volume (cubic units)</th></tr></thead><tbody><tr><td>Cylinder A</td><td>$72\pi$</td></tr><tr><td>Cylinder B</td><td>$4{,}608\pi$</td></tr></tbody></table><p>The table shows the volume of two similar solids, right circular cylinder A and right circular cylinder B. The radius of right circular cylinder A is 3 units. The surface area of right circular cylinder A is $k\pi$ square units, and the surface area of right circular cylinder B is $n\pi$ square units, where $k$ and $n$ are constants. What is the value of $n-k$? (The surface area of a right circular cylinder with radius $r$ and height $h$ is $2\pi r^2+2\pi rh$.)</p>
+## 3203
+A square with sides of length $x$ inches has been removed from each of the four corners of a square piece of cardboard that originally had an area of 144 square inches. When the cardboard is folded upward along the dashed lines, it forms an open box with no top. Which of the following quantities is represented by $(12-2x)^2$ square inches?
+@ The area of the bottom face of the box | The area of the five faces of the box | The area of the four squares that have been removed from the box | The surface area of the closed box
+## 3204
+A rectangle has a length that is 59 times its width. The function $y=(59w)(w)$ represents this situation, where $y$ is the area, in square feet, of the rectangle and $y>0$. Which of the following is the best interpretation of $59w$ in this context?
+@ The length of the rectangle, in feet | The area of the rectangle, in square feet | The difference between the length and the width of the rectangle, in feet | The width of the rectangle, in feet
+## 3205
+Thomas is making a sign in the shape of a regular hexagon with 4-inch sides, which he will cut out from a rectangular sheet of metal; the hexagon touches all four sides of the rectangle (two opposite sides of the hexagon lie along two sides of the rectangle). What is the sum of the areas of the four triangles that will be removed from the rectangle?
+@ $8\sqrt{3}$ | $8\sqrt{2}$ | $4\sqrt{3}$ | $4\sqrt{2}$
+## 3206
+One gallon of paint costs \$19 and will cover 350 square feet of a surface. A deck has a total surface area of $d$ square feet. Which equation represents the cost $c$, in dollars, of the sealant needed to cover the deck twice?
+@ $c=\frac{350d}{19}$ | $c=\frac{700d}{19}$ | $c=19\left(\frac{d}{175}\right)$ | $c=19\left(\frac{d}{350}\right)$
+## 3207
+A rectangle has a length that is 60 times its width. The function $y=(60w)(w)$ represents this situation, where $y$ is the area, in square feet, of the rectangle and $y>0$. Which of the following is the best interpretation of $60w$ in this context?
+@ The length of the rectangle, in feet | The area of the rectangle, in square feet | The difference between the length and the width of the rectangle, in feet | The width of the rectangle, in feet
+## 3208
+<table><thead><tr><th></th><th>Volume (cubic units)</th></tr></thead><tbody><tr><td>Cylinder A</td><td>$112\pi$</td></tr><tr><td>Cylinder B</td><td>$3{,}024\pi$</td></tr></tbody></table><p>The table shows the volume of two similar solids, right circular cylinder $A$ and right circular cylinder $B$. The radius of right circular cylinder $A$ is 4 units. The surface area of right circular cylinder $A$ is $k\pi$ square units, and the surface area of right circular cylinder $B$ is $n\pi$ square units, where $k$ and $n$ are constants. What is the value of $n-k$? (The surface area of a right circular cylinder with radius $r$ and height $h$ is $2\pi r^2+2\pi rh$.)</p>
+## 3209
+A space probe uses a square-shaped solar sail to move through space. The side length of the solar sail is $8.89w$ meters, where $w$ is the width, in meters, of the space probe. Which equation gives the area $A$, in square meters, of the solar sail?
+@ $A=(w+8.89)(w+8.89)$ | $A=4(8.89w)$ | $A=(8.89w)(8.89w)$ | $A=\left(\frac{8.89}{w}\right)\left(\frac{8.89}{w}\right)$
+## 3211
+<table><thead><tr><th>Animal</th><th>Diameter of eyeball (millimeters)</th></tr></thead><tbody><tr><td>Red-tailed hawk</td><td>12</td></tr><tr><td>Human</td><td>24</td></tr></tbody></table><p>The table shows the diameter of a red-tailed hawk eyeball and the diameter of a human eyeball. If both eyeballs are approximately spherical, the volume of the red-tailed hawk eyeball is approximately how many times the volume of the human eyeball? (The volume of a sphere with radius $r$ is $\frac{4}{3}\pi r^3$.)</p>
+@ $\frac{1}{8}$ | $\frac{1}{2}$ | 2 | 8
+## 3212
+A right square pyramid has a total surface area of 20736 square inches and the combined surface area of the four lateral faces of the pyramid is 11520 square inches. What is the height of this pyramid, in inches?
+## 3213
+Two square pyramids have heights of 11 cm and 22 cm, respectively. The area of the base for each pyramid is 144 cm$^2$. What is the positive difference in the surface areas between the two pyramids?
+## 3214
+The concentration of a chemical compound is equal to the amount of the substance in the container, in moles, divided by the volume of the solution, in cubic centimeters. A chemist has two containers of different sizes (filled to capacity) each in the shape of a cube. The edge length of the larger container is 4 times the edge length of the smaller container. Each cube contains 144 moles of a substance. The concentration of the compound in the larger container is 3 moles per cubic centimeter. What is the positive difference between the larger container's volume and the smaller container's volume, in cubic centimeters?
+## 3215
+Prisms A and B are right rectangular prisms which are similar. The surface area of A is 40 cm$^2$ and of B is 1440 cm$^2$. Prism B has a volume of 1728 cm$^3$. The combined volume of prisms A and B is $k$ cm$^3$, where $k$ is a constant. Find the value of $k$.
+## 3216
+Right circular cylinder $A$ is similar to right circular cylinder $B$, where the ratio of the diameter of $A$ to the diameter of $B$ is 2 to 3. The height of $A$ is equal to its diameter. If the surface area of $A$ is $600\pi$ square inches, what is the volume, in cubic inches, of cylinder $B$?
+@ $6{,}750\pi$ | $4{,}500\pi$ | $2{,}000\pi$ | $1{,}350\pi$
+## 3217
+Cylinder A has a volume of $243\pi$ cubic meters, a radius of 9 meters, and a surface area of $k\pi$ square meters. Cylinder B is similar to Cylinder A and has a volume of $30{,}375\pi$ cubic meters and a surface area of $n\pi$ square meters. Find the value of $n-k$.
+## 3218
+Domestic bees make their honeycombs with rings of hexagonal cells. The first ring of the honeycomb is made with 6 hexagonal cells, the second ring is made with 12 hexagonal cells, and the third ring is made with 18 hexagonal cells. If the number of hexagonal cells the domestic bees make for each ring continues in this linear pattern, which of the following functions represents the number of hexagonal cells, $c(r)$, in ring $r$ of the honeycomb?
+@ $c(r)=12r$ | $c(r)=6r+12$ | $c(r)=6r-6$ | $c(r)=6r$
+## 3219
+The function $f(w)=6w^2$ gives the area, in square feet, of a rectangle whose width is $w$ feet and whose length is 6 times its width. Which statement best interprets $f(13)=1{,}014$?
+@ A width of 13 feet gives an area of 1,014 square feet. | A width of 13 feet gives a length of 1,014 feet. | A width of 1,014 feet gives an area of 13 square feet. | A width of 1,014 feet gives a length of 13 feet.
+## 3220
+A metal block has a rectangular shape with a length of 12 cm, a width of 10 cm, and a height of 6 cm, with a circular hole of diameter 8 cm drilled through its height in the middle. If the volume and the surface area of the block are equal to $m$ and $n$, respectively, what is the value of $m+n$?
+## 3221
+A right square pyramid has a height of 11 centimeters (cm). A second right square pyramid has a height of 22 centimeters. The area of the bases of each of the two pyramids is 100 cm$^2$. Which of the following is closest to the difference in the surface area of the second pyramid and the surface area of the first pyramid, in cm$^2$?
+@ 209 | 220 | 367 | 551
+## 3222
+The function $f(w)=9w^2$ gives the area, in square feet, of a rectangle whose width is $w$ feet and whose length is 9 times its width. Which statement best interprets $f(12)=1{,}296$?
+@ A width of 12 feet gives an area of 1,296 square feet. | A width of 12 feet gives a length of 1,296 feet. | A width of 1,296 feet gives an area of 12 square feet. | A width of 1,296 feet gives a length of 12 feet.
+## 3223
+<table><thead><tr><th></th><th>Volume</th></tr></thead><tbody><tr><td>Square pyramid A</td><td>16</td></tr><tr><td>Square pyramid B</td><td>5488</td></tr></tbody></table><p>A square pyramid is a pyramid that has a square base and four lateral faces. Square Pyramid A is similar to Square Pyramid B. The table gives the volumes, in cubic inches, of the two square pyramids. If the height of Square Pyramid A is 8 inches, what is the perimeter of the square base of Square Pyramid B, in inches?</p>
+@ $28\sqrt{6}$ | $4\sqrt{6}$ | $196\sqrt{6}$ | $7\sqrt{6}$
+## 3224
+A right circular cone has a volume of $4{,}800\pi$ cubic centimeters and the area of its base is $1{,}600\pi$ square centimeters. What is the slant height, in centimeters, of this cone?
+@ 3 | 9 | 40 | 41
+## 3225
+Right circular cylinders $A$ and $B$ are similar. The height of cylinder $A$ is 10 units, and the diameter of its base is equal to its height. The ratio of the diameter of the base of cylinder $A$ to the diameter of the base of cylinder $B$ is $3:7$. What is the volume, in cubic units, of cylinder $B$?
+@ $250\pi$ | $\frac{1{,}750\pi}{3}$ | $\frac{12{,}250\pi}{9}$ | $\frac{85{,}750\pi}{27}$
+## 3226
+A right triangle has side lengths of 3, 8, and $\sqrt{73}$. All three of its sides are diameters of semicircles, which have a total area of $w\pi$. What is the value of $w$?
+## 3227
+<table><thead><tr><th></th><th>Volume (cubic units)</th></tr></thead><tbody><tr><td>Right circular cylinder A</td><td>$392\pi$</td></tr><tr><td>Right circular cylinder B</td><td>$10{,}584\pi$</td></tr></tbody></table><p>The table shows the volume of two similar solids, right circular cylinder A and right circular cylinder B. The radius of right circular cylinder A is 7 units. The surface area of cylinder A is $k\pi$ square units, and the surface area of cylinder B is $n\pi$ square units, where $k$ and $n$ are constants. What is the value of $n-k$? (The surface area of a right circular cylinder with radius $r$ and height $h$ is $2\pi r^2+2\pi rh$.)</p>
+## 3228
+A cone is enclosed inside a sphere such that the edge of its base lies entirely on the sphere and the top of it touches the sphere. The diameter of the base of the cone is 56 m and the radius of the sphere is 35 m. The volume of the cone is $k\pi$, where $k$ is a constant. What is the value of $k$, rounded to the nearest whole number?

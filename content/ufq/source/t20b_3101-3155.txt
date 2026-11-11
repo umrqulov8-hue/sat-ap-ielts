@@ -1,0 +1,123 @@
+## 3101
+The area $A$, in square centimeters, of a rectangular painting can be represented by $w(w+78)$, where $w$ is the width, in centimeters, of the painting. Which expression represents the length, in centimeters, of the painting?
+@ 78 | $w$ | $w+78$ | $w(w+78)$
+## 3102
+A square cube (box) with an open lid has a side length of 89 cm. Find the total surface area in square meters.
+## 3103
+Parallelogram $ABCD$ has area 31. Parallelogram $EFGH$ has side lengths which are double those of $ABCD$. What is the area of $EFGH$?
+## 3104
+The inside of a can of soup is in the shape of a cylinder having an internal height of 10 centimeters and an internal radius of 5 centimeters. To the nearest cubic centimeter, what is the maximum amount of soup that the can could hold?
+@ 157 | 196 | 250 | 785
+## 3105
+The area of triangle $ABC$ is 220 square centimeters and its base $AC$ is 10 cm. What is the height $h$, in centimeters, of this triangle?
+@ 10 | 22 | 44 | 88
+## 3106
+The area of triangle $ABC$ is 250 square centimeters and its base $AC$ is 10 cm. What is the height $h$, in centimeters, of this triangle?
+@ 10 | 25 | 50 | 100
+## 3107
+The width of a rectangular dance floor is $w$ feet. The length of the floor is 6 feet longer than its width. Which of the following expresses the perimeter, in feet, of the dance floor in terms of $w$?
+@ $2w+6$ | $4w+12$ | $w^2+6$ | $w^2+6w$
+## 3108
+A room in the shape of a right rectangular prism is 3 meters high and 1.5 times as long as it is wide. If the volume of the room is $4.5x^2$ cubic meters, what could $x$ represent?
+@ The length of the room, in meters | The width of the room, in meters | The perimeter of the room's floor, in meters | The area of the room's floor, in square meters
+## 3109
+A granite block in the shape of a right rectangular prism has dimensions 30 centimeters by 40 centimeters by 50 centimeters. The block has a density of 2.8 grams per cubic centimeter. What is the mass of the block, in grams?
+@ 336 | 3,360 | 16,800 | 168,000
+## 3110
+One gallon of paint will cover 20 square feet of a surface. A room has a total wall area of $w$ square feet. Which equation represents the total amount of paint $P$, in gallons, needed to paint the walls of the room twice?
+@ $P=40w$ | $P=20w$ | $P=\frac{w}{10}$ | $P=\frac{w}{20}$
+## 3111
+The volume of a cube is 91,125 cubic centimeters. Find the surface area of all 6 faces of the cube.
+## 3112
+A box in the shape of a cube with no lid has an edge length of 47 cm. Find the total surface area of the box in square meters.
+## 3113
+A figure has an area of 3,168 square inches. What is the area, in square feet, of this figure? (1 foot = 12 inches)
+## 3114
+A cone has a slant height of 25 cm and a height of 15 cm. Its volume is $k\pi$, where $k$ is a constant. Find the value of $k$.
+## 3115
+The perimeter of an isosceles right triangle is $48+48\sqrt{2}$ inches. What is the length, in inches, of the hypotenuse of this triangle?
+@ 24 | $24\sqrt{2}$ | 48 | $48\sqrt{2}$
+## 3116
+The area of the base of a cone is $16\pi$ and the volume of the cone is $32\pi$. What is the length of the slant height?
+## 3117
+A right circular cone has a volume of $2{,}700\pi$ cubic centimeters and the area of its base is $225\pi$ square centimeters. What is the slant height, in centimeters, of this cone?
+@ 12 | 15 | 36 | 39
+## 3118
+A right circular cone has a volume of $71{,}148\pi$ cubic centimeters and the area of its base is $5{,}929\pi$ square centimeters. What is the slant height, in centimeters, of this cone?
+@ 12 | 36 | 77 | 85
+## 3120
+The volume of a right rectangular prism with a square base is 539 cubic centimeters. If the area of each of the four lateral faces is 77 square centimeters, what is the height, in centimeters, of the prism?
+@ 77 | 49 | 11 | 7
+## 3121
+For a right circular cone, $B$ is a point on the circumference of the base, and the length of segment $AB$ ($A$ the apex) is 86 centimeters. If the height of the cone is 43 centimeters and the volume of the cone is $k\pi$ cubic centimeters, what is the value of $k$?
+## 3122
+A right circular cone has base area $81\pi$ square meters and lateral surface area $214\pi$ square meters. For radius $r$ and slant height $L$, the lateral surface area is $\pi rL$. What is the height of the cone, in meters, rounded to the nearest meter?
+@ 10 | 18 | 22 | 24
+## 3123
+A regular right triangular pyramid has a height of 15 cm and a volume of 125 cm$^3$. Find the total surface area of the pyramid.
+## 3124
+Right rectangular prism X is similar to right rectangular prism Y. The surface area of right rectangular prism X is 62 square centimeters, and the surface area of right rectangular prism Y is 1,550 cm$^2$. The volume of right rectangular prism X is 16.8 cubic centimeters. What is the volume, in cm$^3$, of right rectangular prism Y?
+## 3125
+A manufacturer packages vegetables in cans that are in the shape of right cylinders with height 15 centimeters and volume 750 cubic centimeters. If the manufacturer reduces the volume of the cans to 600 cubic centimeters but keeps the area of the base the same, by how many centimeters does the height of the can decrease?
+@ 3 | 4 | 5 | 6
+## 3127
+Right rectangular prism X is similar to right rectangular prism Y. The surface area of right rectangular prism X is 59 cm$^2$, and the surface area of right rectangular prism Y is 1,475 cm$^2$. The volume of right rectangular prism Y is 1,500 cm$^3$. What is the sum of the volumes, in cm$^3$, of right rectangular prism X and right rectangular prism Y?
+## 3128
+Right rectangular prism X is similar to right rectangular prism Y. The surface area of right rectangular prism X is 52 square centimeters, and the surface area of right rectangular prism Y is 3,328 cm$^2$. The volume of right rectangular prism X is 10.5 cubic centimeters. What is the volume, in cm$^3$, of right rectangular prism Y?
+## 3129
+The surface area of a right circular cylinder is $360\pi$ and its height is 11. If the volume of the cylinder equals $n\pi$, what is the value of $n$?
+## 3130
+<table><thead><tr><th></th><th>Volume (cubic units)</th></tr></thead><tbody><tr><td>Right circular cylinder A</td><td>$32\pi$</td></tr><tr><td>Right circular cylinder B</td><td>$864\pi$</td></tr></tbody></table><p>The radius of cylinder A is 2 units. The surface area of cylinder A is $k\pi$ square units, and the surface area of cylinder B is $n\pi$ square units. What is the value of $n-k$? Given that figures are similar.</p>
+## 3132
+A right square pyramid has base side length 10. Each edge from the apex to a base vertex has length 13. What is the total surface area of the pyramid?
+@ 240 | 360 | 340 | 580
+## 3133
+One gallon of paint covers 310 square feet. A room has total wall area $w$ square feet. Which equation gives the gallons $P$ needed to paint the walls twice?
+@ $P=\frac{w}{155}$ | $P=620w$ | $P=\frac{w}{310}$ | $P=310w$
+## 3134
+The height of a right circular cylinder is 31 inches and the circumference of its base is 310 inches. Which expression represents the total surface area, in square inches, of the cylinder?
+@ $(31)(310)$ | $\pi\left(\frac{155}{\pi}\right)^2(31)$ | $(31)(310)+\pi\left(\frac{155}{\pi}\right)^2$ | $(31)(310)+2\pi\left(\frac{155}{\pi}\right)^2$
+## 3135
+Right rectangular prism X is similar to right rectangular prism Y. The surface area of right rectangular prism X is 58 cm$^2$, and the surface area of right rectangular prism Y is 2,088 cm$^2$. The volume of right rectangular prism Y is 2,160 cm$^3$. What is the sum of the volumes, in cm$^3$, of right rectangular prism X and right rectangular prism Y?
+## 3136
+Right circular cylinders A and B are similar. The total surface area of cylinder A is $96\pi$ square centimeters, and the total surface area of cylinder B is $216\pi$ square centimeters. The volume of cylinder A is 128 cubic centimeters. If the volume of cylinder B is $k\pi$ cubic centimeters, where $k$ is a constant, what is the value of $k$?
+## 3137
+Two identical rectangular prisms each have height 90 centimeters, a square base, and surface area $K$ square centimeters. They are glued together along one square base, making a prism with surface area $\left(\frac{92}{47}\right)K$ square centimeters. What is the side length, in centimeters, of each square base?
+@ 4 | 8 | 9 | 16
+## 3138
+<p style="text-align:center">$w(w+89)$</p><p>The expression gives a rectangle's area, in square centimeters, where $w$ is its width in centimeters. What does $w+89$ represent?</p>
+@ Its length is 89 centimeters. | Its width is 89 centimeters. | Its length is 89 centimeters greater than its width. | Its width is 89 centimeters greater than its length.
+## 3139
+A right rectangular prism has a base area of $32t$ square centimeters, a base length of $\frac{16}{3}$ centimeters, and a height of 3 centimeters, where $t>0$. Which expression gives its total surface area, in square centimeters?
+@ $64t+64$ | $100t+32$ | $1{,}088t+32$ | $96t$
+## 3140
+A marble has a diameter of 33 cm and a density of 2.3 g/cm$^3$. What is the mass of this marble, rounded to the nearest whole number?
+## 3143
+A right triangular pyramid consists of 4 equilateral triangles with side length 48. Its surface area is equal to $k\sqrt{3}$. Find the value of $k$.
+## 3144
+Cylinder A and cylinder B are each right circular cylinders with a radius of 3 inches. The height of cylinder A is half the height of cylinder B, and the total surface area of cylinder A is $96\pi$ square inches. If the cylinders are glued together along a circular base, what is the height, in inches, of the resulting cylinder?
+@ 6 | 13 | 26 | 39
+## 3145
+A rectangle has length $l$ centimeters (cm), width $w$ cm, and perimeter 134 cm. Which equation gives its perimeter in terms of $l$ and $w$?
+@ $134=2l+2w$ | $134=2l-2w$ | $134=l+w$ | $134=l-w$
+## 3146
+Spheres A and B have a point of tangency at point $P$, where segment $MP$ is a diameter of sphere A, segment $NP$ is a diameter of sphere B, and point $P$ lies on segment $MN$. The radius of sphere A is 9 times the radius of sphere B, and the volume of sphere B is $288\pi$ cubic inches. What is the length, in inches, of segment $MN$?
+## 3147
+For a right circular cone, $B$ is a point on the circumference of the base, and the length of segment $AB$ ($A$ the apex) is 84 centimeters. If the height of the cone is 42 centimeters and the volume of the cone is $k\pi$ cubic centimeters, what is the value of $k$?
+## 3148
+A right rectangular prism has a base area of $20t$ square centimeters, a base length of $\frac{10}{3}$ centimeters, and a height of 12 centimeters, where $t>0$. Which expression gives its total surface area, in square centimeters?
+@ $40t+160$ | $184t+80$ | $1{,}640t+80$ | $240t$
+## 3149
+A sphere has a density of 2.2 g/cm$^3$ and a diameter of 20 cm. Find the mass of the sphere in grams, rounded to the nearest whole number.
+## 3150
+A rectangular prism with a square base has a total surface area of 550 cm$^2$. The area of non-base sides is 308 cm$^2$. Find the height of the prism.
+## 3151
+A rectangular region is divided into 90 squares, each square having an area of $R$. The length of the region is 2.5 times the width, which is equal to $x\sqrt{R}$. What is the value of $x$?
+## 3153
+A right square pyramid has a total surface area of 36,864 square inches, and the combined surface area of the four lateral faces of this pyramid is 20,480 square inches. What is the height, in inches, of this pyramid?
+## 3154
+A right square pyramid has a total surface area of 28,160 square inches, and the combined surface area of the four lateral faces of this pyramid is 16,060 square inches. What is the height, in inches, of this pyramid?
+@ 48 | 55 | 73 | 110
+## 3155
+A right square pyramid has a total surface area of 360 square inches. Its slant height, measured from the apex to the midpoint of a base edge, is 13 inches. What is the vertical height, in inches, of the pyramid?
+@ 5 | 10 | 12 | 13

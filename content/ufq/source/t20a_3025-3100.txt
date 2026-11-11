@@ -1,0 +1,182 @@
+## 3025
+A pool in the shape of a right rectangular prism has a length of 75 feet, a width of 20 feet, and a depth of 5 feet. What is the volume, in cubic feet, of the pool?
+## 3026
+A rectangle has length $x$ and width $x-3$. If its area is 28, what is $x$?
+@ 3 | 7 | 11 | 28
+## 3027
+A rectangle has a length of 35 inches and a width of 1 inch. What is the area, in square inches, of the rectangle?
+## 3028
+A rectangle has a length of 3 centimeters and a width of 2 centimeters. What is the perimeter, in centimeters, of this rectangle?
+## 3029
+What is the area, in square centimeters, of a rectangle with a length of 27 centimeters (cm) and a width of 19 cm?
+## 3030
+A rectangle has a length of 11 and a width of 5. What is the perimeter of the rectangle?
+@ 10 | 22 | 32 | 44
+## 3031
+A triangular pyramid with edge length 48 has a surface area equal to $k\sqrt{3}$. Find the value of $k$.
+## 3032
+A rectangle has diagonal length $\sqrt{106}$ and one side of length 9. What is its perimeter?
+@ 106 | 45 | 28 | 14
+## 3033
+A triangle has base 27 units and corresponding height 15 units. Its area is $\left(\frac{1}{2}\right)k$ square units. What is $k$?
+## 3034
+A cylinder and a sphere have the same positive radius $r$. The cylinder has height 16. The sphere has half the volume of the cylinder. What is $r$?
+## 3035
+A video screen has a height of 36 inches and a diagonal length of 60 inches. What is the area, in square inches, of the video screen?
+## 3036
+A rectangular region consists of 74 equal square lots, each of area $A$. Its length is 18.5 times its width. If length is $r\sqrt{A}$, what is $r$?
+## 3037
+A landscaper is designing a rectangular garden. The length of the garden is to be 5 feet longer than the width. If the area of the garden will be 104 square feet, what will be the length, in feet, of the garden?
+## 3038
+What is the volume, in cubic centimeters, of a right rectangular prism that has a length of 4 centimeters, a width of 9 centimeters, and a height of 10 centimeters?
+## 3039
+An area of 58.00 square nautical miles is equivalent to $k$ square kilometers. To the nearest tenth, what is the value of $k$? (1 nautical mile = 1.852 kilometers)
+## 3040
+A right square pyramid has a height of 12 and a volume of 196 cubic inches. What is the perimeter, in inches, of the base of this pyramid?
+## 3041
+A right circular cylinder has a height of 16 inches and a volume of $3{,}136\pi$ cubic inches. What is the radius, in inches, of this cylinder?
+## 3042
+A cube has an edge length of 7 inches. What is its volume, in cubic inches?
+@ 21 | 49 | 294 | 343
+## 3043
+A right prism has a square base with side lengths of 10 inches. The height of the prism is 47 inches. What is the volume, in cubic inches, of the prism?
+## 3044
+A gardener has a cultivated plot that measures 4 feet by 6 feet. Next year, she wants to double the area of her plot by increasing the length and width by $x$ feet. What is the value of $x$?
+## 3045
+A right square pyramid has a height of 15 inches and a volume of 405 cubic inches. What is the perimeter, in inches, of the base of this pyramid?
+## 3046
+A right square pyramid has lateral surface area 2320 square centimeters and slant height 29 centimeters. What is its volume, in cubic centimeters?
+## 3047
+A square has a side length of 32 inches. What is the area, in square inches, of the square?
+@ 1,024 | 128 | 64 | 32
+## 3048
+A square has a side length of 47 inches. What is the area, in square inches, of the square?
+@ 2,209 | 188 | 94 | 47
+## 3049
+A 15-sided polygon has perimeter 107 inches. One side is 9 inches long, and the other 14 sides have equal lengths. What is the length, in inches, of each of those 14 sides?
+## 3050
+A square has a diagonal of length 20 cm. Find the area of the square in cm$^2$.
+## 3051
+The perimeter of a triangle is 25 inches. The length of one side of the triangle is 9 inches. The other two sides have equal lengths. What is the length, in inches, of one of the two sides with equal lengths?
+## 3052
+A cube has an edge length of 45 inches. What is the volume, in cubic inches, of the cube?
+@ 180 | 2,025 | 12,150 | 91,125
+## 3053
+The surface area of a cube is $6\left(\frac{a}{4}\right)^2$, where $a$ is a positive constant. Which of the following gives the perimeter of one face of the cube?
+@ $\frac{a}{4}$ | $a$ | $4a$ | $6a$
+## 3054
+A laboratory supply company produces graduated cylinders, each with an internal radius of 2 inches and an internal height between 7.75 inches and 8 inches. What is one possible volume, rounded to the nearest cubic inch, of a graduated cylinder produced by this company?
+## 3055
+A rectangular park has side lengths of 150 yards and 360 yards. Sylvia and Amber both walk from one corner to the opposite corner, but Sylvia walks along the rectangular edges of the park and Amber walks along the diagonal. How many more yards does Sylvia walk than Amber?
+## 3056
+The sides of a rectangle are such that the length is 11 centimeters more than 8 times the width, in centimeters. If the width of the rectangle is 5 centimeters, what is the area, in square centimeters, of the rectangle?
+## 3057
+A box in the shape of a right rectangular prism has a volume of 60 cubic inches. If the dimensions of the box are 3 inches by 5 inches by $h$ inches, what is the value of $h$?
+@ 3 | 4 | 5 | 6
+## 3058
+A polygon with 17 sides has a perimeter of 57 inches. The length of one side is 9 inches. The other 16 sides have equal lengths. What is the length, in inches, of one of the 16 sides with equal lengths?
+## 3059
+A right square pyramid has a surface area of 75,264 square inches, which includes a base area of 36,864 square inches. What is the slant height, in inches, of this pyramid?
+## 3060
+Identical rectangles X and Y each have an area of $\frac{49}{5}$ square meters and a perimeter of $P$ meters. If one of the shorter sides of rectangle X is glued to one of the shorter sides of rectangle Y, the resulting rectangle has a perimeter of $\frac{14}{9}P$ meters. What is the value of $P$?
+## 3061
+A rectangle has a length of 29 meters and a width of 37 meters. What is the area, in square meters, of the rectangle?
+@ 8 | 66 | 528 | 1,073
+## 3062
+The length of a rectangle's diagonal is $\sqrt{65}$, and the length of one of the rectangle's sides is 4. What is the perimeter of the rectangle?
+@ 11 | 22 | 28 | 65
+## 3063
+A right triangular pyramid has exactly six edges. Each of these edges is 96 centimeters long. If the surface area of the pyramid is $k\sqrt{3}$ square centimeters, what is the value of $k$?
+## 3064
+The area of a triangle is 33 square inches. The length of the base of the triangle, in inches, is the sum of 14 and a positive number $d$, and the height, in inches, is 5 less than $d$. What is the value of $d$?
+## 3065
+The equation $66=2x+2y$ gives the perimeter of a rectangular garden that has length $x$, in feet, and width $y$, in feet. The width of the garden is 8 feet. What is the length, in feet, of the garden?
+## 3066
+A cylinder has a diameter of 8 inches and a height of 16 inches. What is the volume, in cubic inches, of the cylinder?
+@ $16\pi$ | $128\pi$ | $256\pi$ | $1024\pi$
+## 3067
+The sides of a rectangle are such that the length is 11 centimeters more than 8 times the width, in centimeters. If the width of the rectangle is 9 centimeters, what is the area, in square centimeters, of the rectangle?
+## 3068
+A marble sphere has density 2.6000 grams per cubic centimeter and diameter 31.000 centimeters. What is its mass, in grams, to the nearest whole number? Use $\pi=3.14159$.
+## 3069
+A side of square J is 5 times a side of square N. Square N has area 49 square centimeters. What is the area of square J?
+@ 175 | 245 | 350 | 1,225
+## 3070
+A rectangular region of land is divided into 88 square lots of equal area $R$, in square units. The length of the region is 5.5 times the width of the region. If the width of the region is $x\sqrt{R}$ units, what is the value of $x$?
+## 3071
+A rectangle has a length of $x$ units and a width of $x-8$ units. If the rectangle has an area of 105 square units, what is the value of $x$?
+@ 7 | 15 | 22 | 105
+## 3072
+What is the area, in square centimeters, of a rectangle with a length of 38 centimeters and a width of 33 centimeters?
+@ 71 | 142 | 1,089 | 1,254
+## 3073
+A right square prism has a height of 16 units. The volume of the prism is 144 cubic units. What is the length, in units, of an edge of the base?
+@ 3 | 9 | 12 | 16
+## 3074
+A right square prism has a height of 9 units. The volume of the prism is 324 cubic units. What is the length, in units, of an edge of the base?
+@ 6 | 9 | 18 | 36
+## 3075
+A right square pyramid has a surface area of $64+16\sqrt{357}$ square inches, which includes a base area of 64 square inches. What is the height, in inches, of this pyramid?
+## 3076
+A rectangular image has an area of 480 square centimeters. A copy is made in which the length is increased by 25% and the width is decreased by 20%. What is the area, in square centimeters, of the copy?
+## 3077
+The length of each edge of a box is 29 inches. Each side of the box is in the shape of a square. The box does not have a lid. What is the exterior surface area, in square inches, of this box without a lid?
+## 3078
+Similar cylinders A and B have diameters in the ratio 3 to 7. Cylinder A has height 10 and diameter 10. What is the volume of cylinder B?
+@ $250\pi$ | $\frac{1750\pi}{3}$ | $\frac{12250\pi}{9}$ | $\frac{85750\pi}{27}$
+## 3079
+<table><thead><tr><th>Cylinder</th><th>Radius</th><th>Height</th></tr></thead><tbody><tr><td>A</td><td>$R$</td><td>$H$</td></tr><tr><td>B</td><td>$R+9$</td><td>$4H$</td></tr></tbody></table><p>Cylinders A and B are similar, with dimensions shown in the table. If A has volume $45\pi$ and B has surface area $M\pi$, what is $M$?</p>
+## 3080
+A right circular cylinder has volume $6{,}591\pi$ cubic inches. Its height is 3 times its radius. What is the radius, in inches?
+@ 13 | 39 | 169 | 507
+## 3081
+The points $(0,15)$, $(10,8)$, and $(10,3)$ define one base of a triangular prism. The distance between the two bases of the prism is 20 units. What is the volume, in cubic units, of the prism?
+## 3082
+Two right square pyramids A and B have the same base area of 1600 square centimeters. Their heights are 15 and 21 centimeters, respectively. What is the difference between the surface areas of B and A, in square centimeters?
+## 3083
+The volume of right circular cylinder A is 22 cubic centimeters. What is the volume, in cubic centimeters, of a right circular cylinder with twice the radius and half the height of cylinder A?
+@ 11 | 22 | 44 | 66
+## 3084
+A rectangle has a perimeter of 36 inches. If the sum of the lengths of three sides of the rectangle is 24 inches, what is the length, in inches, of the fourth side?
+@ 6 | 12 | 36 | 60
+## 3085
+A rectangle has a perimeter of 48 inches. If the sum of the lengths of three sides of the rectangle is 32 inches, what is the length, in inches, of the fourth side?
+@ 8 | 16 | 48 | 80
+## 3086
+The painting <i>The Starry Night</i> by Vincent van Gogh is rectangular in shape with height 29 inches and width 36.25 inches. If a reproduction was made where each dimension is $\frac{1}{3}$ the corresponding original dimension, what is the height of the reproduction, in inches?
+## 3087
+The area of a rectangle is 60 square inches. The length of the longest side of the rectangle is 15 inches. What is the length, in inches, of the shortest side of this rectangle?
+@ 4 | 15 | 30 | 45
+## 3088
+The width of a rectangle is 16 inches less than 2 times its length, in inches. The area of the rectangle is 130 square inches. What is the width, in inches, of the rectangle?
+@ 5 | 10 | 13 | 18
+## 3089
+A can in the shape of a right circular cylinder has a height of 4 and is $\frac{1}{2}$ full of water. If the amount of water in the can is $32\pi$ cubic inches, what is the diameter, in inches, of the can?
+## 3090
+Two closed right circular cylinders, $P$ and $Q$, have equal volumes. The radius of cylinder $P$ is $\frac{1}{3}$ the radius of cylinder $Q$ and the height of cylinder $P$ is half its own radius. The total surface area of cylinder $P$ is $k$ times the total surface area of cylinder $Q$. What is the value of $k$?
+## 3091
+The circumference of the base of a right circular cylinder is $6\pi$ meters, and the height of the cylinder is 19 meters. What is the volume, in cubic meters, of the cylinder?
+@ $57\pi$ | $114\pi$ | $171\pi$ | $684\pi$
+## 3092
+Trapezoid $ABCD$ is similar to trapezoid $EFGH$. The area of $ABCD$ is 450, the area of $EFGH$ is 1800, and the length of $AB$ is 50. Find the length of $EF$.
+## 3093
+The length of one side of square M is 6 times the length of one side of square N. The area of square N is 49 square feet. What is the area, in square feet, of square M?
+@ 1,764 | 504 | 294 | 252
+## 3094
+The length of one side of square X is 7 centimeters. The area of rectangle Y is 32 square centimeters. What is the total area, in square centimeters, of square X and rectangle Y?
+@ 113 | 81 | 78 | 49
+## 3095
+In a right circular cone, $B$ is on the circumference of the base. The slant length $AB$ is 34 centimeters, and the height is 17 centimeters. If the volume is $k\pi$ cubic centimeters, what is $k$?
+## 3096
+<table><thead><tr><th></th><th>Radius</th><th>Height</th></tr></thead><tbody><tr><td>Cylinder A</td><td>$R$</td><td>$H$</td></tr><tr><td>Cylinder B</td><td>$4R$</td><td>$3H+24$</td></tr></tbody></table><p>Cylinders A and B are similar. The volume of cylinder A is $1176\pi\ \text{cm}^3$. If the surface areas of cylinder B and A are $n\pi\ \text{cm}^2$ and $k\pi\ \text{cm}^2$, respectively, what is the value of $(n-k)$?</p>
+## 3097
+The length of a side of square X is 8 centimeters. The area of rectangle Y is 45 square centimeters. What is the total area, in square centimeters, of square X and rectangle Y?
+@ 154 | 109 | 106 | 64
+## 3098
+A triangular prism has an equilateral triangle base with side length $x$ and a prism height of $x\sqrt{3}$. If the volume of the prism is $\frac{2187}{4}$, what is the value of $x$?
+@ 3 | 9 | 27 | 81
+## 3099
+<p style="text-align:center">$h(x)=\left(\frac{1}{2}\right)\cdot x\cdot99$</p><p>The function $h$ gives the area, in square inches, of a triangle of base $x$ inches and fixed height. What is its height, in inches?</p>
+@ $\frac{1}{99}$ | $\frac{99}{2}$ | 99 | 198
+## 3100
+Sphere A and sphere B have a point of tangency at point $P$. Segment $MP$ is a diameter of sphere A, segment $NP$ is a diameter of sphere B, and $P$ lies on $MN$. The radius of sphere A is 12 times the radius of sphere B, and the volume of sphere B is $972\pi$ cubic inches. What is the length, in inches, of $MN$?

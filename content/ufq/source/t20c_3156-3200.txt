@@ -1,0 +1,101 @@
+## 3156
+The height of a right circular cylinder is 59 inches, and the circumference of its base is 590 inches. Which expression represents the total surface area, in square inches, of the cylinder?
+@ $(59)(590)$ | $\pi\left(\frac{295}{\pi}\right)^2(59)$ | $(59)(590)+\pi\left(\frac{295}{\pi}\right)^2$ | $(59)(590)+2\pi\left(\frac{295}{\pi}\right)^2$
+## 3157
+The volume of a right rectangular prism with a square base is 2,448 cubic centimeters. If the area of the square base is 144 square centimeters, what is the area, in square centimeters, of one of the four lateral faces of the prism?
+@ 17 | 204 | 540 | 816
+## 3158
+A ramp has a height of 23.3 cm. The tangent of the angle formed by the ramp and the ground is at most $\frac{1}{12}$. What is the minimum length of the base of the ramp?
+## 3159
+A rectangular area consists of 1372 equal squares where each square has an area of $k$. If the length of rectangular area is 1.75 times the width and the length is equal to $x\sqrt{k}$, what is $x$?
+## 3160
+A rectangular region is divided into 40 equal squares. The area of each square is $R$, the length of the rectangular region is 1.6 times its width, and the width is $x\sqrt{R}$. What is the value of $x$?
+## 3161
+A right rectangular pyramid has length $l=40$ units, width $w=16$ units, and height $h=15$ units. What is the surface area, in square units, of the pyramid?
+## 3162
+The total surface area of a pyramid with a square base is 3920 square meters. The lateral surface area is 2320 square meters. What is the volume of the pyramid?
+## 3163
+A rectangular poster has an area of <b>300 square inches</b>. A copy of the poster is made in which the length and width of the original poster are each increased by <b>20%</b>. What is the area of the copy, in square inches?
+## 3164
+A pyramid with a square base has a total surface area of 19968 cm$^2$ and the area of the four lateral faces is 13884 cm$^2$. What is the height of the pyramid?
+## 3165
+Right rectangular prism X is similar to right rectangular prism Y. The surface area of right rectangular prism X is 56 square centimeters (cm$^2$), and the surface area of right rectangular prism Y is 896 square centimeters (cm$^2$). The volume of right rectangular prism Y is 1,536 cubic centimeters (cm$^3$). What is the sum of the volumes, in cm$^3$, of right rectangular prism X and right rectangular prism Y?
+## 3166
+One gallon of sealant costs \$43 and covers 450 square feet. A deck has area $d$ square feet. Which equation gives the cost $c$, in dollars, of the sealant needed to cover the deck twice?
+@ $c=\frac{450d}{43}$ | $c=\frac{900d}{43}$ | $c=\frac{43\cdot d}{225}$ | $c=\frac{43\cdot d}{450}$
+## 3167
+A cylindrical can containing pieces of fruit is filled to the top with syrup before being sealed. The base of the can has an area of 75 cm$^2$, and the height of the can is 10 cm. If 110 cm$^3$ of syrup is needed to fill the can to the top, which of the following is closest to the total volume of the pieces of fruit in the can?
+@ 7.5 cm$^3$ | 185 cm$^3$ | 640 cm$^3$ | 750 cm$^3$
+## 3168
+Cylinder A is similar to cylinder B. The volume of cylinder A is 5.13 cubic units and the volume of cylinder B is 1.52 cubic units. The surface area of cylinder A is 22.41 square units. What is the surface area, in square units, of cylinder B?
+## 3169
+A right rectangular prism has a base surface area of $20p$ cm$^2$, a height of 10 cm, and one side of the base is 12 cm. Find the total surface area of the prism, in cm$^2$, in terms of $p$.
+## 3170
+A rectangular region is divided into 76 equal squares. The area of each square is $R$, the length of the rectangular region is 4.75 times its width, and the width is $x\sqrt{R}$. What is the value of $x$?
+## 3171
+A rectangle and a triangle have the same area. If the bases of the rectangle and the triangle are the same length, which of the following is true?
+@ The height of the triangle is one-half the height of the rectangle. | The height of the triangle is equal to the height of the rectangle. | The height of the triangle is twice the height of the rectangle. | The height of the triangle is four times the height of the rectangle.
+## 3172
+The right square pyramid has a base side length of 16 centimeters and a perpendicular height of 15 centimeters. What is its total surface area, in square centimeters?
+@ 496 | 544 | 736 | 800
+## 3173
+A square solar sail has side length $8.61w$ meters, where $w$ is the width of a space probe in meters. Which equation gives the sail's area $A$, in square meters?
+@ $A=(w+8.61)(w+8.61)$ | $A=4(8.61w)$ | $A=(8.61w)(8.61w)$ | $A=\left(\frac{w}{8.61}\right)\left(\frac{w}{8.61}\right)$
+## 3174
+Two identical rectangular prisms each have a height of 90 centimeters (cm). The base of each prism is a square, and the surface area of each prism is $K$ cm$^2$. If the prisms are glued together along a square base, the resulting prism has a surface area of $\frac{92}{47}K$ cm$^2$. What is the side length, in centimeters, of each square base?
+@ 4 | 8 | 9 | 16
+## 3175
+In a scale drawing of a rectangular living room floor, the width of the floor is 2 inches and the length is 4 inches. If the width of the actual living room floor is $w$ feet, which of the following function could represent the area, in square feet, of the actual living room floor?
+@ $A(w)=\frac{w^2}{8}$ | $A(w)=2w^2$ | $A(w)=4w^2$ | $A(w)=8w^2$
+## 3176
+A rectangular pool is surrounded by a concrete path that is $x$ feet (ft) wide on all sides. The pool is 21 ft long and 13 ft wide. The area of the concrete path is 240 ft$^2$. What is the value of $x$?
+@ 3 | 6 | 20 | 40
+## 3177
+Earth's outer core can be modeled by a spherical shell that extends from a distance of approximately 1,200 kilometers from Earth's center to approximately 3,400 kilometers from Earth's center. Which of the following is closest to the volume of Earth's outer core, in cubic kilometers?
+@ $1.52\times10^7$ | $3.18\times10^7$ | $4.46\times10^{10}$ | $1.57\times10^{11}$
+## 3178
+A right rectangular pyramid has length $\ell=18$ units, width $w=9$ units, and height $h=12$ units. What is the surface area, in square units, of the pyramid? Give your answer to the nearest tenth.
+## 3179
+A right rectangular prism has a base area of $16t$ square centimeters (cm$^2$). The length of the base of the rectangular prism is $\frac{8}{3}$ cm, and the height of the rectangular prism is 9 cm. Which expression represents the surface area, in cm$^2$, of the right rectangular prism?
+@ $32t+96$ | $140t+48$ | $800t+48$ | $144t$
+## 3180
+A right rectangular pyramid has a base length of 16 units, a base width of 8 units, and a perpendicular height of 18 units. What is its total surface area, in square units? Round your answer to the nearest tenth.
+## 3182
+Sphere A and Sphere B are tangent to each other at point $P$. Segment $MP$ is a diameter of Sphere A, segment $NP$ is a diameter of Sphere B, and point $P$ lies on line segment $MN$. The radius of Sphere A is 5 times the radius of Sphere B. If the volume of Sphere B is $288\pi$ in.$^3$, what is the length of segment $MN$ in inches?
+## 3183
+Prism X is similar to prism Y. Surface area: X = 58 cm$^2$, Y = 1,450 cm$^2$. Volume Y = 1,500 cm$^3$. What is the sum of volumes?
+## 3184
+The area of a rectangular field is 2,661 square feet. The field's length $x$, in feet, is 23 feet longer than its width, in feet. Which equation represents this situation?
+@ $0=x^2-23x-2{,}661$ | $0=x^2-23x+2{,}661$ | $0=x^2+23x-2{,}661$ | $0=x^2+23x+2{,}661$
+## 3185
+A spacecraft uses a communications panel. The side length of the panel is $6.4w$ meters, where $w$ is the width, in meters, of the spacecraft. Which equation gives the area $A$, in square meters, of the panel?
+@ $A=(w+6.4)^2$ | $A=4(6.4w)$ | $A=(6.4w)^2$ | $A=\left(\frac{6.4}{w}\right)^2$
+## 3186
+A hollow steel pipe is in the shape of a right circular cylinder. The steel pipe has an outside diameter of 48 inches, a wall thickness of $\frac{3}{5}$ inches, and a height of 144 inches. Which of the following is closest to the volume, in cubic inches, of the wall of this steel pipe?
+@ 177 | 565 | 2,160 | 13,395
+## 3188
+A cube has an edge length of 82 inches. A solid sphere with a radius of 41 inches is inside the cube, such that the sphere touches the center of each face of the cube. To the nearest cubic inch, what is the volume of the space in the cube not taken up by the sphere?
+@ 262,672 | 288,532 | 334,846 | 546,087
+## 3189
+Hollow steel pipe: outside diameter 48 in, wall thickness $\frac{5}{8}$ in, height 144 in. What is the volume of the wall?
+@ 177 | 565 | 2,160 | 13,395
+## 3190
+A pyramid has a rectangular base with length = 12 cm and width = 14 cm and a height of 7 cm. Find the total surface area of the pyramid rounded to the nearest tenth of a cm$^2$.
+## 3191
+A regular hexagonal prism has a volume of 350 cubic inches and a height of 14 inches. What is the perimeter of each of the hexagonal bases, in inches? Round your answer to the nearest tenth of an inch.
+@ $10\sqrt[4]{12}$ | $10\sqrt{3}$ | $6\sqrt{25}$ | $25\sqrt{3}$
+## 3192
+A sphere is inscribed in a right circular cylinder. The sphere touches the center of each base of the cylinder. The sphere and the cylinder have the same radius, $r$, where $r$ is 33 centimeters. What is the surface area, in square centimeters, of the cylinder?
+@ $4{,}356\pi$ | $6{,}534\pi$ | $13{,}068\pi$ | $71{,}874\pi$
+## 3193
+A nesting structure is a right rectangular prism 20 inches high. Its base has length $x$ inches, which is 2 inches greater than its width. Which function gives its volume, in cubic inches?
+@ $V(x)=x(x+20)(x+2)$ | $V(x)=x(x+20)(x-2)$ | $V(x)=20x(x+2)$ | $V(x)=20x(x-2)$
+## 3195
+A semicircle sits on a rectangle which has a width of 12; the diameter of the semicircle is 48 and is half of the length of the rectangle. The area of both figures together is represented as $a\pi+b$. What is $a+b$?
+## 3196
+A square pyramid has a base side length of $a=4$ units and a height of $h=6$ units. What is the volume of the pyramid in cubic units?
+@ 8 | 16 | 32 | 48
+## 3198
+<table><thead><tr><th>Solid</th><th>Volume (cubic units)</th></tr></thead><tbody><tr><td>Right circular cylinder $A$</td><td>$32\pi$</td></tr><tr><td>Right circular cylinder $B$</td><td>$864\pi$</td></tr></tbody></table><p>The table shows the volumes of two similar solids, right circular cylinder $A$ and right circular cylinder $B$. The radius of cylinder $A$ is 2 units. The surface area of cylinder $A$ is $k\pi$ square units, and the surface area of cylinder $B$ is $n\pi$ square units, where $k$ and $n$ are constants. What is $n-k$? (The surface area of a right circular cylinder with radius $r$ and height $h$ is $2\pi r^2+2\pi rh$.)</p>
+## 3200
+A right square pyramid has a total surface area of 19200 square inches and the combined surface area of the four lateral faces of the pyramid is 9984 square inches. What is the height of this pyramid, in inches?

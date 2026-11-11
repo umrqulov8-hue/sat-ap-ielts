@@ -1,0 +1,58 @@
+## 3229
+For an electric field passing through a flat surface perpendicular to it, the electric flux of the electric field through the surface is the product of the electric field's strength and the area of the surface. A certain flat surface consists of two adjacent squares, where the side length, in meters, of the larger square is 3 times the side length, in meters, of the smaller square. An electric field with strength 29.00 volts per meter passes uniformly through this surface, which is perpendicular to the electric field. If the total electric flux of the electric field through this surface is 4,640 volts $\cdot$ meters, what is the electric flux, in volts $\cdot$ meters, of the electric field through the larger square?
+## 3230
+A right rectangular prism has a base area of $56t$ square centimeters (cm$^2$). The length of the base of the rectangular prism is $\frac{14}{3}$ cm, and the height of the rectangular prism is 3 cm. Which expression represents the surface area, in cm$^2$, of the right rectangular prism?
+@ $112t+56$ | $184t+28$ | $1{,}680t+28$ | $168t$
+## 3231
+A right rectangular pyramid has length $l=18$ units, width $w=9$ units, and height $h=12$ units. What is the surface area, in square units, of the pyramid?
+@ $297+27\sqrt{73}$ | $162+54\sqrt{73}$ | $162+27\sqrt{193}$ | $324+18\sqrt{73}$
+## 3232
+A shipping service restricts the dimensions of the boxes it will ship for a certain type of service. The restriction states that for boxes shaped like rectangular prisms, the sum of the perimeter of the base of the box and the height of the box cannot exceed 130 inches. The perimeter of the base is determined using the width and length of the box. If a box has a height of 60 inches and its length is 2.5 times the width, which inequality shows the allowable width, $x$, in inches, of the box?
+@ $0<x\le10$ | $0<x\le11\frac{2}{3}$ | $0<x\le17\frac{1}{2}$ | $0<x\le20$
+## 3233
+The top of a right square pyramid is removed by a plane parallel to its base. The remaining solid has square bases with side lengths 20 and 10 and volume 2,800. What is the slant height of a trapezoidal face, measured between the midpoints of its parallel edges?
+@ 13 | 12 | 15 | 26
+## 3234
+A plane slices a right circular cone parallel to its base. The radius of the cone is 18 cm and its height is 24 cm. If the cone is separated at the cross section, the bottom portion of the cone is called a <b>frustum</b>. The height of the divided (top) cone is one-third of the height of the original cone. If the surface area of the frustum is $k\pi$, what is the value of $k$? (Use $\pi r(r+l)$ to calculate the surface area of a cone, where $l$ is the slant height.)
+## 3235
+A rectangular prism with a height of 90 cm and a square base has a total surface area of $K$ cm$^2$. It is placed such that the square base is on the floor and the prism is perpendicular to the floor. An identical prism is then glued directly on top of it with the square bases aligned on top of each other. The resulting figure of two prisms has a total surface area of $\frac{63}{36}K$ cm$^2$. Find the side length of the square base.
+## 3236
+Cylinder A has a radius $r$, height $h$, and volume $V$. The volume of Cylinder B is $256V$. Which of the following represent possible values of the radius $R$ and height $H$ of Cylinder B?
+@ $R=4r$, $H=8h$ | $R=8r$, $H=4h$ | $R=2r$, $H=128h$ | $R=4r$, $H=64h$
+## 3237
+A right triangle has side lengths of 7, 10, and $\sqrt{149}$. All three of its sides are diameters of semicircles (circles/semicircles drawn on them), which have a total area of $w\pi$. What is the value of $w$?
+## 3238
+The height of a right circular cylinder is 31 inches, and the circumference of its base is 310 inches. Which expression represents the total surface area, in square inches, of the cylinder?
+@ $31\cdot310$ | $\pi\left(\frac{155^2}{\pi}\right)\cdot31$ | $31\cdot310+\pi\left(\frac{155^2}{\pi}\right)$ | $31\cdot310+2\pi\left(\frac{155}{\pi}\right)^2$
+## 3239
+Cylinders A and B are similar. The volume of cylinder A is $567\pi$ m$^3$, the volume of Cylinder B is $15309\pi$ m$^3$, and the radius of cylinder A is 9 meters. The positive difference in the surface area of the two cylinders is $n\pi$. Find the value of $n$. (The formula for the surface area of a cylinder is $SA=2\pi r^2+2\pi rh$.)
+## 3240
+The height of a right circular cylinder is 36 inches, and the circumference of its base is 360 inches. Which expression represents the total surface area, in square inches, of the cylinder?
+@ $(36)(360)+2\pi\left(\frac{180}{\pi}\right)^2$ | $(36)(360)+\pi\left(\frac{180}{\pi}\right)^2$ | $\pi\left(\frac{180}{\pi}\right)^2(36)$ | $(36)(360)$
+## 3241
+The points $(0,15)$, $(10,8)$, and $(10,3)$ lie on the circumference of one circular base of a cylinder. The distance between the two bases of the cylinder is 20 units. If the volume of the cylinder is $m\pi$ cubic units and the surface area of the cylinder is $n\pi$ square units, what is the value of $m-n$? Round your answer to the nearest whole number.
+## 3242
+Point A is located at the tip of a cone and Point B is located on the circular rim of the same cone. The distance from A to B is 85 cm and the height of the cone is 77 cm. The volume of the cone is $k\pi$. Find the value of $k$ rounded to the nearest whole number.
+@ 33,264 | 36,720 | 99,792 | 167,988
+## 3243
+A right circular cylinder has radius $r$ and height $h$. A second right circular cylinder (not shown) has a volume that is 576 times as large as the volume of the cylinder shown. Which of the following could represent the radius $R$, in terms of $r$, and the height $H$, in terms of $h$, of the second cylinder?
+@ $R=9r$ and $H=8h$ | $R=9r$ and $H=64h$ | $R=2r$ and $H=144h$ | $R=64r$ and $H=9h$
+## 3244
+For a study, a research team measured the heights of 380 king penguins from the Kerguelen Islands and 190 king penguins from the Falkland Islands. The research team determined that the mean height of the 380 king penguins from the Kerguelen Islands was 87 centimeters and the mean height of the 190 king penguins from the Falkland Islands was 93 centimeters. What was the mean height, in centimeters, of all 570 king penguins the research team measured for this study?
+@ 91 | 89 | 90 | 88
+## 3246
+A hollow steel pipe in the shape of a cylinder has an outer diameter of 60 inches, a height of 130 inches, and a wall thickness of $\frac{5}{8}$ of an inch. The volume of the steel pipe itself is $n\pi$. Find the value of $n$ rounded to the nearest whole number.
+## 3247
+The lateral surface area of a cone is $243\pi$ cm$^2$ and the area of the circular base is $81\pi$ cm$^2$. The formula for the lateral surface area of a cone is $rl\pi$ where $r$ is the radius of the circular base and $l$ is the slant height. Find the height, $h$, of the cone.
+@ 9 | 27 | $18\sqrt{2}$ | $9\sqrt{10}$
+## 3248
+A hollow steel pipe is in the shape of a right circular cylinder. The steel pipe has an outside diameter of 60 inches, a wall thickness of $\frac{5}{8}$ inches, and a height of 144 inches. Which of the following is closest to the volume, in cubic inches, of the wall of this steel pipe?
+@ 177 | 565 | 2,700 | 16,788
+## 3249
+A conservation specialist hung artificial nesting structures each in the shape of a right rectangular prism for a species of native duck. Each structure has a height of 18 inches. The length of each structure's base is $x$ inches, which is 1 inch more than the width of the structure's base. Which function $V$ gives the volume of each structure, in cubic inches, in terms of the length of the structure's base?
+@ $V(x)=x(x+18)(x+1)$ | $V(x)=x(x+18)(x-1)$ | $V(x)=18x(x+1)$ | $V(x)=18x(x-1)$
+## 3250
+A trirectangular tetrahedron is a three-dimensional figure with four triangular faces, three of which are right triangles. A chemistry professor uses trirectangular tetrahedrons to create large-scale models of various carbon-based molecules. The base of one of these tetrahedrons is an isosceles right triangle whose legs each have length 14 inches. The height of this tetrahedron is 15 inches. Which of the following is closest to the volume of this tetrahedron, in pints? <i>Note:</i> 1 pint = 0.5 quarts; use 1 quart = 57.75 cubic inches. The volume of a trirectangular tetrahedron is equal to $\frac{1}{3}Sh$, where $S$ is the area of its base and $h$ is its height.
+@ 1,148.75 | 16.9 | 490.00 | 101.82
+## 3251
+A right rectangular pyramid has length $\ell=18$ units, width $w=9$ units, and height $h=12$ units. What is the surface area, in square units, of the pyramid?
