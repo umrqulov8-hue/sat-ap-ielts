@@ -1,0 +1,65 @@
+## 2630
+In triangle $EFG$, $EF=8$ and $EG=10$. Which of the following could NOT be the length of $FG$?
+@ 16 | 9 | 3 | 2
+## 2632
+A regular polygon has exactly 45 sides. If the measure of each exterior angle is $(180k)^\circ$, what is the value of $k$?
+## 2633
+A regular polygon has exactly 57 sides. If the measure of each interior angle is $(180p)^\circ$, what is the value of $p$?
+## 2634
+In triangle $XYZ$, $A$ is the midpoint of $\overline{XY}$ and $B$ is the midpoint of $\overline{YZ}$. If $XY=14$ and $XZ=12$, what is the length of $\overline{AB}$?
+@ 6 | 7 | 24 | 28
+## 2637
+For a certain rectangle, the ratio of the width to the length is 1 to 2. If the width of the rectangle is 91 centimeters, what is the length, in centimeters, of the rectangle?
+## 2639
+A polygon has exactly 87 sides. If the measure of each of the 87 interior angles of this polygon is $(180p)^\circ$, what is the value of $p$?
+## 2640
+In triangle $ABC$, the sum of angles $A$ and $B$ is $159.5^\circ$. What is the measure of angle $C$?
+@ 20.5° | 90° | 110.5° | 180°
+## 2641
+In triangle $DEF$, angle $D$ measures $143^\circ$. Which could be the measure, in degrees, of angle $E$?
+@ 36 | 38 | 90 | 144
+## 2644
+In rectangle $PQRS$, diagonal $\overline{QS}$ has length $\sqrt{3560}$. Side $PS$ is 8 units longer than side $RS$. What is the length of $\overline{QR}$?
+## 2645
+Line $p$ is defined by $y=\left(\frac{7}{5}\right)x-\frac{49}{5}$. Line $r$ is perpendicular to $p$ and passes through $(12,7)$. An equation of $r$ is $ax+by=1$. What is $b$?
+@ $\frac{-7}{11}$ | $\frac{-5}{11}$ | $\frac{5}{109}$ | $\frac{7}{109}$
+## 2646
+In triangle $RST$, angle $R$ measures $39^\circ$, angle $S$ measures $x^\circ$, and angle $T$ measures $(5x-3)^\circ$. Point $L$ lies on $\overline{RS}$, point $K$ lies on $\overline{ST}$, and $\overline{LK}$ is parallel to $\overline{RT}$. What is the measure, in degrees, of angle $SKL$?
+## 2650
+In triangle $RST$, angle $R$ measures $37^\circ$, angle $S$ measures $x^\circ$, and angle $T$ measures $(3x-5)^\circ$. Point $L$ lies on side $\overline{RS}$ and point $K$ lies on side $\overline{ST}$, with $\overline{LK}$ parallel to $\overline{RT}$. What is the measure, in degrees, of angle $SKL$?
+## 2658
+In triangle $ABC$, the measure of angle $B$ is $42^\circ$ and the measure of angle $C$ is $37^\circ$. What is the measure of angle $A$?
+@ 5° | 11° | 79° | 101°
+## 2660
+In triangle $PQR$, angle $P$ measures $67^\circ$ and angle $Q$ measures $13^\circ$. What is the measure of angle $R$?
+@ 26° | 54° | 80° | 100°
+## 2662
+Which of the following pieces of information is sufficient to prove that angle $J$ and angle $L$ are congruent?<p>I. Angle $J$ and angle $L$ are complementary angles.<br>II. Angle $J$ and angle $L$ are vertical angles.</p>
+@ I is sufficient, but II is not. | II is sufficient, but I is not. | I is sufficient, and II is sufficient. | Neither I nor II is sufficient.
+## 2665
+In triangle $JKL$, angles $J$ and $K$ have equal measures, and angle $L$ measures $108^\circ$. What is the measure of angle $J$?
+@ 36° | 54° | 72° | 90°
+## 2666
+In triangle $ABC$, the measure of angle $A$ is $36^\circ$, the measure of angle $B$ is $90^\circ$, and the measure of angle $C$ is $\left(\frac{k}{2}\right)^\circ$. What is the value of $k$?
+@ 45 | 54 | 72 | 108
+## 2667
+In triangle $PQR$, the measure of angle $P$ is $67^\circ$, and the measure of angle $Q$ is $13^\circ$. What is the measure of angle $R$?
+@ 26° | 54° | 80° | 100°
+## 2671
+A line intersects two parallel lines, forming four acute angles and four obtuse angles. The measure of one of the acute angles is $(9x-640)^\circ$. The sum of the measures of one of the acute angles and three of the obtuse angles is $(-18x+w)^\circ$. What is the value of $w$?
+## 2675
+A line intersects two parallel lines, forming four acute angles and four obtuse angles. The measure of one of the acute angles is $(7x-610)^\circ$. The sum of the measures of one of the acute angles and three of the obtuse angles is $(-14x+w)^\circ$. What is the value of $w$?
+## 2679
+In triangle $PQR$, the measure of angle $P$ is $(3x+5)^\circ$, the measure of angle $Q$ is $(2x+9)^\circ$, and the measure of angle $R$ is $(4y+5)^\circ$. If side $QR$ is extended through point $R$ to point $S$ and the measure of angle $PRS$ is $(x+y)^\circ$, what is $x+y$?
+## 2682
+Three line segments have different lengths: 28, 52, and $p$. Which condition is sufficient to prove that they can form a triangle?
+@ $p>24$ | $28<p<52$ | $p<80$ | No additional information is necessary.
+## 2683
+In triangle $RST$, the measure of angle $R$ is $39^\circ$, the measure of angle $S$ is $x^\circ$, and the measure of angle $T$ is $(8x-3)^\circ$. Point $L$ lies on $RS$, point $K$ lies on $ST$, and $LK$ is parallel to $RT$. What is the measure, in degrees, of angle $SKL$? (Disregard the degree symbol when entering your answer.)
+## 2684
+Lines $j$ and $k$ are perpendicular and intersect at the point $(5,16)$. Line $j$ passes through the origin. If line $k$ passes through $(p,0)$, what is $p$?
+## 2688
+Two intersecting lines form two acute and two obtuse angles. The obtuse angles measure $(2x+78)^\circ$ and $(15x-13)^\circ$. What is the sum of the measures of the acute angles?
+@ 14° | 92° | 176° | 180°
+## 2691
+A line intersects two parallel lines, forming four acute angles and four obtuse angles. The measure of one of the acute angles is $(4x-410)^\circ$. The sum of the measures of one of the acute angles and three of the obtuse angles is $(-8x+w)^\circ$. What is the value of $w$?

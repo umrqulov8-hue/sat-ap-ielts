@@ -1,0 +1,88 @@
+## 2755
+In $\triangle ABC$ and $\triangle DEF$, $AC=DF$ and $BC=EF$. Which of the following additional information is NOT sufficient to prove that $\triangle ABC$ is congruent to $\triangle DEF$?
+@ $AB=DE$ | $m\angle CAB=m\angle FDE$ | $m\angle ACB=m\angle DFE$ | $AB+BC=DE+EF$
+## 2757
+In triangle $RST$, $RS=21$ and $ST=9$. A dilation with scale factor $\frac{1}{3}$ produces triangle $R'S'T'$. What is the length of $S'T'$?
+@ 3 | 7 | 27 | 63
+## 2758
+In triangle $RST$, the length of $RS$ is 6, and the length of $ST$ is 12. Triangle $RST$ is dilated by a scale factor of $\frac{1}{3}$ to obtain triangle $R'S'T'$. What is the length of $S'T'$?
+@ 2 | 4 | 18 | 36
+## 2759
+Each angle of triangle $ABC$ is congruent to an angle of triangle $QRS$. If $AB=56$, $BC=84$, $AC=112$, and $RS=336$, what is one possible perimeter of $QRS$?
+## 2760
+<table><thead><tr><th>Triangle</th><th>Perimeter</th></tr></thead><tbody><tr><td>$TUV$</td><td>49</td></tr><tr><td>$XYZ$</td><td>343</td></tr></tbody></table><p>The table gives the perimeters of similar triangles $TUV$ and $XYZ$. Side $TU$ corresponds to $XY$. If $TU=14$, what is $XY$?</p>
+@ 2 | 14 | 63 | 98
+## 2761
+In triangle $ABC$, $DE$ is parallel to $AC$, $BD=AD$, $BE=7$, and $AC=13$. What is the length of $BC$?
+## 2762
+Triangle $ABC$ is dilated by a scale factor of 3 to form triangle $A'B'C'$. If $AB=15$, what is the length of $A'B'$?
+@ 45 | 18 | 5 | 3
+## 2763
+<table><thead><tr><th>Triangle</th><th>Perimeter</th></tr></thead><tbody><tr><td>$TUV$</td><td>43</td></tr><tr><td>$XYZ$</td><td>387</td></tr></tbody></table><p>The table gives the perimeters of similar triangles $TUV$ and $XYZ$. Side $TU$ corresponds to $XY$. If $TU=18$, what is $XY$?</p>
+@ 2 | 18 | 61 | 162
+## 2764
+In triangle $RST$, angle $T$ is a right angle. Point $L$ lies on $RS$, point $K$ lies on $ST$, and $LK$ is parallel to $RT$. If $RT=63$, $LK=21$, and the area of $RST$ is 252 square units, what is the length of $KT$?
+## 2766
+Each angle of triangle $ABC$ is congruent to one of the angles of triangle $QRS$. If $AB=44$, $BC=66$, $AC=88$, and $RS=264$, what is one possible value for the perimeter of triangle $QRS$?
+## 2767
+Triangles $ABC$ and $DEF$ are similar, where each side of $ABC$ is four times the length of its corresponding side in $DEF$. The length of $AB=40$ cm, the length of $BC=20$ cm, the length of $DE$ is $a$ cm, and the length of $EF$ is $b$ cm. Find the value of $a+b$.
+## 2770
+In triangle $RST$, the measure of angle $R$ is 18 degrees and the measure of angle $T$ is 72 degrees. Point $L$ lies on $\overline{RS}$, point $K$ lies on $\overline{ST}$, and $LK$ is parallel to $\overline{RT}$. What is the measure, in degrees, of angle $SKL$? (Disregard the degree symbol when entering your answer.)
+## 2771
+Each angle of $\triangle ABC$ is congruent to one of the angles of $\triangle QRS$. If $AB=6$, $BC=9$, $AC=12$, and $RS=36$, what is one possible value for the perimeter of $\triangle QRS$?
+## 2772
+In triangle $ABC$, angle $C$ is a right angle, point $D$ lies on $AB$, point $E$ lies on $BC$, and $DE$ is parallel to $AC$. If the length of $AB$ is 39 units, $DE$ is 8 units, the length of $AC$ is greater than the length of $BC$, and the area of triangle $ABC$ is 270 square units, what is the length of $BE$, in units?
+## 2773
+Rectangle $A$ is similar to rectangle $B$. Rectangle $A$ has a width of $n$ inches and a length of $x$ inches. Rectangle $B$ has a width of $76n$ inches. Which expression represents the length, in inches, of rectangle $B$?
+@ $x+76$ | $76x$ | $\frac{x}{76}$ | $\frac{76}{x}$
+## 2775
+<table><thead><tr><th>Rectangle</th><th>Area</th><th>Perimeter</th></tr></thead><tbody><tr><td>A</td><td>1110</td><td>370</td></tr><tr><td>B</td><td>4440</td><td>$n$</td></tr></tbody></table><p>The rectangles are similar. Areas are in square inches and perimeters in inches. What is $n$?</p>
+@ 740 | 1,480 | 2,960 | 3,700
+## 2776
+Triangle $QRS$ is similar to triangle $FGH$, with $Q$, $R$, and $S$ corresponding to $F$, $G$, and $H$. Each side of $FGH$ is $\frac{1}{3}$ the length of its corresponding side in $QRS$. Angle $F$ is $35^\circ$, angle $G$ is $6^\circ$, and $FG=a$. Angle $Q$ is $b^\circ$, and $QR=30$. What is $a+b$?
+## 2781
+An isosceles triangle has a base of length $x$ and two congruent sides of length $y$ each, where $x\ne y$. Its perimeter is 81. Which equation represents this situation?
+@ $3x+y=81$ | $3xy=81$ | $x+2y=81$ | $2x+y=81$
+## 2782
+An isosceles triangle has one side of length $x$ and two congruent sides of length $y$, where $x\ne y$. Its perimeter is 56 units. Which equation represents this situation?
+@ $x+y=56$ | $x+2y=56$ | $2x+y=56$ | $2x+2y=56$
+## 2784
+In triangle $PRN$, side $PN$ is 111 inches and side $RN$ is 113 inches. Which of the following cannot be the length of $PR$, in inches?
+@ 2 | 3 | 111 | 113
+## 2785
+Triangle $ABC$ has a perimeter of 90, where $AB$ and $AC$ are the same length. The length of $AB$ is 35. The height of the triangle is $15\sqrt{a}$. What is $a$?
+## 2787
+In triangle $RST$, the length of $RS$ is 21, and the length of $ST$ is 9. Triangle $RST$ is dilated by a scale factor of $\frac{1}{3}$ to obtain triangle $R'S'T'$. What is the length of $S'T'$?
+@ 3 | 7 | 27 | 63
+## 2788
+In isosceles triangle $ABC$, sides $AB$ and $AC$ are congruent. Point $D$ divides side $BC$ such that the length of segment $BD$ is $\frac{3}{4}$ of the length of segment $BC$. Point $E$ lies on side $AB$ and point $F$ lies on side $AC$ such that segments $DE$ and $DF$ are drawn, angle $BED$ is congruent to angle $CFD$. If the length of segment $BE$ is 12, what is the length of segment $CF$?
+@ 4 | 16 | 27 | 96
+## 2790
+In triangle $DEF$, angle $F$ is a right angle. Point $Q$ lies on $DE$, point $J$ lies on $EF$, and $QJ$ is parallel to $DF$. If the length of $EF$ is 45 units, the length of $FJ$ is 24 units, and the area of triangle $DEF$ is 630 square units, what is the perimeter of triangle $QEJ$, in units?
+@ $\frac{294}{5}$ | 63 | $\frac{441}{5}$ | 126
+## 2791
+Triangle $ABC$ is an isosceles triangle where sides $AB$ and $AC$ are each 33 units long with a $120$ degree angle between them. If $\sin B=\frac{p}{33}$, find the value of $p$.
+## 2792
+Triangle $ABC$ is dilated by a scale factor of 6 to form triangle $A'B'C'$. If the length of $AB$ is 18, what is the length of $A'B'$?
+@ 3 | 6 | 24 | 108
+## 2794
+Triangle $ABC$ is similar to triangle $XYZ$ with $A$ corresponding to $X$ and $B$ to $Y$. Each side of $XYZ$ is $k$ times its corresponding side in $ABC$, where $k$ is an integer greater than 1. Angle $Z$ measures $(5x+28)^\circ$, where $x$ is an integer. Which expression gives the measure, in degrees, of angle $C$?
+@ $180-k(5x+28)$ | $90-(5x+28)$ | $k(5x+28)$ | $5x+28$
+## 2795
+In isosceles triangle $ABC$, sides $AB$ and $AC$ are congruent. Point $D$ divides side $BC$ such that the length of $BD$ is $\frac{4}{7}$ of the length of $BC$. Point $E$ lies on side $AB$ and point $F$ lies on side $AC$ such that segments $DE$ and $DF$ are drawn, angle $BED$ is congruent to angle $CFD$. If the length of $BE$ is 8, what is the length of $CF$?
+@ 6 | 14 | 32 | 56
+## 2796
+In triangle $ABC$, angle $A$ is $56^\circ$ and $AC=30$. In triangle $PQR$, angle $P$ is $56^\circ$ and $PR=90$. Which additional information is sufficient to prove that triangle $ABC$ is similar to triangle $PQR$?
+@ $AB=20$ and $PQ=20$ | $AB=20$ and $QR=60$ | Angle $B$ is $48^\circ$ and angle $R$ is $76^\circ$. | Angle $B$ is $56^\circ$ and angle $Q$ is $48^\circ$.
+## 2797
+<table><thead><tr><th></th><th>Area</th><th>Perimeter</th></tr></thead><tbody><tr><td>Rectangle $A$</td><td>2,450</td><td>490</td></tr><tr><td>Rectangle $B$</td><td>9,800</td><td>$n$</td></tr></tbody></table><p>The table gives the areas (square inches) and perimeters (inches) of two similar rectangles, where $n$ is a constant. What is the value of $n$?</p>
+@ 980 | 1,960 | 3,920 | 4,900
+## 2798
+Triangle $CAE$ is similar to triangle $CBD$. The measure of angle $CBD$ is $55^\circ$, and $AE=27(BD)$. What is the measure of angle $CAE$?
+@ $(27\times55)^\circ$ | $(27+55)^\circ$ | $55^\circ$ | $27^\circ$
+## 2799
+Triangle $ABC$ is similar to triangle $XYZ$ such that $A$, $B$, and $C$ correspond to $X$, $Y$, and $Z$, respectively. The length of each side of triangle $ABC$ is $n$ times the length of its corresponding side in triangle $XYZ$, where $n$ is an integer greater than 1. The measure of angle $C$ is 58 degrees, and $YZ=71$. Which of the following must be true?
+@ The measure of angle $Z$ is $\frac{58}{n}$ degrees. | The measure of angle $Z$ is $58n$ degrees. | $BC=\frac{71}{n}$ | $BC=71n$
+## 2800
+In triangles $PQR$ and $WXY$, angles $P$ and $W$ each have a measure of $29^\circ$ and angle $R$ has a measure of $47^\circ$. Which additional piece of information is sufficient to prove that triangle $PQR$ is similar to triangle $WXY$?
+@ $PR=\left(\frac{1}{5}\right)WY$ | Angle $X$ has a measure of $104^\circ$. | $PQ=\left(\frac{1}{5}\right)WX$ and $QR=\left(\frac{1}{5}\right)XY$ | $PQ=\left(\frac{1}{5}\right)WX$ and angle $Y$ has a measure of $76^\circ$.

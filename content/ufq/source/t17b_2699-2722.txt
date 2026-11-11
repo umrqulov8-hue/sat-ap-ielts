@@ -1,0 +1,27 @@
+## 2699
+A line intersects two parallel lines, forming acute and obtuse angles. One acute angle: $(9x-650)^\circ$. Sum of one acute and three obtuse angles: $(-18x+w)^\circ$. What is $w$?
+## 2701
+In triangle $PQR$, the measure of angle $P$ is $(7x+9)^\circ$, the measure of angle $Q$ is $(3x+8)^\circ$, and the measure of angle $R$ is $(4y+3)^\circ$. If side $QR$ is extended through point $R$ to point $S$, and the measure of angle $PRS$ is $(x+y)^\circ$, what is the value of $x+y$?
+## 2703
+In rhombus $QRST$, diagonals $\overline{QS}$ and $\overline{RT}$ intersect at point $P$. The ratio of $QP$ to $RP$ is $20:21$ and the perimeter of the rhombus is 464. Find the length of $QS+RT$.
+## 2704
+Line $a$ passes through the points $(5,0)$ and $(0,4)$. Line $b$ passes through the origin and is perpendicular to line $a$. The two lines intersect at the point $(p,q)$. What is the value of $p$?
+## 2705
+Trapezoid $CDEF$ is similar to trapezoid $JKLM$, such that $C$, $D$, $E$, and $F$ correspond to $J$, $K$, $L$, and $M$, respectively. The length of each side of trapezoid $JKLM$ is 3 times the length of its corresponding side in trapezoid $CDEF$. The measure of angle $C$ is $42^\circ$. What is the measure of angle $J$?
+@ 39° | 42° | 45° | 126°
+## 2710
+The triangle inequality theorem states that the sum of any two sides of a triangle must be greater than the length of the third side. If a triangle has side lengths of 9 and 13, which inequality represents the possible lengths, $x$, of the third side?
+@ $x<22$ | $x>22$ | $4<x<22$ | $x<4$ or $x>22$
+## 2713
+Triangle $ABC$ has $B$ as a right angle, $AC=35$, and $AB$ is 11 less than $AC$. A perpendicular line segment is drawn from point $B$ and intersects side $AC$ at point $D$. What is the ratio $\frac{BC}{BD}$?
+## 2714
+Triangles $DEF$ and $QRS$ are similar, with corresponding side lengths proportional by a factor of $k=3$ ($D\leftrightarrow Q$, $E\leftrightarrow R$, $F\leftrightarrow S$). The angles of triangle $DEF$ are $30^\circ$, $x^\circ$, and $(2x+6)^\circ$ at $D$, $E$, and $F$, respectively. What is the measure, in degrees, of angle $S$?
+## 2715
+In triangle $ABC$, the angle at $A$ is a right angle, $D$ lies on $\overline{AB}$ and $E$ lies on $\overline{BC}$, $DE$ is parallel to $AC$, $BD=AD$, $BE=9$, and $AC=17$. What is the length of $BC$?
+## 2720
+Triangles $DEF$ and $QRS$ are similar, with corresponding side lengths proportional by a factor of $k=2$ ($D\leftrightarrow Q$, $E\leftrightarrow R$, $F\leftrightarrow S$). The angles of triangle $DEF$ are $42^\circ$, $x^\circ$, and $(2x+12)^\circ$ at $D$, $E$, and $F$, respectively. What is the measure, in degrees, of angle $S$?
+## 2721
+If $\tan(A)=\frac{\sqrt{3}}{3}$, which of the following could be the measure of angle $A$, in radians?<p>I. $\frac{-65\pi}{6}$<br>II. $\frac{119\pi}{6}$<br>III. $\frac{79\pi}{6}$</p>
+@ I only | III only | I and III only | I, II, and III
+## 2722
+A property owner wants to find the length $x$, in feet, across a pond. $\overline{PR}$ intersects $\overline{ST}$ at point $Q$, $\angle PTQ$ is congruent to $\angle RSQ$, and $x=PT$ while $\angle PQT$ and $\angle RQS$ are vertical angles. The lengths represented by $PQ$, $TQ$, $QS$, and $RS$ were determined to be 4,200 feet, 8,400 feet, 1,400 feet, and 1,600 feet, respectively. What is the value of $x$?

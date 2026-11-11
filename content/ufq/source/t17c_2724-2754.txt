@@ -1,0 +1,43 @@
+## 2724
+Triangles $PQR$ and $LMN$ are graphed in the $xy$-plane. Triangle $PQR$ has vertices $P$, $Q$, and $R$ at $(5,2)$, $(5,4)$, and $(7,2)$, respectively. Triangle $LMN$ has vertices $L$, $M$, and $N$ at $(5,2)$, $(5,4+k)$, and $(7+k,2)$, respectively, where $k$ is a positive constant. If the measure of $\angle Q$ is $t^\circ$, what is the measure of $\angle N$?
+@ $(90-(t-k))^\circ$ | $(90-(t+k))^\circ$ | $(90-t)^\circ$ | $(90+k)^\circ$
+## 2725
+For each of two rectangles, the ratio of the rectangle's length to its width is 10 to 5. The width of rectangle X is 16.2 times the width of rectangle Y. How does the length of rectangle X compare to the length of rectangle Y?
+@ The length of rectangle X is 0.5 times the length of rectangle Y. | The length of rectangle X is 2 times the length of rectangle Y. | The length of rectangle X is 16.2 times the length of rectangle Y. | The length of rectangle X is 32.4 times the length of rectangle Y.
+## 2726
+In quadrilateral $KLMN$, $KL=3$, $LM=3$, $KN=23$, and $MN=23$. Diagonals $KM$ and $LN$ intersect at point $G$, where $GK=1$ and $GM=1$. If the length of diagonal $LN$ is $\sqrt{p}+\sqrt{w}$, where $p$ and $w$ are integers, what is the value of $p+w$?
+## 2727
+In $\triangle ABC$, angle $C$ is a right angle ($\angle C=90^\circ$). Point $E$ lies on side $AC$ such that $CE=2\cdot AE$, and point $D$ lies on side $AB$ such that segment $ED$ is perpendicular to $AC$. If $BC=198$, what is the length of segment $ED$?
+@ 66 | 99 | 132 | 396
+## 2728
+A line intersects 2 parallel lines creating 4 acute angles and 4 obtuse angles. One acute angle is $9x-440$ degrees and the sum of one acute angle and 3 obtuse angles is $-18x+w$ degrees, where $w$ is a constant. Find the value of $w$.
+## 2730
+A line intersects 2 parallel lines, creating 4 acute angles and 4 obtuse angles. One acute angle measures $6x-620$ degrees, and the sum of one acute angle and 3 obtuse angles is $-12x+w$ degrees. What is the value of $w$?
+## 2733
+A line intersects two parallel lines, forming four acute angles and four obtuse angles. The measure of one of these eight angles is $(7x-250)^\circ$ (an acute angle). The sum of the measures of four of the eight angles is $k^\circ$. Which of the following could NOT be equivalent to $k$, for all values of $x$?
+@ $-14x+1{,}540$ | $14x-320$ | $-28x+1{,}720$ | 360
+## 2738
+In triangle $ABC$ and triangle $DEF$, sides $AB$ and $DE$ each have a side length of 10 inches, and angles $A$ and $D$ each have an angle measure of $40^\circ$. Which of the following additional pieces of information is (are) sufficient to prove whether triangle $ABC$ is congruent to triangle $DEF$?<p>I. The measures of angles $B$ and $C$ are equal.<br>II. The lengths of sides $AC$ and $DF$ are equal.<br>III. The lengths of sides $BC$ and $EF$ are equal.</p>
+@ I is sufficient, but II and III are not. | II is sufficient, but I and III are not. | III is sufficient, but I and II are not. | II is sufficient and III is sufficient, but I is not.
+## 2741
+In triangle $FGH$ and triangle $KLM$, the measures of angles $G$ and $L$ are each $60^\circ$. The lengths of $GH$ and $LM$ are each 34 centimeters, and $\frac{GH}{GF}=\frac{LM}{LK}$. Which additional piece of information would be necessary to prove that triangle $FGH$ is congruent to triangle $KLM$?
+@ The lengths of $FG$ and $KM$ are each 17 centimeters. | The measures of angles $H$ and $M$ are each $30^\circ$. | The measures of angles $F$ and $K$ are each $60^\circ$. | No additional information is necessary.
+## 2742
+Quadrilateral $ABCD$ has sides $AB=AD$ and $BC=DC$ where $AB=3$ and $BC=19$. The two diagonals, $AC$ and $BD$, intersect at point $G$, and both $GB$ and $GD$ have a length of 1. The length of $AC$ can be expressed as $\sqrt{p}+\sqrt{w}$. Find the value of $p+w$.
+## 2743
+In triangle $ABC$, the measure of angle $B$ is $90^\circ$ and $BD$ is an altitude of the triangle. The length of $AB$ is 13 and the length of $AC$ is 19 greater than the length of $AB$. What is the value of $\frac{BC}{BD}$?
+@ $\frac{13}{52}$ | $\frac{13}{12}$ | $\frac{19}{13}$ | $\frac{32}{13}$
+## 2744
+Two lines intersect to form 2 acute and 2 obtuse angles. The measure of one of the obtuse angles is $9x+280$ degrees. Which of the following cannot be the measure of any pair of two angles added together?
+@ $-18x-200$ | $18x+560$ | 180 | $18x+280$
+## 2746
+Two lines intersect at exactly one point, forming two acute angles and two obtuse angles. The measure of one of these angles is $3x-310^\circ$. Which of the following could NOT be the sum of the measures of any two of these angles?
+@ $-6x+620^\circ$ | $-6x+980^\circ$ | $6x-620^\circ$ | $180^\circ$
+## 2752
+In triangle $ABC$ and triangle $XYZ$, the measures of angles $A$ and $X$ are each $20^\circ$, and the lengths of $AB$ and $XY$ are each 16 centimeters. Which of the following additional pieces of information is (are) sufficient to prove that triangle $ABC$ is congruent to triangle $XYZ$?<p>I. The measures of angles $C$ and $Z$ are each $25^\circ$.<br>II. $\frac{AB}{AC}=\frac{XY}{XZ}$</p>
+@ I is sufficient, and II is sufficient. | II is sufficient, but I is not. | Neither I nor II is sufficient. | I is sufficient, but II is not.
+## 2753
+Triangle $PST$ and $VQX$ where $m\angle S=m\angle Q=120^\circ$ and $PT=28$, $VX=21$. What is sufficient to confirm the triangles are similar?<p>I. Ratio of $PS$ to $VQ$ is $4/3$<br>II. Ratio of $ST$ to $QX$ is $4/3$</p>
+@ I is sufficient, II is not | II is sufficient, I is not | I is sufficient, II is sufficient | Both are not sufficient
+## 2754
+A property owner wants to find the length $x$, in feet, across a pond ($x=PT$). $\overline{PR}$ intersects $\overline{ST}$ at point $Q$, and $\angle PTQ$ is congruent to $\angle RSQ$. The lengths represented by $PQ$, $TQ$, $QS$, and $RS$ were determined to be 4,900 feet, 9,800 feet, 1,400 feet, and 1,400 feet, respectively. What is the value of $x$?
