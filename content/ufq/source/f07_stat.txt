@@ -1,0 +1,95 @@
+## 2299
+In 2011, the total number of guests who rode the ride at a small amusement park was 36,384. The bar graph above shows the distribution of the guests by age.<p>Which of the following ages could be the median age of the group of guests who rode the boat ride in 2011?</p><p></p>[[fig:q2299]]
+@ 23 | 27 | 31 | 35
+## 2303
+The box plot summarizes 15 data values. What is the median of this data set?<p></p>[[fig:q2303]]
+@ 2 | 3 | 6 | 9
+## 2305
+The scatterplot above shows the perihelion distance, in astronomical units (AU), and the orbital eccentricity for a random sample of ten comets. The line of best fit for the data is also shown.<p>Of the following, which best approximates the median perihelion distance for the comets in the sample with an orbital eccentricity less than 0.8?</p><p></p>[[fig:q2305]]
+@ 0.6 | 0.9 | 1.0 | 1.3
+## 2321
+In an experiment, a heated cup of coffee is removed from a heat source, and the cup of coffee is then left in a room that is kept at a constant temperature. The graph above shows the temperature, in degrees Fahrenheit (°F), of the coffee immediately after being removed from the heat source and at 10-minute intervals thereafter.<p>During which of the following 10-minute intervals does the temperature of the coffee decrease at the greatest average rate?</p><p></p>[[fig:q2321]]
+@ Between 0 and 10 minutes | Between 30 and 40 minutes | Between 50 and 60 minutes | Between 90 and 100 minutes
+## 2331
+The scatterplot above shows the relationship between the number of tickets sold and the price per ticket for 9 different concerts. The line of best fit is also shown.<p>Which of the following is closest to the mean number of tickets sold for the 9 concerts shown in the scatterplot?</p><p></p>[[fig:q2331]]
+@ 20,000 | 17,000 | 15,000 | 13,000
+## 2339
+For which of the following sets of 9 data points is the median less than the mean?<p></p>[[fig:q2339]]
+@ Dot plot A | Dot plot B | Dot plot C | Dot plot D
+## 2351
+The dot plot shows tree circumferences to the nearest inch. How many trees had a circumference of 11 inches?<p></p>[[fig:q2351]]
+@ 1 | 3 | 5 | 15
+## 2355
+In 2011, the total number of guests who rode the ride at a small amusement park was 36,384. The bar graph above shows the distribution of the guests by age.<p>Of the following, which is closest to the ratio of the number of guests who rode the boat ride aged 60 to 64 to the number of guests who rode the boat ride aged 65 and over?</p><p></p>[[fig:q2355]]
+@ 1 to 4 | 2 to 5 | 1 to 2 | 2 to 1
+## 2357
+The box plot summarizes the lengths, in centimeters, of 75 shoal bass. What is the range of these lengths?<p></p>[[fig:q2357]]
+@ 12 | 17 | 30 | 45
+## 2358
+The box plot summarizes the lengths, in centimeters, of 75 shoal bass. What is the range of these lengths?<p></p>[[fig:q2358]]
+@ 14 | 19 | 30 | 45
+## 2369
+The dot plot shows the circumferences, to the nearest inch, of 20 trees. How many trees had a circumference of 15 inches?<p></p>[[fig:q2369]]
+@ 2 | 4 | 6 | 20
+## 2383
+The bar graph shows participation in four school sports programs. How many more students are in hockey than in volleyball?<p></p>[[fig:q2383]]
+@ 10 | 30 | 40 | 70
+## 2401
+The owner of a pumpkin patch recorded the number of pumpkins sold each day for four days. Sales increased each day. Which graph could represent the numbers sold?<p></p>[[fig:q2401]]
+@ Graph A | Graph B | Graph C | Graph D
+## 2407
+Each of the three data sets represented by the three dot plots has 18 values. The median of data sets $A$, $B$, and $C$ are $a$, $b$, and $c$ respectively. What is the relationship between $a$, $b$, and $c$?<p></p>[[fig:q2407]]
+@ $a<b<c$ | $c<b<a$ | $b<c<a$ | $a=b=c$
+## 2417
+Data set G is shown in the scatterplot. Data set H is created by multiplying the $y$-values of data set G by 20. Which is the most appropriate model for data set H?<p></p>[[fig:q2417]]
+@ $y=20(0.30)^x+20$ | $y=26(0.30)^x$ | $y=26(0.30)^x+20$ | $y=522(0.30)^x$
+## 2418
+The histograms shown summarize two data sets, $X$ and $Y$. Each data set consists of 25 whole numbers. In each histogram, the first interval represents the frequency of whole numbers greater than or equal to 70, but less than 75. The second interval represents the frequency of whole numbers greater than or equal to 75, but less than 80, and so on. What is the <b>largest possible difference</b> between the median of data set $Y$ and the mean of data set $X$?<p></p>[[fig:q2418]]
+## 2420
+The line graph above shows the average price of one metric ton of oranges, in dollars, for each of seven months in 2014.<p>Between which two consecutive months shown did the average price of one metric ton of oranges decrease the most?</p><p></p>[[fig:q2420]]
+@ March to April | May to June | June to July | July to August
+## 2423
+The line graph above shows the average price of one metric ton of oranges, in dollars, for each of seven months in 2014.<p>Which of the following is closest to the median price, in dollars, of the seven recorded prices of one metric ton of oranges?</p><p></p>[[fig:q2423]]
+@ 834 | 808 | 783 | 768
+## 2424
+Data set A: $y=-5.0+8.7x$ for $2\le x\le6$. A new point $(9,52)$ is added. For data set B: $y=r+sx$ for $2\le x\le9$. Which is the best estimate for $s$?<p></p>[[fig:q2424]]
+@ 5.8 | 8.7 | 13.7 | 17.7
+## 2425
+Sunspots are temporary dark spots on the surface of the Sun. The monthly mean number of sunspots for one calendar month is the average of the number of sunspots observed each day during the month. The linear function $s$ models the monthly mean number of sunspots as a function of the number of months, $x$, since April 2015, where $0\le x\le30$. The graph of $y=s(x)$ is shown.<p>Which of the following is the best estimate for the monthly mean number of sunspots in April 2016?</p><p></p>[[fig:q2425]]
+@ 23 | 33 | 43 | 53
+## 2429
+Sunspots are temporary dark spots on the surface of the Sun. The monthly mean number of sunspots for one calendar month is the average of the number of sunspots observed each day during the month. The linear function $s$ models the monthly mean number of sunspots as a function of the number of months, $x$, since December 2013, where $0\le x\le30$. The graph of $y=s(x)$ is shown.<p>Which of the following is the best estimate for the monthly mean number of sunspots in December 2014?</p><p></p>[[fig:q2429]]
+@ 61 | 71 | 81 | 91
+## 2430
+The histogram summarizes the distribution of an original data set that represents the number of points per game a basketball team has scored in the last 50 games played. If the team scores 18 points in the next game and this game is added to the original data set to create a new data set of 51 values, which of the following must be true?<p>I. The median number of points per game for the new data set is less than the median number of points per game for the original data set.<br>II. The mean number of points per game for the new data set is less than the mean number of points per game for the original data set.</p><p></p>[[fig:q2430]]
+@ I only | II only | I and II | Neither I nor II
+## 2432
+The graph above represents the temperature of an oven $t$ minutes after the oven temperature is set to $350^\circ$F. Based on the graph, which of the following best describes the oven temperature?<p></p>[[fig:q2432]]
+@ The oven temperature rises and falls periodically around a temperature of $350^\circ$F | The oven temperature rises at a positive exponential growth rate until it reaches a maximum temperature of $350^\circ$F | The oven temperature rises to $350^\circ$F, and then it varies periodically between room temperature and $350^\circ$F | The oven temperature reaches $350^\circ$F and remains constant.
+## 2435
+The scatterplot above shows the minimum and maximum temperatures in July for 19 selected cities in the United States. For the cities shown, which of the following is closest to the maximum temperature for the city with the median minimum temperature?<p></p>[[fig:q2435]]
+@ 64°F | 66°F | 84°F | 86°F
+## 2437
+A meteorologist records the daily high temperature, in degrees Fahrenheit (°F), over the course of a week in a city as shown. Between which two consecutive days did the greatest increase in high temperature take place?<p></p>[[fig:q2437]]
+@ Day 2 and day 3 | Day 4 and day 5 | Day 5 and day 6 | Day 6 and day 7
+## 2442
+The 22 students in a health class conducted an experiment in which they each recorded their pulse rates, in beats per minute, before and after completing a light exercise routine. The two dot plots display the results.<p>Let $s_1$ and $r_1$ be the standard deviation and range, respectively, of the data before exercise, and let $s_2$ and $r_2$ be the standard deviation and range, respectively, of the data after exercise. Which of the following is true?</p><p></p>[[fig:q2442]]
+@ $s_1=s_2$ and $r_1=r_2$ | $s_1<s_2$ and $r_1<r_2$ | $s_1>s_2$ and $r_1>r_2$ | $s_1\ne s_2$ and $r_1=r_2$
+## 2443
+During mineral formation, the same chemical compound can become different minerals depending on the temperature and pressure at the time of formation. A phase diagram is a graph that shows the conditions that are needed to form each mineral. The graph above is a portion of the phase diagram for aluminosilicates, with the temperature, $T$, in degrees Celsius, on the horizontal axis, and the pressure, $P$, in gigapascals (GPa), on the vertical axis.<p>Which of the following systems of inequalities best describes the region where sillimanite can form?</p><p></p>[[fig:q2443]]
+@ $p\ge0.0021T-0.67$ and $p\ge0.0013T-0.25$ | $p\le0.0021T-0.67$ and $p\ge-0.0015T+1.13$ | $p\le0.0013T-0.25$ and $p\ge-0.0015T+1.13$ | $p\le0.0013T-0.25$ and $p\le-0.0015T+1.13$
+## 2444
+The dot plots represent the distributions of values in data sets A and B. Which of the following statements must be true?<p>I. The median of data set A is equal to the median of data set B.<br>II. The standard deviation of data set A is equal to the standard deviation of data set B.</p><p></p>[[fig:q2444]]
+@ I and II | I only | II only | Neither I nor II
+## 2445
+A data set of the orbital periods, rounded to the nearest whole number of Earth days, for 13 of Jupiter's moons is represented in the dot plot. Two additional moons with an orbital period of 422 and 1044 days are added to the original data set to create a new data set of 15 orbital periods. Which statement best compares the mean and median of the new data set to those of the original data set?<p></p>[[fig:q2445]]
+@ The mean and median of the new data set are equal to the mean and median of the original data set. | The mean of the new data set is less than the mean of the original data set, but the median of the new data set is equal to the median of the original data set. | The mean of the new data set is greater than the mean of the original data set, but the median of the new data set is equal to the median of the original data set. | The mean and median of the new data set are less than the mean and median of the original data set.
+## 2446
+Two data sets of 23 integers each are summarized in the histograms shown. For each of the histograms, the first interval represents the frequency of integers greater than or equal to 10, but less than 20. The second interval represents the frequency of integers greater than or equal to 20, but less than 30, and so on. What is the smallest possible difference between the mean of data set A and the mean of data set B?<p></p>[[fig:q2446]]
+@ 0 | 1 | 10 | 23
+## 2447
+The weight of each object in two groups, A and B, was recorded. The histograms represent the distributions of weight, in grams, for the objects in groups A and B. The mean weight of objects in Group A is 2.1, in Group B is 11.1. Which statement about their standard deviations is true?<p></p>[[fig:q2447]]
+@ Group A's SD is less than Group B's | Group A's SD equals Group B's | Group A's SD is greater than Group B's | Not enough information
+## 2448
+Sunspots are temporary dark spots on the surface of the Sun. The monthly mean number of sunspots for one calendar month is the average of the number of sunspots observed each day during the month. The linear function $s$ models the monthly mean number of sunspots as a function of the number of months, $x$, since April 2015, where $0\le x\le30$. The graph of $y=s(x)$ is shown.<p>Which of the following is the best estimate for the monthly mean number of sunspots in April 2016?</p><p></p>[[fig:q2448]]
+@ 23 | 33 | 43 | 53
