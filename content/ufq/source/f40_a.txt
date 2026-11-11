@@ -1,0 +1,7 @@
+## 3181
+The graph shows three points. What is the area, in square units, of the triangle defined by the three points?<p></p>[[fig:q3181]]
+@ 29 | 58 | 108 | 116
+## 3141
+A right rectangular prism has a height of $\frac{14}{3}$ cm, a base of area $27t$ cm$^2$, and one side of the base is 3 cm. Find the total surface area of the prism.
+## 3142
+The volume of a rectangular prism with a square base is 54 cm$^3$. The surface area of one non-base face is 18 cm$^2$. Find the length, width, and height of the prism (give the values in order: length, width, height).
