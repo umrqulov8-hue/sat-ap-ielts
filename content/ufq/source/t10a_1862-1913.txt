@@ -1,0 +1,130 @@
+## 1862
+For an exponential function $g$, increasing $x$ by 2 doubles $g(x)$. If $g(4)=9$, what is $g(6)$?
+## 1863
+The function $h$ is defined by $h(x)=14(2)^{-x}+7$. What is the value of $h(3)$?
+@ $\frac{42}{4}$ | $\frac{35}{4}$ | -77 | -105
+## 1864
+What is the $y$-intercept of the graph of $y=13^x$ in the $xy$-plane?
+@ $(0,14)$ | $(0,13)$ | $(0,1)$ | $(0,-1)$
+## 1865
+What is the $y$-intercept of the graph of $y=16^{x+3}$ in the $xy$-plane?
+@ $(0,4{,}096)$ | $(0,0)$ | $(0,16)$ | $(0,3)$
+## 1866
+The function $f$ is defined by $f(x)=2(3)^x$. What is the value of $f(x)$ when $x=4$?
+@ 64 | 68 | 81 | 162
+## 1867
+For $q(x)=28(2)^x$, which row lists $q(-1)$, $q(0)$, and $q(1)$, in that order?
+@ 14, 28, 56 | 28, 28, 56 | 14, 56, 112 | 14, 28, 28
+## 1868
+What is the $y$-coordinate of the $y$-intercept of the graph of $y=135(28)^x$ in the $xy$-plane?
+@ 0 | 28 | 135 | 3,780
+## 1869
+<p style="text-align:center">$f(x)=7\cdot4^x$</p><p>If $g(x)=f(x+2)$, which equation defines $g$?</p>
+@ $g(x)=14\cdot4^x$ | $g(x)=112\cdot4^x$ | $g(x)=14\cdot8^x$ | $g(x)=49\cdot16^x$
+## 1870
+An exponential function $f$ is defined by $f(x)=c^x$, where $c$ is a constant greater than 1. If $f(6)=25\cdot f(4)$, what is the value of $c$?
+## 1871
+<p style="text-align:center">$q(x)=28(2^x)$</p><p>Which choice lists $q(-1)$, $q(0)$, and $q(1)$, in that order?</p>
+@ 14, 28, 56 | $\frac{1}{14}$, 28, 56 | $\frac{1}{14}$, 2, 56 | $-56$, 0, 56
+## 1872
+If $f(x)=x^2-4x+10$ and $c$ is a positive integer less than 5, what is one possible value of $f(c)$?
+## 1873
+The function $f$ is defined by $f(x)=a^x-b$, where $a>0$ and $a\ne1$. Its graph passes through $(c,7)$ and $(2c,163)$. What is the value of $b$?
+## 1874
+The function $g$ is defined by $g(x)=\frac{5\cdot2^x+4}{11}$. For every real $x$, $g(x)>k$. What is the greatest possible value of $k$?
+@ 4 | $\frac{4}{11}$ | 9 | $\frac{9}{11}$
+## 1875
+The exponential function $g$ is defined by $g(x)=18\cdot a^x$, where $a$ is a positive constant. If $g(3)=486$, what is the value of $g(4)$?
+## 1876
+<p>Which of the following functions has (have) a minimum value at $-3$?</p><p>I. $f(x)=-6(3)^x-3$<br>II. $g(x)=-3(6)^x$</p>
+@ I only | II only | I and II | Neither I nor II
+## 1877
+The function $f$ is defined by $f(x)=53(0.15)^x$. For each positive integer $n$, $f(n)$ is $p\%$ less than $f(n-1)$. What is the value of $p$?
+@ 15 | 53 | 68 | 85
+## 1878
+The function $f$ is defined by $f(x)=px+8$, where $p$ is a constant. If the graph of $f$ in the $xy$-plane has an $x$-intercept of 4, what is the value of $p$?
+@ -2 | 1 | $\frac{1}{2}$ | 2
+## 1879
+The exponential function $f$ is defined by $f(x)=a\cdot b^x$, where $a$ and $b$ are positive constants. If $f(2)=12$ and $f(5)=324$, what is the value of $b$?
+## 1880
+<p style="text-align:center">$y=2\left(\frac{a}{9}\right)^{x+c}-b$</p><p>The constants $a$, $b$, and $c$ are positive, with $a>9$ and $b>c$. How many times does the graph cross the $x$-axis?</p>
+@ Zero | One | Two | Three
+## 1881
+<p style="text-align:center">$z(w)=(0.829)^{2w}$</p><p>The function $z$ is defined by the equation shown. The value of $z(w)$ decreases by $p\%$ for each increase by 1 in the value of $w$. Which of the following is closest to the value of $p$?</p>
+## 1882
+<p style="text-align:center">$y=3400a^x$</p><p>The equation, where $a$ is positive, predicts the number of bacteria $y$ in a growth medium $x$ hours after an initial measurement. What was the predicted number of bacteria at the initial measurement?</p>
+## 1884
+The function $C(t)=220\left(\frac{52}{51}\right)^{t-12}+8$ estimates the number of cephalopods in an area $t$ months after a study begins. At how many months does the model predict 228 cephalopods?
+## 1885
+<table><thead><tr><th>$x$</th><th>$f(x)$</th></tr></thead><tbody><tr><td>3</td><td>72</td></tr><tr><td>7</td><td>1152</td></tr></tbody></table><p>The function $f$ is defined by $f(x)=ab^x$, where $a$ and $b$ are positive. The table gives two values. What is $f(5)$?</p>
+@ 288 | 144 | 576 | 2,304
+## 1886
+<p style="text-align:center">$y=9\left(\frac{a}{7}\right)^{x+c}-b$</p><p>The constants $a$, $b$, and $c$ are positive, with $a>7$ and $b>c$. How many times does the graph cross the $x$-axis?</p>
+@ Zero | One | Two | Three
+## 1887
+<p style="text-align:center">$f(x)=(r-s)x^2-(s-r)x+rs$</p><p>In the function $f$ defined above, $r$ and $s$ are positive constants. When the graph of $y=f(x)$ is plotted in the $xy$-plane, it intersects the $x$-axis at $(a,0)$ and $(b,0)$. What is the value of $a+b$?</p>
+## 1888
+<p>The function $f$ is defined by</p><p style="text-align:center">$f(x)=ab^x$</p><p>where $a$ and $b$ are constants. If $f(2)=6$ and $f(5)=162$, what is the value of $f(7)$?</p>
+## 1889
+The function $h$ is defined by $h(x)=a^x+b$, where $a$ and $b$ are positive constants. Its graph passes through $(0,11)$ and $(2,19)$. What is $ab$?
+@ 19 | 30 | 33 | 38
+## 1890
+<p style="text-align:center">$z(w)=(0.954)^{2w}$</p><p>The function $z$ is defined by the equation shown. The value of $z(w)$ decreases by $q\%$ for each increase by 1 in the value of $w$. Which of the following is closest to the value of $q$?</p>
+## 1891
+The function $f$ is defined by $f(x)=41(0.26)^x$. For any positive integer $n$, the value of $f(n)$ is $p\%$ less than the value of $f(n-1)$. What is the value of $p$?
+@ 74 | 59 | 41 | 26
+## 1892
+<p>The function $f$ is defined by</p><p style="text-align:center">$f(x)=ab^x$</p><p>where $a$ and $b$ are constants and $b$ is an integer. If $f(4)=5$ and $f(7)=135$, what is the value of $f(9)$?</p>
+## 1893
+The function $f$ is defined by $f(x)=29\cdot b^x+c$, where $b$ and $c$ are constants and $b>1$. The graph of $y=f(x)$ passes through $(0,44)$. For every real $x$, $f(x)>k$. What is the greatest possible value of $k$?
+## 1894
+The population of a certain city doubled every 25 years from 1660 to 1760. The population of this city was 208,000 in 1760. What was the population of this city in 1660?
+@ 13,000 | 26,000 | 104,000 | 416,000
+## 1895
+The value, in dollars, of a certain bicycle $t$ years after it was purchased can be modeled by the function $f(t)=220(0.97)^t$. According to the model, what was the estimated value, in dollars, of the bicycle when it was purchased?
+## 1896
+The graph of $y=\left(\frac{1}{7}\right)^x+1$ in the $xy$-plane is shifted up 3 units. What is an equation of the resulting graph?
+@ $y=\left(\frac{1}{7}\right)^{x+3}+1$ | $y=\left(\frac{1}{7}\right)^{x-3}+1$ | $y=3\left(\frac{1}{7}\right)^x+1$ | $y=\left(\frac{1}{7}\right)^x+4$
+## 1897
+<p style="text-align:center">$r(m)=(1.037)^{4m}$</p><p>The value of $r(m)$ increases by $p\%$ for each increase of 1 in $m$. Which value is closest to $p$?</p>
+@ 0.912 | 3.7 | 15.642 | 25.925
+## 1898
+<p style="text-align:center">$J(x)=1{,}950+35x$<br>$K(x)=2{,}100+25x$</p><p>Jana and Kora both estimated their town's present population and rate of growth. The functions $J$ and $K$ defined above represent, respectively, Jana's prediction and Kora's predictions of the population of their town $x$ years after January 1, 2015.</p><p>During what year does Jana's function predict the town's population will become greater than 2,290?</p>
+@ 2022 | 2024 | 2028 | 2032
+## 1899
+The function $h$ is defined by $h(x)=a^x+b$, where $a$ and $b$ are positive constants. The graph passes through $(0,11)$ and $(2,14)$. What is $ab$?
+@ 20 | 22 | 28 | 30
+## 1900
+The graph of $y=\left(\frac{1}{9}\right)^x+1$ in the $xy$-plane is shifted up 3 units. What is an equation of the resulting graph?
+@ $y=\left(\frac{1}{9}\right)^{x+3}+1$ | $y=\left(\frac{1}{9}\right)^{x-3}+1$ | $y=3\left(\frac{1}{9}\right)^x+1$ | $y=\left(\frac{1}{9}\right)^x+4$
+## 1901
+An exponential function increases by 110% whenever $x$ increases by $\frac{1}{3}$. Which equation could define it?
+@ $f(x)=(2.1)^{3x}$ | $f(x)=(2.1)^{\frac{x}{3}}$ | $f(x)=(1.1)^{3x}$ | $f(x)=(1.1)^{\frac{x}{3}}$
+## 1902
+For function $h$, the table gives three input-output pairs. Which equation could define $h$?<table><thead><tr><th>$x$</th><th>$h(x)$</th></tr></thead><tbody><tr><td>0</td><td>15</td></tr><tr><td>1</td><td>16</td></tr><tr><td>2</td><td>18</td></tr></tbody></table>
+@ $h(x)=2^x+14$ | $h(x)=2^x+13$ | $h(x)=2^x+2$ | $h(x)=2^x$
+## 1903
+<p style="text-align:center">$J(x)=1{,}950+35x$<br>$K(x)=2{,}100+25x$</p><p>Jana and Kora both estimated their town's present population and rate of growth. The functions $J$ and $K$ defined above represent, respectively, Jana's prediction and Kora's predictions of the population of their town $x$ years after January 1, 2015.</p><p>In what year is the population predicted by Jana's function the same as the population predicted by Kora's function?</p>
+@ 2028 | 2029 | 2030 | 2031
+## 1904
+<p style="text-align:center">$y=7200(0.85)^x$</p><p>The equation estimates the value $y$, in dollars, of a car $x$ years after purchase. What was its estimated value at the time of purchase?</p>
+@ 720 | 6,120 | 7,200 | 8,500
+## 1905
+The function is $f(x)=14(2)^{\frac{x}{4}}$. Which row gives the corresponding values of $f(x)$ for $x=-4$, 0, 4, and 8, in that order?
+@ 7, 0, 28, 56 | 7, 14, 28, 56 | $-7$, 14, 28, 56 | 7, 14, 28, 42
+## 1906
+A start-up company opened with 8 employees. The company's growth plan assumes that 2 new employees will be hired each quarter (every 3 months) for the first 5 years. If an equation is written in the form $y=ax+b$ to represent the number of employees, $y$, employed by the company $x$ quarters after the company opened, what is the value of $b$?
+## 1909
+<p style="text-align:center">$y=3\left(\frac{a}{6}\right)^{x+c}-b$</p><p>How many times does the graph of the given equation in the $xy$-plane cross the $x$-axis, where $a$, $b$, and $c$ are positive constants such that $a>6$ and $b>c$?</p>
+@ Zero | One | Two | Three
+## 1910
+The function $h$ is defined by $h(x)=a^x+b$ where $a$ and $b$ are positive constants. The graph of $y=h(x)$ passes through $(0,4)$ and $(2,12)$. What is the value of $ab$?
+@ 8 | 9 | 12 | 15
+## 1911
+The function $f$ defined by $f(t)=26\left(\frac{1}{2}\right)^{\frac{t}{4}}$ gives the estimated volume of hydrogen peroxide, in milliliters, in a solution $t$ hours after the hydrogen peroxide was added to the solution. According to the function, the estimated volume of hydrogen peroxide, in milliliters, in the solution reduces by half every $n$ minutes. What is the value of $n$?
+## 1912
+When a scientist began observing an isotope sample, its mass was 530,000 milligrams. The mass decreases by half every 5 days. Which value is closest to the mass, in milligrams, 35 days after observations began?
+@ 4,141 | 15,143 | 16,563 | 18,714
+## 1913
+<p>The exponential function</p><p style="text-align:center">$f(x)=ab^x$</p><p>is defined where $a$ and $b$ are positive. If $f(n-1)=f(n)+\frac{61}{100}f(n-1)$, where $n$ is a constant, what is the value of $b$?</p>
+@ 0.39 | 0.61 | 1.61 | 2.56

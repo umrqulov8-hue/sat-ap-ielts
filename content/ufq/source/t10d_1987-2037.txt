@@ -1,0 +1,123 @@
+## 1987
+The exponential function $f$ is defined by $f(s)=a\cdot b^s$, where $a$ and $b$ are positive constants. If $f(s)=t$ and $f(s+1)=t-0.87t$, where $s$ and $t$ are constants, what is the value of $b$?
+@ 0.13 | 0.87 | 1.13 | 1.87
+## 1988
+<p style="text-align:center">$f(x)=18(2.10)^{\frac{x}{2}}$</p><p>The function $f$ is defined by the given equation. The value of $f(x)$ increases by $p\%$ for every increase of $x$ by 4. For which of the following functions, where $n$ is a positive constant, does the value of $g(x)$ increase by $p\%$ for every increase of $x$ by 1?</p>
+@ $g(x)=n(1.05)^x$ | $g(x)=n(2.10)^x$ | $g(x)=n(3.41)^x$ | $g(x)=n(4.41)^x$
+## 1989
+According to the consumer price index, the price of a certain product has increased by the same number of cents each month since January 2015. Which of the following function types could correctly be used to model this situation, where $a$ and $b$ are positive constants and $t$ is the number of months since January 2015? (Assume the price of the product was not zero in January 2015.)
+@ $f(t)=abt$ | $f(t)=a(b)^t$ | $f(t)=a+b^t$ | $f(t)=a+bt$
+## 1991
+<p style="text-align:center">$f(x)=510(0.92)^x$</p><p>The function estimates the mass, in grams, of paper bags $x$ days after they are placed with bacteria, where $0\le x\le30$. What does the point $(1, 469.20)$ mean?</p>
+@ After 1 day, the mass is 469.20 grams less than the day before. | The mass decreases by 469.20 grams per day. | After 1 day, the remaining mass is 469.20 grams. | After 469.20 days, the remaining mass is 1 gram.
+## 1994
+An exponential function $f$ gives the estimated amount of an X-ray beam's initial intensity remaining after passing through a $w$-centimeter-thick window made of beryllium. The function estimates that after passing through a 1.8-centimeter-thick window, the amount of the X-ray beam's initial intensity remaining is 0.65. Which equation could define $f$?
+@ $f(w)=0.65(0.78)^{w-1.8}$ | $f(w)=0.65(0.78)^{\frac{w}{1.8}}$ | $f(w)=0.65(1.8)^w$ | $f(w)=1.8(0.65)^w$
+## 1995
+<p style="text-align:center">$f(x)=4000(0.90)^x$</p><p>A conservation scientist used a program to reduce an invasive insect population. The function estimates this population $x$ years after 2008, where $x\le8$. What is the best interpretation of 4000?</p>
+@ The estimated percent decrease every 8 years after 2008 | The estimated initial insect population in 2008 | The estimated percent decrease each year after 2008 | The estimated insect population 8 years after 2008
+## 1996
+An exponential function $f$ gives the estimated amount of an X-ray beam's initial intensity remaining after passing through a $w$-centimeter-thick window made of beryllium. The function estimates that after passing through a 1.7-centimeter-thick window, the amount of the X-ray beam's initial intensity remaining is 0.66. Which equation could define $f$?
+@ $f(w)=0.66(0.79)^{w-1.7}$ | $f(w)=0.66(0.79)^{\frac{w}{1.7}}$ | $f(w)=0.66(1.7)^w$ | $f(w)=1.7(0.66)^w$
+## 1997
+James purchased a baseball card on January 1. The function $f(x)=85(1.03)^x$, for $0\le x\le10$, predicts its value in dollars $x$ years later. Which statement best interprets $f(8)\approx108$?
+@ When the predicted value is \$108, it is 8% greater than the value a year earlier. | When the predicted value is \$108, it is 8 times the value a year earlier. | The predicted value increases by approximately \$108 during the first 8 years. | The predicted value is approximately \$108 eight years after purchase.
+## 1998
+A model estimates that the initial number of photons in an X-ray beam is 700 when the beam reaches the surface of a certain material. The model also estimates that when the beam passes through this material, the number of photons in the beam decreases by 50% for each 9 millimeters of the material the beam passes through. Which equation represents this model, where $I$ is the estimated number of photons in the beam when the beam reaches a point $x$ millimeters from the surface?
+@ $I=700(0.5)^{\frac{x}{9}}$ | $I=700(0.5)^x$ | $I=700(2)^{\frac{x}{9}}$ | $I=700(9)^{\frac{x}{2}}$
+## 1999
+In the $xy$-plane, which of the following does NOT contain any points that are part of the solution set to $7x-6y>42$?
+@ The $x$-axis | The region where $x>0$ and $y>0$ | The region where $x<0$ and $y<0$ | The region where $x<0$ and $y>0$
+## 2001
+A model estimates that the initial number of photons in an X-ray beam is 600 when the beam reaches the surface of a certain material. The model also estimates that when the beam passes through this material, the number of photons in the beam decreases by 50% for each 13 millimeters of the material the beam passes through. Which equation best represents this model, where $I$ is the estimated number of photons in the beam when the beam reaches a point $x$ millimeters from the surface?
+@ $I=600(0.5)^{\frac{x}{13}}$ | $I=600(0.5)^x$ | $I=600(2)^{\frac{x}{13}}$ | $I=600(13)^{\frac{x}{2}}$
+## 2002
+Bennett opens an account with \$700 and makes no further deposits or withdrawals. After the first 4 months, the balance has increased by 0.6% of the original balance. Thereafter, the balance increases by 0.2% every 2 months. Which formula models the balance $B(x)$, in dollars, at the end of each 2-month interest period, where $x\ge4$ is an even integer?
+@ $B(x)=704.20(1.002)^{\frac{x-4}{2}}$ | $B(x)=704.20(1.002)^{\frac{x}{2}}$ | $B(x)=704.20(1.002)^{x-8}$ | $B(x)=704.20(1.002)^{2x-4}$
+## 2003
+The function $f(x)=600(0.5)^{\frac{x}{11}}$ gives the predicted intensity of a beam $f(x)$, in number of photons in the beam, $x$ millimeters below the surface of a certain material. What is the best interpretation of $f(11)=300$?
+@ A beam at the surface of the material has a predicted intensity of 11 photons in the beam. | A beam at the surface of the material has a predicted intensity of 300 photons in the beam. | A beam 11 millimeters below the surface of the material has a predicted intensity of 300 photons in the beam. | A beam 300 millimeters below the surface of the material has a predicted intensity of 600 photons in the beam.
+## 2004
+A company has a customer loyalty program. In January 2018, there were 1,100 customers enrolled in the loyalty program. For the next 24 months after January 2018, the total number of customers enrolled in the loyalty program each month was 4% greater than the total number enrolled the previous month. Which equation gives the total number of customers, $c$, enrolled in the company's loyalty program $m$ months after January 2018, where $m<24$?
+@ $c=1100(0.04)^m$ | $c=1100(1.04)^m$ | $c=1100(1.4)^m$ | $c=1100(4)^m$
+## 2005
+The wood bison is the largest land animal in North America. An exponential model estimates that the population of wood bison in a certain area doubled from the end of 1994 to the end of 1998. The model also estimates that the population of wood bison in this area at the end of 1997 was approximately 256. Which equation best represents this model, where $P$ is the estimated population of wood bison in this area $t$ years after the end of 1994 and $0\le t\le4$?
+@ $P=152(2)^{\frac{t}{4}}$ | $P=152(2)^{4t}$ | $P=256(2)^{\frac{t}{4}}$ | $P=256(2)^{4t}$
+## 2006
+A sample of a certain isotope takes 16 years to decay to half its original mass. The function $s(t)=192(0.5)^{\frac{t}{16}}$ gives the approximate mass, in grams, that remains $t$ years after a 192-gram sample starts to decay. Which statement is the best interpretation of $s(48)=24$ in this context?
+@ Approximately 24 grams of the sample remain 48 years after the sample starts to decay. | The mass of the sample has decreased by approximately 24 grams after 48 years. | Approximately 48 grams of the sample remain 24 years after the sample starts to decay. | The sample loses approximately 48 grams every 24 years.
+## 2007
+The function $f(x)=1{,}200(0.5)^{\frac{x}{15}}$ gives the predicted intensity of a beam $f(x)$, in number of photons in the beam, $x$ millimeters below the surface of a certain material. What is the best interpretation of $f(15)=600$?
+@ A beam at the surface of the material has a predicted intensity of 15 photons in the beam. | A beam at the surface of the material has a predicted intensity of 600 photons in the beam. | A beam 15 millimeters below the surface of the material has a predicted intensity of 600 photons in the beam. | A beam 600 millimeters below the surface of the material has a predicted intensity of 1,200 photons in the beam.
+## 2008
+Nakia opened a bank account on January 1, 2015, with a deposit of \$360. On January 1, 2016, the balance was still \$360. Each year after January 1, 2016, the account balance increased by 2.8% of the balance on January 1 of the previous year. No other deposits or withdrawals were made. Which function gives the balance $h(x)$, in dollars, of Nakia's account $x$ years after the account was opened, where $x\ge1$?
+@ $h(x)=360(0.028)^x$ | $h(x)=360(0.028)^{x-1}$ | $h(x)=360(1.028)^x$ | $h(x)=360(1.028)^{x-1}$
+## 2012
+A conservation scientist implemented a program to reduce a certain invasive insect population in an area. The function $f(x)=2{,}000(0.80)^x$ estimates this insect species' population $x$ years after 2008, where $x\le8$. Which of the following is the best interpretation of 2,000 in this context?
+@ The estimated initial insect population for this species and area in 2008 | The estimated insect population for this species and area 8 years after 2008 | The estimated percent decrease in the insect population for this species and area each year after 2008 | The estimated percent decrease in the insect population for this species and area every 8 years after 2008
+## 2013
+A computer program models the population of a certain insect in an environment where the insect has no natural predators. According to the model, the estimated total mass of the population of insects at the end of every 5-week period is 158% greater than the estimated total mass of the population of insects at the end of the previous 5-week period. The estimated mass of the population of insects at the end of 15 weeks is 627.7 grams. Which equation best represents this model, where $M$ is the estimated total mass, in grams, of the population of insects at the end of $t$ weeks?
+@ $M=538.92(1.58)^{\frac{t}{5}}$ | $M=457.66(2.58)^{\frac{t}{5}}$ | $M=159.14(1.58)^{\frac{t}{5}}$ | $M=36.55(2.58)^{\frac{t}{5}}$
+## 2014
+The function $P(x)=533(1.011)^x$ models the population of a certain town each year from 1951 through 1966, where $x$ is the number of years after 1951. Which of the following is the best interpretation of "$P(5)$ is approximately equal to 563" in this context?
+@ The population of the town is estimated to be approximately 5 greater in 1956 than in 1951. | The population of the town is estimated to be approximately 563 in 1956. | The population of the town is estimated to be approximately 5 times greater in 1956 than in 1951. | The population of the town is estimated to increase by approximately 563 every 5 years between 1951 and 1966.
+## 2015
+<p style="text-align:center">$z(w)=(0.829)^{2w}$</p><p>The function $z$ is defined by the equation shown. The value of $z(w)$ decreases by $p\%$ for each increase by 1 in the value of $w$. Which of the following is closest to the value of $p$?</p>
+@ 0.171 | 0.829 | 17.1 | 31.3
+## 2016
+The function $P(x)=506(1.013)^x$ models the population of a certain town each year from 1953 through 1968, where $x$ is the number of years after 1953. Which of the following is the best interpretation of "$P(5)$ is approximately equal to 540" in this context?
+@ The population of the town is estimated to be approximately 5 greater in 1958 than in 1953. | The population of the town is estimated to be approximately 540 in 1958. | The population of the town is estimated to be approximately 5 times greater in 1958 than in 1953. | The population of the town is estimated to increase by approximately 540 every 5 years between 1953 and 1968.
+## 2017
+At different times on a certain day, a manager at a theme park recorded the number of visitors. An exponential model gives the estimated number of visitors, $V$, at the theme park $t$ hours after the theme park opened, where $t\le3$. Based on the model, 85 visitors were estimated to be at the theme park when it opened, and every 30 minutes the estimated number of visitors increased by 140% of the estimated number of visitors 30 minutes earlier. Which of the following equations best represents this model?
+@ $V=85(1.40)^{\frac{t}{2}}$ | $V=85(1.40)^{2t}$ | $V=85(2.40)^{\frac{t}{2}}$ | $V=85(2.40)^{2t}$
+## 2018
+A model estimates that in a particular forest, the number of trees with any given diameter measured at shoulder height is 21% less for each 1-inch increase in tree diameter measured at shoulder height. The model can be written in the form $f(x)=ab^x$, where $a$ and $b$ are constants and $x$ is the tree's diameter, in inches, measured at shoulder height, and $x\ge5$. The model estimates that 3,100 trees in this forest have a diameter of 13 inches measured at shoulder height. Which function best represents this model?
+@ $f(x)=3{,}100(0.79)^x$ | $f(x)=3{,}100(0.79)^{x-13}$ | $f(x)=3{,}100(1.21)^{x-13}$ | $f(x)=3{,}100(0.21)^{x-13}$
+## 2019
+The relationship between the variables $x$ and $y$ is defined by an exponential equation. When $x=0$ the value of $y$ is 30, and for every increase in the value of $x$ by 1, the corresponding value of $y$ increases by 70% of its previous value. Which equation represents this relationship?
+@ $y=30(1.70)^x$ | $y=30(1.07)^x$ | $y=70(1.30)^x$ | $y=70(1.03)^x$
+## 2020
+James purchased a certain baseball card on January 1. The function $f(x)=55(1.02)^x$, where $0\le x\le10$, gives the predicted value, in dollars, of the baseball card $x$ years after James purchased it. What is the best interpretation of the statement "$f(9)$ is approximately equal to 66" in this context?
+@ When the baseball card's predicted value is approximately 66 dollars, it is 9% greater than the predicted value, in dollars, on January 1 of the previous year. | When the baseball card's predicted value is approximately 66 dollars, it is 9 times the predicted value, in dollars, on January 1 of the previous year. | From the day James purchased the baseball card to 9 years after James purchased the card, its predicted value increased by a total of approximately 66 dollars. | 9 years after James purchased the baseball card, its predicted value is approximately 66 dollars.
+## 2021
+<p style="text-align:center">$f(x)=18(2.80)^{\frac{x}{2}}$</p><p>The function $f$ is defined by the given equation. The value of $f(x)$ increases by $p\%$ for every increase of $x$ by 4. For which of the following functions, where $n$ is a positive constant, does the value of $g(x)$ increase by $p\%$ for every increase of $x$ by 1?</p>
+@ $g(x)=n(1.40)^x$ | $g(x)=n(2.80)^x$ | $g(x)=n(6.84)^x$ | $g(x)=n(7.84)^x$
+## 2022
+The function is defined by $f(x)=-10(2)^{\frac{x}{3}}$. Which table gives four values of $x$ and their corresponding values of $f(x)$ for the given exponential function?
+@ $x=-3,0,3,6$ with $f(x)=-5,\ 0,\ -20,\ -40$ | $x=-3,0,3,6$ with $f(x)=-5,\ -10,\ -20,\ -40$ | $x=-3,0,3,6$ with $f(x)=5,\ 10,\ -20,\ -40$ | $x=-3,0,3,6$ with $f(x)=-5,\ 0,\ -20,\ -30$
+## 2023
+<p style="text-align:center">$f(x)=500(1.003)^{2x}$</p><p>The given function $f$ models the balance of a bank account, in dollars, $x$ years after it is opened. Which statement is the best interpretation of $(1.003)^{2x}$?</p>
+@ Every 6 months, the balance increases by about \$3. | Every 2 years, the balance increases by about \$3. | At the end of every 6-month interval, the balance increases by about 0.3% of the balance at the beginning of the 6-month interval. | At the end of every 2-year interval, the balance increases by about 0.3% of the balance at the beginning of the 2-year interval.
+## 2025
+The scatterplot shows the federal-mandated minimum wage every 10 years between 1940 and 2010 ($x$ is years since 1940, $y$ is dollars per hour). A line of best fit is shown, and its equation is $y=0.096x-0.488$. What does the line of best fit predict about the increase in the minimum wage over the 70-year period?
+@ Each year between 1940 and 2010, the average increase in minimum wage was 0.096 dollars. | Each year between 1940 and 2010, the average increase in minimum wage was 0.49 dollars. | Every 10 years between 1940 and 2010, the average increase in minimum wage was 0.096 dollars. | Every 10 years between 1940 and 2010, the average increase in minimum wage was 0.488 dollars.
+## 2026
+A certain investment account offers a special interest rate for the first 6 months the account is open followed by a lower interest rate for the remainder of the time the account is open. Bennett opened one of these accounts with an original account balance of \$600 and did not make any other deposits or withdrawals. 6 months after Bennett opened the account, the balance had increased by 0.4% of the original balance. 8 months after Bennett opened the account, the balance had increased by an additional 0.3% of the balance at the end of the first 6 months. Every 2 months after the first 8 months, the balance had increased by an additional 0.3% of the balance 2 months before. Which of the following equations could represent the account balance $B(x)$, in dollars, $x$ months after the account was opened, where $x\ge6$?
+@ $B(x)=602.40(1.003)^{\frac{x}{2}-6}$ | $B(x)=602.40(1.003)^{\frac{x-6}{2}}$ | $B(x)=602.40(1.003)^{2x-12}$ | $B(x)=602.40(1.003)^{2x-6}$
+## 2027
+<p style="text-align:center">$f(p)=7{,}000-30p$</p><p>A manufacturer of DVD players developed the function $f$ above, where $f(p)$ represents the number of DVD players retailers are likely to purchase each week when the DVD players cost $p$ dollars each. What is the best interpretation of the number 30 in the function?</p>
+@ For every 1 dollar increase in price, 30 fewer DVD players are likely to be purchased each week. | For every 1 dollar increase in price, 30 more DVD players are likely to be purchased each week. | For every 30 dollar increase in price, 1 fewer DVD player is likely to be purchased each week. | For every 30 dollar increase in price, 1 more DVD player is likely to be purchased each week.
+## 2028
+The number of bacteria in a growth medium is expected to increase by 150% every 2 hours. The number of bacteria was estimated to be 7,000 when the period of observation began. Which function $P$ gives the expected number of bacteria in this growth medium $t$ hours after the period of observation began?
+@ $P(t)=7{,}000(1.50)^{\frac{t}{2}}$ | $P(t)=7{,}000(1.50)^{2t}$ | $P(t)=7{,}000(2.50)^{\frac{t}{2}}$ | $P(t)=7{,}000(2.50)^{2t}$
+## 2029
+For a certain position, an employer offers an hourly wage of \$24.00 at the start of employment. For the next two years after the start of employment, the hourly wage is increased by 15% of the hourly wage at the end of the previous year. For the next five years, at the end of every 3-month interval, the hourly wage is increased by 7% of the hourly wage at the end of the previous 3-month interval. Which of the following functions models the percent change in the value of the hourly wage between the end of the second and seventh year?
+@ $f(x)=\left(31.74\cdot(1.07)^{28}-31.74\right)\cdot100$ | $f(x)=\left(31.74\cdot(1.07)^{20}-31.74\right)\cdot100$ | $f(x)=\left((1.07)^{28}-1\right)\cdot100$ | $f(x)=\left((1.07)^{20}-1\right)\cdot100$
+## 2030
+A certain investment account offers a special interest rate for the first 4 months the account is open followed by a lower interest rate for the remainder of the time the account is open. Akeyla opened one of these accounts with an original account balance of \$700.00 and did not make any other deposits or withdrawals. 4 months after Akeyla opened the account, the balance had increased by 0.6% of the original balance. 6 months after Akeyla opened the account, the balance had increased by an additional 0.1% of the balance at the end of the first 4 months. Every 2 months after the first 6 months, the balance had increased by an additional 0.1% of the balance 2 months before. Which of the following equations could represent the account balance $B(x)$, in dollars, $x$ months after the account was opened, where $x\ge4$?
+@ $B(x)=704.20(1.001)^{\frac{x-4}{2}}$ | $B(x)=700.00(1.001)^{\frac{x-4}{2}}$ | $B(x)=704.20(1.001)^{2(x-4)}$ | $B(x)=700.00(1.001)^{2(x-4)}$
+## 2033
+For a certain isotope, at the end of every 29-year period, the mass of a sample of the isotope has decayed to half its mass at the beginning of the 29-year period. The function $s(t)=168(0.5)^{\frac{t}{29}}$ gives the approximate mass of this isotope, in grams, that remains $t$ years after a 168-gram sample starts to decay. Which statement is the best interpretation of $s(2\cdot29)=42$ in this context?
+@ The mass of the sample is approximately 42 grams 2 years after the sample starts to decay. | The mass of the sample is approximately 42 grams 2 29-year periods after the sample starts to decay. | The mass of the sample is approximately 2 grams 42 29-year periods after the sample starts to decay. | The mass of the sample is approximately 2 grams 42 years after the sample starts to decay.
+## 2034
+A model estimates that in a particular forest, the number of trees with any given diameter measured at shoulder height is 21% less for each 1-inch increase in tree diameter measured at shoulder height. The model can be written in the form $f(x)=ab^x$, where $a$ and $b$ are constants and $x$ is the tree's diameter, in inches, measured at shoulder height, and $x\ge5$. The model estimates that 3,100 trees in this forest have a diameter of 13 inches measured at shoulder height. Which function best represents this model?
+@ $f(x)=3{,}100(0.21)^x$ | $f(x)=3{,}100(0.79)^x$ | $f(x)=66{,}000(0.21)^x$ | $f(x)=66{,}000(0.79)^x$
+## 2035
+<p>A reindeer population was introduced into an area and researched for 19 years. Function $P$ models this reindeer population $t$ years after the population was introduced into the area.</p><p style="text-align:center">$P(t)=67\left(\frac{5}{4}\right)^t$</p><p>Which statement is the best interpretation of $\frac{5}{4}$ in this context?</p>
+@ For every 4 reindeer there were in this population in a certain year, it is predicted that there will be 5 reindeer the next year. | For every 5 reindeer there were in this population in a certain year, it is predicted that there will be 4 reindeer the next year. | It is predicted that this reindeer population grows by 4 reindeer every 5 years. | It is predicted that this reindeer population grows by 5 reindeer every 4 years.
+## 2036
+A computer program models the total mass of the population of a certain type of algae after the algae was placed in an environment where it has no natural predators. According to the model, the estimated total mass of this population of algae at the end of every 6-hour period is 128% greater than the estimated total mass of this population of algae at the end of the previous 6-hour period, and the estimated total mass of this population of algae is 629.60 grams after 18 hours. Which equation best represents this model, where $A$ is the estimated total mass, in grams, of the population of algae after $x$ hours, and $x<50$?
+@ $A=34.98(1.28)^{x/6}$ | $A=34.98(2.28)^{x/6}$ | $A=53.12(2.28)^{x/6}$ | $A=300.22(1.28)^{x/6}$
+## 2037
+A certain investment account offers a special interest rate for the first 4 months the account is open followed by a lower interest rate for the remainder of the time the account is open. Bennett opened one of these accounts with an original account balance of \$700 and did not make any other deposits or withdrawals. 4 months after Bennett opened the account, the balance had increased by 0.6% of the original balance. 6 months after Bennett opened the account, the balance had increased by an additional 0.2% of the balance at the end of the first 4 months. Every 2 months after the first 6 months, the balance had increased by an additional 0.2% of the balance 2 months before. Which of the following equations could represent the account balance $B(x)$, in dollars, $x$ months after the account was opened, where $x\ge4$?
+@ $B(x)=704.2(1.002)^{\frac{x}{2}-\frac{4}{2}}$ | $B(x)=704.2(1.002)^{\frac{x}{2}-4}$ | $B(x)=704.2(1.002)^{2x-8}$ | $B(x)=704.2(1.002)^{2x-4}$

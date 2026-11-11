@@ -1,0 +1,72 @@
+## 1955
+A tournament begins with 176 teams and has four rounds. In each round, every remaining team plays one game; half the teams lose and are eliminated. Which equation gives the number of teams eliminated in round $r$, where $r$ is 1, 2, 3, or 4?
+@ $t=11\left(\frac{1}{2}\right)^r$ | $t=11(2)^r$ | $t=176\left(\frac{1}{2}\right)^r$ | $t=176(2)^r$
+## 1956
+The equation $E(t)=6(1.8)^t$ gives the estimated number of employees at a certain business, where $t$ is the number of years since the business opened. Which of the following is the best interpretation of the number 6 in this context?
+@ The increase in the estimated number of employees each year | The estimated number of employees when the business opened | The percent increase in the estimated number of employees each year | The number of years the business has been open
+## 1958
+A model estimates that an algae population's mass increases by 128% every 6 hours. After 18 hours, its mass is 629.60 grams. Which equation models the mass $A$, in grams, after $x$ hours, where $x<50$?
+@ $A=34.98(1.28)^{\frac{x}{6}}$ | $A=34.98(2.28)^{\frac{x}{6}}$ | $A=53.12(2.28)^{\frac{x}{6}}$ | $A=300.22(1.28)^{\frac{x}{6}}$
+## 1959
+The function $P(t)=67\left(\frac{5}{4}\right)^t$ models a reindeer population $t$ years after it was introduced into an area. What is the best interpretation of the factor $\frac{5}{4}$?
+@ For every 4 reindeer in one year, the model predicts 5 the next year. | For every 5 reindeer in one year, the model predicts 4 the next year. | The population grows by 4 reindeer every 5 years. | The population grows by 5 reindeer every 4 years.
+## 1960
+<p style="text-align:center">$E(t)=5(1.7)^t$</p><p>The equation shown above gives the estimated number of employees at a certain business, where $t$ is the number of years since the business opened. Which of the following is the best interpretation of the number 5 in this context?</p>
+@ The estimated number of employees when the business opened. | The increase in the estimated number of employees each year. | The number of years the business has been open. | The percent increase in the estimated number of employees each year.
+## 1962
+<p style="text-align:center">$f(x)=15(b)^x$</p><p>In the given function, $b$ is a positive constant. For every increase in the value of $x$ by 1, the value of $f(x)$ increases by $c\%$, where $0<c<100$. Which expression gives the value of $c$ in terms of $b$?</p>
+@ $1+\frac{b}{100}$ | $b+100$ | $100(b+1)$ | $100(b-1)$
+## 1963
+An account initially contains \$600. It earns 0.4% interest after the first six months and then 0.3% at the end of every two-month period. Which expression gives the balance $x$ months after the initial deposit, where $x\ge6$ is an even integer?
+@ $602.4(1.003)^{\frac{x}{2}-6}$ | $602.4(1.003)^{\frac{x-6}{2}}$ | $602.4(1.003)^{2x-12}$ | $602.4(1.003)^{\frac{x}{2}}$
+## 1965
+<p>The functions $f$ and $g$ are defined by the given equations, where $x\ge0$. Which of the following equations displays, as a constant or coefficient, the maximum value of the function it defines, where $x\ge0$?</p><p>I. $f(x)=16(1.24)^x+43$<br>II. $g(x)=8(0.72)^x$</p>
+@ I only | II only | I and II | Neither I nor II
+## 1966
+<p>The functions $f$ and $g$ are defined by the given equations, where $2\le x\le5$. Which of the following equations displays, as a constant or coefficient, the maximum value of the function it defines, where $2\le x\le5$?</p><p>I. $f(x)=-(x-4)^2+7$<br>II. $g(x)=-(x+4)^2+7$</p>
+@ I only | II only | I and II | Neither I nor II
+## 1967
+<p>The functions $f$ and $g$ are defined by the equations shown, where $a$ and $b$ are integer constants, $a<b$ and $b<0$. Which of the following equations displays, as a constant or coefficient, the $y$-coordinate of the $y$-intercept of the graph of the corresponding function?</p><p>I. $f(x)=a(4.2)^{x+b}$<br>II. $g(x)=a(4.2)^x+b$</p>
+@ I only | II only | I and II | Neither I nor II
+## 1968
+A company purchased a machine valued at \$120,000. The value of the machine depreciates by the same amount each year so that after 10 years the value will be \$30,000. Which of the following equations gives the value, $v$, in dollars, $t$ years after it was purchased for $0\le t\le10$?
+@ $v=30{,}000-9{,}000t$ | $v=120{,}000-9{,}000t$ | $v=120{,}000+9{,}000t$ | $v=120{,}000-30{,}000t$
+## 1969
+A model estimates 200 squirrels in an area in 2003. After each 4-year period, the population is 120% greater than at the end of the preceding period. Which equation gives the population $N$ at time $t$ years after 2003, for $0\le t\le20$?
+@ $N=200(2.20)^{4t}$ | $N=200(1.20)^{4t}$ | $N=200(1.20)^{\frac{t}{4}}$ | $N=200(2.20)^{\frac{t}{4}}$
+## 1970
+An isotope takes 29 years to decay to half its mass. The function $s(t)=128(0.5)^{\frac{t}{29}}$ gives the mass, in grams, remaining $t$ years after a 128-gram sample starts to decay. What does $s(58)=32$ mean?
+@ About 32 grams remain after 58 years. | The mass has decreased by about 32 grams after 58 years. | The mass has decreased by about 32 grams after 32 years. | About 58 grams remain after 32 years.
+## 1971
+<p>The functions $f$, $g$ and $h$ are defined by the given equations, where $x\ge0$. Which of the following equations displays, as a constant or coefficient, the maximum or minimum value of the function it defines, where $x\ge0$?</p><p>I. $f(x)=(x-3)^2+6$<br>II. $g(x)=(x+3)^2+6$<br>III. $h(x)=(x-5)^2+8$</p>
+@ I only | I and III only | Both I and II | None of these
+## 1972
+<p style="text-align:center">$h(x)=4^{3-x}$</p><p>Which of the following equivalent forms of the given function $h$ displays the $y$-coordinate of the $y$-intercept of the graph of $y=h(x)$ in the $xy$-plane as a constant or coefficient?</p>
+@ $h(x)=4^3\cdot\left(\frac{1}{4}\right)^x$ | $h(x)=64\left(\frac{1}{4}\right)^x$ | $h(x)=4^{-(x-3)}$ | $h(x)=\left(\frac{1}{4}\right)^{x-3}$
+## 1973
+For the function $f$, for every increase in $\frac{1}{2}$ in the value of $x$, the value of $f(x)$ increases by a factor of $c$, where $c$ is a constant. Which of the following equivalent forms of the function $f$ displays the value of $c$ as the base or the coefficient?
+@ $f(x)=38(2)^{6x}$ | $f(x)=38(8)^{2x}$ | $f(x)=38(64)^x$ | $f(x)=38(4096)^{\frac{x}{2}}$
+## 1977
+<p style="text-align:center">$2{,}000-61k=48$</p><p>In 1962, the population of a bird species was 2,000. The population $k$ years after 1962 was 48, and $k$ satisfies the equation above. Which of the following is the best interpretation of the number 61 in this context?</p>
+@ The population $k$ years after 1962 | The value of $k$ when the population was 48 | The difference between the population in 1962 and the population $k$ years after 1962 | The average decrease in the population per year from 1962 to $k$ years after 1962
+## 1978
+The number of city residents, $y$, in Philadelphia from 1980 to 2000 can be modeled by the linear equation $y=-8{,}533x+1{,}688{,}210$, where $x$ is the number of years after 1980. What does the number 8,533 represent?
+@ The percent of city residents leaving Philadelphia after 1980 | The ratio of the number of city residents remaining in Philadelphia to the number of years since 1980 | The number of city residents remaining in Philadelphia in 2000 | The average decrease in the number of city residents each year from 1980 to 2000
+## 1980
+<p>The functions $f$ and $g$ are defined by the given equations, where $x\ge0$, $a<b$, and $a>1$. If $y=f(x)$ and $y=g(x)$ are graphed in the $xy$-plane, which of the following equations displays, as a constant or coefficient, the minimum value of the function it defines, where $x\ge0$?</p><p>I. $f(x)=a(0.23)^{-bx}$<br>II. $g(x)=a(1.77)^{x+2}+b$</p>
+@ I only | II only | I and II | Neither I nor II
+## 1981
+An isotope loses half its mass every 29 years. The function $g(t)=208(0.5)^{\frac{t}{29}}$ gives the mass, in grams, remaining $t$ years after a 208-gram sample starts to decay. What does $g(3\cdot29)=26$ mean?
+@ About 26 grams remain after 3 years. | About 26 grams remain after three 29-year periods. | About 3 grams remain after twenty-six 29-year periods. | About 3 grams remain after 26 years.
+## 1982
+<p>The functions $f$ and $g$ are defined by the given equations, where $x\ge0$, $a$ and $b$ are integer constants, $a<b$, and $a>1$. Which of the following equations displays, as a constant or coefficient, the minimum value of the function it defines, for $x\ge0$?</p><p>I. $f(x)=a(0.63)^{-bx}$<br>II. $g(x)=a(1.37)^{x+2}+b$</p>
+@ I only | II only | I and II | Neither I nor II
+## 1984
+<p>The functions $f$ and $g$ are defined by the given equations, where $2\le x\le8$. Which of the following equations displays, as a constant or coefficient, the minimum value of the function it defines, where $2\le x\le8$?</p><p>I. $f(x)=0.0625(0.5)(2)^{x+2}$<br>II. $g(x)=1500(0.2)^{x-3}$</p>
+@ I only | II only | I and II | Neither I nor II
+## 1985
+A quantity decreases by 20% every 5 seconds. If the initial value of the quantity is 340, which function $f(x)$ represents the value of the quantity after $x$ seconds?
+@ $f(x)=340(0.2)^{5x}$ | $f(x)=340(0.8)^{5x}$ | $f(x)=340(0.2)^{\frac{x}{5}}$ | $f(x)=340(0.8)^{\frac{x}{5}}$
+## 1986
+On average, a certain tree grows 87 centimeters every $m$ months. At this rate, which expression represents the number of centimeters, on average, the tree grows every $k$ years?
+@ $\frac{29m}{4k}$ | $\frac{29k}{4m}$ | $\frac{1{,}044m}{k}$ | $\frac{1{,}044k}{m}$
