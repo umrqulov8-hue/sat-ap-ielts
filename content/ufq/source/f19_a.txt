@@ -1,0 +1,21 @@
+## 1158
+The graph of a system of a linear equation and an exponential equation is shown. What is the solution $(x,y)$ to this system?<p></p>[[fig:q1158]]
+@ $(6,8)$ | $(5,4)$ | $(5,0)$ | $(0,4)$
+## 1162
+<p style="text-align:center">$y\le10-x$</p><p style="text-align:center">$y\ge\frac{3}{2}x$</p><p>Which shaded region represents the solutions to the given system of inequalities?</p><p></p>[[fig:q1162]]
+@ Region A | Region B | Region C | Region D
+## 1167
+If a new graph of three linear equations is created using the system of equations shown and the equation $x+4y=-32$, how many solutions $(x,y)$ will the resulting system of three equations have?<p></p>[[fig:q1167]]
+@ Zero | Exactly one | Exactly two | Infinitely many
+## 1191
+Which shaded region represents the solutions to $y\le\frac{-x}{4}+7$?<p></p>[[fig:q1191]]
+@ Region A | Region B | Region C | Region D
+## 1157
+<p style="text-align:center">$5x+8y=9$</p><p style="text-align:center">$15x+24y=27$</p><p>For each real number $r$, which of the following points lies on the graph of each equation in the $xy$-plane for the given system?</p>
+@ $\left(r,\frac{-5r}{8}+\frac{9}{8}\right)$ | $\left(\frac{-5r}{8}+\frac{9}{8},r\right)$ | $\left(\frac{-5r}{8}+9,\frac{5r}{8}+27\right)$ | $\left(\frac{r}{3}+9,\frac{-r}{3}+27\right)$
+## 1164
+<p style="text-align:center">$y<-6x-18$</p><p style="text-align:center">$y>-4x-11$</p><p>For which of the following tables are all the values of $x$ and their corresponding values of $y$ solutions to the given system of inequalities?</p><p><b>Table A</b></p><table><thead><tr><th>$x$</th><th>$y$</th></tr></thead><tbody><tr><td>-5</td><td>7</td></tr><tr><td>-6</td><td>23</td></tr><tr><td>-8</td><td>-6</td></tr></tbody></table><p><b>Table B</b></p><table><thead><tr><th>$x$</th><th>$y$</th></tr></thead><tbody><tr><td>-5</td><td>8</td></tr><tr><td>-6</td><td>16</td></tr><tr><td>-8</td><td>28</td></tr></tbody></table><p><b>Table C</b></p><table><thead><tr><th>$x$</th><th>$y$</th></tr></thead><tbody><tr><td>-5</td><td>10</td></tr><tr><td>-6</td><td>17</td></tr><tr><td>-8</td><td>28</td></tr></tbody></table><p><b>Table D</b></p><table><thead><tr><th>$x$</th><th>$y$</th></tr></thead><tbody><tr><td>-5</td><td>12</td></tr><tr><td>-6</td><td>16</td></tr><tr><td>-8</td><td>-6</td></tr></tbody></table>
+@ Table A | Table B | Table C | Table D
+## 1171
+<p style="text-align:center">$y<-6x-16$</p><p style="text-align:center">$y>-4x-12$</p><p>For which of the following tables are all the values of $x$ and their corresponding values of $y$ solutions to the given system of inequalities?</p><p><b>Table A</b></p><table><thead><tr><th>$x$</th><th>$y$</th></tr></thead><tbody><tr><td>-5</td><td>6</td></tr><tr><td>-6</td><td>22</td></tr><tr><td>-8</td><td>-6</td></tr></tbody></table><p><b>Table B</b></p><table><thead><tr><th>$x$</th><th>$y$</th></tr></thead><tbody><tr><td>-5</td><td>7</td></tr><tr><td>-6</td><td>18</td></tr><tr><td>-8</td><td>30</td></tr></tbody></table><p><b>Table C</b></p><table><thead><tr><th>$x$</th><th>$y$</th></tr></thead><tbody><tr><td>-5</td><td>9</td></tr><tr><td>-6</td><td>19</td></tr><tr><td>-8</td><td>30</td></tr></tbody></table><p><b>Table D</b></p><table><thead><tr><th>$x$</th><th>$y$</th></tr></thead><tbody><tr><td>-5</td><td>14</td></tr><tr><td>-6</td><td>18</td></tr><tr><td>-8</td><td>-6</td></tr></tbody></table>
+@ Table A | Table B | Table C | Table D
