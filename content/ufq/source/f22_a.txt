@@ -1,0 +1,14 @@
+## 1688
+In the $xy$-plane, what is the solution $(x,y)$ to the system of equations graphed above?<p></p>[[fig:q1688]]
+@ $(0,1)$ | $(0,2)$ | $(1,1)$ | $(2,0)$
+## 1751
+The vertex of the parabola $y=ax^2+c$ shown in the $xy$-plane above is $(0,c)$. Which of the following is true about the parabola with the equation $y=-a(x-b)^2+c$?<p></p>[[fig:q1751]]
+@ The vertex is $(b,c)$ and the graph opens upward. | The vertex is $(b,c)$ and the graph opens downward. | The vertex is $(-b,c)$ and the graph opens upward. | The vertex is $(-b,c)$ and the graph opens downward.
+## 1752
+The graph of function $f$, where $y=f(x)$, is shown in the $xy$-plane. What is the value of $f(0)$?<p></p>[[fig:q1752]]
+@ $-2$ | 0 | 1 | 3
+## 1755
+A ball is thrown into the air from an initial height of 9 feet. It reaches a maximum height of 13 feet 0.5 seconds after it is thrown. Which graph best models the height $y$, in feet, at time $x$ seconds?<p></p>[[fig:q1755]]
+@ Graph A | Graph B | Graph C | Graph D
+## 1768
+In the $xy$-plane above, the graph of a quadratic function $y=f(x)$ intersects the $x$-axis at points $O$ and $Q$, and has a vertex at point $P(3,5)$. If line $\ell$ passes through points $P$ and $Q$, what is the $y$-intercept of line $\ell$?<p></p>[[fig:q1768]]
