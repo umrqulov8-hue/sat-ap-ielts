@@ -1,0 +1,84 @@
+## 2599
+For 100 neurons, the table summarizes the distribution of classification and cell body diameter.<table><thead><tr><th>Classification</th><th>Cell body diameter (micrometers): Less than 20</th><th>Cell body diameter (micrometers): 20 to 30</th><th>Cell body diameter (micrometers): Greater than 30</th></tr></thead><tbody><tr><td>Sensory neuron</td><td>12</td><td>9</td><td>2</td></tr><tr><td>Motor neuron</td><td>0</td><td>16</td><td>19</td></tr><tr><td>Interneuron</td><td>10</td><td>32</td><td>0</td></tr></tbody></table><p>One of these neurons will be selected at random. What is the probability of selecting a neuron with a cell body diameter that is less than or equal to 30 micrometers, given that it is not classified as a motor neuron? (Express your answer as a decimal or fraction, not as a percent.)</p>
+## 2600
+For 100 neurons, the table summarizes the distribution of classification and cell body diameter.<table><thead><tr><th>Classification</th><th>Cell body diameter (micrometers): Less than 20</th><th>Cell body diameter (micrometers): 20 to 30</th><th>Cell body diameter (micrometers): Greater than 30</th></tr></thead><tbody><tr><td>Sensory neuron</td><td>12</td><td>7</td><td>4</td></tr><tr><td>Motor neuron</td><td>0</td><td>17</td><td>18</td></tr><tr><td>Interneuron</td><td>10</td><td>32</td><td>0</td></tr></tbody></table><p>One of these neurons will be selected at random. What is the probability of selecting a neuron with a cell body diameter that is less than or equal to 30 micrometers, given that it is not classified as a motor neuron? (Express your answer as a decimal or fraction, not as a percent.)</p>
+## 2601
+A researcher selected 23 guinea pigs from one habitat and 19 wild cavies from another habitat at random in Venezuela. A field of a specific size within each habitat was divided into equally-sized virtual squares, and the animals were allowed to wander in the field for a fixed amount of time. To observe their behavior, the researcher counted the number of times the guinea pigs and wild cavies crossed the virtual squares in their field during early adolescence and again during late adolescence. The researcher found that in early adolescence, the number of virtual squares the wild cavies crossed was significantly more than the number of virtual squares the guinea pigs crossed. The researcher also found that the number of virtual squares crossed by both the wild cavies and the guinea pigs decreased from early adolescence to late adolescence.<p>Based on the researcher's findings, which of the following statements is an appropriate conclusion that can be drawn from this study?</p>
+@ The statistically significant difference in behavior between the two age groups was caused by the differences in habitat. | The statistically significant difference in behavior between the two age groups was caused by aging. | The statistically significant difference in behavior during early adolescence between the two groups of animals can be generalized to all guinea pigs and wild cavies. | The statistically significant difference in behavior during early adolescence between the two groups of animals can only be generalized to the habitats in the study.
+## 2602
+A nutritionist wants to conduct a survey to estimate the mean number of servings of vegetables eaten by a certain group of people each day. The nutritionist has not yet decided which group of people to survey. Surveying a random sample from which of the following groups would most likely result in the smallest margin of error?
+@ Residents of the same city | Customers of a certain restaurant | Viewers of the same television show | Students who are following the same daily diet plan
+## 2603
+A random sample contains 22 white stones and 29 tan stones. Based on this sample, how many more tan than white stones are expected in a population of 765 stones?
+@ 7 | 105 | 330 | 435
+## 2604
+A random sample contains 22 white stones and 27 tan stones. Based on this sample, how many more tan than white stones are expected in a population of 686 stones?
+@ 5 | 70 | 308 | 378
+## 2605
+<table><thead><tr><th>Group</th><th>Percentage</th><th>Margin of error</th></tr></thead><tbody><tr><td>1</td><td>41%</td><td>13%</td></tr><tr><td>2</td><td>45%</td><td>11%</td></tr><tr><td>3</td><td>45%</td><td>8%</td></tr><tr><td>4</td><td>47%</td><td>15%</td></tr></tbody></table><p>Which group had the largest sample size?</p>
+@ Group 4 | Group 3 | Group 2 | Group 1
+## 2606
+A survey's margin of error $E$, in percentage points, is modeled by $E=\frac{c}{\sqrt{n}}$, where $n$ is the sample size and $c$ is positive. All surveys use the same sampling method and confidence level. A sample size of 400 gives a margin of error of 5.4 points. What sample size gives a margin of error of 1.8 points?
+## 2607
+A random survey estimates that 12% of residents visit a library, with margin of error 3.7 percentage points. If the sample size doubles while the estimate and confidence level stay the same, what is the new margin of error?
+@ Less than 3.7 | 7.4 | Greater than 12 | 24
+## 2608
+A random survey estimates 78.29% with a margin of error of 2.9 percentage points. The sample size doubles, using the same confidence level. What is the new margin of error?
+@ Less than 2.9 | Between 2.9 and 4.9 | Between 3.8 and 6.7 | Greater than 6.7
+## 2609
+A random survey estimates that 13% of residents visit a library, with margin of error 3.4 percentage points. If the sample size doubles while the estimate and confidence level stay the same, what is the new margin of error?
+@ Less than 3.4 | 6.8 | Greater than 13 | 26
+## 2610
+A random survey estimates that 27% of Madison residents support a gas station, with a margin of error of 6 percentage points. Which is a plausible range for the population percentage?
+@ 21% to 33% | Outside 21% to 33% | Exactly 21% | Greater than 33%
+## 2611
+<table><thead><tr><th>Group</th><th>Estimate</th><th>Error</th></tr></thead><tbody><tr><td>1</td><td>42%</td><td>13%</td></tr><tr><td>2</td><td>45%</td><td>12%</td></tr><tr><td>3</td><td>45%</td><td>9%</td></tr><tr><td>4</td><td>47%</td><td>15%</td></tr></tbody></table><p>Four groups use the same method to estimate a population percentage. Which group likely used the largest sample?</p>
+@ Group 4 | Group 3 | Group 2 | Group 1
+## 2612
+<table><thead><tr><th>Survey</th><th>In favor</th><th>Error</th></tr></thead><tbody><tr><td>A</td><td>52%</td><td>4.2%</td></tr><tr><td>B</td><td>48%</td><td>1.6%</td></tr></tbody></table><p>Two random surveys of the same population use the same method. Why would A have a greater margin of error?</p>
+@ A had fewer unrecordable votes. | A estimated a greater percentage in favor. | A used a larger sample. | A used a smaller sample.
+## 2613
+A company surveyed employees in departments A, B, and C of a large corporation to understand their average daily time spent on remote work and their overall job satisfaction score. They randomly selected 2,500 employees across several regional offices in the US. If the results show a connection between time spent remote and job satisfaction, which factor would limit applying these findings to all employees in departments A, B, and C across the entire company?
+@ The employees came from multiple regional offices. | The sample size was too small. | There were more employees from departments B and C than department A. | Employees were not randomly chosen from all departments A, B, and C throughout the company.
+## 2614
+Researchers randomly sampled 25 guinea pigs from one Venezuelan habitat and 19 wild cavies from another. Early in adolescence, wild cavies moved farther on a grid; later, both groups moved less. Which conclusion is justified?
+@ Aging caused the difference between species. | The habitat caused the difference between species. | The findings apply to both species everywhere. | The findings apply to the two populations in the sampled habitats.
+## 2615
+A study of 220 gophers and 200 groundhogs compares a treatment group with a control group. Which procedure is needed to determine whether the treatment causes a difference?
+@ Use the same number of each species in both groups. | Randomly select animals from their habitats. | Randomly assign animals to treatment and control groups. | Use the same average age for each species in both groups.
+## 2616
+A survey estimates that 63% of adult residents of Madison support a new parking garage, with a margin of error of 3 percentage points. Which conclusion is most appropriate?
+@ Plausible values for the percentage are between 60% and 66%. | Plausible values for the percentage are below 60% or above 66%. | Exactly 60% of adult residents support the garage. | More than 66% of adult residents support the garage.
+## 2617
+A random sample of town residents is surveyed about a plan to build a park. The survey estimates that 68% of all town residents support the plan, with a margin of error of 3.5 percentage points. Which of the following is the interval estimate obtained by applying this margin of error to the estimated percentage?
+@ 65.62% to 70.38% | 61% to 75% | 64.5% to 71.5% | 66.25% to 69.75%
+## 2618
+A research manager tested 2 random samples of ovens to estimate average preheat time to 325°F. The first sample gave an estimate of 15.2 minutes with a margin of error of 1 minute. The second sample gave 15.4 minutes with a margin of error of 2.2 minutes. Why did the first sample obtain a smaller margin of error?
+@ The first sample contained more ovens than the second sample. | The first sample contained fewer ovens than the second sample. | The first sample took more time on average to preheat. | The first sample took less time on average to preheat.
+## 2619
+A polling agency wanted to test whether a ballot measure would pass with greater than 50% yes votes. The agency sampled 1,000 registered voters selected at random, and 50.6% of the voters favored the ballot measure. The margin of error associated with this poll was ±3%. Based on the poll's results, which of the following statements must be true?
+@ The percentage of voters who will vote yes for the ballot measure is 50.6%. | The ballot measure will pass with more yes votes than no votes, but the percentage of votes it will receive cannot be predicted. | The ballot measure will pass with at least 53.6% of the vote. | The poll's results do not provide sufficient evidence to conclude that the ballot measure will pass.
+## 2620
+In a survey, 58 residents of a particular town were selected at random, and approximately 40% of them reported that they recycle regularly. If the reported percentage is used as an estimate for the proportion of all residents in the town who recycle regularly, the margin of error is 13%. Which of the following statements is appropriate based on the data provided?
+@ Less than 25% of all the town residents recycle regularly. | Between 0% and 13% of all the town residents recycle regularly. | Between 27% and 53% of all the town residents recycle regularly. | Approximately 12.6% of the surveyed residents misstated how often they recycle.
+## 2621
+A poll was conducted to find the percent of residents in a community who support an increase in taxes to help pay for the construction of alternative energy sources. Of the 1,200 residents selected at random to be polled, 57% were in favor of the tax increase. The poll had a margin of error of 3 percentage points. Which of the following conclusions is most appropriate about all residents of the community, based on the results of the poll?
+@ The percent of all residents who favor the tax increase is 57%. | The percent of all residents who favor the tax increase is likely less than 54%. | The percent of all residents who favor the tax increase is likely between 54% and 60%. | The percent of all residents who favor the tax increase is likely either less than 54% or greater than 60%.
+## 2622
+An inspector randomly samples 370 scales from a population of 8,000. The estimated percentage of inaccurate scales is 9%, with a margin of error of 2.9 percentage points. Which conclusion is most appropriate?
+@ Between 488 and 952 inaccurate scales is a plausible estimate for the population. | Fewer than 488 inaccurate scales is supported by the estimated interval. | Exactly 720 scales in the population must be inaccurate. | More than 952 inaccurate scales is supported by the estimated interval.
+## 2623
+An inspector randomly samples 330 scales from a population of 8,000. The estimated percentage of inaccurate scales is 7%, with a margin of error of 2.8 percentage points. Which conclusion is most appropriate?
+@ Between 336 and 784 inaccurate scales is a plausible estimate for the population. | Fewer than 336 inaccurate scales is supported by the estimated interval. | Exactly 560 scales in the population must be inaccurate. | More than 784 inaccurate scales is supported by the estimated interval.
+## 2624
+In a certain sporting goods manufacturing company, a quality control expert tests a randomly selected group of 1,000 tennis balls in order to determine how many contain defects. If this quality control expert discovered that 13 of the randomly selected tennis balls were defective, which of the following inferences would be most supported?
+@ 98.7% of the company's tennis balls are defective | 98.7% of the company's tennis balls are not defective | 9.87% of the company's tennis balls are defective | 9.87% of the company's tennis balls are not defective
+## 2625
+A researcher used two random samples of the same type of oven to estimate the mean time to preheat to 350°F. The first estimate was 14.2 minutes with a margin of error of 1 minute; the second was 14.4 minutes with a margin of error of 2.2 minutes. Both margins were calculated in the same way. Which best explains the smaller margin for the first sample?
+@ The first sample contained fewer ovens. | The first sample contained more ovens. | The first sample had a smaller mean preheating time. | The first sample had a greater mean preheating time.
+## 2626
+Jasmine and Daniel are each conducting a survey among the 1,190 students at North High to determine the proportion of students who would be interested in a new after-school sports club. Jasmine randomly selected 100 students to survey, and Daniel randomly selected 50 students to survey. In both surveys, 34% of students indicated they are interested. If $J$ represents the margin of error for Jasmine's sample proportion, $D$ represents the margin of error for Daniel's sample proportion, and both students have the same amount of confidence in their results, which of the following is most likely true?
+@ $J<D$ | $J>D$ | $J=D$ | The relationship between $J$ and $D$ cannot be determined.
+## 2627
+A community organization surveyed a random sample of residents to estimate the percentage of residents who visit their local library at least once per month. The organization estimates that 19% of residents visit the library at least once per month, with an associated margin of error of 3.7%. The organization repeated the survey with a random sample that was double the original sample size. Which of the following is true about the margin of error associated with the estimate from the larger sample?
+@ The margin of error is less than 3.7%. | The margin of error is 7.4%. | The margin of error is greater than 19%. | The margin of error is 38%.

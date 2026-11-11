@@ -1,0 +1,96 @@
+## 2508
+A bag contains only yellow and red marbles. The probability of randomly selecting a yellow marble is $\frac{8}{17}$. What is the probability of selecting a red marble?
+## 2509
+A bag contains only yellow and red marbles. The probability of randomly selecting a yellow marble is $\frac{5}{19}$. What is the probability of selecting a red marble?
+## 2510
+A fair 20-sided die is labeled with the integers 1 through 20, one on each face. It is rolled once. What is the probability of rolling 9?
+@ $\frac{19}{20}$ | $\frac{11}{20}$ | $\frac{9}{20}$ | $\frac{1}{20}$
+## 2511
+A study classified 100 vehicles as fuel efficient or fuel inefficient. The probability of randomly selecting a fuel-efficient vehicle from the study is $\frac{64}{100}$. How many vehicles were classified as fuel efficient?
+## 2513
+A certain book has 200 pages, and 27 of these pages have an illustration. If one of the book's pages is selected at random, what is the probability of selecting a page with an illustration? (Express your answer as a decimal or fraction, not as a percent.)
+## 2514
+A certain book has 200 pages and 19 of these pages have an illustration. If one of the book's pages is selected at random, what is the probability of selecting a page with an illustration? (Express your answer as a decimal or fraction, not as a percent.)
+## 2515
+For 100 neurons, the table summarizes the distribution of classification and cell body diameter.<p><b>Cell body diameter (micrometers)</b></p><table><thead><tr><th>Classification</th><th>Less than 20</th><th>20 to 30</th><th>Greater than 30</th></tr></thead><tbody><tr><td>Sensory neuron</td><td>12</td><td>3</td><td>5</td></tr><tr><td>Motor neuron</td><td>0</td><td>17</td><td>18</td></tr><tr><td>Interneuron</td><td>10</td><td>32</td><td>3</td></tr></tbody></table><p>One of these neurons will be selected at random. What is the probability of selecting an interneuron that has a cell body diameter between 20 and 30 micrometers? (Express your answer as a decimal or fraction, not as a percent.)</p>
+## 2516
+<table><thead><tr><th>Set</th><th>Wood</th><th>Painted</th></tr></thead><tbody><tr><td>A</td><td>4</td><td>8</td></tr><tr><td>B</td><td>14</td><td>5</td></tr><tr><td>Total</td><td>18</td><td>13</td></tr></tbody></table><p>A block is selected at random from the two sets in the table. What is the probability it is a wood-finish block from set A? Give a decimal or fraction.</p>
+## 2517
+A researcher surveyed 200 randomly selected adults and found that 84 of them regularly exercised. Based on the survey, which of the following is the best estimate for the proportion of adults in the population who regularly exercise?
+@ 0.22 | 0.35 | 0.38 | 0.42
+## 2518
+Set $K$ consists of the positive integers from 1 through 250, each included once. A number is selected at random from $K$. What is the probability that it is even and at most 30?
+@ $\frac{3}{50}$ | $\frac{2}{25}$ | $\frac{3}{28}$ | $\frac{3}{25}$
+## 2519
+<p><b>Blood type</b></p><table><thead><tr><th>Rhesus factor</th><th>A</th><th>B</th><th>AB</th><th>O</th></tr></thead><tbody><tr><td>+</td><td>33</td><td>9</td><td>3</td><td>37</td></tr><tr><td>−</td><td>7</td><td>2</td><td>1</td><td>$x$</td></tr></tbody></table><p>Human blood can be classified into four common blood types—A, B, AB, and O. It is also characterized by the presence (+) or absence (−) of the rhesus factor. The table above shows the distribution of blood type and rhesus factor for a group of people. If one of these people who is rhesus negative (−) is chosen at random, the probability that the person has blood type B is $\frac{1}{9}$. What is the value of $x$?</p>
+## 2520
+<table><thead><tr><th>Tree type</th><th>Site A</th><th>Site B</th></tr></thead><tbody><tr><td>Red maple</td><td>16</td><td>24</td></tr><tr><td>Chestnut oak</td><td>12</td><td>30</td></tr><tr><td>Total</td><td>28</td><td>54</td></tr></tbody></table><p>A tree in the table is selected at random. Given that it is a red maple, what is the probability it is from site A? Give a decimal or fraction.</p>
+## 2521
+Each face of a fair 16-sided die is labeled with a number from 1 through 16, with a different number appearing on each face. If the die is rolled one time, what is the probability of rolling a 2?
+@ $\frac{15}{16}$ | $\frac{14}{16}$ | $\frac{2}{16}$ | $\frac{1}{16}$
+## 2522
+On a particular assembly line, 59 out of every 100 products have a defect. A product from the assembly line will be selected at random. What is the probability of selecting a product that has a defect?
+@ $\frac{1}{5{,}900}$ | $\frac{1}{59}$ | $\frac{59}{100}$ | $\frac{59}{10}$
+## 2523
+At a school with 300 students, 120 students are members of the math club, 150 students are members of the science club, and 72 students are members of both clubs. One student is selected at random. Given that the selected student is not a member of the math club, what is the probability that the student is a member of the science club?
+## 2524
+<p><b>Number of Contestants by Score and Day</b></p><table><thead><tr><th></th><th>5 out of 5</th><th>4 out of 5</th><th>3 out of 5</th><th>2 out of 5</th><th>1 out of 5</th><th>0 out of 5</th><th>Total</th></tr></thead><tbody><tr><td>Day 1</td><td>2</td><td>3</td><td>4</td><td>6</td><td>2</td><td>3</td><td>20</td></tr><tr><td>Day 2</td><td>2</td><td>3</td><td>5</td><td>5</td><td>4</td><td>1</td><td>20</td></tr><tr><td>Day 3</td><td>3</td><td>3</td><td>4</td><td>5</td><td>3</td><td>2</td><td>20</td></tr><tr><td>Total</td><td>7</td><td>9</td><td>13</td><td>16</td><td>9</td><td>6</td><td>60</td></tr></tbody></table><p>The same 20 contestants, on each of 3 days, answered 5 questions in order to win a prize. Each contestant received 1 point for each correct answer. The number of contestants receiving a given score on each day is shown in the table above.</p><p>No contestant received the same score on two different days. If a contestant is selected at random, what is the probability that the selected contestant received a score of 5 on Day 2 or Day 3, given that the contestant received a score of 5 on one of the three days?</p>
+## 2526
+For a poll, an organizer randomly selected 21 professors from a certain liberal arts program at a university. These professors were asked whether they were interested in using a new textbook for their classes, and 14 of them responded "Yes." What is the largest group to which the results of the poll can be generalized?
+@ The 14 professors who responded "Yes" | All liberal arts professors at the university | All professors in the program | All professors at the university
+## 2527
+A random sample estimates a population mean of 178, with a margin of error of 1.5. Which describes the range of plausible values for the population mean?
+@ Between 175 and 178 | Between 176.5 and 179.5 | Less than 176.5 | Greater than 179.5
+## 2528
+A researcher randomly selected 36 second-grade boys from Wilson Elementary School to participate in a study about the effects of exercise on memory. At the end of the study, the researcher concluded that regular participation in moderate-level exercise has a positive effect on memory. The results of the study can be generalized to which of the following populations?
+@ All boys at Wilson Elementary School | All students at Wilson Elementary School | All second-grade boys at Wilson Elementary School | All second-grade students at Wilson Elementary School
+## 2529
+A random sample estimates a population mean of 133, with a margin of error of 1.5. Which describes the range of plausible values for the population mean?
+@ Between 130 and 133 | Between 131.5 and 134.5 | Less than 131.5 | Greater than 134.5
+## 2530
+A survey was given to a random sample of 300 high school students in California. The results of this survey should be representative of which of the following populations?
+@ All high school students in the United States | All high school students in California | All students in California | All students in the United States
+## 2531
+The total area of a coastal city is 92.1 square miles, of which 11.3 square miles is water. If the city had a population of 621,000 people in the year 2010, which of the following is closest to the population density, in people per square mile of land area, of the city at that time?
+@ 6,740 | 7,690 | 55,000 | 76,000
+## 2532
+A marketing executive plans to survey 300 potential car buyers to determine which car feature customers value most. Which of the following sample groups is most likely to represent all potential car buyers?
+@ 300 first-time car buyers selected at random | 300 potential car buyers selected at random | The first 300 first-time car buyers who enter a certain car dealership | The first 300 potential car buyers who enter a certain car dealership
+## 2533
+A department store sells pants in three lengths: short, regular, and long. The table shows the distribution of pant length and color. A pair of pants is selected at random. What is the probability of selecting a pair of pants that is brown, given that the pair of pants is regular length?<table><thead><tr><th></th><th>Black</th><th>Brown</th><th>Blue</th><th>Total</th></tr></thead><tbody><tr><td>Short</td><td>25</td><td>14</td><td>24</td><td>63</td></tr><tr><td>Regular</td><td>23</td><td>15</td><td>22</td><td>60</td></tr><tr><td>Long</td><td>20</td><td>19</td><td>19</td><td>58</td></tr><tr><td>Total</td><td>68</td><td>48</td><td>65</td><td>181</td></tr></tbody></table>
+## 2534
+An athletic trainer wants to determine whether a new exercise improves the performance of members of high school athletic teams. To test whether the regimen improves performance for all the members of the boys' track team at a local high school, the trainer arranges for the members of the boys' track team to use it for one season. The trainer will then compare this season's performances to previous year. Which of the following would NOT improve the quality of the study?
+@ Randomly assigning half of the track team to use the new regimen while the other half uses the current regimen | Including members of all the boys' athletic teams at the high school in the study | Including students who are not on athletic teams at the high school in the study | Including members of the girls' track team at the high school in the study
+## 2535
+At a large college, of the students working toward a degree in English, 250 were selected at random and asked how many books on average they read each month. The results of this survey can be best generalized to which of the following populations?
+@ All students at the same large college | Any sample of 250 students at the same large college | All students working toward a degree in English at any college | All students working toward a degree in English at the same large college
+## 2536
+A science club from a high school in Ohio conducted an experiment on the effect of smell on taste. 80 students were selected at random. 32 were able to correctly identify the pureed food sample while wearing nose plugs. Which of the following is the largest population to which the results of the experiment can be generalized?
+@ All students from high schools in Ohio | The 80 students who participated in the experiment | All students from the high school | The 32 students who correctly identified the food sample
+## 2537
+A researcher conducted a study to determine if certain memorization strategies could improve the performance of chess players. For the study, the researcher selected a random sample of adults who are competing in a chess tournament. At the end of the study, 80% of those sampled reported that they did not find the memorization strategies to be useful during their chess games. Which of the following is the largest population to which the results of this study can be applied?
+@ All chess players who compete in tournaments | All adults who compete in chess tournaments | All chess players competing in the tournament | All adults competing in the tournament
+## 2538
+To investigate the effectiveness of a new sleep medication, a researcher selected a random sample of 125 people 30 to 45 years old from a county to take part in a sleep study. Of the following, which is the largest population to which the results of this study can be generalized?
+@ All people 18 years or older in the world | All people 18 years or older in the county | All people 30 to 45 years old in the world | All people 30 to 45 years old in the county
+## 2539
+<table><thead><tr><th>Session</th><th>Completed</th><th>Not done</th></tr></thead><tbody><tr><td>Morning</td><td>48</td><td>32</td></tr><tr><td>Afternoon</td><td>36</td><td>84</td></tr><tr><td>Total</td><td>84</td><td>116</td></tr></tbody></table><p>The table summarizes course completion. If a person is chosen at random from those who completed the course, what is the probability the person attended in the afternoon?</p>
+@ $\frac{3}{10}$ | $\frac{9}{50}$ | $\frac{3}{5}$ | $\frac{3}{7}$
+## 2540
+The members of a city council wanted to assess the opinions of all city residents about converting an open field into a dog park. The council surveyed a sample of 500 city residents who own dogs. The survey showed that the majority of those sampled were in favor of the dog park. Which of the following is true about the city council's survey?
+@ It shows that the majority of city residents are in favor of the dog park. | The survey sample should have included more residents who are not dog owners. | The survey sample should have consisted entirely of residents who do not own dogs. | The survey sample is biased because it is not representative of all city residents.
+## 2541
+Ms. Miller is one of the music teachers at Union High School, which has 1,125 students. She selected 40 of her music students at random and asked each whether they play an instrument. Of the 40 students surveyed, 31 play an instrument. Based on the design of the study, which of the following is the largest group of students to whom the results of Ms. Miller survey can be generalized?
+@ All of Ms. Miller's music students at Union High School | All of the music students at Union High School | All of the students at Union High School | All of the music students in the state
+## 2542
+<table><thead><tr><th></th><th>Economics</th><th>History</th><th>Music</th></tr></thead><tbody><tr><td>Male</td><td>24</td><td>20</td><td>19</td></tr><tr><td>Female</td><td>18</td><td>22</td><td>17</td></tr></tbody></table><p>The table above shows the distribution of a group of 120 college students by gender and major.</p><p>If one student is randomly selected from the group, what is the probability that the student is a History major?</p>
+@ $\frac{36}{120}$ | $\frac{40}{120}$ | $\frac{42}{120}$ | $\frac{46}{120}$
+## 2543
+At a conference, 500 participants are assigned to room A, room B, or room C. If one participant is selected at random, the probability of selecting a participant in room A is 0.38, and the probability of selecting a participant in room B is 0.27. How many participants are assigned to room C?
+@ 135 | 175 | 190 | 325
+## 2544
+<table><thead><tr><th>Classification</th><th>Frequency</th></tr></thead><tbody><tr><td>igneous</td><td>10</td></tr><tr><td>metamorphic</td><td>37</td></tr><tr><td>sedimentary</td><td>13</td></tr></tbody></table><p>Each rock in a collection of 60 rocks was classified as either igneous, metamorphic, or sedimentary, as shown in the frequency table. If one of these rocks is selected at random, what is the probability that a rock is igneous?</p>
+@ $\frac{10}{13}$ | $\frac{10}{37}$ | $\frac{10}{50}$ | $\frac{10}{60}$
+## 2545
+A survey was conducted asking adults which of three streaming services — A, B, and C — they subscribe to. The results showed that 55% subscribe to service A, 40% subscribe to service B, and 25% subscribe to both A and B. None of the respondents subscribe to service C. A person who subscribes to service A is selected at random. What is the probability that this person also subscribes to service B?
+@ $\frac{1}{4}$ | $\frac{5}{11}$ | $\frac{4}{11}$ | $\frac{1}{2}$
