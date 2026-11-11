@@ -1,0 +1,35 @@
+## 2628
+Two lines intersect in the figure above. What is the value of $x$?<p></p>[[fig:q2628]]
+## 2629
+In the figure above, $\overline{BD}$ is parallel to $\overline{AE}$. What is the length of $\overline{CE}$?<p></p>[[fig:q2629]]
+## 2635
+What is the value of $x$ in the quadrilateral above?<p></p>[[fig:q2635]]
+@ 125 | 130 | 135 | 140
+## 2636
+In the figure, line $j$ is parallel to line $k$. What is the value of $x$?<p></p>[[fig:q2636]]
+## 2638
+In the figure above, what is the length of $\overline{NQ}$?<p></p>[[fig:q2638]]
+@ 2.2 | 2.3 | 2.4 | 2.5
+## 2642
+Triangles $ABC$ and $DEF$ are shown above. Which of the following is equal to the ratio $\frac{BC}{AB}$?<p></p>[[fig:q2642]]
+@ $\frac{DE}{DF}$ | $\frac{DF}{DE}$ | $\frac{DF}{EF}$ | $\frac{EF}{DE}$
+## 2643
+Note: Figure not drawn to scale. In triangle $XYZ$, $\frac{a}{c}=k$ and $\frac{b}{d}=k$. What is $k$?<p></p>[[fig:q2643]]
+@ $\frac{6}{7}$ | $\frac{7}{6}$ | $\frac{7}{13}$ | $\frac{13}{7}$
+## 2647
+What is the length of $\overline{PQ}$ in the figure above?<p></p>[[fig:q2647]]
+@ 36 | 39 | $\sqrt{250}$ | $\sqrt{369}$
+## 2652
+In the figure shown, line $r$ is parallel to line $s$. What is the value of $x$?<p></p>[[fig:q2652]]
+## 2653
+In the figure above, what is the value of $x$?<p></p>[[fig:q2653]]
+@ 45 | 90 | 100 | 105
+## 2654
+In triangle $ABC$ above, side $\overline{AC}$ is extended to point $D$. What is the value of $y-x$?<p></p>[[fig:q2654]]
+@ 40 | 75 | 100 | 140
+## 2659
+In the figure, two lines intersect at a point. If $a=26$, what is the value of $b$?<p></p>[[fig:q2659]]
+@ -64 | 26 | 154 | 386
+## 2664
+In the figure, two lines intersect at a point. If $a=25$, what is the value of $b$?<p></p>[[fig:q2664]]
+@ -65 | 25 | 155 | 385
