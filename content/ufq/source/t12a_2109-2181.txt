@@ -1,0 +1,185 @@
+## 2109
+<p style="text-align:center">$\sqrt[3]{117n}\left(\sqrt{117n}\right)^2$</p><p>For what value of $x$ is the given expression equivalent to $(117n)^{12x}$, where $n>1$?</p>
+## 2110
+The function $f$ is defined by $f(x)=35x+500$. What is the value of $f(60)$?
+## 2111
+What is the sum of the solutions to $2|4x-1|=4x+9$?
+## 2112
+If $f(x)=x+2$ and $g(x)=2x$, what is the value of $3f(2)-g(2)$?
+## 2113
+<p style="text-align:center">$f(a)=(a^2+12a+36)(a+1)$<br>$g(b)=b(b+4)(b-2)^2$</p><p>If $f(3)=c$, what is $g\left(\frac{c}{54}\right)$?</p>
+## 2114
+The function $g$ is defined by $g(x)=|10x|+18$. What is the value of $g(-6)$?
+## 2115
+The function is $f(x)=\frac{|x|}{a}-14$, where $a<0$. What is $f(15a)\cdot f(8a)$?
+## 2116
+The function $f$ is defined by $f(x)=\frac{|x|}{a}$, where $a<0$. What is the product of $f(17a)$ and $f(8a)$?
+## 2117
+The function $f$ is defined by $f(x)=2x+5$. What is the value of $f(x)$ when $x=100$?
+## 2118
+The function $h$ is defined by $h(x)=\left(\frac{1}{2}\right)(x+60)$. For what value of $x$ does $h(x)=11$?
+## 2119
+The function is defined by $f(x)=\frac{|x|}{a}-9$, where $a<0$. What is the product of $f(12a)$ and $f(5a)$?
+## 2120
+The function $j$ is defined by $j(x)=\frac{x}{7}$. What is the value of $j(28)$?
+@ 28 | 21 | 7 | 4
+## 2121
+The function $f$ is defined by $f(x)=\frac{|x|}{a}-14$, where $a<0$. What is the product of $f(15a)$ and $f(8a)$?
+## 2122
+If $g(x)=30+2(x+1)+x^2$, what is the value of $g(5)$?
+@ 65 | 66 | 67 | 77
+## 2123
+If $|12-2x|=48$, which is a possible value of $6-x$?
+@ 0 | 6 | 24 | 36
+## 2124
+The function $h$ is defined by $h(x)=5|x|$. What is the value of $h(-4)$?
+@ -20 | 1 | 9 | 20
+## 2125
+If $|16-2x|=58$, which of the following is a value of $8-x$?
+@ 0 | 8 | 29 | 42
+## 2126
+The vertex of the function $f(x)$ is $(9,-13)$, and the point $(3,-4)$ lies on the parabola. If $h(x)=4\cdot f(x-2)$, what is the value of $h(0)-2f(0)$?
+## 2127
+<p style="text-align:center">$n(x)=3(x+8)+(x-8)$</p><p>The function $n$ is defined as shown. For what value of $x$ is $n(x)=52$?</p>
+## 2128
+<p style="text-align:center">$9|7-x|+5=95$</p><p>What is the sum of the solutions to the equation?</p>
+@ 14 | 10 | -3 | -14
+## 2129
+The function $m$ is defined by $m(x)=3x+2$, and the function $p$ is defined by $p(x)=2-x$. What is the value of $4m(2)-p(2)$?
+## 2130
+In the $xy$-plane, the point $(2,5)$ lies on the graph of the function $f$. If $f(x)=k-x^2$, where $k$ is a constant, what is the value of $k$?
+## 2131
+The function $p$ is defined by $p(x)=a(x-1)^2+b$, where $a$ and $b$ are constants. If $p(0)=10$ and $p(3)=19$, what is the value of $p(-1)+p(5)$?
+## 2132
+How many real solutions does $|2x-3|=-8$ have?
+@ Zero | One | Two | Infinitely many
+## 2133
+The function $g$ is defined by $g(x)=4x+8$. If $g(a)=28$ and $g(4)=b$, what is the value of $a+b$?
+@ 144 | 32 | 29 | 9
+## 2134
+The function $f$ is defined by $f(x)=9(2x+5)$. For what value of $x$ does $f(x)=99$?
+@ 3 | 8 | 11 | 47
+## 2135
+The polynomial $p(x)=x^3-6x^2+11x-6$ has roots $r$, $s$, and $t$, where $r<s<t$. What is the value of $r^2+s^2+t^2$?
+## 2136
+The function $f$ is defined by $f(x)=3x-7$. If $f(a)+1=2a$, what is the value of $a$?
+@ -1 | 1 | 5 | 6
+## 2137
+The graph of the polynomial function $f$ in the $xy$-plane, where $y=f(x)$, passes through the point $(5,8)$. What is the value of $f(5)$?
+@ 5 | 8 | 13 | 40
+## 2138
+The function $f$ is defined by $f(x)=6x-3$. If $f(a)+1=5a$, what is the value of $a$?
+@ -1 | 1 | 2 | 11
+## 2139
+The function $w$ is defined by $w(r)=\frac{1}{r-8}-\frac{r-5}{-r+4.25}$. What is the greatest possible value of $r$ such that $w(r)=0$?
+## 2140
+The function $f$ is defined by $f(r)=(r-4)(r+1)^2$. If $f(h-3)=0$, what is one possible value of $h$?
+## 2141
+The function $g$ is defined by $g(x)=2x+8$, where $g(a)=18$ and $g(4)=b$. What is the value of $a+b$?
+@ 60 | 22 | 21 | 9
+## 2142
+<p style="text-align:center">$5|x-5|=10$</p><p>What is the sum of the solutions to the given equation?</p>
+@ -2 | 0 | 10 | 15
+## 2143
+The function $f$ is defined by $f(z)=6z$. Which of the following is equivalent to $f(z-5)$?
+@ $-6z$ | $6z-5$ | $6z-30$ | $-6z+30$
+## 2144
+The function $f$ is defined by $f(z)=6z$. Which of the following is equivalent to $f(z-4)$?
+@ $-6z$ | $6z-4$ | $6z-24$ | $-6z+24$
+## 2145
+<p style="text-align:center">$4x+5y=18$</p><p>The graph is shifted up 9 units. What is the $y$-intercept of the resulting graph?</p>
+@ $\left(0,\frac{63}{5}\right)$ | $\left(0,\frac{18}{5}\right)$ | $\left(0,\frac{41}{5}\right)$ | $(0,27)$
+## 2146
+<p style="text-align:center">$2x+3y=32$</p><p>The graph is shifted up 10 units. What is the $y$-intercept of the resulting graph?</p>
+@ $\left(0,\frac{62}{3}\right)$ | $\left(0,\frac{32}{3}\right)$ | $(0,42)$ | $\left(0,\frac{28}{3}\right)$
+## 2147
+The graph of the polynomial function $f$ in the $xy$-plane, where $y=f(x)$, passes through the point $(7,9)$. What is the value of $f(7)$?
+@ 7 | 9 | 16 | 63
+## 2148
+<p style="text-align:center">$5|x-9|=k$</p><p>If the equation has exactly one real solution for $x$, which value could $k$ have?</p>
+@ $-9$ only | $-9$ or 9 | 0 only | 9 only
+## 2149
+<p style="text-align:center">$f(x)=x+\frac{5}{9}$</p><p>The function $f$ is defined by the given equation. What is the value of $f(x)$ when $x=\frac{4}{9}$?</p>
+@ $\frac{4}{9}$ | $\frac{5}{9}$ | 1 | 9
+## 2150
+<p style="text-align:center">$f(x)=\frac{2x+3}{x-1}$<br>$g(x)=\frac{5x+25}{x+4}$</p><p>The graph of $g$ is the graph of $f$ translated $h$ units left and $k$ units up, where $h$ and $k$ are positive. What is $h+k$?</p>
+@ 2 | 3 | 5 | 8
+## 2151
+The function $t(d)=27-17d$ estimates the remaining time, in minutes, for a person walking a route after walking $d$ kilometers. According to the model, how many minutes does it take to walk 1 kilometer?
+## 2152
+<p style="text-align:center">$f(x)=\frac{3x+11}{x+2}$</p><p>Translate the graph 4 units right and 5 units up to obtain $g$. Which equation defines $g$?</p>
+@ $g(x)=\frac{8x+53}{x+6}$ | $g(x)=\frac{-2x+9}{x-2}$ | $g(x)=\frac{8x-11}{x-2}$ | $g(x)=\frac{-2x-7}{x+6}$
+## 2153
+<p style="text-align:center">$f(x)=\frac{x+3}{2}$</p><p>For the function $f$ above, what is the value of $f(7)-f(5)$?</p>
+@ $\frac{1}{2}$ | 1 | 2 | $\frac{5}{2}$
+## 2154
+<p style="text-align:center">$f(x)=\frac{8}{x+1}-2$</p><p>Translate the graph 4 units right and 5 units up to obtain $g$. Which equation defines $g$?</p>
+@ $g(x)=\frac{8}{x+5}+3$ | $g(x)=\frac{8}{x-3}+3$ | $g(x)=\frac{8}{x-3}-7$ | $g(x)=\frac{8}{x+5}-7$
+## 2155
+The equation $2|x-5|=k$, where $k$ is a constant, has exactly one solution. Which of the following could be the value of $k$?
+@ $-5$ only | $-5$ or 5 | 0 only | 5 only
+## 2156
+<p style="text-align:center">$f(x)=x+\frac{3}{10}$</p><p>The function $f$ is defined by the given equation. What is the value of $f(x)$ when $x=\frac{7}{10}$?</p>
+@ $\frac{3}{10}$ | $\frac{7}{10}$ | 1 | 10
+## 2157
+The graph of the polynomial function $f$ in the $xy$-plane, where $y=f(x)$, has $x$-intercepts of $(-3,0)$ and $(4,0)$. Which of the following must be true?
+@ $f(0)=-3$ | $f(4)=-3$ | $f(-3)=0$ | $f(-3)=4$
+## 2158
+The graph of the polynomial function $f$ in the $xy$-plane, where $y=f(x)$, has $x$-intercepts of $(-5,0)$ and $(6,0)$. Which of the following must be true?
+@ $f(0)=-5$ | $f(6)=-5$ | $f(-5)=0$ | $f(-5)=6$
+## 2159
+<p style="text-align:center">$f(x)=25x+400$</p><p>The function $f$ gives the monthly fee $f(x)$, in dollars, a storage company charges to keep $x$ boxes in its warehouse. What is the monthly fee, in dollars, the company charges to keep 50 boxes in its warehouse?</p>
+## 2160
+For a polynomial function $f$, the graph of $y=f(x)$ in the $xy$-plane contains the points $(-6,0)$, $(7,0)$, $(0,0)$, and $(4,0)$. Which of the following must be a factor of $f(x)$?
+@ $x^2-2x-24$ | $x^2-x+42$ | $x^2-11x-28$ | $x^2-7x$
+## 2161
+<p style="text-align:center">$g(x)=x^3-1$</p><p>The function $g$ is defined above. If $s=4$, what is the value of $g(s+1)$?</p>
+@ 63 | 64 | 124 | 125
+## 2162
+The function $f$ is defined by $f(x)=7x-205$. If the point $(k,2k)$ lies on the graph of $y=f(x)$ in the $xy$-plane, where $k$ is a constant, what is the value of $k$?
+@ 7 | 14 | 41 | 205
+## 2163
+The function $f$ is defined by $f(x)=\frac{|x|}{a}-14$, where $a<0$. What is the product of $f(15a)$ and $f(8a)$?
+## 2165
+<p style="text-align:center">$s(p)=16{,}000-4.5p$</p><p>The function $s$ above gives the remaining free space, in megabytes (MB), on a 16,000 MB memory card that is storing $p$ photos, each with a size of 4.5 MB. If there are 1500 photos on the card, how many MB of free space remain on the card?</p>
+## 2166
+The function $f$ is defined by $f(x)=\frac{x^2+ax+b}{2x+c}$, where $a$, $b$, and $c$ are constants. The graph of the function $f$ in the $xy$-plane, where $y=f(x)$, does not intersect the line $x=4$. If $f(5)=f(6)=0$, what is the value of $a+b+c$?
+## 2167
+<p style="text-align:center">$12(w-a)(w+8)=4(w+8)$</p><p>The sum of solutions is $\frac{34}{3}$. What is $a$?</p>
+## 2168
+<table><thead><tr><th>$x$</th><th>$w(x)$</th><th>$t(x)$</th></tr></thead><tbody><tr><td>1</td><td>-1</td><td>-3</td></tr><tr><td>2</td><td>3</td><td>-1</td></tr><tr><td>3</td><td>4</td><td>1</td></tr><tr><td>4</td><td>3</td><td>3</td></tr><tr><td>5</td><td>-1</td><td>5</td></tr></tbody></table><p>The table above shows some values of the functions $w$ and $t$. For which value of $x$ is $w(x)+t(x)=x$?</p>
+@ 1 | 2 | 3 | 4
+## 2169
+In the $xy$-plane, the graph of the equation $y=6^x$ is translated 3 units down. What is an equation of the resulting graph?
+@ $y=6^x+3$ | $y=6^x-3$ | $y=6^{(x+3)}$ | $y=6^{(x-3)}$
+## 2171
+<p style="text-align:center">$p(x)=3x^2+7$<br>$r(x)=3x+3$</p><p>The functions $p$ and $r$ are shown above. Which of the following is equal to $p(x)+r(x)$?</p>
+@ $9x+10$ | $3x^2+3x+7$ | $3x^2+3x+10$ | $9x^3+9x^2+21x+21$
+## 2172
+A student council group is selling car stickers for a fundraiser. They use the function $p(x)=5x-210$ to determine their profit $p(x)$, in dollars, for selling $x$ car stickers. In order to earn a profit of 800, how many car stickers must they sell?
+## 2173
+In the $xy$-plane, the graph of the equation $y=5^x$ is translated 3 units down. What is an equation of the resulting graph?
+@ $y=5^x+3$ | $y=5^x-3$ | $y=5^{(x+3)}$ | $y=5^{(x-3)}$
+## 2174
+The functions $f$ and $g$ are defined by $f(x)=4x$ and $g(x)=x^2$. For what value of $x$ does $f(x)-g(x)=4$?
+@ -2 | -1 | 1 | 2
+## 2175
+<p style="text-align:center">$f(x)=16-\frac{x}{27}$</p><p>The function $f$ is defined by the given equation. What is the value of $f(270)$?</p>
+@ -10 | 6 | 10 | 26
+## 2176
+A service delivers packages each day at an average rate of 10 packages per hour. Which of the following best approximates the number of packages, $n$, the service delivers in $t$ hours?
+@ $n=t+10$ | $n=t-10$ | $n=10t$ | $n=\frac{t}{10}$
+## 2177
+<p style="text-align:center">$f(x)=-2x-3$</p><p>The function $f$ is defined above. If $f(a)=2$, what is the value of $a$?</p>
+@ -7 | $-\frac{5}{2}$ | 1 | $\frac{5}{2}$
+## 2178
+The weight of an empty fish tank is 4 pounds. A gallon of water weighs approximately 8 pounds. Which of the following best approximates the total weight $w$, in pounds, of the fish tank and $g$ gallons of water?
+@ $w=8g$ | $w=8g+4$ | $w=4g+8$ | $w=4g$
+## 2179
+<p style="text-align:center">$f(x)=250(5)^x$</p><p>The function $f$ is defined by the given equation. If $g(x)=f(x-2)$, which of the following equations defines the function $g$?</p>
+@ $g(x)=10(5)^x$ | $g(x)=125(5)^x$ | $g(x)=250(25)^x$ | $g(x)=250(10)^x$
+## 2180
+A model predicts that a certain elephant calf weighed 213 pounds when it was born and that the calf gained 2 pounds per day in its first year of life. This model is defined by $f(x)=a+bx$, where $f(x)$ is the predicted weight, in pounds, of the elephant calf $x$ days after it was born, and $a$ and $b$ are constants. What is the value of $a$?
+## 2181
+<p style="text-align:center">$f(x)=4x+900$</p><p>The function shown gives the total cost $f(x)$, in dollars, for making $x$ units of a certain product. What is the total cost, in dollars, for making 100 units of this product?</p>
+@ 100 | 400 | 900 | 1,300

@@ -1,0 +1,112 @@
+## 2218
+The graphs of $y=x^2$ and $y=mx-1$ are shown in the $xy$-plane, where $m$ is the slope of the line. If the graph of $y=mx-1$ is tangent to the graph of $y=x^2$ (with $m>0$), what is the value of $m$?
+## 2219
+The function $f(x)=43.50-0.28x$ gives a person's estimated grip strength, in kilograms, $x$ years after the person's grip strength was first measured. Based on the function, what is this person's estimated grip strength, in kilograms, 32.50 years after the person's grip strength was first measured?
+@ 10.72 | 34.40 | 43.50 | 52.60
+## 2220
+<p style="text-align:center">$C=75h+125$</p><p>The equation above gives the amount $C$, in dollars, an electrician charges for a job that takes $h$ hours. Ms. Sanchez and Mr. Roland each hired this electrician. The electrician worked 2 hours longer on Ms. Sanchez's job than on Mr. Roland's job. How much more did the electrician charge Ms. Sanchez than Mr. Roland?</p>
+@ \$75 | \$125 | \$150 | \$275
+## 2222
+The graph of $f$ is a line. The points $(0,3)$, $(5b,b)$, and $(10b,-b)$ lie on the line, where $b$ is positive. What are the coordinates of point $C=(10b,-b)$?
+@ $(5,1)$ | $(10,-1)$ | $(15,-0.5)$ | $(20,-2)$
+## 2224
+The function $f(x)=44.10-0.22x$ gives a person's estimated grip strength, in kilograms, $x$ years after the person's grip strength was first measured. Based on the function, what is this person's estimated grip strength, in kilograms, 31.50 years after the person's grip strength was first measured?
+@ 12.38 | 37.17 | 44.10 | 51.03
+## 2225
+<p style="text-align:center">$P=1.20x+5.00$</p><p>The equation above gives the total monthly price $P$, in dollars, for using an online gaming service. The total monthly price for the online service consists of a flat monthly fee and a charge for each game played during a month. Of the following, which is the best interpretation of the value of $x$ in this context?</p>
+@ The number of games played during a month | The charge, in dollars, for playing $x$ games | The flat monthly fee, in dollars, for the gaming service | The number of months the gaming service was used
+## 2227
+Sarah ordered a set of golf clubs and a golf bag online, which were shipped to her house. The weight $w$, in pounds, of the bag and the clubs is estimated by the equation $w=1.2c+13$, where $c$ is the number of clubs in the bag. What is the best interpretation of the number 1.2 in the equation?
+@ The estimated weight, in pounds, of 1 club | The estimated weight, in pounds, of 13 clubs | The estimated weight, in pounds, of the bag with no clubs | The estimated weight, in pounds, of the bag with 13 clubs
+## 2228
+For a car driving $m$ miles on a highway, toll A's cost, in dollars, can be modeled by the function $f(m)=0.15m+1.25$. For a car driving $m$ miles on a highway, Toll B's cost, in dollars, can be modeled by the function $g(m)=0.20m+0.50$. How much greater is $g(40)$ than $f(40)$?
+@ \$3.60 | \$2.40 | \$1.25 | \$0.75
+## 2231
+A landscape architect charges \$136 for the first hour of work and \$68 for each additional hour of work. Which of the following functions gives the charge $C(h)$, in dollars, for $h$ hours of work, where $h$ is a positive integer?
+@ $C(h)=68h+68$ | $C(h)=68h+136$ | $C(h)=136h+68$ | $C(h)=136h+204$
+## 2232
+The profit, in dollars, that a school will earn from selling tickets to a dance can be modeled by the function $p(x)=-25x^2+400x$, where $x$ is the price, in dollars, of each ticket. What is the price per ticket for which the school will earn its maximum profit?
+@ \$8 | \$16 | \$25 | \$400
+## 2235
+The function $p(x)=145-3x$ models the number of blank sheets remaining in a printer $x$ days after it was loaded. Which statement best interprets $p(5)=130$?
+@ The printer used 5 sheets in 130 days. | The printer had 5 sheets remaining after 130 days. | The printer had 130 sheets remaining after 5 days. | The printer used 130 sheets in 5 days.
+## 2236
+A contract for a construction job states that if the job is not completed by the stated deadline, then the construction company will be fined a flat fee of \$1,000 as well as \$200 for each day the construction continues past the deadline. Which of the following equation types would best model this situation, where $y$ is the total amount, in dollars, the company will be fined if construction continues $x$ days beyond the deadline and $a$ and $b$ are constants?
+@ $y=abx$ | $y=a(b)^x$ | $y=a+(b)^x$ | $y=a+bx$
+## 2237
+The function $p(x)=158-4x$ models the number of blank sheets remaining in a printer $x$ days after it was loaded. Which statement best interprets $p(8)=126$?
+@ The printer used 8 sheets in 126 days. | The printer had 8 sheets remaining after 126 days. | The printer had 126 sheets remaining after 8 days. | The printer used 126 sheets in 8 days.
+## 2239
+On its opening day, a car dealership had an inventory of 29 cars. During the first 6 months, 18 additional cars were purchased by the dealership each week, and the sales team sold an average of 15 cars per week. During the first six months, which of the following equations best models the inventory, $c$, at the dealership $t$ weeks after opening day?
+@ $c=-t+29$ | $c=t+29$ | $c=\frac{3}{2}t+29$ | $c=3t+29$
+## 2240
+In the function $f(x)=\frac{a-14}{x}+6$, $a$ is a constant. The graph of $f$ in the $xy$-plane, where $y=f(x)$, is translated 2 units down and 7 units to the right to produce the graph of $y=g(x)$. Which equation defines $g$?
+@ $g(x)=\frac{a-14}{x+7}+4$ | $g(x)=\frac{a-14}{x-7}+4$ | $g(x)=\frac{a-16}{x+7}+6$ | $g(x)=\frac{a-16}{x-7}+6$
+## 2242
+Carol purchased 45 ceramic figures from an online store. The online store charged $(d+5)$ dollars per figure for the first 30 figures and $d$ dollars per figure for each figure in excess of 30. Which of the following represents the amount $A$, in dollars, Carol was charged for her purchase in terms of $d$?
+@ $A=30d+45$ | $A=30d+150$ | $A=45d+45$ | $A=45d+150$
+## 2243
+The function $f$ is defined by $f(x)=11x^3$. The graph of $y=f(-x)+c$ in the $xy$-plane, where $c$ is a positive integer constant, has an $x$-intercept at $(r,0)$ and a $y$-intercept at $(0,t)$. Which of the following must be true about $r$ and $t$?
+@ $r<0$ and $t<0$ | $r<0$ and $t>0$ | $r>0$ and $t>0$ | $r>0$ and $t<0$
+## 2245
+A dance studio charges one introductory fee covering the first 3 lessons and a fixed fee for each additional lesson. Six lessons cost \$150 and 14 lessons cost \$390. Which function gives the total cost $f(x)$, in dollars, for an integer number $x\ge3$ of lessons?
+@ $f(x)=25x$ | $f(x)=25x+40$ | $f(x)=30x$ | $f(x)=30x-30$
+## 2246
+A bookstore gives away books each day. The function $f(x)=200-10x$ gives the number remaining after $x$ days, for $0\le x\le20$. What is the best interpretation of $f(20)=0$?
+@ There are 20 books initially. | The store gives away 20 books in 10 days. | It takes 20 days to give away all the books. | It takes 200 days to give away 20 books.
+## 2247
+The boiling point of water at sea level is 212 degrees Fahrenheit ($^\circ$F). For every increase of 1,000 feet above sea level, the boiling point of water drops approximately 1.84$^\circ$F. Which of the following equations gives the approximate boiling point $B$, in $^\circ$F, at $h$ feet above sea level?
+@ $B=212-1.84h$ | $B=212-(0.00184)h$ | $B=212h$ | $B=1.84(212)-1{,}000h$
+## 2248
+A full box of cereal initially contains 28 ounces. If 2.4 ounces of cereal are eaten each day, which of the following represents the number of ounces of cereal, $C$, remaining in the box after $d$ days?
+@ $C=-2.4d+28$ | $C=-2.4d-28$ | $C=2.4d+28$ | $C=2.4d-28$
+## 2249
+The graph of the function $f$ defined by $f(x)=x^2+3$ is shown in the $xy$-plane. If the graph of $f$ is shifted right 2 units and up 4 units, the resulting graph represents the function $g$. Which of the following defines $g$?
+@ $g(x)=(x-2)^2+7$ | $g(x)=(x-2)^2-4$ | $g(x)=(x+2)^2+4$ | $g(x)=(x+4)^2+2$
+## 2250
+The graph shows the distance traveled $d$, in feet, by a product on a conveyor belt $m$ minutes after the product is placed on the belt. The graph is a line through $(0,0)$ and $(2,4)$. Which of the following equations correctly relates $d$ and $m$?
+@ $d=2m$ | $d=\frac{1}{2}m$ | $d=m+2$ | $d=2m+2$
+## 2251
+<p style="text-align:center">$C(x)=850+5(x-500)$</p><p>The total cost $C(x)$, in dollars, to produce $x$ units of a certain product can be estimated using the equation above, where $500\le x\le2000$. According to the equation, what is the estimated total cost, in dollars, to produce 600 units of this product?</p>
+## 2252
+The graph models the number of gallons, $g$, of gasoline remaining in the gas tank of a golf cart after traveling $h$ hours. The graph is a line through $(0,5)$ and $(10,0)$. Which of the following is an equation of this graph?
+@ $g=5h+10$ | $g=-10h+5$ | $g=-5h$ | $g=-\frac{1}{2}h+5$
+## 2253
+A company sells each phone it produces for \$200. The company has a fixed cost of \$800,000 to produce the phones plus a cost of \$80 for each phone produced. Which of the following functions best models the profit $P$, in dollars, made by the company for producing and selling $n$ phones? (Profit is total sales minus total cost.)
+@ $P(n)=120^n-800{,}000$ | $P(n)=200^n-80^n-800{,}000$ | $P(n)=120n-800{,}000$ | $P(n)=200n-800{,}000$
+## 2254
+A jar is used to store marbles. The function $f(x)=5x+360$ gives the total mass, in grams, of the jar and the marbles inside, where $x$ is the number of marbles in the jar. Which of the following is the best interpretation of $f(0)=360$ in this context?
+@ The mass of each marble is 0 grams. | The mass of each marble is 360 grams. | The total mass of the jar with 0 marbles inside is 360 grams. | The total mass of the jar with 360 marbles inside is 0 grams.
+## 2255
+The equation $5|x-8|=k$, where $k$ is a constant, has exactly one solution. Which of the following could be the value of $\frac{k}{5}$?
+@ $-8$ or 8 | $-8$ only | 0 only | 8 only
+## 2258
+Kelly is a salesperson at a car dealership. Each month, her total earnings include a base salary of \$2,500 plus a bonus for each car she sells. Which of the following equations can be used to determine Kelly's per-car bonus $b$, in dollars, for a month in which her total earnings were \$6,000 and she sold 20 cars?
+@ $2{,}500+20+b=6{,}000$ | $2{,}500+20b=6{,}000$ | $6{,}000+20b=2{,}500$ | $6{,}000+20+b=2{,}500$
+## 2259
+In the $xy$-plane, the graph of $y=5-(x-3)^2$ is the image of the graph of $y=4-x^2$ after which of the following transformations?
+@ A translation of 1 unit up and 3 units to the right | A translation of 1 unit down and 3 units to the right | A translation of 1 unit up and 3 units to the left | A translation of 3 units down and 1 unit to the right
+## 2262
+For the polynomial function $v$, $v(2)=3$ and $v(0)=-13$. The graph of $y=v(x)$ in the $xy$-plane passes through the points $(-2,7)$ and $(6,0)$. Which of the following must be true?
+@ When $v(x)$ is divided by $(x+13)$, the remainder is 0. | When $v(x)$ is divided by $(x+7)$, the remainder is $-2$. | When $v(x)$ is divided by $(x+2)$, the remainder is 7. | When $v(x)$ is divided by $(x-6)$, the remainder is $-13$.
+## 2263
+A bookstore is giving away free books every day. The equation $f(x)=210-14x$ gives the number of free books, $f(x)$, that remain to be given away after $x$ days. Which of the following is the best interpretation of $f(15)=0$ in this context?
+@ The bookstore has 15 free books to give away. | The bookstore will give away 15 free books in 14 days. | It will take 15 days to give away all the free books. | It will take 210 days to give away 15 free books.
+## 2266
+<p style="text-align:center">$T(x)=66-8x$</p><p>The function estimates a city's temperature, in degrees Fahrenheit, $x$ hours after 10 a.m., where $1\le x\le7$. What does $T(6)=18$ mean?</p>
+@ 6 hours after 10 a.m., the estimated temperature is 18$^\circ$F. | 6 hours before 10 a.m., the temperature decreased by 18$^\circ$F. | 6 hours after 10 a.m., the temperature decreased by 18$^\circ$F. | 6 hours before 10 a.m., the estimated temperature is 18$^\circ$F.
+## 2267
+At an amusement park, visitors wait in line for a certain ride. People in this line get on the ride at a rate of 12 people per minute. At the end of a certain day, 201 people are in line for the ride when the line closes. If these 201 people will get on the ride and no additional people are allowed to get in line, which function $p$ models the number of people who remain in line $t$ minutes after it closes?
+@ $p(t)=-12t+201$ | $p(t)=12t+201$ | $p(t)=12t-201$ | $p(t)=213t$
+## 2268
+Player 1 answers 33 questions. Each correct answer earns Player 1 one point; each incorrect answer earns Player 2 one point. The graph (a line from $(0,33)$ to $(33,0)$) relates Player 1's score $x$ to Player 2's score $y$. What does $(33,0)$ mean?
+@ Player 1 earns 33 points and Player 2 earns 33. | Player 1 earns 33 points and Player 2 earns 0. | Player 1 earns 0 points and Player 2 earns 33. | Player 1 earns 0 points and Player 2 earns 0.
+## 2270
+For the polynomial function $f$, when $f(x)$ is divided by $x-8$, the remainder is 9. Which of the following must be true about the graph of $y=f(x)$ in the $xy$-plane?
+@ It passes through the point $(9,-8)$. | It passes through the point $(-8,9)$. | It passes through the point $(9,8)$. | It passes through the point $(8,9)$.
+## 2272
+A beekeeper's initial observation of the population of a certain bee colony was 1,800 bees. The beekeeper set a goal to increase the population to 3,300 bees. The beekeeper uses a model that predicts the population of this bee colony begins at 1,800 and increases by 120 bees per week in the first two weeks after the initial observation, and then increases by 180 bees per week until the beekeeper's goal is reached. According to this model, at the end of week $w$ after the initial observation, where $w>2$, which of the following functions gives the predicted number of bees still needed to reach the beekeeper's goal?
+@ $p(w)=3{,}300-180w$ | $p(w)=3{,}180+180w$ | $p(w)=1{,}620-180w$ | $p(w)=-120+180w$
+## 2273
+The graph of a linear function $h$ (not shown), where $y=h(x)$, is a line completely contained in only quadrants I and II of the $xy$-plane. Which of the following could define the function $h$?
+@ $h(x)=16x+16$ | $h(x)=16x$ | $h(x)=16$ | $h(x)=-16$

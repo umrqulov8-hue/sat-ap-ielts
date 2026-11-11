@@ -1,0 +1,86 @@
+## 2183
+<p style="text-align:center">$W(x)=5x+50$</p><p>The function $W$ gives the total time, in minutes, it takes for a gardener to water $x$ plants and mow the grass. According to the function, how long does it take the gardener to mow the grass, in minutes?</p>
+@ 5 | 10 | 50 | 250
+## 2184
+Which of the following describes the meaning of the number 5 in the equation $v=9.8t+5$?
+@ The starting position of the skydiver | The initial vertical speed of the skydiver | The acceleration of the skydiver | The number of meters the skydiver travels each second
+## 2185
+The function $j$ is defined by $j(x)=\frac{10x+5}{3p}$, and the function $k$ is defined by $k(x)=\frac{j(x)\cdot p}{x+1}$, where $p$ is a positive constant. What is the value of $k(9)$?
+@ $\frac{19}{6}$ | $\frac{10}{3}$ | $\frac{95}{13}$ | $\frac{85}{3}$
+## 2186
+<p style="text-align:center">$f(x)=4x+800$</p><p>The function shown gives the total cost $f(x)$, in dollars, for making $x$ units of a certain product. What is the total cost, in dollars, for making 100 units of this product?</p>
+@ 100 | 400 | 800 | 1,200
+## 2187
+An electrician charges \$70 per hour for labor plus \$125 for parts. Which function gives the total charge, in dollars, for $x$ hours of labor?
+@ $f(x)=70x-125$ | $f(x)=70x+125$ | $f(x)=70x$ | $f(x)=x+125$
+## 2188
+A museum displays 73 artifacts on day 1 and adds 3 artifacts on each following day. The function $f(x)=3(x-1)+73$ gives the total on day $x$. Which expression gives the number added after day 1 through the end of day $x$?
+@ 73 | $3x$ | $3x+73$ | $3(x-1)$
+## 2190
+A museum displays 69 artifacts on day 1 and adds 7 artifacts on each following day. The function $f(x)=7(x-1)+69$ gives the total on day $x$. Which expression gives the number added after day 1 through the end of day $x$?
+@ 69 | $7x$ | $7x+69$ | $7(x-1)$
+## 2191
+In the $xy$-plane, the point with coordinates $(a,2)$ and $(b,2)$ lie on the graph of the equation $y=5x^2-3$. If $a\ne b$, what is the value of $b^2-a^2$?
+@ -3 | 0 | 5 | 17
+## 2192
+Which of the following equations can be used to find the number of seconds, $t$, after jumping at which the skydiver's vertical speed is $v$ meters per second? (The vertical speed is modeled by $v=9.8t+5$.)
+@ $t=\frac{v}{9.8}-5$ | $t=5-\frac{v}{9.8}$ | $t=\frac{v-5}{9.8}$ | $t=\frac{5-v}{9.8}$
+## 2193
+<p style="text-align:center">$f(x)=-(x+a)^2(x-b)(x-c)$</p><p>For the polynomial function above, $a$, $b$, and $c$ are positive constants. Let $b<k<c$ for some constant $k$. Which of the following must be true?</p><p>I. $k>0$<br>II. $f(k)>0$<br>III. $f(0)>0$</p>
+@ I and II only | II and III only | I and III only | I, II, and III
+## 2195
+The decibel level $d$ of each successive measure of the refrain of a song can be modeled by the equation $d=5n+40$, where $n$ is the number of measures from the beginning of the refrain and $0\le n\le12$. According to the model, what is the change in decibel level between each successive measure of the refrain?
+@ 5 | 12 | 40 | 60
+## 2196
+The equation $5q+7r=t$ can be used to determine the total charges, $t$, in dollars, for an order of sandwiches and salads from Dilini's Catering. If $q$ represents the number of sandwiches in the order and $r$ represents the number of salads in the order, which of the following is the best interpretation of the number 7 in this context?
+@ The number of salads in the order | The number of sandwiches in the order | The charge, in dollars, for each salad | The charge, in dollars, for each sandwich
+## 2197
+In the $xy$-plane, the point $(2,6)$ lies on the graph of $y=\frac{k}{x}$, where $k$ is a constant. Which of the following points must also lie on the graph?
+@ $(1,3)$ | $(1,4)$ | $(3,3)$ | $(3,4)$
+## 2198
+The gas mileage $M(s)$, in miles per gallon, of a car traveling $s$ miles per hour is modeled by the function below, where $20\le s\le75$.<p style="text-align:center">$M(s)=-\frac{1}{24}s^2+4s-50$</p><p>According to the model, at what speed, in miles per hour, does the car obtain its greatest gas mileage?</p>
+@ 46 | 48 | 50 | 75
+## 2199
+<p style="text-align:center">$x-a=(x-a)(x-24)$</p><p>Which of the following are solutions to the given equation, where $a$ is a constant and $a>25$?</p><p>I. $a$<br>II. 24<br>III. 25</p>
+@ I and II only | I and III only | II and III only | I, II, and III
+## 2200
+A scooter rental company charges \$11 for the first hour of renting a scooter and \$6 for each additional hour. Which of the following functions gives the cost $S(t)$, in dollars, of renting a scooter for $t$ hours?
+@ $S(t)=11t$ | $S(t)=11t+6$ | $S(t)=5t+6$ | $S(t)=6t+5$
+## 2201
+The equation $A=30+40h$ gives the amount $A$, in dollars, a mechanic charges a customer for $h$ hours of labor on a project. In the equation, what does the number 40 represent?
+@ The number of hours of labor spent on a project | A flat fee, in dollars, that the mechanic charges for starting a project | The dollar amount that the mechanic charges for each hour of labor spent on a project | The total amount, in dollars, that the mechanic charges for $h$ hours of labor spent on a project
+## 2202
+First-time customer at a dog-boarding facility must pay a onetime \$15 evaluation fee. As well as \$30 for each day and \$20 for each night the dog spends at the facility. Which of the following expressions best models the total cost, in dollars, for a first-time customer to board a dog at this facility for $d$ days and $n$ nights?
+@ $30d+20n+15$ | $(30+15)d+20n$ | $(30+20)(d+n)$ | $(30+20)(d+n)-15$
+## 2203
+<p style="text-align:center">$f(x)=(1.84)^{\frac{x}{4}}$</p><p>The function $f$ is defined by the given equation. The equation can be rewritten as $f(x)=\left(1+\frac{p}{100}\right)^x$, where $p$ is a constant. Which of the following is closest to the value of $p$?</p>
+@ 16 | 21 | 46 | 96
+## 2204
+A publisher pays an author \$3.50 per book for the first 400 books sold and \$4.75 per book thereafter. Which function gives the total payment $P(b)$, in dollars, for $b$ books sold, where $b>400$?
+@ $P(b)=3.50(400)+4.75b$ | $P(b)=3.50b+4.75b$ | $P(b)=3.50b+4.75(b-400)$ | $P(b)=3.50(400)+4.75(b-400)$
+## 2205
+An architect designs an archway by resting the two bases of an arch on the floor. The shape of the arch can be modeled by the graph of the function $f$ in the $xy$-plane (a downward-opening parabola starting at the origin). If $f$ is defined by $f(x)=-2x^2+20x$, where $x$ is in feet, what is the value of the distance $d$, in feet, between the two bases of the arch?
+@ 2 | 10 | 20 | 40
+## 2206
+The sculptor also makes stone carvings. The profit, $p$, from making and selling $c$ stone carvings in one day is given by the equation $p=7c-40$. Which of the following is the best interpretation of 7 in the context of the problem?
+@ The amount of increased profit for every carving sold | The number of carvings that need to be sold to have a 40-dollar profit | The cost per day to maintain the stone-carving tools | The number of carvings that need to be sold to increase profit by one dollar
+## 2207
+The graph of the function $f$ in the $xy$-plane is a parabola with vertex $(3,1)$ and passing through the points $(2,5)$ and $(4,5)$. Which of the following defines $f$?
+@ $f(x)=4(x-3)^2+1$ | $f(x)=4(x+3)^2+1$ | $f(x)=(x-3)^2+1$ | $f(x)=3(x+3)^2+1$
+## 2208
+When the polynomial function $g$ is graphed in the $xy$-plane, where $y=g(x)$, it passes through the points $(6,0)$, $(7,0)$, and $(0,13)$. Which of the following must be true?<p>I. When $g(x)$ is divided by $(x-6)$, the remainder is 0.<br>II. The point $(7,0)$ is an $x$-intercept of the graph of $y=g(x)$.<br>III. When $g(x)$ is divided by $(x-13)$, the remainder is 0.</p>
+@ II only | I and II only | I and III only | I, II, and III
+## 2209
+A family has money in an account for renting movies online. Each time the family rents a movie, the cost of the rental is withdrawn from the account, and each rental costs the same amount of money. The function $f(m)=24-4m$ gives the amount of money, in dollars, in the account after the family has rented $m$ movies. What amount of money, in dollars, is withdrawn from the account each time the family rents a movie?
+## 2210
+<p style="text-align:center">$f(x)=5(0.92)^{3x}$</p><p>The function $f$ is defined by the given equation. The equation can be rewritten as $f(x)=5\left(1-\frac{p}{100}\right)^x$, where $p$ is a constant. Which of the following is closest to the value of $p$?</p>
+@ 8 | 12 | 22 | 24
+## 2212
+A contractor rents a power saw for an initial fee of \$15 and an additional fee of \$12 per day. Which of the following represents the total cost $c$, in dollars, to rent a power saw for $d$ days?
+@ $c=27d$ | $c=15(d+12)$ | $c=12d+15$ | $c=15d+12$
+## 2215
+Jenna has practiced a total of 150 hours for her sport this year. If Jenna practices exactly 10 hours each week, which of the following equations can be solved to find the total number of weeks, $x$, she practiced this year?
+@ $10x=150$ | $\frac{x}{10}=150$ | $x+10=150$ | $x-10=150$
+## 2217
+<p style="text-align:center">$W(d)=2.5d+21$</p><p>The function $W$ defined above models the typing speed, in words per minute, of a student taking a typing class, where $d$ is the number of days the student has been in class and $0\le d\le15$. According to the model, what is the typing speed, in words per minute, of a student who has been in class for 7 days?</p>
+@ 9.5 | 28.0 | 30.5 | 38.5

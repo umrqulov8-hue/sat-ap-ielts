@@ -1,0 +1,23 @@
+## 2276
+A bookstore is giving away free books every day. The equation $f(x)=162-9x$ gives the number of free books, $f(x)$, that remain to be given away after $x$ days. Which of the following is the best interpretation of $f(18)=0$ in this context?
+@ The bookstore has 18 free books to give away. | The bookstore will give away 18 free books in 9 days. | It will take 18 days to give away all the free books. | It will take 162 days to give away 18 free books.
+## 2277
+<table><thead><tr><th>Material</th><th>Maintenance cost per day</th><th>Cost to produce each figurine</th><th>Selling price per figurine</th></tr></thead><tbody><tr><td>Softwood</td><td>\$5</td><td>\$4</td><td>\$10</td></tr><tr><td>Hardwood</td><td>\$10</td><td>\$5</td><td>\$12</td></tr><tr><td>Clay</td><td>\$20</td><td>\$3</td><td>\$9</td></tr></tbody></table><p>The table above shows the costs for a sculptor to make figurines out of various materials. The maintenance cost is the cost to keep the tools needed to work with the corresponding material in good condition. The sculptor makes figurines from only one material each day to keep this cost low. The profit from selling the figurines is equal to the total selling price for the figurines minus both the cost to produce them and the maintenance cost.</p><p>The sculptor makes and sells $f$ softwood figurines in a single day. On that day, what is the profit $p$, in dollars, in terms of $f$?</p>
+@ $p=5+4f$ | $p=6f-5$ | $p=10f$ | $p=14f+5$
+## 2279
+The scatterplot shows data collected on the lengths and widths of <i>Iris setosa</i> petals. A line of best fit for the data is also shown, with equation $y=1.67x+21.1$ ($x$ is width in millimeters, $y$ is length in millimeters). Based on the line of best fit, if the width of an <i>Iris setosa</i> petal is 19 millimeters, what is the predicted length, in millimeters, of the petal?
+@ 21.10 | 31.73 | 52.83 | 55.27
+## 2281
+A dance studio charges an introductory fee for the first 3 lessons and then charges a fixed fee for each additional lesson. One student took 4 lessons and was charged \$60. Another student took 16 lessons and was charged \$300. Which function $f$ gives the total charge, in dollars, for any student who took $x$ lessons, where $x>2$?
+@ $f(x)=15x$ | $f(x)=15x+60$ | $f(x)=20x$ | $f(x)=20x-20$
+## 2282
+The graph gives atmospheric pressure $y$, in pounds per square inch, at height $x$ miles above sea level. What does the point $(4.4,5.9)$ mean?
+@ At sea level, the pressure is 4.4 pounds per square inch. | At sea level, the pressure is 5.9 pounds per square inch. | At 5.9 miles above sea level, the pressure is 4.4 pounds per square inch. | At 4.4 miles above sea level, the pressure is 5.9 pounds per square inch.
+## 2283
+The graph of the function $f$, defined by $f(x)=-\frac{1}{2}(x-4)^2+10$, is shown in the $xy$-plane. If the function $g$ (not shown) is defined by $g(x)=-x+10$, what is one possible value of $a$ such that $f(a)=g(a)$?
+## 2286
+The graph estimates boiling point $y$, in degrees Celsius, for a straight-chain alkane of molecular weight $x$ grams per mole, where $1\le x\le280$. What does $(155.21,196.74)$ mean?
+@ An alkane of molecular weight 196.74 has estimated boiling point 155.21$^\circ$C. | An alkane of molecular weight 155.21 has estimated boiling point 196.74$^\circ$C. | The minimum estimated boiling point occurs at molecular weight 155.21 and is 196.74$^\circ$C. | The maximum estimated boiling point occurs at molecular weight 155.21 and is 196.74$^\circ$C.
+## 2287
+The graph estimates boiling point $y$, in degrees Celsius, for a straight-chain alkane of molecular weight $x$ grams per mole, where $1\le x\le280$. What does $(152.08,191.38)$ mean?
+@ An alkane of molecular weight 191.38 has estimated boiling point 152.08$^\circ$C. | An alkane of molecular weight 152.08 has estimated boiling point 191.38$^\circ$C. | The minimum estimated boiling point occurs at molecular weight 152.08 and is 191.38$^\circ$C. | The maximum estimated boiling point occurs at molecular weight 152.08 and is 191.38$^\circ$C.
