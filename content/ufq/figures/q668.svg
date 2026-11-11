@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 130" width="520" height="130"><rect width="520" height="130" fill="#fff"/>
+<line x1="40" y1="70" x2="480" y2="70" stroke="#000" stroke-width="2"/>
+<g fill="#000"><circle cx="40" cy="70" r="5"/><circle cx="330" cy="70" r="5"/><circle cx="480" cy="70" r="5"/></g>
+<g font-family="Times,serif" font-size="20" fill="#000" text-anchor="middle"><text x="40" y="100" font-style="italic">A</text><text x="330" y="100" font-style="italic">B</text><text x="480" y="100" font-style="italic">C</text>
+<text x="185" y="52">5<tspan font-style="italic">x</tspan></text><text x="405" y="52" font-style="italic">y</text></g></svg>

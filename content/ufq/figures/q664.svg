@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 330" width="480" height="330"><rect width="480" height="330" fill="#fff"/>
+<text x="80.0" y="292" font-size="14" text-anchor="middle" font-family="Times,serif">0</text>
+<text x="236.66666666666669" y="292" font-size="14" text-anchor="middle" font-family="Times,serif">5</text>
+<text x="393.33333333333337" y="292" font-size="14" text-anchor="middle" font-family="Times,serif">10</text>
+<text x="72" y="279.0" font-size="14" text-anchor="end" font-family="Times,serif">0</text>
+<text x="72" y="216.5" font-size="14" text-anchor="end" font-family="Times,serif">10,000</text>
+<text x="72" y="154.0" font-size="14" text-anchor="end" font-family="Times,serif">20,000</text>
+<text x="72" y="91.5" font-size="14" text-anchor="end" font-family="Times,serif">30,000</text>
+<text x="72" y="29.0" font-size="14" text-anchor="end" font-family="Times,serif">40,000</text>
+<text x="268.0" y="322" font-size="15" text-anchor="middle" font-style="italic" font-family="Times,serif">x</text>
+<text transform="translate(16,149.0) rotate(-90)" font-size="15" text-anchor="middle" font-style="italic" font-family="Times,serif">y</text>
+<line x1="80.0" y1="274.0" x2="456.0" y2="274.0" stroke="#000" stroke-width="2"/><line x1="80.0" y1="274.0" x2="80.0" y2="24.0" stroke="#000" stroke-width="2"/>
+<line x1="80.0" y1="117.75" x2="393.33333333333337" y2="86.5" stroke="#000" stroke-width="2"/><circle cx="80.0" cy="117.75" r="4.5" fill="#000"/>
+</svg>

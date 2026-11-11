@@ -1,0 +1,9 @@
+## 748
+[[fig:q748]]<p>The graph shows the predicted depth below sea level $y$, in meters, of a certain seal $x$ minutes after the seal dives into the water. Based on the graph, which of the following is closest to the predicted depth below sea level, in meters, of the seal 2 minutes after the seal dives into the water?</p>
+@ 371 | 308 | 186 | 0
+## 749
+<div style="border:2px solid #000;padding:8px"><p style="text-align:center"><b>ENROLLMENT IS OPEN<br>AT OUR TUTORING CENTER!</b></p><p><u>Tuition:</u><br>\$25 per student for each tutoring session<br>Each tutoring session lasts an hour</p><p><u>Discounts:</u></p><ul><li>First session is free for all new students</li><li>Family discount: 10% off tuition if you enroll more than one child</li></ul><p><u>Books and Supplies:</u> \$20 per student</p></div><p>The figure above shows an advertisement for a tutoring center. The tutoring center allows the two discounts to be used together. A family enrolls two children in the tutoring center program, each for the first time. If each child is signed up for $x$ tutoring sessions, not including the first free session, which of the following represents the family's total cost $c(x)$, in dollars?</p>
+@ $c(x)=45x+40$ | $c(x)=45x-5$ | $c(x)=22.5x+20$ | $c(x)=22.5x-2.5$
+## 750
+A neighborhood consists of a 3-hectare park and a 34-hectare residential area. The total number of trees in the neighborhood is 4,832. The equation $3x+34y=4{,}832$ represents this situation. Which of the following is the best interpretation of $x$ in this context?
+@ The average number of trees per hectare in the park | The average number of trees per hectare in the residential area | The total number of trees in the park | The total number of trees in the residential area

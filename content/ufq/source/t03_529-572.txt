@@ -1,0 +1,112 @@
+## 529
+<p style="text-align:center">$j(x-k)=\frac{3}{4}x+15$</p><p>In the equation above, $j$ and $k$ are constants. If the equation has infinitely many solutions for $x$, what is the value of $k$?</p>
+## 530
+Which expression is a factor of $y^2(x-9)-36(x-9)^3$?
+@ $y(x-9)$ | $(x-9)(x-6)$ | $y+x-9$ | $y+6x-54$
+## 531
+If $\frac{k(x+4)}{12}+\frac{x+4}{15}-1=4$, where $k$ is positive, what is $(5k+4)(x+4)$?
+@ 180 | 300 | 720 | 900
+## 532
+<p style="text-align:center">$2(5x-20)-(15+8x)=7$</p><p>What value of $x$ satisfies the equation above?</p>
+## 533
+Charles saves $\frac{2}{5}$ of the \$145 he earns each week. At this rate, how many dollars will he save in 3 weeks?
+## 534
+If $(x-1)(x-2)(x+3)(x+4)=x^4+ax^3+bx^2+cx+d$ for all values of $x$, what is the value of $a$?
+## 535
+<p>What is the solution of</p><p style="text-align:center">$9n+20=-16$</p>
+@ -4 | $\frac{-20}{9}$ | $\frac{-4}{9}$ | 4
+## 536
+If $\frac{3}{4}x+1=K+\frac{1}{4}x$, what is the value of $K$ when $x=0$?
+@ -2 | $\frac{-1}{2}$ | $\frac{1}{2}$ | 1
+## 537
+<p style="text-align:center">$6(x-4)=(x-4)+6$</p><p>If $x$ is the solution to the given equation, what is the value of $x-4$?</p>
+## 538
+<p style="text-align:center">$\frac{2}{3}t=\frac{5}{2}$</p><p>What value of $t$ is the solution of the equation above?</p>
+## 539
+In the equation $\frac{p}{2}-9=11$, what value of $p$ is the solution?
+@ 20 | 22 | 40 | 80
+## 540
+<p style="text-align:center">$2\left(x+\frac{b}{2}-2\right)=2x$</p><p>In the equation above, $b$ is a constant. For what value of $b$ is the equation true for all values of $x$?</p>
+## 541
+<table><thead><tr><th></th><th>Area (square inches)</th><th>Perimeter (inches)</th></tr></thead><tbody><tr><td>Rectangle A</td><td>660</td><td>220</td></tr><tr><td>Rectangle B</td><td>2,640</td><td>$n$</td></tr></tbody></table><p>Rectangle A and Rectangle B are similar. What is the value of $n$?</p>
+@ 2,200 | 1,760 | 880 | 440
+## 542
+<p style="text-align:center">$\frac{x^2-3x+a}{x-1}$</p><p>In the expression above, $x\ne1$ and $a$ is a positive constant. For what value of $a$ is the expression equivalent to $x-2$?</p>
+## 543
+<p style="text-align:center">$\frac{x^2+17x+66}{x+6}$</p><p>If the expression above is equivalent to an expression of the form $x+a$, where $x\ne-6$, what will be the value of $a$?</p>
+## 544
+<p style="text-align:center">$\frac{x}{8}=5$</p><p>What value of $x$ is the solution to the given equation?</p>
+@ 80 | 40 | 13 | 8
+## 545
+<p style="text-align:center">$Q=\frac{M}{53}$</p><p>Which equation expresses $M$ in terms of $Q$?</p>
+@ $M=\frac{Q}{53}$ | $M=53Q$ | $M=Q+53$ | $M=Q-53$
+## 546
+<p style="text-align:center">$Q=\frac{M}{33}$</p><p>Which equation expresses $M$ in terms of $Q$?</p>
+@ $M=\frac{Q}{33}$ | $M=33Q$ | $M=Q+33$ | $M=Q-33$
+## 547
+How many solutions does the equation $9x=45$ have?
+@ Zero | Exactly one | Exactly two | Infinitely many
+## 548
+<p style="text-align:center">$4x+12=4x+k$</p><p>In the given equation, $k$ is a constant. The equation has infinitely many solutions. What is the value of $k$?</p>
+## 549
+If $2(3x-6)+5(2x-3)=5$, what is the value of $x$?
+@ $\frac{1}{8}$ | $\frac{1}{2}$ | 2 | 8
+## 550
+<p>Solve for $x$:</p><p style="text-align:center">$x=\sqrt[2n]{7x^n+30}$</p><p>Find the value of $x^n$.</p>
+## 551
+<p style="text-align:center">$4x+28=4x+k$</p><p>In the given equation, $k$ is a constant. The equation has infinitely many solutions. What is the value of $k$?</p>
+## 552
+Jacob bought two types of pens: blue pens that cost \$0.60 each and red pens that each cost $d$ times as much as a blue pen. If the cost of 3 blue pens and 6 red pens was \$10.80, what is the value of $d$?
+## 553
+If $10+\frac{6(7-x)}{5}=\frac{4(7-x)}{3}$, which equation must also be true?
+@ $7-x=148$ | $7-x=-75$ | $x-7=148$ | $x-7=-75$
+## 554
+How many solutions does the equation $6x+4=22$ have?
+@ Exactly one | Exactly two | Infinitely many | Zero
+## 555
+<p style="text-align:center">$4x+2=rx+8$</p><p>In the equation above, $r$ is a constant. If the equation has no solution, what is the value of $r$?</p>
+@ 4 | 6 | 8 | 16
+## 556
+Which equation has no solution?
+@ $6x+2=2(3x+1)$ | $6x+20=2(3x+4)$ | $6x+1=3x+1$ | $6x+3=-6x-3$
+## 557
+<p style="text-align:center">$x+5=2(5)$</p><p>What value of $x$ is the solution to the given equation?</p>
+@ -10 | -5 | 5 | 10
+## 558
+<p style="text-align:center">$a^2+6a+9=16$</p><p>Based on the equation above, which of the following could be the value of $a+3$?</p>
+@ 8 | 4 | 2 | 1
+## 559
+How many solutions does the equation $7x-19=19-7x$ have?
+@ Zero | Exactly one | Exactly two | Infinitely many
+## 560
+What value of $x$ satisfies the equation $3x+3=27$?
+@ 3 | 8 | 10 | 27
+## 561
+<p style="text-align:center">$f(x)=3+\left|-2x-x^2\right|$</p><p style="text-align:center">$g(w)=\left|-\frac{w}{w-1}\right|-w+5$</p><p>The functions $f$ and $g$ are defined by the given equations. If $f(-4)=c$, where $c$ is a constant, what is the value of $g(c)$?</p>
+## 562
+<p style="text-align:center">$x+40=140$</p><p>What value of $x$ is the solution to the given equation?</p>
+@ -180 | -100 | 100 | 180
+## 563
+For a set of three consecutive integers, the result of subtracting the greatest integer from the sum of the other two integers is 42. What is the value of the greatest of the three integers?
+## 564
+For a service visit, a technician charges a \$38 fee plus an additional \$12 for every $\frac{1}{4}$ hour of work. If the technician's total charge was \$158, for how much time, in hours, did the technician charge?
+## 565
+For a set of three consecutive integers, the result of subtracting the greatest integer from the sum of the other two integers is 33. What is the value of the greatest of the three integers?
+## 566
+The equation $32=2a+2b$ gives the relationship between the side lengths $a$ and $b$ of a certain parallelogram. If $a=6$, what is the value of $b$?
+## 567
+<p style="text-align:center">$x-\frac{1}{2}a=0$</p><p>If $x=1$ in the equation above, what is the value of $a$?</p>
+## 568
+Yin mowed $m$ lawns each day for 8 days. In terms of $m$, what is the total number of lawns Yin mowed in the 8 days?
+@ $8m$ | $\frac{8}{m}$ | $m^8$ | $8+m$
+## 569
+If $5k+15=35$, what is the value of $10k$?
+@ 4 | 10 | 40 | 100
+## 570
+If $x=\frac{2}{3}y$ and $y=18$, what is the value of $2x-3$?
+@ 21 | 15 | 12 | 10
+## 571
+Which equation has no solution?
+@ $14x+7=7(2x+1)$ | $14x+11=-14x-11$ | $14x+1=2x+1$ | $14x+70=7(2x+4)$
+## 572
+If $(x-2)^2=4(x-2)$, what is one possible value of $x$?

@@ -1,0 +1,65 @@
+## 701
+<p style="text-align:center">$R=\frac{0.43l}{A}$</p><p>The equation relates a wire's resistance $R$, in ohms, to its length $l$, in meters, and cross-sectional area $A$, in square meters. Which equation expresses $l$?</p>
+@ $l=\frac{R-A}{0.43}$ | $l=\frac{R+A}{0.43}$ | $l=\frac{0.43R}{A}$ | $l=\frac{AR}{0.43}$
+## 702
+For their practical exam in binary fission, a biology class at Central High School placed 50 bacteria cells in a culture dish in their laboratory. The number of cells of these bacteria doubles every 20 minutes. How many bacteria cells will be in the culture dish when 1 <u>hour</u> has passed?
+@ 800 | 400 | 200 | 150
+## 703
+<p style="text-align:center">$\frac{x}{5}+\frac{y}{9}=\frac{47}{45}$</p><p>An engineer connects $x$ type A resistors and $y$ type B resistors in series. Each type A resistor has resistance $a$ ohms, and each type B resistor has resistance $b$ ohms. The equation gives a total resistance of $\frac{47}{45}$ ohms. What is $a-b$?</p>
+@ 47 | 4 | $\frac{47}{45}$ | $\frac{4}{45}$
+## 704
+A chef made 36 cups of sauce. The chef then filled $x$ small jars and $y$ large jars with all the sauce he made. The equation $2x+5y=36$ represents this situation. Which is the best interpretation of $5y$ in this context?
+@ The number of large jars the chef filled | The number of small jars the chef filled | The total number of cups of sauce in the large jars | The total number of cups of sauce in the small jars
+## 705
+The equation $d=6t+210$ gives the distance $d$, in feet, from a reference point on the surface of Mars to a Mars rover, where $t$ is the number of minutes after the start of a period of observation. By how many feet does the Mars rover's distance from the reference point increase over a period of 20 minutes?
+@ 330 | 230 | 120 | 6
+## 706
+$f(x)=-30x+390$ gives the predicted height after $x$ minutes of descent. What is the predicted height after 3 minutes?
+@ 90 | 300 | 360 | 480
+## 707
+<p style="text-align:center">$Q=\sqrt{\frac{2dk}{h}}$</p><p>The formula above is used to estimate the ideal quantity, $Q$, of items a store manager needs to order given the demand quantity, $d$; the setup cost per order, $k$; and the storage cost per item, $h$. Which of the following correctly expresses the storage cost per item in terms of the other variables?</p>
+@ $h=\sqrt{\frac{2dk}{Q}}$ | $h=\frac{\sqrt{2dk}}{Q}$ | $h=\frac{2dk}{Q^2}$ | $h=\frac{Q^2}{2dk}$
+## 708
+Two warehouse employees need to move microwave ovens and televisions that weigh 45 pounds and 85 pounds, respectively, using a freight elevator. The freight elevator can hold a maximum of 2,400 pounds. Together, the employees and their loading equipment weigh 400 pounds. What is the maximum number of microwave ovens the two employees can take on the elevator if both employees, the loading equipment, and 20 televisions are in the elevator?
+@ 5 | 6 | 7 | 20
+## 709
+The equation $d=6t+240$ gives the distance $d$, in feet, from a reference point on the surface of Mars to a Mars rover, where $t$ is the number of minutes after the start of a period of observation. By how many feet does the Mars rover's distance from the reference point increase over a period of 20 minutes?
+@ 360 | 260 | 120 | 6
+## 710
+The equation $R=\frac{0.43l}{A}$ relates the resistance $R$ of a wire to its length $l$ and cross-sectional area $A$, where all quantities are positive. Which equation expresses $l$ in terms of $R$ and $A$?
+@ $l=\frac{R-A}{0.43}$ | $l=\frac{R+A}{0.43}$ | $l=\frac{0.43R}{A}$ | $l=\frac{AR}{0.43}$
+## 711
+Casey is raising $h$ horses and $g$ goats. Each horse requires 2 acres of land, and each goat requires 1 acre of land. The $h$ horses and $g$ goats require a total of 55 acres of land. Which equation represents this situation?
+@ $2g+h=55$ | $g+2h=55$ | $g+\frac{h}{2}=55$ | $\frac{g}{2}+h=55$
+## 712
+Casey is raising $h$ horses and $g$ goats. Each horse requires 2 acres of land, and each goat requires 1 acre of land. The $h$ horses and $g$ goats require a total of 42 acres of land. Which equation represents this situation?
+@ $2g+h=42$ | $g+2h=42$ | $g+\frac{h}{2}=42$ | $\frac{g}{2}+h=42$
+## 713
+A kayak rental company charges \$48 for the first hour and \$27 for each additional hour, plus an equipment fee $e$. Which equation represents the total cost $y$, in dollars, of renting a kayak for $x$ hours, where $x\ge1$?
+@ $y=27(x-1)+e$ | $y=48+27+e$ | $y=48+27x+e$ | $y=48+27(x-1)+e$
+## 714
+The equation $R=\frac{0.36l}{A}$ relates the resistance $R$ of a wire to its length $l$ and cross-sectional area $A$, where all quantities are positive. Which equation expresses $l$ in terms of $R$ and $A$?
+@ $l=\frac{R-A}{0.36}$ | $l=\frac{R+A}{0.36}$ | $l=\frac{0.36R}{A}$ | $l=\frac{AR}{0.36}$
+## 715
+A botanist studied the growth rate of a birch tree over two years. In the first year, the height of the tree increased $c$ inches. In the second year, the height of the tree increased $d$ inches. The height of the tree increased a total of 44 inches over these two years. Which equation represents this situation?
+@ $c+d=44$ | $c-d=44$ | $-c+d=44$ | $-c-d=44$
+## 716
+A botanist studied the growth rate of a birch tree over two years. In the first year, the height of the tree increased $c$ inches. In the second year, the height of the tree increased $d$ inches. The height of the tree increased a total of 46 inches over these two years. Which equation represents this situation?
+@ $-c-d=46$ | $-c+d=46$ | $c-d=46$ | $c+d=46$
+## 717
+A chef made 34 cups of sauce. The chef then filled $x$ small jars and $y$ large jars with all the sauce he made. The equation $3x+5y=34$ represents this situation. Which is the best interpretation of $5y$ in this context?
+@ The number of large jars the chef filled | The number of small jars the chef filled | The total number of cups of sauce in the large jars | The total number of cups of sauce in the small jars
+## 718
+<p style="text-align:center">$\frac{2}{7}x^2-6x+\sqrt{7k+4}\,x+\sqrt{7k+4}=0$</p><p>In the given equation, $k$ is a positive constant. The product of the solutions to the equation is 31.5. What is the value of $k$?</p>
+## 719
+The formula $B=\frac{703w}{h^2}$ is used to determine body mass index, $B$, based on a person's weight $w$, in pounds, and height $h$, in inches. Which of the following can be used to determine a person's height, in inches, based on weight and body mass index?
+@ $h=\sqrt{\frac{703w}{B}}$ | $h=\sqrt{\frac{B}{703w}}$ | $h=\frac{703w}{B}$ | $h=\frac{B}{703w}$
+## 720
+<p style="text-align:center">$10v-6t=3{,}310$</p><p>The equation above models the relationship between the speed of sound $v$, in meters per second, in dry air, and the temperature of the air $t$, in degrees Celsius. Which of the following expresses $v$ in terms of $t$?</p>
+@ $v=\frac{3}{5}t+331$ | $v=\frac{5}{3}t+551.7$ | $t=\frac{3}{5}v+331$ | $t=\frac{5}{3}v+551.7$
+## 721
+A machine makes 8-inch, 5-inch, and 7-inch parts. During a certain day, the number of 8-inch parts that the machine makes is 3 times the number $n$ of 5-inch parts, and the number of 7-inch parts is 12. During this day, the machine makes 100 parts total. Which equation represents this situation?
+@ $8(3n)+5n+7(12)=100$ | $8n+5n+7n=100$ | $3n+12=100$ | $4n+12=100$
+## 722
+To determine the mean number of children per household in a community, Tabitha surveyed 20 families at a playground. For the 20 families surveyed, the mean number of children per household was 2.4. Which of the following statements must be true?
+@ The mean number of children per household in the community is 2.4. | A determination about the mean number of children per household in the community should not be made because the sample size is too small. | The sampling method is flawed and may produce a biased estimate of the mean number of children per household in the community. | The sampling method is not flawed and is likely to produce an unbiased estimate of the mean number of children per household in the community.

@@ -1,0 +1,72 @@
+## 723
+To determine whether residents of a community would vote in favor of a ballot proposal to use \$100,000 of local taxes for additional playground equipment at a community park, Jennifer surveyed 60 adults visiting the park with their children during one week in June. She found that 45 of those surveyed reported that they would vote in favor of the proposal. Which of the following statements must be true?
+@ When the actual vote is taken, 75 percent of the votes will be in favor of the proposal. | No prediction should be made about the vote on the proposal because the sample size is too small. | The sampling method is flawed and may produce biased results. | The sampling method is not flawed and is likely to produce unbiased results.
+## 724
+A contractor needs to purchase plywood boards and nails for a job. The contractor will buy $P$ plywood boards for \$16.99 each and one box of nails for \$12.99. Which of the following equations shows the total cost, $C$, of the plywood boards and nails that the contractor will buy?
+@ $C=16.99P+12.99$ | $C=(12.99+16.99)P$ | $P=16.99C+12.99$ | $P=(12.99+16.99)C$
+## 725
+<p style="text-align:center">$5a=\frac{4b^2}{a}-20a$</p><p>The given equation relates the positive variables $a$ and $b$. Which equation correctly expresses $a$ in terms of $b$?</p>
+@ $a=\frac{4b}{25}$ | $a=\frac{4b^2}{25}$ | $a=\frac{2b}{5}$ | $a=\frac{2b^2}{5}$
+## 726
+A carnival charges \$2 for each ride ticket and \$5 for each game ticket. A family purchased ride tickets and game tickets worth a total of \$35. Which equation represents this situation, where $x$ is the number of ride tickets and $y$ is the number of game tickets that this family purchased?
+@ $2(x+y)=35$ | $2x+5y=35$ | $5(x+y)=35$ | $5x+2y=35$
+## 727
+A carnival charges \$3 for each ride ticket and \$4 for each game ticket. A family purchased ride tickets and game tickets worth a total of \$35. Which equation represents this situation, where $x$ is the number of ride tickets and $y$ is the number of game tickets that this family purchased?
+@ $3(x+y)=35$ | $3x+4y=35$ | $4(x+y)=35$ | $4x+3y=35$
+## 728
+<p style="text-align:center">$\frac{x}{7}+\frac{y}{5}=\frac{41}{35}$</p><p>An engineer connects resistors in series, where the resistors in the series have a total resistance of $\frac{41}{35}$ ohms. In this series, there are $x$ resistors of type A, which each have a resistance of $a$ ohms, and $y$ resistors of type B, which each have a resistance of $b$ ohms. The given equation represents this situation. According to this equation, what is the positive difference between the value of $a$ and the value of $b$?</p>
+@ $\frac{1}{35}$ | $\frac{2}{35}$ | $\frac{3}{35}$ | $\frac{12}{35}$
+## 729
+<table><thead><tr><th>Macronutrient</th><th>Food calories</th><th>Kilojoules</th></tr></thead><tbody><tr><td>Protein</td><td>4.0</td><td>16.7</td></tr><tr><td>Fat</td><td>9.0</td><td>37.7</td></tr><tr><td>Carbohydrate</td><td>4.0</td><td>16.7</td></tr></tbody></table><p>The table above gives the typical amounts of energy per gram, expressed in both food calories and kilojoules, of the three macronutrients in food. If the 180 food calories in a granola bar come entirely from $p$ grams of protein, $f$ grams of fat, and $c$ grams of carbohydrate, which of the following expresses $f$ in terms of $p$ and $c$?</p>
+@ $f=20+\frac{4}{9}(p+c)$ | $f=20-\frac{4}{9}(p+c)$ | $f=20-\frac{4}{9}(p-c)$ | $f=20+\frac{9}{4}(p+c)$
+## 730
+A cooking school is offering a promotion where the first class is free, the second class is half off the regular price, and the remaining classes are regularly priced. If the regular price of a class is \$22.80, which function $f$ gives the total cost, in dollars, of $x$ classes taken using this promotion, where $x>2$?
+@ $f(x)=22.80(x-1)+11.40$ | $f(x)=22.80(x-2)+11.40$ | $f(x)=22.80(x-1)+11.40(x-2)$ | $f(x)=22.80(x-2)+11.40(x-1)$
+## 731
+A machine makes 4-inch, 7-inch, and 9-inch parts. During a certain day, the number of 4-inch parts that the machine makes is 5 times the number $n$ of 7-inch parts, and the number of 9-inch parts is 4. During this day, the machine makes 100 parts total. Which equation represents this situation?
+@ $4(5n)+7n+9(4)=100$ | $4n+7n+9n=100$ | $5n+4=100$ | $6n+4=100$
+## 733
+<p style="text-align:center">$h(t)=-\frac{1}{175}t+481$</p><p>An archeologist estimates that, as a result of erosion, the height of the Great Pyramid of Giza has been decreasing at a constant rate since it was built. The function above is used by the archeologist to model the height $h(t)$, in feet, of the pyramid $t$ years after it was built. According to the function, which of the following statements is true?</p>
+@ Every 1,750 years the height of the pyramid decreases by 10 feet. | Every 175 years the height of the pyramid decreases by 0.1 foot. | Every 100 years the height of the pyramid decreases by 1.75 feet. | Every year the height of the pyramid decreases by 175 feet.
+## 734
+A machine makes 7-inch, 9-inch, and 4-inch parts. During a certain day, the number of 7-inch parts that the machine makes is 5 times the number $n$ of 9-inch parts, and the number of 4-inch parts is 4. During this day, the machine makes 100 parts total. Which equation represents this situation?
+@ $7(5n)+9n+4(4)=100$ | $7n+9n+4n=100$ | $5n+4=100$ | $6n+4=100$
+## 735
+<p style="text-align:center">$35x+3=k(7x+3)+7x$</p><p>In the given equation, $k$ is a constant. The equation has exactly one solution. Which value CANNOT be the value of $k$?</p>
+@ 5 | 4 | 0 | -4
+## 736
+The amount of water $y$, in gallons, in a reservoir $x$ minutes after the reservoir begins to drain can be modeled by the equation $y=1{,}500-3x$. If the equation is graphed in the $xy$-plane, which of the following is the best interpretation of the $x$-intercept?
+@ The reservoir drains at the rate of 3 gallons per minute. | There are 500 gallons of water in the reservoir before it begins to drain. | There are 1,500 gallons of water in the reservoir before it begins to drain. | The water will completely drain from the reservoir 500 minutes after the reservoir begins to drain.
+## 737
+A baker has a total of 15 cups of flour and enough other ingredients to make banana pancakes and apple pancakes. The baker needs 1.25 cups of flour for a batch of banana pancakes and 0.75 cups of flour for a batch of apple pancakes. If the baker makes 8 batches of banana pancakes, what is the greatest number of whole batches of apple pancakes the baker can make?
+@ 6 | 7 | 8 | 9
+## 738
+A moving truck rental company charges its customers \$165 for the first hour of renting a truck and \$95 for each additional hour, plus the cost of gas used. Which equation represents this situation, where $y$ is the total cost, in dollars, of renting a truck from this company for $x$ hours, $w$ is the cost, in dollars, of gas used, and $x\ge1$ ?
+@ $y=95(x-1)+w$ | $y=165+95+w$ | $y=165+95x+w$ | $y=165+95(x-1)+w$
+## 739
+The efficiency of an engine is the proportion of its fuel energy that the engine can convert into motion energy. The equation $E=1-\frac{x}{p}$ relates an engine's efficiency, $E$, to its exhaust temperature $x$, in kelvins, and its operating temperature $p$, in kelvins. A particular automobile engine has an operating temperature of 473 kelvins and an exhaust temperature of 293 kelvins. Based on the engine's efficiency, about how many joules of motion energy can the engine obtain from 40,000,000 joules of fuel energy?
+@ 15,200,000 | 24,800,000 | 64,600,000 | 105,000,000
+## 740
+<p style="text-align:center">$9ax+9b-6=21$</p><p>Based on the equation above, what is the value of $ax+b$?</p>
+@ 3 | 6 | 8 | 12
+## 741
+[[fig:q741]]<p>The graph shows the total amount of rainfall $y$, in centimeters, from the start of a 10-hour period, where $x$ is the number of hours after the start of the period. Which of the following statements about the rainfall during this time period is true?</p>
+@ The rate of rainfall was 2 centimeters per hour between $x=2$ and $x=4$. | The rate of rainfall was the greatest between $x=4$ and $x=10$. | The rate of rainfall increased between $x=0$ and $x=2$. | The rate of rainfall was 0 centimeters per hour between $x=2$ and $x=4$.
+## 742
+<p style="text-align:center">$c(x-6)=-7(x+k)$</p><p>In the given equation, $c$ and $k$ are constants. The equation has exactly one solution. Which statement must be true?</p>
+@ The value of $c$ cannot be $-7$. | The value of $c$ cannot be $-\frac{7}{6}$. | The value of $k$ cannot be $\frac{6}{7}$. | The value of $k$ cannot be $-6$.
+## 743
+Hannah and Wyatt are saving money to purchase a car. Hannah saves $\frac{1}{5}$ of her salary each month, and Wyatt saves $\frac{2}{7}$ of his salary each month. Together, they save a total of \$3,270 from their monthly salaries each month. If $h$ and $w$ represent Hannah's and Wyatt's monthly salaries, in dollars, respectively, which equation shows the relationship between $h$ and $w$?
+@ $h+w=3{,}270$ | $h+2w=3{,}270$ | $10h+7w=114{,}450$ | $7h+10w=114{,}450$
+## 744
+Bottles of water cost \$0.93 each with a profit of \$0.35 each. In the first 3 days, 128 bottles were sold. For the rest of the week, $w$ bottles were sold. The total profit was \$130.20. Which equation represents this?
+@ $(0.93-0.35)(w+128)=130.20$ | $(0.93-0.35)(w-128)=130.20$ | $0.35(w+128)=130.20$ | $0.35(w-128)=130.20$
+## 745
+<p style="text-align:center">$\frac{x}{7}+\frac{y}{5}=\frac{41}{35}$</p><p>An engineer connects resistors in series, where the resistors in the series have a total resistance of $\frac{41}{35}$ ohms. In this series, there are $x$ resistors of type A, which each have a resistance of $a$ ohms, and $y$ resistors of type B, which each have a resistance of $b$ ohms. The given equation represents this situation. According to this equation, what is the positive difference between the value of $a$ and the value of $b$?</p>
+@ $41$ | $2$ | $\frac{41}{35}$ | $\frac{2}{35}$
+## 746
+[[fig:q746]]<p>The graph shows the predicted depth below sea level $y$, in meters, of a certain seal $x$ minutes after the seal dives into the water. Based on the graph, which of the following is closest to the predicted depth below sea level, in meters, of the seal 2 minutes after the seal dives into the water?</p>
+@ 324 | 288 | 180 | 0
+## 747
+A machine makes 8-inch, 9-inch, and 3-inch parts. During a certain day, the number of 8-inch parts that the machine makes is 5 times the number $n$ of 9-inch parts, and the number of 3-inch parts is 4. During this day, the machine makes 100 parts total. Which equation represents this situation?
+@ $8(5n)+9n+3(4)=100$ | $8n+9n+3n=100$ | $5n+4=100$ | $6n+4=100$

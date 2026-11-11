@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 400" width="480" height="400"><rect width="480" height="400" fill="#fff"/>
+<text x="70.0" y="362" font-size="14" text-anchor="middle" font-family="Times,serif">0</text>
+<text x="140.1818181818182" y="362" font-size="14" text-anchor="middle" font-family="Times,serif">2</text>
+<text x="210.36363636363637" y="362" font-size="14" text-anchor="middle" font-family="Times,serif">4</text>
+<text x="280.5454545454545" y="362" font-size="14" text-anchor="middle" font-family="Times,serif">6</text>
+<text x="350.72727272727275" y="362" font-size="14" text-anchor="middle" font-family="Times,serif">8</text>
+<text x="420.9090909090909" y="362" font-size="14" text-anchor="middle" font-family="Times,serif">10</text>
+<text x="62" y="349.0" font-size="14" text-anchor="end" font-family="Times,serif">0</text>
+<text x="62" y="275.3636363636364" font-size="14" text-anchor="end" font-family="Times,serif">1</text>
+<text x="62" y="201.72727272727272" font-size="14" text-anchor="end" font-family="Times,serif">2</text>
+<text x="62" y="128.0909090909091" font-size="14" text-anchor="end" font-family="Times,serif">3</text>
+<text x="62" y="54.45454545454544" font-size="14" text-anchor="end" font-family="Times,serif">4</text>
+<text x="263.0" y="392" font-size="15" text-anchor="middle" font-style="italic" font-family="Times,serif">x</text>
+<text transform="translate(16,182.0) rotate(-90)" font-size="15" text-anchor="middle" font-style="italic" font-family="Times,serif">y</text>
+<line x1="70.0" y1="344.0" x2="456.0" y2="344.0" stroke="#000" stroke-width="2"/><line x1="70.0" y1="344.0" x2="70.0" y2="20.0" stroke="#000" stroke-width="2"/>
+<path d="M70.0,344.0 L140.1818181818182,196.72727272727272 L210.36363636363637,196.72727272727272 L420.9090909090909,152.54545454545456" fill="none" stroke="#000" stroke-width="2"/>
+</svg>

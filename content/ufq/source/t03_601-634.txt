@@ -1,0 +1,96 @@
+## 601
+<p style="text-align:center">$3ax-7=6x-7$</p><p>In the equation above, $a$ is a constant. For what value of $a$ does the equation have infinitely many solutions?</p>
+@ 0 | 2 | 6 | 7
+## 602
+<p style="text-align:center">$t=(2r-4)$</p><p style="text-align:center">$w=(2r+4)$</p><p>The equations above define $t$ and $w$ in terms of $r$.</p><p>What is $\frac{tw}{4}$ in terms of $r$?</p>
+@ $r^2-4$ | $r^2-16$ | $4r^2-4$ | $4r^2-16$
+## 603
+<p style="text-align:center">$\frac{x-7}{7}+6=\frac{x+8}{3}$</p><p>The solution to the given equation is between which of the following pairs of values?</p>
+@ 12 and 13 | 13 and 14 | 14 and 15 | 16 and 18
+## 604
+If $y$ is 3 less than twice $x$ and $y=0$, what is the value of $x$?
+@ 1 | $\frac{3}{2}$ | $\frac{5}{2}$ | 3
+## 605
+<p style="text-align:center">$12x+9=k(6x+9)+6x$</p><p>In the given equation, $k$ is a constant. The equation has exactly one solution. Which value CANNOT be the value of $k$?</p>
+@ 2 | 1 | 0 | -1
+## 606
+<p style="text-align:center">$a(9-x)=36-4x$</p><p>In the given equation, $a$ is a constant. The equation has exactly one solution. Which of the following CANNOT be the value of $a$?</p>
+@ 1 | 4 | 9 | 36
+## 607
+<p style="text-align:center">$-3x+18px=36$</p><p>In the given equation, $p$ is a constant. The equation has no solution. What is the value of $p$?</p>
+@ 0 | $\frac{1}{6}$ | $\frac{2}{3}$ | 2
+## 608
+<p style="text-align:center">$C(x)=7000+25x$</p><p>A company uses the function above to estimate the cost of $C(x)$, in dollars, to produce $x$ units of a product. Based on the model, how many units of the product can the company produce at a cost of \$25,000?</p>
+## 609
+<p style="text-align:center">$\frac{20}{p}=\frac{20}{q}-\frac{20}{r}-\frac{20}{s}$</p><p>The given equation relates the positive variables $p$, $q$, $r$, and $s$. Which of the following is equivalent to $q$?</p>
+@ $p+r+s$ | $20(p+r+s)$ | $\frac{prs}{pr+rs+ps}$ | $\frac{prs}{20p+20r+20s}$
+## 610
+A designer used a total of 25 yards of blue fabric and yellow fabric for a sewing project. The designer used 17 yards of blue fabric. How many yards of yellow fabric were used?
+@ 8 | 17 | 25 | 33
+## 611
+The equation $y=30x+200$ gives the total cost $y$, in dollars, of producing $x$ shirts. How many shirts can be produced for \$650?
+@ 10 | 15 | 20 | 30
+## 612
+The square of $n$ is equal to the sum of twice $n$ and 24. If $n$ is positive, what is the value of $n$?
+## 613
+<p style="text-align:center">$\frac{3}{2x-1}=\frac{x}{5}$</p><p>In the equation above, $2x-1$ could equal which of the following?</p>
+@ -6 | -5 | 4 | 8
+## 614
+<p style="text-align:center">$\frac{a-b}{a}=c$</p><p>In the equation above, if $a$ is negative and $b$ is positive, which of the following must be true?</p>
+@ $c>1$ | $c=1$ | $c=-1$ | $c<-1$
+## 615
+<p style="text-align:center">$18p-19p=17$</p><p>What is the value of $p$ that satisfies the equation?</p>
+@ -17 | $\frac{-1}{17}$ | 17 | 37
+## 616
+<p style="text-align:center">$-3x+15px=60$</p><p>In the given equation, $p$ is a constant. The equation has no solution. What is the value of $p$?</p>
+@ 0 | $\frac{1}{5}$ | $\frac{4}{3}$ | 4
+## 617
+The number $b$ is 15 more than half of the number $a$. Which equation expresses this relationship?
+@ $b=30a$ | $b=15a+2$ | $b=\frac{a+15}{2}$ | $b=\frac{a}{2}+15$
+## 618
+<p style="text-align:center">$\text{Mosteller's formula: } A=\frac{\sqrt{hw}}{60}$</p><p style="text-align:center">$\text{Current's formula: } A=\frac{4+w}{30}$</p><p>The formulas above are used in medicine to estimate the body surface area $A$, in square meters, of infants and children whose weight $w$ ranges between 3 and 30 kilograms and whose height $h$ is measured in centimeters.</p><p>Based on Current's formula, what is $w$ in terms of $A$?</p>
+@ $w=30A-4$ | $w=30A+4$ | $w=30(A-4)$ | $w=30(A+4)$
+## 619
+A provider surveys 200 of its 20,000 subscribers and finds 3 interested in a new plan. What is the best estimate of total interested subscribers?
+## 620
+The ideal gas law formula is $PV=nRT$, where $P$ is the pressure of the gas, $V$ is the volume of the gas, $n$ is the number of moles of gas molecules, $R$ is a constant, and $T$ is the absolute temperature of the gas. What is $n$ in terms of $P$, $V$, $R$, and $T$?
+@ $\frac{PV}{RT}$ | $\frac{RT}{PV}$ | $PV+RT$ | $PV\times RT$
+## 621
+A vendor sells two types of items: bottles of juice for \$3 each and sandwiches for \$9 each. If a customer buys a total of 2 items from the vendor for \$18, how many sandwiches does the customer buy?
+@ 0 | 1 | 2 | 9
+## 622
+Natalie bought both neon tetra fish and swordtail fish for a total of \$52. Each neon tetra fish costs \$8 and each swordtail fish costs \$3. If Natalie bought 4 swordtail fish, how many neon tetra fish did she buy?
+@ 48 | 12 | 11 | 5
+## 623
+A website-hosting service charges businesses a onetime setup fee of \$350 plus $d$ dollars for each month. If a business owner paid \$1,010 for the first 12 months, including the setup fee, what is the value of $d$?
+@ 25 | 35 | 45 | 55
+## 624
+A vendor sells two types of items: bottles of juice for \$4 each and sandwiches for \$8 each. If a customer buys a total of 2 items from the vendor for \$16, how many sandwiches does the customer buy?
+@ 0 | 1 | 2 | 8
+## 625
+If $|2x+3|=5$ and $|3y-3|=6$, what is one possible value of $|xy|$?
+## 626
+What value of $w$ is the solution to the equation $0.8w-0.56=8(w-0.001)$?
+## 627
+The density $d$ of an object is found by dividing the mass $m$ of the object by its volume $V$. Which of the following equations gives the mass $m$ in terms of $d$ and $V$?
+@ $m=dV$ | $m=\frac{d}{V}$ | $m=\frac{V}{d}$ | $m=V+d$
+## 628
+Natalie bought both neon tetra fish and swordtail fish for a total of \$34. Each neon tetra fish costs \$5 and each swordtail fish costs \$7. If Natalie bought 2 swordtail fish, how many neon tetra fish did she buy?
+@ 4 | 12 | 14 | 32
+## 629
+<p style="text-align:center">$2xy+3xt-13yt=0$</p><p>The numbers $x$ and $y$ are positive, and $x<y$. Which expression equals $t$?</p>
+@ $\frac{1}{5}$ | $\frac{2xy}{3x-13y}$ | $\frac{2xy}{13y-3x}$ | $\frac{xy}{5(y-x)}$
+## 630
+<p>The equation $9x+5=a(x+b)$, where $a$ and $b$ are constants, has no solutions. Which of the following must be true?</p><p>I. $a=9$<br>II. $b=5$<br>III. $b\ne\frac{5}{9}$</p>
+@ I only | III only | I and III only | None of the above
+## 631
+<p style="text-align:center">$8x-2x(c+1)=x$</p><p>In the equation above, $c$ is a constant. If the equation has infinitely many solutions, what is the value of $c$?</p>
+@ $\frac{3}{2}$ | $\frac{5}{2}$ | $\frac{7}{2}$ | $\frac{9}{2}$
+## 632
+The front row of an auditorium has 10 seats. There are 50 rows in total. If each row has 2 more seats than the row before it, which expression gives the total number of seats in the last row?
+@ $10+2(50-1)$ | $10+2(50)$ | $50(10+2)$ | $10+2^{50}$
+## 633
+At a coffee shop, Don combined arabica beans with robusta beans to make a coffee bean blend. The arabica beans cost \$13.50 per pound, and the robusta beans cost \$9.25 per pound. He used 1.2 pounds of robusta beans in the blend, and the total cost of the blend was \$21.90. How many pounds of arabica beans did Don use in the blend?
+## 634
+If $\frac{2}{5}$ of $10x$ is 6 more than $x$, what is the value of $x$?
+@ 2 | 3 | 4 | 6

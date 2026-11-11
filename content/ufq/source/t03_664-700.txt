@@ -1,0 +1,106 @@
+## 664
+[[fig:q664]]<p>The graph models the number of residents in a city $x$ years after 2010. According to the model, how many residents were there in 2010?</p>
+@ 0 | 2,500 | 25,000 | 30,000
+## 665
+In the equation $c(x-2)=-5(x+k)$, $c$ and $k$ are constants. The equation has exactly one solution. Which of the following statements must be true?
+@ The value of $c$ cannot be $-5$. | The value of $c$ cannot be $\frac{-5}{2}$. | The value of $k$ cannot be $\frac{2}{5}$. | The value of $k$ cannot be $-2$.
+## 666
+The equation $d=25w+100$ gives the total amount of money $d$, in dollars, that Jerome plans to save $w$ weeks after he starts to save. What is the total amount of money, in dollars, he plans to save in 10 weeks?
+@ 300 | 350 | 400 | 450
+## 667
+The water depth in a certain river is 78.7 feet (ft). During a 30-day period, the water depth in this river is predicted to increase by a minimum of 1 ft and a maximum of 3 ft. What is the predicted maximum water depth, in feet, during this time?
+@ 75.7 | 77.7 | 79.7 | 81.7
+## 668
+[[fig:q668]]<p>Note: Figure not drawn to scale.</p><p>In the figure above, $AC=42$, if $y=2x$, what is the length of line segment $\overline{BC}$?</p>
+@ 6 | 7 | 12 | 14
+## 669
+Jauna bought a block of cheese for 6 dollars and 3 boxes of crackers that were each the same price. The total price for the cheese and crackers was 18.36 dollars. What was the price, in dollars, of 1 box of crackers? (Assume there is no sales tax.)
+@ 4.12 | 4.36 | 8.24 | 18.00
+## 670
+The equation $a=b-33c$ relates the variables $a$, $b$, and $c$. Which equation correctly expresses $c$ in terms of $a$ and $b$, where $b>33$?
+@ $c=\frac{-a-b}{33}$ | $c=\frac{-a+b}{33}$ | $c=\frac{a}{b-33}$ | $c=\frac{a}{b}+33$
+## 671
+For a set of three consecutive integers, the result of subtracting the greatest integer from the sum of the other two integers is 48. What is the value of the <b>greatest</b> of the three integers?
+## 672
+Gemma bought 4 rosebushes and 3 azaleas. The price of each rosebush was \$7.50. Gemma's subtotal for the 4 rosebushes and the 3 azaleas was \$46.50, before sales tax was added. What was the price, in dollars, of each azalea before sales tax if the 3 azaleas each had the same price? (Disregard the \$ sign when gridding your answer. For example, if your answer is \$1.37, grid 1.37)
+## 673
+$\triangle QPR\sim\triangle STR$. $ST=17$, $QP=21$, $PR=28$, $QR=35$. What is $SR$?
+@ $\frac{595}{21}$ | $\frac{595}{28}$ | $\frac{357}{28}$ | $\frac{357}{35}$
+## 674
+The amount of money, $A$, in a bank account earning simple interest can be determined using the formula $A=P+Prt$, where $P$ is the principal, $r$ is the rate of interest earned, and $t$ is the time in years. Which formula shows the value of the principal in terms of the account balance, rate of interest, and time?
+@ $P=\frac{A}{1+rt}$ | $P=\frac{1+rt}{A}$ | $P=\frac{A}{2rt}$ | $P=A-2rt$
+## 675
+<p style="text-align:center">$x+y=8$</p><p>The given equation relates the number of Carolina chickadees, $x$, and the number of downy woodpeckers, $y$, that are in a certain mixed-species flock of 8 total birds. If there are 7 Carolina chickadees in the flock, how many downy woodpeckers are in the flock?</p>
+@ 15 | 8 | 7 | 1
+## 676
+<p style="text-align:center">$x+y=75$</p><p>The equation above relates the number of minutes, $x$, Maria spends running each day and the number of minutes, $y$, she spends biking each day. In the equation, what does the number 75 represent?</p>
+@ The number of minutes spent running each day | The number of minutes spent biking each day | The total number of minutes spent running and biking each day | The number of minutes spent biking for each minute spent running
+## 677
+<p style="text-align:center">$\left|\frac{1}{2}x+4\right|=2$</p><p>Which of the following values of $x$ satisfies the equation above?</p><p>I. $-12$<br>II. $-4$<br>III. $4$</p>
+@ II only | III only | I and II only | II and III only
+## 678
+Einstein's theory of special relativity gives the relationship between the time $t$ measured by a stationary clock and the time $m$ measured by a clock moving at velocity $v$ by the formula $m=t\sqrt{1-v^2}$, where $v$ is measured as a proportion of the speed of light. Which of the following equations can be used to find the velocity of the moving clock in terms of the different times measured?
+@ $v=\sqrt{1+m^2t^2}$ | $v=\sqrt{1-m^2t^2}$ | $v=\sqrt{1-\frac{m^2}{t^2}}$ | $v=\sqrt{1+\frac{m^2}{t^2}}$
+## 679
+Newton's second law of motion states that a force, $F$, acting on an object of mass $m$ results in an acceleration, $a$, and can be represented using the equation $F=ma$. If mass is measured in kilograms (kg), and acceleration is measured in meters per second squared $\left(\frac{\text{meter}}{\text{sec}^2}\right)$, which of the following units could be used to measure force?
+@ $\frac{\text{kg}\cdot\text{meter}}{\text{sec}^2}$ | $\frac{\text{kg}\cdot\text{sec}^2}{\text{meter}}$ | $\frac{\text{meter}}{\text{kg}\cdot\text{sec}^2}$ | $\text{kg}\cdot\text{meter}\cdot\text{sec}^2$
+## 680
+<p style="text-align:center">$1.90c+1.50n=T$</p><p>The equation above gives the total cost $T$, in dollars, to purchase $c$ pounds of cherries and $n$ pounds of nectarines at a local grocery store. How much greater would be the total cost, in dollars, to purchase 4 pounds of cherries and 5 pounds of nectarines than to purchase 3 pounds of cherries and 4 pounds of nectarines? (Disregard the \$ sign when gridding your answer. For example, if your answer is \$4.97, grid 4.97)</p>
+## 681
+<p style="text-align:center">$x+12=y(z+6)$</p><p>The given equation relates the distinct positive variables $x$, $y$, and $z$. Which equation correctly represents $z$ in terms of $x$ and $y$?</p>
+@ $z=\frac{x+6}{y}$ | $z=\frac{x}{y}+6$ | $z=\frac{x+12}{y}+6$ | $z=\frac{x+12}{y}-6$
+## 682
+<p style="text-align:center">$x+11=y(z+6)$</p><p>The given equation relates the distinct positive variables $x$, $y$, and $z$. Which equation correctly represents $z$ in terms of $x$ and $y$?</p>
+@ $z=\frac{x+5}{y}$ | $z=\frac{x}{y}+5$ | $z=\frac{x+11}{y}+6$ | $z=\frac{x+11}{y}-6$
+## 683
+A baker is making cakes. The recipe requires 3 eggs per cake, and the baker has 100 eggs before beginning the first cake. If the baker uses the eggs only for making the cakes, which of the following expressions gives the number of unused eggs after $c$ cakes have been made?
+@ $100+3c$ | $100-3c$ | $3c-100$ | $\frac{100}{3}-c$
+## 684
+Janelle is shipping CDs to remote employees. She has two identical boxes filled with packing material that each weigh 3.2 ounces before packing them with CDs. She packed each box with the same number of CDs that each weigh 0.55 ounce. The total weight for the two boxes packed with CDs was 17.4 ounces. What is the total number of CDs that Janelle packed in the two boxes?
+## 685
+<p style="text-align:center">$\sqrt{p^4}=t^{5/6}$</p><p>In the given equation, $p>1$ and $t>1$. If $t=p^{2n-1}$, where $n$ is a constant, what is the value of $n$?</p>
+## 686
+Hassan put up wire fencing along each edge of a rectangular garden with a length of $x$ feet and a width of $y$ feet. Hassan put up a total length of 44 feet of wire fencing. Which equation represents this situation?
+@ $2x+2y=44$ | $x+y=44$ | $2xy=44$ | $xy=44$
+## 687
+Resistors connected in series have a total resistance of $\frac{43}{35}$ ohms. There are $x$ type A resistors, each of resistance $a$ ohms, and $y$ type B resistors, each of resistance $b$ ohms. The equation $\frac{x}{7}+\frac{y}{5}=\frac{43}{35}$ models the total. What is the positive difference between $a$ and $b$?
+@ 43 | 2 | $\frac{43}{35}$ | $\frac{2}{35}$
+## 688
+A company predicts that it will sell no products at a price of \$90 each. For every \$1.50 decrease in price, the number sold increases by one. If the revenue is exactly \$1,336.50, what could be the number of products sold? (Revenue $=$ price $\cdot$ number sold.)
+@ 27 | 30 | 831 | 1,350
+## 689
+<p style="text-align:center">$0.8p=t$</p><p>At a store, a coat originally priced at $p$ dollars is on sale for $t$ dollars, and the relationship between $p$ and $t$ is given in the equation above. What is $p$ in terms of $t$?</p>
+@ $p=t-0.8$ | $p=0.8t$ | $p=\frac{0.8}{t}$ | $p=\frac{t}{0.8}$
+## 690
+<p style="text-align:center">$2.5c+5d=60$</p><p>The given equation describes the relationship between the number of cats, $c$, and the number of dogs, $d$, that can be cared for at a pet care business during a week. If the business cares for 12 dogs during a week, how many cats can it care for during this week?</p>
+@ 0 | 5 | 30 | 60
+## 691
+<p style="text-align:center">$D=60-\frac{3}{4}P$</p><p style="text-align:center">$S=\frac{1}{4}P$</p><p>In economics, the equilibrium price is defined as the price at which quantity demanded and quantity supplied are equal. If the quantity demanded, $D$, and quantity supplied, $S$, in terms of the price in dollars, $P$, are given by the equations above, what is the equilibrium price?</p>
+@ \$0 | \$60 | \$80 | \$120
+## 692
+During a 4-day period, a weather station recorded a total of 3.6 inches of rain and snow. During this period, the weather station recorded $r$ inches of rain and $s$ inches of snow. Which equation represents this situation?
+@ $r+s=3.6$ | $r-s=3.6$ | $s-r=3.6$ | $rs=3.6$
+## 693
+<p style="text-align:center">$5x=15yz+10$</p><p>The equation relates the distinct, positive real numbers $x$, $y$, and $z$. Which equation expresses $z$ in terms of $x$ and $y$?</p>
+@ $z=\frac{5x}{10}-15y$ | $z=\frac{5x}{15y}-10$ | $z=\frac{5x-10}{15y}$ | $z=\frac{5x-15y}{10}$
+## 694
+<p style="text-align:center">$x+y=300$</p><p>The given equation relates the total number of bur oak trees, $x$, and the total number of other oak trees, $y$, planted in a 12-acre forest preserve. If 270 bur oak trees were planted in the forest preserve, how many other oak trees were planted in the forest preserve?</p>
+@ 270 | 30 | 25 | 12
+## 695
+A bricklayer uses the formula $n=7\ell h$ to estimate the number of bricks, $n$, needed to build a wall that is $\ell$ feet long and $h$ feet high. Which of the following correctly expresses $\ell$ in terms of $n$ and $h$?
+@ $\ell=\frac{7}{nh}$ | $\ell=\frac{h}{7n}$ | $\ell=\frac{n}{7h}$ | $\ell=\frac{n}{7+h}$
+## 696
+Erika works at a restaurant for an hourly rate during the week and delivers newspapers on Sundays. Last week, she worked at the restaurant for 3 hours on Thursday and 4 hours on Friday, and she didn't work any other day of the week at the restaurant. She also earned \$15 on Sunday for delivering newspapers. If Erika earned a total of \$78 from working at the restaurant and delivering newspapers last week, what is her hourly rate at the restaurant?
+@ \$7.00 | \$9.00 | \$11.14 | \$63.00
+## 697
+During a 6-day period, a weather station recorded a total of 2.3 inches of rain and snow. During this period, the weather station recorded $r$ inches of rain and $s$ inches of snow. Which equation represents this situation?
+@ $r+s=2.3$ | $r-s=2.3$ | $s-r=2.3$ | $rs=2.3$
+## 698
+<p style="text-align:center">$(3x+a)-4(ax-3)=7x+11$</p><p>In the equation above, $a$ is a constant. If the equation holds true for all values of $x$, what is the value of $a$?</p>
+@ 6 | 4 | 1 | -1
+## 699
+The equation $x+y=1{,}440$ represents the number of minutes of daylight (between sunrise and sunset), $x$, and the number of minutes of non-daylight, $y$, on a particular day in Grand Rapids, Michigan. If this day has 740 minutes of daylight, how many minutes of non-daylight does it have?
+@ 700 | 740 | 1,366 | 1,440
+## 700
+<p style="text-align:center">$C=10x+4y$</p><p>The formula above gives the monthly cost $C$, in dollars, of operating a delivery truck when the driver works a total of $x$ hours and when $y$ gallons of gasoline are used. If, in a particular month, it cost no more than \$2,000 to operate the truck and at least 150 gallons of gas were used, what is the maximum number of hours the driver could have worked?</p>
+@ 125 | 140 | 500 | 1,400
