@@ -1,0 +1,21 @@
+## 3016
+A circle in the $xy$-plane has its center at $(-7,2)$, and the point $(1,-2)$ lies on the circle. Which equation represents this circle?
+@ $(x+7)^2+(y-2)^2=80$ | $(x+7)^2+(y-2)^2=36$ | $(x-7)^2+(y+2)^2=80$ | $(x-7)^2+(y+2)^2=36$
+## 3017
+Two concentric circles with center $C$ are shown (a smaller circle inside a larger one). The diameter of the smaller (inside) circle is 18 cm. The shaded area between the circles is $403\pi$. Segment $AB$ runs from the smaller circle's edge ($A$) to the larger circle's edge ($B$) along a radius. Find the length of line segment $AB$.
+## 3018
+A circle with a center of $(-2,-4)$ is tangent to line $m$, which passes through the point $(-7,-5)$. What is the slope of line $m$?
+@ 5 | -5 | $\frac{1}{5}$ | $-\frac{1}{5}$
+## 3019
+Circle $A$: $(x-7)^2+(y-p)^2=21$; Circle $B$: $(x+7)^2+(y-p)^2=21$. In the given equations, $p$ is a positive constant. Which statement correctly compares the graphs of circles $A$ and $B$ in the $xy$-plane?
+@ Circle $B$ is the reflection of circle $A$ across the $x$-axis. | Circle $B$ is the reflection of circle $A$ across the $y$-axis. | Circle $B$ is the translation of circle $A$ 14 units up. | Circle $B$ is the translation of circle $A$ 14 units to the right.
+## 3020
+Right triangle $ABC$ is inscribed in a circle with angle $B=90$ degrees, $BC>AB$, and $AC$ a diameter of the circle. $BE$ is perpendicular to $AC$ with point $D$ on $AC$ and point $E$ on the circle. $AC=125$ and $BD=\sqrt{246}$. What is the ratio $\frac{CD}{AD}$?
+## 3021
+Point $B$ is the center of a circle with coordinates $(h,m)$. Point $A$ with coordinates $(h+1,m+\sqrt{112})$ lies on the circle. Point $C$ also lies on the circle and triangle $ABC$ is a right triangle. Find the length of $AC$.
+@ $\sqrt{113}$ | $2\sqrt{113}$ | $\sqrt{226}$ | 226
+## 3023
+The equation for a circle is listed below. Find the expression for the radius in terms of $a$, which is a constant.<p style="text-align:center">$x^2-2ax+y^2-6y-14a=40$</p>
+@ $a-7$ | $a+7$ | $(a-7)^2$ | $(a+7)^2$
+## 3024
+Points $A$, $B$, $C$, and $E$ lie on a circle, and $AB<BC$. Segment $AC$ is perpendicular to segment $BE$ at point $D$, and $BD=\sqrt{322}$. The diameter of the circle is 163. If $\frac{CD}{AD}=r$, what is the value of $r$?

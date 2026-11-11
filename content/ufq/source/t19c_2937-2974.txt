@@ -1,0 +1,85 @@
+## 2937
+A circle in the $xy$-plane has its center at $(-5,3)$ and the point $(-9,6)$ lies on the circle. Which equation represents this circle?
+@ $(x-5)^2+(y+3)^2=5$ | $(x+5)^2+(y-3)^2=5$ | $(x-5)^2+(y+3)^2=25$ | $(x+5)^2+(y-3)^2=25$
+## 2938
+A circle has center $O$, and points $A$ and $B$ lie on the circle. The measure of arc $AB$ is $20^\circ$, and the length of this arc is 4 inches. What is the circumference, in inches, of the circle?
+@ 4 | 8 | 16 | 72
+## 2939
+In a semicircle, $\overline{OA}$ and $\overline{OB}$ are radii. The length of arc $AB$ is $14\pi$ and $x=70$ (the measure of angle $AOB$ in degrees). What is the length of $\overline{OA}$?
+## 2940
+In the $xy$-plane, a unit circle with center at the origin $O$ contains point $A$ at $(1,0)$ and point $B$ at $\left(\frac{5}{\sqrt{89}},\frac{-8}{\sqrt{89}}\right)$. If angle $\angle AOB=p$, what is the value of $\frac{\cos p}{\sin p}$?
+## 2941
+A circle in the $xy$-plane has its center at $(7,5)$ and has a radius of length 4. Which equation represents this circle?
+@ $(x+7)^2+(y+5)^2=4$ | $(x-7)^2+(y-5)^2=4$ | $(x+7)^2+(y+5)^2=16$ | $(x-7)^2+(y-5)^2=16$
+## 2942
+<p style="text-align:center">$(x-6)^2+(y+5)^2=16$</p><p>In the $xy$-plane, the graph of the equation above is a circle. Point $P$ is on the circle and has coordinates $(10,-5)$. If $\overline{PQ}$ is a diameter of the circle, what are the coordinates of point $Q$?</p>
+@ $(2,-5)$ | $(6,-1)$ | $(6,-5)$ | $(6,-9)$
+## 2943
+<p style="text-align:center">$x^2-6x+y^2-12y-36=0$</p><p>In the $xy$-plane, the graph of the given equation is a circle. If this circle is inscribed in a square, what is the perimeter of the square?</p>
+@ 18 | 36 | 72 | 144
+## 2945
+A circle in the $xy$-plane has its center at $(6,9)$ and has a radius of length 8. Which equation represents this circle?
+@ $(x+6)^2+(y+9)^2=8$ | $(x-6)^2+(y-9)^2=8$ | $(x+6)^2+(y+9)^2=64$ | $(x-6)^2+(y-9)^2=64$
+## 2946
+A circle has center $(3,7)$ and is tangent to a line at the point $(a,-4)$. The tangent line has a slope of $\frac{7}{9}$. What is the value of $a$?
+## 2947
+In circle $O$, there are two diameters, $AC$ and $BD$. The circumference of the circle is $96\pi$ and arc $AB$ is three times the length of arc $AD$. What is the length of arc $BC$?
+## 2948
+A circle has center $G$, and points $M$ and $N$ lie on the circle. Line segments $MH$ and $NH$ are tangent to the circle at points $M$ and $N$, respectively. If the radius of the circle is 247 millimeters and the perimeter of quadrilateral $GMHN$ is 5,174 millimeters, what is the distance, in millimeters, between points $G$ and $H$?
+## 2949
+Points $A$ and $B$ lie on a circle with center $O$. The measure of angle $AOB$ is 20 degrees and the length of arc $AB$ is $8\pi$ cm. What is the radius length of the circle?
+## 2950
+An equilateral triangle is inscribed in a circle. The perimeter is 780 and the circle has a radius of $a\sqrt{3}$. What is the value of $a$?
+## 2951
+The center of a circle is $(3,8)$. Line $L$, with a slope of $\frac{5}{4}$, is tangent to the circle at the point $(a,-5)$, where $a$ is a constant. Find the value of $a$.
+## 2952
+The circle $2x^2+2y^2+tx+ty-60=0$ has a radius of $\sqrt{38}$, where $t$ is a positive constant. What is the value of $t$?
+## 2953
+A rectangle is inscribed in a circle such that the diagonal is twice the length of its shortest side. The circle has a circumference of $152\pi$. Find the area of the rectangle.
+## 2954
+<p style="text-align:center">$x^2-16x+y^2-10y-55=0$</p><p>In the $xy$-plane, the graph of the given equation is a circle. If this circle is inscribed in a square, what is the perimeter of the square?</p>
+@ 24 | 48 | 96 | 220
+## 2955
+A circle in the $xy$-plane has its center at $(8,5)$ and has a radius with a length of 4. Which of the following is an equation of this circle?
+@ $(x+8)^2+(y+5)^2=16$ | $(x+8)^2+(y+5)^2=4$ | $(x-8)^2+(y-5)^2=16$ | $(x-8)^2+(y-5)^2=4$
+## 2957
+<p style="text-align:center">$(x-m)^2+(y-n)^2=25$</p><p>The given equation is a circle, where $m$ and $n$ are positive constants. The circle is tangent to both axes. A line is tangent to the circle at $(8,9)$, and points $A(0,a)$ and $B(b,0)$ are on the line. What is the area of triangle $AOB$? (Point $O$ is the origin.)</p>
+## 2958
+A circle in the $xy$-plane has a diameter with endpoints $(a,11)$ and $(a,d)$, where $a$ and $d$ are constants. An equation of this circle is $(x-a)^2+(y-17)^2=r^2$, where $r$ is positive. What is the value of $d$?
+@ 5 | 12 | 17 | 23
+## 2961
+<p style="text-align:center">$(x+3)^2+(y-18)^2=169$</p><p>The graph of the given equation is a circle in the $xy$-plane. The point $(a,b)$ lies on the circle. Which of the following is a possible value for $a$?</p>
+@ $-16$ | $-10$ | 3 | 10
+## 2962
+What is the radius length of a circle with the following equation?<p style="text-align:center">$2x^2+14x+2y^2+16y=\frac{19}{2}$</p>
+@ 33 | $\sqrt{132}$ | 1089 | $\sqrt{33}$
+## 2963
+A square is inscribed in a circle which has a radius length of 21 cm. The perimeter of the square can be expressed as $a\sqrt{2}$ where $a$ is a positive constant. Find the value of $a$.
+## 2965
+In the $xy$-plane, a circle passes through the points $(-10,-5)$, $(4,3)$, and $(-4,7)$. Which equation represents this circle?
+@ $(x-6)^2+(y-2)^2=55$ | $(x+3)^2+(y+1)^2=65$ | $(x+6)^2+(y+2)^2=55$ | $(x-3)^2+(y-1)^2=65$
+## 2966
+The equation $x^2+y^2=169$ represents a circle graphed in the $xy$-plane. Which of the following points $(x,y)$ lies on the circle and also on the line with equation $y=x-7$?
+@ $(10,3)$ | $(-3,10)$ | $(-5,-12)$ | $(-12,5)$
+## 2967
+A rectangle is inscribed in a circle. If the length of the diagonal of the rectangle is $482\sqrt{3}$, what is the radius of the circle?
+@ $241\sqrt{3}$ | $482\sqrt{3}$ | $964\sqrt{3}$ | $241\sqrt{6}$
+## 2968
+Circle $A$ has equation $(x-7)^2+(y+3)^2=1$. In the $xy$-plane, circle $B$ is obtained by translating circle $A$ to the right 4 units. Which equation represents circle $B$?
+@ $(x-7)^2+(y+7)^2=1$ | $(x-3)^2+(y+3)^2=1$ | $(x-11)^2+(y+3)^2=1$ | $(x-7)^2+(y-1)^2=1$
+## 2969
+<p style="text-align:center">$x^2+12x+y^2-18y-39=0$</p><p>is the equation of a circle whose circumference is equal to $4\pi\sqrt{a}$. What is the value of $a$?</p>
+## 2970
+Circle $O$ has radius 5 and $OP=13$. Segments $PA$ and $PB$ are tangent to the circle at points $A$ and $B$, respectively. What is the area of quadrilateral $OAPB$?
+@ 60 | 30 | 65 | 120
+## 2971
+Which of the following equations describes a circle with radius 10 that passes through the origin when graphed in the $xy$-plane?
+@ $(x-5)^2+(y+5)^2=10$ | $(x-5)^2+(y-5)^2=100$ | $(x-10)^2+(y-10)^2=100$ | $(x-5\sqrt{2})^2+(y+5\sqrt{2})^2=100$
+## 2972
+The circle has center $A$, and line segment $CB$ is tangent to the circle at point $C$. If $AB=1.0$ and $CB=0.8$, what is the length of the diameter of the circle?
+## 2973
+Point $M$ lies on a unit circle in the $xy$-plane and has coordinates $(1,0)$. Point $C$ is the center of the circle at $(0,0)$. Point $N$ also lies on the unit circle, and the measure of angle $MCN$ is $\frac{385\pi}{6}$ radians. If the coordinates of point $N$ are $(p,q)$, where $p$ and $q$ are constants, what is the value of $q$?
+@ $-\frac{1}{2}$ | $\frac{\sqrt{3}}{2}$ | $-\frac{\sqrt{3}}{2}$ | $\frac{1}{2}$
+## 2974
+A circle is inscribed in a square such that the circumference of the circle touches the midpoint of each side of the square. The length of the diagonal of the square is 228 units. What is the area, in square units, of the circle?
+@ $6{,}498\pi$ | $12{,}996\pi$ | $25{,}992\pi$ | $51{,}984\pi$

@@ -1,0 +1,99 @@
+## 2895
+Circle $A$ has a radius of $4n$, and circle $B$ has a radius of $116n$, where $n$ is a positive constant. The area of circle $B$ is how many times the area of circle $A$?
+@ 841 | 116 | 58 | 29
+## 2896
+<p style="text-align:center">$x^2+20x+y^2+16y=-20$</p><p>The equation above defines a circle in the $xy$-plane. What are the coordinates of the center of the circle?</p>
+@ $(-20,-16)$ | $(-10,-8)$ | $(10,8)$ | $(20,16)$
+## 2898
+<p style="text-align:center">$x^2-14x+y^2+22y=26$</p><p>In the $xy$-plane, the graph of the given equation is a circle. What is the length of the circle's diameter?</p>
+@ 13 | 28 | 52 | 196
+## 2899
+In the $xy$-plane, the graph of $x^2+52x+y^2=0$ is a circle. What are the coordinates $(x,y)$ of the center of the circle?
+@ $(0,26)$ | $(0,-26)$ | $(26,0)$ | $(-26,0)$
+## 2900
+<p style="text-align:center">$2x^2+14x+2y^2+12y=\frac{19}{2}$</p><p>The given equation defines a circle in the $xy$-plane. What is the radius of the circle?</p>
+@ $\frac{\sqrt{38}}{2}$ | $\sqrt{19}$ | $\sqrt{26}$ | $\frac{\sqrt{378}}{2}$
+## 2901
+<p style="text-align:center">$c(r)=\left(\frac{2}{5}\right)(2\pi r)$</p><p>The function gives a partial length, in centimeters, of the circumference of a circle of radius $r$ centimeters. For each 18-centimeter increase in radius, this length increases by $k\pi$ centimeters. What is $k$?</p>
+## 2903
+In the $xy$-plane, a circle with center $(h,k)$ and radius 10 passes through the $x$-axis at $(4,0)$ and $(20,0)$, and its center lies above the $x$-axis. What is the value of $k$?
+## 2904
+<p style="text-align:center">$8x^2+112px+8y^2-64py=-448p^2$</p><p>In the $xy$-plane, the graph of the given equation is a circle. The length of the radius is $np$, where $n$ and $p$ are positive constants. What is the value of $n$?</p>
+## 2905
+A circle has center $(-3,4)$ and passes through $(-2,1)$. Which equation represents the circle?
+@ $(x-3)^2+(y+4)^2=\sqrt{10}$ | $(x+3)^2+(y-4)^2=\sqrt{10}$ | $(x-3)^2+(y+4)^2=10$ | $(x+3)^2+(y-4)^2=10$
+## 2906
+<p style="text-align:center">$2x^2-x\sqrt{k}+2y^2+y\sqrt{t}=12$</p><p>This equation defines a circle with radius $\sqrt{57}$. If $k$ and $t$ are positive, which expression equals $t$?</p>
+@ $180-k$ | $k-720$ | $720-k$ | $816-k$
+## 2907
+The circle has center $O$, and angle $AOB$ is a right angle, with $A$ and $B$ on the circle. The shaded region is the quarter of the circle bounded by $OA$, $OB$ and arc $AB$ and has area $37\pi$ square units. What is $OA$?
+@ 74 | 148 | $\sqrt{148}$ | $\sqrt{592}$
+## 2908
+A circle in the $xy$-plane has its center at $(9,-2)$. Line $t$ is tangent to this circle at the point $(16,k)$, where $k$ is a constant. The slope of line $t$ is $\frac{7}{8}$. What is the value of $k$?
+@ -10 | $\frac{-65}{8}$ | $\frac{33}{8}$ | 6
+## 2909
+In the $xy$-plane, a circle has center $C$ with coordinates $(h,k)$. Points $A$ and $B$ lie on the circle. Point $A$ has coordinates $(h,k+231)$, and $\angle ACB$ is a right angle. What is the length of $\overline{AB}$?
+@ $231\sqrt{3}$ | $231\sqrt{2}$ | $2\sqrt{230}$ | 462
+## 2910
+A circle is inscribed in a square which has a diagonal of length 164 cm. What is the area of the circle?
+## 2911
+A circle in the $xy$-plane has center $(36,4)$ and $y$-intercepts $(0,-23)$ and $(0,31)$. What is the radius of this circle?
+@ 23 | 27 | 31 | 45
+## 2912
+A square is inscribed in a circle which has a radius of $\frac{28\sqrt{2}}{2}$ cm. Find the length of each side of the square.
+## 2913
+If the radius of a circle increases by 4 and the partial circumference $\frac{3}{5}(2\pi r)$ increases by $k\pi$, what is $k$?
+## 2914
+In circle $O$, the measure of arc $AOB$ is 60 degrees and its length is $3\pi$ cm. What is the radius of the circle?
+## 2915
+A circle is centered at point $O$ with coordinates $(0,0)$ in the $xy$-plane. The circle contains point $A$ with coordinates $(25,0)$ and point $B$ with coordinates $(k,24)$, where $k$ is a negative constant. What is the value of the cosine of $\angle AOB$?
+## 2917
+A circle has center $O$, and points $A$ and $B$ lie on the circle. The measure of arc $AB$ is $45^\circ$, and the length of this arc is 3 inches. What is the circumference, in inches, of the circle?
+@ 3 | 6 | 9 | 24
+## 2918
+The equation $x^2+y^2-10x+8y+c=0$, where $c$ is a constant, defines a circle in the $xy$-plane. The circle is tangent to the line $y=3$. What is the value of $c$?
+@ -49 | -8 | 8 | 90
+## 2919
+The area of an isosceles right triangle inscribed in the circle with center $O$ and radius $5\sqrt{2}$ is
+@ 100 | 50 | $10\sqrt{2}$ | $25\sqrt{2}$
+## 2920
+A circle has center $P$, and points $A$ and $B$ lie on the circle. The measure of arc $AB$ is $45^\circ$ and the length of arc $AB$ is $4\pi$ units. What is the length, in units, of the radius of the circle?
+## 2921
+<p style="text-align:center">$5x^2-40px+5y^2+70py=325p^2$</p><p>In the $xy$-plane, the graph of the given equation is a circle, where $p$ is a constant. The center of the circle is $(-8,14)$. If a square is inscribed in the circle, what is the area of the square?</p>
+## 2922
+The circle has center $O$ and radius $x$. Angle $AOB$ measures $120^\circ$. What is the length of chord $AB$ in terms of $x$?
+@ $\sqrt{2}\cdot x$ | $\sqrt{3}\cdot x$ | $\frac{x}{\sqrt{2}}$ | $\frac{x}{\sqrt{3}}$
+## 2923
+<p style="text-align:center">$c(r)=\frac{2}{5}(2\pi r)$</p><p>The function $c$ gives the partial length, in centimeters (cm), of the circumference of a circle with a radius that measures $r$ cm. According to the function, for each increase of 18 cm in the length of the radius, this partial length of the circumference increases by $k\pi$ cm. What is the value of $k$?</p>
+## 2924
+A circle in the $xy$-plane has a center of $(-6,-8)$, and the origin lies on the circle. Which of the following is an equation for the circle?
+@ $(x+6)^2+(y+8)^2=100$ | $(x+6)^2+(y+8)^2=10$ | $(x-6)^2+(y-8)^2=100$ | $(x-6)^2+(y-8)^2=10$
+## 2925
+In circle $O$, there are two diameters, $AC$ and $BD$. The circumference of the circle is $96\pi$ and arc $AB$ is three times the length of arc $AD$. What is the length of arc $BC$?
+@ $12\pi$ | $24\pi$ | $36\pi$ | $48\pi$
+## 2928
+<p style="text-align:center">$(x-5)^2+(y+12)^2=169$</p><p>The given equation represents a circle. If the point $(r,s)$ lies on the circle, which of the following could NOT be the point $(r,s)$?</p>
+@ $(-7,-7)$ | $(10,-24)$ | $(\sqrt{140}+5,\ \sqrt{29}-12)$ | $(\sqrt{140}-5,\ \sqrt{29}+12)$
+## 2929
+Point $F$ is $(1,0)$ on a unit circle centered at $G=(0,0)$. Point $H=(-1,y)$ also lies on the circle. Which could be a positive measure of angle $FGH$, in radians?
+@ $59\pi$ | $58\pi$ | $\frac{63\pi}{2}$ | $\frac{61\pi}{2}$
+## 2930
+A circle in the $xy$-plane has its center at $(-3,3)$. Line $t$ is tangent to this circle at the point $(6,-3)$. Which of the following points also lies on $t$?
+@ $\left(0,\frac{5}{2}\right)$ | $(3,12)$ | $(12,6)$ | $(15,3)$
+## 2931
+<p style="text-align:center">$x^2+y^2+2x-10y+17=0$</p><p>The graph of the equation above in the $xy$-plane is a circle. What are the coordinates of the center of the circle?</p>
+@ $(1,-5)$ | $(1,5)$ | $(-1,-5)$ | $(-1,5)$
+## 2932
+The equation of a circle is $x^2+(y+6)^2=p+4$, where $p$ is a constant. Find $p$ if $(0,0)$ is on the circle.
+## 2933
+<p style="text-align:center">$(x-2)^2+y^2=36$</p><p style="text-align:center">$y=-x+2$</p><p>The equations represent a circle and a line through its diameter. Which intersection lies in quadrant II?</p>
+@ $(-3\sqrt{2},\ 3\sqrt{2})$ | $(-4,2)$ | $(2+\sqrt{3},\ 2)$ | $(2-3\sqrt{2},\ 3\sqrt{2})$
+## 2934
+The circle is centered at $(0,0)$ and passes through $(7,0)$. The point $(3,k)$ lies on its upper semicircle. What is $k$?
+@ 5 | 6 | 7 | $\sqrt{40}$
+## 2935
+$O$ is the center of the circle that has radius 1, and $\overline{AB}$ is tangent to the circle at point $A$. If $AB=1$, what is the length of $\overline{OB}$?
+@ 1 | $\frac{3}{2}$ | $\sqrt{2}$ | $\frac{\sqrt{2}}{2}$
+## 2936
+In the $xy$-plane, the line $y=3x-14$ is tangent to a circle with center $(h,1)$. Which of the following is a possible value for $h$ if the center lies to the right of the tangent line?
+@ 2 | 3 | 5 | 7

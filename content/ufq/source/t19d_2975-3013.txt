@@ -1,0 +1,91 @@
+## 2975
+For a certain type of rope, $y=900ax^2$, where $a$ is a constant, gives the estimated breaking strength $y$, in pounds, of a rope with a circumference of $x$ inches. A rope of this type with a circumference of 2.75 inches has an estimated breaking strength of 9,528.75 pounds. What is the estimated breaking strength, in pounds, of a rope of this type that has a circumference of 3.50 inches?
+## 2977
+A circle has center $G$, and points $M$ and $N$ lie on the circle. Line segments $MH$ and $NH$ are tangent to the circle at $M$ and $N$, respectively. If the radius is 168 mm and the perimeter of quadrilateral $GMHN$ is 3,856 mm, what is the distance, in mm, between $G$ and $H$?
+@ 168 | 1,752 | 1,760 | 1,768
+## 2978
+A circle is inscribed in an equilateral triangle $PQR$. Point $L$ is the center of the circle. Points $A$, $B$, and $C$ all lie on the circle and the sides of the triangle ($A$ on $PQ$, $B$ on $PR$, $C$ on $QR$). The perimeter of the triangle is $90\sqrt{3}$. The length of arc $AC$ is equal to $k\pi$. What is the value of $k$?
+## 2979
+Point $O$ is the center of a circle with points $A$ and $B$ located on the circle. The measure of arc $AB$ is 24 degrees, and the length of arc $AB$ is 5 inches. What is the circumference of the circle in inches?
+## 2980
+For a certain type of rope, the equation $y=900ax^2$, where $a$ is a constant, gives the estimated breaking strength $y$, in pounds, of a rope with a circumference of $x$ inches. Based on this equation, if a rope of this type has a circumference of 1.75 inches, it has an estimated breaking strength of 3,858.75 pounds. What is the estimated breaking strength, in pounds, of a rope of this type that has a circumference of 3.50 inches?
+## 2981
+An equilateral triangle is inscribed in a circle with a radius of 8 inches. What is the area of the region that lies within the circle but outside the triangle, in square inches?
+@ $64\pi-48\sqrt{3}$ | $64\pi-24\sqrt{3}$ | $64\pi-32\sqrt{3}$ | $16\pi-12\sqrt{3}$
+## 2982
+In the $xy$-plane, the line $y=2x+k$ is tangent to the circle $(x-3)^2+(y+1)^2=20$ for exactly two values of $k$. What is the sum of these values?
+@ -20 | -14 | 14 | 20
+## 2983
+Circle $A$ has equation $(x-7)^2+(y-p)^2=21$, and circle $B$ has equation $(x+7)^2+(y-p)^2=21$, where $p>0$. Which statement is correct?
+@ Circle $B$ is the reflection of $A$ across the $x$-axis. | Circle $B$ is the reflection of $A$ across the $y$-axis. | Circle $B$ is $A$ translated 14 units up. | Circle $B$ is $A$ translated 14 units right.
+## 2984
+Circle $A$: $(x-3)^2+(y+8)^2=16$; Circle $B$: $(x-5)^2+(y-14)^2=16$. In the $xy$-plane, which translation of the graph of circle $A$ would result in the graph of circle $B$?
+@ 2 units left and 22 units down | 2 units right and 22 units up | 22 units left and 2 units down | 22 units right and 2 units up
+## 2986
+Right triangle $ABC$ is inscribed in a circle with angle $B=90$ degrees, $BC>AB$ and $AC$ is a diameter of the circle. $BD$ is perpendicular to $AC$ with point $D$ on $AC$. $AC=113$ and $BD=\sqrt{222}$. What is the ratio $CD/AD$?
+@ $\frac{111}{2}$ | $\frac{2}{111}$ | $\frac{\sqrt{222}}{2}$ | 111
+## 2987
+Points $A$ and $B$ lie on a circle centered at point $C$. If the length of line segment $AC$ is 34 mm, what is the length of segment $BC$?
+@ 17 mm | 34 mm | 68 mm | 115.6 mm
+## 2988
+Points $O(0,0)$, $A(1,0)$ and $B\left(\frac{5}{\sqrt{89}},-\frac{8}{\sqrt{89}}\right)$ are connected to form angle $AOB$, which has a measure of $p$ radians. Find the value of $\frac{\cos p}{\sin p}$.
+## 2989
+A circle whose equation is listed below only intersects both the $x$-axis and $y$-axis once each. What is the value of $q+w$, where $q$ and $w$ are positive integer constants?<p style="text-align:center">$(x+q)^2+(y-34)^2=w$</p>
+## 2990
+Point $F$ lies on a unit circle in the $xy$-plane and has coordinates $(1,0)$. Point $G$ is the center of the circle and has coordinates $(0,0)$. Point $H$ also lies on the circle and has coordinates $(-1,y)$, where $y$ is a constant. Which of the following could be the positive angle measure of angle $FGH$, in radians?
+@ $\frac{27\pi}{2}$ | $\frac{29\pi}{2}$ | $24\pi$ | $25\pi$
+## 2991
+In the $xy$-plane, a circle has center $C$ with coordinates $(p,8)$, where $p$ is a constant. Points $G$ and $H$ lie on the circle. Point $G$ has coordinates $(p+3\sqrt{5},14)$, and point $H$ has coordinates $(q,8)$, where $q$ is a constant greater than $p$. What is the area, in square units, of triangle $CGH$?
+@ $27\sqrt{5}$ | 27 | $5\sqrt{27}$ | $27\sqrt{6}$
+## 2993
+In the $xy$-plane, circle $M$ is the graph of $(x-2)^2+(y-6)^2=9$. Circle $P$ has the same center as circle $M$ but has a radius that is twice the radius of circle $M$. Which equation represents circle $P$?
+@ $(x-2)^2+(y-6)^2=18$ | $(x-2)^2+(y-6)^2=36$ | $(x-4)^2+(y-12)^2=9$ | $(x-4)^2+(y-12)^2=18$
+## 2995
+A circle in the $xy$-plane has its center at $(-5,5)$. Line $t$ is tangent to this circle at the point $(6,-1)$. Which of the following points also lies on line $t$?
+@ $(0,11)$ | $(1,16)$ | $(12,10)$ | $(17,5)$
+## 2996
+Point $N$ lies on a unit circle in the $xy$-plane and has coordinates $(1,0)$. Point $O$ is the center at $(0,0)$. Point $M$ also lies on the unit circle, and the measure of angle $NOM$ is $\frac{272\pi}{3}$ radians. If the coordinates of point $M$ are $(a,b)$, what is the value of $a$?
+@ $\frac{1}{2}$ | $\frac{\sqrt{3}}{2}$ | $-\frac{1}{2}$ | $-\frac{\sqrt{3}}{2}$
+## 2997
+In the $xy$-plane, circle $M$ is the graph of the equation $(x-5)^2+(y-6)^2=4$. Circle $P$ has the same center as circle $M$ but has a radius that is twice the radius of circle $M$. Which equation represents circle $P$?
+@ $(x-5)^2+(y-6)^2=8$ | $(x-5)^2+(y-6)^2=16$ | $(x-10)^2+(y-12)^2=4$ | $(x-10)^2+(y-12)^2=8$
+## 2998
+<p style="text-align:center">$x^2+y^2-6x-10y-4n=0$</p><p>The given equation represents circle $A$ in the $xy$-plane, where $n$ is a constant. Point $(5,7)$ lies on circle $B$, which has the same center but twice the diameter as circle $A$. What is the value of $n$?</p>
+## 2999
+In the $xy$-plane, an equation of circle $R$ is $(x+8)^2+(y+19)^2=100$. Circle $S$ is obtained by shifting circle $R$ to the right 3 units. An equation defining circle $S$ is $(x+h)^2+(y+k)^2=100$, where $h$ and $k$ are constants. What is the value of $h$?
+## 3000
+The circle $(x+1)^2+(y-4)^2=7$ is translated to the right 50 units. The new equation after the translation is of the form $(x-h)^2+(y-k)^2=a$. What is the value of $4a$?
+## 3001
+Line segment $TE$ is tangent to a circle at point $T$. The circle has center $C$. The measure of angle $CET$ is $30^\circ$. The length of line segment $TE$ is 48 centimeters. What is the area of the region that is both inside the triangle $CTE$ and outside the circle, in square centimeters? (Use exact numbers in your answer.)
+## 3002
+A circle has center $O$, and points $P$ and $Q$ lie on the circle such that segment $PQ$ is a diameter of the circle. The length of arc $PQ$ is 56 centimeters. What is the circumference, in centimeters, of the circle?
+@ 42 | 56 | 112 | 224
+## 3003
+In the $xy$-plane, the line $y=\frac{p}{2}x+\frac{c}{3}$ is tangent to the circle $x^2+y^2=32$ at a point $(a,b)$, where $a$, $b$, $p$, and $c$ are nonzero constants. Which expression is equal to $c$?
+@ $\frac{32}{b}$ | $\frac{64}{b}$ | $\frac{96}{b}$ | $\frac{128}{b}$
+## 3004
+A circle has center $G$ and points $A$ and $B$ on the circle. Line segments $AH$ and $BH$ are tangent to the circle at points $A$ and $B$, respectively. If the radius of the circle is 500 and the perimeter of the quadrilateral $GABH$ is 3400, what is the distance between $G$ and $H$?
+## 3005
+A circle has center $G$, and points $A$ and $B$ lie on the circle. Line segments $AH$ and $BH$ are tangent to the circle at points $A$ and $B$, respectively. If the radius of the circle is 250 and the perimeter of quadrilateral $GAHB$ is 4000, what is the distance between points $G$ and $H$?
+## 3006
+A circle has center at point $(5,7)$ and a tangent line (to this circle) with slope $\frac{5}{6}$ that passes through $(a,-4)$. Find the value of $a$.
+@ $-\frac{25}{6}$ | $\frac{85}{6}$ | $\frac{91}{6}$ | $-\frac{6}{91}$
+## 3007
+<p style="text-align:center">$c(r)=\frac{2}{3}\cdot2\pi r$</p><p>The equation gives the value of the partial circumference of a circle, where $r$ is the radius of a circle. For every 13-inch increase in the radius of the circle, $c(r)$ increases by $k\pi$, where $k$ is a constant. What is the value of $k$?</p>
+## 3008
+A circle in the $xy$-plane has its center at $(-1,1)$. Line $t$ is tangent to this circle at the point $(7,-6)$. Which of the following points also lies on line $t$?
+@ $\left(0,\frac{8}{7}\right)$ | $(6,9)$ | $(14,2)$ | $(15,1)$
+## 3009
+<p style="text-align:center">$3x^2-x\sqrt{k}+3y^2+y\sqrt{t}-15=0$</p><p>The given equation, where $k$ and $t$ are positive constants, defines a circle in the $xy$-plane. The radius of this circle is $\sqrt{41}$. Which expression represents the value of $t$?</p>
+@ $1{,}296-k$ | $k-1{,}296$ | $180-k$ | $1{,}476-k$
+## 3010
+The equation of Circle $A$ is $x^2-6x+y^2-10y-4n=0$ where $n$ is a constant. Circle $B$ has the same center as Circle $A$, passes through the point $(5,7)$, and has a diameter that is twice the diameter of Circle $A$. Find the value of $n$.
+## 3011
+The coordinates of three points are as follows: $F(1,0)$, $G(0,0)$, $H(-1,d)$. What could be the positive angle measure of angle $FGH$ in radians?
+@ $55\pi$ | $50\pi$ | $\frac{55}{2}\pi$ | $\frac{53}{2}\pi$
+## 3012
+In the $xy$-plane, a circle has center $D$ with coordinates $(m,16)$, where $m$ is a constant. Points $E$ and $F$ lie on the circle. Point $E$ lies on the circle and has coordinates $(m+4\sqrt{10},34)$, and point $F$ has coordinates $(n,16)$, where $n$ is a constant greater than $m$. What is the area, in square units, of triangle $DEF$?
+@ 198 | $72\sqrt{10}$ | 242 | $99\sqrt{10}$
+## 3013
+A circle has a center $A$, and points $B$ and $C$ lie on the circle. Line segments $BD$ and $CD$ are tangent to the circle at points $B$ and $C$, respectively. The measure of angle $BDC$ is $120^\circ$. The length of line segment $CD$ is 12 inches. What is the area of the region that is both inside quadrilateral $ABDC$ and outside the circle, in square inches? (Round your answer to the nearest hundredth of a square inch)
+@ $144\sqrt{3}-72\pi$ | $72\sqrt{3}-36\pi$ | $144\sqrt{3}-24\pi$ | $144-36\pi$
