@@ -1,0 +1,227 @@
+## 101
+[[fig:q101]]<p>The scatterplot above shows the average fuel economy for a certain class of car driven at 12 different speeds. The graph of a quadratic model for the data is also shown.</p><p>The quadratic model predicts the average fuel economy to be 26 miles per gallon for how many different speeds?</p>
+## 102
+The density of an object is equal to its mass divided by its volume, and gold has a density of 19.3 grams per cubic centimeter. A piece of metal is 25% gold by volume. If the volume of the piece of metal is 8 cubic centimeters, what is the mass of the gold, in grams, in the piece of metal?
+@ 0.60 | 38.6 | 60.3 | 154.4
+## 103
+The ratio of cups of flour to cups of butter in a pie dough recipe is 2.75 to 1. The ratio of cups of flour to cups of butter in a biscuit recipe is 7 to 1. Each recipe has 1 cup of butter. How many more cups of flour are in the biscuit recipe than in the pie dough recipe?
+## 104
+In the 1908 Olympic Games, the Olympic marathon was lengthened from 40 kilometers to approximately 42 kilometers. Of the following, which is closest to the increase in the distance of the Olympic marathon, in miles? (1 mile is approximately 1.6 kilometers)
+@ 1.00 | 1.25 | 1.50 | 1.75
+## 105
+<p style="text-align:center">$x+y+z=53$</p><p>A cyclist biked $x$ miles on Monday, $y$ miles on Tuesday, and $z$ miles on Wednesday. If $x=12$ and $y=16$, how many miles did the cyclist bike on Wednesday?</p>
+@ 12 | 24 | 25 | 36
+## 106
+The area of a rectangular region is increasing at a rate of 140 square feet per hour. Which of the following is closest to this rate in square meters per minute? (Use 1 meter $=$ 3.28 feet.)
+@ 0.22 | 0.71 | 7.65 | 13.01
+## 107
+A recipe for pound cake instructs a cook to use 3 cups of flour for every $\frac{3}{4}$ teaspoon of vanilla extract used. According to the recipe, if a cook uses 2 teaspoons of vanilla extract, how many cups of flour should be used?
+@ 4 | $4\frac{1}{2}$ | $5\frac{3}{4}$ | 8
+## 108
+If the height of Mount Everest increases by 2.4 inches each year, how many years after 1999 would the mountain be expected to have a maximum height of 6 miles above sea level? (Note: 1 mile $=$ 5,280 feet)
+@ 2,645 years | 13,225 years | 31,740 years | 76,176 years
+## 109
+Water flows into a basin at a rate of 1 cubic foot per second. At this rate, how many cubic feet of water will flow into the basin in one <u>day</u>?
+@ 1,440 | 28,800 | 86,400 | 259,200
+## 110
+<p style="text-align:center">$s=20+3t$</p><p>The equation gives the speed $s$, in miles per hour, of a certain car $t$ seconds after it began to accelerate. What is the speed, in miles per hour, of the car 5 seconds after it began to accelerate?</p>
+@ 20 | 23 | 25 | 35
+## 111
+Jamal purchased 8.75 gallons of gasoline, for which he paid \$18.40. Which of the following is closest to the price, in dollars, Jamal paid per gallon of gasoline?
+@ \$2.04 | \$2.10 | \$2.20 | \$2.30
+## 112
+A production manager sets a conveyor belt of an assembly line to move at a rate of 1 foot per second. At what rate does the conveyor belt move in <u>feet per minute</u>?
+@ 5 | 12 | 60 | 120
+## 113
+If Eli bikes at a constant speed of 15 feet per second, which of the following is closest to how many <u>miles</u> he will bike in <u>2 hours</u>? (1 mile $=$ 5,280 feet; 1 hour $=$ 60 minutes; 1 minute $=$ 60 seconds)
+@ 0.3 | 10.2 | 11.0 | 20.5
+## 114
+A certain blue whale calf weighed 5,800 pounds when it was born, and its weight increased at an average rate of 250 pounds per day for the first $n$ days after birth, where $n$ is an integer. If the calf's weight was greater than 8,550 pounds but less than 9,550 pounds $n$ days after birth, what is one possible value of $n$?
+## 115
+The area of a rectangular region is increasing at a rate of 220 square feet per hour. Which of the following is closest to this rate in square meters per minute? (Use 1 meter $=$ 3.28 feet.)
+@ 0.34 | 1.12 | 12.03 | 20.45
+## 116
+A 2,400-kilogram truck travels 1,520 meters in 60 seconds at a constant speed. Later, it travels 1,170 meters in 60 seconds at another constant speed in the same direction. Momentum equals mass times velocity. What is the positive difference between the two momenta, in $\frac{\text{kg}\cdot\text{m}}{\text{s}}$?
+## 117
+An instrument shows the number of revolutions per minute made by each tire of a car. In each revolution, the car travels a distance equal to the circumference of one of its tires. The circumference of a tire is equal to $2\pi r$, where $r$ is the radius of the tire.<br><br>If the radius of each tire on Maria's car is 0.30 meter, what is the approximate speed of Maria's car, to the <b>nearest kilometer</b> per hour, when the instrument is showing 779 revolutions per minute?<br>(1 kilometer $=$ 1000 meters)
+## 118
+Danica is mixing iced tea and lemonade to make a punch. She likes the taste of the punch most when she mixes 2 ounces of iced tea with 5 ounces of lemonade. If she uses this same mixing ratio of iced tea to lemonade to make 10.5 liters of punch, how many liters of lemonade will she need?
+@ 3 | 4.2 | 7.5 | 8.5
+## 119
+Ashley wanted to save an average of \$20 per week over the past 15 weeks. For the first 5 weeks, she saved an average of \$15 per week. For the next 5 weeks, she saved an average of \$19 per week. For the last 5 weeks, she saved an average of \$23 per week. How much more should she have saved each week to hit her goal?
+@ \$0.75 | \$0.80 | \$1.00 | \$1.50
+## 120
+The equation $y=66x$ gives the estimated distance $y$, in kilometers, that a car traveled $x$ hours after exiting a parking garage. What is the estimated distance, in kilometers, the car traveled 2 hours after exiting the parking garage?
+@ 0 | 64 | 68 | 132
+## 121
+A square map has a side length of 30 inches, and 1 inch on the map represents an actual distance of 17 miles. A smaller version of the same map is printed as a square with the side length 65% shorter than the side length of the previous map. On the smaller map, which of the following is closest to the actual distance, in miles, represented by 1 inch?
+@ 5.95 | 10.30 | 19.50 | 48.57
+## 122
+The load capacity of a certain washing machine is 12 pounds. What is the approximate load capacity of the same washing machine, in <u>kilograms</u>? (1 kilogram $=$ 2.2046 pounds)
+@ 2.2 | 5.4 | 9.8 | 26.5
+## 123
+<p style="text-align:center">$d=2{,}565-500t$</p><p>An airplane flies directly from a city in Pennsylvania to a city in Ecuador. The equation above estimates the distance $d$, in miles, from the city in Ecuador of the airplane $t$ hours after taking off from the city in Pennsylvania.</p><p>Which of the following is the best interpretation of the number 2,565 in this context?</p>
+@ The speed, in miles per hour, of the airplane | The distance, in miles, the airplane travels in one hour | The distance, in miles, the airplane travels between the two cities | The time, in minutes, it takes the airplane to reach the city in Ecuador
+## 124
+A square map has a side length of 45 inches, and 1 inch on the map represents an actual distance of 19 miles. A smaller version of the same map is printed as a square with the side length 70% shorter than the side length of the previous map. On the smaller map, which of the following is closest to the actual distance, in miles, represented by 1 inch?
+@ 5.70 | 11.18 | 31.50 | 63.33
+## 125
+The weight of an object on Venus is approximately $\frac{9}{10}$ of its weight on Earth. The weight of an object on Jupiter is approximately $\frac{23}{10}$ of its weight on Earth. If an object weighs 100 pounds on Earth, approximately how many more pounds does it weigh on Jupiter than it weighs on Venus?
+@ 90 | 111 | 140 | 230
+## 126
+A college student earns \$12 per hour working part-time. After working for a number of hours, the student's total earnings can be modeled by the equation $E=12h$. If the student works an additional 5 hours per week for 4 weeks, which of the following represents the change in total earnings?
+@ \$48 | \$60 | \$240 | \$480
+## 127
+In the past, the US space program used rockoons, rockets that were lifted to a certain height by high-altitude balloons before the rocket was ignited. After being released from the ground, one rockoon was lifted by the balloons at a constant rate of 690 feet per minute. Approximately how many minutes did it take the rockoon to reach 38,000 feet?
+@ 55 | 140 | 630 | 3,300
+## 128
+George took a nonstop flight from Dallas to Los Angeles, a total flight distance of 1,233 miles. The plane flew at a speed of 460 miles per hour for the first 75 minutes of the flight and at a speed of 439 miles per hour for the remainder of the flight. To the nearest minute, for how many <u>minutes</u> did the plane fly at a speed of 439 miles per hour?
+## 129
+<p><b>Homeroom teacher</b></p><table><thead><tr><th>Number of pets</th><th>Ms. Wilcox</th><th>Mr. Xiong</th></tr></thead><tbody><tr><td>None</td><td>2</td><td>3</td></tr><tr><td>One</td><td>10</td><td>8</td></tr><tr><td>Two</td><td>8</td><td>9</td></tr><tr><td>Three</td><td>7</td><td>4</td></tr><tr><td>Four or more</td><td>3</td><td>6</td></tr></tbody></table><p>Teachers in two homerooms of 30 students each surveyed their students to find out the number of pets the students have. The results of the survey are shown in the table above.</p><p>If a student in Ms. Wilcox's homeroom who indicated having one or more pets is selected at random, what is the probability that the selected student indicated having exactly three pets?</p>
+## 130
+Mount Everest is the highest mountain on the planet. In 1999, the highest point on the mountain was measured to be 29,035 feet above sea level. Scientists believe that Mount Everest is still growing and estimate that the height of the mountain is increasing between 0.16 and 2.4 inches every year.<br>(Note: 1 foot $=$ 12 inches)<br><br>Which of the following expressions represents the difference between the maximum and minimum predicted heights, in inches, of Mount Everest $t$ years after 1999?
+@ $2.24t$ | $\frac{2.24t}{12}$ | $29{,}035+\frac{2.24t}{12}$ | $29{,}035+\frac{2.56t}{12}$
+## 131
+The population density of Town A is 140 people per square mile, and the population density of Town B is 96 people per square mile. Town A has a population of 22,400 people, and Town B has a population of 4,608 people. The area of Town A is $k$ times the area of Town B. What is the value of $k$?
+## 132
+The growth rate of the sunflower from day 14 to day 35 is nearly constant. On this interval, which of the following equations best models the height $h$, in centimeters, of the sunflower $t$ days after it begins to grow?
+@ $h=2.1t-15$ | $h=4.5t-27$ | $h=6.8t-12$ | $h=13.2t-18$
+## 133
+Voyager 1 is a space probe launched by NASA to observe the outer solar system. If Voyager 1 is currently traveling at a rate of 17.032 kilometers per second, how fast is it traveling, in <u>miles per hour</u>, rounded to the nearest 100 miles per hour? (1 mile is approximately 1.61 kilometers)
+@ 600 | 1,600 | 38,100 | 98,700
+## 135
+A greenhouse owner purchases fertilizer in 60-gallon drums. The fertilizer is mixed with water to make several batches of solution. Each batch of solution is made by mixing 3 quarts of fertilizer with water. What is the maximum number of batches of solution that can be made from one 60-gallon drum of fertilizer? (1 gallon $=$ 4 quarts)
+@ 45 | 60 | 80 | 180
+## 136
+<p style="text-align:center">$h=3c$</p><p>A wildlife biologist uses the formula above to estimate the height $h$, in centimeters, of an elephant from its foot to its shoulder, based on the circumference $c$, in centimeters, of the elephant's footprint.</p><p>The circumference $c$ of a mother elephant's circular footprint is 4 times the circumference of a baby elephant's circular footprint. What is the ratio of the height of the mother to the height of the baby?</p>
+@ 1 to 4 | 1 to 3 | 4 to 1 | 4 to 3
+## 137
+There are 324 employees at the main office of a company, and the ratio of men to women at this office is 5 to 7. There are 288 employees at a branch office of the same company, and the ratio of men to women at this office is 5 to 4. If all of the employees at the main office and the branch office attend the annual company meeting, which of the following is closest to the percentage of the total number of employees from these two offices who are men?
+@ 43% | 48% | 52% | 57%
+## 138
+Two units of length used in ancient Egypt were cubits and palms, where 1 cubit is equivalent to 7 palms. The Great Sphinx statue in Giza is approximately 140 cubits long. Which of the following best approximates the length, in palms, of the Great Sphinx statue?
+@ 0.05 | 20 | 140 | 980
+## 139
+The population density of Town A is 120 people per square mile, and the population density of Town B is 90 people per square mile. Town A has a population of 20,640 people, and Town B has a population of 3,870 people. The area, in square miles, of Town A is $k$ times the area, in square miles, of Town B. What is the value of $k$?
+@ 4 | 8 | 16,770 | 24,510
+## 140
+There are two ranches, ranch $A$ and ranch $B$. The ratio of male horses to female horses is 1 : 15 for the total number of horses on ranches $A$ and $B$. The ratio of female horses on ranch $A$ to ranch $B$ is 7 : 17. There are 168 horses on ranch $A$ and 344 horses on ranch $B$. How many more male horses are there on ranch $A$ than on ranch $B$?
+## 141
+[[fig:q141]]<p>The scatterplot above shows the densities of 7 planetoids, in grams per cubic centimeter, with respect to their average distances from the Sun in astronomical units (AU). The line of best fit is also shown.</p><p>According to the scatterplot, which of the following statements is true about the relationship between a planetoid's average distance from the Sun and its density?</p>
+@ Planetoids that are more distant from the Sun tend to have lesser densities. | Planetoids that are more distant from the Sun tend to have greater densities. | The density of a planetoid that is twice as far from the Sun as another planetoid is half the density of that other planetoid. | The distance from a planetoid to the Sun is unrelated to its density.
+## 142
+<table><caption>Number of Yellowstone National Park Camping Permits in 2013, by type of permit</caption><thead><tr><th>Quarter</th><th>tent</th><th>RV</th><th>backcountry</th><th>cabin or lodge</th><th>Total</th></tr></thead><tbody><tr><td>First quarter</td><td>292</td><td>582</td><td>627</td><td>0</td><td>1,501</td></tr><tr><td>Second quarter</td><td>21,149</td><td>19,430</td><td>5,931</td><td>142,886</td><td>189,396</td></tr><tr><td>Third quarter</td><td>66,448</td><td>42,774</td><td>33,201</td><td>389,695</td><td>532,118</td></tr><tr><td>Fourth quarter</td><td>873</td><td>1,111</td><td>864</td><td>314</td><td>3,162</td></tr><tr><td>Total</td><td>88,672</td><td>63,897</td><td>40,623</td><td>532,895</td><td>726,177</td></tr></tbody></table><p>The table above shows the 726,177 camping permits issued for Yellowstone National Park in 2013, categorized by type of permit and the quarter of the year for which the permit was issued.</p><p>In the quarter with the most permits issued in 2013, which of the following best approximates the ratio of backcountry permits to tent permits?</p>
+@ 1:10 | 1:2 | 3:4 | 2:1
+## 143
+[[fig:q143]]<p>The glass pictured above can hold a maximum volume of 473 cubic centimeters, which is approximately 16 fluid ounces.</p><p>What is the value of $k$, in centimeters?</p>
+@ 2.52 | 7.67 | 7.79 | 10.11
+## 144
+In pea plants, flowering time can be described as early, intermediate, or late. A cross of an early-flowering plant and a late-flowering plant results in a set of offspring having a 1 : 2 : 1 ratio of early-, intermediate-, and late-flowering plants, respectively. If 371 offspring are produced from a cross of an early-flowering plant and a late-flowering plant, the expected number of intermediate-flowering offspring would be closest to which of the following?
+@ 93 | 186 | 247 | 278
+## 145
+During a storm, the atmospheric pressure in a certain location fell at a constant rate of 3.4 millibars (mb) per hour over a 24-hour time period. Which of the following is closest to the total drop in atmospheric pressure, in <u>millimeters of mercury</u> (mm Hg), over the course of 5 hours during the 24-hour period?<br>(Note: 1,013 mb $=$ 760 mm Hg)
+@ 2.6 | 12.8 | 17.0 | 22.7
+## 146
+Matthew and Claire each sell fishing lures on the Internet. Matthew's profit, in dollars, for selling $x$ lures at \$6.50 per lure can be modeled by the expression $6.5x-4.25x-125$. Claire's revenue and expenses for selling her fishing lures are shown in the table below.<table><caption>Claire's Lures</caption><thead><tr><th>Revenue per lure</th><th>Expense per lure</th><th>Onetime start-up expense</th></tr></thead><tbody><tr><td>\$5.50</td><td>\$3.00</td><td>\$200</td></tr></tbody></table><p>Profit $=$ Revenue $-$ Expenses</p><p>If Matthew and Claire sold the same number of lures and made the same profit, how many lures did each person sell?</p>
+@ 60 | 300 | 325 | 1,300
+## 147
+[[fig:q147]]<p>As part of an experiment, a ball was dropped and allowed to bounce repeatedly off the ground until it came to rest. The graph above represents the relationship between the time elapsed after the ball was dropped and the height of the ball above the ground. After it was dropped, how many times was the ball at a height of 2 feet?</p>
+@ One | Two | Three | Four
+## 148
+If the 180 food calories in a granola bar come entirely from $p$ grams of protein, $f$ grams of fat, and $c$ grams of carbohydrate, which of the following expresses $f$ in terms of $p$ and $c$?
+@ $f=20+\frac{4}{9}(p+c)$ | $f=20-\frac{4}{9}(p+c)$ | $f=20-\frac{4}{9}(p-c)$ | $f=20+\frac{9}{4}(p+c)$
+## 149
+A laboratory starts with 300 grams of substance X and 20 grams of substance Y. Each experiment uses 5 grams of X and 10 grams of Y. After the same number of experiments, $x$ grams of X and $y$ grams of Y remain. Which equation relates $x$ and $y$?
+@ $y=2x-580$ | $y=\left(\frac{1}{2}\right)x-130$ | $y=-2x+620$ | $y=-\left(\frac{1}{2}\right)x+170$
+## 150
+During the first 5.00 seconds after a car started moving, its speed increased to 12.0 meters per second. From 5.00 seconds to 13.0 seconds after the car started moving, its speed increased from 12.0 meters per second to 25.0 meters per second. To the nearest hundredth, what is the positive difference between the average rate of change of the speed of the car, in meters per second per second, during the first 5.00 seconds after the car started moving and the average rate of change of the speed of the car, in meters per second per second, from 5.00 seconds to 13.0 seconds after the car started moving?
+## 151
+[[fig:q151]]<p>A pump can be set to extract water from a pool at one of three different rates: 1 gallon per minute, 4 gallons per minute, or 8 gallons per minute. The graph below shows the amount of water left in the pool from the time the pump was turned on. How many minutes after being turned on was the pump switched to a rate of 8 gallons per minute?</p>
+@ 3 | 5 | 8 | 29
+## 152
+Washington High School randomly selected freshman, sophomore, junior, and senior students for a survey about potential changes to next year's schedule. Of students selected for the survey, $\frac{1}{4}$ were freshmen and $\frac{1}{3}$ were sophomores. Half of the remaining students were juniors. If 336 students were selected for the survey, how many were seniors?
+@ 240 | 140 | 120 | 70
+## 153
+<p style="text-align:center">$C=\frac{5}{9}(F-32)$</p><p>The equation above gives the relationship between the temperature measured in degrees Fahrenheit, $F$, and degrees Celsius, $C$. At what temperature, in degrees Fahrenheit, will the temperature measured in degrees Celsius be twice the value of the temperature measured in degrees Fahrenheit?</p>
+@ $-\frac{160}{13}$ | $\frac{160}{23}$ | 160 | 320
+## 155
+On day 1 of an 8-day experiment, a lima bean plant had an estimated mass of 253 grams. Each following day, its estimated mass decreases by 4 grams. Which equation models its mass $m$, in grams, on day $x$, where $1\le x\le 8$?
+@ $m=-4x+245$ | $m=-4x+249$ | $m=-4x+253$ | $m=-4x+257$
+## 156
+A triathlon is a multisport race consisting of three different consecutive events. A triathlon participant plans to complete the cycling event with an average speed of 31,680 yards per hour. What is this average speed, in miles per hour? (1 mile $=$ 1,760 yards)
+## 157
+It took Sara a total of 42 minutes to jog from home to the park and back again, by the same path. If she averaged 8 miles per hour going to the park and 6 miles per hour coming back, what is the distance from her home to the park?
+@ 2.4 miles | 2.8 miles | 3.2 miles | 3.6 miles
+## 158
+<table><caption>Sunflower Growth</caption><thead><tr><th>Day</th><th>Height (cm)</th></tr></thead><tbody><tr><td>0</td><td>0.00</td></tr><tr><td>7</td><td>17.93</td></tr><tr><td>14</td><td>36.36</td></tr><tr><td>21</td><td>67.76</td></tr><tr><td>28</td><td>98.10</td></tr><tr><td>35</td><td>131.00</td></tr><tr><td>42</td><td>169.50</td></tr><tr><td>49</td><td>205.50</td></tr><tr><td>56</td><td>228.30</td></tr><tr><td>63</td><td>247.10</td></tr><tr><td>70</td><td>250.50</td></tr><tr><td>77</td><td>253.80</td></tr><tr><td>84</td><td>254.50</td></tr></tbody></table><p>In 1919, H. S. Reed and R. H. Holland published a paper on the growth of sunflowers. Included in the paper was the table above, which shows the height $h$, in centimeters, of a sunflower $t$ days after the sunflower begins to grow.</p><p>Over which of the following time periods is the average growth rate of the sunflower least?</p>
+@ Day 0 to Day 21 | Day 21 to Day 42 | Day 42 to Day 63 | Day 63 to Day 84
+## 159
+Vitruvius, a Roman architect of the first century BCE, set guidelines in his writings for the relationship between the height (rise) and tread (run) of stairs in a building. He wrote that the rise should be between 9 and 10 inches, inclusive, per step, and the run should be between 18 and 24 inches, inclusive. Which of the following could NOT be the ratio of rise to run for a set of stairs that follows this guideline?
+@ $\frac{1}{3}$ | $\frac{5}{12}$ | 0.38 | 0.49
+## 160
+During the first 8.00 seconds after a car started moving from rest, its speed increased to 11.0 meters per second. From 8.00 seconds to 14.0 seconds after the car started moving, its speed increased from 11.0 meters per second to 25.0 meters per second. To the nearest hundredth, what is the positive difference between the average rate of change of the speed of the car, in meters per second per second, during the first 8.00 seconds and the average rate of change from 8.00 seconds to 14.0 seconds?
+## 161
+The length, $y$, of a beluga whale was 156 centimeters (cm) when it was born and increased an average of 4.8 cm per month for the first 12 months after it was born. Which equation best represents this situation, where $x$ is the number of months after the whale was born?
+@ $y=156x$ | $y=156x+156$ | $y=4.8x+4.8$ | $y=4.8x+156$
+## 162
+On day 1 of an 8-day experiment, a lima bean plant had an estimated mass of 259 grams. Each day after day 1, its estimated mass decreased by 4 grams. Which equation models its mass $m$, in grams, on day $x$, where $1\le x\le 8$?
+@ $m=-4x+251$ | $m=-4x+255$ | $m=-4x+259$ | $m=-4x+263$
+## 164
+In the $xy$-plane, the point $(p,r)$ lies on the line with equation $y=x+b$, where $b$ is a constant. The point with coordinates $(2p,5r)$ lies on the line with equation $y=2x+b$. If $p\ne0$, what is the value of $\frac{r}{p}$?
+@ $\frac{2}{5}$ | $\frac{3}{4}$ | $\frac{4}{3}$ | $\frac{5}{2}$
+## 165
+A miniature replica of a full-sized car has a 1 : 20 scale ratio. For example, a 1-inch measurement on the replica corresponds to a 20-inch measurement on the full-sized car. If the length of the full-sized car is 14 feet, what is the length, in <u>inches</u>, of the replica? (1 foot $=$ 12 inches)
+@ 0.7 | 1.4 | 8.4 | 168.0
+## 167
+Each 3.0-ounce serving of cheddar cheese and each 1.2-ounce serving of tuna provides about 1 microgram of vitamin B12. If a total of 1.8 micrograms of vitamin B12 are consumed from eating $x$ ounces of cheese and $y$ ounces of tuna, which equation best represents this situation?
+@ $3.0x+1.2y=1.8$ | $1.2x+3.0y=1.8$ | $0.83x+0.33y=1.8$ | $0.33x+0.83y=1.8$
+## 169
+Each 3.0-ounce serving of cheddar cheese and each 1.2-ounce serving of tuna provides about 1 microgram of vitamin B12. If a total of 2.1 micrograms of vitamin B12 are consumed from eating $x$ ounces of cheese and $y$ ounces of tuna, which equation best represents this situation?
+@ $1.2x+3.0y=2.1$ | $0.83x+0.33y=2.1$ | $3.0x+1.2y=2.1$ | $0.33x+0.83y=2.1$
+## 170
+During a triathlon, an athlete swims at a rate of 31,152 inches per hour. Given that 1 yard $=$ 36 inches, what is this speed in yards per hour?
+@ 17.7 | 865.33 | 1,760 | 8,653.33
+## 171
+An object's speed, in meters per hour, is increasing at a rate of 1,490 meters per hour per second. Which of the following is closest to this rate in feet per second squared? (Use 1 meter $=$ 3.28 feet)
+@ 0.126 | 1.36 | 7.57 | 81.5
+## 172
+For the first 10 seconds of an experiment that lasts 100 seconds, a particle travels at a speed that is at least 4 meters per second and is at most 8 meters per second. For the remainder of the experiment, the particle travels at a constant speed of 12 meters per second. Which of the following is a possible number of meters the particle traveled in the first 70 seconds of the experiment?
+@ 725 | 766 | 801 | 840
+## 173
+A ball is being swung in a circular path with a fixed radius. The centripetal acceleration, $a_c$, of the ball can be determined with the equation $a_c=bv^2$, where $b$ is a constant. Some values of velocity $v$, in meters per second, and $a_c$, in meters per second squared, are shown in the table below.<table><thead><tr><th>$v$</th><th>$a_c$</th></tr></thead><tbody><tr><td>2</td><td>2</td></tr><tr><td>4</td><td>8</td></tr><tr><td>6</td><td>18</td></tr></tbody></table><p>What would be the centripetal acceleration, in meters per second squared, of the ball if the velocity of the ball were 5 meters per second?</p>
+@ 10 | 11 | 12.5 | 13
+## 175
+The total remaining distance, in miles, of a runner after $t$ hours is modeled by the function $g(t)=22-4t$. What is the best interpretation of the number 22 in this context?
+@ The speed of the runner in miles per hour | The total time taken to finish the run | The initial total distance, in miles, of the run | The distance covered in the first hour
+## 176
+The bone mineral density of a certain person's thoracic spine was estimated to be 0.812 grams per square centimeter. What is this estimated bone mineral density in <b>grams per square millimeter</b>?<br>(1 centimeter $=$ 10 millimeters)
+@ 81.2 | 8.12 | 0.0812 | 0.00812
+## 177
+Each 3.0-ounce serving of cheddar cheese and each 1.2-ounce serving of tuna provides about 1 microgram of vitamin B12. If a total of 3.1 micrograms of vitamin B12 are consumed from eating $x$ ounces of cheese and $y$ ounces of tuna, which equation best represents this situation?
+@ $0.83x+0.33y=3.1$ | $3.0x+1.2y=3.1$ | $1.2x+3.0y=3.1$ | $0.33x+0.83y=3.1$
+## 178
+The base camp for Mount Everest climbers is 17,598 feet above sea level. The fastest anybody has climbed from base camp to the highest point on the mountain is 8 hours and 10 minutes. If $T$ is the time, in minutes, it took this person to reach the highest point on the mountain from the base camp, what are the value and meaning of $m$ in the equation $17{,}598+mT=29{,}035$ ?
+@ The climbing distance from the base camp to the highest point on the mountain is 11,437 feet. | The person took 490 minutes to make the climb. | The person's height above sea level increased at an average rate of approximately 23 feet per minute. | The slope of the mountain is about 11 vertical feet for every horizontal foot closer to the highest point.
+## 179
+<table><caption>Farm Acreage for Three Crops</caption><thead><tr><th></th><th>2008</th><th>2009</th><th>2010</th><th>2011</th><th>2012</th></tr></thead><tbody><tr><td>Strawberries</td><td>15</td><td>30</td><td>25</td><td>30</td><td>30</td></tr><tr><td>Soybeans</td><td>85</td><td>95</td><td>95</td><td>90</td><td>95</td></tr><tr><td>Corn</td><td>220</td><td>215</td><td>220</td><td>240</td><td>235</td></tr><tr><td>Total</td><td>320</td><td>340</td><td>340</td><td>360</td><td>360</td></tr></tbody></table><p>The table above shows the acreages devoted to planting three crops on a farm for each of five years. In what year did corn represent exactly $\frac{2}{3}$ of the total acreage planted that year?</p>
+@ 2008 | 2009 | 2010 | 2011
+## 181
+<table><caption>Number of Adults Contracting Colds</caption><thead><tr><th></th><th>Cold</th><th>No cold</th><th>Total</th></tr></thead><tbody><tr><td>Vitamin C</td><td>21</td><td>129</td><td>150</td></tr><tr><td>Sugar pill</td><td>33</td><td>117</td><td>150</td></tr><tr><td>Total</td><td>54</td><td>246</td><td>300</td></tr></tbody></table><p>The table shows the results of a research study that investigated the therapeutic value of vitamin C in preventing colds. A random sample of 300 adults received either a vitamin C pill or a sugar pill each day during a 2-week period, and the adults reported whether they contracted a cold during that time period. What proportion of adults who received a sugar pill reported contracting a cold?</p>
+@ $\frac{11}{18}$ | $\frac{11}{50}$ | $\frac{9}{50}$ | $\frac{11}{100}$
+## 182
+During the first 8.00 seconds, a car's speed increased to 11.0 m/s. From 8.00 seconds to 14.0 seconds, speed increased from 11.0 m/s to 23.0 m/s. What is the positive difference between the average rates of change of speed during these two intervals? Round your answer to the nearest hundredth.
+## 183
+A gear ratio $r:s$ is the ratio of the number of teeth of two connected gears. The ratio of the number of revolutions per minute (rpm) of two gear wheels is $s:r$. In the diagram, Gear A is turned by a motor. The turning of Gear A causes Gears B and C to turn as well. Gear A has 20 teeth, Gear B has 60 teeth, and Gear C has 10 teeth.<br><br>If Gear A is rotated by the motor at a rate of 100 rpm, what is the number of revolutions per minute for Gear C?
+@ 50 | 110 | 200 | 1,000
+## 185
+A square map has a side length of 45 inches, and 1 inch on the map represents an actual distance of 13 miles. A smaller version of the same map is printed as a square with the side length 70% shorter than the side length of the previous map. On the smaller map, which of the following is closest to the actual distance, in miles, represented by 1 inch?
+@ 3.90 | 7.65 | 31.50 | 43.33
+## 187
+A fitness club is hosting an indoor triathlon. Each triathlon participant spends 10 minutes swimming in the pool, 30 minutes biking on a stationary bike, and 20 minutes running on a treadmill. Scores are given based on total combined distance in miles, $D$, of the three activities, which can be found using the equation below.<p style="text-align:center">$\frac{1}{6}s+\frac{1}{2}b+\frac{1}{3}r=D$</p>In the equation, $s$ is the participant's average swimming speed in miles per hour (mph); $b$ is the participant's average biking speed in mph; and $r$ is the participant's average running speed in mph.<br><br>In the swim portion of the triathlon, Deonte's average swimming speed was 1.2 miles per hour. His goal is to have a total combined distance of at least 10 miles. He knows he will have an average biking speed that is between 2 and 3 times faster than his average running speed. Which system of inequalities represents the ways in which Deonte can meet his goal?
+@ $\frac{1}{2}b+\frac{1}{3}r\ge 8.8$ and $2b<r<3b$ | $\frac{1}{2}b+\frac{1}{3}r\ge 8.8$ and $2r<b<3r$ | $\frac{1}{2}b+\frac{1}{3}r\ge 9.8$ and $2b<r<3b$ | $\frac{1}{2}b+\frac{1}{3}r\ge 9.8$ and $2r<b<3r$
+## 188
+$f(x)=60x+8$ estimates the distance traveled $x$ hours after crossing the city border. What is the best interpretation of 8?
+@ Between station and city border, train traveled 8 km. | After crossing border, train traveled at 8 km/h. | After crossing border, train traveled 8 km total. | Between station and border, train traveled at 8 km/h.
+## 189
+Based on a model, on day 1 of an 8-day experiment, a lima bean plant had an estimated mass of 251 grams, and each day after day 1 of the experiment, the estimated mass of the plant decreased by 3 grams. Which equation represents this model, where $m$ is the estimated mass, in grams, of the plant on day $x$ of the experiment and $1\le x\le 8$?
+@ $m=-3x+245$ | $m=-3x+248$ | $m=-3x+251$ | $m=-3x+254$

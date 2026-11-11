@@ -11,7 +11,7 @@ def load_answers():
         if not re.search(r'Answers\s+-\s+questions',t): continue
         for line in t.split('\n'):
             m=pat.match(line.strip())
-            if m: ans[int(m.group(1))]=m.group(2).strip()
+            if m: ans[int(m.group(1))]=re.sub(r'\s*†','',m.group(2)).strip()
     return ans
 def parse(path):
     qs=[]; cur=None
@@ -44,3 +44,30 @@ def build(path,out):
     json.dump(rows,open(out,'w'),ensure_ascii=False,indent=1)
     print(len(rows),'rows;',len(problems),'problems'); [print(' ',p) for p in problems]
 if __name__=='__main__': build(sys.argv[1],sys.argv[2])
+
+
+SLUG={1:'problem-solving',2:'problem-solving',3:'algebra',4:'algebra',5:'algebra',6:'algebra',7:'advanced-math',8:'advanced-math',9:'advanced-math',10:'advanced-math',11:'advanced-math',12:'advanced-math',13:'data-analysis',14:'data-analysis',15:'data-analysis',16:'data-analysis',17:'geometry',18:'geometry',19:'geometry',20:'geometry',21:'geometry'}
+import os
+def payload(paths,out,figdir='fig'):
+    ans=load_answers(); rows=[]; skipped=[]; problems=[]
+    drawn=set(os.listdir(figdir)) if os.path.isdir(figdir) else set()
+    qs=[]
+    for p in paths: qs+=parse(p)
+    for q in qs:
+        n=q['n']; key=ans.get(n)
+        if key is None: problems.append(f'Q{n}: no key'); continue
+        text='\n'.join(q['text']).strip()
+        figs=re.findall(r'\[\[fig:(\w+)\]\]',text)
+        text=re.sub(r'\[\[fig:\w+\]\]','',text).strip()
+        if figs and (figs[0]+'.webp') not in drawn: skipped.append(n); continue
+        tno,a,b,name=topic_of(n); frac=(n-a)/(b-a+1)
+        diff='easy' if frac<1/3 else 'medium' if frac<2/3 else 'hard'
+        img=('/ufq/'+figs[0]+'.webp') if figs else ''
+        if q['opts']:
+            if not re.fullmatch(r'[A-D]',key) or len(q['opts'])!=4: problems.append(f'Q{n}: opts/key mismatch {key!r} {len(q["opts"])}'); continue
+            rows.append([SLUG[tno],diff,text,q['opts'],'ABCD'.index(key),'',img])
+        else:
+            if re.fullmatch(r'[A-D]',key): problems.append(f'Q{n}: key letter, no options'); continue
+            rows.append([SLUG[tno],diff,text,[],-1,key,img])
+    json.dump(rows,open(out,'w'),ensure_ascii=False,separators=(',',':'))
+    print(len(rows),'rows; skipped(fig missing):',skipped,'; problems:',problems)
