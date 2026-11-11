@@ -1,0 +1,9 @@
+## 2000
+The number of students enrolled in a personal finance seminar for each of 10 years is shown in the scatterplot above. A line of best fit is also drawn. For how many of these 10 years was enrollment in the seminar less than predicted by this line of best fit?<p></p>[[fig:q2000]]
+@ 2 | 4 | 6 | 8
+## 2009
+The population $y$, in tens of thousands, of a certain city $x$ years since 1990 is shown in the scatterplot below. If the data are modeled using a line of best fit, which of the following could be an equation of that line?<p></p>[[fig:q2009]]
+@ $y=13.8+1.4x$ | $y=13.8-1.4x$ | $y=12+1.4x$ | $y=12-1.4x$
+## 2010
+The graph shows the estimated balance of a bank account, in dollars, $x$ years after an initial deposit is made. According to the graph, which of the following is closest to the number of years it took for the estimated balance to increase from the initial deposit to 125 dollars?<p></p>[[fig:q2010]]
+@ 0 | 6 | 100 | 125
