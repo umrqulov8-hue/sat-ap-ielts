@@ -235,6 +235,21 @@ export default function TestPage() {
       return { start, end: start + (highlight.text || '').length, idx: highlight.index, color: highlight.color, border: highlight.border }
     }).filter(range => range.start >= 0 && range.end > range.start)
 
+    // Never cut a $math$ segment in half: widen any range that touches one so the
+    // whole expression sits inside a single <mark> and still renders as KaTeX.
+    const mathSpans = []
+    const mathRe = /(?<!\\)\$[^$]+?(?<!\\)\$/g
+    let mm
+    while ((mm = mathRe.exec(passageText)) !== null) mathSpans.push([mm.index, mm.index + mm[0].length])
+    ranges.forEach(range => {
+      mathSpans.forEach(([ms, me]) => {
+        if (range.start < me && range.end > ms) {
+          range.start = Math.min(range.start, ms)
+          range.end = Math.max(range.end, me)
+        }
+      })
+    })
+
     const walker = document.createTreeWalker(template.content, NodeFilter.SHOW_TEXT)
     const textNodes = []
     while (walker.nextNode()) textNodes.push(walker.currentNode)
