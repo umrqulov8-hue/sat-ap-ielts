@@ -1,0 +1,6 @@
+## 3194
+A futuristic football is built from two right circular cones and a right circular cylinder with internal measurements represented by the figure above (cylinder: radius 3 in, height 6 in; each cone: radius 3 in, height 3 in). Of the following, which is closest to the volume of the football, in cubic inches?<p></p>[[fig:q3194]]
+@ 56.1 | 169.6 | 197.9 | 226.2
+## 3197
+The solid in the figure below is the shaded part of a cone with a height of 10 cm obtained by cutting its top parallel to the base, 10 cm from its tip (the full cone has height 20 cm; top radius 1.5 cm, bottom radius 3 cm). The volume of the solid is<p></p>[[fig:q3197]]
+@ 188.52 cm$^3$ | 23.57 cm$^3$ | 164.93 cm$^3$ | 145.29 cm$^3$
