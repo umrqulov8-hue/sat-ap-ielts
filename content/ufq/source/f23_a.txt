@@ -1,0 +1,14 @@
+## 1773
+In the $xy$-plane, the quadrants are labeled as shown. The graph of the equation $y=3(x+a)^2+b$, where $a$ and $b$ are positive constants, has a vertex in which quadrant?<p></p>[[fig:q1773]]
+@ Quadrant I | Quadrant II | Quadrant III | Quadrant IV
+## 1776
+$y=6x^2+bx+c$ is shown in the graph. What is the value of $bc$?<p></p>[[fig:q1776]]
+## 1780
+In the $xy$-plane above, the graphs of $y=x^2-4$ and $y=mx+k$ intersect at $x=-2$ and $x=3$. What is the value of $k$?<p></p>[[fig:q1780]]
+@ 1 | 2 | 3 | 4
+## 1792
+The graph of $y=a(x+1)(x-5)$ is shown in the $xy$-plane above, where $a$ is a constant. If the graph with vertex $(h,k)$ intersects the $y$-axis at point $(0,5)$, which of the following is equal to $k$?<p></p>[[fig:q1792]]
+@ 7 | 8 | 9 | 10
+## 1765
+<p style="text-align:center">$2x^2-8x-21=0$</p><p>One solution to the given equation can be written as $x=h-\frac{1}{2}\sqrt{k}$, where $h$ and $k$ are integer constants. What is the value of $h+k$?</p>
+@ -24 | 10 | 29 | 60
