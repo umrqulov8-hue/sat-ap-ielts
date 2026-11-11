@@ -1,0 +1,27 @@
+## 899
+<table><thead><tr><th>$x$</th><th>$y$</th></tr></thead><tbody><tr><td>$-2s$</td><td>17</td></tr><tr><td>$-s$</td><td>14</td></tr><tr><td>$s$</td><td>8</td></tr></tbody></table><p>The table shows three values of $x$ and their corresponding values of $y$. There is a linear relationship between $x$ and $y$. Which of the following equations represents this relationship?</p>
+@ $sx+3y=11s$ | $3x+sy=11s$ | $3x+sy=11$ | $sx+3y=11$
+## 986
+Yesterday Jill knitted part of a scarf. Today she continued knitting. The graph gives the approximate length of the scarf, in inches, $x$ minutes after she began knitting today. Which statement best interprets the point $(90,4.7)$?
+@ The scarf was approximately 4.7 inches long 90 minutes after Jill began knitting today. | The scarf increased in length by approximately 4.7 inches during the first 90 minutes today. | The scarf increased in length by approximately 90 inches during the first 4.7 minutes today. | The scarf was approximately 90 inches long 4.7 minutes after Jill began knitting today.
+## 987
+<table><caption>Columbia River Bridge Daily Crossings, 1971–2010</caption><thead><tr><th>Years</th><th>Average number of vehicles per day</th></tr></thead><tbody><tr><td>1971–1975</td><td>90,175</td></tr><tr><td>1976–1980</td><td>120,250</td></tr><tr><td>1981–1985</td><td>151,200</td></tr><tr><td>1986–1990</td><td>182,000</td></tr><tr><td>1991–1995</td><td>212,900</td></tr><tr><td>1996–2000</td><td>242,800</td></tr><tr><td>2001–2005</td><td>272,000</td></tr><tr><td>2006–2010</td><td>302,000</td></tr></tbody></table><p>The table above shows the average number of vehicles, $y$, that crossed the Columbia River Bridge daily in 5-year intervals from 1971 to 2010. Let $x$ be the number of intervals after 1971–1975. For example, 1971–1975 corresponds to $x=0$, 1976–1980 corresponds to $x=1$, and so on. Of the following, which best models the relationship between $y$ and $x$?</p>
+@ $y=\frac{1}{30{,}000}x+90{,}175$ | $y=30{,}000x+90{,}175$ | $y=90{,}175(0.75)^x$ | $y=90{,}175(1.33)^x$
+## 989
+<table><thead><tr><th>$x$</th><th>$y$</th></tr></thead><tbody><tr><td>-12</td><td>46</td></tr><tr><td>$a$</td><td>16</td></tr><tr><td>2</td><td>$b$</td></tr></tbody></table><p>The table shows three values of $x$ and their corresponding values of $y$, where $a$ and $b$ are constants. There is a linear relationship between $x$ and $y$. In the $xy$-plane, the $y$-intercept of the line representing this relationship is $(0,-14)$. What is the value of $a+b$?</p>
+@ -30 | -29 | -20 | -19
+## 990
+<table><thead><tr><th>$x$</th><th>$y$</th></tr></thead><tbody><tr><td>-26</td><td>$t$</td></tr><tr><td>-13</td><td>$t+29$</td></tr><tr><td>0</td><td>$t+58$</td></tr></tbody></table><p>For a linear relationship between $x$ and $y$, the table gives three values of $x$ and their corresponding values of $y$, where $t$ is a constant. Which equation represents this relationship?</p>
+@ $y=-2x+t+29$ | $y=2x+t+29$ | $y=-\frac{20}{11}x+t+58$ | $y=\frac{29}{13}x+t+58$
+## 991
+<table><thead><tr><th>Number of cars</th><th>Maximum number of passengers and crew</th></tr></thead><tbody><tr><td>3</td><td>139</td></tr><tr><td>6</td><td>271</td></tr><tr><td>10</td><td>447</td></tr></tbody></table><p>The table shows the linear relationship between the number of cars, $c$, on a commuter train and the maximum number of passengers and crew, $p$, that the train can carry. Which equation represents the linear relationship between $c$ and $p$?</p>
+@ $44c-p=-7$ | $44c-p=7$ | $44p-c=-7$ | $44p-c=7$
+## 992
+The graph of the linear function $y=f(x)+14$ passes through the points $(0,3)$ and $(2,0)$. If $c$ and $d$ are positive constants, which equation could define $f$?
+@ $f(x)=-d-cx$ | $f(x)=-d+cx$ | $f(x)=d-cx$ | $f(x)=d+cx$
+## 993
+A partially filled container containing 24 milliliters of water is placed under a leaky faucet that produces one 0.06-milliliter drop of water every 6 seconds. Until the container is full, which of the following can be used to represent the volume $v$, in milliliters, of water in the container $t$ seconds after it is placed under the faucet, where $t$ is a multiple of 6?
+@ $v=6t$ | $v=0.36t+24$ | $v=0.06t+24$ | $v=0.01t+24$
+## 994
+<p style="text-align:center">$H=2.419L+22.83$</p><p>A group of biology students conducted an experiment to study the relationship between a person's femur length and the person's height. The given equation describes the relationship between the length $L$, in inches, of a student's femur and the student's estimated height $H$, in inches, for the students in the group. Which of the following is the best interpretation of 2.419 in this context?</p>
+@ The increase in a student's estimated height, in inches, for each increase of 1 inch in the student's femur length | The increase in a student's femur length, in inches, for each increase of 1 inch in the student's estimated height | The increase in a student's femur length, in inches, for each increase of 22.83 inches in the student's estimated height | The estimated height, in inches, of a student whose femur has a length of 1 inch

@@ -1,0 +1,115 @@
+## 751
+A line passes through $(9,1)$, $(0,8)$, and $(c,0)$. What is $c$?
+## 752
+Line $k$ contains the points $(-3,-60)$, $(v,0)$, and $(5,76)$. What is $v$?
+## 753
+Line $k$ has slope $\frac{6}{13}$, $x$-intercept $(-6,0)$, and $y$-intercept $(0,p)$. What is $p$?
+## 754
+The graph of $9x+y=11$ in the $xy$-plane is a line. What is the slope of the line?
+## 755
+What is the slope of a line that is parallel to the graph of $7x+16y=-1$ in the $xy$-plane?
+## 756
+What is the slope of the graph of $y=\left(\frac{6}{19}\right)x$?
+@ $\frac{19}{6}$ | $\frac{6}{19}$ | 0 | $\frac{-6}{19}$
+## 757
+In the $xy$-plane, the graph of the equation $3y-6x=8$ intersects the $y$-axis at the point $(0,a)$. What is the value of $a$?
+## 758
+What is the slope of a line parallel to $y=\left(\frac{5}{2}\right)x+8$?
+@ $\frac{-5}{2}$ | $\frac{-2}{5}$ | $\frac{2}{5}$ | $\frac{5}{2}$
+## 759
+A line passes through the points $(5,7)$ and $(13,35)$ in the $xy$-plane. What is the slope of the line?
+## 760
+Line $j$ is defined by $4x-9y=18$. Line $k$ is parallel to line $j$ in the $xy$-plane. What is the slope of line $k$?
+## 761
+Line $s$ is defined by $x-4y=24$. Line $t$ is perpendicular to line $s$ in the $xy$-plane and passes through the points $(k,0)$ and $(60,-k)$. What is the value of $k$?
+## 762
+Line $k$ is defined by $y=-\left(\frac{10}{3}\right)x+3$. Line $j$ is perpendicular to line $k$ in the $xy$-plane. What is the slope of line $j$?
+## 763
+What is the $x$-intercept of a line with slope $\frac{-4}{7}$ that passes through $(0,12)$?
+@ $(-21,0)$ | $(-4,0)$ | $(7,0)$ | $(21,0)$
+## 764
+The graph of a line in the $xy$-plane passes through the point $(1,4)$ and crosses the $x$-axis at the point $(2,0)$. The line crosses the $y$-axis at the point $(0,b)$. What is the value of $b$?
+## 765
+In the $xy$-plane, line $\ell$ passes through the origin $O$, has a slope of $\frac{1}{2}$, and contains the point $(x,2)$. What is the value of $x$?
+## 766
+The line with the equation $\frac{4}{5}x+\frac{1}{3}y=1$ is graphed in the $xy$-plane. What is the $x$-coordinate of the $x$-intercept of the line?
+## 767
+A machine in a factory produces items at a constant rate of 40 items per hour. At this rate, how many items will the machine produce in 6 hours?
+## 768
+A factory produces identical objects at a constant rate of 44 objects per minute. At what rate, in objects per hour, does the factory produce the objects?
+## 769
+A factory produces identical objects at a constant rate of 49 objects per minute. At what rate, in objects per hour, does the factory produce the objects?
+## 770
+The graphs of lines $\ell$ and $v$ in the $xy$-plane are perpendicular. The equation of line $\ell$ is $\frac{2}{3}x+\frac{5}{6}y=-10$. What is the slope of line $v$?
+## 771
+A line has slope $\frac{-9}{5}$ and passes through $(0,27)$. What is its $x$-intercept?
+@ $(15,0)$ | $(5,0)$ | $(-9,0)$ | $(-15,0)$
+## 772
+What is the slope of the line in the $xy$-plane with equation $3x-5y=18$?
+## 773
+Line $s$ is defined by $x-4y=24$. Line $t$ is perpendicular to line $s$ in the $xy$-plane and passes through the points $(k,0)$ and $(60,-k)$. What is the value of $k$?
+## 774
+The function $f$ is defined by $f(x)=2x-\frac{1}{8}$. What is the $y$-intercept of its graph?
+@ $\left(0,\frac{-1}{8}\right)$ | $(0,-2)$ | $(0,2)$ | $(0,8)$
+## 775
+In the equation $y=(x-3)(x-a)$, $a$ is a positive constant. If the graph of the equation in the $xy$-plane intersects the $y$-axis at the point $(0,15)$, what is the value of $a$?
+## 776
+<table><thead><tr><th>$x$</th><th>$f(x)$</th></tr></thead><tbody><tr><td>8</td><td>12</td></tr><tr><td>12</td><td>17</td></tr></tbody></table><p>The table above shows two pairs of values for the linear function $f$. The function can be written in the form $f(x)=ax+b$, where $a$ and $b$ are constants. What is the value of $a+b$?</p>
+## 777
+The function $f$ is defined by $f(x)=\left(\frac{6}{7}\right)x+\frac{18}{7}$. What is the slope of the graph of $y=f(x)$ in the $xy$-plane?
+@ $\frac{1}{3}$ | $\frac{6}{7}$ | $\frac{18}{7}$ | 3
+## 778
+Line $s$ is defined by $x-4y=24$. Line $t$ is perpendicular to line $s$ in the $xy$-plane and passes through the points $(k,0)$ and $(60,-k)$. What is the value of $k$?
+## 779
+<p style="text-align:center">$2x^2+bx+8=0$</p><p>In the equation above, $b$ is a constant. For what positive value of $b$ does the equation have exactly one real solution?</p>
+## 780
+The equation $y=mx+b$, where $m$ and $b$ are constants, is graphed in the $xy$-plane. If the line contains the points $(-20,0)$ and $(0,40)$, what is the value of $m$?
+## 781
+<p style="text-align:center">$g(x)=5(18x-19)$</p><p>What is the $y$-coordinate of the $y$-intercept of the graph of $y=g(x)-4$ in the $xy$-plane?</p>
+@ -99 | -95 | -23 | -19
+## 782
+In the $xy$-plane, line $t$ passes through the points $(0,9)$ and $(1,14)$. Which equation defines line $t$?
+@ $y=\left(\frac{1}{5}\right)x+9$ | $y=x+15$ | $y=x+5$ | $y=5x+9$
+## 783
+Line $q$ passes through $(0,20)$ and $(1,44)$. Which equation defines $q$?
+@ $24x-y+20=0$ | $24x-y+\frac{1}{20}=0$ | $24x-y-\frac{1}{20}=0$ | $24x-y-20=0$
+## 784
+The line in the $xy$-plane that is the graph of the linear function $f$ has slope 2 and contains the point $(0,7)$. What is the value of $f(2)$?
+@ 9 | 11 | 14 | 16
+## 785
+The function $f$ is defined by $f(x)=-\left(\frac{4}{13}\right)x+13$. What is the slope of the graph of $y=f(x)$ in the $xy$-plane?
+@ -13 | $\frac{-4}{13}$ | $\frac{1}{13}$ | 4
+## 786
+The graph of a line in the $xy$-plane passes through the point $(1,4)$ and crosses the $x$-axis at the point $(7,0)$. The line crosses the $y$-axis at the point $(0,b)$. What is the value of $b$?
+## 787
+A linear function $g$ is defined by $g(x)=ax+b$, where $a$ and $b$ are constants. If $g(-4)=-6$ and $g(3)=8$, what is the value of $a$?
+## 788
+In the $xy$-plane, what is the $x$-intercept of the line that has a slope of $-\frac{4}{3}$ and passes through the point $(0,12)$?
+@ -9 | -4 | 3 | 9
+## 790
+The function $h$ is defined by $h(x)=6x+18$. Its graph has $x$-intercept $(a,0)$ and $y$-intercept $(0,b)$. What is $a+b$?
+@ 24 | 21 | 18 | 15
+## 791
+Line $p$ is defined by $x-38y=38$. Line $w$ is parallel to line $p$ in the $xy$-plane. What is the slope of line $w$?
+@ 38 | $\frac{1}{38}$ | $\frac{-1}{38}$ | -38
+## 792
+A linear function $g$ is defined by $g(x)=ax+b$, where $a$ and $b$ are constants. If $g(-2)=-7$ and $g(1)=5$, what is the value of $a$?
+## 793
+Line $k$ contains the points $(-3,-40)$, $(v,0)$, and $(5,56)$. What is the value of $v$?
+## 794
+For the linear function $f$, $f(4)=17$ and $f(8)=1$. Which equation defines $f$?
+@ $f(x)=\frac{-x}{4}+18$ | $f(x)=\frac{x}{4}-1$ | $f(x)=-4x+21$ | $f(x)=-4x+33$
+## 795
+For the linear function $h$, $h(0)=0$ and $h(11)=5$. Which equation defines $h$?
+@ $h(x)=\left(\frac{5}{11}\right)x$ | $h(x)=\left(\frac{5}{11}\right)x+5$ | $h(x)=\left(\frac{11}{5}\right)x$ | $h(x)=\left(\frac{11}{5}\right)x+11$
+## 796
+Line $k$ is defined by $y=3x+13$. Line $j$ is perpendicular to line $k$ in the $xy$-plane. What is the slope of line $j$?
+@ $\frac{-1}{3}$ | $\frac{-1}{10}$ | $\frac{-1}{16}$ | $\frac{-1}{39}$
+## 798
+For a linear function $g$, $g(4)=10$ and $g(x+1)-g(x)=6$. Which equation defines $g$?
+@ $g(x)=4x+10$ | $g(x)=4x+6$ | $g(x)=6x-14$ | $g(x)=6x-24$
+## 799
+Line $s$ is defined by $x-3y=21$. Line $t$ is perpendicular to line $s$ in the $xy$-plane and passes through the points $(k,0)$ and $(60,-k)$. What is the value of $k$?
+## 800
+The function $f$ is defined by $f(x)=2x-\frac{1}{6}$. What is the $y$-intercept of the graph of $y=f(x)$ in the $xy$-plane?
+@ $\left(0,\frac{-1}{6}\right)$ | $(0,-2)$ | $(0,2)$ | $(0,6)$

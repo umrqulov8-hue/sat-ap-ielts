@@ -1,0 +1,64 @@
+## 840
+Line $j$ is defined by $4x+5y=25$. Line $k$ is parallel to line $j$ in the $xy$-plane. An equation of line $k$ is $16x+ry=15$, where $r$ is a constant. If line $k$ passes through the point $(0,b)$, what is the value of $b$?
+## 841
+Line $j$ is defined by $3x+4y=16$. Line $k$ is parallel to line $j$ in the $xy$-plane. An equation of line $k$ is $24x+ry=24$, where $r$ is a constant. If line $k$ passes through the point $(0,b)$, what is the value of $b$?
+## 842
+Line $t$ in the $xy$-plane passes through the points $\left(-6,-\frac{27}{5}\right)$, $\left(\frac{5}{2},-2\right)$, and $\left(9,\frac{3}{5}\right)$. What is the slope of line $t$?
+## 843
+<p style="text-align:center">$a(3x-4)=9x-8$</p><p>In the equation above, $a$ is a constant. If no value of $x$ satisfies the equation, what is the value of $a$?</p>
+@ 3 | 2 | 1 | 0
+## 844
+The equation of a line in the $xy$-plane is $kx+4y=22$, where $k$ is a constant. This line is perpendicular to a second line that passes through the points $(a+37,b+22)$ and $(a-47,b-26)$, where $a$ and $b$ are constants. What is the value of $k$?
+## 845
+For the linear function $f$, the graph of $y=f(x)$ in the $xy$-plane has a slope of $-18$ and passes through the point $(0,0)$. Which equation defines $f$?
+@ $f(x)=-18x$ | $f(x)=-12x$ | $f(x)=-6x$ | $f(x)=x$
+## 846
+Which of the following is an equation of the line in the $xy$-plane that has a slope of 2 and passes through the point $(0,-3)$?
+@ $y=-3x+2$ | $y=-3x-2$ | $y=2x+3$ | $y=2x-3$
+## 848
+<p style="text-align:center">$-2x+3y=6$</p><p>In the $xy$-plane, the graph of which of the following equations is perpendicular to the graph of the equation above?</p>
+@ $3x+2y=6$ | $3x+4y=6$ | $2x+4y=6$ | $2x+6y=3$
+## 850
+In the $xy$-plane, lines $k$ and $j$ are perpendicular and intersect at the point $(5,26)$. Line $j$ passes through the origin, and line $k$ passes through the point $(p,0)$, where $p$ is a constant. What is the value of $p$?
+@ -130.2 | -129.8 | 139.8 | 140.2
+## 851
+<table><thead><tr><th>$x$</th><th>$f(x)$</th></tr></thead><tbody><tr><td>-9</td><td>78</td></tr><tr><td>9</td><td>-156</td></tr><tr><td>27</td><td>-390</td></tr></tbody></table><p>For the linear function $f$, the table shows three values of $x$ and their corresponding values of $f(x)$. Function $f$ is defined by $f(x)=rx+s$, where $r$ and $s$ are constants. What is the value of $rs$?</p>
+## 853
+Which of the following tables is consistent with the function $f(x)=x^2+6x-5$?
+@ Table A: $f(-2)=-19$, $f(-1)=-12$, $f(0)=-5$, $f(1)=2$ | Table B: $f(-2)=-13$, $f(-1)=-10$, $f(0)=-5$, $f(1)=2$ | Table C: $f(-2)=11$, $f(-1)=2$, $f(0)=-5$, $f(1)=-10$ | Table D: $f(-2)=-13$, $f(-1)=-10$, $f(0)=-7$, $f(1)=-4$
+## 854
+In the $xy$-plane, the graph of the linear function $f$ contains the points $(2,4)$ and $(4,12)$. Which of the following defines $f$?
+@ $f(x)=4x-4$ | $f(x)=4x+3.5$ | $f(x)=\frac{1}{4}x-4$ | $f(x)=\frac{1}{4}x+3.5$
+## 855
+In the $xy$-plane, line $\ell$ passes through the points $(1,-1)$ and $(-1,-5)$. Line $m$ is perpendicular to line $\ell$ and has a $y$-intercept that is 4 units greater than the $y$-intercept of line $\ell$. What is an equation of line $m$?
+@ $y=-\frac{1}{2}x-7$ | $y=-\frac{1}{2}x+1$ | $y=2x-3$ | $y=2x+1$
+## 856
+Which of the following is an equation of a line in the $xy$-plane that is parallel to the line with equation $2x+3y=18$?
+@ $2x+3y=12$ | $2x-3y=10$ | $3x+2y=9$ | $3x-2y=4$
+## 857
+<table><thead><tr><th>$x$</th><th>$y$</th></tr></thead><tbody><tr><td>1</td><td>3</td></tr><tr><td>2</td><td>1</td></tr><tr><td>3</td><td>-1</td></tr><tr><td>4</td><td>-3</td></tr><tr><td>5</td><td>-5</td></tr></tbody></table><p>The relationship between $x$ and $y$ is linear, and some values for the relationship are shown in the table above. When graphed in the $xy$-plane, the line that represents the relationship between $x$ and $y$ passes through the point $(-1,a)$. What is the value of $a$?</p>
+@ -1 | 5 | 7 | 9
+## 858
+A cable company charges a one-time installation fee plus a monthly fee. The equation $y=50x+120$ gives the total charge, in dollars, for $x$ months. What is the one-time installation fee, in dollars?
+@ 170 | 120 | 70 | 50
+## 859
+In the $xy$-plane, what is the slope of the line that passes through the points $(0,0)$ and $(3,4)$?
+@ $\frac{3}{4}$ | $\frac{4}{3}$ | 3 | 4
+## 860
+<table><thead><tr><th>$x$</th><th>$y$</th></tr></thead><tbody><tr><td>0</td><td>11</td></tr><tr><td>1</td><td>18</td></tr><tr><td>2</td><td>25</td></tr></tbody></table><p>The table shows three values of $x$ and their corresponding values of $y$. There is a linear relationship between $x$ and $y$. What is the $y$-coordinate of the $y$-intercept of the line in the $xy$-plane that represents this relationship?</p>
+## 861
+In the $xy$-plane, the line with equation $x-2y=6$ is reflected across the $y$-axis. Which of the following is an equation of the reflected line?
+@ $y=-2x-6$ | $y=-2x-3$ | $y=-\frac{1}{2}x-3$ | $y=\frac{1}{2}x-3$
+## 863
+Water flows from a lake at a constant rate. Which of the following statements correctly describes the type of function that would best model the total amount of water that has flowed from the lake?
+@ Exponential growth, because the total amount of water that has flowed is increasing by the same amount each second | Exponential growth, because the total amount of water that has flowed is increasing by the same percentage each second | Increasing linear, because the total amount of water that has flowed is increasing by the same amount each second | Increasing linear, because the total amount of water that has flowed is increasing by the same percentage each second
+## 864
+<table><thead><tr><th>$x$</th><th>$y$</th></tr></thead><tbody><tr><td>-2</td><td>19</td></tr><tr><td>0</td><td>31</td></tr><tr><td>2</td><td>43</td></tr></tbody></table><p>The table shows three values of $x$ and their corresponding values of $y$. The linear relationship between $x$ and $y$ can be represented by an equation written in the form $Ax+By=C$, where $A$, $B$, and $C$ are constants. What is the value of $\frac{A}{B}$?</p>
+## 865
+The linear function $h$ is defined by $h(x)=c-6x$, where $c$ is a constant. If $h(d-4)=8d$, where $d$ is a constant, which of the following expressions represents the value of $c$?
+@ $2d-24$ | $2d+24$ | $14d-24$ | $14d+24$
+## 866
+<p style="text-align:center">$f(x)=43$</p><p>For the given linear function $f$, which table gives three values of $x$ and their corresponding values of $f(x)$?</p>
+@ Table A: $f(0)=0$, $f(1)=0$, $f(2)=0$ | Table B: $f(0)=43$, $f(1)=43$, $f(2)=43$ | Table C: $f(0)=0$, $f(1)=43$, $f(2)=86$ | Table D: $f(0)=43$, $f(1)=0$, $f(2)=-43$
+## 868
+Line $s$ is defined by $6x+2y=0$. Line $t$ is perpendicular to line $s$ and passes through $(7,0)$ and $\left(k,\frac{4}{3}\right)$. What is the value of $k$?

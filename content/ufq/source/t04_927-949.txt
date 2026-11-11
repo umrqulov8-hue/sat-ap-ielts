@@ -1,0 +1,56 @@
+## 928
+A partially filled glass containing 24 milliliters of water is placed under a leaky faucet that produces one 0.05 milliliter drop of water every 5 seconds. Until the glass is full, which of the following can be used to represent the volume $v$, in milliliters, of water in the glass $s$ seconds after it is placed under the faucet?
+@ $v(s)=0.25s+24$ | $v(s)=0.05s+24$ | $v(s)=0.01s+24$ | $v(s)=6s$
+## 929
+Line $k$ in the $xy$-plane passes through the points $(0,4)$ and $(3,0)$. Line $j$ is perpendicular to $k$ and passes through $(-20,-25)$. Which equation defines $j$?
+@ $y=\left(\frac{3}{4}\right)x-10$ | $y=\left(\frac{3}{4}\right)x-40$ | $y=\left(\frac{4}{3}\right)x-10$ | $y=\left(\frac{4}{3}\right)x-40$
+## 930
+<p style="text-align:center">$f(x)=26(2)^x+4(2)^x$</p><p>Which equivalent form displays the $y$-intercept as a coefficient or base?</p>
+@ $f(x)=104(2)^{x-2}+16(2)^{x-2}$ | $f(x)=2\left(13(2)^x+2(2)^x\right)$ | $f(x)=26(4)^{\frac{x}{2}}+4(4)^{\frac{x}{2}}$ | $f(x)=30(2)^x$
+## 932
+<p style="text-align:center">$y=19.99+1.50x$</p><p>The equation above models the total cost $y$, in dollars, that a company charges a customer to rent a truck for one day and drive the truck $x$ miles. The total cost consists of a flat fee plus a charge per mile driven. When the equation is graphed in the $xy$-plane, what does the $y$-intercept of the graph represent in terms of the model?</p>
+@ A flat fee of \$19.99 | A charge per mile of \$1.50 | A charge per mile of \$19.99 | Total daily charges of \$21.49
+## 933
+Line $j$ passes through the points $(12,0)$ and $(8,0)$ in the $xy$-plane. Line $k$ is perpendicular to line $j$ and passes through the origin $(0,0)$. At what $x$-coordinate do line $j$ and line $k$ intersect?
+@ -12 | 0 | 8 | 10
+## 935
+A pool initially contains 1,385 cubic feet of water. A pump begins emptying the water at a constant rate of 20 cubic feet per minute. Which of the following functions best approximates the volume $v(t)$, in cubic feet, of water in the pool $t$ minutes after pumping begins, for $0\le t\le 69$?
+@ $v(t)=1{,}385-20t$ | $v(t)=1{,}385-69t$ | $v(t)=1{,}385+20t$ | $v(t)=1{,}385+69t$
+## 936
+The population $P$ of Town Y is modeled by $P=1.0635x+3{,}250$, where $x$ is the number of years since 1995 and $0\le x\le 20$. What does 1.0635 represent in this model?
+@ The estimated population in 1995 | The estimated population in 2015 | The estimated increase in population per year | The estimated decrease in population per year
+## 937
+Tim attends a college that charges \$900 per credit plus \$1,000 each month for room and board. If Tim takes $x$ credits in a 4-month term, which of the following represents the total amount $y$, in dollars, that Tim is charged for credits and room and board for the 4-month term?
+@ $y=900x+4{,}000$ | $y=1{,}000x+3{,}600$ | $y=3{,}600x+4{,}000$ | $y=\frac{900}{x}+4{,}000$
+## 938
+<p style="text-align:center">$y=\frac{35-x}{ax+b}$</p><p>What is the $x$-intercept of the graph of the equation in the $xy$-plane, where $a$ and $b$ are positive constants?</p>
+@ $(35,0)$ | $(0,-35)$ | $\left(0,\frac{35}{b}\right)$ | $\left(-\frac{b}{a},0\right)$
+## 939
+The line shown in the $xy$-plane passes through the points $(0,-5)$ and $(2,0)$ and is represented by $ax+by=32$, where $a$ and $b$ are constants. Which statement is true?
+@ $a<0$ and $b<0$ | $a<0$ and $b>0$ | $a>0$ and $b<0$ | $a>0$ and $b>0$
+## 940
+<p style="text-align:center">$v(t)=9t+70$</p><p>The function $v$ gives the volume of water, in liters, in a tank being filled by a hose $t$ minutes after the hose was turned on. Which of the following is the best interpretation of 70 in this context?</p>
+@ The volume of water in the tank increases at a rate of 70 liters per minute. | The tank holds a maximum of 70 liters. | It takes 70 hours to fill the tank completely. | There were 70 liters of water in the tank when the hose was turned on.
+## 941
+<table><thead><tr><th>$x$</th><th>$y$</th></tr></thead><tbody><tr><td>-12</td><td>124</td></tr><tr><td>-6</td><td>88</td></tr><tr><td>6</td><td>16</td></tr><tr><td>12</td><td>-20</td></tr></tbody></table><p>The table shows four values of $x$ and their corresponding values of $y$. There is a linear relationship between $x$ and $y$. Which of the following equations represents this relationship?</p>
+@ $36x+6y=52$ | $36x+6y=312$ | $6x+36y=52$ | $6x+36y=312$
+## 942
+On January 1, 2000, a town had 26,255 people. On January 1, 2010, it had 27,056 people. The equation $10x+26{,}255=27{,}056$ describes the change. What does $x$ represent?
+@ The total population increase from 2000 to 2010 | The projected population 10 years after 2010 | The average annual population increase from 2000 to 2010 | The annual percentage increase in population
+## 943
+<table><thead><tr><th>Pages</th><th>Total paid</th></tr></thead><tbody><tr><td>9</td><td>\$308</td></tr><tr><td>12</td><td>\$341</td></tr><tr><td>15</td><td>\$374</td></tr><tr><td>18</td><td>\$407</td></tr></tbody></table><p>The table above shows the total amount of money $m$, in dollars, a comic book artist is paid for a project consisting of $p$ pages. The formula $m=rp+k$ shows the relationship between the variables $m$ and $p$, where $r$ is the amount of money, in dollars, paid per page and $k$ is the one-time fee the artist is paid for the project. What is the value of $r$?</p>
+## 944
+Kai used fabric measuring 4 yards in length to make each costume for a school play. The relationship between the number of costumes that Kai made, $x$, and the total length of fabric that he purchased $y$, in yards, is represented by $y-4x=3$. What is the best interpretation of 3 in this context?
+@ Kai made 3 costumes. | Kai purchased a total of 3 yards of fabric. | Kai used a total of 3 yards of fabric to make the costumes. | Kai purchased 3 yards more fabric than he used to make the costumes.
+## 945
+<table><caption>Population of Greenleaf, Idaho</caption><thead><tr><th>Year</th><th>Population</th></tr></thead><tbody><tr><td>2000</td><td>862</td></tr><tr><td>2010</td><td>846</td></tr></tbody></table><p>The table above shows the population of Greenleaf, Idaho, for the years 2000 and 2010. If the relationship between population and year is linear, which of the following functions $P$ models the population of Greenleaf $t$ years after 2000?</p>
+@ $P(t)=862-1.6t$ | $P(t)=862-16t$ | $P(t)=862+16(t-2000)$ | $P(t)=862-1.6(t-2000)$
+## 946
+The height of an airplane, in feet, while it is in the process of landing is being modeled by the equation $h(t)=13{,}200-11t$, where $t$ is the time, in seconds, since the landing process began. What is the meaning of the value 13,200 in the equation?
+@ The distance the airplane travels while it is landing | The rate of descent of the airplane while it is landing | The speed of the airplane at the start of the landing process | The height of the airplane at the start of the landing process
+## 948
+<table><caption>Temperature Inside Alicia's Home</caption><thead><tr><th>Time</th><th>Temperature</th></tr></thead><tbody><tr><td>1 p.m.</td><td>80°F</td></tr><tr><td>3 p.m.</td><td>82°F</td></tr><tr><td>5 p.m.</td><td>82°F</td></tr><tr><td>9 p.m.</td><td>80°F</td></tr></tbody></table><p>The table represents the temperature inside Alicia's home on a certain day; between the listed times the temperature changed at a constant rate. From 5 p.m. to 9 p.m., how many degrees Fahrenheit (°F) did the temperature decrease each hour?</p>
+@ 2 | 1 | $\frac{1}{2}$ | $\frac{1}{4}$
+## 949
+<p style="text-align:center">$v(t)=8t+50$</p><p>The function $v$ gives the volume of water, in liters, in a tank being filled by a hose $t$ minutes after the hose was turned on. Which of the following is the best interpretation of 50 in this context?</p>
+@ The volume of water in the tank increases at a rate of 50 liters per minute. | The tank holds a maximum of 50 liters. | It takes 50 hours to fill the tank completely. | There were 50 liters of water in the tank when the hose was turned on.

@@ -1,0 +1,30 @@
+## 969
+<p style="text-align:center">$f(x)=4^{-5(x+1)}$</p><p>Which of the following equivalent forms of the given function $f$ displays, as the base or the coefficient, the $y$-coordinate of the $y$-intercept of the graph of $y=f(x)$ in the $xy$-plane?</p>
+@ $f(x)=\frac{1}{1{,}024}\left(\frac{1}{4}\right)^{5x}$ | $f(x)=\left(\frac{1}{4}\right)^{5x+5}$ | $f(x)=4^{-5x-5}$ | $f(x)=1{,}024^{-x-1}$
+## 970
+<p>The velocity $v$, in meters per second, of a falling object on Earth after $t$ seconds, ignoring the effect of air resistance, is modeled by the equation $v=9.8t$. There is a different linear relationship between time and velocity on Mars, as shown in the table below.</p><table><thead><tr><th>Time (seconds)</th><th>Velocity on Mars (meters per second)</th></tr></thead><tbody><tr><td>0</td><td>0</td></tr><tr><td>4</td><td>14.8</td></tr><tr><td>8</td><td>29.6</td></tr></tbody></table><p>If an object dropped toward the surface of Earth has a velocity of 58.8 meters per second after $t$ seconds, what would be the velocity of the same object dropped toward the surface of Mars after $t$ seconds, ignoring the effect of air resistance?</p>
+@ 15.9 meters per second | 22.2 meters per second | 36.2 meters per second | 88.8 meters per second
+## 973
+A landscaping company mixes oil with gasoline to power its tools. A chainsaw requires 8 ounces of oil per gallon of gasoline. A lawnmower requires 4 ounces of oil per gallon of gasoline. The company uses a total of 24 ounces of oil in its mixes for the chainsaw and lawnmower. Which equation represents this situation, where $x$ represents the amount of gasoline, in gallons, in the mix for the chainsaw and $y$ represents the amount of gasoline, in gallons, in the mix for the lawnmower?
+@ $2(x+2y)=24$ | $2(2x+y)=24$ | $4(x+2y)=24$ | $4(2x+y)=24$
+## 974
+<p style="text-align:center">$y=\frac{1}{4}x$</p><p style="text-align:center">$y=ax-b$</p><p>The system of equations above has no solution $(x,y)$. Which of the following could be the values of $a$ and $b$?</p>
+@ $a=\frac{1}{4}$, $b=0$ | $a=\frac{1}{4}$, $b=1$ | $a=-4$, $b=0$ | $a=-4$, $b=1$
+## 975
+Line $p$ is defined by $kx+7y=16$. Line $p$ passes through the points $(r,0)$ and $(0,t)$, where $k$, $r$, and $t$ are nonzero constants and $r\ne t$. Which expression represents the value of $k$?
+@ $\frac{16}{t}$ | $\frac{16}{r}$ | $\frac{7}{t}$ | $\frac{7}{r}$
+## 978
+During a specific 2-hour period of the day, the mean photosynthetic rate, $P(x)$, of a plant species increases at a constant rate in terms of the photochemical energy available, $x$. During this period, $P(300)=9.8$, and the mean photosynthetic rate increases by 0.13 micromoles per meter squared per second ($\mu\text{mol}\cdot\text{m}^{-2}\cdot\text{s}^{-1}$) when the photochemical energy available increases by 5 $\mu\text{mol}\cdot\text{m}^{-2}\cdot\text{s}^{-1}$. Which equation gives the mean photosynthetic rate, in $\mu\text{mol}\cdot\text{m}^{-2}\cdot\text{s}^{-1}$, in terms of the photochemical energy available, in $\mu\text{mol}\cdot\text{m}^{-2}\cdot\text{s}^{-1}$, during this period?
+@ $P(x)=0.026x+9.8$ | $P(x)=0.026x+2$ | $P(x)=9.8x+0.026$ | $P(x)=9.8x-2{,}930.2$
+## 979
+The line passes through the points $(0,12)$ and $(12,0)$ and models the possible length $x$ and width $y$, in meters, of a rectangle with perimeter 24 meters. What does the point $(10,2)$ mean?
+@ The length is 2 meters less than the perimeter, and the width is 10 meters less. | The length is 2 meters and the width is 10 meters. | The length is 10 meters and the width is 2 meters. | The length is 10 meters less than the perimeter, and the width is 2 meters less.
+## 980
+<table><thead><tr><th>$x$</th><th>$y$</th></tr></thead><tbody><tr><td>0</td><td>$n$</td></tr><tr><td>4</td><td>$n+21$</td></tr><tr><td>8</td><td>$n+42$</td></tr></tbody></table><p>There is a linear relationship between $x$ and $y$. The table shows three values of $x$ and their corresponding values of $y$ in terms of a constant $n$. What is the slope of the line in the $xy$-plane that represents this relationship?</p>
+@ 21 | 2 | $\frac{21}{4}$ | $\frac{1}{2}$
+## 982
+The line passes through the points $(0,9)$ and $(3,0)$ in the $xy$-plane and shows a linear relationship between $x$ and $y$. Which equation represents this relationship, where $R$ is a positive constant?
+@ $Rx+21y=63$ | $Rx-21y=-63$ | $21x+Ry=63$ | $21x-Ry=-63$
+## 985
+Kai used fabric measuring 4 yards in length to make each costume. The relationship between the number of costumes $x$ and total fabric purchased $y$ is $y-4x=5$. What is the best interpretation of 5 in this context?
+@ Kai made 5 costumes. | Kai purchased a total of 5 yards of fabric. | Kai used a total of 5 yards of fabric to make the costumes. | Kai purchased 5 yards more fabric than he used to make the costumes.

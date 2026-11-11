@@ -1,0 +1,55 @@
+## 901
+<p>$13x+17y=10$<br>$ax+b\cdot y=10$</p><p>The lines given by these equations are perpendicular. Which pair also represents perpendicular lines?</p>
+@ $39x+17y=10$ and $ax-3b\cdot y=10$ | $52x+34y=10$ and $2ax+4b\cdot y=10$ | $65x+17y=10$ and $5ax+b\cdot y=10$ | $13x-17y=10$ and $ax+b\cdot y=10$
+## 902
+<table><thead><tr><th>Number of cars</th><th>Max passengers/crew</th></tr></thead><tbody><tr><td>2</td><td>102</td></tr><tr><td>6</td><td>294</td></tr><tr><td>10</td><td>486</td></tr></tbody></table><p>The table shows the linear relationship between the number of cars, $c$, on a commuter train and the maximum number of passengers and crew, $p$, that the train can carry. Which equation represents the linear relationship between $c$ and $p$?</p>
+@ $48p-c=-6$ | $48c-p=6$ | $48p-c=6$ | $48c-p=-6$
+## 903
+The function $F(x)=\left(\frac{9}{5}\right)(x-273.15)+32$ gives the temperature, in degrees Fahrenheit, that corresponds to a temperature of $x$ kelvins. If a temperature increased by 6.80 kelvins, by how much did the temperature increase, in degrees Fahrenheit?
+@ 12.24 | 44.24 | 479.43 | 511.43
+## 904
+If $y=3x^2+6x+2$ is graphed in the $xy$-plane, which of the following characteristics of the graph is displayed as a constant or coefficient in the equation?
+@ $y$-coordinate of the vertex | $x$-intercept(s) | $y$-intercept | $x$-intercept of the line of symmetry
+## 905
+<table><thead><tr><th>Salt, $x$</th><th>Water, $y$</th></tr></thead><tbody><tr><td>111</td><td>3</td></tr><tr><td>148</td><td>4</td></tr><tr><td>185</td><td>5</td></tr></tbody></table><p>The table shows a linear relationship between $x$ grams of salt and $y$ liters of water. Which equation gives $y$ in terms of $x$?</p>
+@ $y=\frac{x}{74}$ | $y=\frac{x}{37}$ | $y=37x$ | $y=74x$
+## 906
+In the $xy$-plane, line $h$ passes through the point $(0,0)$ and is perpendicular to the line represented by the equation $-3x+y=20$. If line $h$ also passes through the point $(18,t)$, what is the value of $t$?
+## 908
+Emmary makes and sells ceramics. It costs her \$12 to make a ceramic piece. If she sells each piece for \$33, which of the following equations gives the amount of profit $P$, in dollars, Emmary will receive for selling $n$ pieces? (Profit $=$ revenue $-$ expenses)
+@ $P=21n$ | $P=33n$ | $P=33n-12$ | $P=21n+12$
+## 910
+A linear function $f$ gives a company's profit, in dollars, for selling $x$ items. The company's profit is \$190 when it sells 4 items, and its profit is \$670 when it sells 10 items. Which equation defines $f$?
+@ $f(x)=180x-670$ | $f(x)=67x$ | $f(x)=80x-10x$ | $f(x)=80x-130$
+## 911
+<table><thead><tr><th>$x$</th><th>$f(x)$</th></tr></thead><tbody><tr><td>1</td><td>-54</td></tr><tr><td>2</td><td>0</td></tr><tr><td>3</td><td>54</td></tr></tbody></table><p>For the linear function $f$, the table shows three values of $x$ and their corresponding values of $f(x)$. Function $f$ is defined by $f(x)=ax+b$, where $a$ and $b$ are constants. What is the value of $a-b$?</p>
+@ -54 | 52 | 108 | 162
+## 913
+For groups of 25 or more people, a museum charges \$21 per person for the first 25 people and \$14 for each additional person. Which function $f$ gives the total charge, in dollars, for a tour group with $n$ people, where $n\ge25$?
+@ $f(n)=14n+175$ | $f(n)=14n+525$ | $f(n)=35n-350$ | $f(n)=14n+21$
+## 914
+<table><thead><tr><th>$s$</th><th>$t$</th></tr></thead><tbody><tr><td>-5</td><td>0</td></tr><tr><td>0</td><td>5</td></tr></tbody></table><p>A linear relationship exists between $s$ and $t$, and the table above shows two pairs of values for them. Which of the following equations could be used to describe the relationship between $s$ and $t$?</p>
+@ $t=-s-5$ | $t=-s+5$ | $t=s-5$ | $t=s+5$
+## 915
+Lines $k$ and $j$ are perpendicular and intersect at $(4,23)$. Line $j$ passes through the origin, and line $k$ passes through $(p,0)$. What is $p$?
+@ -128.25 | -127.75 | 135.75 | 136.25
+## 918
+A balloon descends from an altitude of 5,000 feet at a constant rate of 500 feet every 10 minutes. Which of the following models the balloon's altitude, in feet, as a function of the time $t$, in minutes, since the beginning of its descent?
+@ $h(t)=5{,}000-50t$ | $h(t)=5{,}000-500t$ | $h(t)=5{,}000-\frac{500}{t}$ | $h(t)=5{,}000-\frac{50}{t}$
+## 919
+In the $xy$-plane, line $l$ has a $y$-intercept of $-13$ and is perpendicular to the line with equation $y=-\frac{2}{3}x$. If the point $(10,b)$ is on line $l$, what is the value of $b$?
+## 922
+In the $xy$-plane, line $\ell$ passes through the point $(-2,1)$ and has slope $\frac{3}{2}$. Which of the following is an equation of line $\ell$?
+@ $y=\frac{3}{2}x+4$ | $y=\frac{3}{2}x+1$ | $y=\frac{3}{2}x-\frac{7}{2}$ | $y=-2x+\frac{3}{2}$
+## 923
+Line segment $GH$ and point $R$ are shown in the $xy$-plane, where $G=(0,3)$, $H=(4,0)$, and $R=(0,2)$. If line $\ell$ (not shown) contains point $R$ and is perpendicular to line segment $GH$, which of the following is an equation of line $\ell$?
+@ $-4x+3y=6$ | $-3x+4y=8$ | $3x+4y=8$ | $4x+3y=6$
+## 924
+<table><thead><tr><th>Distance</th><th>Time</th></tr></thead><tbody><tr><td>0.32</td><td>8</td></tr><tr><td>0.48</td><td>12</td></tr><tr><td>0.76</td><td>19</td></tr></tbody></table><p>The table relates distance $d$, in miles, to Adriana's average travel time $t$, in minutes. Which equation represents this linear relationship?</p>
+@ $t=\left(\frac{1}{4}\right)d$ | $t=25d$ | $t=\left(\frac{1}{25}\right)d$ | $t=4d$
+## 925
+<p style="text-align:center">$(x-6)^2+y^2=64$</p><p>One equation in a system of equations is shown above. The graph of the second equation (not shown) is a vertical line in the $xy$-plane that crosses the $x$-axis at $(3,0)$. For both $y$-coordinates of the solutions to the system of equations, what is the value of $y^2$?</p>
+@ 32 | 35 | 55 | 58
+## 926
+<table><thead><tr><th>$x$</th><th>$y$</th></tr></thead><tbody><tr><td>$-2s$</td><td>18</td></tr><tr><td>$-s$</td><td>15</td></tr><tr><td>$s$</td><td>9</td></tr></tbody></table><p>The table shows three values of $x$ and their corresponding values of $y$, where $s$ is a constant. There is a linear relationship between $x$ and $y$. Which of the following equations represents this relationship?</p>
+@ $sx+3y=12s$ | $3x+sy=12s$ | $3x+sy=12$ | $sx+3y=12$

@@ -1,0 +1,93 @@
+## 801
+<table><thead><tr><th>$x$</th><th>$y$</th></tr></thead><tbody><tr><td>-2</td><td>-21</td></tr><tr><td>0</td><td>-13</td></tr></tbody></table><p>The table gives two points on the line $y=mx+b$, where $m$ and $b$ are constants. What is $m+b$?</p>
+## 803
+In the $xy$-plane, line $r$ passes through the points $(3,12)$ and $(7,13)$. Line $s$ passes through the point $(1,2)$ and is perpendicular to line $r$. An equation of line $s$ is $ax+7y=c$, where $a$ and $c$ are constants. What is the value of $c$?
+## 804
+Lines $k$ and $l$ are perpendicular. If the point $(4,m)$ lies on line $k$ and lines $k$ and $l$ intersect at $(9,m+3)$, which of the following can lie on line $l$?
+@ $(m-6,-4)$ | $(m+9,24)$ | $(21,m-17)$ | $(24,m+12)$
+## 805
+<p style="text-align:center">$f(x)=5x+b$</p><p>For the linear function $f$, $b$ is a constant and $f(7)=35$. What is the value of $b$?</p>
+@ 0 | 1 | 5 | 7
+## 806
+<p style="text-align:center">$f(x)=3x+b$</p><p>For the linear function $f$, $b$ is a constant and $f(7)=21$. What is the value of $b$?</p>
+@ 0 | 1 | 3 | 7
+## 807
+The graph of the linear function $f$ in the $xy$-plane has a $y$-intercept of 2 and a slope of $-\frac{3}{4}$. What is the $x$-intercept of the graph of $f$?
+## 808
+What is the $x$-intercept of the graph of $y=\frac{28-x}{ax+b}$, where $a$ and $b$ are positive constants?
+@ $\left(\frac{-b}{a},0\right)$ | $\left(0,\frac{28}{b}\right)$ | $(0,-28)$ | $(28,0)$
+## 809
+<table><thead><tr><th>$x$</th><th>$f(x)$</th><th>$g(x)$</th></tr></thead><tbody><tr><td>1</td><td>4</td><td>0</td></tr><tr><td>4</td><td>6</td><td>12</td></tr><tr><td>6</td><td>4</td><td>7</td></tr><tr><td>9</td><td>1</td><td>10</td></tr><tr><td>12</td><td>9</td><td>8</td></tr></tbody></table><p>The table above shows several values of function $f$ and function $g$. According to the table, if $f(4)=a$, what is $g(a)$?</p>
+## 810
+The function $f$ is defined by $f(x)=x^2+bx+c$, where $b$ and $c$ are constants. If the $x$-intercepts of the graph of $f$ in the $xy$-plane are 3 and $-1$, what is the value of $b$?
+@ -3 | -2 | 1 | 3
+## 811
+<p style="text-align:center">$g(x)=\frac{1}{2}(3)^x$</p><p>If the given function $g$ is graphed in the $xy$-plane, where $y=g(x)$, what is the $y$-intercept of the graph?</p>
+@ $(0,0)$ | $\left(0,\frac{1}{2}\right)$ | $\left(0,\frac{3}{2}\right)$ | $(0,3)$
+## 812
+For a function $f$, $f(-12)=\frac{17}{3}$ and $f(6)=\frac{-1}{3}$. Which equation could define $f$?
+@ $f(x)=-3x-\frac{91}{3}$ | $f(x)=-3x+\frac{53}{3}$ | $f(x)=-\left(\frac{1}{3}\right)x+\frac{29}{3}$ | $f(x)=-\left(\frac{1}{3}\right)x+\frac{5}{3}$
+## 813
+In the $xy$-plane, line $l$ passes through the point $(0,0)$ and is parallel to the line represented by the equation $y=8x+1$. If line $l$ passes through the point $(6,d)$, what is the value of $d$?
+## 814
+<table><thead><tr><th>$x$</th><th>$y$</th></tr></thead><tbody><tr><td>0</td><td>-10</td></tr><tr><td>1</td><td>-4</td></tr><tr><td>2</td><td>2</td></tr></tbody></table><p>The table gives points on line $j$. Line $k$ has equation $y=4x$. At what point do the lines intersect?</p>
+@ $(5,20)$ | $(5,-44)$ | $(6,24)$ | $(6,26)$
+## 815
+The graph of $y=f(x)$ in the $xy$-plane is a line with a slope of 7. What is the slope of the graph of $y=f(x)+8$ in the $xy$-plane?
+@ 7 | 8 | 15 | 56
+## 816
+Line $t$ in the $xy$-plane has a slope of $\frac{1}{8}$ and passes through the point $(40,-9)$. Which equation defines line $t$?
+@ $y=-14x+\frac{1}{8}$ | $y=\frac{x}{8}-14$ | $y=\frac{x}{8}-9$ | $y=40x-9$
+## 817
+A line in the $xy$-plane is defined by $y=x+b$, where $b$ is a constant. This line passes through the point $(2,9)$. What is the value of $b$?
+@ 0 | 2 | 7 | 18
+## 819
+<table><thead><tr><th>$x$</th><th>$y$</th></tr></thead><tbody><tr><td>-7</td><td>$d+3$</td></tr><tr><td>-4</td><td>$4k+6d$</td></tr><tr><td>$1-3d$</td><td>8</td></tr></tbody></table><p>The table shows three values of $x$ and their corresponding values of $y$ for the linear relationship between $x$ and $y$. The $x$-intercept of the line occurs when $x=-4$. The number $d$ is a negative constant. The number $k$ is a constant. What is the value of $dk$?</p>
+## 820
+<p style="text-align:center">$g(x)=\frac{1}{7}(3)^x$</p><p>If the given function $g$ is graphed in the $xy$-plane, where $y=g(x)$, what is the $y$-intercept of the graph?</p>
+@ $(0,0)$ | $\left(0,\frac{1}{7}\right)$ | $\left(0,\frac{3}{7}\right)$ | $(0,3)$
+## 821
+In the $xy$-plane, line $l$ passes through the point $(0,0)$ and is parallel to the line represented by the equation $y=8x+4$. If line $l$ passes through the point $(6,d)$, what is the value of $d$?
+## 822
+In the $xy$-plane, what is the $y$-intercept of the line with equation $y=4x-1$?
+@ 4 | $\frac{1}{4}$ | $-\frac{1}{4}$ | -1
+## 823
+<table><thead><tr><th>$x$</th><th>$y$</th></tr></thead><tbody><tr><td>0</td><td>$r$</td></tr><tr><td>3</td><td>$r-21$</td></tr><tr><td>6</td><td>$r-42$</td></tr></tbody></table><p>The table gives a linear relationship, where $r$ is a constant. What is the slope?</p>
+@ -21 | -7 | 7 | 21
+## 824
+<table><thead><tr><th>$x$</th><th>$y$</th></tr></thead><tbody><tr><td>0</td><td>$r$</td></tr><tr><td>4</td><td>$r-24$</td></tr><tr><td>8</td><td>$r-48$</td></tr></tbody></table><p>The table gives a linear relationship, where $r$ is a constant. What is the slope?</p>
+@ -24 | -6 | 6 | 24
+## 825
+The shaded region represents the solutions to $rx+ty\ge-48$, where $r$ and $t$ are constants. The boundary line passes through $(-8,-10)$ and $(0,-12)$. What is the value of $r+t$?
+@ 8 | 5 | -5 | 7
+## 826
+<table><thead><tr><th>$x$</th><th>$y$</th></tr></thead><tbody><tr><td>-13</td><td>$28+\frac{13}{28}$</td></tr><tr><td>-1</td><td>$28+\frac{1}{28}$</td></tr><tr><td>13</td><td>$28-\frac{13}{28}$</td></tr></tbody></table><p>The table shows three points on a line. What is the $x$-intercept of the line?</p>
+@ $\left(\frac{-1}{784},0\right)$ | $(28,0)$ | $(-28,0)$ | $(784,0)$
+## 827
+Line $p$ in the $xy$-plane contains the points $(11,0)$ and $(11,11)$. Which equation defines line $p$?
+@ $x=0$ | $x=11$ | $y=0$ | $y=11$
+## 828
+What is the $x$-intercept of the graph of $y=\frac{33-x}{ax+b}$ in the $xy$-plane, where $a$ and $b$ are positive constants?
+@ $\left(\frac{-b}{a},0\right)$ | $\left(0,\frac{33}{b}\right)$ | $(0,-33)$ | $(33,0)$
+## 829
+Line $m$ in the $xy$-plane contains the points $(2,4)$ and $(0,1)$. Which of the following is an equation of line $m$?
+@ $y=2x+3$ | $y=2x+4$ | $y=\frac{3}{2}x+3$ | $y=\frac{3}{2}x+1$
+## 832
+One of the factors of $6x^4+29x^2+28$ is $ax^2+b$, where $a$ and $b$ are positive constants. Which of the following is a possible value of $ab$?
+@ 8 | 21 | 7 | 12
+## 833
+<table><thead><tr><th>$x$</th><th>$f(x)$</th></tr></thead><tbody><tr><td>-9</td><td>78</td></tr><tr><td>9</td><td>-156</td></tr><tr><td>27</td><td>-390</td></tr></tbody></table><p>The table shows values of a linear function $f$. If $f(x)=rx+s$, where $r$ and $s$ are constants, what is the value of $rs$?</p>
+## 834
+Line $p$ in the $xy$-plane contains the points $(34,0)$ and $(34,34)$. Which equation defines line $p$?
+@ $x=0$ | $x=34$ | $y=0$ | $y=34$
+## 835
+Line $\ell$ has slope 2 and $y$-intercept $-2$ in the $xy$-plane. Which of the following is an equation of line $\ell$?
+@ $y=2x+2$ | $y=2x-2$ | $y=-2x+2$ | $y=-2x-2$
+## 836
+Which of the following equations, when graphed in the $xy$-plane, would result in a line with slope of 4 that passes through the point $(0,-3)$?
+@ $y=-4x+3$ | $y=-3x+4$ | $y=4x-3$ | $y=3x-4$
+## 837
+A magnifying lens makes an object's apparent length 350% of its actual length. What type of function models apparent length in terms of actual length?
+@ Decreasing exponential | Decreasing linear | Increasing exponential | Increasing linear
+## 839
+The graph of the linear function $f$ in the $xy$-plane passes through the points $(4,0)$ and $(0,-6)$. What is the $y$-intercept of the line that is parallel to the graph of $f$ and passes through the point $(-4,0)$?
