@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 610 360" width="610" height="360">
+<rect width="610" height="360" fill="#fff"/>
+<g fill="none" stroke="#000" stroke-width="2">
+<path d="M222,283 L52,112 Q223,-96 394,112 Z"/>
+<path d="M148,215 Q223,95 298,215"/>
+<path d="M222,283 L175,228 L223,178 L270,228 Z"/>
+<path d="M205,270 L168,232 M239,270 L277,232" stroke-width="1.6"/>
+</g>
+<g fill="#fff" stroke="#000" stroke-width="1.6">
+<rect x="171" y="224" width="8" height="8" transform="rotate(45 175 228)"/>
+<rect x="219" y="174" width="8" height="8" transform="rotate(45 223 178)"/>
+<rect x="266" y="224" width="8" height="8" transform="rotate(45 270 228)"/>
+<circle cx="223" cy="233" r="7"/>
+<circle cx="222" cy="283" r="14"/>
+<rect x="218" y="279" width="8" height="8" transform="rotate(45 222 283)"/>
+</g>
+<line x1="218" y1="233" x2="228" y2="233" stroke="#000" stroke-width="1.5"/>
+<g font-family="Times, 'Times New Roman', serif" font-size="19" fill="#000">
+<text x="128" y="142">infield</text>
+<text x="326" y="261">pitcher's mound</text>
+<text x="86" y="301">baseline</text>
+<text x="294" y="301">baseline</text>
+<text x="154" y="353">home plate area</text>
+</g>
+<g fill="none" stroke="#000" stroke-width="1.4">
+<path d="M150,148 L182,190" stroke-dasharray="4 3"/>
+<path d="M324,255 L233,235"/>
+<path d="M152,298 L192,268" stroke-dasharray="3 3"/>
+<path d="M292,298 L255,266" stroke-dasharray="3 3"/>
+<path d="M222,300 L222,336" stroke-dasharray="4 3"/>
+</g>
+<path d="M233,235 l9,-1 l-6,-7 z M182,190 l-3,-9 l9,4 z" fill="#000"/>
+</svg>

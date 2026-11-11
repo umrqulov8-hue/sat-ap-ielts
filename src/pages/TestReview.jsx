@@ -3,15 +3,9 @@ import { useParams, useNavigate } from 'react-router-dom'
 import { supabase } from '../lib/supabaseClient'
 import { useLayout } from '../components/DashLayout'
 import { sanitizeHtml } from '../lib/sanitizeHtml'
+import { renderMath } from '../lib/mathHtml'
 
-function renderQuestionText(text) {
-  if (!text) return ''
-  const parts = text.split(/(<[^>]+>)/g)
-  return parts.map((part, i) => {
-    if (part.startsWith('<')) return <span key={i} dangerouslySetInnerHTML={{ __html: sanitizeHtml(part) }} />
-    return <span key={i}>{part}</span>
-  })
-}
+const mathHtml = (text) => ({ __html: renderMath(sanitizeHtml(text || '')) })
 
 export default function TestReview() {
   const { testId } = useParams()
@@ -89,7 +83,7 @@ export default function TestReview() {
                   {isCorrect ? 'CORRECT' : 'WRONG'}
                 </span>
               </div>
-              <div className="tr-q-text">{renderQuestionText(q?.question_text)}</div>
+              <div className="tr-q-text" dangerouslySetInnerHTML={mathHtml(q?.question_text)} />
               {q?.question_type === 'written' || q?.question_type === 'short_answer' ? (
                 <div className="tr-q-options">
                   <div className="tr-written-review">
@@ -117,7 +111,7 @@ export default function TestReview() {
                     return (
                       <div key={oi} className={cls}>
                         <span className="tr-opt-letter">{String.fromCharCode(65 + oi)}</span>
-                        <span className="tr-opt-text">{opt}</span>
+                        <span className="tr-opt-text" dangerouslySetInnerHTML={mathHtml(String(opt).replace(/&/g, "&amp;").replace(/</g, "&lt;"))} />
                         {isRight && <span className="tr-opt-check">&check;</span>}
                       </div>
                     )

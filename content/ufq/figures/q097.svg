@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 350" width="480" height="350">
+<rect width="480" height="350" fill="#fff"/>
+<g stroke="#000" stroke-width="2" fill="none">
+<line x1="50" y1="210" x2="368" y2="210"/>
+<line x1="208" y1="336" x2="208" y2="30"/>
+<line x1="140" y1="346" x2="280" y2="72"/>
+</g>
+<path d="M376,210 l-14,-5 v10 z M208,18 l-5,14 h10 z" fill="#000"/>
+<circle cx="250" cy="127" r="6" fill="#000"/>
+<path d="M284,100 q-6,-14 18,-16" fill="none" stroke="#000" stroke-width="1.4"/>
+<path d="M284,100 l-1,-11 l8,6 z" fill="#000"/>
+<g font-family="Times, 'Times New Roman', serif" font-size="20" fill="#000">
+<text x="268" y="140">(3, 6)</text>
+<text x="314" y="92" font-style="italic">y = f(x)</text>
+<text x="170" y="240" font-style="italic">O</text>
+<text x="390" y="217" font-style="italic">x</text>
+<text x="203" y="14" font-style="italic">y</text>
+</g>
+</svg>
