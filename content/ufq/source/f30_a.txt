@@ -1,0 +1,31 @@
+## 2702
+Note: Figure not drawn to scale. In the given figure, $BC$ is the diameter of the circle. If the length of $BC$ is equal to 132 and the length of $AB$ is equal to $\sqrt{363}$, what is the value of $\frac{BC}{BD}$?<p></p>[[fig:q2702]]
+## 2706
+$AL\parallel CM\parallel DF$, $AB\parallel EK$, $\angle FEK=20^\circ$, $\angle ABC=100^\circ$. Based on this, find $\angle DCM$.<p></p>[[fig:q2706]]
+@ 160° | 150° | 120° | 100°
+## 2707
+Not drawn to scale. In the figure shown, lines $\ell$ and $k$ are parallel and line $t$ intersects both lines. If $x>145$, which of the following must be true?<p></p>[[fig:q2707]]
+@ $y<35$ | $y>35$ | $x+y<180$ | $x+y>180$
+## 2708
+Figure not drawn to scale. For isosceles triangle $ABC$, $AB=BC=64$, the measure of angle $ABC$ is $36^\circ$, point $D$ lies on $BC$, and angle $BAC$ is bisected by $AD$. Which of the following statements must be true?<p></p>[[fig:q2708]]
+@ $AB=AC=BC$ | $AD=BD=AC$ | $BD=CD=AC$ | $AB=BD=AD$
+## 2709
+Not drawn to scale. In the figure, lines $\ell$ and $k$ are parallel and line $t$ intersects both lines. If $x>112$, which of the following must be true?<p></p>[[fig:q2709]]
+@ $y<68$ | $y>68$ | $x+y<180$ | $x+y>180$
+## 2711
+Note: Figure not drawn to scale. In the figure above, line $q$ is parallel to line $r$, and both lines are intersected by line $s$. If $y=2x+7$, what is the value of $x$?<p></p>[[fig:q2711]]
+@ 19 | 26 | 64 | 74
+## 2712
+In the figure, parallel lines $r$ and $s$ are intersected by lines $t$, $u$, and $w$. If $d=42$, $g=143$, and $h>d$, which statement about $j$ and $p$ must be true?<p></p>[[fig:q2712]]
+@ $j=p$ | $j+p=90$ | $j>p$ | $j<p$
+## 2716
+$\overline{AD}$ and $\overline{BC}$ intersect at point $D$ and angle $B$ (right angle at $A$). The measure of $\angle ABD$ is $w^\circ$, the measure of $\angle CAD$ is $z^\circ$, and $AD=186$. If $\cos w^\circ=\frac{9}{41}$, what is the value of $\tan z^\circ$?<p></p>[[fig:q2716]]
+## 2717
+Note: Figure not drawn to scale. In the rhombus shown above, $E$ is the midpoint of $\overline{BD}$. What is the measure of $\angle EAD$?<p></p>[[fig:q2717]]
+@ 20° | 35° | 40° | 70°
+## 2718
+Not drawn to scale. In the figure, line $AB$ is parallel to line $CD$, and line $AD$ intersects line $BC$ at point $E$. If $y=116$ and $z=113$, what is the value of $x$?<p></p>[[fig:q2718]]
+@ 49 | 67 | 131 | 139
+## 2719
+Figure not drawn to scale. In the figure, line $AB$ is parallel to line $CD$, and line $AD$ intersects line $BC$ at point $E$. If $y=118$ and $z=114$, what is the value of $x$?<p></p>[[fig:q2719]]
+@ 52 | 66 | 128 | 142
