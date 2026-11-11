@@ -1,0 +1,54 @@
+## 995
+<p style="text-align:center">$5x-2y=8$<br>$x=2y$</p><p>What is the value of $x$ in the system of equations above?</p>
+## 996
+<p style="text-align:center">$3r-4s=8$<br>$\frac{1}{2}r-s=2$</p><p>What is the value of $r$ in the system of linear equations above?</p>
+## 997
+In the $xy$-plane, the graph of $y=3x^2-14x$ intersects the graph of $y=x$ at the points $(0,0)$ and $(a,a)$. What is the value of $a$?
+## 998
+In the $xy$-plane, the graphs of $y=3x+10$ and $y=2x+4$ intersect at $(x,y)$. What is the value of $x$?
+## 999
+The solution to the system $-0.9y=0.8x+2.3$ and $4y=-3x+17$ is $(x,y)$. What is the value of $x$?
+## 1000
+<p style="text-align:center">$x^2+y=7$<br>$x-y=5$</p><p>Which value is a $y$-coordinate of a solution to the system of equations above?</p>
+@ -8 | -3 | -2 | 6
+## 1001
+<p style="text-align:center">$x=0.5$<br>$y=x+5.5$</p><p>In the $xy$-plane, what is the $y$-coordinate of the point of intersection of the graphs of the equations above?</p>
+## 1002
+<p style="text-align:center">$x+2y=-6$<br>$2x-y=8$</p><p>If the solution to the system of equations above is $(x,y)$, what is the value of $x-3y$?</p>
+## 1003
+<p style="text-align:center">$y\le x+8$<br>$y>-3x-8$</p><p>Which point $(x,y)$ is a solution to the system?</p>
+@ $(0,-9)$ | $(0,9)$ | $(-5,0)$ | $(5,0)$
+## 1004
+If $2w+4t=14$ and $4w+5t=25$, what is the result of $2w+3t$?
+@ 6 | 10 | 13 | 17
+## 1005
+The solution to the system $y=5$ and $x=y+6$ is $(x,y)$. What is the value of $x$?
+@ 11 | 10 | 5 | 1
+## 1006
+<p>In the given system of equations, $p$ is a constant. If the system has no solution, what is the value of $p$?</p><p style="text-align:center">$\frac{3}{2}y-\frac{1}{4}x=\frac{2}{3}-\frac{3}{2}y$<br>$\frac{1}{6}x+\frac{3}{6}=py+\frac{9}{5}$</p>
+## 1007
+<p style="text-align:center">$2x+y=8$<br>$x+4y=11$</p><p>If the $x$- and $y$-coordinates of a point in the $xy$-plane satisfy the system of equations above, what is the value of $6x+10y$?</p>
+## 1008
+<p style="text-align:center">$2x+3y=26$<br>$x+3y=19$</p><p>If $(x,y)$ satisfies the system of equations above, what is the value of $x$?</p>
+## 1009
+<p style="text-align:center">$\frac{1}{2}(2x+y)=\frac{21}{2}$<br>$y=2x$</p><p>The system of equations above has solution $(x,y)$. What is the value of $x$?</p>
+## 1010
+Isabella sells only rings and necklaces on her website. Rings sell for \$50 each, and necklaces sell for \$30 each. If Isabella sold 25 pieces of jewelry and her sales totaled \$1050, how many necklaces did Isabella sell?
+## 1011
+<p style="text-align:center">$\left(\frac{5}{2}\right)x-\left(\frac{1}{5}\right)y=48$<br>$x+2y=-12$</p><p>The solution to this system is $(x,y)$. What is $x+y$?</p>
+@ -12 | -3 | 3 | 12
+## 1012
+<p style="text-align:center">$x+y=9$<br>$3x+y=17$</p><p>If $(x,y)$ is the solution to the system of equations above, what is the value of $xy$?</p>
+## 1013
+<p style="text-align:center">$x-2y=3$<br>$2x-2y=8$</p><p>The ordered pair $(x,y)$ satisfies the system of equations above. What is the value of $x$?</p>
+## 1014
+<p style="text-align:center">$-x+y=-3.5$<br>$x+3y=9.5$</p><p>If $(x,y)$ satisfies the system of equations above, what is the value of $y$?</p>
+## 1015
+In the ancient Roman measurement system, a leuga was a unit of length equal to 7,500 pedes. In this measurement system, how many pedes were equivalent to 2.5 leugas?
+## 1016
+<p style="text-align:center">$y=x-3$<br>$y=-2x+9$</p><p>If $(a,b)$ are the coordinates of the point of intersection of the two lines in the $xy$-plane represented by the equations above, what is the value of $a$?</p>
+## 1017
+<p style="text-align:center">$2x-y=-4$<br>$2x+y=4$</p><p>For the solution of the systems equations above, what is the value of $x$?</p>
+@ -4 | -2 | 0 | 2
+## 1018
+When Michael swims he burns 9 calories per minute, and when he walks he burns 4 calories per minute. If Michael spends a total of 4 hours walking and swimming and burns a total of 1600 calories, how many <u>minutes</u> did he spend walking?

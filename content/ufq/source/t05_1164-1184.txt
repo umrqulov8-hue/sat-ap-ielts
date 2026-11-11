@@ -1,0 +1,54 @@
+## 1165
+The selling price of an item is \$120.00, and at this price 0 are sold. For each \$1.50 decrease in price, 1 more item is sold. If the revenue is \$1,966.50, which could be the number of items sold?
+@ 23 | 40 | 1,231 | 2,400
+## 1166
+A movie theater charges \$11 for each full-price ticket and \$8.25 for each reduced-price ticket. For one movie showing, the theater sold a total of 214 full-price and reduced-price tickets for \$2,145. Which of the following systems of equations could be used to determine the number of full-price tickets, $f$, and the number of reduced-price tickets, $r$, sold?
+@ $f+r=2{,}145$ and $11f+8.25r=214$ | $f+r=214$ and $11f+8.25r=2{,}145$ | $f+r=214$ and $8.25f+11r=2{,}145$ | $f+r=2{,}145$ and $8.25f+11r=214$
+## 1168
+A study established that in a certain park, there are at least 141 squirrels, consisting of red squirrels and gray squirrels. The study also established that there are at least 4 times as many gray squirrels as red squirrels in this park. Which of the following systems of inequalities best represents this situation, where $g$ is the number of gray squirrels in this park and $r$ is the number of red squirrels in this park?
+@ $g+r\le141$ and $g\ge4r$ | $g+r\le141$ and $g\le4r$ | $g+r\ge141$ and $g\ge4r$ | $g+r\ge141$ and $g\le4r$
+## 1169
+A sports drink is sold in cans with capacities of 10 fluid ounces and 14 fluid ounces. A shipment of 54 cans of these sizes, totaling 636 fluid ounces of the sports drink, arrives at a store. Which of the following systems of equations could be used to determine the number of cans of each size in the shipment, where $x$ is the number of 10-fluid-ounce cans and $y$ is the number of 14-fluid-ounce cans?
+@ $10x+14y=636$ and $x+y=54$ | $10x+14y=54$ and $x+y=636$ | $24xy=636$ and $x+y=54$ | $24xy=54$ and $x+y=636$
+## 1170
+<p>$3x=18y-45$</p><p>One equation in a system is given. The system has no solution. Which could be the second equation?</p>
+@ $x=2y$ | $\frac{1}{3}x=2y$ | $x=6y-15$ | $\frac{1}{3}x=6y-15$
+## 1172
+<p style="text-align:center">$y=x-c$<br>$y=-6(x-12)^2$</p><p>In the given system of equations, $c$ is a constant. The system has two distinct real solutions. Which of the following could be the value of $c$?</p>
+@ 7 | 11 | $\frac{287}{24}$ | 17
+## 1173
+The combined original price for a towel and chair is \$40. After a 35% discount to the towel and a 15% discount to the chair are applied, the combined sale price for the two items is \$31. Which system of equations gives the original price $t$, in dollars, of the towel and the original price $c$, in dollars, of the chair?
+@ $t+c=40$ and $0.85t+0.65c=31$ | $t+c=40$ and $0.15t+0.35c=31$ | $t+c=40$ and $0.65t+0.85c=31$ | $t+c=40$ and $0.35t+0.15c=31$
+## 1174
+A farmer sold 108 pounds of produce that consisted of $z$ pounds of zucchini and $c$ pounds of cucumbers. The farmer sold the zucchini for \$1.69 per pound and the cucumbers for \$0.99 per pound and collected a total of \$150.32. Which of the following systems of equations can be used to find the number of pounds of zucchini that were sold?
+@ $z+c=150.32$ and $1.69z+0.99c=108$ | $z+c=108$ and $1.69z+0.99c=150.32$ | $z+c=108$ and $0.99z+1.69c=150.32$ | $z+c=150.32$ and $0.99z+1.69c=108$
+## 1175
+The graph of the function $f$, where $y=f(x)$, is a line that passes through the points $(0,150)$ and $(10,320)$. It gives the total cost $y$, in dollars, for a certain video game system and $x$ games. What is the best interpretation of the slope of the graph in this context?
+@ Each game costs \$17. | The video game system costs \$17. | Each game costs \$150. | The video game system costs \$150.
+## 1176
+<p style="text-align:center">$x^2+y^2=36$<br>$y=mx+\frac{b}{4}$</p><p>In the given system of equations, $m$ and $b$ are negative constants. In the $xy$-plane, the graphs of the equations in the given system intersect at the point $(-5,y)$, where $y<0$. Which expression represents the value of $b$?</p>
+@ $-\frac{5m}{4}+\frac{\sqrt{11}}{4}$ | $\frac{5m}{4}-\frac{\sqrt{11}}{4}$ | $-20m+4\sqrt{11}$ | $20m-4\sqrt{11}$
+## 1177
+A soccer team needs new equipment. The team will buy soccer balls for \$19.50 each and shin guards for \$10.25 per pair. The soccer team cannot spend more than \$550 on this equipment. Every player needs a pair of shin guards, so the team will buy at least 12 pairs. Under these conditions, which system of inequalities gives the possible number of soccer balls, $x$, and possible number of pairs of shin guards, $y$, the team can buy?
+@ $10.25x+19.50y\ge550$ and $x\ge12$ | $10.25x+19.50y\le550$ and $x\ge12$ | $19.50x+10.25y\ge550$ and $y\ge12$ | $19.50x+10.25y\le550$ and $y\ge12$
+## 1178
+Two types of tickets were sold for a concert held at an amphitheater. Tickets to sit on a bench during the concert cost \$75 each, and tickets to sit on the lawn during the concert cost \$40 each. Organizers of the concert announced that 350 tickets had been sold and that \$19,250 had been raised through ticket sales alone. Which of the following systems of equations could be used to find the number of tickets for bench seats, $B$, and the number of tickets for lawn seats, $L$, that were sold for the concert?
+@ $(75B)(40L)=1{,}950$ and $B+L=350$ | $40B+75L=19{,}250$ and $B+L=350$ | $75B+40L=350$ and $B+L=19{,}250$ | $75B+40L=19{,}250$ and $B+L=350$
+## 1179
+A software company is selling a new game in a standard edition and a collector's edition. The box for the standard edition has a volume of 20 cubic inches, and the box for the collector's edition has a volume of 30 cubic inches. The company receives an order for 75 copies of the game, and the total volume of the order to be shipped is 1,870 cubic inches. Which of the following systems of equations can be used to determine the number of standard edition games, $s$, and collector's edition games, $c$, that were ordered?
+@ $75-s=c$ and $20s+30c=1{,}870$ | $75-s=c$ and $30s+20c=1{,}870$ | $s-c=75$ and $25(s+c)=1{,}870$ | $s-c=75$ and $30s+20c=1{,}870$
+## 1180
+The graph of the function $f$, where $y=f(x)$, is a line that passes through the points $(0,150)$ and $(10,330)$. It gives the total cost $y$, in dollars, for a certain video game system and $x$ games. What is the best interpretation of the slope of the graph in this context?
+@ Each game costs \$18. | The video game system costs \$18. | Each game costs \$150. | The video game system costs \$150.
+## 1181
+<p style="text-align:center">$50x+49y=c$<br>$49x-50y=c$</p><p>In the given system of equations, $c$ is a positive constant. Which of the following could be the point where the graphs of the equations in this system intersect in the $xy$-plane?</p>
+@ $\left(10,-\frac{10}{99}\right)$ | $(10,990)$ | $\left(c,\frac{c}{99}\right)$ | $(c,0)$
+## 1182
+<p>$30x=1{,}800y-2{,}700$</p><p>One of the two equations in a system of linear equations is given. The system has no solution. Which equation could be the second equation in this system?</p>
+@ $\frac{1}{30}x=2y$ | $\frac{1}{30}x=60y-90$ | $x=2y$ | $x=60y-90$
+## 1183
+<p>$39(x-n)=39y+39n$</p><p>One of the equations in a system of two linear equations is given, where $n$ is a positive constant. The system has no solution. Which equation could be the second equation in this system?</p>
+@ $4x-4y=8n$ | $4x+4y=4n$ | $4x+4y=8n$ | $4x-4y=4n$
+## 1184
+<p>$7x+8y=3$</p><p>The given equation is one equation in a system of two linear equations. If the system of equations has at least one solution, which of the following equations could be the other equation in the system?</p><p>I. $10.5x+12y=4.5$<br>II. $10.5x-12y=4.5$</p>
+@ II only | Neither I nor II | I and II | I only

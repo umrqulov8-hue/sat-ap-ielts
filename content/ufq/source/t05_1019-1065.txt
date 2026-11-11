@@ -1,0 +1,116 @@
+## 1019
+<p>In the given system of equations, $t$ is a constant. If the system has no solution, what is the value of $t$?</p><p style="text-align:center">$4x-6y=10y+2$<br>$ty=\frac{1}{2}+2x$</p>
+## 1020
+The system $y=24x^2+17$ and $y=rx$, where $r$ is a constant, has two real solutions. If $r$ is a negative integer, what is the greatest possible value of $r$?
+## 1021
+<p style="text-align:center">$y<x+8$<br>$y>-7x-8$</p><p>Which point $(x,y)$ is a solution to the system of inequalities?</p>
+@ $(0,-9)$ | $(0,9)$ | $(-3,0)$ | $(3,0)$
+## 1022
+Which ordered pair $(x,y)$ is the solution to the system $y=(x-2)(x+7)$ and $y=9x-18$?
+@ $(2,0)$ | $(2,-7)$ | $(0,2)$ | $(-7,2)$
+## 1023
+<p>In the given system of equations, $k$ and $m$ are constants. The system has a solution of $(2,y)$. What is the value of $k$?</p><p style="text-align:center">$13kx+17my=122$<br>$11kx+5my=-22$</p>
+## 1024
+<p style="text-align:center">$\frac{3}{2}x-\frac{1}{3}y=14$<br>$x+2y=-4$</p><p>If $(x,y)$ is the solution to the system of equations shown above, what is the value of $x+y$?</p>
+@ -4 | -2 | 2 | 4
+## 1025
+<p style="text-align:center">$y=x^2-4x+4$<br>$y=4-x$</p><p>If the ordered pair $(x,y)$ satisfies the system of equations above, what is one possible value of $x$?</p>
+## 1026
+In the ancient Roman measurement system, a leuga was a unit of length that was equal to 7,500 pedes. In this measurement system, how many pedes were equivalent to 3.8 leugas?
+## 1027
+<p style="text-align:center">$3(x+y)=12$<br>$\frac{x}{2}=3$</p><p>If $(x,y)$ is a solution to the system of equations above, what is the value of $y$?</p>
+@ -6 | -2 | 2 | 6
+## 1028
+<p style="text-align:center">$\frac{3}{4}x-\frac{1}{2}y=12$<br>$ax-by=9$</p><p>The system of equations above has no solutions. If $a$ and $b$ are constants, what is the value of $\frac{a}{b}$?</p>
+## 1029
+<p style="text-align:center">$y-1=2(x-3)^2$<br>$y-1=20(x-3)$</p><p>The solutions $(x,y)$ to the given system of equations are $(a,b)$ and $(c,d)$. What is the value of $a+c$?</p>
+## 1030
+<p style="text-align:center">$x=2y-5$<br>$y=-2x+5$</p><p>The ordered pair $(x,y)$ satisfies the system of equations above. What is the value of $x+y$?</p>
+@ -5 | 0 | $\frac{5}{2}$ | 4
+## 1031
+<p style="text-align:center">$4x+4y=6$<br>$6x-4y=60$</p><p>In the $xy$-plane, the graphs of the given equations intersect at $(x,y)$. What is the value of $x+y$?</p>
+## 1032
+The score on a trivia game is obtained by subtracting the number of incorrect answers from twice the number of correct answers. If a player answered 40 questions and obtained a score of 50, how many questions did the player answer correctly?
+## 1033
+<p style="text-align:center">$y=5x+18$<br>$y=5x-18$</p><p>How many solutions does the system have?</p>
+@ Zero | Exactly one | Exactly two | Infinitely many
+## 1034
+<p style="text-align:center">$22x-21y=43$<br>$5x+14y=59$</p><p>The solution to the given system of equations is $(x,y)=\left(\frac{p}{826},\frac{w}{59}\right)$, where $p$ and $w$ are integers. What is the value of $p+w$?</p>
+## 1035
+<p style="text-align:center">$x+y=10$<br>$x-y=8$</p><p>If $(x_1,y_1)$ is the solution to the system of equations above, what is the value of $y_1$?</p>
+@ 9 | 2 | 1 | -1
+## 1036
+<p style="text-align:center">$y=24x^2+17$<br>$y=rx$</p><p>The system has two distinct real solutions. If $r$ is a negative integer, what is its greatest possible value?</p>
+## 1037
+A harvest festival charges a fixed cost per van for parking and an amount per person to enter the festival. One van with 3 people in it is charged \$22, and another with 5 people is charged \$32. How many people are in a van that is charged \$47 to enter the festival?
+## 1038
+<p style="text-align:center">$2x-\frac{1}{4}y=15$<br>$\frac{1}{2}x+y=8$</p><p>If $(x,y)$ satisfies the system of equations above, what is the value of $x$?</p>
+@ 2 | 6 | 8 | 10
+## 1039
+At a theater, adult tickets for a play cost \$15 each and child tickets cost \$10 each. If 300 tickets were sold, and the sale of the tickets generated between \$3575 and \$3600 inclusive, what is a possible number of child tickets that were sold?
+## 1040
+<p style="text-align:center">$2x-y=8$<br>$x+2y=4$</p><p>For the system of equations above, what is the value of $x+y$?</p>
+@ -1 | 4 | 5 | 20
+## 1041
+<p style="text-align:center">$4x+y=8$<br>$x^2+y=4$</p><p>If the ordered pair $(x,y)$ is a solution of the system of equations above, what is the value of $x$?</p>
+@ -6 | -2 | 2 | 6
+## 1042
+<p>In the given system of equations, $w$ is a constant. The system has only one solution. Find the value that $w$ is not equal to.</p><p style="text-align:center">$-32x+18y+150=15y+4x$<br>$52+\frac{w}{3}x+18y=-32$</p>
+## 1043
+<p style="text-align:center">$y=5$<br>$x=y+6$</p><p>The solution to the given system of equations is $(x,y)$. What is the value of $x$?</p>
+@ 11 | 6 | 5 | 1
+## 1045
+In the $xy$-plane, the equations $x+2y=10$ and $3x+6y=c$ represent the same line for some constant $c$. What is the value of $c$?
+## 1046
+<p>In the system of equations below, $a$ and $c$ are constants.</p><p style="text-align:center">$ax+y=c$<br>$\frac{1}{2}x+\frac{1}{3}y=\frac{1}{6}$</p><p>If the system of equations has an infinite number of solutions $(x,y)$, what is the value of $a$?</p>
+## 1047
+<p style="text-align:center">$y=2x^2-12x+20$<br>$y+3=0$</p><p>How many solutions does the system have?</p>
+@ Exactly 1 | Exactly 2 | Exactly 3 | None
+## 1048
+<p style="text-align:center">$2x+5y=9$<br>$6x+15y=27$</p><p>How many solutions does this system have?</p>
+@ Exactly one | Exactly two | Infinitely many | Zero
+## 1049
+The solution to the system $x+3y=18$ and $5x+y=3$ is $(x,y)$. What is the value of $6x+4y$?
+@ 9 | 15 | 21 | 36
+## 1050
+In the $xy$-plane, the lines with equations $4x-8y=16$ and $3x+3y=30$ intersect at the point $(x,y)$. What is the value of $x+y$?
+## 1051
+<p style="text-align:center">$x+y=21$<br>$x-2y=-3$</p><p>According to the system of equations above, what is the value of $x$?</p>
+@ 6 | 8 | 13 | 15
+## 1052
+<p style="text-align:center">$4x+3y=11$<br>$3x+2y=7$</p><p>Which ordered pair, $(x,y)$, is the solution to the system of equations above?</p>
+@ $(5,-1)$ | $(3,1)$ | $(1,2)$ | $(-1,5)$
+## 1053
+<p style="text-align:center">$y=x^2$<br>$2y+6=2(x+3)$</p><p>If $(x,y)$ is a solution of the system of equations above and $x>0$, what is the value of $xy$?</p>
+@ 1 | 2 | 3 | 9
+## 1054
+<p>In the system of equations above, $k$ is a constant. For what value of $k$ does the system of equations have infinitely many solutions?</p><p style="text-align:center">$-3x+\frac{1}{2}y=\frac{2}{3}$<br>$-9x+\frac{3}{2}y=k$</p>
+## 1055
+<p>In the given system of equations, $h$ is a constant. If the system has no solution, what is the value of $h$?</p><p style="text-align:center">$8x-3y=3y+9$<br>$hy=2+8x$</p>
+## 1056
+<p>In the given system of equations, $k$ is a constant. If the system has exactly one distinct real solution, what is the value of $k$?</p><p style="text-align:center">$y=x^2-8x+21$<br>$y=2x+k$</p>
+## 1057
+<p style="text-align:center">$y=x^2+2x+1$<br>$x+y+1=0$</p><p>If $(x_1,y_1)$ and $(x_2,y_2)$ are the two solutions to the system of equations above, what is the value of $y_1+y_2$?</p>
+@ -3 | -2 | -1 | 1
+## 1058
+<p style="text-align:center">$w=2x^2$<br>$y=4x^2$</p><p>The equations above define $w$ and $y$ in terms of $x$. What is $3w-y$ in terms of $x$?</p>
+@ $x^2$ | $2x^2$ | $5x^2$ | $6x^2$
+## 1059
+<p>In the given system of equations, $h$ is a constant. If the system has no solution, what is the value of $h$?</p><p style="text-align:center">$5x-3y=3y+11$<br>$hy=6+5x$</p>
+## 1060
+<p style="text-align:center">$19x-21y=31$<br>$7x+14y=59$</p><p>The solution is $(x,y)=\left(\frac{p}{59},\frac{w}{826}\right)$, where $p$ and $w$ are integers. What is $p$?</p>
+## 1061
+<p style="text-align:center">$3x+2y=10$<br>$18x+12y=60$</p><p>How many solutions does this system have?</p>
+@ Exactly one | Exactly two | Infinitely many | Zero
+## 1062
+The sum of two different numbers $x$ and $y$ is 70, and the difference when the smaller number is subtracted from the larger number is 30. What is the value of $xy$?
+@ 100 | 210 | 1,000 | 2,100
+## 1063
+<p style="text-align:center">$x+47=y$<br>$(x+47)^2=y$</p><p>A solution to the given system of equations is $(x,y)$. What is a possible value of $x$?</p>
+@ 47 | 1 | 0 | -46
+## 1064
+If the equations $-10x+y=13$ and $10x+y=13$ are graphed in the $xy$-plane, at what point $(x,y)$ do the graphs intersect?
+@ $(0,13)$ | $(0,10)$ | $(10,0)$ | $(13,0)$
+## 1065
+<p style="text-align:center">$y<21-7x$<br>$\frac{y}{7}>8$</p><p>Which inequality describes the possible values of $x$?</p>
+@ $x>3$ | $x<3$ | $x>-5$ | $x<-5$

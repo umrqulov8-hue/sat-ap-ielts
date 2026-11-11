@@ -1,0 +1,67 @@
+## 1135
+<p style="text-align:center">$3x=y$<br>$3x=36-y$</p><p>Based on the system of equations above, what is the value of $y$?</p>
+@ 9 | 12 | 15 | 18
+## 1136
+<p style="text-align:center">$y=4x^2+47$<br>$y=px+43$</p><p>In the given system of equations, $p$ is a positive constant. The graphs of the equations in the given system intersect at exactly one point, $(x,y)$, in the $xy$-plane. What is the value of $x$?</p>
+@ 1 | 8 | 51 | 90
+## 1138
+<p style="text-align:center">$\frac{1}{2}x=a$<br>$x+y=5a$</p><p>In the system of equations above, $a$ is a constant such that $0<a<\frac{1}{3}$. If $(x,y)$ is a solution to the system of equations, what is one possible value of $y$?</p>
+## 1139
+<p>$10x+35y=11$</p><p>A system containing this equation has more than one solution. Which could be its other equation?</p><p>I. $12x+42y=11$<br>II. $35x+10y=11$</p>
+@ I only | II only | I and II | Neither I nor II
+## 1140
+A home improvement store sells indoor paint for \$20 a can and outdoor paint for \$30 a can. A customer spends \$260 on cans of indoor and outdoor paint. If the customer buys 2 fewer cans of indoor paint than cans of outdoor paint, how many cans of indoor paint did the customer buy?
+@ 4 | 5 | 6 | 7
+## 1141
+<p style="text-align:center">$17x+16y=c$<br>$16x-17y=c$</p><p>In this system, $c$ is a positive constant. Which point could be the intersection of the two graphs?</p>
+@ $\left(10,\frac{-10}{33}\right)$ | $(10,330)$ | $\left(c,\frac{c}{33}\right)$ | $(c,0)$
+## 1142
+Between 1497 and 1500, Amerigo Vespucci embarked on two voyages to the New World. According to Vespucci's letters, the first voyage lasted 43 days longer than the second voyage, and the two voyages combined lasted a total of 1,003 days. How many days did the second voyage last?
+@ 460 | 480 | 520 | 540
+## 1143
+A hotel has rooms with a balcony that cost \$100 per night to rent and rooms without a balcony that cost \$80 per night to rent. On a given night, the hotel received \$6,800 from renting both types of rooms. If a total of 76 rooms were rented, how many rooms with a balcony were rented on that night?
+@ 34 | 36 | 38 | 40
+## 1145
+<p style="text-align:center">$2x+3y=5$<br>$4x+cy=8$</p><p>In the system of equations above, $c$ is a constant. For what value of $c$ will there be no solution $(x,y)$ to the system of equations?</p>
+@ 3 | 4 | 5 | 6
+## 1146
+A system of a linear equation and a quadratic equation is graphed in the $xy$-plane. The graph of the linear equation is the horizontal line $y=3$, and the graph of the quadratic equation is a downward-opening parabola with vertex $(-5,3)$. What is the solution $(x,y)$ to this system?
+@ $(0,3)$ | $(0,5)$ | $(-5,3)$ | $(5,-3)$
+## 1147
+<p>$7x+8y=3$</p><p>The given equation is one equation in a system of two linear equations. If the system of equations has at least one solution, which of the following equations could be the other equation in the system?</p><p>I. $14x+16y=12$<br>II. $14x+16y=6$</p>
+@ I only | II only | I and II | Neither I nor II
+## 1148
+<p style="text-align:center">$x^2+y^2=49$<br>$y=mx+\frac{b}{3}$</p><p>In this system, $m$ and $b$ are negative constants. The graphs intersect at $(-4,y)$, where $y<0$. Which expression equals $b$?</p>
+@ $12m-3\sqrt{33}$ | $-12m+3\sqrt{33}$ | $\frac{4m}{3}-\frac{\sqrt{33}}{3}$ | $-\frac{4m}{3}+\frac{\sqrt{33}}{3}$
+## 1149
+<p style="text-align:center">$y=x^2+x-2$<br>$x+y=1$</p><p>If $(x,y)$ is a solution of the system of equations above, which of the following is a possible value of $xy$?</p>
+@ 7 | 1 | -1 | -12
+## 1150
+<p style="text-align:center">$3x-y=-2$<br>$2x^2-y=0$</p><p>If $(x,y)$ is a solution to the system of equations above, which of the following is a possible value of $xy$?</p>
+@ 10 | 12 | 14 | 16
+## 1151
+A manager at a toy store tracks the sales and profits of two toys. Each unit of Toy A costs the store \$12 and sells for \$16. Each unit of Toy B costs the store \$6 and sells for \$9. If the store sells a total of 25 units between Toy A and Toy B, what is the minimum number of units of Toy A sold that would give the store a profit of at least \$90? (Profit is total sales minus total cost.)
+@ 10 | 15 | 23 | 30
+## 1152
+<p style="text-align:center">$x^2-6x+11=y$<br>$x=y+1$</p><p>The system of equations above is graphed in the $xy$-plane. Which of the following is the $y$-coordinate of an intersection point $(x,y)$ of the graphs of the two equations?</p>
+@ -4 | -2 | 2 | 4
+## 1153
+A system of linear equations is given: $y=6$ and $y=-4x+2$. What is the solution $(x,y)$ to the system?
+@ $(-1,6)$ | $(1,6)$ | $(6,-1)$ | $(6,22)$
+## 1155
+<p style="text-align:center">$6x+y=3$<br>$y=5x+1$</p><p>In the solution $(x,y)$ to the system of equations above, what is the value of $x$?</p>
+@ -2 | $\frac{2}{11}$ | $\frac{4}{11}$ | 4
+## 1156
+<table><thead><tr><th>Depth $d$ (feet)</th><th>Pressure $p$ (pounds per square inch)</th></tr></thead><tbody><tr><td>11</td><td>20</td></tr><tr><td>33</td><td>30</td></tr></tbody></table><p>The table above gives the pressure on an object at two depths under the surface of a body of water. The formula $p=a+kd$ gives the pressure $p$, in pounds per square inch, exerted on an object at depth $d$, in feet, where $a$ and $k$ are constants. What is the value of $k$?</p>
+@ $\frac{5}{11}$ | $\frac{11}{5}$ | 5 | 11
+## 1159
+Tarun sold 33 sweatshirts and hats. He sold $s$ sweatshirts for \$24.50 each and $h$ hats for \$13.00 each. He sold 3 fewer sweatshirts than hats and earned a total of \$601.50. Which system represents this situation?
+@ $s+s-3=33$ and $24.50s+13.00h=601.50$ | $h+h+3=33$ and $13.00s+24.50h=601.50$ | $s+s+3=33$ and $13.00s+24.50h=601.50$ | $h+h-3=33$ and $24.50s+13.00h=601.50$
+## 1160
+<p style="text-align:center">$3x=2+8y$<br>$-3x=-5+8y$</p><p>Consider the system of linear equations above. What is the value of $6x$?</p>
+@ $\frac{7}{2}$ | 7 | 14 | 21
+## 1161
+<p>In the given system of equations, $p$ is a constant. If the system has no solution, what is the value of $p$?</p><p style="text-align:center">$\frac{5}{16}x+\frac{7}{16}y=\frac{8}{7}-\frac{7}{14}y$<br>$\frac{5}{6}x+\frac{7}{6}=py+\frac{3}{4}$</p>
+## 1163
+In a soccer league, each team received 3 points for a win, 1 point for a tie, and 0 points for a loss. The Blue Jersey team has no losses and a total of 36 points after playing 18 games. Which system of equations could be used to solve for the number of wins and ties, where $w$ is the number of wins and $t$ is the number of ties?
+@ $3w+t=36$ and $w+t=18$ | $3w+t=18$ and $w+t=36$ | $3w+3t=36$ and $w+t=18$ | $3w+3t=12$ and $w+t=18$

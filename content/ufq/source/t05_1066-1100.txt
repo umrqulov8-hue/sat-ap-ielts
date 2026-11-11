@@ -1,0 +1,102 @@
+## 1066
+<p style="text-align:center">$y=x+6$<br>$y=7(x+6)^2$</p><p>A solution to the given system of equations is $(x,y)$. What is one possible value of $x$?</p>
+@ -7 | -6 | 6 | 13
+## 1067
+A fashion buyer for a large retail store purchased 315 items directly from the manufacturer for a total of \$6000. Some of the items were dresses purchased for \$25 each, and the rest were shirts purchased for \$10 each. How many more dresses than shirts did the buyer purchase?
+## 1068
+<p style="text-align:center">$2x+5y=7$<br>$8x+20y=28$</p><p>For every real $r$, which point lies on both graphs?</p>
+@ $\left(r,\frac{-5r}{2}+\frac{7}{2}\right)$ | $\left(r,\frac{2r}{5}+\frac{7}{5}\right)$ | $\left(\frac{r}{4}+7,\frac{-r}{4}+28\right)$ | $\left(\frac{-5r}{2}+\frac{7}{2},r\right)$
+## 1069
+<p style="text-align:center">$y=8x$<br>$y=x^2+16$</p><p>If $(x,y)$ is the solution of the system of equations above, what is the value of $x$?</p>
+## 1070
+<p style="text-align:center">$y\le36-6x$<br>$\frac{y}{6}>4$</p><p>Which inequality describes the possible values of $x$ in this system?</p>
+@ $x<2$ | $x>2$ | $x<-2$ | $x>-2$
+## 1071
+<p style="text-align:center">$y=24x^2+17$<br>$y=rx$</p><p>The given system of equations, where $r$ is a constant, has two distinct real solutions. If $r$ is a negative integer, what is the greatest possible value of $r$?</p>
+## 1072
+<p style="text-align:center">$x+2y=16$<br>$0.5x-y=10$</p><p>The solution to the system of equations above is $(x,y)$. What is the value of $x$?</p>
+@ -2 | 2 | 18 | 36
+## 1073
+<p style="text-align:center">$y-7x=13$<br>$8x=3y$</p><p>Which ordered pair $(x,y)$ is the solution to the system of equations above?</p>
+@ $(-8,-3)$ | $(-3,-8)$ | $\left(1,\frac{3}{8}\right)$ | $\left(\frac{8}{3},1\right)$
+## 1074
+<p style="text-align:center">$x+2=10$<br>$(x+2)^2=y$</p><p>Which ordered pair $(x,y)$ is a solution to the given system of equations?</p>
+@ $(8,100)$ | $(8,8)$ | $(8,20)$ | $(8,10)$
+## 1075
+<p style="text-align:center">$x=y-3$<br>$\frac{x}{2}+2y=6$</p><p>Which ordered pair $(x,y)$ satisfies the system of equations shown above?</p>
+@ $(-3,0)$ | $(0,3)$ | $(6,-3)$ | $(36,-6)$
+## 1076
+<p style="text-align:center">$y=x^2-2x+6$<br>$y=2x+2$</p><p>In the $xy$-plane, the graphs of the two equations above intersect at $(a,b)$. What is the value of $b$?</p>
+@ 0 | 2 | 4 | 6
+## 1077
+<p style="text-align:center">$7x+3y=8$<br>$6x-3y=5$</p><p>For the solution $(x,y)$ to the system of equations above, what is the value of $x-y$?</p>
+@ $-\frac{4}{3}$ | $\frac{2}{3}$ | $\frac{4}{3}$ | $\frac{22}{3}$
+## 1078
+<p style="text-align:center">$x^2+y+2=2$<br>$16x+64-y=0$</p><p>The solution to the given system of equations is $(x,y)$. What is the value of $x$?</p>
+@ -64 | -8 | 4 | 16
+## 1079
+If the equations $-9x+y=20$ and $9x+y=20$ are graphed in the $xy$-plane, at what point $(x,y)$ do the graphs intersect?
+@ $(0,20)$ | $(0,9)$ | $(9,0)$ | $(20,0)$
+## 1080
+<p style="text-align:center">$y=x+2$<br>$y=x^2$</p><p>A system consisting of a linear equation and a quadratic equation is shown above. If $(x,y)$ is a solution to the system, which of the following is a possible value of $x$?</p>
+@ -2 | -1 | 0 | 1
+## 1081
+<p style="text-align:center">$3x+5y=10$<br>$cx+10y=12$</p><p>In the system of equations above, $c$ is a constant. If the system has no solution, what is the value of $c$?</p>
+@ -2 | 2 | 4 | 6
+## 1082
+<p style="text-align:center">$x+2=11$<br>$(x+2)^2=y$</p><p>Which ordered pair $(x,y)$ is a solution to the given system of equations?</p>
+@ $(9,121)$ | $(9,22)$ | $(9,9)$ | $(9,11)$
+## 1083
+<p style="text-align:center">$y=2x+4$<br>$y=(x-3)(x+2)$</p><p>The system of equations above is graphed in the $xy$-plane. At which of the following points do the graphs of the equations intersect?</p>
+@ $(-3,-2)$ | $(-3,2)$ | $(5,-2)$ | $(5,14)$
+## 1084
+An online bookstore sells novels and magazines. Each novel sells for \$4, and each magazine sells for \$1. If Sadie purchased a total of 11 novels and magazines that have a combined selling price of \$20, how many novels did she purchase?
+@ 2 | 3 | 4 | 5
+## 1085
+<p style="text-align:center">$x^2+y^2=104$<br>$y-5x=0$</p><p>If the ordered pair $(x,y)$ is a solution to the system of equations above, and $x<0$, what is the value of $y$?</p>
+@ -20 | -10 | -5 | -2
+## 1086
+<p style="text-align:center">$x^2+y=4x-3$<br>$y=1-2x$</p><p>If $(x_1,y_1)$ and $(x_2,y_2)$ are two distinct solutions of the system of equations above, what is the value of $|x_1-x_2|$?</p>
+@ 2 | 6 | $\sqrt{20}$ | $\sqrt{44}$
+## 1087
+<p style="text-align:center">$3x+7y=14$<br>$ax+28y=56$</p><p>In the system of the equation above, $a$ is a constant. If the system has infinitely many solutions, what is the value of $a$?</p>
+@ 2 | 3 | 4 | 12
+## 1088
+<p style="text-align:center">$y=x^2+3x-7$<br>$y-5x+8=0$</p><p>How many solutions are there to the system of equations above?</p>
+@ There are exactly 4 solutions. | There are exactly 2 solutions. | There is exactly 1 solution. | There are no solutions.
+## 1089
+<p style="text-align:center">$x^2+y^2=153$<br>$y-4x=0$</p><p>A solution to the given system of equations is $(x,y)$, where $x<0$. What is the value of $y$?</p>
+@ -36 | -12 | -4 | -3
+## 1090
+<p style="text-align:center">$y-x=20$<br>$y=x^2-18x$</p><p>The graphs of the equations in the given system intersect at the point $(x,y)$ in the $xy$-plane. What is a possible value of $y$?</p>
+@ 20 | 21 | 39 | 40
+## 1091
+An artist made 11 pieces of pottery using 36 pounds of clay. The pottery included only bowls and vases. Each bowl used 2 pounds of clay and each vase used 4 pounds of clay. How many vases did the artist make?
+@ 4 | 5 | 6 | 7
+## 1092
+<p style="text-align:center">$2x+5y=1$<br>$3x+7.5y=d$</p><p>In the system of equations, $d$ is a constant. If the system has infinitely many solutions $(x,y)$, what is the value of $d$?</p>
+@ 1.5 | 2.5 | 3.5 | 4.5
+## 1093
+In the $xy$-plane, the graph of $y=4x$ intersects the graph of $y=x^2-45$ at two points. What is the sum of the $x$-coordinates of the two points of intersection?
+@ -45 | -5 | 4 | 9
+## 1094
+<p style="text-align:center">$y-x=32$<br>$y=x^2-30x$</p><p>The graphs of the equations in the given system intersect at the point $(x,y)$ in the $xy$-plane. What is a possible value of $y$?</p>
+@ 32 | 33 | 63 | 64
+## 1095
+<p style="text-align:center">$y=5x+1$<br>$y=x^2+3x+2$</p><p>What is the $y$-coordinate of the point of intersection, in the $xy$-plane, of the graphs of the equations above?</p>
+@ 1 | 2 | $\frac{9}{4}$ | 6
+## 1096
+An artist made 14 pieces of pottery using 48 pounds of clay. The pottery included only bowls and vases. Each bowl used 3 pounds of clay and each vase used 5 pounds of clay. How many vases did the artist make?
+@ 3 | 6 | 8 | 11
+## 1097
+In the $xy$-plane, the graph of $y=7x$ intersects the graph of $y=x^2-18$ at two points. What is the sum of the $x$-coordinates of the two points of intersection?
+@ -18 | -2 | 7 | 9
+## 1098
+<p style="text-align:center">$x^2+y^2=1{,}088$<br>$y-4x=0$</p><p>A solution to the given system of equations is $(x,y)$, where $x<0$. What is the value of $y$?</p>
+@ -256 | -32 | -8 | -4
+## 1099
+<p style="text-align:center">$4x+7y=20$<br>$rx+21y=60$</p><p>In the given system of equations, $r$ is a constant. The system has infinitely many solutions. What is the value of $r$?</p>
+@ 3 | 4 | 7 | 12
+## 1100
+<p>$5x+9y=8$</p><p>A system containing this equation has at least one solution. Which could be its other equation?</p><p>I. $7.5x+13.5y=12$<br>II. $7.5x-13.5y=12$</p>
+@ I only | II only | I and II | Neither I nor II
