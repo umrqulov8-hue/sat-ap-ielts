@@ -1,0 +1,25 @@
+## 2875
+The measure of angle $BDC$, in radians, is equal to $\frac{a\pi}{b}$ where $a$ and $b$ are positive integer constants. What is the smallest possible value of $a+b$? (Points $A$, $B$, $C$ lie on a circle; $D$ is inside with $\angle DBC=\angle DCB=19^\circ$.)<p></p>[[fig:q2875]]
+## 2878
+The circle has center $O$, the length of arc $ADC$ is $5\pi$, and $x=100$. What is the length of arc $ABC$?<p></p>[[fig:q2878]]
+@ $9\pi$ | $13\pi$ | $18\pi$ | $\frac{13}{2}\pi$
+## 2891
+Note: Figure not drawn to scale. In the circle above, $C$ is the center. If the measure of $\angle ABC$ is $60^\circ$ and radius $BC=10$, what is the length of $\overline{AB}$?<p></p>[[fig:q2891]]
+## 2894
+Note: Figure not drawn to scale. In the circle above, point $O$ is the center, and diameter $\overline{AC}$ bisects $\overline{BD}$ at point $E$. The radius of the circle is 8, and $EC=1$. If $BE=\sqrt{k}$, what is the value of $k$?<p></p>[[fig:q2894]]
+## 2897
+Note: Figure not drawn to scale. In the circle above, $D$ is the center, $\overline{AC}$ is a diameter, and point $B$ lies on the circle. If $AB=BD$, what is the value of $x$ (the angle at $A$)?<p></p>[[fig:q2897]]
+## 2902
+Point $P$ is the center of the circle in the figure above. What is the value of $x$?<p></p>[[fig:q2902]]
+## 2907
+Note: Figure not drawn to scale. The circle has center $O$, and angle $AOB$ is a right angle. The shaded region has area $37\pi$ square units. What is $OA$?<p></p>[[fig:q2907]]
+@ 74 | 148 | $\sqrt{148}$ | $\sqrt{592}$
+## 2916
+In the figure above, $O$ is the center of the circle and $\overline{AC}$ and $\overline{BD}$ are diameters of the circle. The measure of $\angle AOB$ is twice the measure of $\angle BOC$, and the radius of the circle is 3. What is the area of the shaded region?<p></p>[[fig:q2916]]
+@ $9\pi$ | $6\pi$ | $\frac{9}{2}\pi$ | $\frac{3}{2}\pi$
+## 2919
+The area of an isosceles right triangle inscribed in the circle with center $O$ and radius $5\sqrt{2}$ is<p></p>[[fig:q2919]]
+@ 100 | 50 | $10\sqrt{2}$ | $25\sqrt{2}$
+## 2922
+The circle has center $O$ and radius $x$. Angle $AOB$ measures $120^\circ$. What is the length of chord $AB$ in terms of $x$?<p></p>[[fig:q2922]]
+@ $\sqrt{2}\cdot x$ | $\sqrt{3}\cdot x$ | $\frac{x}{\sqrt{2}}$ | $\frac{x}{\sqrt{3}}$
