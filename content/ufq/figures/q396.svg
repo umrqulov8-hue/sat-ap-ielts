@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 430" width="640" height="430"><rect width="640" height="430" fill="#fff"/>
+<line x1="70.0" y1="360.0" x2="70.0" y2="40.0" stroke="#bbb" stroke-width="1"/>
+<text x="70.0" y="378" font-size="14" text-anchor="middle" font-family="Times,serif">0</text>
+<line x1="148.57142857142856" y1="360.0" x2="148.57142857142856" y2="40.0" stroke="#bbb" stroke-width="1"/>
+<text x="148.57142857142856" y="378" font-size="14" text-anchor="middle" font-family="Times,serif">20</text>
+<line x1="227.14285714285714" y1="360.0" x2="227.14285714285714" y2="40.0" stroke="#bbb" stroke-width="1"/>
+<text x="227.14285714285714" y="378" font-size="14" text-anchor="middle" font-family="Times,serif">40</text>
+<line x1="305.71428571428567" y1="360.0" x2="305.71428571428567" y2="40.0" stroke="#bbb" stroke-width="1"/>
+<text x="305.71428571428567" y="378" font-size="14" text-anchor="middle" font-family="Times,serif">60</text>
+<line x1="384.2857142857143" y1="360.0" x2="384.2857142857143" y2="40.0" stroke="#bbb" stroke-width="1"/>
+<text x="384.2857142857143" y="378" font-size="14" text-anchor="middle" font-family="Times,serif">80</text>
+<line x1="462.8571428571429" y1="360.0" x2="462.8571428571429" y2="40.0" stroke="#bbb" stroke-width="1"/>
+<text x="462.8571428571429" y="378" font-size="14" text-anchor="middle" font-family="Times,serif">100</text>
+<line x1="541.4285714285713" y1="360.0" x2="541.4285714285713" y2="40.0" stroke="#bbb" stroke-width="1"/>
+<text x="541.4285714285713" y="378" font-size="14" text-anchor="middle" font-family="Times,serif">120</text>
+<line x1="620.0" y1="360.0" x2="620.0" y2="40.0" stroke="#bbb" stroke-width="1"/>
+<text x="620.0" y="378" font-size="14" text-anchor="middle" font-family="Times,serif">140</text>
+<line x1="70.0" y1="360.0" x2="620.0" y2="360.0" stroke="#bbb" stroke-width="1"/>
+<text x="62" y="365.0" font-size="14" text-anchor="end" font-family="Times,serif">0</text>
+<line x1="70.0" y1="330.9090909090909" x2="620.0" y2="330.9090909090909" stroke="#bbb" stroke-width="1"/>
+<text x="62" y="335.9090909090909" font-size="14" text-anchor="end" font-family="Times,serif">20</text>
+<line x1="70.0" y1="301.8181818181818" x2="620.0" y2="301.8181818181818" stroke="#bbb" stroke-width="1"/>
+<text x="62" y="306.8181818181818" font-size="14" text-anchor="end" font-family="Times,serif">40</text>
+<line x1="70.0" y1="272.72727272727275" x2="620.0" y2="272.72727272727275" stroke="#bbb" stroke-width="1"/>
+<text x="62" y="277.72727272727275" font-size="14" text-anchor="end" font-family="Times,serif">60</text>
+<line x1="70.0" y1="243.63636363636363" x2="620.0" y2="243.63636363636363" stroke="#bbb" stroke-width="1"/>
+<text x="62" y="248.63636363636363" font-size="14" text-anchor="end" font-family="Times,serif">80</text>
+<line x1="70.0" y1="214.54545454545456" x2="620.0" y2="214.54545454545456" stroke="#bbb" stroke-width="1"/>
+<text x="62" y="219.54545454545456" font-size="14" text-anchor="end" font-family="Times,serif">100</text>
+<line x1="70.0" y1="185.45454545454547" x2="620.0" y2="185.45454545454547" stroke="#bbb" stroke-width="1"/>
+<text x="62" y="190.45454545454547" font-size="14" text-anchor="end" font-family="Times,serif">120</text>
+<line x1="70.0" y1="156.36363636363637" x2="620.0" y2="156.36363636363637" stroke="#bbb" stroke-width="1"/>
+<text x="62" y="161.36363636363637" font-size="14" text-anchor="end" font-family="Times,serif">140</text>
+<line x1="70.0" y1="127.27272727272725" x2="620.0" y2="127.27272727272725" stroke="#bbb" stroke-width="1"/>
+<text x="62" y="132.27272727272725" font-size="14" text-anchor="end" font-family="Times,serif">160</text>
+<line x1="70.0" y1="98.18181818181819" x2="620.0" y2="98.18181818181819" stroke="#bbb" stroke-width="1"/>
+<text x="62" y="103.18181818181819" font-size="14" text-anchor="end" font-family="Times,serif">180</text>
+<line x1="70.0" y1="69.09090909090912" x2="620.0" y2="69.09090909090912" stroke="#bbb" stroke-width="1"/>
+<text x="62" y="74.09090909090912" font-size="14" text-anchor="end" font-family="Times,serif">200</text>
+<line x1="70.0" y1="40.0" x2="620.0" y2="40.0" stroke="#bbb" stroke-width="1"/>
+<text x="62" y="45.0" font-size="14" text-anchor="end" font-family="Times,serif">220</text>
+<rect x="70.0" y="40.0" width="550.0" height="320.0" fill="none" stroke="#000" stroke-width="1.5"/>
+<text x="345.0" y="422" font-size="15" text-anchor="middle" font-style="italic" font-family="Times,serif">Time since cup was removed from heat source (minutes)</text>
+<text transform="translate(16,200.0) rotate(-90)" font-size="15" text-anchor="middle" font-style="italic" font-family="Times,serif">Temperature (°F)</text>
+<text x="345.0" y="16" font-size="16" text-anchor="middle" font-weight="bold" font-family="Times,serif">Temperature of a Cup of Coffee during an Experiment</text>
+<circle cx="70.0" cy="76.36363636363637" r="4.5" fill="#000"/>
+<circle cx="109.28571428571428" cy="134.54545454545453" r="4.5" fill="#000"/>
+<circle cx="148.57142857142856" cy="159.27272727272725" r="4.5" fill="#000"/>
+<circle cx="187.85714285714283" cy="178.18181818181816" r="4.5" fill="#000"/>
+<circle cx="227.14285714285714" cy="198.54545454545456" r="4.5" fill="#000"/>
+<circle cx="266.42857142857144" cy="211.63636363636363" r="4.5" fill="#000"/>
+<circle cx="305.71428571428567" cy="223.27272727272728" r="4.5" fill="#000"/>
+<circle cx="345.0" cy="232.0" r="4.5" fill="#000"/>
+<circle cx="384.2857142857143" cy="236.36363636363637" r="4.5" fill="#000"/>
+<circle cx="423.5714285714286" cy="239.27272727272728" r="4.5" fill="#000"/>
+<circle cx="462.8571428571429" cy="243.63636363636363" r="4.5" fill="#000"/>
+<circle cx="502.1428571428571" cy="248.0" r="4.5" fill="#000"/>
+<circle cx="541.4285714285713" cy="248.0" r="4.5" fill="#000"/>
+<circle cx="580.7142857142858" cy="250.90909090909093" r="4.5" fill="#000"/>
+<circle cx="620.0" cy="250.90909090909093" r="4.5" fill="#000"/>
+</svg>

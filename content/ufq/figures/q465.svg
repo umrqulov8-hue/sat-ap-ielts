@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 420" width="640" height="420"><rect width="640" height="420" fill="#fff"/>
+<line x1="80.0" y1="340.0" x2="80.0" y2="24.0" stroke="#bbb" stroke-width="1"/>
+<line x1="147.5" y1="340.0" x2="147.5" y2="24.0" stroke="#bbb" stroke-width="1"/>
+<line x1="215.0" y1="340.0" x2="215.0" y2="24.0" stroke="#bbb" stroke-width="1"/>
+<line x1="282.5" y1="340.0" x2="282.5" y2="24.0" stroke="#bbb" stroke-width="1"/>
+<line x1="350.0" y1="340.0" x2="350.0" y2="24.0" stroke="#bbb" stroke-width="1"/>
+<line x1="417.5" y1="340.0" x2="417.5" y2="24.0" stroke="#bbb" stroke-width="1"/>
+<line x1="485.0" y1="340.0" x2="485.0" y2="24.0" stroke="#bbb" stroke-width="1"/>
+<line x1="552.5" y1="340.0" x2="552.5" y2="24.0" stroke="#bbb" stroke-width="1"/>
+<line x1="620.0" y1="340.0" x2="620.0" y2="24.0" stroke="#bbb" stroke-width="1"/>
+<line x1="80.0" y1="340.0" x2="620.0" y2="340.0" stroke="#bbb" stroke-width="1"/>
+<text x="72" y="345.0" font-size="14" text-anchor="end" font-family="Times,serif">729</text>
+<line x1="80.0" y1="308.4" x2="620.0" y2="308.4" stroke="#bbb" stroke-width="1"/>
+<text x="72" y="313.4" font-size="14" text-anchor="end" font-family="Times,serif">745</text>
+<line x1="80.0" y1="276.8" x2="620.0" y2="276.8" stroke="#bbb" stroke-width="1"/>
+<text x="72" y="281.8" font-size="14" text-anchor="end" font-family="Times,serif">761</text>
+<line x1="80.0" y1="245.2" x2="620.0" y2="245.2" stroke="#bbb" stroke-width="1"/>
+<text x="72" y="250.2" font-size="14" text-anchor="end" font-family="Times,serif">777</text>
+<line x1="80.0" y1="213.6" x2="620.0" y2="213.6" stroke="#bbb" stroke-width="1"/>
+<text x="72" y="218.6" font-size="14" text-anchor="end" font-family="Times,serif">793</text>
+<line x1="80.0" y1="182.0" x2="620.0" y2="182.0" stroke="#bbb" stroke-width="1"/>
+<text x="72" y="187.0" font-size="14" text-anchor="end" font-family="Times,serif">809</text>
+<line x1="80.0" y1="150.4" x2="620.0" y2="150.4" stroke="#bbb" stroke-width="1"/>
+<text x="72" y="155.4" font-size="14" text-anchor="end" font-family="Times,serif">825</text>
+<line x1="80.0" y1="118.80000000000001" x2="620.0" y2="118.80000000000001" stroke="#bbb" stroke-width="1"/>
+<text x="72" y="123.80000000000001" font-size="14" text-anchor="end" font-family="Times,serif">841</text>
+<line x1="80.0" y1="87.19999999999999" x2="620.0" y2="87.19999999999999" stroke="#bbb" stroke-width="1"/>
+<text x="72" y="92.19999999999999" font-size="14" text-anchor="end" font-family="Times,serif">857</text>
+<line x1="80.0" y1="55.599999999999966" x2="620.0" y2="55.599999999999966" stroke="#bbb" stroke-width="1"/>
+<text x="72" y="60.599999999999966" font-size="14" text-anchor="end" font-family="Times,serif">873</text>
+<line x1="80.0" y1="24.0" x2="620.0" y2="24.0" stroke="#bbb" stroke-width="1"/>
+<text x="72" y="29.0" font-size="14" text-anchor="end" font-family="Times,serif">889</text>
+<rect x="80.0" y="24.0" width="540.0" height="316.0" fill="none" stroke="#000" stroke-width="1.5"/>
+<text x="350.0" y="412" font-size="15" text-anchor="middle" font-style="italic" font-family="Times,serif">Month</text>
+<text transform="translate(16,182.0) rotate(-90)" font-size="15" text-anchor="middle" font-style="italic" font-family="Times,serif">Average price of one metric ton of oranges (US dollars)</text>
+<path d="M147.5,245.2 L215.0,182.0 L282.5,114.85 L350.0,128.675 L417.5,130.65 L485.0,237.3 L552.5,261.0" fill="none" stroke="#000" stroke-width="1.6" stroke-dasharray="6 4"/>
+<circle cx="147.5" cy="245.2" r="4.5" fill="#000"/>
+<circle cx="215.0" cy="182.0" r="4.5" fill="#000"/>
+<circle cx="282.5" cy="114.85" r="4.5" fill="#000"/>
+<circle cx="350.0" cy="128.675" r="4.5" fill="#000"/>
+<circle cx="417.5" cy="130.65" r="4.5" fill="#000"/>
+<circle cx="485.0" cy="237.3" r="4.5" fill="#000"/>
+<circle cx="552.5" cy="261.0" r="4.5" fill="#000"/>
+<text transform="translate(153.5,352.0) rotate(-45)" font-size="13" text-anchor="end" font-family="Times,serif">February</text>
+<text transform="translate(221.0,352.0) rotate(-45)" font-size="13" text-anchor="end" font-family="Times,serif">March</text>
+<text transform="translate(288.5,352.0) rotate(-45)" font-size="13" text-anchor="end" font-family="Times,serif">April</text>
+<text transform="translate(356.0,352.0) rotate(-45)" font-size="13" text-anchor="end" font-family="Times,serif">May</text>
+<text transform="translate(423.5,352.0) rotate(-45)" font-size="13" text-anchor="end" font-family="Times,serif">June</text>
+<text transform="translate(491.0,352.0) rotate(-45)" font-size="13" text-anchor="end" font-family="Times,serif">July</text>
+<text transform="translate(558.5,352.0) rotate(-45)" font-size="13" text-anchor="end" font-family="Times,serif">August</text>
+</svg>

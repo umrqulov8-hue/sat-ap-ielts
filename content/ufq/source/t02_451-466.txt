@@ -1,0 +1,47 @@
+## 451
+<table><caption>Where Do People Get Most of Their Medical Information?</caption><thead><tr><th>Source</th><th>Percent of those surveyed</th></tr></thead><tbody><tr><td>Doctor</td><td>63%</td></tr><tr><td>Internet</td><td>13%</td></tr><tr><td>Magazines/brochures</td><td>9%</td></tr><tr><td>Pharmacy</td><td>6%</td></tr><tr><td>Television</td><td>2%</td></tr><tr><td>Other/none of the above</td><td>7%</td></tr></tbody></table><p>The table above shows a summary of 1,200 responses to a survey question. Based on the table, how many of those surveyed get most of their medical information from either a doctor or the Internet?</p>
+@ 865 | 887 | 912 | 926
+## 452
+In a certain state, the population of pheasants is estimated each year by counting the number of pheasants observed along certain roads in the state. On average, each year from 2005 to 2015 the number of pheasants counted per mile of road decreased by 3.5% of the number of pheasants per mile of road the previous year. Based on this average, if there were 6.22 pheasants per mile of road in this state in 2005, which of the following best approximates the number of pheasants per mile of road in 2015?
+@ $0.965(6.22)^{10}$ | $1.035(6.22)^{10}$ | $6.22(0.035)^{10}$ | $6.22(0.965)^{10}$
+## 453
+The value of a painting increased by 179% from the end of 2017 to the end of 2018 and then decreased by 23% from the end of 2018 to the end of 2019. What was the net percentage increase in the value of the painting from the end of 2017 to the end of 2019?
+@ 114.83% | 137.83% | 156.00% | 243.17%
+## 454
+In January 2005, a ranger began monitoring the deer population in an area. The function $P$, defined by $P(t)=650(1.02)^t$, where $0\le t\le 5$, models the number of deer in the area $t$ years after January 2005. What does the 650 represent in the model?
+@ The number of deer in the area in January 2005 | The number of deer in the area in January 2010 | The increase in the number of deer per year in the area from January 2005 to January 2010 | The decrease in the number of deer per year in the area from January 2005 to January 2010
+## 455
+At a hotel, guests used the pool for a total of $t$ hours in March. At the same hotel, guests used the pool for $3.49t$ hours in April. What is the percent increase in the number of hours guests used the pool from March to April?
+@ 2.49% | 3.49% | 249% | 349%
+## 456
+The percent increase in mass of a kangaroo from 90 to 160 days old was 438%. If mass was $k$ grams at 90 days, which expression represents mass at 160 days?
+@ $0.06k$ | $1.06k$ | $4.38k$ | $5.38k$
+## 457
+A company's annual revenue was $x$ dollars in 2012. The revenue increased by 12% from 2012 to 2013, and increased by 4% from 2013 to 2014. If the revenue in 2014 was $y$ times the revenue in 2012, which expression represents $y$?
+@ $(1.12)(1.04)$ | $(1.12)+(1.04)$ | $\frac{1.04}{1.12}$ | $\frac{1}{(1.12)(1.04)}$
+## 458
+<table><thead><tr><th></th><th>Gold</th><th>Silver</th><th>Bronze</th><th>Total</th></tr></thead><tbody><tr><td>Canada</td><td>14</td><td>7</td><td>5</td><td>26</td></tr><tr><td>Norway</td><td>9</td><td>8</td><td>6</td><td>23</td></tr><tr><td>South Korea</td><td>6</td><td>6</td><td>2</td><td>14</td></tr><tr><td>Total</td><td>29</td><td>21</td><td>13</td><td>63</td></tr></tbody></table><p>The table above shows the number of gold, silver, and bronze medals awarded to three of the countries that participated in the 2010 Olympic Winter Games. Of the 63 medals awarded to these countries, what fraction were silver?</p>
+@ $\frac{1}{3}$ | $\frac{1}{4}$ | $\frac{1}{6}$ | $\frac{1}{21}$
+## 459
+In 2015, a swimming team had a total of 60 swimmers, each classified as either advanced or intermediate. From 2015 to 2025, the number of advanced swimmers on the team increased by approximately 70%, and the number of intermediate swimmers increased by approximately 40%. The total number of swimmers on the team increased by approximately 52%. Which equation best represents this situation, where $a$ represents the number of advanced swimmers on the team in 2015 and $b$ represents the number of intermediate swimmers on the team in 2015?
+@ $1.40a+1.70b=60(1.52)$ | $1.70a+1.40b=60(1.52)$ | $1.52a+0.70b=60(1.40)$ | $1.70a+1.52b=60(1.40)$
+## 460
+<table><caption>Feeding Information for Boarded Pets</caption><thead><tr><th></th><th>Fed only dry food</th><th>Fed both wet and dry food</th><th>Total</th></tr></thead><tbody><tr><td>Cats</td><td>5</td><td>11</td><td>16</td></tr><tr><td>Dogs</td><td>2</td><td>23</td><td>25</td></tr><tr><td>Total</td><td>7</td><td>34</td><td>41</td></tr></tbody></table><p>The table above shows the kinds of foods that are fed to the cats and dogs currently boarded at a pet care facility. What fraction of the dogs are fed only dry food?</p>
+@ $\frac{2}{41}$ | $\frac{2}{25}$ | $\frac{7}{41}$ | $\frac{2}{7}$
+## 461
+<table><caption>Percent of Residents Who Earned a Bachelor's Degree or Higher</caption><thead><tr><th>State</th><th>Percent of residents</th></tr></thead><tbody><tr><td>State A</td><td>21.9%</td></tr><tr><td>State B</td><td>27.9%</td></tr><tr><td>State C</td><td>25.9%</td></tr><tr><td>State D</td><td>19.5%</td></tr><tr><td>State E</td><td>30.1%</td></tr><tr><td>State F</td><td>36.4%</td></tr><tr><td>State G</td><td>35.5%</td></tr></tbody></table><p>A survey was given to residents of all 50 states asking if they had earned a bachelor's degree or higher. The results from 7 of the states are given in the table above. The median percent of residents who earned a bachelor's degree or higher for all 50 states was 26.95%. What is the difference between the median percent of residents who earned a bachelor's degree or higher for these 7 states and the median for all 50 states?</p>
+@ 0.05% | 0.95% | 1.22% | 7.45%
+## 462
+<p>Over a two-year period, scientists searched for neutrinos (subatomic particles) that are produced outside the solar system. The energy, $E$, of those neutrinos is measured in units of $10^{12}$ electron volts (TeV). The table below shows the results of the scientists' investigation:</p><table><thead><tr><th>Neutrino energy, $E$ (TeV)</th><th>Number of neutrinos detected</th></tr></thead><tbody><tr><td>$E\le 30$</td><td>1</td></tr><tr><td>$30<E\le 60$</td><td>10</td></tr><tr><td>$60<E\le 90$</td><td>7</td></tr><tr><td>$90<E\le 120$</td><td>3</td></tr><tr><td>$120<E\le 150$</td><td>0</td></tr><tr><td>$E>150$</td><td>7</td></tr></tbody></table><p>Approximately what percentage of neutrinos detected had an energy of 90 TeV or less?</p>
+@ 18% | 25% | 64% | 75%
+## 463
+The equation $0.10x+0.20y=0.17(x+y)$ gives a volume $x$, in gallons, of a 10% saltwater solution that could be mixed with a volume $y$, in gallons, of a 20% saltwater solution to produce a 17% saltwater solution. According to this equation, what volume, in gallons, of the 20% saltwater solution could be mixed with 75.0 gallons of the 10% saltwater solution to produce a 17% saltwater solution? (Assume that the volume of the mixture is the sum of the volumes of the two solutions before they were mixed.)
+## 464
+<p>The 25 brightest stars in the night sky were classified by spectral type and luminosity class, as shown in the table below.</p><table><thead><tr><th>Spectral type</th><th>Luminosity class</th><th>Number of stars</th></tr></thead><tbody><tr><td>B</td><td>supergiant</td><td>3</td></tr><tr><td>B</td><td>giant</td><td>2</td></tr><tr><td>B</td><td>main sequence</td><td>5</td></tr><tr><td>A</td><td>supergiant</td><td>1</td></tr><tr><td>A</td><td>main sequence</td><td>5</td></tr><tr><td>F</td><td>main sequence</td><td>1</td></tr><tr><td>G</td><td>giant</td><td>1</td></tr><tr><td>G</td><td>main sequence</td><td>2</td></tr><tr><td>K</td><td>giant</td><td>3</td></tr><tr><td>N</td><td>supergiant</td><td>1</td></tr><tr><td>N</td><td>giant</td><td>1</td></tr></tbody></table><p>What percentage of the stars represented in the table have a luminosity class of main sequence?</p>
+@ 13% | 36% | 52% | 67%
+## 465
+[[fig:q465]]<p>The line graph above shows the average price of one metric ton of oranges, in dollars, for each of seven months in 2014.</p><p>In 2014, the average price of one metric ton of oranges decreased by 2.36% from January (not shown) to February. Which of the following is closest to the price of one metric ton of oranges in January 2014?</p>
+@ 700 | 770 | 790 | 830
+## 466
+In 2010, there were 34 skaters in total (advanced and intermediate); $a$ and $b$ represent the 2010 numbers of advanced and intermediate skaters. From 2010 to 2020, the number of advanced skaters increased by 67%, the number of intermediate skaters increased by 44%, and the total number of skaters increased by 56%. Which equation represents this situation?
+@ $1.44a+1.67b=34(1.56)$ | $1.67a+1.44b=34(1.56)$ | $1.56a+0.67b=34(1.44)$ | $1.67a+1.56b=34(1.44)$

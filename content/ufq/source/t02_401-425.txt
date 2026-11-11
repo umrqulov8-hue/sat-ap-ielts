@@ -1,0 +1,69 @@
+## 401
+<table><caption>Ice Cream and Topping Selections</caption><thead><tr><th></th><th></th><th>Vanilla</th><th>Chocolate</th></tr></thead><tbody><tr><td>Topping</td><td>Hot fudge</td><td>8</td><td>6</td></tr><tr><td>Topping</td><td>Caramel</td><td>5</td><td>6</td></tr></tbody></table><p>The table above shows the flavors of ice cream and the toppings chosen by the people at a party. Each person chose one flavor of ice cream and one topping. Of the people who chose vanilla ice cream, what fraction chose hot fudge as a topping?</p>
+@ $\frac{8}{25}$ | $\frac{5}{13}$ | $\frac{13}{25}$ | $\frac{8}{13}$
+## 402
+Marko purchased a camera in September 2019 for \$4,000. For the next 50 months, its value decreased by 2% each month. Which equation gives its value $v$, in dollars, $m$ months after purchase, where $0\le m\le 50$?
+@ $v=2019(0.98)^m$ | $v=2019(2)^m$ | $v=4000(0.98)^m$ | $v=4000(2)^m$
+## 403
+In State X, Mr. Camp's eighth-grade class consisting of 26 students was surveyed and 34.6 percent of the students reported that they had at least two siblings. The average eighth-grade class size in the state is 26. If the students in Mr. Camp's class are representative of students in the state's eighth-grade classes, and there are 1,800 eighth-grade classes in the state, which of the following best estimates the number of eighth-grade students in the state who have fewer than two siblings?
+@ 16,200 | 23,400 | 30,600 | 46,800
+## 404
+A public relations expert developed the model $P(x)=0.5x+15$ to predict a political candidate's performance in a certain upcoming election based on the amount the candidate spent on advertising. In the model, $P(x)$ is the percentage of votes, and $x$ is the number of dollars, in thousands, spent on advertising. For example, if a candidate spends \$0 on advertising, the model predicts that the candidate will receive 15% of the votes.<br><br>Which of the following statements best describes the prediction model?
+@ For every \$1,000 spent on advertising, a candidate's performance in the election increase by 15 percentage points. | For every \$1 spent on advertising, a candidate's performance in the election increase by 15 percentage points. | For every \$1,000 spent on advertising, a candidate's performance in the election increase by 0.5 percentage points. | For every \$1 spent on advertising, a candidate's performance in the election increase by 0.5 percentage points.
+## 405
+A store sells notebooks individually and in packs of 8. Individual notebooks are sold for \$3 each, and packs of 8 are sold for \$19 per pack. Last week, the store received a total of \$589 from notebook sales. If the store sold $n$ individual notebooks and $p$ packs, which equation represents this situation?
+@ $3n+19p=589$ | $8n+19p=589$ | $3n+8p=589$ | $19n+3p=589$
+## 406
+<p>To determine whether a certain author wrote a famous book, a researcher studied the works known to have been written by the author. The researcher collected a total of 5,000 distinct words of length 3, 4, 5, 6, or 7 letters from these works, and the table below summarizes information about these 5,000 words.</p><table><thead><tr><th>Length of word</th><th>Number of distinct words</th><th>Total number of letters</th></tr></thead><tbody><tr><td>3 letters</td><td>293</td><td>879</td></tr><tr><td>4 letters</td><td>731</td><td>2,924</td></tr><tr><td>5 letters</td><td>1,038</td><td>5,190</td></tr><tr><td>6 letters</td><td>1,350</td><td>8,100</td></tr><tr><td>7 letters</td><td>1,588</td><td>11,116</td></tr><tr><td>Total</td><td>5,000</td><td>28,209</td></tr></tbody></table><p>The number of distinct 7-letter words collected is approximately how many times as great as the number of distinct 3-letter words collected?</p>
+@ 0.2 | 0.5 | 3 | 5
+## 407
+An online ticketing platform charges a service fee for all concert tickets purchased on its site. The service fee is equal to $k$% of the final price at checkout. The final price at checkout is the original price of the tickets plus a 1.4% processing fee. If a buyer purchased 5 tickets to a concert that each have an original price of $m$ dollars, the platform charges the buyer a service fee that is equal to $0.01521m$ dollars. What is the value of $k$?
+## 408
+<table><thead><tr><th>Class size</th><th>Number of classes</th></tr></thead><tbody><tr><td>23</td><td>1</td></tr><tr><td>28</td><td>2</td></tr><tr><td>29</td><td>6</td></tr><tr><td>30</td><td>6</td></tr><tr><td>31</td><td>5</td></tr></tbody></table><p>The table above shows the distribution of class sizes for the 20 math classes at a high school.</p><p>The math department chairperson wants to show the principal of the school the number of math classes by size as a percentage of the total number of math classes. Which type of graph is most useful for this purpose?</p>
+@ Scatterplot | Box plot | Line graph | Circle graph
+## 409
+<table><caption>Most Frequently Reported Prior Career Fields of the 535 Members of the 113th Congress</caption><thead><tr><th></th><th>House of Representatives</th><th>Senate</th></tr></thead><tbody><tr><td>Business</td><td>187</td><td>27</td></tr><tr><td>Education</td><td>77</td><td>15</td></tr><tr><td>Law</td><td>154</td><td>55</td></tr><tr><td>Public service</td><td>180</td><td>42</td></tr></tbody></table><p>The table above gives the distribution, by chamber, of fields in which members of the 113th Congress most frequently reported spending a portion of their careers before being elected to Congress. There were 435 members in the House of Representatives and 100 members in the Senate at the time these data were collected. Some members reported more than one career field.</p><p>Of the 435 people who reported from the House of Representatives, 78 are female. Assuming that gender and prior career field are independent, how many female representatives would be expected to have reported a prior career field in public service? (Round your answer to the nearest whole number.)</p>
+## 410
+<p style="text-align:center">$P=215(1.005)^{\frac{t}{3}}$</p><p>The equation above can be used to model the population, in thousands, of a certain city $t$ years after 2000. According to the model, the population is predicted to increase by 0.5% every $n$ months. What is the value of $n$?</p>
+@ 3 | 4 | 12 | 36
+## 411
+Sonja purchased a laptop in September 2019 for \$1,000. For the next 50 months, its value decreased by 2% each month. Which equation gives its value $v$, in dollars, $m$ months after purchase, where $0\le m\le 50$?
+@ $v=2019(0.98)^m$ | $v=2019(2)^m$ | $v=1000(0.98)^m$ | $v=1000(2)^m$
+## 412
+When sunlight passes through a water column in a certain lake, the intensity of the light at a depth of 10.00 centimeters is 69.00% of the intensity of the light at the surface of the water column. The intensity of the light at a depth of 20.00 centimeters is 69.00% of the intensity of the light at a depth of 10.00 centimeters. The intensity of the light at a depth of 20.00 centimeters is $p$% of the intensity of the light at the surface of the water column. What is the value of $p$?
+## 413
+The volume of water in a reservoir at the start of a construction project is $V_0$. For every 10-day period, the volume of water in the reservoir will decrease by 3% of the volume from 10 days before. Which of the following equations represents the amount of water left in the reservoir, $V_t$, after $t$ days?
+@ $V_t=V_0(0.97)^{10t}$ | $V_t=V_0(0.97)^{\frac{t}{10}}$ | $V_t=V_0(0.03)^{10t}$ | $V_t=\frac{t}{10}(0.97V_0)$
+## 414
+<table><caption>Number of plants</caption><thead><tr><th>Treatment</th><th>Regressed</th><th>Thrived</th><th>Total</th></tr></thead><tbody><tr><td>A</td><td>80</td><td>120</td><td>200</td></tr><tr><td>B</td><td>140</td><td>60</td><td>200</td></tr></tbody></table><p>The table above shows the results of an experiment involving the effect of two treatments, A and B, on plants. Based on the results, what fraction of the plants that thrived received treatment A?</p>
+@ $\frac{2}{5}$ | $\frac{1}{2}$ | $\frac{3}{5}$ | $\frac{2}{3}$
+## 415
+In 2010, the population of a small town was 455. The population is projected to increase by 3% each year from the preceding year's population for the next 20 years. Which of the following equations can be used to estimate the population $P$ of the town $n$ years after 2010 for $0\le n\le 20$?
+@ $P=455n^3$ | $P=455(0.03)^n$ | $P=455(1.03)^n$ | $P=455(3)^n$
+## 416
+A chemist mixes $x$ liters of a 6% saline solution with $y$ liters of a 9% saline solution to make a 7% saline solution. Which equation models this situation? Assume the volumes are additive.
+@ $0.06x+0.09y=7(x+y)$ | $0.06x+0.09y=0.07(x+y)$ | $0.6x+0.9y=7(x+y)$ | $0.6x+0.9y=0.07(x+y)$
+## 417
+A survey of 500 adults finds a correlation coefficient of 0.7 between the number of hours spent reading per week and their vocabulary test scores. The survey also reports that 60% of participants read more than 5 hours per week, with a margin of error of $\pm$5%. Which conclusion is most appropriate?
+@ Reading more hours per week causes higher vocabulary scores. | There is a strong positive relationship between reading hours and vocabulary scores, but causation cannot be determined. | Between 55% and 65% of adults read more than 5 hours per week, and this improves their vocabulary. | The correlation of 0.7 means 70% of vocabulary scores are explained by reading hours.
+## 418
+Website P: $y=0.65x+1{,}000$<br>Website Q: $y=0.5x+1{,}450$<br><br>A company wants to place advertisements on two social media websites. The cost to place an advertisement on each site consists of an initial start-up fee plus a fee every time the advertisement is clicked. The equations above show the cost $y$, in dollars, to place an advertisement that receives $x$ clicks on each site.<br><br>The company has a total budget of \$5,000 to place an advertisement on Website Q. What is the maximum number of clicks the advertisement can receive on Website Q without going over budget?
+@ 1,775 | 7,100 | 10,000 | 12,900
+## 419
+<table><thead><tr><th>Minutes after injection</th><th>Penicillin concentration (micrograms per milliliter)</th></tr></thead><tbody><tr><td>0</td><td>200</td></tr><tr><td>5</td><td>152</td></tr><tr><td>10</td><td>118</td></tr><tr><td>15</td><td>93</td></tr><tr><td>20</td><td>74</td></tr></tbody></table><p>When a patient receives a penicillin injection, the kidneys begin removing the penicillin from the body. The table above shows the penicillin concentration in a patient's bloodstream at 5-minute intervals for the 20 minutes immediately following a one-time penicillin injection.</p><p>According to the table, how many more micrograms of penicillin are present in 10 milliliters of blood drawn from the patient 5 minutes after the injection than are present in 8 milliliters of blood drawn 10 minutes after the injection?</p>
+## 420
+A real estate company offers a series of three webinars. 3,125 people attended the first webinar. 56% of the people who attended the first webinar attended the second webinar, and 26% of the people who attended the first and second webinars attended the third webinar. How many people attended all three webinars?
+## 421
+A biologist wanted to study the effectiveness of a fertilizer on the growth of corn seeds. The greenhouse was split down the middle: half A was treated with fertilizer, half B was not. The biologist obtained two 750-seed packages. The seeds from one package were planted in the soil treated by the fertilizer, and the seeds from the other package were planted in the soil not treated by the fertilizer. How should the experiment be changed to allow the researcher to conclude whether the fertilizer has an effect on the growth of corn seeds?
+@ No changes to the experiment are required. | All 1,500 corn seeds should receive the fertilizer. | One of the packages of corn seeds should be planted in a field rather than the greenhouse. | Half of the seeds from each package should be randomly assigned to each half of the greenhouse.
+## 422
+A chemist mixes $x$ liters of a 4% saline solution with $y$ liters of a 7% saline solution to make a 6% saline solution. Which equation models this situation? Assume the volumes are additive.
+@ $0.04x+0.07y=6(x+y)$ | $0.4x+0.7y=6(x+y)$ | $0.04x+0.07y=0.06(x+y)$ | $0.4x+0.7y=0.06(x+y)$
+## 423
+The world's population has grown at an average rate of 1.9 percent per year since 1945. There were approximately 4 billion people in the world in 1975. Which of the following functions represents the world's population $P$, in billions of people, $t$ years since 1975? (1 billion $=$ 1,000,000,000)
+@ $P(t)=4(1.019)^t$ | $P(t)=4(1.9)^t$ | $P(t)=1.19t+4$ | $P(t)=1.019t+4$
+## 424
+<table><caption>Eye color</caption><thead><tr><th>Coat color</th><th>Deep blue</th><th>Light brown</th><th>Total</th></tr></thead><tbody><tr><td>Cream-tortoiseshell</td><td>16</td><td>16</td><td>32</td></tr><tr><td>Chocolate</td><td>12</td><td>4</td><td>16</td></tr><tr><td>Total</td><td>28</td><td>20</td><td>48</td></tr></tbody></table><p>The data on the coat color and eye color for 48 Himalayan kittens available for adoption were collected and summarized in the table above. What fraction of the chocolate-colored kittens has deep blue eyes?</p>
+@ $\frac{12}{48}$ | $\frac{12}{28}$ | $\frac{16}{32}$ | $\frac{12}{16}$
+## 425
+A clothing store buys shirts at a wholesale price of \$6.00 each and resells them each at a retail price that is 310% of the wholesale price. At the end of the season, any remaining shirts are marked at a discounted price that is 75% off the retail price. What is the discounted price of each remaining shirt, in dollars?

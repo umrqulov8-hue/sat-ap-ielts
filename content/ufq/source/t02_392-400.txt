@@ -1,0 +1,22 @@
+## 392
+<table><caption>Townsend Realty Group Investments</caption><thead><tr><th>Property address</th><th>Purchase price (dollars)</th><th>Monthly rental price (dollars)</th></tr></thead><tbody><tr><td>Clearwater Lane</td><td>128,000</td><td>950</td></tr><tr><td>Driftwood Drive</td><td>176,000</td><td>1,310</td></tr><tr><td>Edgemont Street</td><td>70,000</td><td>515</td></tr><tr><td>Glenview Street</td><td>140,000</td><td>1,040</td></tr><tr><td>Hamilton Circle</td><td>450,000</td><td>3,365</td></tr></tbody></table><p>The Townsend Realty Group invested in the five different properties listed in the table above. The table shows the amount, in dollars, the company paid for each property and the corresponding monthly rental price, in dollars, the company charges for the property at each of the five locations.</p><p>Townsend Realty purchased the Glenview Street property and received a 40% discount off the original price along with an additional 20% off the discounted price for purchasing the property in cash. Which of the following best approximates the original price, in dollars, of the Glenview Street property?</p>
+@ \$350,000 | \$291,700 | \$233,300 | \$175,000
+## 394
+Matthew's profit, in dollars, for selling $x$ lures at \$6.50 per lure can be modeled by the expression $6.5x-4.25x-125$.<br><br>If Matthew had instead decided to sell the lures for 20% less than his price of \$6.50 per lure and his expenses including the start-up cost remained the same, which of the following functions $f$ would model his profit, in dollars, in terms of the number of lures sold, $x$ ?
+@ $f(x)=0.95x-125$ | $f(x)=0.95x-100$ | $f(x)=3.1x-125$ | $f(x)=3.1x-100$
+## 395
+A public relations expert developed the model $P(x)=0.5x+15$ to predict a political candidate's performance in a certain upcoming election based on the amount the candidate spent on advertising. In the model, $P(x)$ is the percentage of votes, and $x$ is the number of dollars, in thousands, spent on advertising. For example, if a candidate spends \$0 on advertising, the model predicts that the candidate will receive 15% of the votes.<br><br>Based on the model, if a candidate receives 40% of the votes in the election, how much did the candidate spend on advertising?
+@ \$20,000 | \$35,000 | \$40,000 | \$50,000
+## 396
+[[fig:q396]]<p>In an experiment, a heated cup of coffee is removed from a heat source, and the cup of coffee is then left in a room that is kept at a constant temperature. The graph above shows the temperature, in degrees Fahrenheit (°F), of the coffee immediately after being removed from the heat source and at 10-minute intervals thereafter.</p><p>Of the following, which best approximates the temperature, in degrees Fahrenheit, of the coffee when it is first removed from the heat source?</p>
+@ 75 | 100 | 155 | 195
+## 397
+Undergraduates were 6,950% of postdoctorals. Graduates were 32% of undergraduates. If 4,448 graduates surveyed, what was sum of undergraduates and postdoctorals?
+## 398
+The composition of an animal is defined as the muscles, bones, and fat of the animal. A scientist studied the composition of one young swamp buffalo and determined the buffalo had 123 kilograms of muscle, which made up approximately 61.6% of its composition. Of the remaining composition of this buffalo, approximately 54.5% was bone, and the remainder was fat. Based on these approximations, to the nearest tenth, how many kilograms of this buffalo's composition was fat?
+## 399
+The daily precipitation total at a weather station is recorded by a weather instrument each day. The daily precipitation total recorded on Monday was 19.00 millimeters. The daily precipitation total recorded on Tuesday was a 134.00% increase from the daily precipitation total recorded on Monday. What was the daily precipitation total, in millimeters, recorded on Tuesday?
+@ 8.12 | 14.18 | 25.46 | 44.46
+## 400
+[[fig:q400]]<p>Which of the following equations best models the relationship between the variables in the scatterplot?</p>
+@ $y=-16(60)^x$ | $y=16(0.86)^x$ | $y=16(1.14)^x$ | $y=16(20)^x$

@@ -20,5 +20,5 @@ def grid_plot(W,H,l,t,r,b,xmin,xmax,ymin,ymax,xstep,ystep,xlabel,ylabel,title=''
     s.append(f'<rect x="{sx(xmin)}" y="{sy(ymax)}" width="{sx(xmax)-sx(xmin)}" height="{sy(ymin)-sy(ymax)}" fill="none" stroke="#000" stroke-width="1.5"/>')
     s.append(f'<text x="{(l+W-r)/2}" y="{H-8}" font-size="15" text-anchor="middle" font-style="italic" font-family="Times,serif">{xlabel}</text>')
     s.append(f'<text transform="translate(16,{(t+H-b)/2}) rotate(-90)" font-size="15" text-anchor="middle" font-style="italic" font-family="Times,serif">{ylabel}</text>')
-    if title: s.append(f'<text x="{(l+W-r)/2}" y="16" font-size="16" text-anchor="middle" font-weight="bold" font-family="Times,serif">{title}</text>')
+    if title: s.append(f'<text x="{(l+W-r)/2}" y="16" font-size="13" text-anchor="middle" font-weight="bold" font-family="Times,serif">{title}</text>')
     return s,sx,sy
