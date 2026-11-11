@@ -1,0 +1,11 @@
+## 2964
+Note: Figure not drawn to scale. In the circle shown, point $C$ is the center, and radius $PC$ bisects $AB$ at point $Q$. The diameter of the circle has a length of 22. Line segment $QP$ has a length of 3. If the length of line segment $AQ$ is equal to $\sqrt{x}$, what is the value of $x$?<p></p>[[fig:q2964]]
+## 2976
+The three points shown define a circle. The circumference of this circle is $k\pi$, where $k$ is a constant. What is the value of $k$?<p></p>[[fig:q2976]]
+## 2985
+In the circle above, chord $\overline{RS}$ is parallel to diameter $\overline{PQ}$. If the length of $\overline{RS}$ is $\frac{3}{4}$ of the length of $\overline{PQ}$ and the distance between the chord and the diameter is $2\sqrt{7}$, what is the radius of the circle?<p></p>[[fig:q2985]]
+@ 6 | $3\sqrt{7}$ | 8 | $4\sqrt{7}$
+## 2992
+Note: Figure not drawn to scale. In the figure shown, points $A$, $B$, $C$, and $E$ lie on the circle, and $AB<BC$. Segment $AC$ is perpendicular to segment $BE$ at point $D$, and $BD=\sqrt{346}$. The diameter of the circle is 175. If $\frac{CD}{AD}=r$, what is the value of $r$?<p></p>[[fig:q2992]]
+## 2994
+In the diagram below, point $O$ is the center of the circle, $BD$ is a diameter, and $AC=BC$. Find the measure of angle $DBA$ (angle $CAB=71^\circ$).<p></p>[[fig:q2994]]
