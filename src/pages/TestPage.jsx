@@ -7,6 +7,8 @@ import { useToast } from '../components/Toast'
 import AITutor from '../components/AITutor'
 import DrawingCanvas from '../components/DrawingCanvas'
 import { sanitizeHtml } from '../lib/sanitizeHtml'
+import { renderMath } from '../lib/mathHtml'
+import { isWrittenAnswerCorrect } from '../lib/answerCheck'
 
 const IS_PRACTICE = true
 const escapeHTML = (value) => String(value).replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[char])
@@ -297,8 +299,8 @@ export default function TestPage() {
   }, [effectivePassage, getHighlightedHTML])
 
   const questionHtmlStr = useMemo(() => getHighlightedHTML(effectiveQText || '', 'question'), [effectiveQText, getHighlightedHTML])
-  const safePassageHtml = useMemo(() => sanitizeHtml(passageHtmlStr), [passageHtmlStr])
-  const safeQuestionHtml = useMemo(() => sanitizeHtml(questionHtmlStr), [questionHtmlStr])
+  const safePassageHtml = useMemo(() => renderMath(sanitizeHtml(passageHtmlStr)), [passageHtmlStr])
+  const safeQuestionHtml = useMemo(() => renderMath(sanitizeHtml(questionHtmlStr)), [questionHtmlStr])
 
   const applyHighlight = (color) => {
     const { text, start } = hlSelectedRef.current
@@ -362,7 +364,7 @@ export default function TestPage() {
 
   const checkCorrect = useCallback((q, sel) => {
     if (isWrittenQ(q)) {
-      return String(sel).trim().toLowerCase() === String(q.explanation).trim().toLowerCase()
+      return isWrittenAnswerCorrect(sel, q.explanation)
     }
     return sel === q.correct_index
   }, [])
@@ -531,7 +533,7 @@ export default function TestPage() {
         const src = match ? match[1] : ''
         return <img key={i} src={src} alt="" className="bb-inline-img" draggable="false" onContextMenu={e => e.preventDefault()} />
       }
-      return <span key={i} dangerouslySetInnerHTML={{ __html: sanitizeHtml(part) }} />
+      return <span key={i} dangerouslySetInnerHTML={{ __html: renderMath(sanitizeHtml(part)) }} />
     })
   }
 
@@ -703,7 +705,7 @@ export default function TestPage() {
                         return (
                           <div key={oi} className={cls}>
                             <span className="test-done-opt-letter">{String.fromCharCode(65 + oi)}</span>
-                            <span className="test-done-opt-text">{opt}</span>
+                            <span className="test-done-opt-text" dangerouslySetInnerHTML={{ __html: renderMath(escapeHTML(opt)) }} />
                             {isRight && <span className="test-done-opt-check">&check;</span>}
                           </div>
                         )
@@ -816,7 +818,7 @@ export default function TestPage() {
             {currentQuestion.options.map((opt, i) => (
               <div key={i} className={'bb-choice' + (selected === i ? ' selected' : '') + ((strikethrough['q' + current] || []).includes(i) ? ' struck' : '')} onClick={() => handleSelect(i)}>
                 <div className="bb-choice-letter">{String.fromCharCode(65 + i)}</div>
-                <div className="bb-choice-text" data-highlight-target={'choice-' + i} dangerouslySetInnerHTML={{ __html: getHighlightedHTML(escapeHTML(opt), 'choice-' + i) }} />
+                <div className="bb-choice-text" data-highlight-target={'choice-' + i} dangerouslySetInnerHTML={{ __html: renderMath(getHighlightedHTML(escapeHTML(opt), 'choice-' + i)) }} />
               </div>
             ))}
           </div>
@@ -866,7 +868,7 @@ export default function TestPage() {
                 {currentQuestion.options.map((opt, i) => (
                   <div key={i} className={'bb-choice' + (selected === i ? ' selected' : '') + ((strikethrough['q' + current] || []).includes(i) ? ' struck' : '')} onClick={() => handleSelect(i)}>
                     <div className="bb-choice-letter">{String.fromCharCode(65 + i)}</div>
-                    <div className="bb-choice-text" data-highlight-target={'choice-' + i} dangerouslySetInnerHTML={{ __html: getHighlightedHTML(escapeHTML(opt), 'choice-' + i) }} />
+                    <div className="bb-choice-text" data-highlight-target={'choice-' + i} dangerouslySetInnerHTML={{ __html: renderMath(getHighlightedHTML(escapeHTML(opt), 'choice-' + i)) }} />
                   </div>
                 ))}
               </div>

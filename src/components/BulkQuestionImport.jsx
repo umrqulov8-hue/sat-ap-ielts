@@ -1,11 +1,14 @@
 import { useState, useRef } from 'react'
 import { supabase } from '../lib/supabaseClient'
 import { useToast } from './Toast'
+import { uploadImage, validateImage } from '../lib/uploadImage'
 import { BATCH, MAX_ROWS, TEMPLATE, parseCsv, normalizeRow } from '../lib/questionImport'
 
 export default function BulkQuestionImport({ subjectId, subjectTitle, startOrder, defaultDifficulty, onDone }) {
   const toast = useToast()
   const fileRef = useRef(null)
+  const imgRef = useRef(null)
+  const [images, setImages] = useState([])
   const [fileName, setFileName] = useState('')
   const [parsed, setParsed] = useState(null)
   const [busy, setBusy] = useState(false)
@@ -47,12 +50,47 @@ export default function BulkQuestionImport({ subjectId, subjectTitle, startOrder
     }
   }
 
+  const handleImages = e => {
+    const files = [...(e.target.files || [])]
+    const bad = files.map(f => [f.name, validateImage(f)]).filter(([, p]) => p)
+    if (bad.length) toast.error(`${bad.length} image(s) rejected, e.g. ${bad[0][0]}: ${bad[0][1]}`)
+    setImages(files.filter(f => !validateImage(f)))
+  }
+
   const handleImport = async () => {
     if (!parsed?.rows.length || !subjectId) return
     setBusy(true); setProgress(0)
     let done = 0
+
+    // Rows that name an image_file: upload the matching picture first (4 at a time).
+    const byName = new Map(images.map(f => [f.name.toLowerCase(), f]))
+    const needed = [...new Set(parsed.rows.map(r => r.image_file).filter(Boolean))]
+    const missing = needed.filter(n => !byName.has(n.toLowerCase()))
+    if (missing.length) {
+      toast.error(`${missing.length} image file(s) not selected, e.g. ${missing[0]}. Select them in "Images" and retry.`)
+      setBusy(false)
+      return
+    }
+    const urlFor = new Map()
+    for (let i = 0; i < needed.length; i += 4) {
+      const results = await Promise.all(needed.slice(i, i + 4).map(async name => {
+        const { url, error } = await uploadImage(byName.get(name.toLowerCase()), 'question-images')
+        return { name, url, error }
+      }))
+      const failed = results.find(r => r.error)
+      if (failed) {
+        toast.error(`Image upload failed (${failed.name}): ${failed.error.message}. Nothing was imported.`)
+        setBusy(false)
+        return
+      }
+      results.forEach(r => urlFor.set(r.name, r.url))
+    }
     for (let i = 0; i < parsed.rows.length; i += BATCH) {
-      const chunk = parsed.rows.slice(i, i + BATCH).map(r => ({ ...r, subject_id: subjectId }))
+      const chunk = parsed.rows.slice(i, i + BATCH).map(({ image_file, ...r }) => ({
+        ...r,
+        ...(image_file ? { image_url: urlFor.get(image_file) } : {}),
+        subject_id: subjectId,
+      }))
       const { error } = await supabase.from('questions').insert(chunk)
       if (error) {
         toast.error(`Stopped at rows ${i + 1}-${i + chunk.length}: ${error.message}. ${done} saved.`)
@@ -64,8 +102,9 @@ export default function BulkQuestionImport({ subjectId, subjectTitle, startOrder
       setProgress(done)
     }
     toast.success(`${done} questions imported`)
-    setBusy(false); setParsed(null); setFileName('')
+    setBusy(false); setParsed(null); setFileName(''); setImages([])
     if (fileRef.current) fileRef.current.value = ''
+    if (imgRef.current) imgRef.current.value = ''
     onDone?.()
   }
 
@@ -82,6 +121,11 @@ export default function BulkQuestionImport({ subjectId, subjectTitle, startOrder
           DOWNLOAD CSV TEMPLATE
         </button>
         <input ref={fileRef} type="file" accept=".csv,.json,text/csv,application/json" onChange={handleFile} disabled={busy} />
+      </div>
+      <div style={{ marginBottom: 10, fontSize: 13 }}>
+        <label>Images for <b>image_file</b> column (select all at once): </label>
+        <input ref={imgRef} type="file" accept="image/png,image/jpeg,image/webp,image/gif" multiple onChange={handleImages} disabled={busy} />
+        {images.length > 0 && <span> {images.length} selected</span>}
       </div>
 
       {parsed && (

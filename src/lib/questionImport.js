@@ -76,6 +76,7 @@ export function normalizeRow(raw, rowNo, defaultDifficulty, order) {
     question_text,
     difficulty,
     image_url: get('image_url'),
+    image_file: get('image_file'),
     desmos_text: get('desmos_text'),
     desmos_image_url: get('desmos_image_url'),
     order_index: order,

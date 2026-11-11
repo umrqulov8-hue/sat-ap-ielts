@@ -1,0 +1,1094 @@
+[
+ {
+  "qno": 1,
+  "topic": "Ratios, Rates, and Units",
+  "difficulty": "easy",
+  "question_text": "If $\\frac{2a}{3b}=\\frac{1}{5}$, what is the value of $\\frac{b}{a}$?",
+  "type": "written",
+  "correct_answer": "10/3"
+ },
+ {
+  "qno": 2,
+  "topic": "Ratios, Rates, and Units",
+  "difficulty": "easy",
+  "question_text": "The ratio of $a$ to $b$ is 49 to 26. What is $a$ when $b = 182$?",
+  "type": "written",
+  "correct_answer": "343"
+ },
+ {
+  "qno": 3,
+  "topic": "Ratios, Rates, and Units",
+  "difficulty": "easy",
+  "question_text": "A length of 550 meters equals how many decimeters? (1 meter $=$ 10 decimeters)",
+  "type": "written",
+  "correct_answer": "5500"
+ },
+ {
+  "qno": 4,
+  "topic": "Ratios, Rates, and Units",
+  "difficulty": "easy",
+  "question_text": "If $\\frac{2}{3}=\\frac{t}{18}$ and $\\frac{3}{2}=\\frac{u}{6}$, what is the value of $3t-2u$?",
+  "options": [
+   "3",
+   "9",
+   "12",
+   "18"
+  ],
+  "correct": "D"
+ },
+ {
+  "qno": 5,
+  "topic": "Ratios, Rates, and Units",
+  "difficulty": "easy",
+  "question_text": "If $\\frac{3x}{4y}=\\frac{9}{8}$, what is the value of $\\frac{x}{y}$?",
+  "options": [
+   "$\\frac{2}{3}$",
+   "$\\frac{3}{4}$",
+   "$\\frac{27}{32}$",
+   "$\\frac{3}{2}$"
+  ],
+  "correct": "D"
+ },
+ {
+  "qno": 6,
+  "topic": "Ratios, Rates, and Units",
+  "difficulty": "easy",
+  "question_text": "<p><b>Ms. Simon's Workday Morning Drive</b></p><table><thead><tr><th>Segment of drive</th><th>Distance (miles)</th><th>Average driving speed with no traffic delay (mph)</th></tr></thead><tbody><tr><td>From home to freeway entrance</td><td>0.6</td><td>25</td></tr><tr><td>From freeway entrance to freeway exit</td><td>15.4</td><td>50</td></tr><tr><td>From freeway exit to workplace</td><td>1.4</td><td>35</td></tr></tbody></table><p>Ms. Simon drives her car from her home to her workplace every workday morning. The table above shows the distance, in miles, and her average driving speed, in miles per hour, when there is no traffic delay, for each segment of her drive.</p><p>One morning, Ms. Simon drove directly from her home to her workplace in 24 minutes. What was her average speed, in miles per hour, during her drive that morning?</p>",
+  "type": "written",
+  "correct_answer": "87/2 or 43.5"
+ },
+ {
+  "qno": 7,
+  "topic": "Ratios, Rates, and Units",
+  "difficulty": "easy",
+  "question_text": "A length of 450 meters is equal to how many decimeters? (1 meter $=$ 10 decimeters)",
+  "type": "written",
+  "correct_answer": "4500"
+ },
+ {
+  "qno": 8,
+  "topic": "Ratios, Rates, and Units",
+  "difficulty": "easy",
+  "question_text": "A helicopter is flying at a speed of 180 miles per hour. What is its speed in meters per second?<br>(Use 1 mile $=$ 1600 meters.)",
+  "type": "written",
+  "correct_answer": "80"
+ },
+ {
+  "qno": 9,
+  "topic": "Ratios, Rates, and Units",
+  "difficulty": "easy",
+  "question_text": "What length, in meters, is equivalent to a length of 230 decimeters? (1 meter $=$ 10 decimeters)",
+  "type": "written",
+  "correct_answer": "23"
+ },
+ {
+  "qno": 10,
+  "topic": "Ratios, Rates, and Units",
+  "difficulty": "easy",
+  "question_text": "Horsepower and watts are units of measure of power. They are directly proportional such that 5 horsepower is equal to 3730 watts. How much power, in watts, is equal to 2 horsepower?",
+  "type": "written",
+  "correct_answer": "1492"
+ },
+ {
+  "qno": 11,
+  "topic": "Ratios, Rates, and Units",
+  "difficulty": "easy",
+  "question_text": "A calligrapher can label 8 envelopes in 1 hour. At this rate, how many envelopes can the calligrapher label in 15 hours?",
+  "type": "written",
+  "correct_answer": "120"
+ },
+ {
+  "qno": 12,
+  "topic": "Ratios, Rates, and Units",
+  "difficulty": "easy",
+  "question_text": "At sea level, the pressure exerted by the atmosphere is 14.7 pounds per square inch. What is the force, in pounds, exerted by the atmosphere on a surface of area 30.0 square inches at sea level?",
+  "type": "written",
+  "correct_answer": "441"
+ },
+ {
+  "qno": 13,
+  "topic": "Ratios, Rates, and Units",
+  "difficulty": "easy",
+  "question_text": "If $\\frac{j}{6}=3$ and $5k=40$, what is the value of $\\frac{j}{k}$ ?",
+  "options": [
+   "$\\frac{4}{9}$",
+   "$\\frac{5}{8}$",
+   "$\\frac{9}{4}$",
+   "$\\frac{17}{2}$"
+  ],
+  "correct": "C"
+ },
+ {
+  "qno": 14,
+  "topic": "Ratios, Rates, and Units",
+  "difficulty": "easy",
+  "question_text": "A triathlon participant plans to cycle at 19,536 yards per hour. What is this speed in miles per hour? One mile equals 1,760 yards.",
+  "type": "written",
+  "correct_answer": "11.1"
+ },
+ {
+  "qno": 15,
+  "topic": "Ratios, Rates, and Units",
+  "difficulty": "easy",
+  "question_text": "Linda has \\$7 more than twice the amount of money Curtis has. If they have no more than \\$100 combined, what is the maximum number of dollars that Curtis could have? (Disregard the \\$ sign when gridding your answer.)",
+  "type": "written",
+  "correct_answer": "31"
+ },
+ {
+  "qno": 16,
+  "topic": "Ratios, Rates, and Units",
+  "difficulty": "easy",
+  "question_text": "A triathlon participant plans to cycle at 33,792 yards per hour. What is this speed in miles per hour? One mile equals 1,760 yards.",
+  "type": "written",
+  "correct_answer": "19.2"
+ },
+ {
+  "qno": 17,
+  "topic": "Ratios, Rates, and Units",
+  "difficulty": "easy",
+  "question_text": "A certain swordfish can swim at a maximum speed of 23 meters per second. At this maximum speed, how many meters would this swordfish swim in 3 seconds?",
+  "type": "written",
+  "correct_answer": "69"
+ },
+ {
+  "qno": 18,
+  "topic": "Ratios, Rates, and Units",
+  "difficulty": "easy",
+  "question_text": "A certain car travels at a constant speed of 40 miles per hour. At this speed, the car can travel a distance of 25 miles per gallon of fuel used. How many gallons of fuel are used when the car travels at this speed for 75 minutes?",
+  "type": "written",
+  "correct_answer": "2"
+ },
+ {
+  "qno": 19,
+  "topic": "Ratios, Rates, and Units",
+  "difficulty": "easy",
+  "question_text": "A distance of 86 furlongs is equivalent to how many feet? (1 furlong $=$ 220 yards and 1 yard $=$ 3 feet)",
+  "type": "written",
+  "correct_answer": "56760"
+ },
+ {
+  "qno": 20,
+  "topic": "Ratios, Rates, and Units",
+  "difficulty": "easy",
+  "question_text": "There are two atoms of hydrogen and one atom of oxygen in one molecule of water. How many atoms of hydrogen are there in 51 molecules of water?",
+  "type": "written",
+  "correct_answer": "102"
+ },
+ {
+  "qno": 21,
+  "topic": "Ratios, Rates, and Units",
+  "difficulty": "easy",
+  "question_text": "A particle moves at 41 feet per second. What is its speed in feet per minute?",
+  "options": [
+   "41",
+   "101",
+   "1,230",
+   "2,460"
+  ],
+  "correct": "D"
+ },
+ {
+  "qno": 22,
+  "topic": "Ratios, Rates, and Units",
+  "difficulty": "easy",
+  "question_text": "The ratio of the side length of square $A$ to the side length of square $B$ is 2 to 6. Square $A$ has a side length of 19 inches. What is the side length, in inches, of square $B$?",
+  "type": "written",
+  "correct_answer": "57"
+ },
+ {
+  "qno": 23,
+  "topic": "Ratios, Rates, and Units",
+  "difficulty": "easy",
+  "question_text": "In a community garden, the ratio of tomato plants to pepper plants is $1:3$, and the ratio of pepper plants to pea plants is $8:1$. There are 6 pea plants in the garden.<br><br>How many tomato plants are in the garden?",
+  "type": "written",
+  "correct_answer": "16"
+ },
+ {
+  "qno": 24,
+  "topic": "Ratios, Rates, and Units",
+  "difficulty": "easy",
+  "question_text": "A coffee shop starts with 8,900 disposable cups. It uses 120 cups per day and receives no new cups. After how many days will 1,700 cups remain?",
+  "type": "written",
+  "correct_answer": "60"
+ },
+ {
+  "qno": 25,
+  "topic": "Ratios, Rates, and Units",
+  "difficulty": "easy",
+  "question_text": "A bamboo plant has height of 11 feet and grows at a constant rate of 2 feet per day. At this rate, how many days from now will the height of the bamboo plant be 27 feet?",
+  "type": "written",
+  "correct_answer": "8"
+ },
+ {
+  "qno": 26,
+  "topic": "Ratios, Rates, and Units",
+  "difficulty": "easy",
+  "question_text": "In a community garden, the ratio of tomato plants to pepper plants is $1:3$, and the ratio of pepper plants to pea plants is $8:1$. There are 6 pea plants in the garden.<br><br>Next year, there will be 25% more pepper plants in the garden. If each plant yields 4 peppers, how many peppers will there be?",
+  "type": "written",
+  "correct_answer": "240"
+ },
+ {
+  "qno": 27,
+  "topic": "Ratios, Rates, and Units",
+  "difficulty": "easy",
+  "question_text": "The floor of a business office has an area of 1,575 square meters. An architect creates a scale model where each side of the model is $\\frac{1}{15}$ times the length of the corresponding side of the actual floor. What is the area, in square meters, of the scale model?",
+  "type": "written",
+  "correct_answer": "7"
+ },
+ {
+  "qno": 28,
+  "topic": "Ratios, Rates, and Units",
+  "difficulty": "easy",
+  "question_text": "A certain striped marlin can swim at a maximum speed of 22 meters per second. At this maximum speed, how many meters would this striped marlin swim in 3 seconds?",
+  "type": "written",
+  "correct_answer": "66"
+ },
+ {
+  "qno": 29,
+  "topic": "Ratios, Rates, and Units",
+  "difficulty": "easy",
+  "question_text": "Jamal reads a book at a rate of 20 pages per half hour. At this rate, how many hours will it take him to read 80 pages of this book?",
+  "options": [
+   "1",
+   "1.5",
+   "2",
+   "3"
+  ],
+  "correct": "C"
+ },
+ {
+  "qno": 30,
+  "topic": "Ratios, Rates, and Units",
+  "difficulty": "easy",
+  "question_text": "A coffee shop starts with 6,600 disposable cups. It uses 110 cups per day and receives no new cups. After how many days will 1,100 cups remain?",
+  "type": "written",
+  "correct_answer": "50"
+ },
+ {
+  "qno": 31,
+  "topic": "Ratios, Rates, and Units",
+  "difficulty": "easy",
+  "question_text": "A remotely operated vehicle (ROV) is used for underwater ocean research. When the ROV is at a depth of 31 fathoms, what is the ROV's depth in feet? (1 fathom $=$ 6 feet)",
+  "type": "written",
+  "correct_answer": "186"
+ },
+ {
+  "qno": 32,
+  "topic": "Ratios, Rates, and Units",
+  "difficulty": "easy",
+  "question_text": "A bag containing 12 marbles includes 3 red marbles, 6 blue marbles, and 3 white marbles. What percent of the marbles in the bag are blue?",
+  "options": [
+   "6%",
+   "25%",
+   "50%",
+   "75%"
+  ],
+  "correct": "C"
+ },
+ {
+  "qno": 33,
+  "topic": "Ratios, Rates, and Units",
+  "difficulty": "easy",
+  "question_text": "<p style=\"text-align:center\">1 palm $=$ 4 fingers<br>1 royal cubit $=$ 7 palms</p><p>The equations above give the relationships between some ancient Egyptian units of length. A length of 28 fingers is equivalent to how many royal cubits?</p>",
+  "type": "written",
+  "correct_answer": "1"
+ },
+ {
+  "qno": 34,
+  "topic": "Ratios, Rates, and Units",
+  "difficulty": "easy",
+  "question_text": "In a typical elk herd in Yellowstone National Park, the ratio of males to females is 14 to 46.<br><br>A biologist spots a herd of 150 elk in the park. The biologist uses the ratio of males to females in a typical herd to estimate the number of males in this herd. How many males would the biologist expect to be in this herd?",
+  "type": "written",
+  "correct_answer": "35"
+ },
+ {
+  "qno": 35,
+  "topic": "Ratios, Rates, and Units",
+  "difficulty": "easy",
+  "question_text": "One pound of grapes costs \\$2. At this rate, how many dollars will $c$ pounds of grapes cost?",
+  "options": [
+   "$2c$",
+   "$2+c$",
+   "$\\frac{2}{c}$",
+   "$\\frac{c}{2}$"
+  ],
+  "correct": "A"
+ },
+ {
+  "qno": 36,
+  "topic": "Ratios, Rates, and Units",
+  "difficulty": "easy",
+  "question_text": "In a box of coins, the ratio of pennies to nickels is 7 to 1. There are 21 pennies in the box. How many nickels are in the box?",
+  "options": [
+   "3",
+   "7",
+   "21",
+   "147"
+  ],
+  "correct": "A"
+ },
+ {
+  "qno": 37,
+  "topic": "Ratios, Rates, and Units",
+  "difficulty": "easy",
+  "question_text": "At Mount Rushmore National Memorial, four sculptures of United States presidents' heads are carved into a granite mountain. The ratio of a sculpture's head length to the actual president's head length is 40 feet to 6 inches. What is the sculpture's head length, in feet, for a president with a head length of 9 inches?",
+  "type": "written",
+  "correct_answer": "60"
+ },
+ {
+  "qno": 38,
+  "topic": "Ratios, Rates, and Units",
+  "difficulty": "easy",
+  "question_text": "In a box, the ratio of blue marbles to green marbles is 8 to 1. If there are 56 blue marbles, how many green marbles are there?",
+  "options": [
+   "7",
+   "8",
+   "56",
+   "448"
+  ],
+  "correct": "A"
+ },
+ {
+  "qno": 39,
+  "topic": "Ratios, Rates, and Units",
+  "difficulty": "easy",
+  "question_text": "An object moves at 145.0 inches per second. What is its speed in feet per second? Give an exact fraction or round to the nearest hundredth. (12 inches $=$ 1 foot)",
+  "type": "written",
+  "correct_answer": "145/12"
+ },
+ {
+  "qno": 40,
+  "topic": "Ratios, Rates, and Units",
+  "difficulty": "easy",
+  "question_text": "The estimated daytime population of Manhattan, New York, during a weekday is 3.9 million people. The area of Manhattan is approximately 23 square miles. Based on these estimates, what is the daytime population density, in millions of people per square mile, of Manhattan during a weekday, rounded to the nearest hundredth?",
+  "type": "written",
+  "correct_answer": "0.17"
+ },
+ {
+  "qno": 41,
+  "topic": "Ratios, Rates, and Units",
+  "difficulty": "easy",
+  "question_text": "At a certain point in time, 1 US dollar was equivalent to 0.90 euro. Based on this relationship, what was the value of 20 US dollars in euros at that time?",
+  "options": [
+   "22.00",
+   "20.00",
+   "18.00",
+   "0.90"
+  ],
+  "correct": "C"
+ },
+ {
+  "qno": 42,
+  "topic": "Ratios, Rates, and Units",
+  "difficulty": "easy",
+  "question_text": "At her summer job, Paula earns the same amount of money for each hour she works. If she earns \\$240 for working 20 hours, how much does she earn for 5 hours?",
+  "options": [
+   "\\$12",
+   "\\$50",
+   "\\$60",
+   "\\$100"
+  ],
+  "correct": "C"
+ },
+ {
+  "qno": 43,
+  "topic": "Ratios, Rates, and Units",
+  "difficulty": "easy",
+  "question_text": "The ratio of children to adults at a restaurant is 1 to 18. If there are $x$ children, which expression gives the number of adults?",
+  "options": [
+   "$x+18$",
+   "$18x$",
+   "$\\frac{18}{x}$",
+   "$\\frac{x}{18}$"
+  ],
+  "correct": "B"
+ },
+ {
+  "qno": 44,
+  "topic": "Ratios, Rates, and Units",
+  "difficulty": "easy",
+  "question_text": "What length, in meters, is equivalent to a length of 140 decimeters? (1 meter $=$ 10 decimeters)",
+  "options": [
+   "1.4",
+   "14",
+   "140",
+   "1,400"
+  ],
+  "correct": "B"
+ },
+ {
+  "qno": 45,
+  "topic": "Ratios, Rates, and Units",
+  "difficulty": "easy",
+  "question_text": "A landscape-supply company sells mulch at a rate of \\$30 per cubic yard. What price does the company charge for 54 cubic feet of mulch? (1 yard $=$ 3 feet)",
+  "options": [
+   "\\$54",
+   "\\$60",
+   "\\$810",
+   "\\$1,620"
+  ],
+  "correct": "B"
+ },
+ {
+  "qno": 46,
+  "topic": "Ratios, Rates, and Units",
+  "difficulty": "easy",
+  "question_text": "A combination of clay, sand, and silt is often used to create parts of a baseball field. An infield mixture is used to construct the infield, baselines, and home plate area. A different mixture is sometimes used to construct the pitcher's mound. A community recreation department is constructing a new baseball field using dirt mixtures in the volume ratios shown in the tables below.<table><caption>Infield Mixture (Infield, Baselines, and Home Plate Area)</caption><tbody><tr><td>Sand to clay</td><td>3 : 1</td></tr><tr><td>Sand to silt</td><td>3 : 1</td></tr><tr><td>Clay to silt</td><td>1 : 1</td></tr></tbody></table><table><caption>Pitcher's Mound Mixture</caption><tbody><tr><td>Sand to clay</td><td>2 : 1</td></tr><tr><td>Sand to silt</td><td>1 : 1</td></tr><tr><td>Clay to silt</td><td>1 : 2</td></tr></tbody></table><p>A pitcher's mound is being built with 1.6 cubic meters of clay. What is the total volume, in cubic meters, of the materials in the mixture for the pitcher's mound?</p>",
+  "image_file": "q046.webp",
+  "type": "written",
+  "correct_answer": "8"
+ },
+ {
+  "qno": 47,
+  "topic": "Ratios, Rates, and Units",
+  "difficulty": "easy",
+  "question_text": "A supply room clerk at an office orders more reams of paper on Monday if the supply is 50 reams or less. This Monday, the supply of paper is 325 reams. The office uses an average of 15 reams of paper per week. At this rate, in how many weeks will the supply room clerk order more paper on Monday?",
+  "type": "written",
+  "correct_answer": "19"
+ },
+ {
+  "qno": 48,
+  "topic": "Ratios, Rates, and Units",
+  "difficulty": "easy",
+  "question_text": "Magaly rode her bike 6 miles in 45 minutes. At this rate, how long would it take her to ride her bike 22 miles?",
+  "options": [
+   "2 hours and 5 minutes",
+   "2 hours and 20 minutes",
+   "2 hours and 45 minutes",
+   "2 hours and 56 minutes"
+  ],
+  "correct": "C"
+ },
+ {
+  "qno": 49,
+  "topic": "Ratios, Rates, and Units",
+  "difficulty": "easy",
+  "question_text": "A cheetah can run at a maximum speed of 113 kilometers per hour. What is the cheetah's maximum speed, to the nearest mile per hour? (1 mile is approximately 1.61 kilometers.)",
+  "options": [
+   "56",
+   "70",
+   "112",
+   "182"
+  ],
+  "correct": "B"
+ },
+ {
+  "qno": 50,
+  "topic": "Ratios, Rates, and Units",
+  "difficulty": "easy",
+  "question_text": "A figure has area 7,344 square inches. What is its area, in square feet? (1 foot $=$ 12 inches)",
+  "options": [
+   "51",
+   "85.7",
+   "612",
+   "1,028.4"
+  ],
+  "correct": "A"
+ },
+ {
+  "qno": 51,
+  "topic": "Ratios, Rates, and Units",
+  "difficulty": "easy",
+  "question_text": "The Silk Road was a 4000 mile trade route that connected China to Europe. To the nearest league, how long was the Silk Road?<br>(Note: 1 league $=$ 3 miles)",
+  "type": "written",
+  "correct_answer": "1333"
+ },
+ {
+  "qno": 52,
+  "topic": "Ratios, Rates, and Units",
+  "difficulty": "easy",
+  "question_text": "A fitness club is hosting an indoor triathlon. Each triathlon participant spends 10 minutes swimming in the pool, 30 minutes biking on a stationary bike, and 20 minutes running on a treadmill. Scores are given based on total combined distance in miles, $D$, of the three activities, which can be found using the equation below.<p style=\"text-align:center\">$\\frac{1}{6}s+\\frac{1}{2}b+\\frac{1}{3}r=D$</p>In the equation, $s$ is the participant's average swimming speed in miles per hour (mph); $b$ is the participant's average biking speed in mph; and $r$ is the participant's average running speed in mph.<br><br>Kate's average running speed during the triathlon was 7.5 mph, and her average biking speed was 16 mph. Her total combined distance was 10.75 miles. At what average speed, in mph, did she swim?",
+  "options": [
+   "0.25",
+   "1.50",
+   "1.79",
+   "5.07"
+  ],
+  "correct": "B"
+ },
+ {
+  "qno": 53,
+  "topic": "Ratios, Rates, and Units",
+  "difficulty": "easy",
+  "question_text": "On Tuesday, Dianna's store sold 5 pairs of running shoes for every 9 pairs of sandals sold. If Dianna's store sold 27 pairs of sandals Tuesday, how many pairs of running shoes did Dianna's store sell on that day?",
+  "options": [
+   "10",
+   "15",
+   "20",
+   "25"
+  ],
+  "correct": "B"
+ },
+ {
+  "qno": 54,
+  "topic": "Ratios, Rates, and Units",
+  "difficulty": "easy",
+  "question_text": "A dairy farm produces 5300 pounds of whole milk each day. The farm uses 21.2 pounds of whole milk to produce one pound of butter. At this rate, how many pounds of butter can the dairy farm produce each day?",
+  "type": "written",
+  "correct_answer": "250"
+ },
+ {
+  "qno": 55,
+  "topic": "Ratios, Rates, and Units",
+  "difficulty": "easy",
+  "question_text": "What length, in centimeters, is equivalent to a length of 98 meters? (1 meter $=$ 100 centimeters)",
+  "options": [
+   "0.098",
+   "0.98",
+   "9,800",
+   "98,000"
+  ],
+  "correct": "C"
+ },
+ {
+  "qno": 56,
+  "topic": "Ratios, Rates, and Units",
+  "difficulty": "easy",
+  "question_text": "What length, in centimeters, is equivalent to a length of 110 meters? (1 meter $=$ 100 centimeters)",
+  "options": [
+   "0.11",
+   "1.1",
+   "11,000",
+   "110,000"
+  ],
+  "correct": "C"
+ },
+ {
+  "qno": 57,
+  "topic": "Ratios, Rates, and Units",
+  "difficulty": "easy",
+  "question_text": "A region has an area of 270 square feet and contains $n$ objects. Which expression gives the average number of objects per square foot?",
+  "options": [
+   "$\\frac{n}{270}$",
+   "$\\left(\\frac{n}{270}\\right)^2$",
+   "$270n$",
+   "$(270n)^2$"
+  ],
+  "correct": "A"
+ },
+ {
+  "qno": 58,
+  "topic": "Ratios, Rates, and Units",
+  "difficulty": "easy",
+  "question_text": "In a random sample of 200 cars of a particular model, 3 have a manufacturing defect. At this rate, how many of 10,000 cars of the same model will have a manufacturing defect?",
+  "options": [
+   "150",
+   "200",
+   "250",
+   "300"
+  ],
+  "correct": "A"
+ },
+ {
+  "qno": 59,
+  "topic": "Ratios, Rates, and Units",
+  "difficulty": "easy",
+  "question_text": "A certain cake recipe calls for 3 cups of flour to make 12 servings. If 40 servings of the cake are being made, how many cups of flour will be needed for this recipe?",
+  "options": [
+   "0.9",
+   "4",
+   "10",
+   "31"
+  ],
+  "correct": "C"
+ },
+ {
+  "qno": 60,
+  "topic": "Ratios, Rates, and Units",
+  "difficulty": "easy",
+  "question_text": "On April 18, 1775, Paul Revere set off on his midnight ride from Charlestown to Lexington. If he had ridden straight to Lexington without stopping, he would have traveled 11 miles in 26 minutes. In such a ride, what would the average speed of his horse have been, to the nearest tenth of a mile per hour?",
+  "type": "written",
+  "correct_answer": "25.4"
+ },
+ {
+  "qno": 61,
+  "topic": "Ratios, Rates, and Units",
+  "difficulty": "easy",
+  "question_text": "There is a proportional relationship between $p$ and $t$. If $p=5{,}610$ when $t=7{,}480$, then what is the value of $t$ when $p=4{,}488$?",
+  "options": [
+   "2,618",
+   "3,366",
+   "5,984",
+   "6,358"
+  ],
+  "correct": "C"
+ },
+ {
+  "qno": 62,
+  "topic": "Ratios, Rates, and Units",
+  "difficulty": "easy",
+  "question_text": "If $x$ food calories is equivalent to $k$ kilojoules, of the following, which best represents the relationship between $x$ and $k$ ?",
+  "options": [
+   "$k=0.24x$",
+   "$k=4.2x$",
+   "$x=4.2k$",
+   "$xk=4.2$"
+  ],
+  "correct": "B"
+ },
+ {
+  "qno": 63,
+  "topic": "Ratios, Rates, and Units",
+  "difficulty": "easy",
+  "question_text": "Miguel is buying prizes for a raffle. He will buy one prize that costs \\$50 and four prizes that cost \\$20 each. The remainder of the prizes will cost \\$10 each. If Miguel can spend no more than \\$300 on all the prizes, what is the largest total number of prizes he can buy for the raffle? (Assume there is no sales tax.)",
+  "type": "written",
+  "correct_answer": "22"
+ },
+ {
+  "qno": 64,
+  "topic": "Ratios, Rates, and Units",
+  "difficulty": "easy",
+  "question_text": "There is a proportional relationship between $p$ and $t$. If $p=2{,}520$ when $t=3{,}360$, then what is the value of $t$ when $p=2{,}016$?",
+  "options": [
+   "2,856",
+   "2,688",
+   "1,512",
+   "1,176"
+  ],
+  "correct": "B"
+ },
+ {
+  "qno": 65,
+  "topic": "Ratios, Rates, and Units",
+  "difficulty": "medium",
+  "question_text": "In 1854, during the California gold rush, each ounce of gold was worth \\$20, and the largest known mass of gold found in California was worth \\$62,400 in that year. What was the weight, in pounds, of this mass of gold? (16 ounces $=$ 1 pound)",
+  "type": "written",
+  "correct_answer": "195"
+ },
+ {
+  "qno": 66,
+  "topic": "Ratios, Rates, and Units",
+  "difficulty": "medium",
+  "question_text": "A 15-foot wire and a 5-foot wire were each cut completely into 10-inch pieces. How many more 10-inch pieces resulted from the 15-foot wire than from the 5-foot wire? (12 inches $=$ 1 foot)",
+  "options": [
+   "6",
+   "9",
+   "12",
+   "18"
+  ],
+  "correct": "C"
+ },
+ {
+  "qno": 67,
+  "topic": "Ratios, Rates, and Units",
+  "difficulty": "medium",
+  "question_text": "A cube made of osmium, the element with the highest density, measures 5 centimeters along each edge and has a mass of 2825 grams. What is the density, in grams per cubic centimeter, of the osmium from which the cube is made? (Density is mass per unit volume.)",
+  "type": "written",
+  "correct_answer": "22.6"
+ },
+ {
+  "qno": 68,
+  "topic": "Ratios, Rates, and Units",
+  "difficulty": "medium",
+  "question_text": "A certain town has an area of 3.51 square miles. What is the area, in square yards, of this town? (1 mile $=$ 1,760 yards)",
+  "options": [
+   "501",
+   "6,178",
+   "882,507",
+   "10,872,576"
+  ],
+  "correct": "D"
+ },
+ {
+  "qno": 69,
+  "topic": "Ratios, Rates, and Units",
+  "difficulty": "medium",
+  "question_text": "A fitness club is hosting an indoor triathlon. Each triathlon participant spends 10 minutes swimming in the pool, 30 minutes biking on a stationary bike, and 20 minutes running on a treadmill. Scores are given based on total combined distance in miles, $D$, of the three activities, which can be found using the equation below.<p style=\"text-align:center\">$\\frac{1}{6}s+\\frac{1}{2}b+\\frac{1}{3}r=D$</p>In the equation, $s$ is the participant's average swimming speed in miles per hour (mph); $b$ is the participant's average biking speed in mph; and $r$ is the participant's average running speed in mph.<br><br>In the triathlon, Jamie ran exactly 6 times the distance he swam. Which equation relates his average swimming speed to his average running speed?",
+  "options": [
+   "$r=3s$",
+   "$r=6s$",
+   "$r=\\frac{s}{12}$",
+   "$r=\\frac{s}{6}$"
+  ],
+  "correct": "A"
+ },
+ {
+  "qno": 70,
+  "topic": "Ratios, Rates, and Units",
+  "difficulty": "medium",
+  "question_text": "Isabel began charging her phone battery when it was 40% charged. After 48 minutes, her phone battery was 80% charged. If the phone battery charges at a constant rate, how many more minutes will it take for her phone battery to be exactly 90% charged?",
+  "options": [
+   "4",
+   "8",
+   "10",
+   "12"
+  ],
+  "correct": "D"
+ },
+ {
+  "qno": 71,
+  "topic": "Ratios, Rates, and Units",
+  "difficulty": "medium",
+  "question_text": "A certain commuter train has a maximum speed of 55 miles per hour. What is the train's maximum speed, in feet per second, rounded to the nearest whole number? (1 mile $=$ 5,280 feet)",
+  "options": [
+   "96",
+   "88",
+   "81",
+   "38"
+  ],
+  "correct": "C"
+ },
+ {
+  "qno": 72,
+  "topic": "Ratios, Rates, and Units",
+  "difficulty": "medium",
+  "question_text": "The perimeter $P$ of a square with side length $s$ is given by the formula $P=4s$. The side length of Square $A$ is 2 times the side length of Square $B$. How many times larger is the perimeter of Square $A$ than the perimeter of Square $B$?",
+  "options": [
+   "2",
+   "4",
+   "8",
+   "16"
+  ],
+  "correct": "A"
+ },
+ {
+  "qno": 73,
+  "topic": "Ratios, Rates, and Units",
+  "difficulty": "medium",
+  "question_text": "A certain town has an area of 13,536,512 square yards. What is the area, in square miles, of this town? 1 mile $=$ 1,760 yards",
+  "options": [
+   "2.09",
+   "4.37",
+   "3,679.20",
+   "7,691.2"
+  ],
+  "correct": "B"
+ },
+ {
+  "qno": 74,
+  "topic": "Ratios, Rates, and Units",
+  "difficulty": "medium",
+  "question_text": "A triathlon is a multisport race consisting of three different legs. A triathlon participant completed the cycling leg with an average speed of 17.700 miles per hour. What was the average speed, in yards per 45 sec, of the participant during the cycling leg? (1 mile $=$ 1,760 yards)",
+  "type": "written",
+  "correct_answer": "389.4"
+ },
+ {
+  "qno": 75,
+  "topic": "Ratios, Rates, and Units",
+  "difficulty": "medium",
+  "question_text": "The area of a rectangular region is increasing at a rate of 210 square feet per hour. Which of the following is closest to this rate in square meters per minute? (Use 1 meter $=$ 3.28 feet.)",
+  "options": [
+   "0.33",
+   "1.07",
+   "11.48",
+   "19.52"
+  ],
+  "correct": "A"
+ },
+ {
+  "qno": 76,
+  "topic": "Ratios, Rates, and Units",
+  "difficulty": "medium",
+  "question_text": "John and Karen work at the bakery. John works 7 hours per day, and Karen works 6 hours per day. John produces $x$ brownies per hour and Karen produces $y$ brownies per hour. Which of the following expressions gives the average number of brownies John and Karen produce per hour?",
+  "options": [
+   "$\\frac{x+y}{13}$",
+   "$\\frac{7x+6y}{13}$",
+   "$\\frac{xy}{13}$",
+   "$\\frac{6x+7y}{13}$"
+  ],
+  "correct": "B"
+ },
+ {
+  "qno": 77,
+  "topic": "Ratios, Rates, and Units",
+  "difficulty": "medium",
+  "question_text": "A certain wind turbine spins at a rate of 22 revolutions per minute. At this rate, how many revolutions will the wind turbine make in 5 hours?",
+  "options": [
+   "110",
+   "300",
+   "1,320",
+   "6,600"
+  ],
+  "correct": "D"
+ },
+ {
+  "qno": 78,
+  "topic": "Ratios, Rates, and Units",
+  "difficulty": "medium",
+  "question_text": "During a trip, Bill drove his car for 17.0 miles and then began driving at a constant speed of 60.0 miles per hour. After 2 hours of driving at this speed, what is the total distance, in miles, Bill has traveled during this trip?",
+  "type": "written",
+  "correct_answer": "137"
+ },
+ {
+  "qno": 79,
+  "topic": "Ratios, Rates, and Units",
+  "difficulty": "medium",
+  "question_text": "Biologists found a new species of pale shrimp at the world's deepest undersea vent, the Beebe Vent Field. The vent is 3.1 miles below the sea's surface. Approximately how many kilometers below the sea's surface is the vent? (1 kilometer $\\approx$ 0.6214 mile)",
+  "options": [
+   "2",
+   "3",
+   "4",
+   "5"
+  ],
+  "correct": "D"
+ },
+ {
+  "qno": 80,
+  "topic": "Ratios, Rates, and Units",
+  "difficulty": "medium",
+  "question_text": "A dog walker charges \\$15 per walk. Which equation gives the total amount $t$, in dollars, that the dog walker charges for $w$ walks?",
+  "options": [
+   "$t=15w$",
+   "$t=w+15$",
+   "$15=tw$",
+   "$15=t+w$"
+  ],
+  "correct": "A"
+ },
+ {
+  "qno": 81,
+  "topic": "Ratios, Rates, and Units",
+  "difficulty": "medium",
+  "question_text": "A dog walker charges \\$19 per walk. Which equation gives the total amount $t$, in dollars, that the dog walker charges for $w$ walks?",
+  "options": [
+   "$t=w+19$",
+   "$19=t+w$",
+   "$t=19w$",
+   "$19=tw$"
+  ],
+  "correct": "C"
+ },
+ {
+  "qno": 82,
+  "topic": "Ratios, Rates, and Units",
+  "difficulty": "medium",
+  "question_text": "To make a bakery's signature chocolate muffins, a baker needs 2.5 ounces of chocolate for each muffin. How many pounds of chocolate are needed to make 48 signature chocolate muffins?<br>(1 pound $=$ 16 ounces)",
+  "options": [
+   "7.5",
+   "10",
+   "50.5",
+   "120"
+  ],
+  "correct": "A"
+ },
+ {
+  "qno": 83,
+  "topic": "Ratios, Rates, and Units",
+  "difficulty": "medium",
+  "question_text": "Yuna sold boxes of cookies and bags of candy. The ratio of the number of boxes of cookies she sold to the number of bags of candy she sold was 2 to 1. If Yuna sold 8 boxes of cookies, how many bags of candy did she sell?",
+  "options": [
+   "4",
+   "8",
+   "10",
+   "16"
+  ],
+  "correct": "A"
+ },
+ {
+  "qno": 84,
+  "topic": "Ratios, Rates, and Units",
+  "difficulty": "medium",
+  "question_text": "During a trip, Bill drove his car for 14 miles and then began driving at a constant speed of 70 miles per hour. After 2 hours of driving at this speed, what was the total distance, in miles, Bill had traveled during the trip?",
+  "options": [
+   "14",
+   "70",
+   "84",
+   "154"
+  ],
+  "correct": "D"
+ },
+ {
+  "qno": 85,
+  "topic": "Ratios, Rates, and Units",
+  "difficulty": "medium",
+  "question_text": "A doctor prescribes a medication for a 66-pound child. In each dose, the child is to be given 8 milligrams of the medication for every kilogram of the child's body weight. The medication is to be given to the child 2 times per day for 5 days. How much medication, in milligrams, should be provided for the entire 5-day treatment plan? (1 kilogram $=$ 2.2 pounds)",
+  "type": "written",
+  "correct_answer": "2400"
+ },
+ {
+  "qno": 86,
+  "topic": "Ratios, Rates, and Units",
+  "difficulty": "medium",
+  "question_text": "<p><b>Ratings Given to a Movie on Release Night</b></p><table><thead><tr><th></th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>Total</th></tr></thead><tbody><tr><td>Adults</td><td>13</td><td>35</td><td>103</td><td>82</td><td>17</td><td>250</td></tr><tr><td>Children</td><td>6</td><td>22</td><td>27</td><td>70</td><td>25</td><td>150</td></tr><tr><td>Total</td><td>19</td><td>57</td><td>130</td><td>152</td><td>42</td><td>400</td></tr></tbody></table><p>On the first night of each movie's release, the manager of a movie theater asks the people who saw the movie to rate it on a scale of 1 (worst) to 5 (best). The table above summarizes the responses of all 400 viewers of one particular movie.</p><p>If the theater manager assumes the surveyed group is representative of the 4,000 people to view the movie at this theater, about how many of the 4,000 people would the theater manager expect to rate the movie a 2 or lower?</p>",
+  "options": [
+   "380",
+   "760",
+   "1,064",
+   "3,240"
+  ],
+  "correct": "B"
+ },
+ {
+  "qno": 87,
+  "topic": "Ratios, Rates, and Units",
+  "difficulty": "medium",
+  "question_text": "A physician prescribes a treatment in which a patient takes 2 teaspoons of a medication every 6 hours for 5 days. According to the prescription, how many teaspoons of the medication should the patient take in a 24-hour period?",
+  "options": [
+   "4",
+   "6",
+   "8",
+   "40"
+  ],
+  "correct": "C"
+ },
+ {
+  "qno": 88,
+  "topic": "Ratios, Rates, and Units",
+  "difficulty": "medium",
+  "question_text": "A population of bacteria doubles every 3 hours. If there are initially 500 bacteria, which of the following expressions gives the number of bacteria after $t$ hours?",
+  "options": [
+   "$500(2)^t$",
+   "$500(2)^{t/3}$",
+   "$500(3)^t$",
+   "$500(3)^{t/2}$"
+  ],
+  "correct": "B"
+ },
+ {
+  "qno": 89,
+  "topic": "Ratios, Rates, and Units",
+  "difficulty": "medium",
+  "question_text": "If 50 one-cent coins were stacked on top of each other in a column, the column would be approximately $3\\frac{7}{8}$ inches tall. At this rate, which of the following is closest to the number of one-cent coins it would take to make an 8-inch-tall column?",
+  "options": [
+   "75",
+   "100",
+   "200",
+   "390"
+  ],
+  "correct": "B"
+ },
+ {
+  "qno": 90,
+  "topic": "Ratios, Rates, and Units",
+  "difficulty": "medium",
+  "question_text": "<p style=\"text-align:center\">$s=30+4t$</p><p>The equation gives the speed $s$, in miles per hour, of a car $t$ seconds after it began to accelerate. What is its speed, in miles per hour, 5 seconds after it began to accelerate?</p>",
+  "options": [
+   "30",
+   "34",
+   "35",
+   "50"
+  ],
+  "correct": "D"
+ },
+ {
+  "qno": 91,
+  "topic": "Ratios, Rates, and Units",
+  "difficulty": "medium",
+  "question_text": "If a white birch tree and a pin oak tree each now have a diameter of 1 foot, which of the following will be closest to the difference, in inches, of their diameters 10 years from now? (1 foot $=$ 12 inches)",
+  "options": [
+   "1.0",
+   "1.2",
+   "1.3",
+   "1.4"
+  ],
+  "correct": "C"
+ },
+ {
+  "qno": 92,
+  "topic": "Ratios, Rates, and Units",
+  "difficulty": "medium",
+  "question_text": "One side of a flat board has an area of 360 square inches. If a pressure of 40 pounds per square inch of area is exerted on this side of the board, what is the total force, in pounds, exerted on this side of the board?",
+  "options": [
+   "9",
+   "320",
+   "400",
+   "14,400"
+  ],
+  "correct": "D"
+ },
+ {
+  "qno": 93,
+  "topic": "Ratios, Rates, and Units",
+  "difficulty": "medium",
+  "question_text": "One side of a flat board has an area of 320 square inches. If a pressure of 20 pounds per square inch of area is exerted on this side of the board, what is the total force, in pounds, exerted on this side of the board?",
+  "options": [
+   "16",
+   "300",
+   "340",
+   "6,400"
+  ],
+  "correct": "D"
+ },
+ {
+  "qno": 94,
+  "topic": "Ratios, Rates, and Units",
+  "difficulty": "medium",
+  "question_text": "Plant $A$ is currently 20 centimeters tall, and Plant $B$ is currently 12 centimeters tall. The ratio of the heights of Plant $A$ to Plant $B$ is equal to the ratio of the heights of Plant $C$ to Plant $D$. If Plant $C$ is 54 centimeters tall, what is the height of Plant $D$, in centimeters?",
+  "options": [
+   "32.4",
+   "44.0",
+   "62.0",
+   "90.0"
+  ],
+  "correct": "A"
+ },
+ {
+  "qno": 95,
+  "topic": "Ratios, Rates, and Units",
+  "difficulty": "medium",
+  "question_text": "One brand of a commercial ice machine can produce a maximum of 263 pounds of ice each day. If 1 cubic foot of ice weighs about 57.2 pounds, which of the following best approximates the maximum number of cubic feet of ice the machine can produce in one day?",
+  "options": [
+   "0.2",
+   "4.6",
+   "206",
+   "320"
+  ],
+  "correct": "B"
+ },
+ {
+  "qno": 96,
+  "topic": "Ratios, Rates, and Units",
+  "difficulty": "medium",
+  "question_text": "A certain town has an area of 4.29 square miles. What is the area, in square yards, of this town? (1 mile $=$ 1,760 yards)",
+  "options": [
+   "410",
+   "7,550",
+   "722,051",
+   "13,288,704"
+  ],
+  "correct": "D"
+ },
+ {
+  "qno": 97,
+  "topic": "Ratios, Rates, and Units",
+  "difficulty": "medium",
+  "question_text": "<p>In the $xy$-plane above, a point (not shown) with coordinates $(s,t)$ lies on the graph of the linear function $f$. If $s$ and $t$ are positive integers, what is the ratio of $t$ to $s$ ?</p>",
+  "image_file": "q097.webp",
+  "options": [
+   "1 to 3",
+   "1 to 2",
+   "2 to 1",
+   "3 to 1"
+  ],
+  "correct": "C"
+ },
+ {
+  "qno": 98,
+  "topic": "Ratios, Rates, and Units",
+  "difficulty": "medium",
+  "question_text": "The circumference of Earth is estimated to be 40,030 kilometers at the equator. Which of the following best approximates the diameter, in miles, of Earth's equator? (1 kilometer $\\approx$ 0.62137 mile)",
+  "options": [
+   "3,205 miles",
+   "5,541 miles",
+   "7,917 miles",
+   "13,004 miles"
+  ],
+  "correct": "C"
+ },
+ {
+  "qno": 99,
+  "topic": "Ratios, Rates, and Units",
+  "difficulty": "medium",
+  "question_text": "Each edge of a metal cube is 4 centimeters in length. If the cube has a mass of 172.8 grams, what is the density, in grams per cubic centimeter, of the metal cube?",
+  "options": [
+   "2.7",
+   "10.8",
+   "14.4",
+   "43.2"
+  ],
+  "correct": "A"
+ },
+ {
+  "qno": 100,
+  "topic": "Ratios, Rates, and Units",
+  "difficulty": "medium",
+  "question_text": "A container has a volume of 0.83 cubic meters. Which is closest to its volume in quarts? Use 100 centimeters $=$ 1 meter and 946.35 cubic centimeters $=$ 1 quart.",
+  "options": [
+   "0.09",
+   "7.85",
+   "785.47",
+   "877.05"
+  ],
+  "correct": "D"
+ }
+]
