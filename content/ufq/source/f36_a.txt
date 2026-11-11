@@ -1,0 +1,13 @@
+## 2927
+In the figure, $\overline{AC}$ is a diameter of the circle with center $O$, and $AC=10$. Triangle $\triangle ACB$ is equilateral. The length of $BP$ is $n$ times the length of $AO$. What is the value of $n$?<p></p>[[fig:q2927]]
+@ $\sqrt{5}$ | $\sqrt{3}$ | $\sqrt{3}-1$ | $\sqrt{5}-1$
+## 2944
+Each circle shown in the $xy$-plane above has center $(-2,2)$, and their radii are 3 and 5. What is the area of the shaded region (the quarter-ring in the upper left)?<p></p>[[fig:q2944]]
+@ $3\pi$ | $\frac{7}{2}\pi$ | $4\pi$ | $\frac{9}{2}\pi$
+## 2956
+The figure above shows a semicircle with the lengths of the adjacent arcs $a$, $a+1$, $a+2$, $a+3$, and $a+4$. If the value of $x$ is 42, what is the value of $a$?<p></p>[[fig:q2956]]
+@ 7 | 8 | 9 | 10
+## 2959
+A circle has center $G$, and $M$ and $N$ are points on the circle. Segments $MH$ and $NH$ are tangent to the circle at $M$ and $N$. The radius is 247 millimeters, and the perimeter of quadrilateral $GMHN$ is 5,174 millimeters. What is $GH$, in millimeters?<p></p>[[fig:q2959]]
+## 2960
+Note: Figure not drawn to scale. The circle has center $Q$. Points $B$, $C$, and $D$ lie on the circle. Line $m$ is tangent at $C$ and parallel to $BD$. Line $DQ$ meets $m$ at $A$, and line $BQ$ meets $m$ at $P$. If $AQ=90$ and $AC=72$, what is the perimeter of triangle $CPQ$?<p></p>[[fig:q2960]]
