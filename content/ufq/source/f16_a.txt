@@ -1,0 +1,18 @@
+## 947
+Which graph represents an increasing linear function?<p></p>[[fig:q947]]
+@ Graph A | Graph B | Graph C | Graph D
+## 954
+The line shown can be represented by the equation $ax+by=48$, where $a$ and $b$ are constants. Which of the following is true about $a$ and $b$?<p></p>[[fig:q954]]
+@ $a<0$ and $b<0$ | $a<0$ and $b>0$ | $a>0$ and $b<0$ | $a>0$ and $b>0$
+## 957
+The graph shows the positions of Paul and Mark during a race. Paul and Mark each ran at a constant rate. Paul finished the race in 6 seconds, and Mark finished the race in 10 seconds (the finish line is 60 yards). Mark was given a head start to shorten the distance he needed to run. According to the graph, Mark was given a head start of how many yards?<p></p>[[fig:q957]]
+@ 3 | 12 | 18 | 24
+## 961
+Of the following equations, which best models the line of best fit for the data in the scatterplot above?<p></p>[[fig:q961]]
+@ $y=4.25x$ | $y=4.25x+14$ | $y=8.25x$ | $y=8.25x+4$
+## 963
+<table><thead><tr><th>$x$</th><th>$y$</th></tr></thead><tbody><tr><td>1</td><td>2</td></tr><tr><td>2</td><td>5</td></tr><tr><td>3</td><td>8</td></tr><tr><td>4</td><td>11</td></tr></tbody></table><p>Each row of the table above gives a pair of values for the variables $x$ and $y$. There is a linear relationship between $x$ and $y$. Which of the following graphs could represent the relationship?</p><p></p>[[fig:q963]]
+@ Graph A | Graph B | Graph C | Graph D
+## 964
+Snow fell and then stopped for a time. When the snow began to fall again, it fell at a faster rate than it had initially. Assuming that none of the snow melted during the time indicated, which of the following graphs could model the total accumulation of snow versus time?<p></p>[[fig:q964]]
+@ Graph A | Graph B | Graph C | Graph D
