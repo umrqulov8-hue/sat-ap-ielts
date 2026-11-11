@@ -1,0 +1,9 @@
+## 1983
+The graph of $y=f(x)+2$ is shown. The function $f$ has the form $f(x)=ab^x+c$, where $a$, $b$, and $c$ are integers and $c\le0$. Which equation could define $f$?<p></p>[[fig:q1983]]
+@ $f(x)=-6(2)^x$ | $f(x)=-6(2)^x-2$ | $f(x)=-6(2)^x-4$ | $f(x)=-6(2)^x-6$
+## 1992
+The graph shows the balance of a bank account, in dollars, $x$ years after an initial deposit is made. According to the graph, which of the following is closest to the number of years it took for the estimated balance to increase from the initial deposit to 125 dollars?<p></p>[[fig:q1992]]
+@ 125 | 100 | 8 | 0
+## 1993
+The scatterplot above shows the numbers of grams of both total protein and total fat for eight sandwiches on a restaurant menu. The line of best fit for the data is also shown. According to the line of best fit, which of the following is closest to the predicted increase in total fat, in grams, for every increase of 1 gram in total protein?<p></p>[[fig:q1993]]
+@ 2.5 | 2.0 | 1.5 | 1.0
