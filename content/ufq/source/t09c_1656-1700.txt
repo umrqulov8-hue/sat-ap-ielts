@@ -1,0 +1,110 @@
+## 1656
+Complete the table based on $y=12x+9$. What is the value of $a$?<table><thead><tr><th>$x$</th><th>$y$</th></tr></thead><tbody><tr><td>1</td><td>21</td></tr><tr><td>2</td><td>33</td></tr><tr><td>3</td><td>$a$</td></tr></tbody></table>
+## 1657
+<p style="text-align:center">$x^2-x-2=0$</p><p>Which of the following are the solutions to the equation above?</p>
+@ $x=\frac{1}{4}\pm\sqrt{\frac{1}{2}}$ | $x=\frac{1}{4}\pm\sqrt{\frac{9}{4}}$ | $x=\frac{1}{2}\pm\sqrt{\frac{1}{4}}$ | $x=\frac{1}{2}\pm\sqrt{\frac{9}{4}}$
+## 1658
+<table><thead><tr><th>$x$</th><th>$f(x)$</th></tr></thead><tbody><tr><td>-1</td><td>-24</td></tr><tr><td>0</td><td>-23</td></tr><tr><td>1</td><td>-22</td></tr><tr><td>2</td><td>-15</td></tr></tbody></table><p>Which function matches the table?</p>
+@ $f(x)=x^3$ | $f(x)=x^3-23$ | $f(x)=x^3+23$ | $f(x)=(x-23)^3$
+## 1659
+The solutions to $x^2+px+56=0$, where $p$ is a constant, are $r$ and $s$. The solutions to $x^2+12x+28=0$ are $r+2$ and $s+2$. What is the value of $p$?
+## 1660
+Which quadratic equation has no real solutions?
+@ $-2x^2=0$ | $-2x^2+2=0$ | $-2x^2+2x=0$ | $-2x^2+2x-2=0$
+## 1661
+<p style="text-align:center">$(ax+3)(5x^2-bx+4)=20x^3-9x^2-2x+12$</p><p>The equation above is true for all $x$, where $a$ and $b$ are constants. What is the value of $ab$?</p>
+@ 18 | 20 | 24 | 40
+## 1663
+The function $g$ is defined by $g(x)=(x+17)(t-x)$, where $t$ is a constant. In the $xy$-plane, the graph of $y=g(x)$ passes through the point $(26,0)$. What is the value of $g(0)$?
+## 1664
+Which of the following complex numbers is equal to $(5+12i)-(9i^2-6i)$, for $i=\sqrt{-1}$?
+@ $-14-18i$ | $-4-6i$ | $4+6i$ | $14+18i$
+## 1665
+<p style="text-align:center">$(3x+p)(5x^2-45)(2x^2-16x+6p)=0$</p><p>In the given equation, $p$ is a positive constant. The sum of the solutions to the equation is $\frac{20}{3}$. What is the value of $p$?</p>
+## 1666
+<p style="text-align:center">$(3i^2+2)(3i^2-2)$</p><p>The expression shown above can be written as the complex number $ai+b$, where $a$ and $b$ are real numbers. What is $a+b$? (Note: $i=\sqrt{-1}$)</p>
+## 1667
+<p style="text-align:center">$(5-2i)(1-i)$</p><p>Which of the following is equivalent to the complex number expression above? (Note: $i=\sqrt{-1}$)</p>
+@ $3-7i$ | $5-5i$ | $5+9i$ | $7+3i$
+## 1668
+<p style="text-align:center">$(x-k)^2=(k-3a)(x-k)$</p><p>In the given equation, $a$ and $k$ are constants, where $k>3a$. The sum of the solutions to the equation is $3k+12$. What is the value of $a$?</p>
+## 1669
+The function $f$ is defined by $f(x)=(x+2)^2$. If $f(x+a)=x^2-6x+9$, where $a$ is a constant, what is the value of $a$?
+@ -5 | -3 | 1 | 3
+## 1670
+<p>The function $p$ is defined by</p><p style="text-align:center">$p(x)=a\left((x+5)^2-b\right)\left((x+5)^2-c\right)$</p><p>where $a$, $b$, and $c$ are constants. In the $xy$-plane, the graph of $y=p(x)$ passes through the points $(-4,34)$ and $(0,150)$. What is the value of $p(-10)+p(-4)$?</p>
+## 1671
+In the $xy$-plane, the graph of $y=-\left(\frac{1}{9}\right)(x+18)(x^2-25)$ contains the point $(s,t)$. If $-5\le s\le5$, which of the following is NOT a possible value of $t$?
+@ 18 | 5 | 0 | -5
+## 1672
+The function $f$ is defined by $f(x)=(x-2)(x-9)(x+4)$. The graph of $y=h(x)$ is obtained by shifting $y=f(x)$ up 7 units. What is the $y$-coordinate of its $y$-intercept?
+@ 0 | 7 | 11 | 79
+## 1673
+The function $f$ is defined by $f(x)=2x^2+28x+99$. The function $g$ is defined by $g(x)=f(x+6)$. What is the minimum value of $g(x)$?
+@ -13 | -7 | 1 | 7
+## 1674
+<p style="text-align:center">$f(x)=x^5+7x+18$</p><p>For the given function $f$, the graph of $y=f(x)$ in the $xy$-plane passes through the point $(0,b)$, where $b$ is a constant. What is the value of $b$?</p>
+## 1675
+<p style="text-align:center">$5px-8=3px+2$</p><p>In the equation above, $p$ is a constant. What is the value of $px-5$?</p>
+@ -10 | -5 | 0 | 2
+## 1676
+The function $f$ is defined by $f(x)=(x-2)(x-8)(x+3)$. The graph of $y=h(x)$ is obtained by shifting $y=f(x)$ up 6 units. What is the $y$-coordinate of its $y$-intercept?
+@ 54 | 48 | 6 | 0
+## 1677
+The function $f$ is defined by $f(x)=5x^2+90x+406$. The function $g$ is defined by $g(x)=f(x+8)$. What is the minimum value of $g(x)$?
+@ -17 | -9 | 1 | 9
+## 1678
+The function $g$ is defined as $g(x)=\frac{2x}{3}+3$. What is the value of $g(-30)$?
+@ -27 | -23 | -17 | -7
+## 1679
+<p style="text-align:center">$f(x)=-4(x+10)^2+12$</p><p>The function $f$ is defined by the given equation. For what value of $x$ does $f(x)$ reach its maximum?</p>
+@ -40 | -12 | -10 | -4
+## 1680
+The function $g$ is defined by $g(x)=(x-12)(t-x)$, where $t$ is a constant. In the $xy$-plane, the graph of $y=g(x)$ passes through the point $(20,0)$. What is the value of $g(0)$?
+@ -240 | -96 | 96 | 240
+## 1681
+The function $f(x)=8x^2+kx-17$ passes through $(r,21)$ and $(2r,123)$, where $k$ and $r$ are constants. Which value could be $k$?
+@ 3 | 9 | 102 | 144
+## 1682
+<p style="text-align:center">$f(x)=-16x^2+71$</p><p>The function $f$ gives the estimated height, in feet, of an acorn $x$ seconds after the acorn fell from a tree. Based on the function, what is the estimated height, in feet, of the acorn before it fell from the tree?</p>
+## 1683
+The product of the two complex numbers $2i$ and $7+6i$ is written in the form $a+bi$ where $a$ and $b$ are real numbers. What is the value of $b$? (Note: $i=\sqrt{-1}$)
+## 1684
+<p style="text-align:center">$57x^{18}+bx^9+34$</p><p>The given expression, where $b$ is a constant, is equivalent to</p><p style="text-align:center">$(3x^9+q)(rx^9+2)$</p><p>where $q$ and $r$ are constants. What is the value of $b$?</p>
+## 1685
+The graph of a quadratic function has vertex $(-2,5)$. One $x$-intercept is $\left(\frac{-7}{3},0\right)$. What is the other $x$-intercept?
+@ $\left(\frac{-13}{3},0\right)$ | $\left(\frac{-5}{3},0\right)$ | $\left(\frac{1}{3},0\right)$ | $\left(\frac{7}{3},0\right)$
+## 1686
+The graph of $g(x)=-2f(3-x)+5$ has vertex $(-4,17)$, where $f$ is quadratic. If $f(5)=2$, what is $f(0)$?
+@ 44 | 86 | 92 | 104
+## 1687
+The function $f(x)=8x^2+kx-21$ passes through $(r,19)$ and $(2r,123)$, where $k$ and $r$ are constants. Which value could be $k$?
+@ 4 | 13 | 104 | 142
+## 1689
+<p style="text-align:center">$f(x)=b\sqrt{a-x}+7\sqrt{a-x}$</p><p>For the function $f$, $a$ and $b$ are constants and $f(16)=0$. If $f(9)>0$, which of the following could be the value of $a+b$?</p>
+@ -3 | 7 | 9 | 15
+## 1691
+The function $f$ is a quadratic function. In the $xy$-plane, the graph of $y=f(x)$ has a vertex at $(1,3)$ and passes through the points $(2,29)$ and $(-1,107)$. What is the value of $f(-2)-f(0)$?
+@ 81 | 133 | 208 | 237
+## 1692
+The function $f$ is a quadratic function. In the $xy$-plane, the graph of $y=f(x)$ has a vertex at $(1,9)$ and passes through the points $(2,37)$ and $(-1,121)$. What is the value of $f(-2)-f(0)$?
+@ 93 | 149 | 224 | 261
+## 1693
+The function $f$ is defined by $f(x)=ax^2+bx+c$, where $a$, $b$, and $c$ are constants. The graph of $y=f(x)$ is a parabola where $f(-11)=f(-1)$. If $b$ is an integer less than $-3$, what is the greatest possible value of $a+b$?
+## 1694
+<p style="text-align:center">$4x^2-px+w=-83$</p><p>The constants $p$ and $w$ are integers. The equation has exactly one real solution. Which is NOT a possible value of $w$?</p>
+@ -19 | 17 | 36 | 317
+## 1695
+<p style="text-align:center">$4x^2-px+w=-86$</p><p>The constants $p$ and $w$ are integers. The equation has exactly one real solution. Which is NOT a possible value of $w$?</p>
+@ -22 | 14 | 25 | 314
+## 1696
+<table><thead><tr><th>$x$</th><th>$h(x)$</th></tr></thead><tbody><tr><td>-7</td><td>-11</td></tr><tr><td>2</td><td>7</td></tr><tr><td>4</td><td>11</td></tr></tbody></table><p>The table above shows selected values for the function $h$. In the $xy$-plane, the graph of $y=h(x)$ is a line. What is the value of $h(8)$?</p>
+@ 15 | 19 | 21 | 22
+## 1698
+The function $h(x)=3x^2+mx+n$ decreases for $x\le4$ and increases for $x\ge4$. Its graph passes through $(0,16)$. What is $m+n$?
+@ -4 | -6 | -8 | -10
+## 1699
+<p style="text-align:center">$f(x)=ax^2+bx+c$</p><p>The function $f$ is defined above, where $a$, $b$, and $c$ are constants and $4<b<7$. The graph of $y=f(x)$ is such that $f(1)=f(5)$. If $b$ is an integer, what could be the value of $ab$?</p>
+## 1700
+Which quadratic equation has no real solutions?
+@ $28r^2=27$ | $28r^2=-27r+27$ | $-28r^2=-27r$ | $-28r^2=-27r+27$

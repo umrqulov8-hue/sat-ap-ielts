@@ -1,0 +1,148 @@
+## 1401
+Which of the following is equivalent to the expression $3(x+2)(x-5)+2(x+1)(x+3)$?
+@ $5x^2-x-24$ | $5x^2-x-39$ | $5x^2-x-51$ | $5x^4-x-39$
+## 1402
+The function $f$ is defined by $f(x)=3x^2-5x+10$. If the function $f(x-2)$ is written in the form $ax^2+bx+c$, what is the value of $a+b+c$?
+## 1403
+<p style="text-align:center">$x^2+6x+4$</p><p>Which of the following is equivalent to the expression above?</p>
+@ $(x+3)^2+5$ | $(x+3)^2-5$ | $(x-3)^2+5$ | $(x-3)^2-5$
+## 1404
+<p style="text-align:center">$4x^2-9=(px+t)(px-t)$</p><p>In the equation above, $p$ and $t$ are constants. Which of the following could be the value of $p$?</p>
+@ 2 | 3 | 4 | 9
+## 1405
+In the $xy$-plane, the four $x$-intercepts of the graph of the polynomial function $f$ are $-2$, 3, 0, and 1. Which of the following is a factor of $f$?
+@ $x^2-x$ | $x^2-x-2$ | $x^2-x+6$ | $x^2-4x-3$
+## 1406
+Which expression is equivalent to $(7x^4+x^2)+(x^4+3x^2)$?
+@ $3x^8+7x^6$ | $8x^4+4x^2$ | $8x^8+4x^4$ | $7x^{16}+3x^4$
+## 1407
+Which of the following is an equivalent form of the expression $(2x-2)^2-(2x-2)$?
+@ $2x^2-6x+6$ | $4x^2-10x+2$ | $(2x-2)(2x-2)$ | $(2x-3)(2x-2)$
+## 1408
+Which of the following is equivalent to the sum of the expressions $a^2-1$ and $a+1$?
+@ $a^2+a$ | $a^3-1$ | $2a^2$ | $a^3$
+## 1409
+Which expression is equivalent to $5x^4+5x^3y^2+12xy+12y^3$?
+@ $(5x^2+y)(x^2+12y^2)$ | $(5x^2+12y)(x^2+y^2)$ | $(5x^3+y)(x+12y^2)$ | $(5x^3+12y)(x+y^2)$
+## 1410
+The expression $6x^4+17x^2+5$ can be written as $(3x^2+a)(2x^2+b)$, where $a$ and $b$ are positive integers, or as $(3x^2+c)(2x^2+d)$, where $c$ and $d$ are positive nonintegers. What is $a+c$?
+## 1411
+Which of the following expressions is equivalent to $\frac{x^2-2x-5}{x-3}$?
+@ $x-5-\frac{20}{x-3}$ | $x-5-\frac{10}{x-3}$ | $x+1-\frac{8}{x-3}$ | $x+1-\frac{2}{x-3}$
+## 1412
+The expression $6x^4+17x^2+7$ can be rewritten as $(3x^2+a)(2x^2+b)$, where $a$ and $b$ are positive integers, or as $(3x^2+c)(2x^2+d)$, where $c$ and $d$ are positive nonintegers. What is the value of $a+c$?
+## 1413
+<p style="text-align:center">$(x^2-7)(x^2-4)$</p><p>The given expression can be written in the form $x^4+bx^2+28$, where $b$ is a constant. What is the value of $b$?</p>
+@ 3 | 0 | -3 | -11
+## 1414
+<p style="text-align:center">$f(x)=11x^{10}+2x^8$<br>$g(x)=-13x^7+7x^5$</p><p>The polynomial $p(x)$ is the product of $f$ and $g$. What is the coefficient of $x^{15}$ in $p(x)$?</p>
+@ 15 | 51 | 77 | 103
+## 1415
+If $t^2-7t=18$ and $t>0$, what is the value of $t$?
+@ 9 | 8 | 5 | 2
+## 1416
+<p>The given expression is</p><p style="text-align:center">$-16(5x-3)^2+4(5x-2)^2$</p><p>The given expression can be rewritten as $\frac{ax^2}{4}+\frac{bx}{4}+\frac{c}{4}$, where $a$, $b$, and $c$ are constants. What is the value of $a+b+c$?</p>
+## 1417
+<p style="text-align:center">$38z^{18}+bz^{9}+30$</p><p>In the given expression, $b$ is a positive integer. If $qz^9+r$ is a factor of the expression, where $q$ and $r$ are positive integers, what is the greatest possible value of $b$?</p>
+## 1418
+If $a^2+b^2=z$ and $ab=y$, which of the following is equivalent to $4z+8y$?
+@ $(a+2b)^2$ | $(2a+2b)^2$ | $(4a+4b)^2$ | $(4a+8b)^2$
+## 1419
+<p style="text-align:center">$(3x+2)^2-(6x^2+5x)$</p><p>Which of the following is equivalent to the expression above?</p>
+@ $15x^2+17x+4$ | $15x^2+7x+4$ | $3x^2+17x+4$ | $3x^2+7x+4$
+## 1420
+The function $g$ is defined by $g(x)=-2x(x+3)(x-k)^2+r$, where $k$ and $r$ are integer constants. Its graph passes through $(7,13)$, and $g(0)=13$. What is the value of $r+k$?
+## 1421
+If $N=\frac{x^2+x-6}{x^2-x-12}=\frac{x-2}{x-4}$ and $N\ge0$, which of the following must be true?
+@ $x\ne-4$ | $x=-3$ | $x\ne1$ | $x\ne2$
+## 1422
+Which expression is equivalent to $5x^4+5x^3y^2+17xy+17y^3$?
+@ $(5x^2+y)(x^2+17y^2)$ | $(5x^2+17y)(x^2+y^2)$ | $(5x^3+y)(x+17y^2)$ | $(5x^3+17y)(x+y^2)$
+## 1424
+An object's speed is increasing at a rate of 12.60 meters per minute squared. What is this rate, in miles per minute squared, rounded to the nearest tenth? Use 1 mile $=$ 1,609 meters.
+## 1425
+Which expression is a factor of $x^4+14ax^2+49a^2-64$, where $a$ is a positive constant?
+@ $x^2+7a+8$ | $x^2-7a-8$ | $x^2+14a$ | $x^2-8a$
+## 1426
+Which of the following equations has a graph in the $xy$-plane with no $x$-intercepts?
+@ $y=x^2+3x+4$ | $y=x^2-5x-6$ | $y=3x^2$ | $y=2x-5$
+## 1427
+<p>Which of the following has a factor of $4x+7b$, where $b$ is a non-positive integer?</p><p>I. $16x^2-49$<br>II. $16x^2+56x+49$<br>III. $64x^3+343$</p>
+@ I only | II and III only | I and III only | All of them
+## 1428
+<p style="text-align:center">$\left(2n^3+\frac{1}{2}\right)-\left(n^3-\frac{1}{2}\right)$</p><p>Which of the following is equivalent to the expression above?</p>
+@ $n^3$ | $n^3+1$ | $n^3-1$ | $-n^3+1$
+## 1429
+Which of the following equations has exactly one real solution?
+@ $x^2-6x+9=0$ | $x^2-5x+6=0$ | $x^2+2x-1=0$ | $x^2+3x-9=0$
+## 1430
+Which of the following is equivalent to $\left(a+\frac{b}{2}\right)^2$?
+@ $a^2+\frac{b^2}{2}$ | $a^2+\frac{b^2}{4}$ | $a^2+\frac{ab}{2}+\frac{b^2}{2}$ | $a^2+ab+\frac{b^2}{4}$
+## 1431
+<p style="text-align:center">$9x^2+bx+49=0$</p><p>In the equation above, $b$ is a constant. If the equation has more than one real solution, which of the following could be the value of $b$?</p>
+@ 7 | 21 | -42 | -53
+## 1432
+<p style="text-align:center">$2x^2-4x=t$</p><p>In the equation above, $t$ is a constant. If the equation has no real solutions, which of the following could be the value of $t$?</p>
+@ -3 | -1 | 1 | 3
+## 1433
+<p style="text-align:center">$39z^{18}+bz^{9}+30$</p><p>In the given expression, $b$ is a positive integer. If $qz^9+r$ is a factor of the expression, where $q$ and $r$ are positive integers, what is the greatest possible value of $b$?</p>
+## 1434
+The expression $6x^4+59x^2+19$ can be rewritten as $(3x^2+a)(2x^2+b)$, where $a$ and $b$ are positive integers, or as $(3x^2+c)(2x^2+d)$, where $c$ and $d$ are positive nonintegers. What is the value of $a+c$?
+## 1435
+<p style="text-align:center">$(x^2+5x-6)(x+7)$</p><p>Which of the following expressions is equivalent to the one above?</p>
+@ $x^3+5x^2+1$ | $x^3+5x^2-42$ | $x^3+5x^2-6x+7$ | $x^3+12x^2+29x-42$
+## 1436
+Which of the following is equivalent to $\frac{2}{x+2}+\frac{1}{x+1}$ for $x>0$?
+@ $\frac{3}{x+3}$ | $\frac{2x+3}{x+3}$ | $\frac{2x+3}{x^2+3x+2}$ | $\frac{3x+4}{x^2+3x+2}$
+## 1437
+If $a+b=14$ and $a^2-b^2=56$, what is the value of $a-b$?
+@ 2 | 4 | 5 | 9
+## 1438
+Which expression is NOT a factor of $7{,}290x^4-56{,}250$?
+@ $9x^2+25$ | $3x^2-5$ | $3x+5$ | 90
+## 1439
+<p style="text-align:center">$r(x)=9(x-3)$<br>$s(x)=x^3+nx^2+3nx+27$</p><p>For the given functions $r$ and $s$, $n$ is a constant. If $r(x)\cdot s(x)=9(x^4-81)$, what is the value of $n$?</p>
+## 1440
+<p style="text-align:center">$\frac{8cx+7}{5}=4x-7$</p><p>In the equation, $c$ is a constant. If the equation has no solution, what is the value of $c$?</p>
+@ $\frac{5}{2}$ | $\frac{2}{5}$ | $\frac{-2}{5}$ | $\frac{-5}{2}$
+## 1441
+If $k-x$ is a factor of the expression $-x^2+\left(\frac{1}{18}\right)nkx^2$, where $n$ and $k$ are constants and $k>0$, what is the value of $n$?
+@ -18 | $\frac{-1}{18}$ | $\frac{1}{18}$ | 18
+## 1442
+Which of the following is equivalent to $\frac{x^2+3x+2}{x+3}$?
+@ $3x$ | $x+2$ | $x+\frac{2x}{x+3}$ | $x+\frac{2}{x+3}$
+## 1443
+<p style="text-align:center">$(7532+100y^2)+10(10y^2-110)$</p><p>The expression above can be written in the form $ay^2+b$, where $a$ and $b$ are constants. What is the value of $a+b$?</p>
+## 1444
+Which of the following is equivalent to $\frac{x^2+5x+6}{x+5}$?
+@ $x+1$ | $x+6$ | $x+\frac{6}{x+5}$ | $x+\frac{6x}{x+5}$
+## 1445
+<p style="text-align:center">$\frac{1}{2x+1}+5$</p><p>Which of the following is equivalent to the expression above for $x>0$?</p>
+@ $\frac{2x+5}{2x+1}$ | $\frac{2x+6}{2x+1}$ | $\frac{10x+5}{2x+1}$ | $\frac{10x+6}{2x+1}$
+## 1446
+Which of the following is equivalent to $\frac{3x^2+7x-6}{9-x^2}$ for $x\ne-3$ and $x\ne3$?
+@ $-3+\frac{7}{3-x}$ | $3-\frac{7}{3-x}$ | $-3+\frac{7}{3+x}$ | $3-\frac{7}{3+x}$
+## 1447
+What are the solutions of the quadratic equation $4x^2-8x-12=0$?
+@ $x=-1$ and $x=-3$ | $x=-1$ and $x=3$ | $x=1$ and $x=-3$ | $x=1$ and $x=3$
+## 1448
+<p style="text-align:center">$(5x+10)(2x+1)-(2x-18)$</p><p>For all values of $x$, the given expression is equivalent to which of the following?</p><p>I. $10x^2+23x+28$<br>II. $10x^2+25x+10-2x-18$</p>
+@ I only | II only | I and II | Neither I nor II
+## 1449
+<p style="text-align:center">$(x+1)^2-9=0$</p><p>If $x=k$ is a solution to the equation above, which of the following must be true?</p>
+@ $k<-5$ | $-5<k<3$ | $3<k<4$ | $4<k$
+## 1450
+<p style="text-align:center">$\left(\frac{1}{2}x+3\right)-\left(\frac{2}{3}x-5\right)$</p><p>Which of the following is equivalent to the expression above?</p>
+@ $-\frac{1}{6}x+8$ | $-\frac{1}{6}x-2$ | $-\frac{1}{3}x^2+\frac{1}{2}x+15$ | $\frac{1}{3}x^2-\frac{9}{2}x-15$
+## 1451
+The expression $(8x^4+7x^3)-(6x^3+4x^2)-(3x^2+x)$ can be written in the form $8x^4+x^3+ax^2-x$, where $a$ is a constant. What is the value of $a$?
+@ -7 | -1 | 1 | 7
+## 1452
+Which of the following is an equivalent form of $(1.5x-2.4)^2-(5.2x^2-6.4)$?
+@ $-2.2x^2+1.6$ | $-2.2x^2+11.2$ | $-2.95x^2-7.2x+12.16$ | $-2.95x^2-7.2x+0.64$
+## 1453
+In the $xy$-plane, the graph of the polynomial function $f$ crosses the $x$-axis at exactly two points, $(a,0)$ and $(b,0)$, where $a$ and $b$ are both positive. Which of the following could define $f$?
+@ $f(x)=(x-a)(x-b)$ | $f(x)=(x+a)(x+b)$ | $f(x)=(x-a)(x+b)$ | $f(x)=x(x-a)(x-b)$
+## 1454
+<p>For a nonzero real constant $r$, which expression must be a factor of $5x^2+(45r+7)x+63r$ for every permitted $r$?</p><p>I. $x+9r$<br>II. $5x+7$</p>
+@ I only | II only | I and II | Neither I nor II

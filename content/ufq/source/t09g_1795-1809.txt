@@ -1,0 +1,42 @@
+## 1704
+<p style="text-align:center">$x^2-6x-10=0$</p><p>The quadratic equation above has solutions $x=a+\sqrt{b}$ and $x=a-\sqrt{b}$, where $a$ and $b$ are constants. What is the value of $\frac{b}{a}$?</p>
+## 1795
+The quadratic function $g$ models the depth, in meters, below the surface of the water of a Weddell seal $t$ minutes after the seal entered the water during a dive. The function estimates that the seal reached its maximum depth of 387.1 meters 7 minutes after it entered the water and then reached the surface of the water 14 minutes after it entered the water. Based on the function, what was the estimated depth, to the nearest meter, of the seal 10 minutes after it entered the water?
+## 1796
+In the equation $7x(x+11)=r$, $r$ is a positive integer. How many distinct real solutions does the equation have for $x$?
+@ Zero | Exactly one | Exactly two | Infinitely many
+## 1797
+<p style="text-align:center">$g(x)=(x+14)(t-x)$</p><p>The function $g$ is defined by the given equation, where $t$ is a constant. In the $xy$-plane, the graph of $y=g(x)$ passes through the point $(18,0)$. What is the value of $g(0)$?</p>
+## 1798
+<p>The equation</p><p style="text-align:center">$3(x-2\sqrt{3})(x+a)-2(x-2\sqrt{3})^2=(x-2\sqrt{3})(b-x)$</p><p>where $a$ and $b$ are positive constants, has exactly two distinct real solutions. The sum of the solutions is 10, and $b$ is 400% greater than $a$.</p><p>What is the value of $a+b$?</p>
+## 1799
+A quadratic function $f(x)$ satisfies $f(0)=3$ and $f(8)=3$. Which of the following equations could define $f(x)$?
+@ $f(x)=x(x-8)+3$ | $f(x)=x(x+8)+3$ | $f(x)=(x-3)(x-8)$ | $f(x)=3x^2-8x$
+## 1800
+<table><thead><tr><th>$x$</th><th>$y$</th></tr></thead><tbody><tr><td>$-\frac{3}{4}$</td><td>0</td></tr><tr><td>0</td><td>-45</td></tr><tr><td>5</td><td>0</td></tr></tbody></table><p>The table shows three values of $x$ and their corresponding values of $y$. There is a quadratic relationship between $x$ and $y$. An equation that represents this relationship can be written as $y=12x^2-bx-45$, where $b$ is a constant. What is the value of $b$?</p>
+## 1801
+<p>The function $f$ is defined by</p><p style="text-align:center">$f(x)=9x^2+kx-21$</p><p>where $k$ is a constant. In the $xy$-plane, the graph of $y=f(x)$ passes through the points $(r,23)$ and $(2r,139)$, where $r$ is a constant. Which of the following could be the value of $k$?</p>
+@ 4 | 12 | 116 | 162
+## 1802
+<p style="text-align:center">$(x-k)^2=(k-4a)(x-k)$</p><p>In the given equation, $a$ and $k$ are constants with $k>4a$. The sum of solutions is $3k+37$. What is the value of $a$?</p>
+## 1803
+<p>The function $v$ is defined by the equation</p><p style="text-align:center">$v(x)=\frac{x^2+bx+c}{(x+5)(x-15)}$</p><p>where $b$ and $c$ are constants. In the $xy$-plane, the graph of $y=v(x)$ passes through the points $\left(0,\frac{22}{25}\right)$ and $(11,0)$. If $v(q)=0$, which of the following could be the value of $q$?</p>
+@ -6 | -5 | 5 | 6
+## 1804
+<p style="text-align:center">$h(x)=-16x^2+100x+10$</p><p>The quadratic function above models the height $h$, in feet, of a projectile $x$ seconds after it had been launched vertically. If $y=h(x)$ is graphed in the $xy$-plane, which of the following represents the real-life meaning of the positive $x$-intercept of the graph?</p>
+@ The initial height of the projectile | The maximum height of the projectile | The time at which the projectile reaches its maximum height | The time at which the projectile hits the ground
+## 1805
+<p style="text-align:center">$f(x)=a(x-b)(x-c)$</p><p>For the quadratic function $f$ above, $a$, $b$, and $c$ are constants. In the $xy$-plane, the graph of $f$ is a parabola that opens downward, and the coordinates of its vertex are both positive. Which of the following could be true?</p>
+@ $a>0$, $b>0$, $c>0$ | $a>0$, $b<0$, $c>0$ | $a<0$, $b>0$, $c>0$ | $a<0$, $b<0$, $c<0$
+## 1806
+The equation of a parabola is written in the form $y=ax^2+bx+c$, where $a$, $b$, and $c$ are constants. When graphed in the $xy$-plane, the parabola has vertex $(-1,4)$ and does not intersect the $x$-axis. Which of the following could be the value of $a-b-c$?
+@ -5 | -4 | 0 | 4
+## 1807
+In the quadratic function $f(x)=ax^2+5x+c$, $a$ and $c$ are constants. The graph of $y=f(x)$ in the $xy$-plane is a parabola that opens upward and has a vertex at the point $(h,k)$, where $h$ and $k$ are constants. If $k<0$ and $f(-9)=f(1)$, which of the following must be true?<p>I. $c<0$<br>II. $a\ge1$</p>
+@ I only | II only | I and II | Neither I nor II
+## 1808
+<p style="text-align:center">$g(t)=-16t^2+256t$</p><p>The function gives the height of a model rocket, in feet, $t$ seconds after launch. Which statement best interprets $g(4)=768$?</p>
+@ The rocket was 768 feet high at launch. | The rocket was 4 feet high at launch. | The rocket was 4 feet high 768 seconds after launch. | The rocket was 768 feet high 4 seconds after launch.
+## 1809
+<p style="text-align:center">$x^2+y^2=36,\qquad y=mx+\frac{b}{4}$</p><p>In the given system, $m$ and $b$ are negative constants. The graphs intersect at $(-5,y_1)$ where $y_1<0$. Which expression represents the value of $b$?</p>
+@ $-\frac{5m}{4}+\frac{\sqrt{11}}{4}$ | $\frac{5m}{4}-\frac{\sqrt{11}}{4}$ | $-20m+4\sqrt{11}$ | $20m-4\sqrt{11}$

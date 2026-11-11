@@ -1,0 +1,73 @@
+## 1568
+What is the greatest solution to $x(x-14)(x+6)(x-5)^2=0$?
+## 1569
+<p style="text-align:center">$x^2+5=(24)^2+5$</p><p>What is a solution to the given equation?</p>
+## 1570
+<p style="text-align:center">$5x^2-30x+45=0$</p><p>What is the solution to the given equation?</p>
+## 1571
+<p style="text-align:center">$2x^2-36x+162=0$</p><p>What is the solution to the given equation?</p>
+## 1572
+The function $f$ is defined by $f(x)=2x^2-8x+3$. What is the minimum value of $f(x)$?
+## 1573
+<p style="text-align:center">$x^2+3=(24)^2+3$</p><p>What is a solution to the given equation?</p>
+## 1574
+<p style="text-align:center">$-34x^2-33x+1=0$</p><p>What is the negative solution to the given equation?</p>
+## 1575
+<p style="text-align:center">$x(x-14)(x+6)(x-5)^2=0$</p><p>What is the greatest solution to the given equation?</p>
+## 1576
+The graph of the linear function $f$ in the $xy$-plane has a $y$-intercept of 12 and a slope of $-\frac{3}{4}$. What is the $x$-intercept of the graph of $f$?
+## 1578
+<p style="text-align:center">$7x^2-55x-72=0$</p><p>What is the positive solution to the given equation?</p>
+## 1579
+<p style="text-align:center">$3x^2-20x-32=0$</p><p>What is the positive solution to the given equation?</p>
+## 1580
+<p style="text-align:center">$\sqrt{k-x}=51-x$</p><p>The given equation has exactly one real solution. What is the value of $4k$?</p>
+## 1581
+Which equation has a vertex of $(3,-3)$?
+@ $y=5(x-3)^2-3$ | $y=5(x+3)^2-3$ | $y=5(x-3)^2+3$ | $y=5(x+3)^2+3$
+## 1582
+<p style="text-align:center">$(x+1)-2(x+1)=0$</p><p>What is the solution $x$ to the equation above?</p>
+@ -2 | -1 | 0 | 1
+## 1583
+If $f(x)=\frac{x^2-6x+3}{x-1}$, what is $f(-1)$?
+@ -5 | -2 | 2 | 5
+## 1584
+What is the positive solution to $4x^2-36=64$?
+@ 5 | 16 | 25 | 100
+## 1585
+<p style="text-align:center">$6x^2+11=nx$</p><p>The equation has exactly one real solution. What is $\frac{n^2}{8}$?</p>
+## 1586
+<p style="text-align:center">$h(x)=\frac{10x^2}{x^2-4k^2}-\frac{5x}{x+2k}$</p><p>If $k$ is positive, what is $h\left(\frac{16k}{7}\right)$?</p>
+@ $\frac{-40}{7}$ | $\frac{-5}{2}$ | 16 | 40
+## 1587
+<p style="text-align:center">$(2x-3)(x^2+5x-14)=0$</p><p>What is the greatest solution to the given equation?</p>
+## 1588
+<p style="text-align:center">$f(x)=\sqrt{x}$<br>$g(x)=x^2$</p><p>What is the value of $f(g(-27))$?</p>
+@ 27 | -27 | $\sqrt{27}$ | $f(g(-27))$ is not a real number
+## 1589
+In the complex number system, what is the value of the expression $16i^4-8i^2+4$? (Note: $i=\sqrt{-1}$)
+## 1590
+The sum of $-2x^2+x+31$ and $3x^2+7x-8$ can be written in the form $ax^2+bx+c$, where $a$, $b$, and $c$ are constants. What is the value of $a+b+c$?
+## 1591
+If $a=0.8c$, $b=0.4c-3$, and $-100\le c\le200$, what is the greatest possible value of $a+b$?
+## 1592
+What is an $x$-coordinate of an $x$-intercept of the graph of $y=3(x-14)(x+8)(x+4)$ in the $xy$-plane?
+## 1593
+What is an $x$-coordinate of an $x$-intercept of the graph of $y=2(x-13)(x+7)(x+4)$ in the $xy$-plane?
+## 1594
+In the $xy$-plane, the graph of $y=(x-6)^2+3$ is the image of the graph of $y=(x+5)^2+3$ after a translation of how many units to the right?
+## 1595
+<p style="text-align:center">$2x^2-22x+56=0$</p><p>If $x=k$ represents a solution to the quadratic equation above, what is one possible value of $k$?</p>
+## 1596
+The quadratic equation $(2x-36)^2=a$, where $a$ is a constant, has exactly one real solution. What is the value of $a$?
+## 1597
+The quadratic equation $(7x-64)^2=a$, where $a$ is a constant, has exactly one real solution. What is the value of $a$?
+## 1598
+The function $f$ is defined by $f(x)=10(x^2+33)$. What is its minimum value?
+@ 0.1 | 3.3 | 10 | 330
+## 1599
+<p style="text-align:center">$f(x)=-\left(\frac{1}{8}\right)(x+18)(x^2-16)$</p><p>For $-4\le x\le4$, which cannot be a value of $f(x)$?</p>
+@ 4 | 24 | 0 | -4
+## 1600
+<p style="text-align:center">$f(x)=(2x-7)(2x+11)$</p><p>What is the minimum value of the given function?</p>
+@ -81 | $\frac{-11}{2}$ | -4 | -1

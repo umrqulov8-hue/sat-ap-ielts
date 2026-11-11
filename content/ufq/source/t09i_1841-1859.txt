@@ -1,0 +1,40 @@
+## 1841
+The height $h$, in feet, of a toy rocket above the ground $t$ seconds after it is launched can be modeled by the function $h(t)=-16t^2+224t$. Which of the following methods can be used to find $m$, the maximum height, in feet, of the rocket above the ground?
+@ Compute $h(0)=-16(0)^2+244(0)$ to find $h(0)=m$. | Rewrite $h$ as $h(t)=-t(16t+224)$. The number 224 represents $m$. | Rewrite $h$ as $h(t)=-16t(t-14)$. The number 14 represents $m$. | Rewrite $h$ as $h(t)=-16(t-7)^2+784$. The number 784 represents $m$.
+## 1842
+The solutions to $x^2+10x+19=0$ are $r$ and $s$, where $r<s$. The solutions to $x^2+10x+1=0$ are $t$ and $u$, where $t<u$. The solutions to $x^2+20x+c=0$, where $c$ is a constant, are $r+u$ and $s+t$. What is the value of $c$?
+## 1843
+An object is launched from a height of 132 feet above the ground. A quadratic function $f$ models the height above the ground, in feet, of the object $t$ seconds after it is launched. According to the model, 3 seconds after the object is launched, it reaches a maximum height of 276 feet above the ground. Which equation defines $f$?
+@ $f(t)=-16(t-276)^2-3$ | $f(t)=-16(t-276)^2+3$ | $f(t)=-16(t+3)^2-276$ | $f(t)=-16(t-3)^2+276$
+## 1845
+A chemical reaction in a closed container produces a gas, and the volume $V$ of gas produced over time $t$ (in minutes) can be modeled by a quadratic function. At $t=5.0$ minutes, the volume of gas produced is 40.0 liters, and at $t=15.0$ minutes, the volume of gas produced is 160.0 liters. If the reaction starts at $t=0$ without gas produced, what will be the volume of gas produced at $t=25.0$ minutes?
+@ 375.2 liters | 483.6 liters | 423.3 liters | 333.5 liters
+## 1846
+<p style="text-align:center">$\frac{-22x-29+m}{2}=k(x+5)$</p><p>In the given equation, $k$ and $m$ are constants. The equation has infinitely many solutions. What is the value of $m$?</p>
+@ 34 | -11 | -26 | -81
+## 1847
+<p style="text-align:center">$\sqrt{x-k+3}=x-7$</p><p>In the given equation, $k$ is a constant. What is the greatest value of $k$ for which the equation has at least one real solution?</p>
+@ 41 | $\frac{41}{4}$ | 10 | $\frac{15}{2}$
+## 1849
+<p style="text-align:center">$f(x)=(x-3)(x+5)$</p><p>The function $f$ is defined by the given equation. The function $g$ is defined by $g(x)=f(x-2)+4$. Which of the following equations is an equivalent form of $g(x)$ that displays the minimum value of $g$ as a constant or coefficient?</p>
+@ $g(x)=(x-5)(x+3)+4$ | $g(x)=(x+1)^2-12$ | $g(x)=(x-1)^2-12$ | $g(x)=x^2-2x-11$
+## 1850
+The quadratic function $g$ models the depth, in meters, below the surface of the water of a Weddell seal $t$ minutes after the seal entered the water during a dive. The function estimates that the seal reached its maximum depth of 396.8 meters 8 minutes after it entered the water and then reached the surface of the water 16 minutes after it entered the water. Based on the function, what was the estimated depth, to the nearest meter, of the seal 11 minutes after it entered the water?
+## 1851
+Which equation is equivalent to the given equation $y=4x^2-bx-5$, where $b$ is positive constant?
+@ $y=4\left(x-\frac{b}{8}\right)^2-5-\frac{b^2}{16}$ | $y=4\left(x+\frac{b}{8}\right)^2-5$ | $y=4\left(x-\frac{b}{8}\right)^2-5$ | $y=4\left(x+\frac{b}{8}\right)^2-5-\frac{b^2}{16}$
+## 1853
+<p style="text-align:center">$g(x)=-\sqrt{x^2+bx+c}$</p><p>The function $g$ is defined by the given equation, where $b$ and $c$ are constants. The graph of $y=g(x)$ passes through the points $(2,0)$ and $\left(0,-\sqrt{298}\right)$. If $m$ is a value for which $g(m)=0$, what is the greatest possible value of $m$?</p>
+@ -150 | 2 | 149 | 150
+## 1854
+<p style="text-align:center">$g(x)=\frac{x^2-x-a}{x^3-x-b}$</p><p>The function $g$ is defined by the given equation, where $a$ and $b$ are constants. The graph of $y=g(x)$ passes through the point $(0,47)$, and $g(-47)=0$. What is the value of $b$?</p>
+@ 48 | 47 | -47 | -48
+## 1857
+<p style="text-align:center">$y=2x^2-24x+54$</p><p>The given equation represents a parabola in the $xy$-plane. Which of the following equations that represent the same parabola displays the $x$-intercepts as constants or coefficients?</p>
+@ $y=2(x^2-12x)+54$ | $y=2x(x-12)+54$ | $y=2(x-6)^2-18$ | $y=2(x-9)(x-3)$
+## 1858
+<p style="text-align:center">$f(x)=a\cdot b^x$</p><p>The function $f$ is defined above, where $a$ and $b$ are both constants greater than 1. Which of the following data sets could be modeled by the function $f$?</p><p><b>Table A (Bouncing Ball)</b></p><table><thead><tr><th>Bounce $x$</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th></tr></thead><tbody><tr><td>Maximum height (inches) $f(x)$</td><td>32</td><td>16</td><td>8</td><td>4</td><td>2</td></tr></tbody></table><p><b>Table B (Experiment)</b></p><table><thead><tr><th>Time (minutes) $x$</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th></tr></thead><tbody><tr><td>Number of observations remaining $f(x)$</td><td>10</td><td>8</td><td>6</td><td>4</td><td>2</td></tr></tbody></table><p><b>Table C (Bacteria Sample)</b></p><table><thead><tr><th>Time (hours) $x$</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th></tr></thead><tbody><tr><td>Population $f(x)$</td><td>2</td><td>4</td><td>8</td><td>16</td><td>32</td></tr></tbody></table><p><b>Table D (Employee Net Pay)</b></p><table><thead><tr><th>Time (hours) $x$</th><th>1</th><th>2</th><th>3</th><th>4</th></tr></thead><tbody><tr><td>Net pay (dollars) $f(x)$</td><td>8</td><td>16</td><td>24</td><td>32</td></tr></tbody></table>
+@ Table A | Table B | Table C | Table D
+## 1859
+<p>The function $f$ is defined by</p><p style="text-align:center">$f(x)=k(x+m)(x-6)(x+n)$</p><p>where $k$, $m$, and $n$ are positive constants, $0<k\le\frac{5}{2}$, and the graph of $y=f(x)$ has three distinct $x$-intercepts.</p><p>The function can also be written as</p><p style="text-align:center">$f(x)=kx^3+ux^2+vx+d$</p><p>where $u$, $v$, and $d$ are constants. Which of the following must be true?</p>
+@ $d=216k+36u+6v$ | $d=-216k+36u+6v$ | $d=-216k-36u-6v$ | The relationship between $d$, $k$, $u$, and $v$ cannot be determined.

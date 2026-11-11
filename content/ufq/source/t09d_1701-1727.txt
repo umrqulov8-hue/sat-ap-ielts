@@ -1,0 +1,59 @@
+## 1701
+<p style="text-align:center">$8rx^2-80sx+8r=0$</p><p>For the given equation, $r$ and $s$ are constants such that $r>0$, $s<0$ and $\frac{r}{s}>k$. What is the least value of $k$ that ensures that the equation has two distinct real solutions?</p>
+## 1702
+The solutions of $x^2-3x-2=0$ are $\frac{3-\sqrt{p}}{2}$ and $\frac{3+\sqrt{p}}{2}$. The solutions of $x^2-19x+c=0$ are $\frac{19-\sqrt{p}}{2}$ and $\frac{19+\sqrt{p}}{2}$. What is the value of $c$?
+## 1703
+Which quadratic equation has exactly one distinct real solution?
+@ $x^2-16=0$ | $x^2+16=0$ | $x^2-16x+56=0$ | $x^2-16x+64=0$
+## 1705
+<p>The function</p><p style="text-align:center">$v(x)=\frac{x^2+bx+c}{(x-7)(x-17)}$</p><p>where $b$, $c$ are constants goes through the points $\left(0,\frac{99}{119}\right)$ and $(11,0)$. There is another point where $v(q)=0$. What is the value of $q$?</p>
+## 1706
+<p style="text-align:center">$f(x)=\sqrt[3]{x^3+ax^2+bx+c}$</p><p>The function $f$ is defined by the given equation, where $a$, $b$, $c$ are integers. The graph of $y=f(x)$ passes through the point $(9,0)$, and $f(0)=27$. What is the value of $9a+b$?</p>
+## 1707
+<p>The equation of a parabola is given, where $a$, $b$, and $c$ are constants. In the $xy$-plane, the parabola has vertex $(5,-9)$ and has zero $x$-intercepts. Which of the following could be the value of $a-b-c$?</p><p style="text-align:center">$y=ax^2+bx+c$</p>
+@ -47 | -5 | 9 | 23
+## 1708
+The function $f$ is defined by $f(x)=\frac{x^2+ax+b}{3x+c}$, where $a$, $b$, and $c$ are constants. The graph of $y=f(x)$ in the $xy$-plane does not intersect the line $x=2$. If $f(3)=f(5)=0$, what is the value of $a+b+c$?
+## 1710
+<p style="text-align:center">$y=(x-a)(x-b)$</p><p>In the equation above, $a$ and $b$ are constants and $a\ne b$. The graph of the equation in the $xy$-plane is a parabola. What must $\frac{a+b}{2}$ represent?</p>
+@ The $x$-coordinate of the vertex of the parabola | The $y$-coordinate of the vertex of the parabola | The $x$-coordinate of one of the roots of the equation | The $y$-coordinate of one of the roots of the equation
+## 1711
+The function $f$ is defined by $f(x)=x^2-4x-780$. Which equivalent form displays its minimum value as a constant?
+@ $f(x)=x^2-4x+195$ | $f(x)=(x-2)^2-784$ | $f(x)=x(x-4)-780$ | $f(x)=(x+26)(x-30)$
+## 1712
+The function $h$ is defined by $h(x)=-\sqrt{x^2+bx+c}$, where $b$ and $c$ are constants. In the $xy$-plane, the graph of $y=h(x)$ contains the points $(2,0)$ and $(0,-\sqrt{358})$. If $h(m)=0$, what is the greatest possible value of $m$?
+## 1713
+The height $h(t)$, in feet, reached by a projectile $t$ seconds after launch is described by the function $h(t)=-16t^2+48t+22$. What is the height, in feet, of the projectile 3 seconds after launch?
+@ 22 | 58 | 118 | 2,470
+## 1714
+The function $h(t)=-16t^2+32t+6$ can be used to model the height of a ball, in feet, $t$ seconds after it is thrown into the air. The function can be rewritten in the form $h(t)=a(t-j)^2+k$, where $k$ is the maximum height of the ball, in feet. What is the value of $k$?
+## 1715
+In the equation $9x(x+5)=r$, $r$ is a positive constant. Which statement must be true?
+@ There are no real solutions. | There is exactly one real solution. | There are two distinct real solutions. | There is not enough information to determine the number of real solutions.
+## 1716
+<p style="text-align:center">$2(1-x)=x+10$</p><p>Which of the following is the solution to the equation above?</p>
+@ -4 | $-\frac{8}{3}$ | $\frac{8}{3}$ | 4
+## 1717
+If $p(x)=x^2+kx+4$ has no real zeros, what is the range of possible values for $k$?
+@ $k<-4$ | $-4<k<4$ | $k>4$ | No range, $k$ can be any real number.
+## 1718
+The function $g(x)=2x^2+px+q$ decreases for $x\le5$ and increases for $x\ge5$. Its two distinct integer $x$-intercepts have a product of 21. What is $p+q$?
+@ -20 | 1 | 22 | 42
+## 1719
+<table><thead><tr><th>$x$</th><th>$f(x)$</th></tr></thead><tbody><tr><td>-2</td><td>-5</td></tr><tr><td>-1</td><td>0</td></tr><tr><td>0</td><td>3</td></tr><tr><td>1</td><td>4</td></tr><tr><td>2</td><td>3</td></tr></tbody></table><p>The table above gives values of the quadratic function $f$ for selected values of $x$. The quadratic function $g$ is defined by $g(x)=-x^2+2x+15$. The maximum value of $g(x)$ is how many units greater than the maximum value of $f(x)$?</p>
+## 1721
+<p style="text-align:center">$f(x)=(x-a)(x-b)$</p><p>The function $f$ is defined by the given equation, where $a$ and $b$ are integers. If $f(12)>0$, $f(17)<0$ and $f(62)>0$, what is a possible value of $a+b$?</p>
+@ 31 | 29 | 28 | 80
+## 1723
+The functions $f$ and $g$ are defined by $f(x)=x^2+px+21$ and $g(x)=x^2+6x+5$, where $p$ is a constant. The solutions to $f(x)=0$ are $r$ and $s$, and the solutions to $g(x)=0$ are $r+2$ and $s+2$. What is the value of $p$?
+## 1724
+<p style="text-align:center">$x+1=\frac{2}{x+1}$</p><p>In the equation above, which of the following is a possible value of $x+1$?</p>
+@ $1-\sqrt{2}$ | $\sqrt{2}$ | 2 | 4
+## 1725
+<p style="text-align:center">$-4<3x+5\le17$</p><p>Which of the following represents all the values of $x$ that satisfy the inequality above?</p>
+@ $-3\le x<4$ | $-3<x\le4$ | $-9<x\le12$ | $-9\le x<12$
+## 1726
+Function $f$ is a quadratic function. The graph of $y=f(x)$ in the $xy$-plane has a vertex at $(9,-7)$, contains the point $(8,-9)$, and has a $y$-intercept at $(0,a)$. The graph of $y=6\cdot f(x)$ has a $y$-intercept at $(0,b)$. What is the positive difference between $a$ and $b$?
+## 1727
+The function $r$ is defined by $r(t)=33t-2t^2$. The function $s$ is defined by $s(t)=r(t)+1$. Which expression represents the maximum value of $s(t)$?
+@ $1+\left(\frac{33}{2}\right)^2$ | $1+2\left(\frac{33}{4}\right)^2$ | $1-2\left(\frac{33}{4}\right)^2$ | $1-\left(\frac{33}{2}\right)^2$

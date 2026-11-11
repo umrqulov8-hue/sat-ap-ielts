@@ -1,0 +1,69 @@
+## 1728
+<p>The function $q$ is defined by</p><p style="text-align:center">$q(x)=a\left|x-9\right|^2-87\left|x-9\right|+b$</p><p>where $a$ and $b$ are constants and $a>b>87$. If $q(639)=h$ and $q(-621)=k$, where $h$ and $k$ are constants, what is the value of $9(-639)^{h-k}+621(9)^{k-h}$?</p>
+## 1729
+Solve: $3x^2-5x-5=0$. What is the greatest solution?
+@ $\frac{5}{6}-\frac{\sqrt{85}}{6}$ | $\frac{5}{6}+\frac{\sqrt{85}}{6}$ | $\frac{5}{3}-\frac{\sqrt{85}}{3}$ | $\frac{5}{3}+\sqrt{85}$
+## 1730
+In the complex number system, what is the quotient when $\frac{i^4-16}{i^4-25}$ is divided by $\frac{i^2-4}{i^2-9}$? (Note: $i=\sqrt{-1}$)
+## 1731
+In the function $f$ defined by $f(x)=x^2+5x+t$, what must $t$ represent?
+@ The maximum value of $f$ | The minimum value of $f$ | The $x$-intercept of the graph of $f$ in the $xy$-plane | The $y$-intercept of the graph of $f$ in the $xy$-plane
+## 1733
+<p style="text-align:center">$y=ax^2+bx+c$</p><p>The function $f$ is defined above, where $a$, $b$, and $c$ are constants. The graph of $y=f(x)$ passes through the points $(-16,0)$ and $(9,0)$. If $a$ is an integer greater than 3, what is the smallest possible value of $3b-2a$?</p>
+## 1734
+The function $f(x)=x^2+bx+c$ decreases for $x\le6$ and increases for $x\ge6$. Its graph has two distinct integer $x$-intercepts, and the greater $x$-intercept is 11. What is $b+c$?
+@ -25 | -12 | -1 | 11
+## 1736
+The solutions to $x^2+12x+35=0$ are $r$ and $s$, where $r<s$. The solutions to $x^2+12x+27=0$ are $t$ and $u$, where $t<u$. The solutions to $x^2+24x+c=0$, where $c$ is a constant, are $r+u$ and $s+t$. What is the value of $c$?
+## 1737
+The graphs of functions $f$ and $g$ are parabolas, such that $g(x)=6f(x)$. The vertex of $f(x)$ is at $(2,10)$. The $y$-intercept of $f(x)$ and $g(x)$ is at $(0,b)$ and $(0,c)$, respectively. If the point $(3,78)$ is on the graph of $g(x)$, what is the value of $b-c$?
+@ -60 | -110 | -130 | -200
+## 1738
+<table><thead><tr><th>Material</th><th>Maintenance cost per day</th><th>Cost to produce each figurine</th><th>Selling price per figurine</th></tr></thead><tbody><tr><td>Softwood</td><td>$\$5$</td><td>$\$4$</td><td>$\$10$</td></tr><tr><td>Hardwood</td><td>$\$10$</td><td>$\$5$</td><td>$\$12$</td></tr><tr><td>Clay</td><td>$\$20$</td><td>$\$3$</td><td>$\$9$</td></tr></tbody></table><p>The table above shows the costs for a sculptor to make figurines out of various materials. The maintenance cost is the cost to keep the tools needed to work with the corresponding material in good condition. The sculptor makes figurines from only one material each day to keep this cost low. The profit from selling the figurines is equal to the total selling price for the figurines minus both the cost to produce them and the maintenance cost.</p><p>Next week, the sculptor wants to have a profit of at least \$125, and she will spend 5 days making only clay figurines. Assuming all the figurines that are made will be sold, what is the minimum number of clay figurines the sculptor should make to reach this goal?</p>
+@ 14 figurines | 21 figurines | 38 figurines | 75 figurines
+## 1742
+In the $xy$-plane, the graph of the function $f$ is a parabola with vertex at $(1,1)$ and $y$-intercept $(0,-1)$. Which of the following defines $f$?
+@ $f(x)=-2(x-1)^2+1$ | $f(x)=-2(x+1)^2+1$ | $f(x)=-\frac{1}{2}(x-1)^2+1$ | $f(x)=\frac{1}{2}(x+1)^2-1$
+## 1743
+The function $f$ is defined by $f(x)=a(x-h)^2+k$, where $a$, $h$, and $k$ are constants. The vertex of the parabola is at $(3,-5)$ and the parabola passes through the point $(5,3)$. What is the value of $a$?
+@ $\frac{1}{2}$ | 1 | $\frac{3}{2}$ | 2
+## 1744
+<p>The function $f$ is defined by</p><p style="text-align:center">$f(x)=a\sqrt{-x+b}$</p><p>where $a$ and $b$ are constants. In the $xy$-plane, the graph of $y=f(x)$ passes through the point $(5,0)$, and $f(-12)>f(-7)$. Which of the following must be true?</p>
+@ $a<f(b)$ | $a>b$ | $f(3)<f(-2b)$ | $a<b$
+## 1745
+<p style="text-align:center">$y=ax^2+bx+c$</p><p>The equation of a parabola is given, where $a$, $b$, and $c$ are constants. In the $xy$-plane, the parabola has vertex $(3,11)$ and $c<0$. Which of the following could be the value of $b$?</p>
+@ 5 | 6 | 7 | 8
+## 1746
+<p style="text-align:center">$(3.63+3.01i)+(5.44-5.22i)$</p><p>Which of the following complex numbers equals the sum above?</p>
+@ $8.45-2.21i$ | $9.07+8.23i$ | $9.07-2.21i$ | $35.46+35.32i$
+## 1747
+<p style="text-align:center">$6wy-2wz+3xy-xz$</p><p>The expression above can be written in the form $(aw+x)(by-z)$, where $a$ and $b$ are constants. What is the value of $a+b$?</p>
+@ 1 | 3 | 5 | 9
+## 1748
+<p style="text-align:center">$y=7x^2-28x+21$</p><p>The graph of the equation above is a parabola in the $xy$-plane. In which of the following equivalent forms of the equation do the $x$-intercepts of the parabola appear as constants or coefficients?</p>
+@ $y=7(x^2-4x)+21$ | $y=7x(x-4)+21$ | $y=7(x-2)^2-7$ | $y=7(x-1)(x-3)$
+## 1749
+The function $g$ is defined by $g(x)=-2x(x+5)(x-k)^2+r$, where $k$ and $r$ are integer constants. In the $xy$-plane, the graph of $y=g(x)$ passes through the point $(6,17)$, and $g(0)=17$. What is the value of $r+k$?
+@ -6 | 11 | 17 | 23
+## 1750
+<p style="text-align:center">$y=5x^2-40x+35$</p><p>Which equation represents the same parabola and displays its $x$-intercepts as constants or coefficients?</p>
+@ $y=5x^2-8x+35$ | $y=5x^2-8+35$ | $y=5(x-4)^2-45$ | $y=5(x-1)(x-7)$
+## 1753
+A quadratic function models the height, in feet, of an object above the ground in terms of the time, in seconds, after the object was launched. According to the model, the object was launched from a height of 0 feet and reached its maximum height of 1,600 feet 10 seconds after it was launched. Based on the model, what was the height, in feet, of the object 7 seconds after it was launched?
+## 1754
+The function $f$ is defined by $f(x)=3x^2-8x+17$. What is the value of $f(-2)$?
+@ -11 | 13 | 21 | 45
+## 1756
+<p style="text-align:center">$y=2x^2-19x+40$<br>$y=x+a$</p><p>In the given system of equations, $a$ is a constant. The graphs intersect at exactly one point $(x,y)$ in the $xy$-plane. What is the value of $x$?</p>
+@ -10 | -5 | 5 | 10
+## 1757
+The function $f$ gives the product of a number, $x$, and a number that is 7 more than $x$. Which equation defines $f$?
+@ $f(x)=x^2+x+7$ | $f(x)=x^2+7$ | $f(x)=x^2+7x$ | $f(x)=x^2+7x+7$
+## 1758
+A quadratic function models the height, in feet, of an object above the ground in terms of the time, in seconds, after the object was launched. According to the model, the object was launched from a height of 0 feet and reached its maximum height of 1,296 feet 9 seconds after it was launched. Based on the model, what was the height, in feet, of the object 11 seconds after it was launched?
+## 1759
+The function $f(x)=2x^2+bx+c$, where $b$ and $c$ are integers, decreases for $x\le7$ and increases for $x\ge7$. Its graph crosses the $x$-axis at two distinct points. What is the greatest possible value of $b+c$?
+@ 68 | 69 | 70 | 71
+## 1760
+The function $h$ is defined by $h(x)=a^x+b$, where $a$ and $b$ are positive constants. The graph of $y=h(x)$ in the $xy$-plane passes through the points $(0,10)$ and $(2,13)$. What is the value of $ab$?
+@ 13 | 18 | 20 | 26

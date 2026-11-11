@@ -1,0 +1,76 @@
+## 1761
+The graphs in the $xy$-plane of the following quadratic equations each have $x$-intercepts of $-2$ and 4. The graph of which equation has its vertex farthest from the $x$-axis?
+@ $y=-7(x+2)(x-4)$ | $y=\frac{1}{10}(x+2)(x-4)$ | $y=-\frac{1}{2}(x+2)(x-4)$ | $y=5(x+2)(x-4)$
+## 1762
+The function $v$ is defined by the equation $v(x)=\frac{x^2+bx+c}{(x+5)(x-19)}$, where $b$ and $c$ are constants. In the $xy$-plane, the graph of $y=v(x)$ passes through the points $\left(0,\frac{66}{95}\right)$ and $(11,0)$. If $v(q)=0$, which of the following could be the value of $q$?
+@ -6 | -5 | 5 | 6
+## 1763
+<p style="text-align:center">$(10b+6a)x^2+(9a^2-25b^2)x-12ab=0$</p><p>The equation above has two real solutions, where $a$ and $b$ are positive constants. The sum of the solutions to the given equation is $k(21a-35)$, where $k$ is a constant. What is the value of $k$?</p>
+## 1764
+<p style="text-align:center">$ax^3+bx^2+cx+d=0$</p><p>In the equation above, $a$, $b$, $c$, and $d$ are constants. If the equation has roots $-1$, $-3$, and 5, which of the following is a factor of $ax^3+bx^2+cx+d$?</p>
+@ $x-1$ | $x+1$ | $x-3$ | $x+5$
+## 1766
+The quadratic function can be used to model the height, in meters, of an object above the ground in terms of time, in seconds, after the object was launched into the air. The object reached a height of 148 meters 2 seconds and a maximum height of 340 meters 10 seconds after it was launched. Based on the model, what was the longest time period when the object reached a height of 97 meters?
+## 1767
+<p style="text-align:center">$f(x)=m\sqrt{-x-n}$</p><p>where $m$ and $n$ are constants. If $f(8)=0$ and $f(4)<-16$, which of the following must be true?</p>
+@ $m>-8$ | $n+m=0$ | $n+m>0$ | $n-m>0$
+## 1769
+Parabola $D$ in the $xy$-plane has equation $x-2y^2-8y-11=0$. Which equation shows the $x$-intercept(s) of the parabola as constants or coefficients?
+@ $x=2y^2+8y+11$ | $x=2(y+2)^2+3$ | $x-3=2(y+2)^2$ | $y=-\sqrt{\frac{x-3}{2}}-2$
+## 1770
+The function $f$ is defined by $f(x)=ax^2+bx+c$, where $a$, $b$, and $c$ are constants. The graph of $y=f(x)$ passes through the points $(11,0)$ and $(-3,0)$. If $a$ is an integer greater than 1, which of the following could be the value of $a+b$?
+@ 9 | 8 | -7 | -14
+## 1771
+<p style="text-align:center">$h(t)=-16t^2+110t+72$</p><p>The function above models the height $h$, in feet, of an object above ground $t$ seconds after being launched straight up in the air. What does the number 72 represent in the function?</p>
+@ The initial height, in feet, of the object | The maximum height, in feet, of the object | The initial speed, in feet per second, of the object | The maximum speed, in feet per second, of the object
+## 1772
+In the given equation, $p$ is a positive constant. The product of the solutions to the equation <p style="text-align:center">$(3x-7p)(5x^2+8x-4p)(x^3+3x^2-16x-48)=0$</p><p>is $-\frac{560}{9}$. What is the value of $p$?</p>
+@ $-\frac{5}{6}$ | $\frac{5}{6}$ | $\frac{25}{36}$ | $\frac{5}{12}$
+## 1773
+In the $xy$-plane, the quadrants are numbered I (upper right), II (upper left), III (lower left) and IV (lower right). The graph of the equation <p style="text-align:center">$y=3(x+a)^2+b$</p><p>where $a$ and $b$ are positive constants, has a vertex in which quadrant?</p>
+@ Quadrant I | Quadrant II | Quadrant III | Quadrant IV
+## 1774
+A quadratic function with vertex $(1,8)$ passes through $(2,47)$ and $(-1,164)$. What is $f(-2)-f(0)$?
+@ 125 | 203 | 312 | 359
+## 1775
+Let <p style="text-align:center">$g(x)=x^3+ax^2+bx+c$</p><p>The zeros of $g$ are $-2$, $-7$, and 6. What is the value of $a$?</p>
+@ -84 | -3 | 3 | 84
+## 1777
+The function $f$ gives the product of a number, $x$, and a number that is 88 more than $x$. Which equation defines $f$?
+@ $f(x)=x^2+x+88$ | $f(x)=x^2+88$ | $f(x)=x^2+88x$ | $f(x)=x^2+88x+88$
+## 1778
+<p style="text-align:center">$4x^2+3x-1=0$</p><p>What are the solutions to the equation above?</p>
+@ $x=\frac{-3\pm5}{8}$ | $x=\frac{3\pm5}{8}$ | $x=\frac{-3\pm5}{4}$ | $x=\frac{-3\pm\sqrt{13}}{8}$
+## 1779
+<p>The function $f$ is defined by</p><p style="text-align:center">$f(x)=ax^2+bx+c$</p><p>where $a$, $b$, and $c$ are constants. The graph of $y=f(x)$ in the $xy$-plane passes through the points $(13,0)$ and $(-6,0)$. Which of the following is the value of $a+b$ in terms of $a$?</p>
+@ $7a$ | $6a$ | $-6a$ | $-7a$
+## 1782
+<p style="text-align:center">$h(t)=-16t^2+b$</p><p>The function $h$ estimates an object's height, in feet, above the ground $t$ seconds after the object is dropped, where $b$ is a constant. The function estimates that the object is 19.36 feet above the ground when it is dropped at $t=0$. How many seconds after being dropped does the function estimate the object will hit the ground?</p>
+## 1783
+A quadratic function models the height, in feet, of an object above the ground in terms of time in seconds after the object was launched. The model estimates that the object was launched from a height of 0 feet and reached a maximum height of 207.36 feet 3.6 seconds. The model also estimates that the object was at a height of 184.32 feet $x$ seconds after it was launched. What is the greatest possible value of $x$?
+## 1784
+<p style="text-align:center">$h(t)=-16t^2+b$</p><p>The function $h$ estimates an object's height, in feet, above the ground $t$ seconds after the object is dropped, where $b$ is a constant. The function estimates that the object is 43.56 feet above the ground when it is dropped at $t=0$. How many seconds after being dropped does the function estimate the object will hit the ground?</p>
+## 1785
+<p style="text-align:center">$g(x)=12(x-a)(x-b)(x-c)$</p><p>where $a$, $b$, and $c$ are distinct constants. When $a<x<b$, $g(x)$ will be positive. If $(p,q)$ is on the graph of $g(x)$, where $p$ and $q$ are constants, and $q=45$, which of the following could be true?</p><p>I. $p<a$<br>II. $b<p<c$<br>III. $p>c$</p>
+@ Only I | Only III | I and III only | II and III only
+## 1786
+<p style="text-align:center">$nx+3t=-3x+4n$</p><p>In the given equation, $n$ and $t$ are constants. The equation has no solution. What CANNOT be the value of $n+t$?</p>
+## 1787
+The function $f$ is defined by $f(x)=(x+3)(x+1)$. The graph of $f$ in the $xy$-plane is a parabola. Which of the following intervals contains the $x$-coordinate of the vertex of the graph of $f$?
+@ $-4<x<-3$ | $-3<x<1$ | $1<x<3$ | $3<x<4$
+## 1788
+<p style="text-align:center">$r(t)=55t-2t^2$</p><p>The function $r$ is defined by the given equation. The function $s$ is defined by $s(t)=r(t)+1$. Which expression represents the maximum value of $s(t)$?</p>
+@ $1+\left(\frac{55}{2}\right)^2$ | $1+2\left(\frac{55}{4}\right)^2$ | $1-2\left(\frac{55}{4}\right)^2$ | $1-\left(\frac{55}{2}\right)^2$
+## 1789
+The function $f$ is defined by $f(x)=a^x-b$, where $a$ and $b$ are constants. In the $xy$-plane, the graph of $y=f(x)$ passes through the points $(c,7)$ and $(2c,117)$, where $c$ is a constant. Which of the following could be the value of $b$?
+@ 4 | 17 | 110 | 124
+## 1790
+<table><thead><tr><th>$x$</th><th>$y$</th></tr></thead><tbody><tr><td>$-\frac{8}{3}$</td><td>0</td></tr><tr><td>0</td><td>-144</td></tr><tr><td>9</td><td>0</td></tr></tbody></table><p>The table shows three values of $x$ and their corresponding values of $y$. There is a quadratic relationship between $x$ and $y$. An equation that represents this relationship can be written as $y=6x^2-bx-144$, where $b$ is a constant. What is the value of $b$?</p>
+## 1791
+<p style="text-align:center">$(6a+10b)x^2+(9a^2-25b^2)x-15ab=0$</p><p>The equation above has two real solutions, where $a$ and $b$ are positive constants. The sum of the solutions to the given equation is $k(21a-35b)$, where $k$ is a constant. What is the value of $k$?</p>
+@ $-\frac{1}{14}$ | $\frac{1}{14}$ | $-\frac{1}{7}$ | $-14$
+## 1793
+<p style="text-align:center">$-\frac{3}{14}rx+\frac{s}{9}=10-\frac{5}{56}x$</p><p>In the given equation, $r$ and $s$ are constants. The equation has no solution. What is the value of $r$?</p>
+## 1794
+The function $f(x)=a^x-b$ passes through points $(c,4)$ and $(2c,114)$. Which could be the value of $b$?
+@ 7 | 14 | 110 | 118

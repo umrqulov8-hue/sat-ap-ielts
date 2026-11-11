@@ -1,0 +1,72 @@
+## 1811
+<p style="text-align:center">$y=4x^2-40x+36$</p><p>The given equation represents a parabola in the $xy$-plane. Which of the following equations that represent the same parabola displays the $x$-intercepts as constants or coefficients?</p>
+@ $y=4(x-9)(x-1)$ | $y=4(x-5)^2-64$ | $y=4x(x-10)+36$ | $y=4(x^2-10x)+36$
+## 1812
+A quadratic model describes the predicted instantaneous rate of change (in bacteria per hour) of a bacteria population as a function of the population size. According to the model, the predicted instantaneous rate of change is 0 bacteria per hour when the population size is 0, and the maximum predicted instantaneous rate of change is 0.200 bacteria per hour when the population size is 7,000. Based on this model, what is the predicted instantaneous rate of change (in bacteria per hour) when the population size is 700?
+## 1813
+<p style="text-align:center">$y=-4.9(x-9.1)^2+12400$</p><p>The equation gives a plane's height $y$, in meters, $x$ seconds after a parabolic maneuver began. What does the vertex mean?</p>
+@ Maximum height 12,400 meters at 4.9 seconds | Maximum height 12,400 meters at 9.1 seconds | Maximum height 4.9 meters at 12,400 seconds | Maximum height 9.1 meters at 12,400 seconds
+## 1814
+<p>The function is:</p><p style="text-align:center">$f(x)=-0.0038400x^2+15.236x-15{,}103$</p><p>Based on this model, what is the <b>positive difference</b> in Arctic sea ice area between 1991 and 1992? <i>(Round your answer to the nearest thousandth.)</i></p>
+## 1815
+<p style="text-align:center">$\frac{2}{7}(2x+7)\left(x+\sqrt{2k+7}\right)\left(x-\sqrt{2k+7}\right)=0$</p><p>In the given equation, $k$ is a positive constant. The product of the solutions to the equation is 63. What is the value of $k$?</p>
+## 1816
+<p>The function $p$ is defined by</p><p style="text-align:center">$p(x)=a\left((x+4)^2-b\right)\left((x+4)^2-c\right)$</p><p>where $a$, $b$, and $c$ are constants. In the $xy$-plane, the graph of $y=p(x)$ passes through the points $(-5,30)$ and $(0,90)$. What is the value of $p(-8)+p(-3)$?</p>
+## 1817
+<p style="text-align:center">$f(x)=-2x^2+bx+c$</p><p>In the given quadratic function $b$ and $c$ are constants. The graph of $y=f(x)$ is a parabola that has a vertex at the point $(h,k)$, where $h$ and $k$ are constants. If $k<0$ and $f(-5)=f(7)$, which of the following must be true?</p><p>I. $c<-1$<br>II. $b\ge3$</p>
+@ I only | II only | I and II | Neither I nor II
+## 1818
+<p style="text-align:center">$h(t)=-16t^2+104t+3$</p><p>At a baseball home run hitting contest, the trajectory of one home run was examined. The baseball's height $h$, in feet above the ground, $t$ seconds after being hit is modeled by the quadratic function above. Which of the following is the best interpretation of the number 3 in this context?</p>
+@ The number of seconds it took the baseball to reach its maximum height | The number of seconds it took the baseball to hit the ground | The number of feet above the ground the baseball was 16 seconds after it was hit | The number of feet above the ground the baseball was when it was hit
+## 1820
+The function $m(t)=-0.0274t^2+7.3873t+75.032$ models the body mass, in kilograms, of a male giraffe $t$ days after birth, for $0\le t\le390$. Which statement best interprets $m(140)\approx572$?
+@ The giraffe has a predicted mass of 140 kg at 572 days. | The giraffe has a predicted mass of 572 kg at 140 days. | The giraffe gains 572 kg every 140 days. | The giraffe has a predicted mass of 572 kg at birth.
+## 1821
+A quadratic function models the height of an object above the ground. The object was launched from a height of 0 feet and reached its maximum height of 1,600 feet 10 seconds after it was launched. What was the height of the object 13 seconds after it was launched?
+## 1822
+In the given equation, $a$ and $b$ are positive constants.<p style="text-align:center">$24x^2-(12a+2b)x+ab=0$</p><p>The sum of the solutions to the given equation is $k(6a+b)$, where $k$ is a constant. What is the value of $k$?</p>
+## 1823
+The equation $y=-4.9(x-8.7)^2+11900$ models the height $y$, in meters, of a plane $x$ seconds after it began a parabolic maneuver. Which interpretation of the vertex is correct?
+@ Maximum height 8.7 meters at 11,900 seconds | Maximum height 4.9 meters at 11,900 seconds | Maximum height 11,900 meters at 8.7 seconds | Maximum height 11,900 meters at 4.9 seconds
+## 1824
+<p style="text-align:center">$f(x)=ax^2+6x+c$</p><p>In the given quadratic function, $a$ and $c$ are constants. The graph of $y=f(x)$ in the $xy$-plane is a parabola that opens upward and has a vertex at $(h,k)$, where $h$ and $k$ are constants. If $k>0$ and $f(-7)=f(5)$, which of the following must be true?</p><p>I. $c>3$<br>II. $a>3$</p>
+@ I only | II only | I and II | Neither I nor II
+## 1825
+The graph of a quadratic function $y=f(x)$ opens upward with its vertex located below the line $y=-9$. Which of the following could be the number of real solutions to the equation $f(x)=-9$?
+@ Zero | Exactly one | Exactly two | Infinitely many
+## 1826
+<p style="text-align:center">$f(x)=-2(x-a)(x-b)(x-c)$</p><p>The function $f$ is defined by the given equation, where $a$, $b$, $c$ are distinct constants. When $b<x<c$, the value of $f(x)$ is positive. The graph of $y=f(x)$ in the $xy$-plane contains the point $(m,n)$, where $m$ and $n$ are constants. If $n$ is equal to $-5$, which of the following could be true?</p><p>I. $m<a$<br>II. $a<m<b$<br>III. $m>c$</p>
+@ I only | II only | II and III | I and III
+## 1827
+<p>The function</p><p style="text-align:center">$f(x)=6(x-a)(x-b)(x-c)$</p><p>is defined by the given equation, where $a$, $b$, and $c$ are distinct constants. When $a<x<b$, the value of $f(x)$ is positive. The graph of $y=f(x)$ in the $xy$-plane contains the point $(r,s)$, where $r$ and $s$ are constants. If $s=9$, which of the following could be true?</p><p>I. $r<a$<br>II. $b<r<c$<br>III. $r>c$</p>
+@ I only | III only | I and III only | II and III only
+## 1828
+The function $f$ is a quadratic function. In the $xy$-plane, the graph of $y=f(x)$ has a vertex at $(1,6)$ and passes through the points $(2,40)$ and $(-1,142)$. What is the value of $f(-2)-f(0)$?
+@ 108 | 176 | 272 | 312
+## 1829
+<p>The function $f$ is defined by</p><p style="text-align:center">$f(x)=a^x+b$</p><p>where $a>0$. In the $xy$-plane, the graph of $y=f(x)$ has a $y$-intercept of $(0,-20)$ and passes through the point $(2,43)$. What is the value of $a-b$?</p>
+## 1830
+The function $h(z)$ is defined by $h(z)=z^4+az^3+bz^2+cz+d$, where $a$, $b$, $c$, and $d$ are constants. In the $xy$-plane, the graph of $y=h(z)$ passes through the points $(-6,0)$, $(-2,0)$, $(4,0)$, and $(5,0)$. If $h(0)=q$ and the product of all the values of $x$ for which $h(x)=0$ is $r$, where $q$ and $r$ are constants, what is the value of $q+r$?
+## 1831
+A quadratic function models the height, in feet, of an object above the ground in terms of the time, in seconds, after the object was launched. The model estimates that the object was launched from an initial height of 0.00 feet above the ground and was at a maximum height of 207.36 feet above the ground 3.6 seconds after it was launched. The model also estimates that the object was at a height of 184.32 feet above the ground $x$ seconds after it was launched. What is a possible value of $x$?
+## 1832
+The front of a roller-coaster car is at the bottom hill and is 15 feet above the ground. If the front of the roller-coaster car rises at a constant rate of 8 feet per second, which of the following equations gives height $h$, in feet, of the front of the roller-coaster $s$ seconds after it starts up the hill?
+@ $h=8s+15$ | $h=15s+\frac{335}{8}$ | $h=8s+\frac{335}{15}$ | $h=15s+8$
+## 1833
+<p>Quadratic function $h$ is defined by</p><p style="text-align:center">$h(x)=ax^2-2x+c$</p><p>where $a$ and $c$ are constants. The graph of $y=h(x)$ in the $xy$-plane is a parabola that opens downward and has a vertex of $(h,k)$, where $k>0$. If $h(1)=h(-13)$, which of the following must be true?</p><p>I. $-1<a<0$<br>II. $c>0$</p>
+@ I only | II only | I and II | Neither I nor II
+## 1834
+<p style="text-align:center">$f(x)=ax^2+bx+c\quad\text{and}\quad k(x)=px^2-57x+q$</p><p>The functions $f$ and $k$ are both quadratic. The parabola of $y=f(x)$ has a vertex $y$-coordinate of $3m$ and the parabola of $y=k(x)$ has a vertex $y$-coordinate of $m$, where $m>0$. If $f(10)=f(14)$ and $k(-3)=k(27)$, for how many values of $x$ does $f(x)=k(x)$?</p>
+@ Exactly one | Exactly two | Infinitely many | Zero
+## 1835
+<p style="text-align:center">$4x^2-px+w=-87$</p><p>In the given equation, $p$ and $w$ are integer constants. The equation has exactly one real solution. Which is NOT a possible value of $w$?</p>
+@ -23 | 13 | 81 | 313
+## 1837
+<p style="text-align:center">$f(x)=-3x^2+bx+c$</p><p>In the given quadratic function $b$ and $c$ are constants. The graph of $y=f(x)$ is a parabola that has a vertex at the point $(h,k)$. If $f(-4)=f(8)$, and the quadratic function has $x$-intercepts at $(r,0)$ and $(s,0)$, which of the following must be true?</p><p>I. $r+s=4$<br>II. $b<0$<br>III. $c<k$</p>
+@ I and II only | II and III only | I and III only | I, II, and III
+## 1838
+An object is launched from a height of 129 feet above the ground. A quadratic function $f$ models the height above the ground, in feet, of the object $t$ seconds after it is launched. According to the model, 2 seconds after the object is launched, it reaches a maximum height of 193 feet above the ground. Which equation defines $f$?
+@ $f(t)=-16(t+193)^2-2$ | $f(t)=-16(t-193)^2+2$ | $f(t)=-16(t+2)^2-193$ | $f(t)=-16(t-2)^2+193$
+## 1839
+<p style="text-align:center">$f(x)=(x-a)(x-b)$</p><p>The function $f$ is defined by the given equation, where $a$ and $b$ are integer constants. If $f(39)>0$, $f(42)<0$, and $f(45)>0$, which of the following could be the value of $a+b$?</p>
+@ 42 | 44 | 81 | 83

@@ -1,0 +1,39 @@
+## 1501
+An object's average acceleration, in meters per second squared, is the change in the object's speed, in meters per second, divided by the time during which the change occurred, in seconds. A certain object's speed changes by 48 meters per second in 5 seconds. What is this object's average acceleration, in meters per second squared, during this time period?
+@ 0.1 | 9.6 | 43 | 53
+## 1502
+An object's average acceleration, in meters per second squared, is the change in the object's speed, in meters per second, divided by the time during which the change occurred, in seconds. A certain object's speed changes by 12 meters per second in 5 seconds. What is this object's average acceleration, in meters per second squared, during this time period?
+@ 0.42 | 2.4 | 7 | 17
+## 1503
+The equation of a parabola is written in the form $y=ax^2+bx+c$, where $a$, $b$, and $c$ are constants. The parabola has vertex $(1,-3)$ and does not intersect the $x$-axis. Which of the following could be the value of $a+b-c$?
+@ -3 | 0 | 3 | 6
+## 1504
+<p style="text-align:center">$\sqrt{x^2+4(2x+4)}$</p><p>Which of the following is equivalent to the expression above, for all $x\ge-4$?</p>
+@ $x+4$ | $x+8$ | $3x+4$ | $5x+8$
+## 1505
+Which expression is equivalent to $12x^3+30x^2y+12xy+30y^2$?
+@ $(6x^2+10y)(2x+3y)$ | $(4x^2+10y)(3x+3y)$ | $(3x^2+3y)(4x+10y)$ | $(2x^2+3y)(6x+10y)$
+## 1507
+A poster has an area of 432 square inches. The length $x$, in inches, of the poster is 6 inches longer than the width of the poster. Which of the following equations can be solved to determine the length, in inches, of the poster?
+@ $x^2-6=432$ | $x^2-6x=432$ | $x^2+6=432$ | $x^2+6x=432$
+## 1508
+<p style="text-align:center">$a=x(x+2)$<br>$b=x(x+1)$<br>$c=x(x-1)$</p><p>In the equations above, $a$, $b$, and $c$ are given in terms of $x$. Which of the following expressions is equivalent to $a-b+c$?</p>
+@ $x^2$ | $x^2+2$ | $x^2+2x$ | $2-x^2$
+## 1509
+One of the factors of $8x^4+50x^2+63$ is $ax^2+b$, where $a$ and $b$ are positive constants. Which of the following is a possible value of $ab$?
+@ 7 | 14 | 18 | 36
+## 1510
+Given the expression $6x^4+29x^2+28$, one of the factors is $ax^2+b$. What is a possible value of $ab$?
+@ 7 | 8 | 12 | 21
+## 1511
+<p>One solution to the given equation $2x^2-20x-17=0$ can be written as</p><p style="text-align:center">$x=h-\frac{1}{2}\sqrt{k}$</p><p>where $h$ and $k$ are integer constants. What is the value of $h+k$?</p>
+@ 139 | 71 | 67 | 22
+## 1512
+<p>Which of the following is a factor of the expression $2x^2+(18r+5)x+45r$, where $r$ is a nonzero constant?</p><p>I. $x+9r$<br>II. $2x+5r$</p>
+@ I only | II only | I and II | Neither I nor II
+## 1513
+<p style="text-align:center">$f(x)=2x+3$<br>$g(x)=7x-2$<br>$h(x)=5x+6$</p><p>The functions $f$, $g$, and $h$ are defined as shown. If $f(x)\cdot g(x)-h(x)=ax^2+bx+c$, where $a$, $b$, and $c$ are constants, what is the value of $b$?</p>
+@ -5 | 12 | 20 | 22
+## 1514
+An object travels $x$ inches in $y$ seconds. At this rate, which expression represents the time, in seconds, to travel $29x$ inches?
+@ $\frac{29}{y}$ | $\frac{y}{29}$ | $29y$ | $y+29$

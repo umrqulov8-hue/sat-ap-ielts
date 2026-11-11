@@ -1,0 +1,136 @@
+## 1601
+<p style="text-align:center">$k^2+5k-17=0$</p><p>If $k$ satisfies the equation, which could be the value of $k+\frac{5}{2}$?</p>
+@ -17 | $\frac{-\sqrt{93}}{2}$ | $-\sqrt{17}$ | -2
+## 1602
+<p style="text-align:center">$i^3+i^4+i^5+i^6$</p><p>The complex number expression above can be rewritten in the form $a+bi$, where $a$ and $b$ are real numbers. What is the value of $|a|+|b|$?</p><p>(Note: $i=\sqrt{-1}$)</p>
+## 1603
+<p>173, 194, 233, 264, 299</p><p>What is the minimum value of the data set shown?</p>
+@ 126 | 173 | 233 | 299
+## 1604
+<p>169, 185, 251, 272, 288</p><p>What is the minimum value of the data set shown?</p>
+@ 119 | 169 | 251 | 288
+## 1605
+<p style="text-align:center">$f(x)=(2x-9)(2x+11)$</p><p>What is the minimum value of the given function?</p>
+@ -100 | $\frac{-11}{2}$ | -2 | $\frac{-1}{2}$
+## 1606
+The function $f$ is defined by $f(x)=(x-1)^2+6$. What is its minimum value?
+@ 1 | 5 | 6 | 7
+## 1607
+In the equation $-4x(6x+p)=54$, $p$ is an integer constant. The equation has no real solution. What is the least possible value of $p$?
+## 1608
+<p style="text-align:center">$\frac{1}{cx}=\frac{x}{128}+\frac{1}{c}$</p><p>In the given equation, $c$ is a constant. If the equation has exactly one solution, what is the value of $c$?</p>
+## 1609
+<p style="text-align:center">$4x^2-12x-72=0$</p><p>What is the product of the solutions to the given equation?</p>
+@ -72 | -18 | 18 | 72
+## 1610
+<p style="text-align:center">$3x^2-6x-72=0$</p><p>What is the product of the solutions to the given equation?</p>
+@ -72 | -24 | 24 | 72
+## 1611
+If $f(x)=5x^2-3$ and $f(x+a)=5x^2+30x+42$, what is the value of $a$?
+@ -30 | -3 | 3 | 30
+## 1612
+The expression $-4.91t^2+23.2t+1.8$ represents the height, in meters, of a ball $t$ seconds after it was thrown straight up into the air. What was the initial height, in meters, of the ball when it was thrown?
+## 1613
+<p style="text-align:center">$2(10ax-5)=2ax+26$</p><p>Based on the equation above, what is the value of $1-ax$?</p>
+@ -2 | -1 | 0 | 2
+## 1614
+What are all possible solutions to $(z+6)(z-3)=0$?
+@ $-6$ and $-3$ | $-6$ and 3 | 6 and $-3$ | 6 and 3
+## 1615
+The function $f$ is defined by $f(x)=-x^2+bx+c$, where $b$ and $c$ are constants. Its graph contains $(0,5)$ and $(4,0)$. What is the value of $b$?
+## 1616
+<p style="text-align:center">$x^2-4=32$</p><p>Which value is a solution to the given equation?</p>
+@ -32 | -28 | -4 | 6
+## 1617
+<p style="text-align:center">$r^2+qr=8r-97$</p><p>The equation has no real solutions, and $q$ is an integer constant. What is the largest possible value of $q$?</p>
+## 1618
+<p style="text-align:center">$\sqrt{k-x}=32-x$</p><p>In the given equation, $k$ is a constant. The equation has exactly one real solution. What is the minimum possible value of $4k$?</p>
+## 1619
+<p style="text-align:center">$\frac{x^2}{8}=\frac{49}{8}$</p><p>Which value is a solution to the given equation?</p>
+@ 7 | 8 | 14 | 56
+## 1620
+<p style="text-align:center">$x^2-12x+7=0$</p><p>What is the sum of the solutions to the given equation?</p>
+@ 0 | 5 | 7 | 12
+## 1621
+<p style="text-align:center">$h=-4.9t^2+7t+12$</p><p>The equation models the height $h$, in meters, of an object $t$ seconds after launch. What was its initial height, in meters?</p>
+## 1622
+<p style="text-align:center">$-4x(6x+p)=54$</p><p>In the given equation, $p$ is an integer constant. The equation has no real solution. What is the least possible value of $p$?</p>
+## 1623
+For the function $f(x)=x^3+6x+11$, the graph of $y=f(x)$ in the $xy$-plane passes through the point $(0,b)$, where $b$ is a constant. What is the value of $b$?
+## 1624
+The product of a positive number $x$ and the number that is 6 more than $x$ is 16. What is the value of $x$?
+@ 1 | 2 | 8 | 16
+## 1625
+<p style="text-align:center">$-3x^2+bx-48=0$</p><p>In the given equation, $b$ is a positive integer. The equation has no real solution. What is the largest possible value of $b$?</p>
+## 1626
+<p style="text-align:center">$f(x)=x^2+px+42$<br>$g(x)=x^2+10x+18$</p><p>The zeros of $f$ are $r$ and $s$. The zeros of $g$ are $r+2$ and $s+2$. What is $p$?</p>
+## 1627
+<p style="text-align:center">$-8x^2+bx-98=0$</p><p>In the given equation, $b$ is a positive integer. The equation has no real solution. What is the largest possible value of $b$?</p>
+## 1628
+In the given equation, $k$ is a constant. The equation <p style="text-align:center">$\sqrt{k-x}=43-x$</p><p>has exactly one real solution. What is the minimum possible value of $4k$?</p>
+## 1630
+<p style="text-align:center">$f(x)=(x-3)(x^2-4x+3)$</p><p>How many distinct zeros does the function $f$, defined above, have?</p>
+@ None | One | Two | Three
+## 1631
+The product of a positive number $x$ and the number that is 9 more than $x$ is 52. What is the value of $x$?
+@ 2 | 4 | 13 | 26
+## 1632
+<p style="text-align:center">$\frac{2x+6}{(x+2)^2}-\frac{2}{x+2}$</p><p>The expression above is equivalent to $\frac{a}{(x+2)^2}$, where $a$ is a positive constant and $x\ne-2$.</p><p>What is the value of $a$?</p>
+## 1633
+<p style="text-align:center">$(x-k)^2=(k-5a)(x-k)$</p><p>In the given equation, $a$ and $k$ are constants with $k>5a$. The sum of solutions is $3k+21$. What is the value of $a$?</p>
+## 1634
+<p style="text-align:center">$x^2-625=0$</p><p>How many distinct real solutions does the given equation have?</p>
+@ Zero | Exactly one | Exactly two | Infinitely many
+## 1635
+For the function $g$ defined by $g(x)=x^2+2x+b$, what must $b$ represent?
+@ The minimum value of $g$ | The maximum value of $g$ | The $x$-intercept of the graph of $g$ in the $xy$-plane | The $y$-intercept of the graph of $g$ in the $xy$-plane
+## 1636
+<p style="text-align:center">$0=(x-k)(7x+t)-(x-k)$</p><p>In the given equation, $k$ and $t$ are positive constants. A solution to the equation is $x=-\frac{22}{7}$. What is the value of $t$?</p>
+## 1637
+<p style="text-align:center">$r^2+qr=8r-87$</p><p>In the given equation shown above, $q$ is an integer constant. The given equation has no real solutions. What is the largest possible value of $q$?</p>
+## 1638
+<p style="text-align:center">$(4x+4)(ax-1)-x^2+4$</p><p>In the expression above, $a$ is a constant. If the expression is equivalent to $bx$, where $b$ is a constant, what is the value of $b$?</p>
+@ -5 | -3 | 0 | 12
+## 1639
+In the equation $(x-k)^2=(k-5a)(x-k)$, $a$ and $k$ are constants, where $k>5a$. The sum of the solutions to the equation is $3k+37$. What is the value of $a$?
+## 1640
+The product of the complex numbers $(2+3i)$ and $(3-i)$ can be written as $a+bi$, where $a$ and $b$ are real numbers and $i=\sqrt{-1}$. What is the value of $100a+b$?
+## 1641
+<p style="text-align:center">$3x^2-13x+19=0$</p><p>How many distinct real solutions does the given equation have?</p>
+@ Zero | Exactly one | Exactly two | Infinitely many
+## 1642
+<p style="text-align:center">$\frac{5}{x}+3=\frac{4}{x-1}$</p><p>What are the two solutions to the equation above?</p>
+@ 1 and $\frac{3}{5}$ | 1 and $\frac{5}{3}$ | $-1$ and $\frac{3}{5}$ | $-1$ and $\frac{5}{3}$
+## 1643
+Which of the following is an example of a function whose graph in the $xy$-plane has no $x$-intercepts?
+@ A linear function whose rate of change is not zero | A quadratic function with real zeros | A quadratic function with no real zeros | A cubic polynomial with at least one real zero
+## 1644
+<p style="text-align:center">$nx^2-16x=26x^2-8$</p><p>In the given equation, $n$ is an integer constant. If the equation has two distinct real solutions, what is the greatest possible value of $n$?</p>
+## 1645
+<p style="text-align:center">$\frac{6}{x^2-9}=\frac{2}{x-3}-\frac{1}{x+3}$</p><p>Which statement describes the solution to the equation above?</p>
+@ 3 is the only solution. | $-3$ is the only solution. | 3 and $-3$ are both solutions. | There are no solutions.
+## 1646
+<p style="text-align:center">$x(9x-2a)+b(9x-2a)-(x+b)=0$</p><p>In the given equation, $a$ and $b$ are positive constants. A solution to the equation is $x=42$. What is the value of $a$?</p>
+## 1647
+<p style="text-align:center">$x^2+3x-1=0$</p><p>Which of the following is a solution to the equation above?</p>
+@ $\frac{-3+\sqrt{13}}{2}$ | $\frac{3-\sqrt{13}}{2}$ | $\frac{-3+\sqrt{7}}{2}$ | $\frac{3-\sqrt{7}}{2}$
+## 1648
+<p style="text-align:center">$(x-k)^2=(k-4a)(x-k)$</p><p>In the given equation, $a$ and $k$ are constants, where $k>4a$. The sum of the solutions to the equation is $3k+33$. What is the value of $a$?</p>
+## 1649
+What is the sum of the complex numbers $2+3i$ and $4+8i$, where $i=\sqrt{-1}$?
+@ 17 | $17i$ | $6+11i$ | $8+24i$
+## 1650
+<p style="text-align:center">$C(x)=\left(\frac{5}{9}\right)(x-32)$</p><p>The function converts a temperature $x$ in degrees Fahrenheit to degrees Celsius. A change of 27 degrees Fahrenheit equals a change of how many degrees Celsius?</p>
+## 1651
+The function $p$ is defined by $p(x)=a\left((x+6)^2-b\right)\left((x+6)^2-c\right)$, where $a$, $b$, and $c$ are constants. In the $xy$-plane, the graph of $y=p(x)$ passes through the points $(-7,24)$ and $(0,899)$. What is the value of $p(-12)+p(-5)$?
+## 1652
+The function $f$ is defined by $f(x)=-4(x+10)^2+12$. For what value of $x$ does $f(x)$ reach its maximum?
+@ -40 | -12 | -10 | -4
+## 1653
+In the equation $(x+k)^2+48=48$, $k$ is a constant. How many distinct real solutions does this equation have?
+@ Zero | Exactly one | Exactly two | Infinitely many
+## 1654
+<p style="text-align:center">$x^2+bx+c=0$</p><p>In the equation, $b$ and $c$ are constants. If $-b+\sqrt{b^2-4c}=18$ and $-b-\sqrt{b^2-4c}=10$, what is one possible value of $x$?</p>
+## 1655
+<p style="text-align:center">$g(x)=2x-1$<br>$h(x)=1-g(x)$</p><p>The functions $g$ and $h$ are defined above. What is the value of $h(0)$?</p>
+@ -2 | 0 | 1 | 2

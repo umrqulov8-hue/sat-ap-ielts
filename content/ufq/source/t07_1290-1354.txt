@@ -1,0 +1,163 @@
+## 1290
+<p style="text-align:center">$2x^2-17x+36=0$</p><p>What is a solution to the equation above?</p>
+## 1291
+If $a^2-9a+14=0$, what is one possible value of $a+3$?
+## 1292
+If $3(x-5)^2=192$, what is $x^2-10x$?
+@ 14 | 39 | 64 | 89
+## 1293
+If $x^2-x-30=0$, what is the positive value of $x$?
+## 1294
+<p style="text-align:center">$(x-1)^2=3x-5$</p><p>What is one possible solution to the equation above?</p>
+## 1296
+The expression $(4x^6)(3x)$ is equivalent to $bx^7$. What is $b$?
+## 1297
+If $\frac{48}{x}=4x$, what is the value of $4x^2$?
+@ 4 | 12 | 48 | 192
+## 1298
+The quadratic equation $9x^2+3=147$ has two solutions. What is the sum of the solutions?
+## 1299
+If $\frac{42}{x}=3x$, what is the value of $3x^2$?
+@ 3 | 14 | 42 | 126
+## 1300
+The expression $7x^3+16x^3-10x^3$ is equivalent to $bx^3$. What is $b$?
+## 1301
+The expression $4(2x+19)(x-5)-(9x+13)$ equals $ax^2+bx+c$. What is $b$?
+## 1302
+The expression $(6x+5)(x+2)$ is equivalent to $ax^2+bx+c$. What is the value of $a+b+c$?
+## 1303
+Which of the following is a solution to the equation $2x^2-4=x^2$?
+@ 1 | 2 | 3 | 4
+## 1304
+Which expression is equivalent to $70y+80y$?
+@ $560y^2$ | $560y$ | $150y^2$ | $150y$
+## 1305
+Which expression is a factor of $81p^{21}-121p^{19}$?
+@ $9p+11$ | $81p^2+121$ | $11p-9$ | $-40p^{44}$
+## 1306
+If $121x^2=-110x+56$, what is the value of $11x+5$, where $11x+5>0$?
+## 1307
+<p style="text-align:center">$x^2+x-12=0$</p><p>If $a$ is a solution of the equation above and $a>0$, what is the value of $a$?</p>
+## 1308
+Which of the following is a factor of $y^2(x-7)-25(x-7)^3$?
+@ $y+5x+35$ | $y-5x-35$ | $y-5x+7$ | $y+5x-35$
+## 1309
+The expression $\frac{54(k+4)}{6(k+4)}$ is equivalent to the constant $c$, where $k>-4$. What is $c$?
+## 1310
+<p style="text-align:center">$r(x)=8(x-3)$<br>$s(x)=x^3+nx^2+3nx+27$</p><p>If $r(x)\cdot s(x)=8(x^4-81)$, what is $n$?</p>
+## 1311
+Which expression is equivalent to $4(y^{19}+6)$?
+@ $4y^{19}+24$ | $4y^{19}+6$ | $y^{19}+24$ | $y^{19}+10$
+## 1312
+<p style="text-align:center">$r(x)=12(x-2)$<br>$s(x)=x^3+nx^2+2nx+8$</p><p>If $r(x)\cdot s(x)=12(x^4-16)$, what is $n$?</p>
+## 1313
+The expression $60y^5-40y^4$ equals $ry^4(12y-8)$, where $r$ is constant. What is $r$?
+## 1314
+<p style="text-align:center">$b^2-36=ab$</p><p>In the equation above, if $a>0$ and both $a$ and $b$ are integers, what is one possible value of $a$?</p>
+## 1315
+<p style="text-align:center">$(x-16)(x-10)(x+7)(x+17)=0$</p><p>What is a positive solution to the given equation?</p>
+## 1316
+What values of $x$ satisfy $x^2+5x+6=9x+3$?
+@ 1 and 3 | 1 and -3 | 2 and 3 | 2 and -3
+## 1317
+If $x\ne-1$, what is the value of $\left(\frac{1}{x+1}\right)(2+2x)$?
+## 1318
+The expression $\frac{33(k+2)}{3(k+2)}$ is equivalent to the constant $c$, where $k>-2$. What is $c$?
+## 1319
+What is the sum of the solutions to $(x-6)(x+0.7)=0$?
+@ -6.7 | -5.3 | 5.3 | 6.7
+## 1320
+The expression $(3x+4)(x+6)$ can be written in the form $ax^2+bx+c$, where $a$, $b$, and $c$ are constants. What is the value of $a+b+c$?
+## 1321
+The expression $(3x+5)(8x-7)$ can be written as $ax^2+bx+c$, where $a$, $b$, and $c$ are constants. What is $a+b$?
+## 1322
+If $a^2-b^2=21$ and $a-b=3$, what is the value of $a+b$?
+## 1323
+The expression $(3x+5)(7x-8)$ can be written as $ax^2+bx+c$, where $a$, $b$, and $c$ are constants. What is $a+b$?
+## 1324
+<p style="text-align:center">$(x-18)(x-14)(x+7)(x+11)=0$</p><p>What is a positive solution to the given equation?</p>
+## 1325
+Which expression is a factor of $49p^{19}-121p^{17}$?
+@ $7p+11$ | $49p^2+121$ | $11p-7$ | $-72p^{40}$
+## 1326
+The expression $10x^3+50$ is equivalent to $k(x^3+5)$, where $k$ is a constant. What is the value of $k$?
+## 1327
+Which expression is a factor of $y^2(x-8)-16(x-8)^3$?
+@ $y(x-8)$ | $(x-8)(x-4)$ | $y+x-8$ | $y+4x-32$
+## 1328
+<p style="text-align:center">$2(p+1)+8(p-1)=5p$</p><p>What value of $p$ is the solution of the equation above?</p>
+## 1329
+Which expression is equivalent to $19(x^2-9)$?
+@ $19x^2+10$ | $19x^2-9$ | $19x^2-28$ | $19x^2-171$
+## 1330
+The equation $\frac{x}{x-3}+\frac{4}{x+2}=\frac{ax^2+bx+c}{x^2-x-6}$ is true for all $x$ except 3 and $-2$. What is $a+b+c$?
+## 1331
+Which expression is equivalent to $3x(x+9)$?
+@ $3x^2+9$ | $3x^2+27x$ | $4x^2+9$ | $4x^2+12x$
+## 1332
+If $x+y=13$ and $x-y=2$, what is the value of $x^2-y^2$?
+@ 4 | 26 | 121 | 165
+## 1333
+<p style="text-align:center">$y=0$<br>$y=x^2+6x+a$</p><p>In the system of equations above, $a$ is a positive constant. For which value of $a$ does the system have exactly one real solution?</p>
+## 1334
+Which of the following is a factor of $6xy-9y+8x-12$?
+@ $2x-3$ | $2x+3$ | $2y-3$ | $3y-4$
+## 1335
+Which expression is equivalent to $\frac{1}{9y^8}$, where $y>1$?
+@ $9y^{-8}$ | $(9y)^{-8}$ | $\frac{9}{y^{-8}}$ | $\frac{y^{-8}}{9}$
+## 1336
+Which expression is equivalent to $8(x^2+7)$?
+@ $8x^2+1$ | $8x^2+7$ | $8x^2+15$ | $8x^2+56$
+## 1337
+Which expression is equivalent to $14x^2-4x^2$?
+@ $-56x^2$ | $10x^2$ | $18x^2$ | $36x^2$
+## 1338
+<p style="text-align:center">$f(x)=x^2+bx$<br>$g(x)=9x^2-63x$</p><p>If $f(x)\cdot g(x)=9x^4-62x^3-7x^2$, what is $b$?</p>
+@ -62 | $\frac{-62}{9}$ | $\frac{1}{9}$ | 9
+## 1339
+Which expression is NOT a factor of $5{,}670x^4-1{,}120$?
+@ $9x^2+4$ | $3x^2-2$ | $3x+2$ | 70
+## 1340
+Which expression is equivalent to $5xy+30x^2y+35xy^2$?
+@ $5xy(1+30x+35y)$ | $5xy(1+6x+7y)$ | $5xy(30x+35y)$ | $5xy(6x+7y)$
+## 1341
+When $2(9x+5y)(-11x+3y)$ is rewritten in the form $ax^2-bxy+cy^2$, what is the value of $b$?
+## 1342
+If $a=c+d$, which of the following is equivalent to the expression $x^2-c^2-2cd-d^2$?
+@ $(x+a)^2$ | $(x-a)^2$ | $(x+a)(x-a)$ | $x^2-ax-a^2$
+## 1343
+Which of the following is equivalent to the product of the expression $-d$ and $d-1$?
+@ $-d^2+d$ | $d^2-d$ | $d^2-1$ | $-1$
+## 1344
+Which expression is NOT a factor of $1{,}280x^4-6{,}480$?
+@ $4x^2+9$ | $2x^2-3$ | $2x+3$ | 80
+## 1345
+If $x^4-y^4=-15$ and $x^2-y^2=-3$, what is the value of $x^2+y^2$?
+@ 5 | 4 | 2 | 1
+## 1346
+<p style="text-align:center">$f(x)=5x+6$<br>$g(x)=7x-5$<br>$h(x)=2x+3$</p><p>If $f(x)\cdot g(x)-h(x)=ax^2+bx+c$, what is $b$?</p>
+@ -2 | 15 | 19 | 65
+## 1347
+The ratio of $x$ to $y$ is 5 to 6. If $x=7t$, which expression equals $y$?
+@ $\frac{5t}{42}$ | $\frac{35t}{6}$ | $\frac{42t}{5}$ | $\frac{6t}{35}$
+## 1348
+Which of the following is a factor of $y^2(x-9)-36(x-9)^3$?
+@ $y(x-9)$ | $(x-9)(x-6)$ | $y+x-9$ | $y+6x-54$
+## 1349
+Which expression is equivalent to $2x^3+16w$?
+@ $2(x^3+8w)$ | $2(x^3+16w)$ | $8(x^3+2w)$ | $16(x^3+w)$
+## 1350
+Which of the following is equivalent to the expression $-4x^2-12x$?
+@ $4(-x^2+3x)$ | $-4x(x+3)$ | $-2x(2x-6)$ | $-x(4x-12)$
+## 1351
+Which expression is equivalent to $4x^3+20x^2$?
+@ $x^2(4+20x)$ | $4x^2(x+5)$ | $4x(x+16)$ | $x(4+20x)$
+## 1352
+Which of the following expressions is equivalent to $x^2-5$?
+@ $(x+\sqrt5)^2$ | $(x-\sqrt5)^2$ | $(x+\sqrt5)(x-\sqrt5)$ | $(x+5)(x-1)$
+## 1353
+Which expression is equivalent to $15(x^2-9)$?
+@ $15x^2-135$ | $15x^2-24$ | $15x^2-9$ | $15x^2+6$
+## 1354
+Which of the following is a factor of $y^2(x-8)-9(x-8)^3$?
+@ $y(x-8)$ | $(x-8)(x-3)$ | $y+x-8$ | $y+3x-24$

@@ -1,0 +1,150 @@
+## 1515
+<p style="text-align:center">$x-4=\sqrt{x+2}$</p><p>What value of $x$ satisfies the equation above?</p>
+## 1516
+If $\sqrt{x-1}=2$, what is the value of $x-1$?
+@ 2 | 3 | 4 | 8
+## 1517
+If $r>0$ and $\sqrt[3]{\frac{9r}{2}}=\frac{1}{2}r$, what is the value of $r$?
+## 1518
+If $\sqrt{x-3}=5$, what is the value of $x-3$?
+@ 5 | 22 | 25 | 50
+## 1519
+If $x=\sqrt[2n]{5x^n+50}$, where $n$ is a positive integer, what is $x^n$?
+## 1520
+If $x=\sqrt[2n]{2x^n+35}$, where $n$ is a positive integer, what is $x^n$?
+## 1521
+If $\sqrt{x}+\sqrt{9}=\sqrt{64}$, what is the value of $x$?
+@ $\sqrt{5}$ | 5 | 25 | 55
+## 1522
+If $x+y=\sqrt{2(xy+3)}$, what is the value of $x^2+y^2$?
+## 1523
+If $\sqrt[5]{x^3}$ is rewritten as $x^a$ and $x>1$, what is the value of $a$?
+## 1524
+Which of the following is equivalent to $a^{\frac{8}{7}}$?
+@ $\sqrt[8]{a^7}$ | $\sqrt[7]{a^8}$ | $\sqrt[8]{a}$ | $a\sqrt[7]{a^4}$
+## 1525
+If $x=\sqrt[2n]{2x^n+35}$, where $n$ is a positive integer constant, what is the value of $x^n$?
+## 1526
+Which of the following is equivalent to $9^{\frac{3}{4}}$?
+@ $\sqrt[3]{9}$ | $\sqrt[4]{9}$ | $\sqrt{3}$ | $3\sqrt{3}$
+## 1527
+<p style="text-align:center">$\sqrt{12x}=x+3$</p><p>What value of $x$ satisfies the equation above?</p>
+@ -3 | 0 | 3 | 12
+## 1528
+Which of the following is equivalent to $x^{\frac{5}{2}}$, where $x>0$?
+@ $\frac{x^5}{x^2}$ | $x^5-x^2$ | $\sqrt{x^5}$ | $(\sqrt[5]{x})^2$
+## 1529
+<p style="text-align:center">$\sqrt{x^2}=x$</p><p>Which of the following values of $x$ is NOT a solution to the equation above?</p>
+@ -4 | 0 | 1 | 3
+## 1530
+If $(x^{24})^a=(x^2)^4$ and $x>1$, what is the value of $a$?
+@ $\frac{1}{4}$ | $\frac{1}{3}$ | $\frac{1}{2}$ | 2
+## 1531
+Which of the following is equivalent to $x^{\frac{3}{4}}\left(x^{\frac{1}{2}}\right)^{\frac{3}{2}}$?
+@ $\sqrt{x^3}$ | $\sqrt[3]{x^2}$ | $\sqrt[4]{x^3}$ | $\sqrt[6]{x^5}$
+## 1532
+If $x$ and $y$ are positive, which of the following is equivalent to $x\sqrt{x(x+y)}$?
+@ $x^2\sqrt{y}$ | $2x\sqrt{y}$ | $\sqrt{x^4+x^3y}$ | $\sqrt{x^3+x^2y}$
+## 1533
+If $9x^2y^2=25$ and $xy>0$, what is the value of $18xy$?
+@ 6 | 30 | 50 | 150
+## 1534
+<p style="text-align:center">$\sqrt{2x+6}+4=x+3$</p><p>What is the solution set of the equation above?</p>
+@ $\{-1\}$ | $\{5\}$ | $\{-1,5\}$ | $\{0,-1,5\}$
+## 1535
+If $n$ and $k$ are numbers greater than 1 and the fourth root of $n^5$ is equivalent to the cube root of $k^2$, for what value of $a$ is $n^{2a+1}$ equal to $k$?
+## 1536
+If $27^x=3$ and $4^{x+y}=16$, what is the value of $y$?
+@ -1 | $\frac{1}{3}$ | $\frac{5}{3}$ | $\frac{7}{3}$
+## 1537
+Which of the following expressions is equivalent to $(16x^2)^{\frac{1}{2}}$?
+@ $4|x|$ | $8|x|$ | $\sqrt{8x}$ | $16x$
+## 1538
+If $a^{-\frac{1}{2}}=x$, where $a>0$, what is $a$ in terms of $x$?
+@ $\sqrt{x}$ | $-\sqrt{x}$ | $\frac{1}{x^2}$ | $-\frac{1}{x^2}$
+## 1539
+For $x>0$, the expression $\frac{6x^{22}}{18x^5}$ equals $\left(\frac{1}{3}\right)x^b$. What is $b$?
+@ $\frac{5}{22}$ | $\frac{22}{5}$ | 17 | 27
+## 1540
+<p style="text-align:center">$\sqrt{x+28}-2\sqrt{x+1}=0$</p><p>What value of $x$ satisfies the equation above?</p>
+@ 8 | 9 | 26 | 27
+## 1541
+If $x>0$ and $\sqrt{x\sqrt{x}}=x^a$, what is the value of $a$?
+@ $\frac{3}{2}$ | $\frac{3}{4}$ | $\frac{1}{2}$ | $\frac{1}{4}$
+## 1542
+If $a^{\frac{b}{4}}=16$ for positive integers $a$ and $b$, what is one possible value of $b$?
+## 1543
+<p style="text-align:center">$x^{16}-x^{14}=k\left(x^{15}-x^{14}\right)$</p><p style="text-align:center">$x>1$</p><p>Based on the two conditions listed above, what is $k$ in terms of $x$?</p>
+@ $x-1$ | $x+1$ | $\frac{1}{x-1}$ | $\frac{1}{x+1}$
+## 1544
+What is the set of all solutions to the equation $\sqrt{x+2}=-x$?
+@ $\{-1,2\}$ | $\{-1\}$ | $\{2\}$ | There are no solutions to the given equation.
+## 1545
+<p style="text-align:center">$\sqrt{3-x}+2=x-1$</p><p>What is the solution of the equation above?</p>
+@ $x=1$ only | $x=2$ only | $x=3$ only | $x=2$ and $x=3$
+## 1546
+<p style="text-align:center">$\sqrt{k+2}-x=0$</p><p>In the equation above, $k$ is a constant. If $x=9$, what is the value of $k$?</p>
+@ 1 | 7 | 16 | 79
+## 1547
+For a positive real number $x$, where $x^8=2$, what is the value of $x^{24}$?
+@ $\sqrt[3]{24}$ | 4 | 6 | 8
+## 1548
+If the expression $2x+6$ is equivalent to $2(x+a)$, where $a$ is a constant, what is the value of $a$?
+@ 2 | 3 | 4 | 6
+## 1549
+Which of the following expressions is equivalent to $\sqrt[3]{8x^3y^5}$, where $x$ and $y$ are positive?
+@ $2xy^{\frac{5}{3}}$ | $8xy^{\frac{5}{3}}$ | $2x^3y^5$ | $\frac{8}{3}xy^2$
+## 1550
+What are all values of $x$ for which $\sqrt{x^2-5}$ is a real number?
+@ $|x|\ge\sqrt{5}$ | $|x|\le\sqrt{5}$ | $|x|\ge5$ | $|x|\le5$
+## 1551
+<p style="text-align:center">$\sqrt{(4y)^3}=8\left(\sqrt[9]{y}\right)^k$</p><p>The given equation is true for all $y>0$, and $k$ is a constant. What is the value of $k$?</p>
+@ 2 | $\frac{9}{2}$ | $\frac{27}{2}$ | 27
+## 1552
+Which of the following expressions is equivalent to $(16x^9y^3)^{\frac{1}{2}}$, where $x\ge0$ and $y\ge0$?
+@ $4x^3y^{\frac{3}{2}}$ | $4x^{\frac{9}{2}}y^{\frac{3}{2}}$ | $8x^3y^3$ | $8x^{\frac{9}{2}}y^3$
+## 1553
+Which of the following is an equivalent form of $\sqrt[3]{f^{6a}k^2}$, where $f>0$ and $k>0$?
+@ $f^{\frac{1}{3a}}k^{-1}$ | $f^{\frac{1}{2a}}k^{\frac{3}{2}}$ | $f^{3a}k^{-1}$ | $f^{2a}k^{\frac{2}{3}}$
+## 1554
+In the equation $(ax+3)^2=36$, $a$ is a constant. If $x=-3$ is one solution to the equation, what is a possible value of $a$?
+@ -11 | -5 | -1 | 0
+## 1555
+Which of the following is equivalent to $\frac{x^2y}{x^4y^{\frac{1}{2}}}$ for all $x>0$ and all $y>0$?
+@ $\frac{\sqrt{y}}{x^2}$ | $\frac{x^2}{y^{\frac{1}{2}}}$ | $x^2\sqrt{y}$ | $x^6\sqrt{y^3}$
+## 1556
+<p style="text-align:center">$2x-3=\sqrt{14-4x}$</p><p>The equation above is satisfied by which of the following values of $x$?</p><p>I. $-\frac{1}{2}$<br>II. 0<br>III. $\frac{5}{2}$</p>
+@ I only | II only | III only | I and III only
+## 1557
+<p style="text-align:center">$x=\sqrt{4x-3}$</p><p>What is the solution set to the equation above?</p>
+@ $\{1\}$ | $\{3\}$ | $\{0,1\}$ | $\{1,3\}$
+## 1558
+Which of the following is equivalent to $(x^2-4)^{\frac{3}{2}}$?
+@ $x^3-8$ | $(x-2)^3$ | $\sqrt{(x^2-4)^3}$ | $\left(\sqrt[3]{x^2-4}\right)^2$
+## 1559
+<p style="text-align:center">$x-2=\sqrt{x+10}$</p><p>Which of the following values of $x$ is a solution to the equation above?</p>
+@ -1 | 1 | 4 | 6
+## 1560
+Which of the following expressions is equivalent to <p style="text-align:center">$x^{\frac{1}{3}}+y^{\frac{1}{3}}$</p>?
+@ $\sqrt[3]{x}+\sqrt[3]{y}$ | $\sqrt[3]{x+y}$ | $\sqrt[3]{xy}$ | $\frac{1}{3}xy$
+## 1561
+If $2\sqrt{2x}=a$, what is $2x$ in terms of $a$?
+@ $\frac{a}{2}$ | $\frac{a^2}{4}$ | $\frac{a^2}{2}$ | $4a^2$
+## 1562
+The total energy of an electron in orbit is the sum of its potential energy $\frac{-e^2}{r}$, in joules, and its kinetic energy $\frac{e^2}{2r}$, in joules. Which of the following gives the total energy, in joules, of an electron in orbit?
+@ $\frac{-e^2}{2r}$ | 0 | $\frac{3e^2}{2r}$ | $\frac{e^2(1-r)}{2r^2}$
+## 1563
+<p style="text-align:center">$\sqrt{x+9}=4$</p><p>Which of the following sets consists of all values of $x$ that satisfy the equation above?</p>
+@ $\{-11,-7\}$ | $\{-25,7\}$ | $\{-7\}$ | $\{7\}$
+## 1564
+The expression $\frac{x^{-2}y^{\frac{1}{2}}}{x^{\frac{1}{3}}y^{-1}}$, where $x>1$ and $y>1$, is equivalent to which of the following?
+@ $\frac{\sqrt{y}}{\sqrt[3]{x^2}}$ | $\frac{y\sqrt{y}}{\sqrt[3]{x^2}}$ | $\frac{y\sqrt{y}}{x\sqrt{x}}$ | $\frac{y\sqrt{y}}{x^2\sqrt[3]{x}}$
+## 1565
+If $y=5(2^x)$, where $x>0$, which of the following is true?
+@ If $x$ increases by 1, then $y$ doubles. | If $y$ increases by 1, then $x$ doubles. | If $x$ increases by 1, then $y$ increases by 5. | If $y$ increases by 1, then $x$ increases by 5.
+## 1566
+If $a>0$, which of the following is equivalent to $\frac{2a^2}{3a^3}$?
+@ $\frac{2}{3}a^{-1}$ | $-a^{-1}$ | $\frac{2}{3}a$ | $\frac{2}{3}a^{\frac{2}{3}}$
+## 1567
+Which of the following is equivalent to $\left(\sqrt{a}+\sqrt{b}\right)^{\frac{2}{3}}$, where $a>0$ and $b>0$?
+@ $(a+b)^3$ | $\sqrt[3]{a+b}$ | $\left(a+2\sqrt{ab}+b\right)^{\frac{1}{3}}$ | $\sqrt[3]{a+2ab+b}$
