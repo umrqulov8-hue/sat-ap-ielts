@@ -1,0 +1,21 @@
+## 830
+What is the $y$-coordinate of the $y$-intercept of the graph shown?<p></p>[[fig:q830]]
+## 831
+Which of the following is a graph of an increasing linear function?<p></p>[[fig:q831]]
+@ Graph A | Graph B | Graph C | Graph D
+## 838
+Two equations are graphed in the $xy$-plane above. Which of the following could be a solution $(x_1,y_1)$ to this system of equations?<p></p>[[fig:q838]]
+@ $(0,1)$ | $(2,0)$ | $(1,4)$ | $(-2,-1)$
+## 847
+What is the $x$-intercept of the graph shown?<p></p>[[fig:q847]]
+@ $(-6.2,0)$ | $(-2.2,0)$ | $(0,0)$ | $(5.4,0)$
+## 849
+In the $xy$-plane above, line $L$ is parallel to the line $y=x$ and passes through $(2,0)$. Which of the following is an equation of line $L$?<p></p>[[fig:q849]]
+@ $y=x+2$ | $y=x-2$ | $y=2x$ | $y=2x-2$
+## 852
+The line graphed in the $xy$-plane above can be described by the equation $y=-3(x+t)+5$ where $t$ is a real number. What is the value of $t$?<p></p>[[fig:q852]]
+## 862
+The $y$-intercept of the graph shown is $(x,y)$. What is the value of $y$?<p></p>[[fig:q862]]
+## 867
+A system of two linear equations is graphed on the $xy$-plane above. Which of the following ordered pairs $(x,y)$ is the solution to the system?<p></p>[[fig:q867]]
+@ $(1,1)$ | $(1,-2)$ | $(2,-1)$ | $(2,1)$
