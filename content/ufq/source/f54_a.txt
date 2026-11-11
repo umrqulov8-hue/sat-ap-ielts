@@ -1,0 +1,17 @@
+## 2256
+Which of the following equations is the most appropriate linear model for the data shown?<p></p>[[fig:q2256]]
+@ $d=-48.1+2.02t$ | $d=148.1+2.02t$ | $d=371.8+2.02t$ | $d=406.8+2.02t$
+## 2257
+The graph of $y=f(x)$ is shown, where the function $f$ is defined by $f(x)=ax^3+bx^2+cx+d$ and $a$, $b$, $c$, and $d$ are constants. For how many values of $x$ does $f(x)=0$?<p></p>[[fig:q2257]]
+@ One | Two | Three | Four
+## 2260
+The scatterplot above shows the numbers of surveys sent to and returned from people in 17 different neighborhoods. A line of best fit for the data is also shown. For the neighborhood that had surveys sent to 800 people, which of the following is closest to the positive difference between the actual number of surveys returned and the number predicted by the line of best fit shown?<p></p>[[fig:q2260]]
+@ 150 | 170 | 200 | 250
+## 2261
+The graph above gives the number of milliliters of solution in a beaker from the start to the end of an experiment. According to the graph, how many milliliters of solution were in the beaker at the start of the experiment?<p></p>[[fig:q2261]]
+## 2264
+The scatterplot above shows a company's ice cream sales $d$, in dollars, and the high temperature $t$, in degrees Celsius (°C), on 12 different days. A line of best fit for the data is also shown. Which of the following could be an equation of the line of best fit?<p></p>[[fig:q2264]]
+@ $d=0.03t+402$ | $d=10t+402$ | $d=33t+300$ | $d=33t+84$
+## 2265
+The range of the polynomial function $f$ is the set of real numbers less than or equal to 4. If the zeros of $f$ are $-3$ and 1, which of the following could be the graph of $y=f(x)$ in the $xy$-plane?<p></p>[[fig:q2265]]
+@ Graph A | Graph B | Graph C | Graph D
