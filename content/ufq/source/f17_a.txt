@@ -1,6 +1,6 @@
 ## 971
 The scatterplot above shows the weight and gas mileage of fourteen cars. Which of the following can be concluded from the data in the scatterplot?<p></p>[[fig:q971]]
-@ If the weight of car A is greater than the weight of car B, then the gas mileage of car A is greater than the gas mileage of car B. | If the weight of car A is greater than the gas mileage of car B, then the gas mileage of car A is less than the gas mileage of car B. | A line of best fit for the data has a positive slope. | A line of best fit for the data has a negative slope.
+@ If the weight of car A is greater than the weight of car B, then the gas mileage of car A is greater than the gas mileage of car B. | If the weight of car A is greater than the weight of car B, then the gas mileage of car A is less than the gas mileage of car B. | A line of best fit for the data has a positive slope. | A line of best fit for the data has a negative slope.
 ## 972
 A certain gas is placed inside a container with a constant volume. The graph shows the estimated pressure $y$, in pounds per square inch (psi), of the gas when its temperature is $x$ kelvins. What is the estimated pressure of the gas, in psi, when the temperature is 700 kelvins?<p></p>[[fig:q972]]
 @ 15 | 30 | 350 | 700
