@@ -1,0 +1,12 @@
+## 789
+What is the $y$-intercept of the graph shown?<p></p>[[fig:q789]]
+@ $\left(0,\frac{-1}{3}\right)$ | $(0,3)$ | $(0,0)$ | $\left(0,\frac{1}{3}\right)$
+## 797
+What is the $x$-intercept of the graph shown?<p></p>[[fig:q797]]
+@ $(-7.8,0)$ | $(-2.8,0)$ | $(0,0)$ | $(7.4,0)$
+## 802
+A system of one linear and one quadratic equation is graphed in the $xy$-plane above. How many solutions does the system of equations have?<p></p>[[fig:q802]]
+@ None | One | Two | More than two
+## 818
+A system of three equations is graphed in the $xy$-plane above. How many solutions does the system have?<p></p>[[fig:q818]]
+@ None | One | Two | Three
