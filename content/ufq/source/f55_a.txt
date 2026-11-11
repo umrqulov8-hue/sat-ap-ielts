@@ -1,0 +1,15 @@
+## 2269
+The function $w$ models the weight, in ounces, of the solid wax remaining in a burning candle $x$ hours after it was lit. The graph of $y=w(x)$ is shown. According to the model, what is the weight, in ounces, of the remaining solid wax after 9 hours?<p></p>[[fig:q2269]]
+@ 3 | 5 | 6 | 8
+## 2271
+The function $w$ models the weight, in ounces, of the solid wax remaining in a burning candle $x$ hours after it was lit. The graph of $y=w(x)$ is shown. According to the model, what is the weight, in ounces, of the remaining solid wax after 12 hours?<p></p>[[fig:q2271]]
+@ 4 | 8 | 10 | 13
+## 2274
+Based on the line of best fit in the scatterplot above, which of the following best predicts the weight, in pounds, of a car with a power output of 275 horsepower?<p></p>[[fig:q2274]]
+@ 3,350 | 3,375 | 3,400 | 3,425
+## 2275
+The line graphed in the $xy$-plane below models the total cost, in dollars, for a cab ride, $y$, in a certain city during nonpeak hours based on the number of miles traveled, $x$. According to the graph, what is the cost for each additional mile traveled, in dollars, of a cab ride?<p></p>[[fig:q2275]]
+@ \$2.00 | \$2.60 | \$3.00 | \$5.00
+## 2278
+The graph of the function $f$ is shown in the $xy$-plane above (an increasing line through the origin region). The function $f$ is defined by $f(x)=mx+b$, where $m$ and $b$ are constants. Which of the following could be the graph of the function $g$, where $g(x)=-mx-b$?<p></p>[[fig:q2278]]
+@ Graph A | Graph B | Graph C | Graph D
