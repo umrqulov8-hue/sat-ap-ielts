@@ -1,0 +1,12 @@
+## 1949
+Which of the following is an equation of the line graphed in the $xy$-plane above?<p></p>[[fig:q1949]]
+@ $y=-\frac{1}{2}x+10$ | $y=-\frac{1}{2}x+5$ | $y=-2x+10$ | $y=-2x+5$
+## 1953
+The graph of $y=f(x)$ is shown. Which equation could define $f$?<p></p>[[fig:q1953]]
+@ $f(x)=\left(\frac{1}{2}\right)^x-4$ | $f(x)=\left(\frac{1}{2}\right)^x+4$ | $f(x)=2^x-4$ | $f(x)=2^x$
+## 1954
+Which of the following is the graph of the equation $y=3x-2$ in the $xy$-plane?<p></p>[[fig:q1954]]
+@ Graph A | Graph B | Graph C | Graph D
+## 1957
+In the function $f(x)=a\left[(x-a)^2+1\right]$ defined above, $a>1$. Which of the following best represents the graph of $f$ in the $xy$-plane? (Vertex labels: A: $(-a,1)$, B: $(-a,a)$, C: $(a,1)$, D: $(a,a)$.)<p></p>[[fig:q1957]]
+@ Graph A | Graph B | Graph C | Graph D
