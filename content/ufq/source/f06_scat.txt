@@ -1,0 +1,85 @@
+## 2472
+The scatterplot shows the number of yeast cells, in billions, at various times during the first 18 hours after a population of yeast begins to grow. A logistical growth model (curve of best fit) is also shown. According to the curve, which of the following is closest to the number of yeast cells in the population, in billions, at the end of 20 hours?<p></p>[[fig:q2472]]
+@ 500 | 600 | 700 | 1,000
+## 2473
+Which equation best models the scatterplot?<p></p>[[fig:q2473]]
+@ $y=0.7x^2$ | $y=0.7x^2+100$ | $y=7x^2$ | $y=7x^2+100$
+## 2474
+Which function best models the scatterplot?<p></p>[[fig:q2474]]
+@ $y=-\left(\frac{1}{8}\right)(x-40)^2+32$ | $y=\left(\frac{1}{8}\right)(x-40)^2+32$ | $y=-\left(\frac{1}{8}\right)(x-32)^2+40$ | $y=-\left(\frac{1}{4}\right)(x-40)^2+32$
+## 2476
+The scatterplot shows nine data points and a line of best fit. For how many points is the actual $y$-value greater than the predicted $y$-value?<p></p>[[fig:q2476]]
+@ 8 | 7 | 5 | 2
+## 2477
+The graph shows daily high temperatures in degrees Fahrenheit, with August 1 at $x=0$. What is the average rate of change, in degrees Fahrenheit per day, from $x=9$ to $x=11$?<p></p>[[fig:q2477]]
+## 2478
+The graph relates each beaver's weight to its number of offspring. How many offspring did the 40-pound beaver produce?<p></p>[[fig:q2478]]
+@ 5 | 6 | 7 | 8
+## 2479
+The scatterplot shows the number of whooping cranes $y$ in a population $x$ years after 1960. Which is the most appropriate exponential model?<p></p>[[fig:q2479]]
+@ $y=34(1.04)^{-x}$ | $y=34(1.04)^x$ | $y=285(1.04)^{-x}$ | $y=285(1.04)^x$
+## 2480
+The 7 points of set $W$ have best-fit line $y=s+tx$. Adding $(14,8)$ gives set $V$ with best-fit line $y=r+px$. Which must be true?<p>I. $t>p$<br>II. $s>r$</p><p></p>[[fig:q2480]]
+@ I only | II only | I and II | Neither I nor II
+## 2486
+The scatterplot and best-fit line describe set $P$. Subtract 687 from each $x$-value to form set $Q$. Which equation is closest to a best-fit line for $Q$?<p></p>[[fig:q2486]]
+@ $y=-7+0.027x$ | $y=8+0.008x$ | $y=19+0.008x$ | $y=30+0.027x$
+## 2487
+For 10 gardeners, $x$ is seeds planted and $y$ is seeds germinated. What does the slope of the fitted line mean?<p></p>[[fig:q2487]]
+@ 70 more seeds are planted per 100 days. | 350 more seeds are planted per 100 days. | 70 more seeds germinate per 100 additional seeds planted. | 350 more seeds germinate per 100 additional seeds planted.
+## 2488
+The puppy's weights have best-fit line $y=-5.4+8.8x$. Add the measurement $(9,52)$ to obtain a new best-fit line $y=r+sx$, calculated by the same method. Which is the best estimate of $s$?<p></p>[[fig:q2488]]
+@ 5.9 | 8.7 | 13.8 | 17.7
+## 2489
+The scatterplot shows data for ten charities along with the line of best fit. For the charity with the greatest percent of total expenses spent on programs, which of the following is closest to the difference of the actual percent and the percent predicted by the line of best fit?<p></p>[[fig:q2489]]
+@ 10% | 7% | 4% | 1%
+## 2490
+<table><thead><tr><th>Species of tree</th><th>Growth factor</th></tr></thead><tbody><tr><td>Red maple</td><td>4.5</td></tr><tr><td>River birch</td><td>3.5</td></tr><tr><td>Cottonwood</td><td>2.0</td></tr><tr><td>Black walnut</td><td>4.5</td></tr><tr><td>White birch</td><td>5.0</td></tr><tr><td>American elm</td><td>4.0</td></tr><tr><td>Pin oak</td><td>3.0</td></tr><tr><td>Shagbark hickory</td><td>7.5</td></tr></tbody></table><p>One method of calculating the approximate age, in years, of a tree of a particular species is to multiply the diameter of the tree, in inches, by a constant called the growth factor for that species. The table above gives the growth factors for eight species of trees.</p><p>The scatterplot gives the tree diameter plotted against age for 26 trees of a single species. The growth factor of this species is closest to that of which of the following species of tree?</p><p></p>[[fig:q2490]]
+@ Red maple | Cottonwood | White birch | Shagbark hickory
+## 2491
+A cable company recorded the percentage of households in the United States that had cable television from 1987 to 1997. In the scatterplot, $x$ represents the number of years since 1987 and $y$ represents the percentage of households with cable television. The line of best fit for the data is shown.<p>Which of the following is closest to the equation of the line of best fit shown?</p><p></p>[[fig:q2491]]
+@ $y=54x+\frac{7}{5}$ | $y=\frac{7}{5}x-54$ | $y=\frac{7}{5}x+54$ | $y=\frac{7}{5}x$
+## 2492
+The scatterplot shows the revenue, in millions of dollars, that a company earned over several years and a line of best fit for the data. In Year 4, the difference between the actual revenue and predicted revenue is $n$ million dollars, where $n$ is a positive integer. What is the value of $n$? Round your answer to the nearest whole number. (Disregard the \$ sign when gridding your answer.)<p></p>[[fig:q2492]]
+## 2493
+The 9 points have the quadratic least-squares model $y=0.07x^2-0.05x+6.26$. After removing the erroneous point at $x=0$, the model for the remaining 8 points is $y=ax^2+bx+c$. Which must be true?<p>I. $a>0.07$<br>II. $c<6.26$</p><p></p>[[fig:q2493]]
+@ I only | II only | I and II | Neither I nor II
+## 2494
+The 9 points have the quadratic least-squares model $y=0.07x^2-0.06x+6.32$. After removing the erroneous point at $x=0$, the model for the remaining 8 points is $y=ax^2+bx+c$. Which must be true?<p>I. $a>0.07$<br>II. $c<6.32$</p><p></p>[[fig:q2494]]
+@ I only | II only | I and II | Neither I nor II
+## 2495
+For 10 gardeners, $x$ is seeds planted and $y$ is seeds germinated. What does the slope of the fitted line mean?<p></p>[[fig:q2495]]
+@ 70 more seeds are planted per 100 days. | 350 more seeds are planted per 100 days. | 60 more seeds germinate per 100 additional seeds planted. | 350 more seeds germinate per 100 additional seeds planted.
+## 2497
+The scatterplot shows the number of people, in hundreds, who visited a new farmers' market each of the first 14 days it was open and the number of booths open at the market each of the 14 days. A line of best fit is also shown.<p>Which of the following could be an equation of this line of best fit for the data?</p><p></p>[[fig:q2497]]
+@ $y=2x+2$ | $y=2x-2$ | $y=0.5x+2$ | $y=0.5x-2$
+## 2498
+The scatterplot shows the concentrations, in milligrams per cubic meter (mg/m³), of phosphorus and chlorophyll that were measured in a lake for 12 different years. A line of best fit is also shown. According to the line of best fit, when the concentration of phosphorus in the lake is 40 mg/m³, which of the following is the best prediction for the concentration of chlorophyll in the lake?<p></p>[[fig:q2498]]
+@ 60 mg/m³ | 40 mg/m³ | 20 mg/m³ | 10 mg/m³
+## 2499
+The scatterplot shows the total number of home runs hit in major league baseball, in ten-year intervals, for selected years. The line of best fit for the data is also shown. Which of the following is closest to the difference between the actual number of home runs and the number predicted by the line of best fit in 2003?<p></p>[[fig:q2499]]
+@ 250 | 500 | 750 | 850
+## 2500
+The scatterplot in the $xy$-plane shows the balance $y$, in dollars, of a savings account after $x$ years. Which of the following functions best models the data in the scatterplot?<p></p>[[fig:q2500]]
+@ $y=(500)^{x+1}$ | $y=500(0.12)^x$ | $y=500(0.12)^{x+1}$ | $y=500(1.12)^x$
+## 2501
+The scatterplot shows the amount of electric energy generated, in millions of megawatt-hours, by nuclear sources over a 10-year period. Of the following equations, which best models the data in the scatterplot?<p></p>[[fig:q2501]]
+@ $y=1.674x^2+19.76x-745.73$ | $y=-1.674x^2-19.76x-745.73$ | $y=1.674x^2+19.76x+745.73$ | $y=-1.674x^2+19.76x+745.73$
+## 2502
+The scatterplot shows the percent market share, $y$, of a new version of software $x$ weeks after its introduction. A curve of best fit is also shown. Which of the following could be an equation of the curve of best fit for the data?<p></p>[[fig:q2502]]
+@ $y=1.9x+20.1$ | $y=-0.05x^2+4.0x+16.5$ | $y=-0.02x^2-7.1x+115.2$ | $y=45.6(1.01)^x$
+## 2503
+The scatterplot shows the relationship between two variables, $x$ and $y$. A line of best fit is also shown. For $x=5$, how much greater is the $y$-value predicted by the line of best fit than the actual $y$-value of the data point?<p></p>[[fig:q2503]]
+@ 1 | 5 | 6 | 11
+## 2504
+The scatterplot shows 9 data points and their line of best fit. For how many of the 9 data points is the actual $y$-value greater than the $y$-value predicted by the line of best fit?<p></p>[[fig:q2504]]
+@ 8 | 7 | 5 | 2
+## 2507
+The scatterplot shows the relationship between two variables, $x$ and $y$, for data set A. A line of best fit for the data is also shown. Data set B is created by subtracting 8 units from the value of $y$ for each data point from data set A. Which of the following is closest to the $y$-coordinate of the $y$-intercept of the line of best fit for data set B?<p></p>[[fig:q2507]]
+@ 39.17 | 48 | 52.22 | 72.33
+## 2512
+The scatterplot shows the perihelion distance, in astronomical units (AU), and the orbital eccentricity for a random sample of ten comets. The line of best fit for the data is also shown.<p>Of the comets in the sample with orbital eccentricity greater than 0.6, what fraction have a perihelion distance less than 0.75 AU?</p><p></p>[[fig:q2512]]
+@ $\frac{7}{10}$ | $\frac{5}{8}$ | $\frac{3}{8}$ | $\frac{1}{7}$
+## 2525
+<table><caption>Annual Production (thousands of units)</caption><thead><tr><th></th><th>Factory W</th><th>Factory Z</th></tr></thead><tbody><tr><td>Product P</td><td>21</td><td>32</td></tr><tr><td>Product Q</td><td>14</td><td>24</td></tr></tbody></table><p>A company makes and sells only two products, P and Q, and makes all products at factories W and Z. The table above shows the number of units of each product made at each factory during a year. The function $f$ represents the projected annual revenue from sales of product P as a function of the price per unit, $f(x)=a(x-250)^2+k$, where $a$ and $k$ are constants. Based on the graph of $f$, which of the following is a factor of $f(x)$?</p><p></p>[[fig:q2525]]
+@ $x-15$ | $x-240$ | $x-250$ | $x-500$
