@@ -1,0 +1,73 @@
+## 3301
+In right triangle $ABC$, angle $B$ is a right angle, $AC=70$, and $\tan A=\frac{3}{4}$. Find the length of $BC$.
+## 3302
+An equilateral triangle has a height of $38\sqrt{3}$. What is the length of each side of the triangle?
+## 3303
+In right triangle $QRS$ with the right angle at $R$, $QR<RS$ and $RS=22$. Which expression represents the length of $QS$?
+@ $22\cos Q$ | $22\sin Q$ | $\frac{22}{\cos Q}$ | $\frac{22}{\sin Q}$
+## 3305
+In the right triangle $ABC$ with right angle at $B$, $AC=43$ and $AB=22$. What is $\cos A$?
+@ $\frac{1}{43}$ | $\frac{1}{22}$ | $\frac{22}{43}$ | $\frac{43}{22}$
+## 3306
+The perimeter of an equilateral triangle is 796 and its height is $r\sqrt{3}$. What is the value of $r$?
+## 3307
+In triangle $QRS$, angle $R$ is a right angle, $RS=49$, and $QR<RS$. Which expression gives $QS$?
+@ $49\cos Q$ | $49\sin Q$ | $\frac{49}{\cos Q}$ | $\frac{49}{\sin Q}$
+## 3308
+In a right triangle with one acute angle of $58^\circ$, the legs are $a$ and $b$ and the hypotenuse is $c$ ($b$ is the leg opposite the other acute angle $D$, which is at the vertex where $a$ and $c$ meet). For an acute angle $D$, $\sin D=\frac{b}{c}$. What is the measure of $D$, in degrees?
+## 3310
+Which of the following is equivalent to $\tan(x^\circ)$?
+@ $\frac{\sin(90^\circ-x^\circ)}{\cos(90^\circ-x^\circ)}$ | $\frac{\cos(90^\circ-x^\circ)}{\sin(90^\circ-x^\circ)}$ | $-\tan(90^\circ-x^\circ)$ | $\sin(x^\circ)-\cos(x^\circ)$
+## 3311
+An equilateral triangle with a height of 44 has a perimeter of $w\sqrt{3}$ units. What is the value of $w$?
+## 3312
+In $\triangle ACE$, $B$ lies on $AC$ and $D$ lies on $CE$ with $\overline{BD}\parallel\overline{AE}$. If $BD=19$ and $AE=31$, what is the value of $\frac{CD}{DE}$?
+@ $\frac{19}{31}$ | $\frac{12}{19}$ | $\frac{19}{12}$ | $\frac{31}{19}$
+## 3314
+In right triangle $JKL$ with the right angle at $K$ and hypotenuse $JL=35$, $\tan L=\frac{3}{4}$. What is the length of $\overline{JK}$?
+@ $\frac{35}{16}$ | $\frac{15}{4}$ | 21 | 28
+## 3315
+For two acute angles $X$ and $Y$, the measure of angle $Y$ is $32^\circ$ and $\frac{\sin X}{\cos Y}=1$. What is the measure, in degrees, of angle $X$?
+@ 77 | 58 | 45 | 32
+## 3316
+In right triangle $ABC$, angle $B$ is a right angle, $\cos A=\frac{3}{5}$, and $BC=290$. What is the length of side $AB$?
+## 3317
+In right triangle $ABC$ (right angle at $A$), $D$ lies on $AB$ and $E$ on $AC$, $AD=4$, $AE=6$, and segment $DE$ is parallel to segment $BC$. What is the ratio of the length of segment $BD$ to the length of segment $CE$?
+@ 2:5 | 3:5 | 2:3 | 1:2
+## 3318
+For two acute angles, $\angle Q$ and $\angle R$, $\cos Q=\sin R$. The measures, in degrees, of $\angle Q$ and $\angle R$ are $\angle Q=4x+9^\circ$ and $\angle R=4x-3^\circ$, respectively. What is the value of $x$?
+## 3319
+In triangles $RST$ and $XYZ$, $XY$ is parallel to $TS$ and $\tan R=\frac{120}{209}$. What is the value of $\sin X$ in triangle $XYZ$?
+@ $\frac{120}{329}$ | $\frac{120}{241}$ | $\frac{209}{241}$ | $\frac{209}{120}$
+## 3320
+According to a law, ramps for use by general public must form an angle with level ground such that the tangent of the angle is $\frac{1}{12}$. If the ramp conforms to the law and has a height of 1.5 feet, what is the value of $x$ (the horizontal length of the base), in feet?
+## 3321
+The perimeter of an isosceles right triangle is $52+52\sqrt{2}$ inches. What is the length, in inches, of the hypotenuse of this triangle?
+## 3323
+In the right triangle $ABC$ with right angle at $B$, $AB=243$, $BC=324$, and $AC=405$. What is the value of $\sin C$?
+@ $\frac{243}{405}$ | $\frac{324}{405}$ | $\frac{405}{243}$ | $\frac{405}{324}$
+## 3325
+Rectangle $ABCD$ has area 324. The tangent of angle $BCA$ is $\frac{4}{9}$. Which value is closest to the length of diagonal $BD$?
+@ 9.8 | 27 | 29.5 | It cannot be determined from the given information.
+## 3327
+Right triangle $ABC$ has a right angle at $C$, $D$ lies on $AC$ and $E$ lies on $AB$ with $DE\perp AC$. $BC=5$, and the length of line segment $AD$ is half the length of line segment $CD$. What is the length of line segment $DE$?
+@ $\frac{2}{5}$ | $\frac{3}{5}$ | $\frac{5}{3}$ | $\frac{5}{2}$
+## 3328
+The measure of angle $y$ is 21 degrees and $\frac{\sin(x)}{\cos(y)}=1$. What is the measure, in degrees, of angle $x$?
+## 3329
+In a right triangle with legs 40 and 39, the value of $\tan x^\circ$ is $\frac{c}{39}$, where $x^\circ$ is the angle opposite the leg of length 40. What is the value of $c$?
+@ 79 | 40 | 39 | 1
+## 3330
+In the figure, $\triangle ABC$ and $\triangle ADE$ are right triangles with right angles at $C$ and $E$ ($B$ lies on $AD$), $AB=\sqrt{89}$ units, $AC=8$ units, and $CE=24$ units. What is the area, in square units, of triangle $ADE$?
+## 3331
+One leg of a right triangle starts at $(-2,3)$ and ends at $(5,10)$. The area of the triangle is $20\sqrt{2}$. What is the length of the other leg?
+## 3332
+Triangle $ABC$ (right angle at $A$) and triangle $EDC$ (right angle at $E$, with $D$ on $AC$ and $E$ on $BC$) are right triangles. If $EC=6\sqrt{3}$ and the cosine of angle $ABC$ is $\frac{1}{2}$, what is the length of segment $ED$?
+@ 6 | $6\sqrt{3}$ | 12 | 18
+## 3333
+For acute angles $A$ and $B$, $\cos A-\sin B=0$. Angle $A=x$ where $8x-13=321$. What is angle $B$?
+## 3336
+The line segment from $(-7,3)$ to $(5,6)$ in the $xy$-plane represents one of the legs of a right triangle. The area of this triangle is $48\sqrt{17}$ square units. What is the length, in units, of the other leg of this triangle?
+@ 16 | 32 | $3\sqrt{17}$ | $24\sqrt{17}$
+## 3337
+Right triangle $ABC$ has angle $B$ as a right angle. Side $AC$ has length 24 and side $AB$ has length 6. The area of the triangle is equal to $k\cos C$, where $k$ is a constant. Find the value of $k$.

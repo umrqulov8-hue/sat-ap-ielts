@@ -1,0 +1,90 @@
+## 3338
+The longer leg of a right triangle is $x$ units and is 70 units more than twice the shorter leg, where $x>70$. Which function gives its area?
+@ $a(x)=\left(\frac{1}{2}\right)x^2-35x$ | $a(x)=\left(\frac{1}{4}\right)x^2-\left(\frac{35}{2}\right)x$ | $a(x)=x^2+35x$ | $a(x)=\left(\frac{1}{4}\right)x^2+\left(\frac{35}{2}\right)x$
+## 3339
+In triangles $RST$ and $XYZ$, $\overline{XY}$ is parallel to $\overline{TS}$ and $\tan R=\frac{160}{231}$. What is the value of $\sin X$ in triangle $XYZ$?
+@ $\frac{160}{391}$ | $\frac{160}{281}$ | $\frac{231}{281}$ | $\frac{231}{160}$
+## 3340
+In right triangle $ABC$, angle $B$ is a right angle, side $BC$ is 6 cm and the hypotenuse is 19 cm. The area of the triangle is equal to $k(\cos A)$ where $k$ is a constant. Find the value of $k$.
+## 3341
+An equilateral triangle has a height of $(k-7)\sqrt{3}$ and its area is $25\sqrt{3}$, where $k$ is a positive constant. What is $k$?
+## 3342
+Frank walked 1,200 feet east and then walked 400 feet south on level ground to get from his home to his school. If there were a straight, level path from his home to his school, what would be the length, rounded to the nearest 100 feet, of the path?
+@ 800 feet | 1,100 feet | 1,300 feet | 1,600 feet
+## 3343
+In triangle $JKL$, angles $J$, $K$, and $L$ measure $90b^\circ$, $66a^\circ$, and $24a^\circ$, respectively, where $a$ and $b$ are constants. Which statement must be true?
+@ $\cos L>\sin K$ | $\cos L=\sin K$ | $\cos L<\sin K$ | There is not enough information to compare $\cos L$ and $\sin K$.
+## 3344
+In triangles $RST$ and $XYZ$, $XY$ is parallel to $TS$ and $\tan R=\frac{96}{247}$. What is the value of $\sin X$ in triangle $XYZ$?
+@ $\frac{96}{343}$ | $\frac{96}{265}$ | $\frac{247}{265}$ | $\frac{247}{96}$
+## 3345
+The perimeter of an isosceles right triangle is $96+96\sqrt{2}$. What is the length of the hypotenuse?
+@ 96 | 48 | $48\sqrt{2}$ | $96\sqrt{2}$
+## 3346
+$ABCD$ is a rectangle with diagonal $AC$. Which of the following must be true?
+@ $\sin(\angle ABC)=\cos(\angle ADC)$ | $\sin(\angle ACB)=\cos(\angle CAD)$ | $\sin(\angle BAC)=\cos(\angle ACD)$ | $\sin(\angle BAC)=\cos(\angle CAD)$
+## 3347
+The ratio of the internal angles of triangle $A$ is 1:2:3. Triangle $B$ is an equilateral triangle with a side of 12 cm. If the area of triangle $A$ and $B$ are equal and the perimeter of triangle $A$ is $m\sqrt{2}+n\sqrt{6}$, what is the value of $m+n$?
+@ 6 | 12 | 18 | 24
+## 3348
+What is the value of the following expression, $\cos(90-b)\cdot\sin(b)+\sin(90-a)\cdot\cos(a)$, if $\cos(a)=0.5$ and $\sin(b)=0.39$?
+## 3349
+Triangles $XYZ$ and $PQR$ are similar right triangles, where angle $X$ corresponds to angle $P$ (right angles at $Z$ and $R$). If $\tan Y=2\sqrt{6}$ and $QR=45$, what is the length of $PQ$?
+@ $10\sqrt{6}$ | $90\sqrt{6}$ | 225 | 1,125
+## 3351
+In right triangle $ABC$, angle $C$ is the right angle and $BC=156$. Point $D$ is connected by a line segment with point $E$ on side $AC$ such that line segment $DE$ is parallel to side $BC$ (with $D$ on $AB$) and $CE=5AE$. What is the length of line segment $DE$?
+## 3352
+The perimeter of an isosceles right triangle is $86+86\sqrt{2}$ cm. What is the length of the hypotenuse?
+@ 43 | $43\sqrt{2}$ | 86 | $86\sqrt{2}$
+## 3353
+In triangle $XYZ$ with altitude from $Z$ to $XY$, the measure of angle $X$ is $52^\circ$. The length of $XY$ is 28 units and the length of $XZ$ is 17 units. What is the area, in square units, of triangle $XYZ$?
+@ 238 | 476 | $238\sin52^\circ$ | $476\sin52^\circ$
+## 3355
+Triangle $XYZ$ is a right triangle with angle $X$ as a right angle. $XW$ is drawn perpendicular to $YZ$ such that $WX=477$ and $YW=636$. Find $\tan Z$.
+## 3356
+In right triangle $QRS$ with the right angle at $R$, $QR<RS$ and $RS=23$. Which expression represents the length of $\overline{QS}$?
+@ $23\cos Q$ | $23\sin Q$ | $\frac{23}{\cos Q}$ | $\frac{23}{\sin Q}$
+## 3357
+For the following equation, $\sin\left(\frac{49\pi}{p}\right)=\frac{\sqrt{2}}{2}$, $p$ is a constant greater than 98. Find the value of $p$.
+@ 98 | 147 | 196 | 294
+## 3358
+A point $P$ on the ground is 30 feet from the base of a flagpole. The angle of elevation from point $P$ to the top of the flagpole is $40^\circ$, and the tangent of $40^\circ$ is approximately 0.84. Of the following, which is the closest to the height of the flagpole?
+@ 21 feet | 23 feet | 25 feet | 27 feet
+## 3359
+$NP$ is the diameter of semicircle $O$ (the semicircle sits on top of rectangle $NQRS$, with $P$ the midpoint of $NQ$). Angles $Q$, $R$, and $S$ are right angles, and point $P$ is the midpoint of $NQ$. If $PQ=52$ feet and $NS=18$ feet, the area of the figure can be expressed as $a\pi+b$ square feet, where $a$ and $b$ are integers. What is the value of $a-b$?
+## 3360
+The solid lines represent the route of a football player (12 feet north, then $x$ feet west along a perpendicular segment), and the dashed line represents the straight-line distance of 13 feet from his starting point to the point at which the player was stopped. What is the value of $x$?
+## 3361
+A zip line will be attached to a pole at a point 27 feet above the ground. The lower end of the zip line will be attached to a second pole at a point 7 feet above the ground. The zip line makes a $60^\circ$ angle with the vertical higher pole. How far apart, in feet, will the two poles be?
+@ $20\sqrt{3}$ | $20\sqrt{5}$ | 20 | 40
+## 3362
+Triangles $XYZ$ and $RST$ are similar triangles, such that angles $X$, $Y$, $Z$ correspond to angles $R$, $S$, $T$ respectively. Angles $Y$ and $S$ are both right angles while angle $Z$ is 20 degrees. What is the measure of one of the acute angles in triangle $RST$?
+## 3363
+$ABC$ is a right triangle where angle $B$ is a right angle. Point $D$ is on side $AC$. Point $E$ is on side $BC$ such that $DE$ is perpendicular to $BC$. Side $AB$ is 7.2 inches long and $\frac{BE}{EC}=\frac{3}{5}$. What is the length of line segment $DE$?
+## 3364
+In triangle $XYZ$, the measure of angle $X$ is $90^\circ$. Point $W$ lies on segment $YZ$, and segment $WX$ is perpendicular to segment $YZ$. The length of segment $WY$ is 668, and the length of segment $WX$ is 501. What is the value of $\tan Z$?
+## 3365
+In right triangle $ABC$, the measure of angle $C$ is $35^\circ$ and angle $B$ is a right angle. If the length of side $BC$ is 26 and the area of the triangle is $k\tan(35^\circ)$, find the value of $k$.
+## 3366
+Right triangle $ABC$, where angle $B$ is a right angle, has side lengths of 18 ($AB$) and 33 ($AC$). An altitude is drawn from point $B$ and intersects the hypotenuse at point $D$. What is the ratio $\frac{BC}{BD}$?
+## 3368
+In right triangle $ABC$, $AB$ is a leg with a length of 38 and $AB>BC$. Which of the following is equal to the length of $AC$?
+@ $38\sin(A)$ | $\frac{38}{\sin(A)}$ | $\frac{38}{\cos(A)}$ | $38\cos(A)$
+## 3369
+Triangle $ABC$ is a right triangle where angle $C$ is a right angle and has an area of 819. Point $K$ is on side $BC$ and point $L$ on side $AB$ such that $LK$, length 21, is parallel to $AC$, length 63. Find the length of segment $BK$.
+## 3370
+In right triangle $XYZ$, the measure of angle $X$ is 90 degrees. Line $WX$ is perpendicular to $YZ$, $WX=531$ and $WY=708$. Find $\tan Z$.
+@ $\frac{4}{3}$ | $\frac{3}{5}$ | $\frac{4}{5}$ | $\frac{3}{4}$
+## 3371
+Triangles $ABC$ and $DEF$ are similar right triangles where angles $B$ and $E$ are right angles. Every side in triangle $DEF$ is 2.7 times the length of its corresponding side in triangle $ABC$. If $\tan F=\frac{9}{40}$, what is the value of $\cos C$?
+## 3372
+A triangle has vertices $(3,2)$, $(3,6)$ and $(7,2)$. Another triangle has vertices $(3,2)$, $(3,6+k)$, and $(7+k,2)$, where $k$ is a constant, and one of its acute angles is equal to $t$. What is the measure of the second acute angle?
+## 3373
+Triangle $ABC$ is a right triangle with angle $B$ as a right angle. A perpendicular line is drawn from $B$ to intersect $AC$ at point $D$. The measure of angle $A$ is $w$ degrees, and the measure of angle $CBD$ is $z$ degrees. If $\cos w=\frac{9}{41}$, then what does $\tan z$ equal?
+## 3374
+Triangle $ABC$ is similar to triangle $DEF$ where angle $A$ corresponds to angle $D$ and angle $B$ corresponds to angle $E$. Angles $B$ and $E$ are both right angles. If $\tan A=\sqrt{3}$ and $DE=121$, find the length of $DF$.
+## 3375
+Triangles $ABC$ and $DEF$ are similar right triangles where angles $B$ and $E$ are right angles. The base of triangle $ABC$, side $BC$, is 9 times the base of triangle $DEF$, side $EF$. The height of each triangle is 2 times the length of its base. How many times larger is the height of triangle $ABC$, side $AB$, than the height of triangle $DEF$, side $DE$?
+## 3376
+In right triangle $QRS$, side $RS=32$ and angle $R$ is a right angle. Which expression is equal to $QS$?
+@ $32\sin Q$ | $32\cos Q$ | $\frac{32}{\sin Q}$ | $\frac{32}{\cos Q}$

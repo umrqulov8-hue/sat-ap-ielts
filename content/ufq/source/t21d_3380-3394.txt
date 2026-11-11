@@ -1,0 +1,37 @@
+## 3380
+The line segment from $(-5,3)$ to $(4,9)$ in the $xy$-plane represents one of the legs of a right triangle. The area of this triangle is $48\sqrt{13}$ square units. What is the length, in units, of the other leg of this triangle?
+@ 16 | 32 | $3\sqrt{13}$ | $6\sqrt{13}$
+## 3381
+$ABC$ is a right triangle where angle $C$ is the right angle and side $BC=174$. Point $E$ is on side $AC$ and point $D$ is on side $AB$; they are connected by a line segment $DE$, which is parallel to side $BC$. $AC=2EA$. What is the length of the line segment $DE$?
+## 3382
+Triangle $ABC$ is a right triangle where angle $B$ is a right angle, $AC=29$ and $AB$ is 14 less than $AC$. A perpendicular line segment is drawn from point $B$ which intersects side $AC$ at point $D$. What is the ratio $\frac{BC}{BD}$?
+## 3383
+Angle $A$ has a measure of $\frac{4}{7}\pi$ radians. Angle $B$ is 18 times bigger than angle $A$. Which of the following represents the measure of angle $B$ in <b>degrees</b>?
+@ $\frac{4}{7\pi}(90)(18)$ | $\frac{4\pi}{7}(180)(18)$ | $\frac{4}{7}(90)(18)$ | $\frac{4}{7}(180)(18)$
+## 3384
+An isosceles right triangle has a perimeter of $34+34\sqrt{2}$ inches. What is the length, in inches, of one leg of this triangle?
+@ 17 | $17\sqrt{2}$ | 34 | $34\sqrt{2}$
+## 3385
+In triangle $XYZ$, the measure of angle $X$ is $90^\circ$. Point $W$ lies on segment $YZ$, and segment $WX$ is perpendicular to segment $YZ$. The length of segment $WY$ is 524, and the length of segment $WX$ is 393. What is the value of $\tan Z$?
+@ $\frac{3}{5}$ | $\frac{3}{4}$ | $\frac{4}{5}$ | $\frac{4}{3}$
+## 3387
+In triangle $XYZ$, the measure of angle $X$ is 53 degrees. The length of $XZ$ is 19 units and the length of $XY$ is 24 units. What is the area of triangle $XYZ$?
+@ 228 | $228\sin(53^\circ)$ | 456 | $456\sin(53^\circ)$
+## 3388
+In triangles $RST$ and $XYZ$, $XY$ is parallel to $TS$ and $\tan R=\frac{180}{299}$. What is the value of $\sin X$ in triangle $XYZ$?
+@ $\frac{299}{349}$ | $\frac{180}{349}$ | $\frac{180}{479}$ | $\frac{299}{180}$
+## 3389
+The expression $\sin(25^\circ)\cos(65^\circ)+\sin(65^\circ)\cos(25^\circ)$ is equal to which of the following expressions?
+@ $\cos(65^\circ)^2+\sin(25^\circ)^2$ | $\cos(65^\circ)^2+\cos(25^\circ)^2$ | $2\sin(25^\circ)\cos(65^\circ)$ | $2\sin(25^\circ)+2\cos(65^\circ)$
+## 3390
+In triangle $JKL$, the measure of angle $J$ is $(90b)^\circ$, the measure of angle $K$ is $(69a)^\circ$, and the measure of angle $L$ is $(21a)^\circ$, where $a$ and $b$ are constants. Which of the following must be true?
+@ $\cos L>\sin K$ | $\cos L=\sin K$ | $\cos L<\sin K$ | There is not enough information to compare the values of $\cos L$ and $\sin K$.
+## 3391
+In triangle $ABC$, $A=90b$, angle $B=53a$, and angle $C=37a$, where $a$ and $b$ are constants. Which of the following is true?
+@ $\cos C<\sin B$ | $\cos C=\sin B$ | $\cos C>\sin B$ | Not enough information given to provide a relationship between $\cos C$ and $\sin B$
+## 3392
+In triangle $JKL$, angle $J=90b$, angle $K=53a$, and angle $L=37a$ where $a$ and $b$ are constants. Which of the following is true?
+@ $\cos K<\sin L$ | $\cos K=\sin L$ | $\cos K>\sin L$ | Not enough information given to provide a relationship between $\cos K$ and $\sin L$
+## 3394
+In triangle $XYZ$, the measure of angle $X$ is $54^\circ$. The length of $\overline{XY}$ is 26 units, and the length of $\overline{XZ}$ is 19 units. What is the area, in square units, of triangle $XYZ$?
+@ 247 | 494 | $247\sin54^\circ$ | $494\sin54^\circ$

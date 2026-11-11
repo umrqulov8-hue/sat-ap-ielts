@@ -1,0 +1,109 @@
+## 3252
+Triangle $PQR$ has right angle at $Q$. If $\sin R=\frac{4}{5}$, what is the value of $\tan P$?
+## 3253
+In right triangle $PQR$ with the right angle at $P$, angle $R$ measures $30^\circ$ and the hypotenuse $QR$ is 8. What is the length of $\overline{PQ}$?
+## 3254
+If the perimeter of an equilateral triangle with a height of 21 is $a\sqrt{3}$, what is the value of $a$?
+## 3255
+The height of an equilateral triangle is $52\sqrt{3}$ feet. What is the perimeter, in feet, of the equilateral triangle?
+## 3256
+In $\triangle ABC$, $BD$ is the altitude to $AC$, angle $ABD=30^\circ$, angle $C=60^\circ$ and $BC=12$. What is the length of $\overline{AD}$?
+@ 4 | 6 | $6\sqrt{2}$ | $6\sqrt{3}$
+## 3257
+In isosceles triangle $RST$, $SR=ST$ and the length of $RT$ is 76. If $\tan(\angle R)=\frac{2}{35}$, what is the area of triangle $RST$?
+## 3258
+In isosceles triangle $PQR$, $PQ=PR$, $QR=48$, and $\tan R=\frac{7}{24}$. What is the area of the triangle?
+## 3259
+In right triangle $RST$, angle $S$ is the right angle. Point $M$ lies on segment $RS$ such that $TM$ bisects angle $RTS$. If the length of $ST$ is 24 and the length of $SM$ is 7, what is the length of hypotenuse $RT$?
+## 3260
+The perimeter of a right isosceles triangle is $52+52\sqrt{2}$. What is the length of the hypotenuse?
+## 3262
+In triangle $LMN$, angle $L$ is $90^\circ$, $MN=105$, and $LM=2$. What is $\tan M$?
+@ $\frac{105}{2}$ | $\frac{\sqrt{11021}}{2}$ | $\frac{\sqrt{11021}}{105}$ | $\frac{2}{105}$
+## 3263
+In a right triangle $ABC$ with right angle at $A$, $D$ lies on $AB$, $E$ lies on $BC$ with $DE\perp AB$ (so $DE\parallel AC$). If $\tan B=\frac{3}{4}$, $BC=15$ and $DA=4$, what is the length of $DE$?
+## 3264
+In right triangle $ABC$, angle $B$ is the right angle. Point $D$ lies on segment $AB$, and segment $CD$ bisects angle $ACB$. If $AD=10$ and $DB=6$, what is the length of $BC$?
+## 3265
+In right triangle $ABC$ (right angle at $A$) $AB=8$ and $BC=21$. The expression $k\cdot\cos x^\circ$ represents the area of the triangle, where $x^\circ$ is the angle at $C$. What is the value of $k$?
+## 3266
+An isosceles right triangle has area 48 square units. What is its hypotenuse length?
+@ $\sqrt{24}$ | $\sqrt{48}$ | $\sqrt{96}$ | $\sqrt{192}$
+## 3267
+In right triangle $QRS$ with right angle at $R$, $QR=8$, $RS=9$, and hypotenuse $QS=c$. What is $\tan y^\circ$, where $y^\circ$ is the angle at $S$?
+@ $\frac{8}{9}$ | $\frac{9}{8}$ | $\frac{c}{8}$ | $\frac{c}{9}$
+## 3268
+In right triangle $ABC$ (right angle at $A$), $AB=8$ and $BC=21$. The expression $k\cos x^\circ$ represents the area of triangle $ABC$, where $x^\circ$ is the angle at $C$. What is the value of $k$?
+## 3271
+In triangle $RST$, $RS=ST$ and $RT=76$. If $\tan R=\frac{9}{38}$, what is the area, in square units, of triangle $RST$?
+@ 722 | 684 | 342 | 171
+## 3272
+In a right triangle, the hypotenuse is 24 and one leg is 19. What is $\sin x^\circ$, where $x^\circ$ is the angle opposite the leg of 19?
+## 3273
+Right triangles $ABC$ (right angle at $A$, $AB=6$, $BC=10$) and $XYZ$ (right angle at $X$) are similar with $A\leftrightarrow X$, $B\leftrightarrow Y$, $C\leftrightarrow Z$. What is the tangent of angle $Z$?
+@ $\frac{3}{5}$ | $\frac{3}{4}$ | $\frac{4}{3}$ | $\frac{5}{3}$
+## 3274
+An isosceles right triangle has perimeter $82+82\sqrt{2}$ inches. What is the length, in inches, of one leg?
+@ 41 | $41\sqrt{2}$ | 82 | $82\sqrt{2}$
+## 3276
+An isosceles right triangle has perimeter $94+94\sqrt{2}$ inches. What is its hypotenuse length, in inches?
+@ 47 | $47\sqrt{2}$ | 94 | $94\sqrt{2}$
+## 3277
+The height of an equilateral triangle is $18\sqrt{3}$ feet. What is the perimeter, in feet, of the equilateral triangle?
+@ 54 | 72 | 108 | 216
+## 3278
+In a right triangle with hypotenuse 29 and one leg 16, what is $\sin x^\circ$, where $x^\circ$ is the angle opposite the leg of length 16?
+## 3279
+A right triangle has legs of dimensions 9 cm and 4 cm. What is its area, in square centimeters?
+## 3280
+Triangle $ABC$ is similar to triangle $DEF$, with $A$ corresponding to $D$. Angles $C$ and $F$ are right angles. If $\cos B=\frac{1}{43}$, what is $\cos E$?
+@ $\frac{1}{43}$ | $\frac{1}{44}$ | $\frac{42}{43}$ | $\frac{43}{44}$
+## 3281
+Triangle $ABC$ is similar to triangle $DEF$, with $A$ corresponding to $D$. Angles $C$ and $F$ are right angles. If $\cos B=\frac{1}{53}$, what is $\cos E$?
+@ $\frac{1}{53}$ | $\frac{1}{54}$ | $\frac{52}{53}$ | $\frac{53}{54}$
+## 3282
+In right triangle $ABC$ (right angle at $A$) the hypotenuse $BC$ is 15. The tangent of $\angle C$ is $\frac{3}{4}$. What is the length of $\overline{AB}$?
+@ 9 | $\frac{105}{16}$ | $\frac{45}{4}$ | 12
+## 3283
+Triangle $XYZ$ is a right triangle with right angle at $Z$, $XZ=21$, $ZY=27$. Which expression has the same value as $\sin X$?
+@ $\tan X$ | $\tan Y$ | $\cos X$ | $\cos Y$
+## 3284
+Triangle $ABC$ (right angle at $C$, $AC=20$, $BC=21$, $AB=29$) and triangle $DEF$ (right angle at $F$, $DF=5$) are similar. How much longer than segment $EF$ is segment $DE$?
+@ 1 | 2 | 4 | 8
+## 3285
+A right triangle has legs of dimensions 6 cm and 4 cm. What is the area of this triangle, in cm$^2$?
+## 3286
+Triangle $ABC$ is right-angled at $A$. Point $D$ lies on $BC$, and $AD$ is perpendicular to $BC$. Angle $ABD$ measures $w^\circ$, angle $CAD$ measures $z^\circ$, and $AD=143$. If $\cos w^\circ=\frac{9}{41}$, what is $\tan z^\circ$?
+## 3287
+In triangle $RST$, $RS=ST$, $TR=52$, and $\tan(T)=\frac{5}{26}$. Find the area of the triangle.
+## 3288
+In a right triangle $ABC$ (right angle at $C$), $AB=25$, $BC=20$. The tangent of $\angle A$ is $\frac{4}{3}$. What is the sine of $\angle B$?
+@ $\frac{3}{5}$ | $\frac{3}{4}$ | $\frac{4}{5}$ | $\frac{5}{3}$
+## 3289
+In the unit circle with center $O$, the length of arc $PQ$ is $\frac{\pi}{3}$. What is the value of the cosine of $\angle POQ$?
+## 3291
+A right triangle has legs 28 centimeters and 26 centimeters long. What is the hypotenuse length, in centimeters?
+@ $6\sqrt{3}$ | $2\sqrt{365}$ | 54 | 1,460
+## 3292
+If $\sin x^\circ=a$, which of the following must be true for all values of $x$?
+@ $\cos x^\circ=a$ | $\sin(90-x)^\circ=a$ | $\cos(90^\circ-x^\circ)=a$ | $\sin(x^2)^\circ=a^2$
+## 3293
+Angles $X$ and $Y$ are acute, and $Y$ measures $24^\circ$. If $\frac{\sin X}{\cos Y}=1$, what is the measure of $X$, in degrees?
+@ 24 | 45 | 66 | 69
+## 3294
+For two acute angles $X$ and $Y$, the measure of angle $Y$ is $21^\circ$ and $\frac{\sin X}{\cos Y}=1$. What is the measure, in degrees, of angle $X$?
+@ 69 | 66 | 45 | 21
+## 3295
+An equilateral triangle has a height of 44 and a perimeter of $a\sqrt{3}$. Find the value of $a$.
+## 3296
+The measure of angle $A$ is $\frac{\pi}{282}$ radians. The measure of angle $B$ is 47 times the measure of angle $A$. What is the value of $\cos B$?
+@ 0 | $\frac{1}{2}$ | $\frac{\sqrt{2}}{2}$ | $\frac{\sqrt{3}}{2}$
+## 3297
+Triangle $ABC$ has a right angle at $A$, and $AD$ is perpendicular to $BC$ at $D$. $\angle ABD=w^\circ$, $\angle CAD=z^\circ$, and $\cos w=\frac{9}{41}$. What is $\tan z$?
+## 3298
+In a right triangle $XYZ$ with right angle at $Y$, $XY=26$ and $XZ=10\sqrt{17}$. What is $\tan X$?
+## 3299
+In triangles $RST$ and $XTZ$, $XZ$ is parallel to $RS$, and $\tan R=\frac{216}{713}$. What is the value of $\sin X$ in triangle $XYZ$?
+@ $\frac{216}{929}$ | $\frac{216}{745}$ | $\frac{713}{745}$ | $\frac{713}{216}$
+## 3300
+Cube $X$ has an edge length that is $\frac{88}{7}$ times the edge length of Cube $Y$. The surface area of Cube $Y$ is $w$ times the surface area of Cube $X$. Find $w$.
