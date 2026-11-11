@@ -1,0 +1,68 @@
+## 2319
+<p style="text-align:center">a, 26, 29, b, 33, 49, c</p><p>For the given data set, the data values are listed in ascending order, where $a$, $b$, and $c$ are constants. For this data set, the mean is 36, the median is 29, and the range is 72. What is the value of $c$?</p>
+@ 53 | 72 | 79 | 98
+## 2320
+Seven Chicago employees have commuting times, in minutes, of 31, 13, 42, 33, 53, 24, and 43. Seven San Francisco employees have commuting times of 45, 31, 17, 33, 46, $x$, and 36. If the two means are equal, what is $x$?
+## 2322
+<p style="text-align:center">137, 163, 115, 137, 179, 155, 171</p><p>A geologist recorded the heights, in feet, of a geyser's eruptions over a twelve-hour period. The heights are given in the list above. What is the median height recorded by the geologist?</p>
+@ 115 | 137 | 151 | 155
+## 2323
+For one week, the manager of a restaurant gathered customer feedback by randomly selecting 50 customers and asking them to complete a survey question. A total of 700 customers ate at the restaurant during the week in which the survey was completed. The survey question and the survey results are shown below.<p>To what extent do you agree or disagree with the following statement: "I would recommend this restaurant to others." (Select only one of the five choices.)</p><table><thead><tr><th>Response</th><th>Number of customers</th></tr></thead><tbody><tr><td>Strongly agree</td><td>6</td></tr><tr><td>Agree</td><td>24</td></tr><tr><td>Neither agree nor disagree</td><td>13</td></tr><tr><td>Disagree</td><td>5</td></tr><tr><td>Strongly disagree</td><td>2</td></tr><tr><td>Total</td><td>50</td></tr></tbody></table><p>Which of the following is an appropriate conclusion about the customers surveyed?</p>
+@ The majority of the customers would recommend the restaurant to others. | The majority of the customers would not recommend the restaurant to others. | The majority of the customers would neither recommend nor not recommend the restaurant to others. | The number of customers who would recommend the restaurant to others is the same as the number of customers who would not recommend the restaurant to others.
+## 2324
+A data set consists of the values 250, 320, 430, 452, 600, and 17,167. If the outlier is removed, what will happen to the value of the mean of the data set?
+@ The mean will remain the same. | The mean will decrease. | The mean will increase. | There is not enough information to determine how the mean will change.
+## 2325
+<p>Data set A: 6, 18, 20, 20, 20, 21<br>Data set B: 18, 20, 20, 20, 21</p><p>Which statement correctly compares the means?</p>
+@ The means are equal. | The mean of A is greater. | The mean of A is less. | There is not enough information.
+## 2326
+<p style="text-align:center">a, 26, 29, b, 33, 46, c</p><p>For the given data set, the data values are listed in ascending order, where $a$, $b$, and $c$ are constants. For this data set, the mean is 36, the median is 29, and the range is 71. What is the value of $c$?</p>
+@ 55 | 71 | 80 | 97
+## 2327
+<p>Each column A–D gives the frequencies of egg counts in 35 wood-duck nests. Which column represents the data set with the smallest standard deviation?</p><table><thead><tr><th>Eggs</th><th>A</th><th>B</th><th>C</th><th>D</th></tr></thead><tbody><tr><td>7</td><td>8</td><td>7</td><td>2</td><td>0</td></tr><tr><td>8</td><td>7</td><td>7</td><td>8</td><td>5</td></tr><tr><td>9</td><td>5</td><td>7</td><td>15</td><td>25</td></tr><tr><td>10</td><td>7</td><td>7</td><td>8</td><td>5</td></tr><tr><td>11</td><td>8</td><td>7</td><td>2</td><td>0</td></tr></tbody></table>
+@ A | B | C | D
+## 2328
+Each of the following frequency tables represents a data set. Which of these frequency tables represents the data set with the smallest standard deviation?<p>Table A</p><table><thead><tr><th>Value</th><th>Frequency</th></tr></thead><tbody><tr><td>3</td><td>0</td></tr><tr><td>4</td><td>10</td></tr><tr><td>5</td><td>55</td></tr><tr><td>6</td><td>10</td></tr><tr><td>7</td><td>0</td></tr></tbody></table><p>Table B</p><table><thead><tr><th>Value</th><th>Frequency</th></tr></thead><tbody><tr><td>3</td><td>11</td></tr><tr><td>4</td><td>17</td></tr><tr><td>5</td><td>19</td></tr><tr><td>6</td><td>17</td></tr><tr><td>7</td><td>11</td></tr></tbody></table><p>Table C</p><table><thead><tr><th>Value</th><th>Frequency</th></tr></thead><tbody><tr><td>3</td><td>15</td></tr><tr><td>4</td><td>15</td></tr><tr><td>5</td><td>15</td></tr><tr><td>6</td><td>15</td></tr><tr><td>7</td><td>15</td></tr></tbody></table><p>Table D</p><table><thead><tr><th>Value</th><th>Frequency</th></tr></thead><tbody><tr><td>3</td><td>17</td></tr><tr><td>4</td><td>15</td></tr><tr><td>5</td><td>11</td></tr><tr><td>6</td><td>15</td></tr><tr><td>7</td><td>17</td></tr></tbody></table>
+@ Table A | Table B | Table C | Table D
+## 2329
+Five students ran a mile, and their times are shown in the table.<table><thead><tr><th>Name</th><th>Time</th></tr></thead><tbody><tr><td>Aaron</td><td>7 min 21 sec</td></tr><tr><td>Jamal</td><td>5 min 5 sec</td></tr><tr><td>Maya</td><td>5 min 21 sec</td></tr><tr><td>Aliyah</td><td>5 min 17 sec</td></tr><tr><td>Nacek</td><td>5 min 10 sec</td></tr></tbody></table><p>If Aaron's time is removed from the data set, which of the following measures will change the least?</p>
+@ Mean | Median | Maximum | Range
+## 2330
+<p style="text-align:center">a, 26, 28, b, 33, 49, c</p><p>For the given data set, the data values are listed in ascending order, where $a$, $b$, and $c$ are constants. For this data set, the mean is 35, the median is 28, and the range is 71. What is the value of $c$?</p>
+@ 55 | 71 | 76 | 97
+## 2332
+The list 12, 21, 23, 33, 39, 42, 44 shows the 7 values in a data set. Which of the following data sets has the same median as the given list?
+@ 21, 24, 25, 28, 33, 33, 39 | 12, 15, 28, 33, 35, 39, 39 | 21, 28, 33, 39, 41, 43, 46 | 22, 25, 36, 38, 49, 50, 54
+## 2333
+Seven different surveys of the daily commuting time, in minutes, of Chicago-based employees yielded the values 32, 14, 43, 31, 52, 23, 44. Seven different surveys of the daily commuting time, in minutes, of San Francisco-based employees yielded the values 46, 32, 19, 34, 47, $x$, 37. If these two data sets have the same mean, what is the value of $x$?
+## 2334
+<table><thead><tr><th>Birds</th><th>Days</th></tr></thead><tbody><tr><td>14</td><td>3</td></tr><tr><td>15</td><td>3</td></tr><tr><td>16</td><td>4</td></tr><tr><td>17</td><td>1</td></tr><tr><td>18</td><td>3</td></tr><tr><td>19</td><td>9</td></tr></tbody></table><p>The table shows how many birds a class observed at a feeder on each school day. What is the median number of birds observed per day?</p>
+## 2335
+A data set has a mean of 72 and a standard deviation of 8. A new data set is created by multiplying each value in the original data set by 2. What are the mean and standard deviation of the new data set?
+@ Mean: 144, Standard deviation: 16 | Mean: 144, Standard deviation: 8 | Mean: 72, Standard deviation: 16 | Mean: 72, Standard deviation: 8
+## 2336
+A data set of 77 different numbers has a mean of 1,073. A new data set is created by adding 93 to each number in the original data set that is greater than the median and subtracting 93 from each number in the original data set that is less than the median. Which of the following measures does NOT have the same value in both the original and the new data sets?
+@ Sum of the numbers | Mean | Standard deviation | Median
+## 2337
+<p>Each column A–D gives the frequencies of egg counts in 40 wood-duck nests. Which column represents the data set with the smallest standard deviation?</p><table><thead><tr><th>Eggs</th><th>A</th><th>B</th><th>C</th><th>D</th></tr></thead><tbody><tr><td>7</td><td>9</td><td>8</td><td>2</td><td>0</td></tr><tr><td>8</td><td>8</td><td>8</td><td>9</td><td>5</td></tr><tr><td>9</td><td>6</td><td>8</td><td>18</td><td>30</td></tr><tr><td>10</td><td>8</td><td>8</td><td>9</td><td>5</td></tr><tr><td>11</td><td>9</td><td>8</td><td>2</td><td>0</td></tr></tbody></table>
+@ A | B | C | D
+## 2338
+Each of the following frequency tables represents a data set. Which data set has the greatest mean?<p>Table A</p><table><thead><tr><th>Value</th><th>Frequency</th></tr></thead><tbody><tr><td>50</td><td>4</td></tr><tr><td>60</td><td>5</td></tr><tr><td>70</td><td>6</td></tr><tr><td>80</td><td>7</td></tr></tbody></table><p>Table B</p><table><thead><tr><th>Value</th><th>Frequency</th></tr></thead><tbody><tr><td>50</td><td>6</td></tr><tr><td>60</td><td>6</td></tr><tr><td>70</td><td>6</td></tr><tr><td>80</td><td>6</td></tr></tbody></table><p>Table C</p><table><thead><tr><th>Value</th><th>Frequency</th></tr></thead><tbody><tr><td>50</td><td>8</td></tr><tr><td>60</td><td>5</td></tr><tr><td>70</td><td>5</td></tr><tr><td>80</td><td>8</td></tr></tbody></table><p>Table D</p><table><thead><tr><th>Value</th><th>Frequency</th></tr></thead><tbody><tr><td>50</td><td>7</td></tr><tr><td>60</td><td>6</td></tr><tr><td>70</td><td>6</td></tr><tr><td>80</td><td>7</td></tr></tbody></table>
+@ Table A | Table B | Table C | Table D
+## 2340
+During hibernation, American black bears do not eat or replenish calories. A certain black bear weighed 258 pounds when entering hibernation and lost weight at a mean rate of 0.8 pounds per day. At this rate, how many days after entering hibernation would the black bear weigh 210 pounds?
+@ 39 | 48 | 60 | 168
+## 2341
+<p><b>Median Ages of Populations of Selected Countries, 2012</b></p><table><thead><tr><th>Country</th><th>Median age of population (years)</th></tr></thead><tbody><tr><td>Brazil</td><td>29.6</td></tr><tr><td>China</td><td>35.9</td></tr><tr><td>Germany</td><td>45.3</td></tr><tr><td>India</td><td>26.5</td></tr><tr><td>Indonesia</td><td>28.5</td></tr><tr><td>Nigeria</td><td>17.9</td></tr><tr><td>Philippines</td><td>23.1</td></tr><tr><td>Russia</td><td>38.8</td></tr><tr><td>United States</td><td>37.1</td></tr></tbody></table><p>What is the range, in years, of the median ages of the populations for the countries in the table above?</p>
+## 2343
+<table><thead><tr><th>School level</th><th>Books</th></tr></thead><tbody><tr><td>Elementary</td><td>369</td></tr><tr><td>Middle</td><td>251</td></tr><tr><td>High</td><td>92</td></tr></tbody></table><p>The table gives average numbers of books in classroom libraries by school level. How much greater is the elementary-school average than the high-school average?</p>
+@ 118 | 159 | 277 | 461
+## 2344
+Each of the following frequency tables represents a data set. Which of these frequency tables represents the data set with the smallest standard deviation?<p>Table A</p><table><thead><tr><th>Value</th><th>Frequency</th></tr></thead><tbody><tr><td>5</td><td>0</td></tr><tr><td>6</td><td>10</td></tr><tr><td>7</td><td>55</td></tr><tr><td>8</td><td>10</td></tr><tr><td>9</td><td>0</td></tr></tbody></table><p>Table B</p><table><thead><tr><th>Value</th><th>Frequency</th></tr></thead><tbody><tr><td>5</td><td>11</td></tr><tr><td>6</td><td>17</td></tr><tr><td>7</td><td>19</td></tr><tr><td>8</td><td>17</td></tr><tr><td>9</td><td>11</td></tr></tbody></table><p>Table C</p><table><thead><tr><th>Value</th><th>Frequency</th></tr></thead><tbody><tr><td>5</td><td>15</td></tr><tr><td>6</td><td>15</td></tr><tr><td>7</td><td>15</td></tr><tr><td>8</td><td>18</td></tr><tr><td>9</td><td>15</td></tr></tbody></table><p>Table D</p><table><thead><tr><th>Value</th><th>Frequency</th></tr></thead><tbody><tr><td>5</td><td>18</td></tr><tr><td>6</td><td>14</td></tr><tr><td>7</td><td>11</td></tr><tr><td>8</td><td>14</td></tr><tr><td>9</td><td>18</td></tr></tbody></table>
+@ Table A | Table B | Table C | Table D
+## 2345
+The weights, in pounds, for 15 horses in a stable were reported, and the mean, median, range, and standard deviation for the data were found. The horse with the lowest reported weight was found to actually weigh 10 pounds less than its reported weight. What value remains unchanged if the four values are reported using the corrected weight?
+@ Mean | Median | Range | Standard deviation
+## 2346
+During hibernation, American black bears do not eat or replenish calories. A certain black bear weighed 293 pounds when entering hibernation and lost weight at a mean rate of 0.9 pounds per day. At this rate, how many days after entering hibernation would the black bear weigh 230 pounds?
+@ 57 | 63 | 70 | 207

@@ -1,0 +1,67 @@
+## 2288
+<p style="text-align:center">75, 76, 79, 80, 83, 84, 87, 89, 94</p><p>What is the median of the data shown?</p>
+## 2289
+<p style="text-align:center">73, 74, 76, 77, 80, 82, 83, 84, 91</p><p>What is the median of the data shown?</p>
+## 2290
+<p><b>Number of Contestants by Score and Day</b></p><table><thead><tr><th></th><th>5 out of 5</th><th>4 out of 5</th><th>3 out of 5</th><th>2 out of 5</th><th>1 out of 5</th><th>0 out of 5</th><th>Total</th></tr></thead><tbody><tr><td>Day 1</td><td>2</td><td>3</td><td>4</td><td>6</td><td>2</td><td>3</td><td>20</td></tr><tr><td>Day 2</td><td>2</td><td>3</td><td>5</td><td>5</td><td>4</td><td>1</td><td>20</td></tr><tr><td>Day 3</td><td>3</td><td>3</td><td>4</td><td>5</td><td>3</td><td>2</td><td>20</td></tr><tr><td>Total</td><td>7</td><td>9</td><td>13</td><td>16</td><td>9</td><td>6</td><td>60</td></tr></tbody></table><p>The same 20 contestants, on each of 3 days, answered 5 questions in order to win a prize. Each contestant received 1 point for each correct answer. The number of contestants receiving a given score on each day is shown in the table above.</p><p>What was the mean score of the contestants on Day 1?</p>
+## 2291
+<p style="text-align:center">1, 4, 7, 10, 33</p><p>What is the mean of the data shown?</p>
+@ 7 | 11 | 17 | 33
+## 2292
+Census blocks are geographic areas defined by the US Census Bureau. The residents in each block are counted each decade. The table below shows the total number of census blocks for the 5 states that had the least census blocks in 2000 and 2010.<table><thead><tr><th>State</th><th>Number of census blocks in 2000</th><th>Number of census blocks in 2010</th></tr></thead><tbody><tr><td>Alaska</td><td>21,874</td><td>45,292</td></tr><tr><td>Hawaii</td><td>18,990</td><td>25,016</td></tr><tr><td>Delaware</td><td>17,483</td><td>24,115</td></tr><tr><td>Rhode Island</td><td>21,023</td><td>25,181</td></tr><tr><td>Vermont</td><td>24,824</td><td>32,580</td></tr><tr><td>Total for these 5 states</td><td>104,194</td><td>152,184</td></tr></tbody></table><p>For these 5 states, what is the difference in the mean of the number of census blocks in 2010 and the mean of the number of census blocks in 2000?</p>
+## 2293
+<p style="text-align:center">13, 17, 23, 6, 4, 8, 17, 15, 16</p><p>The list gives the low temperatures, in degrees Fahrenheit, for nine days in a city. What is the median low temperature?</p>
+## 2294
+The bar graph shows the distribution of the number of raspberries per carton for 27 cartons of raspberries at a grocery store:<table><thead><tr><th>Raspberries per carton</th><th>75</th><th>76</th><th>77</th><th>78</th></tr></thead><tbody><tr><td>Number of cartons</td><td>3</td><td>6</td><td>8</td><td>10</td></tr></tbody></table><p>How many of these cartons contain exactly 78 raspberries?</p>
+@ 3 | 10 | 27 | 78
+## 2295
+<p style="text-align:center">16, 19, 26, 7, 5, 10, 19, 17, 18</p><p>The list above gives the low temperatures, in degrees Fahrenheit, for 9 days in December in a certain city. What is the median low temperature, in degrees Fahrenheit, for the 9 days?</p>
+## 2296
+A data set consists of 5 numbers. The minimum is 5 and the range is 25. If we delete the minimum the median will not change, but if we delete the maximum the median will decrease by 1 unit. If the mean of the data set is 15, what is the median of the data set?
+## 2297
+<p style="text-align:center">15, 19, 28, 9, 7, 14, 19, 17, 18</p><p>The list gives the low temperatures, in degrees Fahrenheit, for nine days in a city. What is the median low temperature?</p>
+## 2298
+Data set A contains 23 positive integers and has mean score of 83. The highest and two lowest values in data set A are removed to create data set B. The average of data set B is 87. What is the greatest possible range of the 3 values that were removed to create data set B?
+## 2301
+<table><thead><tr><th>Species of tree</th><th>Growth factor</th></tr></thead><tbody><tr><td>Red maple</td><td>4.5</td></tr><tr><td>River birch</td><td>3.5</td></tr><tr><td>Cottonwood</td><td>2.0</td></tr><tr><td>Black walnut</td><td>4.5</td></tr><tr><td>White birch</td><td>5.0</td></tr><tr><td>American elm</td><td>4.0</td></tr><tr><td>Pin oak</td><td>3.0</td></tr><tr><td>Shagbark hickory</td><td>7.5</td></tr></tbody></table><p>One method of calculating the approximate age, in years, of a tree of a particular species is to multiply the diameter of the tree, in inches, by a constant called the growth factor for that species. The table above gives the growth factors for eight species of trees.</p><p>According to the information in the table, what is the approximate age of an American elm tree with a diameter of 12 inches?</p>
+@ 24 years | 36 years | 40 years | 48 years
+## 2302
+<p>Data set A: 8, 11, 12, 15, 21, 27<br>Data set B: 9, 12, 13, 16, 22, $h$</p><p>If the standard deviation of A is greater than that of B, which of the following could $h$ be?</p><p>I. 23 &nbsp; II. 28 &nbsp; III. 29</p>
+@ I only | II only | III only | II or III
+## 2304
+<p><b>Survey Results of Households</b></p><table><thead><tr><th>Number of children per household</th><th>Frequency</th></tr></thead><tbody><tr><td>0</td><td>$x$</td></tr><tr><td>1</td><td>3</td></tr><tr><td>2</td><td>2</td></tr><tr><td>3</td><td>5</td></tr><tr><td>4</td><td>2</td></tr></tbody></table><p>In the table above, the median number of children per household is 2. What is one possible value of $x$?</p>
+## 2306
+At regular checkups, a pediatrician measures Anne's height and weight and reports each as a percentile for her age. For example, when Anne was 24 months old, her weight percentile of 65 indicated that 65% of children that age were at or below Anne's weight. Anne's results for 6 checkups are shown below.<table><thead><tr><th>Checkup age</th><th>Height percentile</th><th>Weight percentile</th></tr></thead><tbody><tr><td>1 month</td><td>40</td><td>35</td></tr><tr><td>3 months</td><td>45</td><td>45</td></tr><tr><td>6 months</td><td>55</td><td>50</td></tr><tr><td>12 months</td><td>60</td><td>55</td></tr><tr><td>18 months</td><td>55</td><td>55</td></tr><tr><td>24 months</td><td>50</td><td>65</td></tr></tbody></table><p>Which of the following values is larger for the weight percentile data than for the height percentile data?</p>
+@ Mean | Median | Mode | Range
+## 2307
+The list gives the number of individuals in each of 6 groups of ring-tailed lemurs.<p style="text-align:center">14, 5, 17, 14, 15, 7</p><p>What is the range of the numbers of individuals for the 6 groups of ring-tailed lemurs?</p>
+## 2308
+<p>J: 18, 18, 19, 19, 20, 21, 21, 22, 22<br>K: 18, 20, 20, 20, 20, 20, 20, 20, 22</p><p>Which statistic is greater for data set J than for data set K?</p>
+@ Mean | Median | Range | Standard deviation
+## 2309
+<p><b>Weights of Manhole Covers on Two City Streets</b></p><table><thead><tr><th>Street A</th><th>Street B</th></tr></thead><tbody><tr><td>261</td><td>271</td></tr><tr><td>290</td><td>253</td></tr><tr><td>267</td><td>272</td></tr><tr><td>282</td><td>262</td></tr><tr><td>273</td><td>270</td></tr><tr><td>269</td><td>288</td></tr><tr><td>293</td><td>263</td></tr><tr><td>288</td><td>265</td></tr><tr><td>279</td><td>259</td></tr></tbody></table><p>The table above shows the weights, in pounds, of the manhole covers on two city streets. City regulations require that each manhole cover weigh at least 250 pounds and no more than 300 pounds.</p><p>The median weight of the manhole covers on Street A is how many pounds greater than the median weight of the manhole covers on Street B?</p>
+## 2310
+At regular checkups, a pediatrician measures Anne's height and weight and reports each as a percentile for her age. For example, when Anne was 24 months old, her weight percentile of 65 indicated that 65% of children that age were at or below Anne's weight. Anne's results for 6 checkups are shown below.<table><thead><tr><th>Checkup age</th><th>Height percentile</th><th>Weight percentile</th></tr></thead><tbody><tr><td>1 month</td><td>40</td><td>35</td></tr><tr><td>3 months</td><td>45</td><td>45</td></tr><tr><td>6 months</td><td>55</td><td>50</td></tr><tr><td>12 months</td><td>60</td><td>55</td></tr><tr><td>18 months</td><td>55</td><td>55</td></tr><tr><td>24 months</td><td>50</td><td>65</td></tr></tbody></table><p>What is Anne's median height percentile for these 6 checkups?</p>
+@ 50.8 | 52.5 | 55 | 57.5
+## 2311
+<table><thead><tr><th>Pages</th><th>Students</th></tr></thead><tbody><tr><td>12</td><td>4</td></tr><tr><td>18</td><td>5</td></tr><tr><td>24</td><td>7</td></tr><tr><td>30</td><td>4</td></tr></tbody></table><p>The table gives the numbers of pages read by 20 students. What is the mean number of pages read?</p>
+## 2312
+<p>J: 14, 14, 15, 15, 16, 17, 17, 18, 18<br>K: 14, 16, 16, 16, 16, 16, 16, 16, 18</p><p>Which statistic is greater for data set J than for data set K?</p>
+@ Mean | Median | Range | Standard deviation
+## 2313
+A science class studied the feeding behavior of the birds that visited a bird feeder each school day for a period of time. The table summarizes the number of birds the class observed visiting the bird feeder each school day during this period of time.<table><thead><tr><th>Number of birds</th><th>Number of days</th></tr></thead><tbody><tr><td>14</td><td>3</td></tr><tr><td>15</td><td>3</td></tr><tr><td>16</td><td>4</td></tr><tr><td>17</td><td>1</td></tr><tr><td>18</td><td>3</td></tr><tr><td>19</td><td>9</td></tr></tbody></table><p>What is the median number of birds the class observed visiting the bird feeder each school day during this period of time?</p>
+## 2314
+<p style="text-align:center">x, 24, 32, 33, 37, 42, 45</p><p>The list above consists of seven integers that increase in value from left to right. If the range of the list is equal to one of the values in the list, what is the greatest possible value of $x$?</p>
+@ 23 | 21 | 12 | 0
+## 2315
+In each of the following data sets of 5 values, $p$ is a constant. Which of these data sets has the largest standard deviation?
+@ $p-4,\ p,\ p,\ p,\ p+4$ | $p-1,\ p-1,\ p,\ p+1,\ p+1$ | $p,\ p,\ p,\ p,\ p$ | $p-5,\ p-4,\ p,\ p+4,\ p+5$
+## 2316
+The mean score of 8 players in a basketball game was 14.5 points. If the highest individual score is removed, the mean score of the remaining 7 players becomes 12 points. What was the highest score?
+@ 20 | 24 | 32 | 36
+## 2317
+In each of the following data sets of 5 values, $p$ is a constant. Which of these data sets has the largest standard deviation?
+@ $p-5,\ p-5,\ p,\ p+5,\ p+5$ | $p-6,\ p,\ p,\ p,\ p+6$ | $p-9,\ p-6,\ p,\ p+6,\ p+9$ | $p,\ p,\ p,\ p,\ p$
+## 2318
+A data set of 27 different numbers has a mean of 18 and a median of 18. A new data set is created by adding 20 to all of the values greater than the median while leaving all other numbers in the data set unchanged. Which of the following values will not change?
+@ Mean | Range | Median | Sum of the numbers
