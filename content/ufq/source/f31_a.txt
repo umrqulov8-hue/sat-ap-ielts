@@ -1,0 +1,16 @@
+## 2729
+In triangle $ABC$, $AB=BC$. Points $D$ and $E$ lie on line segments $AB$ and $BC$, respectively, such that line segments $DE$ and $AC$ are parallel. Point $O$ is the midpoint of line segment $DE$, and the measure of angle $OAC$ is $30^\circ$. Point $F$ lies on line segment $AC$, and line segment $BF$ passes through point $O$. If $AB=81$ and $AO=BO$, what is the length of line segment $BE$?<p></p>[[fig:q2729]]
+## 2731
+Note: Figure not drawn to scale. In the figure shown, line $k$ intersects lines $r$ and $s$. If $w=106$, which additional piece of information is sufficient to prove that lines $r$ and $s$ are parallel?<p></p>[[fig:q2731]]
+@ $x=74$ | $y=106$ | $w+y=180$ | $y+z=180$
+## 2734
+Note: Figure not drawn to scale. In the figure shown, line $k$ intersects lines $r$ and $s$. If $w=118$, which additional piece of information is sufficient to prove that lines $r$ and $s$ are parallel?<p></p>[[fig:q2734]]
+@ $x=62$ | $y=118$ | $w+y=180$ | $y+z=180$
+## 2735
+Note: Figure not drawn to scale. In the figure, parallel lines $a$ and $b$ are intersected by lines $c$, $d$, and $e$. If $z=49$, $y=136$, and $v<z$, which statement about $x$ and $w$ must be true?<p></p>[[fig:q2735]]
+@ $x<w$ | $x>w$ | $x=w$ | $x+w=90$
+## 2737
+Note: Figure not drawn to scale. In the figure above, $\overline{AD}$, $\overline{BE}$, and $\overline{CF}$ all intersect at point $G$. Which of the following must be equivalent to $z$?<p></p>[[fig:q2737]]
+@ $x+y$ | $180-(x+y)$ | $180-x$ | $180-y$
+## 2739
+Lines $m$ and $n$ are parallel in the diagram below. The measure of angle $A$ is $3k+93$ degrees, and the measure of angle $B$ is $\frac{k}{4}+48$ degrees. Find the measure of angle $C$.<p></p>[[fig:q2739]]
