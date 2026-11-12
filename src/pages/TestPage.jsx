@@ -414,7 +414,7 @@ export default function TestPage() {
     if (current > 0) handleJump(current - 1)
   }
 
-  const handleJump = useCallback((idx) => {
+  const handleJump = (idx) => {
     if (selected !== null && step === 'taking') {
       const isCorrect = checkCorrect(currentQuestion, selected)
       const already = answers.findIndex(a => a.qIdx === current)
@@ -436,7 +436,7 @@ export default function TestPage() {
     const jumpAns = (step === 'taking' && answers.find(a => a.qIdx === idx))
     setSelected(jumpAns ? jumpAns.selected : null)
     setShowNav(false)
-  }, [selected, step, currentQuestion, answers, current, checkCorrect])
+  }
 
   const markReview = () => {
     setReviewMarked(prev =>
