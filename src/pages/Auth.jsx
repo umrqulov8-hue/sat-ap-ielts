@@ -159,10 +159,16 @@ export default function Auth() {
     setErrors({})
     setSubmitting(true)
     try {
-      await supabase.auth.signInWithOAuth({
+      const { error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: { redirectTo: window.location.origin + '/auth' },
       })
+      if (error) {
+        setErrors({ general: error.code === 'provider_disabled'
+          ? 'Google orqali kirish hozircha yoqilmagan. Email va parol bilan kiring.'
+          : getAuthErrorMessage(error) })
+        setSubmitting(false)
+      }
     } catch (error) {
       setErrors({ general: getAuthErrorMessage(error) })
       setSubmitting(false)

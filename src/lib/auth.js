@@ -78,13 +78,22 @@ export async function signInWithPassword({ email, password }) {
 
 // Google (or any OAuth provider) sign-in. Redirects the browser to Supabase, which
 // returns to `redirectTo` with the session in the URL hash; session.js picks it up.
-export function signInWithOAuth({ provider, options = {} }) {
+export async function signInWithOAuth({ provider, options = {} }) {
+  try {
+    const res = await authFetch(`${SUPABASE_URL}/auth/v1/settings`, { headers: { apikey: SUPABASE_ANON_KEY } })
+    if (res.ok) {
+      const settings = await res.json()
+      if (settings?.external && settings.external[provider] === false) {
+        return { data: null, error: { message: 'provider is not enabled', code: 'provider_disabled' } }
+      }
+    }
+  } catch { /* fall through and let the redirect report any problem */ }
   const redirectTo = options.redirectTo || `${window.location.origin}/auth`
   const params = new URLSearchParams({ provider, redirect_to: redirectTo })
   if (options.queryParams) for (const [k, v] of Object.entries(options.queryParams)) params.set(k, v)
   const url = `${SUPABASE_URL}/auth/v1/authorize?${params.toString()}`
   window.location.assign(url)
-  return Promise.resolve({ data: { provider, url }, error: null })
+  return { data: { provider, url }, error: null }
 }
 
 export async function signOut() {
