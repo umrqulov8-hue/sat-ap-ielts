@@ -635,8 +635,8 @@ export default function TestPage() {
           <div className="test-done-cert" id="done-cert-panel">
             <div className="cert" id="cert">
               <div className="cert-top">
-                <div className="cert-logo">SATAP</div>
-                <div className="cert-badge">ACADEMY</div>
+                <div className="cert-logo">UFQ</div>
+                <div className="cert-badge">SAT MATH</div>
               </div>
               <div className="cert-seal">&#9733;</div>
               <div className="cert-title">CERTIFICATE OF ACHIEVEMENT</div>
@@ -661,7 +661,7 @@ export default function TestPage() {
                 </div>
               </div>
               <div className="cert-date">{new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</div>
-              <div className="cert-footer">SATAP Academy — Excellence in Test Preparation</div>
+              <div className="cert-footer">UFQ — Excellence in Test Preparation</div>
             </div>
             <div className="cert-actions">
               <button className="test-done-btn" onClick={async () => {
@@ -670,7 +670,7 @@ export default function TestPage() {
                 const { default: html2canvas } = await import('html2canvas')
                 const canvas = await html2canvas(el, { scale: 2, backgroundColor: '#ffffff' })
                 const link = document.createElement('a')
-                link.download = 'SATAP-Certificate-' + topic.title.replace(/\s+/g, '-') + '.png'
+                link.download = 'UFQ-Certificate-' + topic.title.replace(/\s+/g, '-') + '.png'
                 link.href = canvas.toDataURL()
                 link.click()
               }}>DOWNLOAD CERTIFICATE</button>

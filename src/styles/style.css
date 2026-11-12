@@ -67,7 +67,7 @@ a, button { text-decoration: none; color: inherit; font-family: inherit; cursor:
 .reveal-fade { opacity: 0; transition: opacity 0.6s ease; }
 .reveal-fade.active { opacity: 1; }
 
-/* hero — SATAP ACADEMY */
+/* hero — UFQ */
 .reveal-hero {
     opacity: 0;
     transform: translateY(50px);
@@ -3484,3 +3484,19 @@ mark.hl-mark:hover { opacity: 0.6; }
   .draw-toolbar-separator { height: 20px; margin: 0 1px; }
   .draw-toolbar svg { width: 18px; height: 18px; }
 }
+
+img.unitap-nav-brand-mark { object-fit: cover; background: #002748; padding: 0; }
+.unitap-footer-brand-mark img.mark { object-fit: cover; background: #002748; border: 2px solid var(--cream); }
+
+.modal-or { display: flex; align-items: center; gap: 0.7rem; margin: 0.2rem 0; font-size: 0.65rem; font-weight: 800; letter-spacing: 0.2em; color: var(--dark); opacity: 0.55; }
+.modal-or::before, .modal-or::after { content: ''; flex: 1; height: 1.5px; background: var(--dark); opacity: 0.35; }
+.modal-google {
+    display: flex; align-items: center; justify-content: center; gap: 0.6rem;
+    width: 100%; padding: 0.85rem 1rem; background: #fff; color: var(--dark);
+    border: 2.5px solid var(--dark); box-shadow: 4px 4px 0 var(--dark);
+    font-family: inherit; font-size: 0.75rem; font-weight: 800; letter-spacing: 0.1em; cursor: pointer;
+    transition: transform 0.18s var(--ease), box-shadow 0.18s var(--ease);
+}
+.modal-google:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 var(--dark); }
+.modal-google:active { transform: translate(1px, 1px); box-shadow: 2px 2px 0 var(--dark); }
+.modal-google:disabled { opacity: 0.5; cursor: not-allowed; }

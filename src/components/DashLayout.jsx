@@ -57,14 +57,14 @@ export default function DashLayout() {
   }, [location.pathname])
 
   useEffect(() => {
-    document.title = pageTitle ? `${pageTitle} — SATAP Academy` : 'SATAP Academy'
+    document.title = pageTitle ? `${pageTitle} — UFQ` : 'UFQ'
     let meta = document.querySelector('meta[name="description"]')
     if (!meta) {
       meta = document.createElement('meta')
       meta.name = 'description'
       document.head.appendChild(meta)
     }
-    meta.content = pageTitle ? `${pageTitle} — SAT va AP imtihonlariga tayyorlanish` : 'SATAP Academy — SAT va AP imtihonlariga tayyorlanish platformasi'
+    meta.content = pageTitle ? `${pageTitle} — SAT va AP imtihonlariga tayyorlanish` : 'UFQ — SAT va AP imtihonlariga tayyorlanish platformasi'
   }, [pageTitle])
 
   return (

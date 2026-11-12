@@ -2,7 +2,7 @@ self.addEventListener('push', function (event) {
   if (!event.data) return
   try {
     const data = event.data.json()
-    self.registration.showNotification(data.title || 'SATAP Academy', {
+    self.registration.showNotification(data.title || 'UFQ', {
       body: data.body || '',
       icon: '/favicon.svg',
       badge: '/favicon.svg',

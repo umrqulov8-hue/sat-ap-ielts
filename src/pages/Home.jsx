@@ -7,7 +7,7 @@ export default function Home() {
   useScrollReveal()
   const heroRef = useHeroParallax()
 
-  useEffect(() => { document.title = 'SATAP Academy — Math Prep' }, [])
+  useEffect(() => { document.title = 'UFQ — SAT Math Prep' }, [])
 
   useEffect(() => {
     const handleClick = (e) => {
@@ -31,8 +31,8 @@ export default function Home() {
     <>
       <nav className="unitap-nav u-navbar">
         <a href="#home" className="unitap-nav-brand">
-          <span className="unitap-nav-brand-mark">S</span>
-          SATAP Academy
+          <img className="unitap-nav-brand-mark" src="/ufq-logo.png" alt="UFQ" width="34" height="34" />
+          UFQ
         </a>
         <div className="unitap-nav-links">
           <a href="#methodology" className="unitap-nav-link">METHODOLOGY</a>
@@ -342,7 +342,7 @@ export default function Home() {
         <div className="unitap-section-inner">
           <span className="unitap-eyebrow u-reveal">FEATURES</span>
           <h2 className="unitap-h2 u-reveal" data-reveal-delay="0.05s">
-            Nega <span className="unitap-h2-line">SATAP Academy</span>?
+            Nega <span className="unitap-h2-line">UFQ</span>?
           </h2>
           <p className="unitap-h2-sub u-reveal" data-reveal-delay="0.1s">
             Boshqa platformalardan farqli — har bir xususiyat natijaga yo'naltirilgan.
@@ -453,7 +453,7 @@ export default function Home() {
         <div className="unitap-final-cta-shape s3" />
         <div className="unitap-final-cta-inner u-stagger">
           <h2>Imtihongacha <em>vaqtingizni</em><br />behuda ketkazmang.</h2>
-          <p>12,400+ talaba allaqachon SATAP Academy bilan natijalarini oshirdi. Siz ham qo'shiling — birinchi mock imtihon bepul.</p>
+          <p>12,400+ talaba allaqachon UFQ bilan natijalarini oshirdi. Siz ham qo'shiling — birinchi mock imtihon bepul.</p>
           <Link to="/auth" className="unitap-btn primary">HOZIROQ BOSHLASH →</Link>
         </div>
       </section>
@@ -463,8 +463,8 @@ export default function Home() {
           <div className="unitap-footer-grid">
             <div>
               <div className="unitap-footer-brand-mark">
-                <span className="mark">S</span>
-                SATAP Academy
+                <img className="mark" src="/ufq-logo.png" alt="UFQ" width="36" height="36" />
+                UFQ
               </div>
               <p className="unitap-footer-tag">
                 Matematika imtihonlariga tayyorlanish uchun eng zamonaviy platforma.
@@ -495,7 +495,7 @@ export default function Home() {
             </div>
           </div>
           <div className="unitap-footer-bottom">
-            <span>© 2026 SATAP Academy. All rights reserved.</span>
+            <span>© 2026 UFQ. All rights reserved.</span>
             <span>Built for ambitious students.</span>
           </div>
         </div>

@@ -3071,3 +3071,6 @@ select.settings-input {
   50% { width: 60%; margin-left: 20%; }
   100% { width: 0; margin-left: 100%; }
 }
+
+.sidebar-logo-icon { overflow: hidden; background: #002748; }
+.sidebar-logo-icon img { width: 100%; height: 100%; object-fit: cover; display: block; }

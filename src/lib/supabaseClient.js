@@ -1,5 +1,5 @@
 import { getSession, onAuthStateChange, getFreshAccessToken, refreshAccessToken } from './session'
-import { signUp, signInWithPassword, signOut, updateUser, resetPasswordForEmail } from './auth'
+import { signUp, signInWithPassword, signInWithOAuth, signOut, updateUser, resetPasswordForEmail } from './auth'
 
 const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL
 const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY
@@ -300,6 +300,7 @@ export const supabase = {
     onAuthStateChange,
     signUp,
     signInWithPassword,
+    signInWithOAuth,
     signOut,
     updateUser,
     resetPasswordForEmail,

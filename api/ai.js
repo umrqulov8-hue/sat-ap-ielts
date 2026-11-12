@@ -46,7 +46,7 @@ export default async function handler(request, response) {
         Authorization: `Bearer ${providerKey}`,
         'Content-Type': 'application/json',
         'HTTP-Referer': 'https://satap.vercel.app',
-        'X-Title': 'SATAP Academy',
+        'X-Title': 'UFQ',
       },
       body: JSON.stringify({
         model: MODEL,

@@ -71,10 +71,10 @@ export default function Sidebar() {
     <aside className="dash-sidebar">
       <div className="sidebar-header">
         <Link to="/dashboard" className="sidebar-logo-wrap">
-          <div className="sidebar-logo-icon"><span>S</span></div>
-          <span className="sidebar-logo-text">SATAP</span>
+          <div className="sidebar-logo-icon"><img src="/ufq-logo.png" alt="UFQ" width="36" height="36" /></div>
+          <span className="sidebar-logo-text">UFQ</span>
         </Link>
-        <span className="sidebar-badge">ACADEMY</span>
+        <span className="sidebar-badge">SAT MATH</span>
       </div>
 
       <div className="sidebar-scroll">
