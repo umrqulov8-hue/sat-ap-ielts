@@ -1,5 +1,5 @@
 -- =====================
--- SATAP ACADEMY SCHEMA
+-- UFQ SCHEMA
 -- =====================
 
 -- Extensions

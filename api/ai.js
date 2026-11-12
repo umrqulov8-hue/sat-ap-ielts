@@ -45,7 +45,7 @@ export default async function handler(request, response) {
       headers: {
         Authorization: `Bearer ${providerKey}`,
         'Content-Type': 'application/json',
-        'HTTP-Referer': 'https://satap.vercel.app',
+        'HTTP-Referer': 'https://ufq-sat.vercel.app',
         'X-Title': 'UFQ',
       },
       body: JSON.stringify({
