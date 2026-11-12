@@ -206,12 +206,45 @@ export function drawPrism(ctx, x, y, w, h, color, lineWidth) {
 }
 
 /* =========================================================================
-   BOUNDS, HIT-TESTING & TRANSLATION HELPERS
+   ELEMENT MODEL
+   draw:        { points: [{x, y}] }
+   line/arrow:  { x1, y1, x2, y2 }
+   everything else (shapes + solids): { x, y, width, height }
    ========================================================================= */
 
-function getElementBounds(el) {
+export const MIN_SIZE = 8
+export const HANDLE_PAD = 6
+// These shapes must stay perfectly round, so they resize with a locked aspect.
+export const LOCK_ASPECT = new Set(['circle', 'sphere'])
+const SOLID_TYPES = new Set(['cube', 'cylinder', 'cone', 'sphere', 'pyramid', 'prism'])
+
+export const isLineType = type => type === 'line' || type === 'arrow'
+
+export function normalizeRect(x1, y1, x2, y2) {
+  return {
+    x: Math.min(x1, x2),
+    y: Math.min(y1, y2),
+    width: Math.max(Math.abs(x2 - x1), MIN_SIZE),
+    height: Math.max(Math.abs(y2 - y1), MIN_SIZE),
+  }
+}
+
+// Builds the stored element for a shape dragged from (x1,y1) to (x2,y2).
+export function makeShape(type, id, x1, y1, x2, y2, color, lineWidth) {
+  if (isLineType(type)) return { id, type, x1, y1, x2, y2, color, lineWidth }
+  if (LOCK_ASPECT.has(type)) {
+    const size = Math.max(Math.abs(x2 - x1), Math.abs(y2 - y1), MIN_SIZE)
+    const x = x2 >= x1 ? x1 : x1 - size
+    const y = y2 >= y1 ? y1 : y1 - size
+    return { id, type, x, y, width: size, height: size, color, lineWidth }
+  }
+  const r = normalizeRect(x1, y1, x2, y2)
+  return { id, type, x: r.x, y: r.y, width: r.width, height: r.height, color, lineWidth }
+}
+
+export function getBounds(el) {
   if (el.type === 'draw') {
-    if (!el.points || el.points.length === 0) return { x: 0, y: 0, width: 20, height: 20 }
+    if (!el.points || el.points.length === 0) return { x: 0, y: 0, width: MIN_SIZE, height: MIN_SIZE }
     let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity
     for (const p of el.points) {
       if (p.x < minX) minX = p.x
@@ -219,60 +252,269 @@ function getElementBounds(el) {
       if (p.x > maxX) maxX = p.x
       if (p.y > maxY) maxY = p.y
     }
-    return { x: minX, y: minY, width: Math.max(maxX - minX, 10), height: Math.max(maxY - minY, 10) }
-  } else if (el.type === 'line' || el.type === 'arrow') {
-    const minX = Math.min(el.x1, el.x2)
-    const minY = Math.min(el.y1, el.y2)
-    const maxX = Math.max(el.x1, el.x2)
-    const maxY = Math.max(el.y1, el.y2)
-    return { x: minX, y: minY, width: Math.max(maxX - minX, 10), height: Math.max(maxY - minY, 10) }
-  } else {
-    return { x: el.x, y: el.y, width: el.width, height: el.height }
+    return { x: minX, y: minY, width: Math.max(maxX - minX, MIN_SIZE), height: Math.max(maxY - minY, MIN_SIZE) }
   }
+  if (isLineType(el.type)) {
+    const x = Math.min(el.x1, el.x2)
+    const y = Math.min(el.y1, el.y2)
+    return { x, y, width: Math.abs(el.x2 - el.x1), height: Math.abs(el.y2 - el.y1) }
+  }
+  if (el.width === undefined) return normalizeRect(el.x1, el.y1, el.x2, el.y2)
+  return { x: el.x, y: el.y, width: el.width, height: el.height }
 }
 
-function distToSegment(p, v, w) {
-  const lengthSquared = (v.x - w.x) ** 2 + (v.y - w.y) ** 2
-  if (lengthSquared === 0) return Math.hypot(p.x - v.x, p.y - v.y)
-  const t = Math.max(0, Math.min(1, ((p.x - v.x) * (w.x - v.x) + (p.y - v.y) * (w.y - v.y)) / lengthSquared))
-  return Math.hypot(p.x - (v.x + t * (w.x - v.x)), p.y - (v.y + t * (w.y - v.y)))
+/* =========================================================================
+   RENDERING
+   ========================================================================= */
+
+function strokeSmooth(ctx, pts) {
+  if (pts.length === 1) {
+    ctx.beginPath()
+    ctx.arc(pts[0].x, pts[0].y, (ctx.lineWidth || 3) / 2, 0, Math.PI * 2)
+    ctx.fillStyle = ctx.strokeStyle
+    ctx.fill()
+    return
+  }
+  ctx.beginPath()
+  ctx.moveTo(pts[0].x, pts[0].y)
+  if (pts.length === 2) {
+    ctx.lineTo(pts[1].x, pts[1].y)
+  } else {
+    for (let i = 1; i < pts.length - 1; i++) {
+      const mx = (pts[i].x + pts[i + 1].x) / 2
+      const my = (pts[i].y + pts[i + 1].y) / 2
+      ctx.quadraticCurveTo(pts[i].x, pts[i].y, mx, my)
+    }
+    const last = pts[pts.length - 1]
+    ctx.lineTo(last.x, last.y)
+  }
+  ctx.stroke()
 }
 
-export function isPointInsideElement(px, py, el) {
-  const padding = 14
-  if (el.type === 'draw') {
-    if (!el.points || el.points.length < 2) return false
-    const bounds = getElementBounds(el)
-    if (px < bounds.x - padding || px > bounds.x + bounds.width + padding ||
-        py < bounds.y - padding || py > bounds.y + bounds.height + padding) {
-      return false
-    }
-    // Check distance to points/segments
-    for (let i = 0; i < el.points.length - 1; i++) {
-      const d = distToSegment({ x: px, y: py }, el.points[i], el.points[i + 1])
-      if (d <= padding + (el.lineWidth || 3)) return true
-    }
-    return false
-  } else if (el.type === 'line' || el.type === 'arrow') {
-    const d = distToSegment({ x: px, y: py }, { x: el.x1, y: el.y1 }, { x: el.x2, y: el.y2 })
-    return d <= padding + (el.lineWidth || 3)
-  } else {
-    // Shapes and 3D shapes
-    const bounds = getElementBounds(el)
-    return (
-      px >= bounds.x - padding &&
-      px <= bounds.x + bounds.width + padding &&
-      py >= bounds.y - padding &&
-      py <= bounds.y + bounds.height + padding
-    )
+export function renderElement(ctx, el, isPreview = false) {
+  ctx.save()
+  ctx.strokeStyle = el.color
+  ctx.lineWidth = el.lineWidth || 3
+  ctx.lineCap = 'round'
+  ctx.lineJoin = 'round'
+  if (isPreview) ctx.globalAlpha = 0.75
+
+  const { type } = el
+  const b = type === 'draw' ? null : getBounds(el)
+
+  if (type === 'draw') {
+    if (el.points && el.points.length > 0) strokeSmooth(ctx, el.points)
+  } else if (type === 'line') {
+    ctx.beginPath()
+    ctx.moveTo(el.x1, el.y1)
+    ctx.lineTo(el.x2, el.y2)
+    ctx.stroke()
+  } else if (type === 'arrow') {
+    const headlen = 16
+    const angle = Math.atan2(el.y2 - el.y1, el.x2 - el.x1)
+    ctx.beginPath()
+    ctx.moveTo(el.x1, el.y1)
+    ctx.lineTo(el.x2, el.y2)
+    ctx.moveTo(el.x2, el.y2)
+    ctx.lineTo(el.x2 - headlen * Math.cos(angle - Math.PI / 6), el.y2 - headlen * Math.sin(angle - Math.PI / 6))
+    ctx.moveTo(el.x2, el.y2)
+    ctx.lineTo(el.x2 - headlen * Math.cos(angle + Math.PI / 6), el.y2 - headlen * Math.sin(angle + Math.PI / 6))
+    ctx.stroke()
+  } else if (type === 'rect') {
+    ctx.beginPath()
+    ctx.rect(b.x, b.y, b.width, b.height)
+    ctx.stroke()
+  } else if (type === 'circle' || type === 'ellipse') {
+    // The shape always fills its box, so the box is exactly what the user sees and grabs.
+    ctx.beginPath()
+    ctx.ellipse(b.x + b.width / 2, b.y + b.height / 2, b.width / 2, b.height / 2, 0, 0, 2 * Math.PI)
+    ctx.stroke()
+  } else if (type === 'triangle') {
+    ctx.beginPath()
+    ctx.moveTo(b.x + b.width / 2, b.y)
+    ctx.lineTo(b.x + b.width, b.y + b.height)
+    ctx.lineTo(b.x, b.y + b.height)
+    ctx.closePath()
+    ctx.stroke()
+  } else if (type === 'right-triangle') {
+    ctx.beginPath()
+    ctx.moveTo(b.x, b.y)
+    ctx.lineTo(b.x, b.y + b.height)
+    ctx.lineTo(b.x + b.width, b.y + b.height)
+    ctx.closePath()
+    ctx.stroke()
+    const mark = Math.min(14, b.width * 0.2, b.height * 0.2)
+    ctx.beginPath()
+    ctx.moveTo(b.x, b.y + b.height - mark)
+    ctx.lineTo(b.x + mark, b.y + b.height - mark)
+    ctx.lineTo(b.x + mark, b.y + b.height)
+    ctx.stroke()
+  } else if (type === 'axes') {
+    const midX = b.x + b.width / 2
+    const midY = b.y + b.height / 2
+    ctx.beginPath()
+    ctx.moveTo(b.x, midY)
+    ctx.lineTo(b.x + b.width, midY)
+    ctx.moveTo(midX, b.y + b.height)
+    ctx.lineTo(midX, b.y)
+    ctx.stroke()
+    const a = Math.min(8, b.width / 4, b.height / 4)
+    ctx.beginPath()
+    ctx.moveTo(b.x + b.width - a, midY - a * 0.6)
+    ctx.lineTo(b.x + b.width, midY)
+    ctx.lineTo(b.x + b.width - a, midY + a * 0.6)
+    ctx.moveTo(midX - a * 0.6, b.y + a)
+    ctx.lineTo(midX, b.y)
+    ctx.lineTo(midX + a * 0.6, b.y + a)
+    ctx.stroke()
+  } else if (type === 'cube') {
+    drawCube(ctx, b.x, b.y, b.width, b.height, el.color, el.lineWidth || 3)
+  } else if (type === 'cylinder') {
+    drawCylinder(ctx, b.x, b.y, b.width, b.height, el.color, el.lineWidth || 3)
+  } else if (type === 'cone') {
+    drawCone(ctx, b.x, b.y, b.width, b.height, el.color, el.lineWidth || 3)
+  } else if (type === 'sphere') {
+    drawSphere(ctx, b.x, b.y, b.width, b.height, el.color, el.lineWidth || 3)
+  } else if (type === 'pyramid') {
+    drawPyramid(ctx, b.x, b.y, b.width, b.height, el.color, el.lineWidth || 3)
+  } else if (type === 'prism') {
+    drawPrism(ctx, b.x, b.y, b.width, b.height, el.color, el.lineWidth || 3)
   }
+
+  ctx.restore()
+}
+
+/* =========================================================================
+   HIT-TESTING
+   ========================================================================= */
+
+function distToSegment(px, py, ax, ay, bx, by) {
+  const l2 = (ax - bx) ** 2 + (ay - by) ** 2
+  if (l2 === 0) return Math.hypot(px - ax, py - ay)
+  const t = Math.max(0, Math.min(1, ((px - ax) * (bx - ax) + (py - ay) * (by - ay)) / l2))
+  return Math.hypot(px - (ax + t * (bx - ax)), py - (ay + t * (by - ay)))
+}
+
+function distToPolyline(px, py, pts, closed) {
+  let best = Infinity
+  const n = closed ? pts.length : pts.length - 1
+  for (let i = 0; i < n; i++) {
+    const a = pts[i]
+    const b = pts[(i + 1) % pts.length]
+    best = Math.min(best, distToSegment(px, py, a.x, a.y, b.x, b.y))
+  }
+  return best
+}
+
+function pointInPolygon(px, py, pts) {
+  let inside = false
+  for (let i = 0, j = pts.length - 1; i < pts.length; j = i++) {
+    const a = pts[i]
+    const b = pts[j]
+    if ((a.y > py) !== (b.y > py) && px < ((b.x - a.x) * (py - a.y)) / (b.y - a.y) + a.x) inside = !inside
+  }
+  return inside
+}
+
+function polygonOf(el, b) {
+  if (el.type === 'triangle') {
+    return [{ x: b.x + b.width / 2, y: b.y }, { x: b.x + b.width, y: b.y + b.height }, { x: b.x, y: b.y + b.height }]
+  }
+  if (el.type === 'right-triangle') {
+    return [{ x: b.x, y: b.y }, { x: b.x, y: b.y + b.height }, { x: b.x + b.width, y: b.y + b.height }]
+  }
+  return [
+    { x: b.x, y: b.y },
+    { x: b.x + b.width, y: b.y },
+    { x: b.x + b.width, y: b.y + b.height },
+    { x: b.x, y: b.y + b.height },
+  ]
+}
+
+// `tol` is the reach in px around the visible lines. With `fill`, the inside of
+// closed shapes counts too (click inside a circle to select it); erasing only
+// reaches the outline so it never wipes a shape by brushing its empty middle.
+export function hitTest(el, px, py, tol, fill = true) {
+  const t = tol + (el.lineWidth || 3) / 2
+  const type = el.type
+  if (type === 'draw') {
+    const pts = el.points || []
+    if (pts.length === 0) return false
+    if (pts.length === 1) return Math.hypot(px - pts[0].x, py - pts[0].y) <= t
+    const b = getBounds(el)
+    if (px < b.x - t || px > b.x + b.width + t || py < b.y - t || py > b.y + b.height + t) return false
+    return distToPolyline(px, py, pts, false) <= t
+  }
+  if (isLineType(type)) return distToSegment(px, py, el.x1, el.y1, el.x2, el.y2) <= t
+
+  const b = getBounds(el)
+  if (type === 'rect' || type === 'triangle' || type === 'right-triangle') {
+    const poly = polygonOf(el, b)
+    if (fill && pointInPolygon(px, py, poly)) return true
+    return distToPolyline(px, py, poly, true) <= t
+  }
+  if (type === 'circle' || type === 'ellipse') {
+    const rx = b.width / 2
+    const ry = b.height / 2
+    const r = Math.hypot((px - (b.x + rx)) / rx, (py - (b.y + ry)) / ry)
+    if (fill && r <= 1) return true
+    return Math.abs(r - 1) * Math.min(rx, ry) <= t
+  }
+  if (type === 'axes') {
+    const midX = b.x + b.width / 2
+    const midY = b.y + b.height / 2
+    return distToSegment(px, py, b.x, midY, b.x + b.width, midY) <= t || distToSegment(px, py, midX, b.y, midX, b.y + b.height) <= t
+  }
+  if (SOLID_TYPES.has(type)) {
+    if (!fill) {
+      return distToPolyline(px, py, polygonOf({ type: 'rect' }, b), true) <= t
+    }
+    return px >= b.x - t && px <= b.x + b.width + t && py >= b.y - t && py <= b.y + b.height + t
+  }
+  return false
+}
+
+/* =========================================================================
+   SELECTION HANDLES, MOVE & RESIZE
+   ========================================================================= */
+
+export function getHandles(el) {
+  if (isLineType(el.type)) return [{ id: 'p1', x: el.x1, y: el.y1 }, { id: 'p2', x: el.x2, y: el.y2 }]
+  const b = getBounds(el)
+  const l = b.x - HANDLE_PAD
+  const r = b.x + b.width + HANDLE_PAD
+  const t = b.y - HANDLE_PAD
+  const bt = b.y + b.height + HANDLE_PAD
+  const cx = (l + r) / 2
+  const cy = (t + bt) / 2
+  const corners = [{ id: 'nw', x: l, y: t }, { id: 'ne', x: r, y: t }, { id: 'se', x: r, y: bt }, { id: 'sw', x: l, y: bt }]
+  if (LOCK_ASPECT.has(el.type)) return corners
+  return [...corners, { id: 'n', x: cx, y: t }, { id: 'e', x: r, y: cy }, { id: 's', x: cx, y: bt }, { id: 'w', x: l, y: cy }]
+}
+
+export function hitHandle(el, px, py, radius) {
+  let best = null
+  let bestDist = radius
+  for (const h of getHandles(el)) {
+    const d = Math.hypot(px - h.x, py - h.y)
+    if (d <= bestDist) {
+      best = h.id
+      bestDist = d
+    }
+  }
+  return best
+}
+
+export const HANDLE_CURSORS = {
+  nw: 'nwse-resize', se: 'nwse-resize', ne: 'nesw-resize', sw: 'nesw-resize',
+  n: 'ns-resize', s: 'ns-resize', e: 'ew-resize', w: 'ew-resize', p1: 'crosshair', p2: 'crosshair',
 }
 
 export function applyOffsetToElement(el, dx, dy) {
   const clone = JSON.parse(JSON.stringify(el))
   if (clone.type === 'draw') {
     clone.points = clone.points.map(p => ({ x: p.x + dx, y: p.y + dy }))
-  } else if (clone.type === 'line' || clone.type === 'arrow') {
+  } else if (isLineType(clone.type)) {
     clone.x1 += dx
     clone.y1 += dy
     clone.x2 += dx
@@ -284,160 +526,65 @@ export function applyOffsetToElement(el, dx, dy) {
   return clone
 }
 
-export function drawSelectionBox(ctx, el) {
-  const bounds = getElementBounds(el)
+function mapToBounds(el, from, to) {
+  const clone = JSON.parse(JSON.stringify(el))
+  if (clone.type === 'draw') {
+    const sx = to.width / from.width
+    const sy = to.height / from.height
+    clone.points = clone.points.map(p => ({ x: to.x + (p.x - from.x) * sx, y: to.y + (p.y - from.y) * sy }))
+  } else {
+    clone.x = to.x
+    clone.y = to.y
+    clone.width = to.width
+    clone.height = to.height
+  }
+  return clone
+}
+
+// Resizes `init` by dragging `handle` to the pointer position (px, py).
+export function resizeElement(init, handle, px, py) {
+  if (isLineType(init.type)) {
+    const clone = JSON.parse(JSON.stringify(init))
+    if (handle === 'p1') { clone.x1 = px; clone.y1 = py } else { clone.x2 = px; clone.y2 = py }
+    return clone
+  }
+  const b = getBounds(init)
+  let l = b.x
+  let r = b.x + b.width
+  let t = b.y
+  let bt = b.y + b.height
+  if (handle.includes('w')) l = Math.min(px + HANDLE_PAD, r - MIN_SIZE)
+  if (handle.includes('e')) r = Math.max(px - HANDLE_PAD, l + MIN_SIZE)
+  if (handle.includes('n')) t = Math.min(py + HANDLE_PAD, bt - MIN_SIZE)
+  if (handle.includes('s')) bt = Math.max(py - HANDLE_PAD, t + MIN_SIZE)
+
+  if (LOCK_ASPECT.has(init.type)) {
+    const scale = Math.max((r - l) / b.width, (bt - t) / b.height, MIN_SIZE / Math.min(b.width, b.height))
+    const w = b.width * scale
+    const h = b.height * scale
+    if (handle.includes('w')) l = r - w; else r = l + w
+    if (handle.includes('n')) t = bt - h; else bt = t + h
+  }
+  return mapToBounds(init, b, { x: l, y: t, width: r - l, height: bt - t })
+}
+
+export function drawSelection(ctx, el) {
   ctx.save()
   ctx.strokeStyle = '#007aff'
+  ctx.fillStyle = '#ffffff'
   ctx.lineWidth = 1.5
-  ctx.setLineDash([4, 4])
-  ctx.strokeRect(bounds.x - 6, bounds.y - 6, bounds.width + 12, bounds.height + 12)
-
-  // Draw 4 corner handles
-  ctx.fillStyle = '#007aff'
-  ctx.setLineDash([])
-  const handleSize = 6
-  const corners = [
-    { x: bounds.x - 6, y: bounds.y - 6 },
-    { x: bounds.x + bounds.width + 6, y: bounds.y - 6 },
-    { x: bounds.x - 6, y: bounds.y + bounds.height + 6 },
-    { x: bounds.x + bounds.width + 6, y: bounds.y + bounds.height + 6 }
-  ]
-  corners.forEach(c => {
-    ctx.fillRect(c.x - handleSize / 2, c.y - handleSize / 2, handleSize, handleSize)
-  })
-
+  if (!isLineType(el.type)) {
+    const b = getBounds(el)
+    ctx.setLineDash([5, 4])
+    ctx.strokeRect(b.x - HANDLE_PAD, b.y - HANDLE_PAD, b.width + HANDLE_PAD * 2, b.height + HANDLE_PAD * 2)
+    ctx.setLineDash([])
+  }
+  for (const h of getHandles(el)) {
+    ctx.beginPath()
+    if (isLineType(el.type)) ctx.arc(h.x, h.y, 5.5, 0, Math.PI * 2)
+    else ctx.rect(h.x - 4.5, h.y - 4.5, 9, 9)
+    ctx.fill()
+    ctx.stroke()
+  }
   ctx.restore()
-}
-
-/* =========================================================================
-   SVG ICONS HELPER
-   ========================================================================= */
-
-export function ShapeIcon({ shape, size = 20 }) {
-  if (shape === 'cube') {
-    return (
-      <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
-        <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
-        <line x1="12" y1="22.08" x2="12" y2="12" />
-      </svg>
-    )
-  }
-  if (shape === 'cylinder') {
-    return (
-      <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <ellipse cx="12" cy="5" rx="9" ry="3" />
-        <path d="M3 5v14c0 1.66 4.03 3 9 3s9-1.34 9-3V5" />
-      </svg>
-    )
-  }
-  if (shape === 'cone') {
-    return (
-      <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M12 3 L3 19 C3 20.5 7 21.5 12 21.5 C17 21.5 21 20.5 21 19 Z" />
-      </svg>
-    )
-  }
-  if (shape === 'sphere') {
-    return (
-      <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <circle cx="12" cy="12" r="9" />
-        <ellipse cx="12" cy="12" rx="9" ry="3.5" />
-      </svg>
-    )
-  }
-  if (shape === 'pyramid') {
-    return (
-      <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M12 2 L2 18 L16 22 L22 17 Z" />
-        <line x1="12" y1="2" x2="16" y2="22" />
-      </svg>
-    )
-  }
-  if (shape === 'prism') {
-    return (
-      <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M4 20 L16 20 L10 7 Z" />
-        <path d="M10 7 L17 4 L22 16 L16 20" />
-      </svg>
-    )
-  }
-  if (shape === 'line') {
-    return (
-      <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <line x1="4" y1="20" x2="20" y2="4" />
-      </svg>
-    )
-  }
-  if (shape === 'arrow') {
-    return (
-      <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <line x1="5" y1="19" x2="19" y2="5" />
-        <polyline points="10 5 19 5 19 14" />
-      </svg>
-    )
-  }
-  if (shape === 'rect') {
-    return (
-      <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <rect x="3" y="4" width="18" height="16" rx="2" />
-      </svg>
-    )
-  }
-  if (shape === 'circle') {
-    return (
-      <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <circle cx="12" cy="12" r="9" />
-      </svg>
-    )
-  }
-  if (shape === 'ellipse') {
-    return (
-      <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <ellipse cx="12" cy="12" rx="10" ry="6" />
-      </svg>
-    )
-  }
-  if (shape === 'triangle') {
-    return (
-      <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z" />
-      </svg>
-    )
-  }
-  if (shape === 'right-triangle') {
-    return (
-      <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <path d="M4 20h16L4 4v16z" />
-      </svg>
-    )
-  }
-  if (shape === 'axes') {
-    return (
-      <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <path d="M12 2v20M2 12h20M12 2l-3 3M12 2l3 3M22 12l-3-3M22 12l-3 3" />
-      </svg>
-    )
-  }
-  return null
-}
-
-export function getShapeName(shape) {
-  const map = {
-    cube: 'Kub',
-    cylinder: 'Silindr',
-    cone: 'Konus',
-    sphere: 'Sfera',
-    pyramid: 'Piramida',
-    prism: 'Prizma',
-    line: 'Chiziq',
-    arrow: 'Strelka',
-    rect: 'To\'rtburchak',
-    circle: 'Aylana',
-    ellipse: 'Ellips',
-    triangle: 'Uchburchak',
-    'right-triangle': 'To\'g\'ri burchak',
-    axes: 'XY O\'qlari'
-  }
-  return map[shape] || shape
 }
