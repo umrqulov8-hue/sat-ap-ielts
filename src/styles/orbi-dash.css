@@ -319,3 +319,35 @@ html body .shape-picker-options button:hover, html body .shape-picker-options bu
   html body .bb-body { padding: 16px; }
   html body :is(.bb-next-btn, .bb-review-btn) { padding: 9px 18px; }
 }
+
+/* ==========================================================================
+   Panels that hold content (modals, calculator, reference, AI explanation) are
+   plain rectangles in the same colours: rounded corners clip their content.
+   ========================================================================== */
+html body :is(.bb-modal, .bb-calc-modal, .bb-ref-panel, .aitutor-modal, .edit-modal, .calendar-container, .shape-picker-menu, .draw-toolbar) {
+  border-radius: 0; border: 2px solid #1F45A8; box-shadow: 0 6px 0 #15327E, 0 20px 40px rgba(20, 33, 61, 0.2); overflow: hidden;
+}
+html body .draw-toolbar { overflow-x: auto; border-color: #EADBC2; box-shadow: 0 5px 0 #EADBC2, 0 12px 24px rgba(20, 33, 61, 0.14); }
+html body :is(.bb-modal-header, .bb-calc-header, .bb-ref-header, .aitutor-header) { border-radius: 0; }
+html body .bb-calc-frame, html body .bb-calc-modal iframe { border-radius: 0; }
+
+html body .aitutor-overlay { background: rgba(20, 33, 61, 0.5); backdrop-filter: none; }
+html body .aitutor-modal { background: #FFF7EA; font-family: var(--ob-font-body); }
+html body .aitutor-header { background: #1F45A8; color: #fff; border-bottom: 0; padding: 14px 20px; }
+html body .aitutor-header h3 { color: #fff; font-family: var(--ob-font-display); font-size: 19px; letter-spacing: 0.02em; }
+html body .aitutor-close { color: #fff; border: 0; border-radius: 0; }
+html body .aitutor-close:hover { background: rgba(255, 255, 255, 0.2); color: #fff; }
+html body .aitutor-body { background: #FFF7EA; }
+html body .aitutor-intro-text, html body .aitutor-explanation, html body .aitutor-loading p { color: #14213D; font-weight: 700; opacity: 1; }
+html body :is(.aitutor-btn, .aitutor-rebtn, .aitutor-retry) {
+  background: #1F45A8; color: #fff; border: 0; border-radius: 0; box-shadow: 0 4px 0 #15327E; font-family: var(--ob-font-display); font-weight: 700; letter-spacing: 0.04em;
+}
+html body :is(.aitutor-btn, .aitutor-rebtn, .aitutor-retry):hover { background: #1F45A8; color: #fff; transform: none; box-shadow: 0 4px 0 #15327E; filter: brightness(1.08); }
+html body :is(.aitutor-btn, .aitutor-rebtn, .aitutor-retry):active { transform: translateY(4px); box-shadow: none; }
+html body .aitutor-error { background: #FBE2DF; border: 2px solid #C8372D; border-radius: 0; color: #14213D; }
+html body .aitutor-spinner { border-color: #EADBC2; border-top-color: #1F45A8; }
+html body .aitutor-explanation { background: #fff; border: 2px solid #EADBC2; border-radius: 0; padding: 16px; }
+
+/* test grid cells and legend: square, same colours */
+html body .bb-grid-cell { border-radius: 0; }
+html body .bb-legend-box { border-radius: 0; }
