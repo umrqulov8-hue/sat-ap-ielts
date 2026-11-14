@@ -414,3 +414,34 @@ html body .tr-q-status.wrong { color: #C8372D; border-color: #C8372D; background
 html body .tr-stat.correct .tr-stat-val { color: #13804F; }
 html body .tr-stat.wrong .tr-stat-val { color: #C8372D; }
 html body .tr-explain-btn { color: var(--ac, #1F45A8); font-weight: 800; }
+
+/* ==========================================================================
+   Leftover old (square, hard-shadow) pieces. Rule of thumb used here:
+   stand-alone controls and cards are rounded; panels that hold content
+   (modals, calculator, explanations) stay rectangular.
+   ========================================================================== */
+html body .card-link {
+  display: inline-flex; align-items: center; background: #fff; color: #14213D; border: 2px solid #EADBC2; border-radius: 999px;
+  box-shadow: 0 3px 0 #EADBC2; padding: 0.35rem 1rem; font-family: var(--ob-font-display); font-weight: 700; font-size: 0.85rem; letter-spacing: 0.05em;
+  cursor: pointer; transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.15s ease;
+}
+html body .card-link:hover { background: #FFF7EA; transform: none; box-shadow: 0 3px 0 #EADBC2; }
+html body .card-link:active { transform: translateY(3px); box-shadow: none; }
+
+html body .qa-btn-icon { border: 0; border-radius: 12px; box-shadow: none; }
+html body .activity-dot { border: 0; border-radius: 50%; box-shadow: none; }
+html body .support-side-icon { border: 2px solid #EADBC2; border-radius: 14px; box-shadow: none; }
+html body .toggle-slider { border: 2px solid #EADBC2; border-radius: 999px; box-shadow: none; }
+html body .toggle-slider::before { border-radius: 50%; }
+html body .toggle-switch input:checked + .toggle-slider { background: #13804F; border-color: #0C5E39; }
+html body .stat-tag { border: 0; }
+html body .stat-bar { border: 0; }
+html body .profile-page .stat-tag, html body .profile-page .stat-bar { border: 0; }
+
+html body .topic-inner { background: #fff; border: 2px solid #EADBC2; border-radius: 22px; box-shadow: 0 6px 0 #EADBC2; }
+html body .shadow-wrap:hover .topic-inner { transform: translateY(-3px); box-shadow: 0 9px 0 #EADBC2; }
+
+html body .faq-a { border: 0; border-top: 2px dashed #EADBC2; border-radius: 0; background: #FFFBF3; }
+html body .cal-day { border-radius: 0; box-shadow: none; }
+html body .cal-day.today, html body .cal-day.selected { background: #1F45A8; color: #fff; }
+html body .cal-footer { border-top: 2px dashed #EADBC2; border-left: 0; border-right: 0; border-bottom: 0; }
