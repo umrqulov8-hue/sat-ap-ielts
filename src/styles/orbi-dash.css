@@ -325,7 +325,7 @@ html body .shape-picker-options button:hover, html body .shape-picker-options bu
    plain rectangles in the same colours: rounded corners clip their content.
    ========================================================================== */
 html body :is(.bb-modal, .bb-calc-modal, .bb-ref-panel, .aitutor-modal, .edit-modal, .calendar-container, .shape-picker-menu, .draw-toolbar) {
-  border-radius: 0; border: 2px solid var(--ac, #1F45A8); box-shadow: 0 6px 0 var(--ac-dark, #15327E), 0 20px 40px rgba(20, 33, 61, 0.2); overflow: hidden;
+  border-radius: 8px; border: 2px solid var(--ac, #1F45A8); box-shadow: 0 6px 0 var(--ac-dark, #15327E), 0 20px 40px rgba(20, 33, 61, 0.2); overflow: hidden;
 }
 html body .draw-toolbar { overflow-x: auto; border-color: #EADBC2; box-shadow: 0 5px 0 #EADBC2, 0 12px 24px rgba(20, 33, 61, 0.14); }
 html body :is(.bb-modal-header, .bb-calc-header, .bb-ref-header, .aitutor-header) { border-radius: 0; }
