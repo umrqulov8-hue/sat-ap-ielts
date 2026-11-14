@@ -326,7 +326,7 @@
 .orbi-tab svg { width: 28px; height: 18px; }
 
 /* ---------- Auth modal restyle ---------- */
-.modal-backdrop.ob-auth { background: rgba(20, 33, 61, 0.45); backdrop-filter: blur(6px); }
+.modal-backdrop.ob-auth { background: rgba(20, 33, 61, 0.5); }
 .ob-auth .modal { border-radius: 0; border: 0; box-shadow: 0 30px 60px rgba(20, 33, 61, 0.25); overflow: hidden; font-family: var(--ob-font-body); }
 .ob-auth .modal-marketing { background: linear-gradient(160deg, #1F45A8 0%, #15327E 100%); opacity: 1; color: var(--ob-cream); }
 .ob-auth .modal-marketing-brand, .ob-auth .modal-marketing-heading, .ob-auth .modal-form-heading { font-family: var(--ob-font-display); }
@@ -454,9 +454,11 @@
   .ob-auth-switch { display: block; }
 }
 
-/* Desktop auth: no strip above the blue panel; the form panel is cut to the same height, so both start at the same line. */
+/* Desktop auth: the blue panel is shorter than the form (starts 28px lower), nothing is drawn above it,
+   and it has the same black outline as the cream form panel. */
 @media (min-width: 721px) {
-  .modal-backdrop.ob-auth .modal { box-shadow: none; }
-  .modal-backdrop.ob-auth .modal-marketing { box-shadow: none; border: 0; }
-  .modal-backdrop.ob-auth .modal-form-panel { box-shadow: none; top: 28px; height: calc(100% - 28px); }
+  .modal-backdrop.ob-auth { backdrop-filter: none; -webkit-backdrop-filter: none; background: rgba(20, 33, 61, 0.5); }
+  .modal-backdrop.ob-auth .modal { box-shadow: none; background: transparent; }
+  .modal-backdrop.ob-auth .modal-marketing { top: 28px; height: calc(100% - 28px); border: 2.5px solid var(--ob-ink); box-shadow: none; }
+  .modal-backdrop.ob-auth .modal-form-panel { top: 0; height: 100%; border: 2.5px solid var(--ob-ink); box-shadow: none; }
 }
