@@ -445,3 +445,20 @@ html body .faq-a { border: 0; border-top: 2px dashed #EADBC2; border-radius: 0; 
 html body .cal-day { border-radius: 0; box-shadow: none; }
 html body .cal-day.today, html body .cal-day.selected { background: #1F45A8; color: #fff; }
 html body .cal-footer { border-top: 2px dashed #EADBC2; border-left: 0; border-right: 0; border-bottom: 0; }
+
+/* ---- Calendar: Orbi colours, square day cells (they sit inside a rectangular panel) ---- */
+html body .calendar-header { border-bottom: 2px solid #1F45A8; }
+html body .calendar-header::after { background: #E4AE45; height: 4px; bottom: -3px; border-radius: 0; }
+html body .cal-month { font-family: var(--ob-font-display); font-weight: 800; letter-spacing: 0.06em; color: #14213D; }
+html body .cal-weekdays span { color: #6B7893; font-weight: 800; }
+html body .cal-day { border: 2px solid #EADBC2; border-radius: 0; color: #14213D; font-family: var(--ob-font-body); font-weight: 800; background: #fff; }
+html body .cal-day:hover { border-color: #1F45A8; background: #E7EDFC; transform: none; }
+html body .cal-day.filled { background: #13804F; color: #fff; border-color: #0C5E39; }
+html body .cal-day.today, html body .cal-day.today.filled { background: #E4AE45; color: #14213D; border-color: #B9852A; box-shadow: none; font-weight: 900; }
+html body .cal-day.today::after { background: #14213D; }
+html body .cal-day.selected { background: #E7EDFC; color: #14213D; border-color: #1F45A8; box-shadow: none; }
+html body .cal-day.empty, html body .cal-day.empty:hover { background: transparent; border-color: transparent; }
+html body .cal-legend { color: #51607A; font-weight: 800; }
+html body .cal-dot { border: 2px solid #C9B993; border-radius: 0; }
+html body .cal-dot.filled { background: #13804F; border-color: #0C5E39; }
+html body .cal-dot.empty { background: #fff; }

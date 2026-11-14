@@ -125,8 +125,8 @@ export default function CalendarModal({ active, onClose, dateRef }) {
             {renderDays()}
           </div>
           <div className="cal-footer">
-            <span className="cal-legend"><span className="cal-dot filled" /> KIRGAN KUN</span>
-            <span className="cal-legend"><span className="cal-dot empty" /> KIRMAGAN</span>
+            <span className="cal-legend"><span className="cal-dot filled" /> LOGGED IN</span>
+            <span className="cal-legend"><span className="cal-dot empty" /> NOT LOGGED IN</span>
           </div>
         </div>
       </div>
