@@ -203,3 +203,13 @@ html body .ob-subject-band { margin-top: 0; }
 @media (prefers-reduced-motion: reduce) {
   html body :is(.stat-card, .dash-card, .qa-btn, .module-card, .sat-list-row, .th-row, .study-task-card, .btn-module):hover { transform: none; }
 }
+
+/* ---- Profile page (profile-style.css carries its own, more specific card rules) ---- */
+html body .profile-page :is(.settings-card, .stat-card, .module-card, .skill-card, .profile-card, .profile-stats > *) {
+  background: #fff; border: 2px solid #EADBC2; border-radius: 22px; box-shadow: 0 6px 0 #EADBC2;
+}
+html body .profile-page :is(.stat-icon, .module-icon, .detail-icon) { border: 2px solid #EADBC2; border-radius: 12px; box-shadow: none; }
+html body .profile-page .profile-avatar { border: 3px solid #fff; border-radius: 50%; box-shadow: 0 4px 0 #EADBC2, 0 0 0 3px #1F45A8; background: #1F45A8; color: #fff; font-family: var(--ob-font-display); }
+html body .profile-page .details-title, html body .profile-page .section-title { border-bottom: 2px dashed #EADBC2; font-family: var(--ob-font-display); letter-spacing: 0.02em; text-transform: none; }
+html body .profile-page :is(.details-title, .section-title)::after { height: 4px; bottom: -3px; width: 56px; background: #E4AE45; border: 0; border-radius: 4px; }
+html body .profile-page .detail-item { border-radius: 16px; box-shadow: 0 3px 0 #EADBC2; }
