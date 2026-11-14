@@ -65,8 +65,8 @@ export default function Profile() {
   }, [setPageTitle])
 
   useEffect(() => {
-    setPageTitle('SALOM, TALABA')
-    setPageSub('BUGUN YANA YUQORIGA CHIQAMIZMI?')
+    setPageTitle('HI, STUDENT')
+    setPageSub('READY TO LEVEL UP TODAY?')
     setPageClass('profile-page')
     loadProfile()
   }, [setPageTitle, setPageSub, setPageClass, loadProfile])

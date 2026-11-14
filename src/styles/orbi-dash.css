@@ -170,7 +170,7 @@ html body .study-card.disabled .study-card-inner { opacity: 0.6; }
 html body .study-card-name { font-family: var(--ob-font-display); font-weight: 800; text-shadow: none; }
 
 /* ---- Modals, calendar, toasts ---- */
-html body :is(.calendar-modal, .edit-modal) { border-radius: 26px; border: 2px solid #EADBC2; box-shadow: 0 10px 0 #EADBC2, 0 30px 60px rgba(20, 33, 61, 0.2); }
+html body .edit-modal { border-radius: 26px; border: 2px solid #EADBC2; box-shadow: 0 10px 0 #EADBC2, 0 30px 60px rgba(20, 33, 61, 0.2); }
 html body :is(.calendar-backdrop, .edit-modal-overlay) { background: rgba(20, 33, 61, 0.5); backdrop-filter: none; }
 html body .toast { border-radius: 16px; border: 2px solid #EADBC2; box-shadow: 0 5px 0 #EADBC2; font-family: var(--ob-font-body); font-weight: 800; }
 html body .settings-toast { border-radius: 14px; border: 2px solid #13804F; background: #E6F5EC; color: #0C5E39; }

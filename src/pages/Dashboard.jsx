@@ -26,7 +26,7 @@ export default function Dashboard() {
     ])
 
     if (profRes.data) {
-      setPageSub(`Xush kelibsiz, ${profRes.data.display_name || 'talaba'}`)
+      setPageSub(`Welcome back, ${profRes.data.display_name || 'Student'}`)
     }
     if (scRes.data) setScores(scRes.data)
     if (actsRes.data) setActivity(actsRes.data)
@@ -35,7 +35,7 @@ export default function Dashboard() {
   }, [navigate, setPageSub])
 
   useEffect(() => {
-    setPageTitle('BOSH SAHIFA')
+    setPageTitle('DASHBOARD')
     setPageClass('')
     loadData()
   }, [setPageTitle, setPageClass, loadData])
@@ -62,21 +62,21 @@ export default function Dashboard() {
     <><div className="ob-dash-hello">
       <OrbiImage pose="wave" size={320} alt="Orbi salomlashmoqda" eager />
       <div>
-        <h2>Bugun ham mashq qilamizmi?</h2>
-        <p>Har kuni 20 daqiqa — shuning oʻzi yetarli.</p>
+        <h2>Ready to practice today?</h2>
+        <p>Just 20 minutes a day is enough.</p>
       </div>
     </div><div className="stats-grid">
       <div className="stat-card">
         <div className="stat-card-top">
           <div className="stat-label-row">
             <span className="stat-tag lavender">ADV</span>
-            <span className="stat-label">MURAKKAB MATEMATIKA</span>
+            <span className="stat-label">ADVANCED MATH</span>
           </div>
           {advScore > 0 && <span className="stat-trend up">+{Math.floor(advScore / 50)}</span>}
         </div>
         <div className="stat-value">{advScore || '—'}</div>
         <div className="stat-footer">
-          <span className="stat-footer-label">{getMaxScore('advanced-math')} DAN</span>
+          <span className="stat-footer-label">OF {getMaxScore('advanced-math')}</span>
           <div className="stat-bar"><div className="stat-bar-fill lavender" style={{ width: `${advScore ? (advScore / getMaxScore('advanced-math')) * 100 : 0}%` }} /></div>
         </div>
       </div>
@@ -84,13 +84,13 @@ export default function Dashboard() {
         <div className="stat-card-top">
           <div className="stat-label-row">
             <span className="stat-tag peach">DATA</span>
-            <span className="stat-label">MAʼLUMOTLAR TAHLILI</span>
+            <span className="stat-label">DATA ANALYSIS</span>
           </div>
           {dataScore > 0 && <span className="stat-trend up">+{Math.floor(dataScore / 40)}</span>}
         </div>
         <div className="stat-value">{dataScore || '—'}</div>
         <div className="stat-footer">
-          <span className="stat-footer-label">{getMaxScore('data-analysis')} DAN</span>
+          <span className="stat-footer-label">OF {getMaxScore('data-analysis')}</span>
           <div className="stat-bar"><div className="stat-bar-fill peach" style={{ width: `${dataScore ? (dataScore / getMaxScore('data-analysis')) * 100 : 0}%` }} /></div>
         </div>
       </div>
@@ -98,13 +98,13 @@ export default function Dashboard() {
         <div className="stat-card-top">
           <div className="stat-label-row">
             <span className="stat-tag pink">PROB</span>
-            <span className="stat-label">MASALA YECHISH</span>
+            <span className="stat-label">PROBLEM SOLVING</span>
           </div>
           {probScore > 0 && <span className="stat-trend up">+{Math.floor(probScore / 40)}</span>}
         </div>
         <div className="stat-value">{probScore || '—'}</div>
         <div className="stat-footer">
-          <span className="stat-footer-label">{getMaxScore('problem-solving')} DAN</span>
+          <span className="stat-footer-label">OF {getMaxScore('problem-solving')}</span>
           <div className="stat-bar"><div className="stat-bar-fill green" style={{ width: `${probScore ? (probScore / getMaxScore('problem-solving')) * 100 : 0}%` }} /></div>
         </div>
       </div>
@@ -118,7 +118,7 @@ export default function Dashboard() {
         </div>
         <div className="stat-value">{algebraScore || '—'}</div>
         <div className="stat-footer">
-          <span className="stat-footer-label">{getMaxScore('algebra')} DAN</span>
+          <span className="stat-footer-label">OF {getMaxScore('algebra')}</span>
           <div className="stat-bar"><div className="stat-bar-fill green" style={{ width: `${algebraScore ? (algebraScore / getMaxScore('algebra')) * 100 : 0}%` }} /></div>
         </div>
       </div>
@@ -126,13 +126,13 @@ export default function Dashboard() {
         <div className="stat-card-top">
           <div className="stat-label-row">
             <span className="stat-tag yellow">GEO</span>
-            <span className="stat-label">GEOMETRIYA</span>
+            <span className="stat-label">GEOMETRY</span>
           </div>
           {geometryScore > 0 && <span className="stat-trend up">+{Math.floor(geometryScore / 40)}</span>}
         </div>
         <div className="stat-value">{geometryScore || '—'}</div>
         <div className="stat-footer">
-          <span className="stat-footer-label">{getMaxScore('geometry')} DAN</span>
+          <span className="stat-footer-label">OF {getMaxScore('geometry')}</span>
           <div className="stat-bar"><div className="stat-bar-fill yellow" style={{ width: `${geometryScore ? (geometryScore / getMaxScore('geometry')) * 100 : 0}%` }} /></div>
         </div>
       </div>
@@ -140,13 +140,13 @@ export default function Dashboard() {
         <div className="stat-card-top">
           <div className="stat-label-row">
             <span className="stat-tag yellow">TEST</span>
-            <span className="stat-label">AMALIY TESTLAR</span>
+            <span className="stat-label">PRACTICE TESTS</span>
           </div>
           <span className="stat-trend">{completedTests}</span>
         </div>
         <div className="stat-value tests">{testCount}</div>
         <div className="stat-footer">
-          <span className="stat-footer-label">{testCount ? Math.round((completedTests / testCount) * 100) : 0}% BAJARILDI</span>
+          <span className="stat-footer-label">{testCount ? Math.round((completedTests / testCount) * 100) : 0}% COMPLETE</span>
           <div className="stat-bar"><div className="stat-bar-fill yellow" style={{ width: `${testCount ? (completedTests / testCount) * 100 : 0}%` }} /></div>
         </div>
       </div>
@@ -154,14 +154,14 @@ export default function Dashboard() {
 
     <div className="dash-grid-2col">
       <div className="dash-card">
-        <div className="card-header"><h2 className="card-title">OXIRGI FAOLIYAT</h2><span className="card-link" onClick={() => navigate('/profile')}>BARCHASI</span></div>
+        <div className="card-header"><h2 className="card-title">RECENT ACTIVITY</h2><span className="card-link" onClick={() => navigate('/profile')}>VIEW ALL</span></div>
         <div className="activity-list">
           {activity.length === 0 ? (
             <div className="activity-item">
               <div className="activity-dot math" />
               <div className="activity-content">
-                <span className="activity-title">Hozircha faoliyat yoʻq</span>
-                <span className="activity-meta">Birinchi darsni boshlang</span>
+                <span className="activity-title">No activity yet</span>
+                <span className="activity-meta">Start your first lesson</span>
               </div>
               <svg className="activity-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="9 18 15 12 9 6" /></svg>
             </div>
@@ -183,33 +183,33 @@ export default function Dashboard() {
       </div>
 
       <div className="dash-card">
-        <div className="card-header"><h2 className="card-title">TEZKOR HARAKATLAR</h2></div>
+        <div className="card-header"><h2 className="card-title">QUICK ACTIONS</h2></div>
         <div className="quick-actions">
           <button className="qa-btn" onClick={() => navigate('/study')}>
             <span className="qa-btn-icon lavender"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2"><polygon points="6 3 20 12 6 21 6 3" /></svg></span>
-            <span className="qa-btn-text">DARSLARNI KOʻRISH</span>
+            <span className="qa-btn-text">WATCH LESSONS</span>
             <span className="qa-btn-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" /></svg></span>
           </button>
           <button className="qa-btn" onClick={() => navigate('/profile')}>
             <span className="qa-btn-icon peach"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2"><path d="M18 20V10" /><path d="M12 20V4" /><path d="M6 20v-4" /></svg></span>
-            <span className="qa-btn-text">BALL TAHLILI</span>
+            <span className="qa-btn-text">SCORE ANALYSIS</span>
             <span className="qa-btn-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" /></svg></span>
           </button>
           <button className="qa-btn" onClick={() => navigate('/study-plan')}>
             <span className="qa-btn-icon green"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2"><circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" /></svg></span>
-            <span className="qa-btn-text">OʻQUV REJA</span>
+            <span className="qa-btn-text">STUDY PLANNER</span>
             <span className="qa-btn-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" /></svg></span>
           </button>
           <button className="qa-btn" onClick={() => navigate('/algebra')}>
             <span className="qa-btn-icon yellow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2"><path d="M12 20h9" /><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" /></svg></span>
-            <span className="qa-btn-text">ZAIF JOYLARNI KOʻRIB CHIQISH</span>
+            <span className="qa-btn-text">REVIEW WEAK AREAS</span>
             <span className="qa-btn-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" /></svg></span>
           </button>
         </div>
       </div>
     </div>
 
-    <h2 className="section-title">KEYINGI MODULLAR</h2>
+    <h2 className="section-title">UPCOMING MODULES</h2>
     <div className="module-list">
       {modules.length === 0 ? (
         <div className="module-row">
@@ -217,8 +217,8 @@ export default function Dashboard() {
             <div className="module-left">
               <span className="module-tag math">MOD</span>
               <div className="module-info">
-                <div className="module-name">Hozircha modullar yoʻq</div>
-                <div className="module-desc">Fanlarni oʻrganishni boshlang</div>
+                <div className="module-name">No modules yet</div>
+                <div className="module-desc">Start exploring subjects</div>
               </div>
             </div>
           </div>

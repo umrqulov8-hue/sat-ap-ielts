@@ -18,6 +18,14 @@ const SAY = {
   wake: 'Uxlab qolibman... Qaytganingdan xursandman!',
 }
 
+// Inside the app (dashboard, subjects) the interface is English, so Orbi speaks English there.
+const SAY_EN = {
+  study: 'Just 20 minutes a day is enough.',
+  wake: 'I fell asleep... glad you are back!',
+}
+const MENU_EN = { ask: 'How can I help?', start: 'Get started', subjects: 'View subjects', help: 'Support', hide: 'Hide Orbi', close: 'Close', show: 'Bring Orbi back', label: 'Orbi assistant' }
+const MENU_UZ = { ask: 'Qanday yordam beray?', start: 'Bepul boshlash', subjects: 'Fanlarni koʻrish', help: 'Yordam', hide: 'Orbini yashirish', close: 'Yopish', show: 'Orbini qaytarish', label: 'Orbi yordamchi' }
+
 const readHidden = () => {
   try { return localStorage.getItem(HIDDEN_KEY) === '1' } catch { return false }
 }
@@ -63,7 +71,7 @@ export default function OrbiCompanion() {
       const id = setTimeout(() => {
         if (!shownSays.current.has('subject')) {
           shownSays.current.add('subject')
-          showBubble({ text: SAY.study })
+          showBubble({ text: SAY_EN.study })
         }
       }, 1200)
       return () => clearTimeout(id)
@@ -135,7 +143,7 @@ export default function OrbiCompanion() {
         asleepRef.current = false
         setAsleep(false)
         setWaving(true)
-        showBubble({ text: SAY.wake })
+        showBubble({ text: onSubject ? SAY_EN.wake : SAY.wake })
         clearTimeout(waveTimer.current)
         waveTimer.current = setTimeout(() => setWaving(false), 1500)
       }
@@ -149,7 +157,7 @@ export default function OrbiCompanion() {
       clearTimeout(sleepTimer.current)
       clearTimeout(waveTimer.current)
     }
-  }, [enabled, hidden, showBubble])
+  }, [enabled, hidden, showBubble, onSubject])
 
   // Never cover buttons: if Orbi overlaps a CTA or link, lift him out of the way.
   useEffect(() => {
@@ -224,10 +232,11 @@ export default function OrbiCompanion() {
   }
 
   if (!enabled) return null
+  const T = onSubject ? MENU_EN : MENU_UZ
 
   if (hidden) {
     return (
-      <button type="button" className="orbi-tab" onClick={show} aria-label="Orbini qaytarish" title="Orbini qaytarish">
+      <button type="button" className="orbi-tab" onClick={show} aria-label={T.show} title={T.show}>
         <svg viewBox="0 0 28 18" aria-hidden="true"><path d="M2 17C2 7 8 1 14 1s12 6 12 16z" fill="#fff" /><path d="M2 17C2 7 8 1 14 1s12 6 12 16z" fill="#121212" /><path d="M5 13h18" stroke="#fff" strokeWidth="1.6" strokeDasharray="2 2.4" /></svg>
       </button>
     )
@@ -240,22 +249,22 @@ export default function OrbiCompanion() {
         <div className="orbi-bubble" role="status" aria-live="polite">
           {bubble.menu ? (
             <>
-              <span>Qanday yordam beray?</span>
+              <span>{T.ask}</span>
               <div className="orbi-menu">
-                <Link to="/auth" className="ob-btn small" onClick={() => setBubble(null)}>Bepul boshlash</Link>
-                <button type="button" className="ob-btn secondary small" onClick={toSubjects}>Fanlarni koʻrish</button>
-                <Link to="/support" className="ob-btn secondary small" onClick={() => setBubble(null)}>Yordam</Link>
-                <button type="button" className="ob-btn secondary small" onClick={hide}>Orbini yashirish</button>
+                <Link to="/auth" className="ob-btn small" onClick={() => setBubble(null)}>{T.start}</Link>
+                <button type="button" className="ob-btn secondary small" onClick={toSubjects}>{T.subjects}</button>
+                <Link to="/support" className="ob-btn secondary small" onClick={() => setBubble(null)}>{T.help}</Link>
+                <button type="button" className="ob-btn secondary small" onClick={hide}>{T.hide}</button>
               </div>
             </>
           ) : bubble.text}
-          <button type="button" className="orbi-bubble-x" onClick={() => setBubble(null)} aria-label="Yopish">×</button>
+          <button type="button" className="orbi-bubble-x" onClick={() => setBubble(null)} aria-label={T.close}>×</button>
         </div>
       )}
       <button
         type="button"
         className="orbi-btn orbi-float"
-        aria-label="Orbi yordamchi"
+        aria-label={T.label}
         aria-expanded={Boolean(bubble?.menu)}
         tabIndex={visible ? 0 : -1}
         onClick={() => (bubble?.menu ? setBubble(null) : showBubble({ menu: true }, false))}

@@ -12,8 +12,8 @@ export default function SatTestList() {
   const { isAdmin, profileLoading } = useUser()
 
   useEffect(() => {
-    setPageTitle('TOʻLIQ SAT TESTLAR')
-    setPageSub('Toʻliq SAT amaliy imtihonlarini topshiring')
+    setPageTitle('FULL SAT TESTS')
+    setPageSub('Take complete SAT practice exams')
     setPageClass('')
     if (profileLoading) return
     // Students only see tests that really contain questions; admins also see empty drafts.

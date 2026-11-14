@@ -16,8 +16,8 @@ const FAQ_DATA = [
 export default function Support() {
   const { setPageTitle, setPageSub, setPageClass } = useLayout()
   useEffect(() => {
-    setPageTitle('YORDAM')
-    setPageSub('Muvaffaqiyatingiz uchun yordamga tayyormiz')
+    setPageTitle('SUPPORT')
+    setPageSub("We're here to help you succeed")
     setPageClass('')
   }, [setPageTitle, setPageSub, setPageClass])
   const [openIndex, setOpenIndex] = useState(null)
@@ -52,7 +52,7 @@ export default function Support() {
       <><div className="support-hero settings-card">
         <div className="support-hero-inner">
           <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" /></svg>
-          <input className="support-search" type="text" placeholder="YORDAM MAVZULARINI QIDIRING..." value={search} onChange={e => setSearch(e.target.value)} />
+          <input className="support-search" type="text" placeholder="SEARCH HELP TOPICS..." value={search} onChange={e => setSearch(e.target.value)} />
         </div>
       </div>
 

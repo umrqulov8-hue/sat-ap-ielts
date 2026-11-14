@@ -10,8 +10,8 @@ export default function Study() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    setPageTitle('VIDEO DARSLAR')
-    setPageSub('Video darslar')
+    setPageTitle('STUDY')
+    setPageSub('Video lessons')
     setPageClass('')
     ;(async () => {
       const [subRes, vidRes] = await Promise.all([
