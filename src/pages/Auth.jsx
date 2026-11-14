@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { supabase } from '../lib/supabaseClient'
+import OrbiImage from '../components/orbi/OrbiImage'
 
 function getAuthErrorMessage(error, action = 'signin') {
   const message = String(error?.message || '').toLowerCase()
@@ -212,7 +213,7 @@ export default function Auth() {
   }
 
   return (
-    <div className="modal-backdrop" ref={containerRef} onClick={(e) => { if (e.target === e.currentTarget) navigate('/') }}>
+    <div className="modal-backdrop ob-auth" ref={containerRef} onClick={(e) => { if (e.target === e.currentTarget) navigate('/') }}>
       <div className={`modal ${mode}${visible ? ' active' : ''}`} onClick={(e) => e.stopPropagation()}>
 
         <div className="modal-marketing">
@@ -238,7 +239,11 @@ export default function Auth() {
         </div>
 
         <div className="modal-form-panel">
-          <button className="modal-close" onClick={() => navigate('/')} aria-label="Close">×</button>
+          <button className="modal-close" onClick={() => navigate('/')} aria-label="Yopish">×</button>
+          <div className="ob-auth-orbi">
+            <OrbiImage pose="wave" size={320} eager alt="Orbi salomlashmoqda" />
+            <span>Xush kelibsan!</span>
+          </div>
 
           {signedUp ? (
             <div className="modal-form-inner modal-success-wrap">

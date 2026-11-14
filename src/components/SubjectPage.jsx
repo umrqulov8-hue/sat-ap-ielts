@@ -6,6 +6,21 @@ import { getCache, setCache } from '../lib/dataCache'
 import { fetchAll } from '../lib/fetchAll'
 import { useUser } from '../context/UserContext'
 
+const SUBJECT_UZ = {
+  algebra: 'Algebra',
+  geometry: 'Geometriya',
+  'advanced-math': 'Murakkab matematika',
+  'data-analysis': "Ma'lumotlar tahlili",
+  'problem-solving': 'Masala yechish',
+}
+const SUBJECT_COLOR = {
+  algebra: '#1F45A8',
+  geometry: '#13804F',
+  'advanced-math': '#C8372D',
+  'data-analysis': '#1BA3B0',
+  'problem-solving': '#B9852A',
+}
+
 const TARGET_MAP = { math: 800 }
 
 export default function SubjectPage({ slug, title, subtitle, tag }) {
@@ -95,8 +110,16 @@ export default function SubjectPage({ slug, title, subtitle, tag }) {
     navigate('/test/' + slug + '/' + t.id)
   }
 
+  const uzName = SUBJECT_UZ[slug] || title
+  const bandColor = SUBJECT_COLOR[slug] || accent
   return (
     <>
+      <div className="ob-subject-band" style={{ '--band': bandColor }}>
+        <div>
+          <h2>{uzName}</h2>
+          <span>{uzName === title ? subtitle : `${title.charAt(0)}${title.slice(1).toLowerCase()} · ${subtitle}`}</span>
+        </div>
+      </div>
       {loading && (
         <div style={{ position: 'fixed', top: 0, left: 220, right: 0, height: 3, background: 'var(--lavender)', zIndex: 100, animation: 'sub-progress 1.2s ease infinite' }} />
       )}

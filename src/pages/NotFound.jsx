@@ -1,13 +1,14 @@
 import { Link } from 'react-router-dom'
+import OrbiImage from '../components/orbi/OrbiImage'
 
 export default function NotFound() {
   return (
-    <div className="not-found">
-      <div className="not-found-inner">
-        <span className="not-found-code">404</span>
-        <h1 className="not-found-title">PAGE NOT FOUND</h1>
-        <p className="not-found-desc">The page you're looking for doesn't exist or has been moved.</p>
-        <Link to="/" className="not-found-btn">GO HOME</Link>
+    <div className="ob-404">
+      <div>
+        <OrbiImage pose="think" size={640} eager alt="Orbi oʻylanib turibdi" />
+        <h1>Bu sahifa topilmadi</h1>
+        <p>Qidirayotgan sahifangiz mavjud emas yoki koʻchirilgan.</p>
+        <Link to="/" className="ob-btn big">BOSH SAHIFAGA</Link>
       </div>
     </div>
   )

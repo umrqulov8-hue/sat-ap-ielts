@@ -2,6 +2,7 @@ import { lazy, Suspense } from 'react'
 import { Routes, Route, Outlet } from 'react-router-dom'
 import { UserProvider } from './context/UserContext'
 import { ToastProvider } from './components/Toast'
+import OrbiCompanion from './components/orbi/OrbiCompanion'
 
 const DashLayout = lazy(() => import('./components/DashLayout'))
 
@@ -82,6 +83,7 @@ export default function App() {
           <Route path="/test/:subjectSlug/:difficulty" element={<SuspenseWrap><TestPage /></SuspenseWrap>} />
           <Route path="*" element={<SuspenseWrap><NotFound /></SuspenseWrap>} />
         </Routes>
+        <OrbiCompanion />
       </ToastProvider>
     </UserProvider>
   )
