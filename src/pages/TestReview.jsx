@@ -112,7 +112,7 @@ export default function TestReview() {
                       <div key={oi} className={cls}>
                         <span className="tr-opt-letter">{String.fromCharCode(65 + oi)}</span>
                         <span className="tr-opt-text" dangerouslySetInnerHTML={mathHtml(String(opt).replace(/&/g, "&amp;").replace(/</g, "&lt;"))} />
-                        {isRight && <span className="tr-opt-check">&check;</span>}
+                        {isRight && <span className="tr-opt-check">✓</span>}
                       </div>
                     )
                   })}

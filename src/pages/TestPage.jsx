@@ -725,7 +725,7 @@ export default function TestPage() {
                           <div key={oi} className={cls}>
                             <span className="test-done-opt-letter">{String.fromCharCode(65 + oi)}</span>
                             <span className="test-done-opt-text" dangerouslySetInnerHTML={{ __html: renderMath(escapeHTML(opt)) }} />
-                            {isRight && <span className="test-done-opt-check">&check;</span>}
+                            {isRight && <span className="test-done-opt-check">✓</span>}
                           </div>
                         )
                       })}
