@@ -327,7 +327,7 @@
 
 /* ---------- Auth modal restyle ---------- */
 .modal-backdrop.ob-auth { background: rgba(20, 33, 61, 0.45); backdrop-filter: blur(6px); }
-.ob-auth .modal { border-radius: 28px; border: 2px solid var(--ob-edge); box-shadow: 0 8px 0 var(--ob-edge), 0 30px 60px rgba(20, 33, 61, 0.25); overflow: hidden; font-family: var(--ob-font-body); }
+.ob-auth .modal { border-radius: 28px; border: 0; box-shadow: 0 30px 60px rgba(20, 33, 61, 0.25); overflow: hidden; font-family: var(--ob-font-body); }
 .ob-auth .modal-marketing { background: linear-gradient(160deg, #1F45A8 0%, #15327E 55%, #13804F 130%); color: var(--ob-cream); }
 .ob-auth .modal-marketing-brand, .ob-auth .modal-marketing-heading, .ob-auth .modal-form-heading { font-family: var(--ob-font-display); }
 .ob-auth .modal-form-panel { background: rgba(255, 255, 255, 0.82); backdrop-filter: blur(14px); }
