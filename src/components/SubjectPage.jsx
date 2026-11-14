@@ -5,16 +5,9 @@ import { supabase } from '../lib/supabaseClient'
 import { getCache, setCache } from '../lib/dataCache'
 import { fetchAll } from '../lib/fetchAll'
 import { useUser } from '../context/UserContext'
+import { SUBJECT_COLORS } from '../lib/subjectColors'
 
 const TARGET_MAP = { math: 800 }
-
-const SUBJECT_COLOR = {
-  algebra: '#1F45A8',
-  geometry: '#13804F',
-  'advanced-math': '#C8372D',
-  'data-analysis': '#1BA3B0',
-  'problem-solving': '#B9852A',
-}
 
 export default function SubjectPage({ slug, title, subtitle, tag }) {
   const navigate = useNavigate()
@@ -103,7 +96,7 @@ export default function SubjectPage({ slug, title, subtitle, tag }) {
     navigate('/test/' + slug + '/' + t.id)
   }
 
-  const bandColor = SUBJECT_COLOR[slug] || accent
+  const bandColor = SUBJECT_COLORS[slug]?.main || accent
   return (
     <>
       <div className="ob-subject-band" style={{ '--band': bandColor }}>

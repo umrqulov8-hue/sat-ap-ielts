@@ -6,6 +6,7 @@ import { fetchAll } from '../lib/fetchAll'
 import { useToast } from '../components/Toast'
 import AITutor from '../components/AITutor'
 import DrawingCanvas from '../components/DrawingCanvas'
+import { SUBJECT_COLORS, DEFAULT_ACCENT } from '../lib/subjectColors'
 import { sanitizeHtml } from '../lib/sanitizeHtml'
 import { renderMath } from '../lib/mathHtml'
 import { isWrittenAnswerCorrect } from '../lib/answerCheck'
@@ -32,6 +33,16 @@ const QuestionTimer = memo(function QuestionTimer({ startTime }) {
 
 export default function TestPage() {
   const { subjectSlug, difficulty } = useParams()
+
+  // The whole test screen wears the subject's header colour (Data Analysis turquoise, Problem Solving gold, ...).
+  useEffect(() => {
+    const accent = SUBJECT_COLORS[subjectSlug] || DEFAULT_ACCENT
+    const root = document.documentElement
+    root.style.setProperty('--ac', accent.main)
+    root.style.setProperty('--ac-dark', accent.dark)
+    root.style.setProperty('--ac-tint', accent.tint)
+    return () => ['--ac', '--ac-dark', '--ac-tint'].forEach(name => root.style.removeProperty(name))
+  }, [subjectSlug])
   const navigate = useNavigate()
   const location = useLocation()
   const locState = location.state
