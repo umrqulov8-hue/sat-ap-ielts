@@ -454,9 +454,11 @@
   .ob-auth-switch { display: block; }
 }
 
-/* Desktop auth: both panels fill the modal, so there is no empty strip above the blue one. */
+/* Desktop auth: the blue panel sits 28px lower (as before); that strip above it is solid cream, never see-through. */
 @media (min-width: 721px) {
   .modal-backdrop.ob-auth .modal { box-shadow: none; }
-  .modal-backdrop.ob-auth .modal-marketing { top: 0; height: 100%; box-shadow: none; border: 0; }
+  .modal-backdrop.ob-auth .modal::before { content: ''; position: absolute; top: 0; left: 0; width: 50%; height: 28px; background: var(--ob-cream); z-index: 0; transition: transform 0.9s cubic-bezier(0.77, 0, 0.175, 1); }
+  .modal-backdrop.ob-auth .modal.signup::before { transform: translateX(100%); }
+  .modal-backdrop.ob-auth .modal-marketing { box-shadow: none; border: 0; }
   .modal-backdrop.ob-auth .modal-form-panel { box-shadow: none; }
 }
