@@ -1,506 +1,426 @@
-import { useEffect } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
-import useScrollReveal from '../hooks/useScrollReveal'
-import useHeroParallax from '../hooks/useHeroParallax'
+import OrbiImage from '../components/orbi/OrbiImage'
+import BgLayer from '../components/orbi/BgLayer'
+import { useBgExtras } from '../components/orbi/assets'
+import Icon, { Star, Sparkle, Majolica } from '../components/orbi/Icons'
+import { useReveal, useScrolled, useAnchorScroll, useHeroParallax, useStackCards, useCountUp } from '../hooks/useOrbiPage'
+
+const NAV = [
+  ['#uslub', 'USLUB'],
+  ['#fanlar', 'FANLAR'],
+  ['#natijalar', 'NATIJALAR'],
+  ['#narx', 'NARX'],
+]
+
+const MARQUEE = ['Algebra', 'Geometriya', 'Murakkab matematika', "Ma'lumotlar tahlili", 'Masala yechish', 'Amaliy testlar', 'AI ustoz', 'Oʻquv reja', 'Nazoratli imtihonlar']
+
+const STEPS = [
+  { n: '01', tag: 'ANIQLA', icon: 'target', color: 'var(--ob-lapis)', title: 'Darajangizni aniqlang', text: "5 daqiqalik diagnostik test orqali hozirgi matematika darajangiz va kuchli/zaif tomonlaringiz aniqlanadi." },
+  { n: '02', tag: 'REJA TUZ', icon: 'route', color: 'var(--ob-emerald)', title: 'Shaxsiy reja tuzing', text: "AI sizning maqsadlaringiz va jadvalingizga mos ravishda har kun uchun aniq darslar va mashqlar tanlaydi." },
+  { n: '03', tag: 'MASHQ QIL', icon: 'pencil', color: 'var(--ob-pomegranate)', title: 'Har kuni mashq qiling', text: "Real imtihon formatidagi 5,000+ savol, batafsil tushuntirishlar va AI ustoz yordamida mustahkamlang." },
+  { n: '04', tag: 'ZABT ET', icon: 'trophy', color: 'var(--ob-gold-dark)', title: 'Imtihonni zabt eting', text: "Nazoratli mock imtihonlar bilan haqiqiy sharoitda mashq qiling va natijangizni kafolatlang." },
+]
+
+const FEATURES = [
+  { icon: 'book', color: 'var(--ob-lapis)', title: '5,000+ amaliy savollar', text: "Algebra, Geometriya, Murakkab matematika, Ma'lumotlar tahlili, Masala yechish — barchasi real imtihon formatida." },
+  { icon: 'chat', color: 'var(--ob-emerald)', title: 'AI ustoz — istalgan payt', text: "Har bir savol boʻyicha batafsil tushuntirish va shaxsiy maslahat." },
+  { icon: 'clock', color: 'var(--ob-pomegranate)', title: 'Nazoratli mock imtihonlar', text: "Haqiqiy imtihon sharoitida, taymer bilan, toʻliq hisobot bilan." },
+  { icon: 'chart', color: 'var(--ob-turquoise)', title: 'Kundalik natija kuzatuvi', text: "Natijangizni har kuni kuzatib boring, zaif tomonlaringizga eʼtibor qarating." },
+  { icon: 'play', color: 'var(--ob-gold-dark)', title: 'Video darslar va strategiyalar', text: "Mutaxassislar tayyorlagan qisqa va aniq videolar." },
+]
+
+const SUBJECTS = [
+  { to: '/algebra', uz: 'Algebra', en: 'Algebra', color: '#1F45A8' },
+  { to: '/geometry', uz: 'Geometriya', en: 'Geometry', color: '#13804F' },
+  { to: '/advanced-math', uz: 'Murakkab matematika', en: 'Advanced Math', color: '#C8372D' },
+  { to: '/data-analysis', uz: "Ma'lumotlar tahlili", en: 'Data Analysis', color: '#1BA3B0' },
+  { to: '/problem-solving', uz: 'Masala yechish', en: 'Problem Solving', color: '#B9852A' },
+]
+
+const WHY = [
+  { icon: 'pulse', color: 'var(--ob-lapis)', title: 'Moslashuvchan oʻqish', text: "AI sizning kuchli va zaif tomonlaringizga qarab savollarni avtomatik ravishda tanlaydi. Vaqtni yoʻqotmang." },
+  { icon: 'clock', color: 'var(--ob-emerald)', title: 'Haqiqiy imtihon sharoiti', text: "Nazoratli mock imtihonlar, taymer bilan, haqiqiy imtihon sharoitida. Hech qanday chalgʻitish yoʻq." },
+  { icon: 'chat', color: 'var(--ob-pomegranate)', title: 'Ekspert tushuntirishlari', text: "Har bir savol boʻyicha video va matnli tushuntirishlar. Nima uchun bu javob toʻgʻri ekanini tushunasiz." },
+  { icon: 'chart', color: 'var(--ob-turquoise)', title: 'Aqlli tahlil', text: "Har bir mashqdan keyin batafsil hisobot. Qayerda yutqazayotganingizni aniq koʻring." },
+]
+
+// TODO(jasper): real data? — the three testimonials below are placeholder copy from the old site.
+const TESTIS = [
+  { initial: 'S', color: 'var(--ob-lapis)', name: 'SARDOR A.', badge: '+300 BALL', quote: "3 oyda SAT ballimni 1180 dan 1480 gacha koʻtardim. AI ustoz har bir savolni tushuntirib bergani juda yoqdi. Eng yaxshi sarmoya!" },
+  { initial: 'M', color: 'var(--ob-pomegranate)', name: 'MADINA Y.', badge: 'ALGEBRA — 800', quote: "Algebra'da 800 oldim! Mock imtihonlar va batafsil tushuntirishlar juda foydali boʻldi. Repetitorga pul sarflash kerak emas edi." },
+  { initial: 'J', color: 'var(--ob-emerald)', name: 'JASUR K.', badge: 'SAT — 1520', quote: "Kundalik 20 daqiqa mashq qilib, imtihonda 1520 ball oldim. Platformaning moslashuvchan tizimi juda zoʻr — faqat zaif joylarimga eʼtibor berdi." },
+]
+
+function BrandMark() {
+  return (
+    <a href="#home" className="ob-brand" aria-label="UFQ — bosh sahifa">
+      <span className="ob-brand-u">
+        <svg className="ob-brand-doppi" viewBox="0 0 20 11" aria-hidden="true">
+          <path d="M1 10C1 4.5 5 1 10 1s9 3.5 9 9z" fill="#121212" />
+          <path d="M3 8.2h14" stroke="#fff" strokeWidth="1.2" strokeDasharray="1.5 1.8" />
+        </svg>
+        U
+      </span>FQ
+    </a>
+  )
+}
+
+function Stat({ to, decimals = 0, suffix = '', label, className }) {
+  const [ref, text] = useCountUp({ to, decimals, suffix })
+  return (
+    <div className={`ob-tile ${className}`} data-reveal>
+      <div className="ob-num" ref={ref} aria-label={`${to}${suffix}`}>{text}</div>
+      <div className="ob-num-label">{label}</div>
+    </div>
+  )
+}
+
+function Ring() {
+  const ref = useRef(null)
+  const [on, setOn] = useState(false)
+  useEffect(() => {
+    const el = ref.current
+    if (!el || !('IntersectionObserver' in window)) { setOn(true); return undefined }
+    const io = new IntersectionObserver(([e]) => { if (e.isIntersecting) { setOn(true); io.disconnect() } }, { threshold: 0.5 })
+    io.observe(el)
+    return () => io.disconnect()
+  }, [])
+  return (
+    <svg ref={ref} className={`ob-ring${on ? ' is-in' : ''}`} viewBox="0 0 120 120" aria-hidden="true">
+      <circle className="bg" cx="60" cy="60" r="46" />
+      <circle className="fg" cx="60" cy="60" r="46" />
+    </svg>
+  )
+}
 
 export default function Home() {
-  useScrollReveal()
-  const heroRef = useHeroParallax()
+  const heroRef = useRef(null)
+  const stackRef = useRef(null)
+  const [menuOpen, setMenuOpen] = useState(false)
+  const scrolled = useScrolled(40)
+  const extras = useBgExtras()
+  useReveal()
+  useAnchorScroll()
+  useHeroParallax(heroRef)
+  useStackCards(stackRef)
 
   useEffect(() => { document.title = 'UFQ — SAT Math Prep' }, [])
-
   useEffect(() => {
-    const handleClick = (e) => {
-      const a = e.target.closest('a[href^="#"]')
-      if (!a || a.getAttribute('href') === '#') return
-      const href = a.getAttribute('href')
-      if (href.length <= 1) return
-      e.preventDefault()
-      const target = document.querySelector(href)
-      if (target) {
-        const offset = 60
-        const top = target.getBoundingClientRect().top + window.scrollY - offset
-        window.scrollTo({ top, behavior: 'smooth' })
-      }
-    }
-    document.addEventListener('click', handleClick)
-    return () => document.removeEventListener('click', handleClick)
-  }, [])
+    document.body.style.overflow = menuOpen ? 'hidden' : ''
+    return () => { document.body.style.overflow = '' }
+  }, [menuOpen])
+  useEffect(() => {
+    if (!menuOpen) return undefined
+    const onKey = e => { if (e.key === 'Escape') setMenuOpen(false) }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [menuOpen])
+
+  const closeMenu = () => setMenuOpen(false)
 
   return (
-    <>
-      <nav className="unitap-nav u-navbar">
-        <a href="#home" className="unitap-nav-brand">
-          <img className="unitap-nav-brand-mark" src="/ufq-logo.png" alt="UFQ" width="34" height="34" />
-          UFQ
-        </a>
-        <div className="unitap-nav-links">
-          <a href="#methodology" className="unitap-nav-link">METHODOLOGY</a>
-          <a href="#curriculum" className="unitap-nav-link">CURRICULUM</a>
-          <a href="#results" className="unitap-nav-link">RESULTS</a>
-          <a href="#pricing" className="unitap-nav-link">PRICING</a>
+    <div className="ob-page" id="home">
+      <nav className={`ob-nav${scrolled ? ' scrolled' : ''}`} aria-label="Asosiy menyu">
+        <BrandMark />
+        <div className="ob-nav-links">
+          {NAV.map(([href, label]) => <a key={href} href={href} className="ob-nav-link">{label}</a>)}
         </div>
-        <div className="unitap-nav-actions">
-          <Link to="/auth" className="unitap-nav-cta login">LOGIN</Link>
-          <Link to="/auth" className="unitap-nav-cta">OPEN APP →</Link>
+        <div className="ob-nav-actions">
+          <Link to="/auth" className="ob-nav-login">KIRISH</Link>
+          <Link to="/auth" className="ob-btn small">ILOVANI OCHISH</Link>
+          <button type="button" className="ob-burger" aria-label={menuOpen ? 'Menyuni yopish' : 'Menyuni ochish'} aria-expanded={menuOpen} aria-controls="ob-sheet" onClick={() => setMenuOpen(o => !o)}>
+            <span /><span /><span />
+          </button>
         </div>
       </nav>
-
-      <main>
-      <section className="unitap-hero" id="home" ref={heroRef}>
-        <div className="unitap-hero-inner">
-          <div className="unitap-hero-text u-hero u-stagger">
-            <span className="unitap-hero-eyebrow">
-              <span className="unitap-hero-eyebrow-dot" />
-              2026 COHORT — ENROLLING NOW
-            </span>
-            <h1>
-              Imtihon natijangni<br />
-              <em>uch barobar</em> oshir.
-            </h1>
-            <p className="unitap-hero-sub">
-              Bizning ekzotik tayyorlov platformamiz matematika imtihonlariga tayyorgarlik ko'rishning
-              yangi usulini taklif etadi. Maqsadli darslar, real imtihon simulyatsiyalari va AI-yordam.
-            </p>
-            <div className="unitap-hero-actions">
-              <Link to="/auth" className="unitap-btn primary">BEPUL BOSHLASH →</Link>
-              <a href="#methodology" className="unitap-btn secondary">QANDAY ISHLAYDI</a>
-            </div>
-            <div className="unitap-hero-meta u-hero-meta">
-              <div className="unitap-hero-meta-item">
-                <span className="unitap-hero-meta-num">12,400+</span>
-                <span className="unitap-hero-meta-label">FAOL TALABALAR</span>
-              </div>
-              <div className="unitap-hero-meta-item">
-                <span className="unitap-hero-meta-num">1520</span>
-                <span className="unitap-hero-meta-label">O'RTACHA SAT</span>
-              </div>
-              <div className="unitap-hero-meta-item">
-                <span className="unitap-hero-meta-num">98%</span>
-                <span className="unitap-hero-meta-label">MAQSADGA ERISHGAN</span>
-              </div>
-            </div>
-          </div>
-
-          <div className="unitap-hero-illu">
-            <svg className="unitap-illu-svg" viewBox="0 0 400 360" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <pattern id="grid" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
-                  <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#1a1a2e" strokeWidth="0.4" opacity="0.1" />
-                </pattern>
-              </defs>
-
-              {/* Subtle grid background — static */}
-              <g data-parallax-speed="0">
-                <rect width="400" height="360" fill="url(#grid)" />
-              </g>
-
-              {/* 1. Back peach card — slides in from right, deepest */}
-              <g className="unitap-illu-a-right unitap-illu-idle-inv" data-parallax-speed="0.12" data-parallax-rotate="3" data-parallax-range="26">
-                <g transform="rotate(6 230 200)">
-                  <rect x="126" y="76" width="200" height="260" fill="#ffb89a" stroke="#1a1a2e" strokeWidth="2.5" />
-                </g>
-              </g>
-
-              {/* 2. Main lavender score card — scales in big */}
-              <g className="unitap-illu-a-scale unitap-illu-idle" data-parallax-speed="0.05" data-parallax-rotate="7" data-parallax-range="30">
-                <g transform="rotate(-4 200 200)">
-                  {/* shadow */}
-                  <rect className="unitap-illu-a-left" x="106" y="56" width="200" height="260" fill="#1a1a2e" style={{ animationDelay: '0.4s' }} />
-                  {/* main card */}
-                  <rect className="unitap-illu-a-stomp" x="100" y="50" width="200" height="260" fill="#a8a2e8" stroke="#1a1a2e" strokeWidth="2.5" style={{ animationDelay: '0.3s' }} />
-                  {/* ACHIEVED tag (pink) */}
-                  <g className="unitap-illu-a-tag">
-                    <rect x="160" y="70" width="80" height="22" fill="#ff5b7e" stroke="#1a1a2e" strokeWidth="2" />
-                    <text x="200" y="86" textAnchor="middle" fontFamily="Inter, sans-serif" fontWeight="800" fontSize="10" fill="#1a1a2e" letterSpacing="1.5">ACHIEVED</text>
-                  </g>
-                  {/* small star above number — burst */}
-                  <g className="unitap-illu-a-burst">
-                    <polygon points="200,115 204,125 214,125 206,131 209,141 200,135 191,141 194,131 186,125 196,125" fill="#1a1a2e" />
-                  </g>
-                  {/* Big 1520 — stomp in */}
-                  <g className="unitap-illu-a-stomp" style={{ animationDelay: '1.05s' }}>
-                    <text x="200" y="200" textAnchor="middle" fontFamily="Inter, sans-serif" fontWeight="900" fontSize="58" fill="#1a1a2e" letterSpacing="-2">1520</text>
-                  </g>
-                  {/* SAT SCORE label — reveal up */}
-                  <g className="unitap-illu-a-reveal" style={{ animationDelay: '1.3s' }}>
-                    <text x="200" y="228" textAnchor="middle" fontFamily="Inter, sans-serif" fontWeight="700" fontSize="11" fill="#1a1a2e" letterSpacing="2.5">SAT SCORE</text>
-                  </g>
-                  {/* Divider line — draws in */}
-                  <line className="unitap-illu-a-line" x1="130" y1="250" x2="270" y2="250" stroke="#1a1a2e" strokeWidth="1.5" />
-                  {/* 3 bottom dots — sequential pop */}
-                  <circle className="unitap-illu-a-dot d1" cx="180" cy="275" r="3" fill="#1a1a2e" />
-                  <circle className="unitap-illu-a-dot d2" cx="200" cy="275" r="3" fill="#1a1a2e" />
-                  <circle className="unitap-illu-a-dot d3" cx="220" cy="275" r="3" fill="#1a1a2e" />
-                </g>
-              </g>
-
-              {/* 3. Yellow card with star (top-right) — burst */}
-              <g className="unitap-illu-a-scale" data-parallax-speed="0.32" data-parallax-rotate="9" data-parallax-range="42" style={{ animationDelay: '0.45s' }}>
-                <g transform="rotate(10 340 70)">
-                  <rect className="unitap-illu-a-left" x="306" y="36" width="70" height="70" fill="#1a1a2e" style={{ animationDelay: '0.6s' }} />
-                  <rect className="unitap-illu-a-stomp" x="300" y="30" width="70" height="70" fill="#ffe066" stroke="#1a1a2e" strokeWidth="2.5" style={{ animationDelay: '0.5s' }} />
-                  {/* star inside — rotate burst */}
-                  <g className="unitap-illu-a-rotate" style={{ animationDelay: '1.2s' }}>
-                    <polygon points="335,45 339,60 354,60 342,69 346,84 335,75 324,84 328,69 316,60 331,60" fill="#1a1a2e" />
-                  </g>
-                </g>
-              </g>
-
-              {/* 4. Green check card (bottom-left) — slides from left */}
-              <g className="unitap-illu-a-left" data-parallax-speed="0.24" data-parallax-rotate="8" data-parallax-range="38">
-                <g transform="rotate(-10 75 280)">
-                  <rect className="unitap-illu-a-top" x="51" y="256" width="56" height="56" fill="#1a1a2e" style={{ animationDelay: '0.7s' }} />
-                  <rect className="unitap-illu-a-btm" x="45" y="250" width="56" height="56" fill="#a8e6a3" stroke="#1a1a2e" strokeWidth="2.5" style={{ animationDelay: '0.6s' }} />
-                  {/* check mark — draw */}
-                  <path className="unitap-illu-check unitap-illu-a-fadein f2" d="M58 278 L70 290 L88 268" fill="none" stroke="#0d0d1a" strokeWidth="4.5" strokeLinecap="round" strokeLinejoin="round" style={{ animationDelay: '1.15s' }} />
-                </g>
-              </g>
-
-              {/* 5. Small green +250 pill (mid-left) — slides from top */}
-              <g className="unitap-illu-a-top" data-parallax-speed="0.38" data-parallax-rotate="10" data-parallax-range="48">
-                <g transform="rotate(-15 50 170)">
-                  <rect className="unitap-illu-a-top" x="20" y="155" width="60" height="30" fill="#1a1a2e" style={{ animationDelay: '0.95s' }} />
-                  <rect className="unitap-illu-a-tag" x="16" y="151" width="60" height="30" fill="#a8e6a3" stroke="#1a1a2e" strokeWidth="2" style={{ animationDelay: '0.85s' }} />
-                  {/* +250 text — glitch reveal */}
-                  <text className="unitap-illu-a-glitch" x="46" y="171" textAnchor="middle" fontFamily="Inter, sans-serif" fontWeight="800" fontSize="11" fill="#1a1a2e">+250</text>
-                </g>
-              </g>
-
-              {/* 6. Three small sparkles — burst, staggered */}
-              <g data-parallax-speed="0.5" data-parallax-rotate="6" data-parallax-range="55">
-                <g className="unitap-illu-a-burst" style={{ animationDelay: '1.0s' }} transform="translate(60 50)">
-                  <polygon points="0,-7 2,-2 7,-2 3,1.5 4.5,7 0,3.5 -4.5,7 -3,1.5 -7,-2 -2,-2" fill="#1a1a2e" />
-                </g>
-                <g className="unitap-illu-a-burst" style={{ animationDelay: '1.2s' }} transform="translate(370 200)">
-                  <polygon points="0,-6 1.8,-1.8 6,-1.8 2.4,1.2 3.6,6 0,2.5 -3.6,6 -2.4,1.2 -6,-1.8 -1.8,-1.8" fill="#1a1a2e" />
-                </g>
-                <g className="unitap-illu-a-burst" style={{ animationDelay: '1.4s' }} transform="translate(340 320)">
-                  <polygon points="0,-5 1.5,-1.5 5,-1.5 2,1 3,5 0,2.5 -3,5 -2,1 -5,-1.5 -1.5,-1.5" fill="#1a1a2e" />
-                </g>
-              </g>
-            </svg>
-          </div>
-        </div>
-      </section>
-
-      <div className="unitap-marquee">
-        <div className="unitap-marquee-track">
-          <span className="unitap-marquee-item">ALGEBRA <span className="unitap-marquee-dot">✦</span></span>
-          <span className="unitap-marquee-item">GEOMETRY <span className="unitap-marquee-dot">✦</span></span>
-          <span className="unitap-marquee-item">ADVANCED MATH <span className="unitap-marquee-dot">✦</span></span>
-          <span className="unitap-marquee-item">DATA ANALYSIS <span className="unitap-marquee-dot">✦</span></span>
-          <span className="unitap-marquee-item">PROBLEM SOLVING <span className="unitap-marquee-dot">✦</span></span>
-          <span className="unitap-marquee-item">PRACTICE TESTS <span className="unitap-marquee-dot">✦</span></span>
-          <span className="unitap-marquee-item">AI TUTOR <span className="unitap-marquee-dot">✦</span></span>
-          <span className="unitap-marquee-item">STUDY PLAN <span className="unitap-marquee-dot">✦</span></span>
-          <span className="unitap-marquee-item">ALGEBRA <span className="unitap-marquee-dot">✦</span></span>
-          <span className="unitap-marquee-item">GEOMETRY <span className="unitap-marquee-dot">✦</span></span>
-          <span className="unitap-marquee-item">ADVANCED MATH <span className="unitap-marquee-dot">✦</span></span>
-          <span className="unitap-marquee-item">DATA ANALYSIS <span className="unitap-marquee-dot">✦</span></span>
-          <span className="unitap-marquee-item">PROBLEM SOLVING <span className="unitap-marquee-dot">✦</span></span>
-          <span className="unitap-marquee-item">PRACTICE TESTS <span className="unitap-marquee-dot">✦</span></span>
-          <span className="unitap-marquee-item">AI TUTOR <span className="unitap-marquee-dot">✦</span></span>
-          <span className="unitap-marquee-item">STUDY PLAN <span className="unitap-marquee-dot">✦</span></span>
-          <span className="unitap-marquee-item">PROCTORED EXAMS <span className="unitap-marquee-dot">✦</span></span>
-        </div>
+      <div id="ob-sheet" className={`ob-sheet${menuOpen ? ' open' : ''}`} aria-hidden={!menuOpen} inert={!menuOpen}>
+        {NAV.map(([href, label]) => <a key={href} href={href} className="big-link" onClick={closeMenu}>{label}</a>)}
+        <Link to="/auth" className="big-link" onClick={closeMenu}>KIRISH</Link>
+        <Link to="/auth" className="ob-btn big" onClick={closeMenu}>ILOVANI OCHISH</Link>
       </div>
 
-      <section className="unitap-section" id="methodology">
-        <div className="unitap-section-inner">
-          <span className="unitap-eyebrow u-reveal">METHODOLOGY</span>
-          <h2 className="unitap-h2 u-reveal" data-reveal-delay="0.05s">
-            To'rtta oddiy <span className="unitap-h2-line">qadam</span> bilan
-            natijaga erishing.
-          </h2>
-          <p className="unitap-h2-sub u-reveal" data-reveal-delay="0.1s">
-            Bizning platformamiz imtihonga tayyorlanish jarayonini soddalashtiradi.
-            Faqat ro'yxatdan o'ting, darajangizni aniqlang, va har kuni 20 daqiqa mashq qiling.
-          </p>
-          <div className="unitap-steps u-stagger">
-            <div className="unitap-step">
-              <span className="unitap-step-num">01 / DIAGNOSE</span>
-              <h3 className="unitap-step-title">Darajangizni aniqlang</h3>
-              <p className="unitap-step-desc">5 daqiqalik diagnostik test orqali hozirgi matematika darajangiz va kuchli/zaif tomonlaringiz aniqlanadi.</p>
-              <div className="unitap-step-bar" />
+      <main>
+        {/* 2. HERO */}
+        <section className="ob-hero" id="hero" data-orbi="hidden" ref={heroRef}>
+          <div className="ob-bg-par" data-depth="6"><BgLayer name="hero" priority /></div>
+          <div className="ob-container ob-hero-grid">
+            <div className="ob-hero-text">
+              <span className="ob-hero-chip" data-reveal><span className="ob-dot" aria-hidden="true" />2026-yil qabuli ochiq</span>
+              <h1 data-reveal style={{ '--i': 1 }}>
+                Imtihon natijangni <span className="ob-underline">uch barobar
+                  <svg viewBox="0 0 300 20" preserveAspectRatio="none" aria-hidden="true"><path d="M4 13 C 60 3, 120 17, 180 8 S 270 6, 296 11" /></svg>
+                </span> oshir.
+              </h1>
+              <p className="ob-hero-sub" data-reveal style={{ '--i': 2 }}>
+                Bizning zamonaviy tayyorlov platformamiz matematika imtihonlariga tayyorgarlik koʻrishning
+                yangi usulini taklif etadi. Maqsadli darslar, real imtihon simulyatsiyalari va AI yordam.
+              </p>
+              <div className="ob-hero-actions" data-reveal style={{ '--i': 3 }}>
+                <Link to="/auth" className="ob-btn big">BEPUL BOSHLASH <Icon name="arrow" width="22" height="22" /></Link>
+                <a href="#uslub" className="ob-btn secondary big">QANDAY ISHLAYDI</a>
+              </div>
+              {/* TODO(jasper): real data? — the three hero stats are placeholder numbers from the old site. */}
+              <div className="ob-stat-chips" data-reveal style={{ '--i': 4 }}>
+                <div className="ob-stat-chip ob-glass"><b>12,400+</b><span>Faol talabalar</span></div>
+                <div className="ob-stat-chip ob-glass"><b>1520</b><span>Oʻrtacha SAT</span></div>
+                <div className="ob-stat-chip ob-glass"><b>98%</b><span>Maqsadga erishgan</span></div>
+              </div>
             </div>
-            <div className="unitap-step">
-              <span className="unitap-step-num">02 / PERSONALIZE</span>
-              <h3 className="unitap-step-title">Shaxsiy reja tuzing</h3>
-              <p className="unitap-step-desc">AI sizning maqsadlaringiz va jadvalingizga mos ravishda har kun uchun aniq darslar va mashqlar tanlaydi.</p>
-              <div className="unitap-step-bar" />
-            </div>
-            <div className="unitap-step">
-              <span className="unitap-step-num">03 / PRACTICE</span>
-              <h3 className="unitap-step-title">Har kuni mashq qiling</h3>
-              <p className="unitap-step-desc">Real imtihon formatidagi 5,000+ savol, batafsil tushuntirishlar, va AI tutor yordamida mustahkamlang.</p>
-              <div className="unitap-step-bar" />
-            </div>
-            <div className="unitap-step">
-              <span className="unitap-step-num">04 / DOMINATE</span>
-              <h3 className="unitap-step-title">Imtihonni zabt eting</h3>
-              <p className="unitap-step-desc">Proktorlangan mock imtihonlar bilan haqiqiy sharoitda mashq qiling va natijangizni kafolatlang.</p>
-              <div className="unitap-step-bar" />
-            </div>
-          </div>
-        </div>
-      </section>
 
-      <section className="unitap-section" id="results" style={{ padding: 0 }}>
-        <div className="unitap-stats u-stagger">
-          <div className="unitap-stat">
-            <span className="unitap-stat-num u-count" data-count-to="12400" data-count-duration="2000">0</span>
-            <span className="unitap-stat-label">Faol talabalar</span>
+            <div className="ob-hero-art">
+              <div className="ob-podium ob-parallax" data-depth="14" aria-hidden="true">
+                {extras.has('podium') ? <img src="/bg/podium.webp" alt="" width="720" height="240" loading="eager" /> : <div className="ob-podium-css" />}
+              </div>
+              <div className="ob-parallax ob-hero-orbi-wrap" data-depth="14">
+                <OrbiImage pose="wave" className="ob-hero-orbi" eager alt="Orbi qoʻl silkitib salomlashmoqda" />
+              </div>
+              <div className="ob-float-card ob-glass a" aria-hidden="true"><b>1520</b><span>SAT ball</span></div>
+              <div className="ob-float-card ob-glass b" aria-hidden="true"><b>+250</b><span>Algebra</span></div>
+              <Sparkle style={{ top: '12%', left: '18%' }} />
+              <Sparkle style={{ top: '30%', right: '6%', width: 14, height: 14, animationDelay: '0.8s' }} />
+            </div>
           </div>
-          <div className="unitap-stat">
-            <span className="unitap-stat-num u-count" data-count-to="1520" data-count-duration="2000">0</span>
-            <span className="unitap-stat-label">O'rtacha SAT ball</span>
-          </div>
-          <div className="unitap-stat">
-            <span className="unitap-stat-num u-count" data-count-to="4.9" data-count-decimals="1" data-count-duration="2000">0</span>
-            <span className="unitap-stat-label">Foydalanuvchi reytingi</span>
-          </div>
-          <div className="unitap-stat">
-            <span className="unitap-stat-num u-count" data-count-to="98" data-count-suffix="%" data-count-duration="2000">0</span>
-            <span className="unitap-stat-label">Maqsadga erishgan</span>
-          </div>
-        </div>
-      </section>
+        </section>
 
-      <section className="unitap-section lavender" id="curriculum">
-        <div className="unitap-section-inner">
-          <span className="unitap-eyebrow u-reveal">EMPOWER</span>
-          <h2 className="unitap-h2 u-reveal" data-reveal-delay="0.05s">
-            Sizga kerak bo'lgan <span className="unitap-h2-line">hamma narsa</span> bitta platformada.
-          </h2>
-          <p className="unitap-h2-sub u-reveal" data-reveal-delay="0.1s">
-            Boshqa darsliklar, qo'shimcha darslar yoki qimmat repetitorlar kerak emas. Hammasi shu yerda.
-          </p>
-          <div className="unitap-empower">
-            <div className="unitap-empower-list u-stagger">
-              <div className="unitap-empower-item">
-                <span className="unitap-empower-check">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><polyline points="20 6 9 17 4 12" /></svg>
-                </span>
-                <div>
-                  <strong>5,000+ amaliy savollar</strong>
-                  <span>Algebra, Geometry, Advanced Math, Data Analysis, Problem Solving — barchasi real imtihon formatida</span>
-                </div>
-              </div>
-              <div className="unitap-empower-item">
-                <span className="unitap-empower-check">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><polyline points="20 6 9 17 4 12" /></svg>
-                </span>
-                <div>
-                  <strong>AI Tutor on-demand</strong>
-                  <span>Har bir savol bo'yicha batafsil tushuntirish va shaxsiy maslahat</span>
-                </div>
-              </div>
-              <div className="unitap-empower-item">
-                <span className="unitap-empower-check">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><polyline points="20 6 9 17 4 12" /></svg>
-                </span>
-                <div>
-                  <strong>Proktorlangan mock imtihonlar</strong>
-                  <span>Haqiqiy imtihon sharoitida, timer bilan, to'liq hisobot bilan</span>
-                </div>
-              </div>
-              <div className="unitap-empower-item">
-                <span className="unitap-empower-check">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><polyline points="20 6 9 17 4 12" /></svg>
-                </span>
-                <div>
-                  <strong>Kundalik progress tracking</strong>
-                  <span>Natijangizni har kuni kuzatib boring, zaif tomonlaringizga e'tibor qarating</span>
-                </div>
-              </div>
-              <div className="unitap-empower-item">
-                <span className="unitap-empower-check">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><polyline points="20 6 9 17 4 12" /></svg>
-                </span>
-                <div>
-                  <strong>Video darsliklar va strategiyalar</strong>
-                  <span>Expertlar tomonidan tayyorlangan qisqa va aniq videolar</span>
-                </div>
+        {/* 3. MARQUEE */}
+        <div className="ob-marquees" aria-hidden="true">
+          {['lapis', 'emerald'].map(tone => (
+            <div key={tone} className={`ob-marquee ${tone}`}>
+              <div className="ob-marquee-track">
+                {[0, 1, 2, 3].map(rep => MARQUEE.map(item => (
+                  <span className="ob-marquee-item" key={`${rep}-${item}`}>{item} <i>✦</i></span>
+                )))}
               </div>
             </div>
-            <div className="unitap-card-large yellow u-reveal" data-reveal-delay="0.2s">
-              <div className="unitap-card-large-deco">PRO</div>
-              <h3>Bitta obuna — to'liq kirish</h3>
-              <p>Barcha fanlar, barcha darajalar, barcha imkoniyatlar. Yashirin to'lovlar yo'q, qo'shimcha xarajatlar yo'q.</p>
-              <div style={{ marginTop: '1.5rem', display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
-                <span style={{ display: 'inline-block', padding: '0.4rem 0.75rem', background: 'var(--dark)', color: 'var(--yellow)', fontSize: '0.65rem', fontWeight: 800, letterSpacing: '0.12em' }}>ALL SUBJECTS</span>
-                <span style={{ display: 'inline-block', padding: '0.4rem 0.75rem', background: 'var(--dark)', color: 'var(--yellow)', fontSize: '0.65rem', fontWeight: 800, letterSpacing: '0.12em' }}>AI ACCESS</span>
-                <span style={{ display: 'inline-block', padding: '0.4rem 0.75rem', background: 'var(--dark)', color: 'var(--yellow)', fontSize: '0.65rem', fontWeight: 800, letterSpacing: '0.12em' }}>UNLIMITED</span>
-              </div>
-            </div>
-          </div>
+          ))}
         </div>
-      </section>
 
-      <section className="unitap-section" id="features">
-        <div className="unitap-section-inner">
-          <span className="unitap-eyebrow u-reveal">FEATURES</span>
-          <h2 className="unitap-h2 u-reveal" data-reveal-delay="0.05s">
-            Nega <span className="unitap-h2-line">UFQ</span>?
-          </h2>
-          <p className="unitap-h2-sub u-reveal" data-reveal-delay="0.1s">
-            Boshqa platformalardan farqli — har bir xususiyat natijaga yo'naltirilgan.
-          </p>
-          <div className="unitap-features u-stagger">
-            <div className="unitap-feature yellow">
-              <span className="unitap-feature-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" /></svg></span>
-              <span className="unitap-feature-ico">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12" /></svg>
-              </span>
-              <h3>Adaptive Learning</h3>
-              <p>AI sizning kuchli va zaif tomonlaringizga qarab savollarni avtomatik ravishda tanlaydi. Vaqtni yo'qotmang.</p>
-            </div>
-            <div className="unitap-feature lavender">
-              <span className="unitap-feature-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" /></svg></span>
-              <span className="unitap-feature-ico">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" /></svg>
-              </span>
-              <h3>Real Test Conditions</h3>
-              <p>Proktorlangan mock imtihonlar, timer bilan, haqiqiy imtihon sharoitida. Hech qanday chalg'itish yo'q.</p>
-            </div>
-            <div className="unitap-feature peach">
-              <span className="unitap-feature-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" /></svg></span>
-              <span className="unitap-feature-ico">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" /></svg>
-              </span>
-              <h3>Expert Explanations</h3>
-              <p>Har bir savol bo'yicha video va matnli tushuntirishlar. Nima uchun bu javob to'g'ri ekanini tushunasiz.</p>
-            </div>
-            <div className="unitap-feature green">
-              <span className="unitap-feature-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" /></svg></span>
-              <span className="unitap-feature-ico">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M3 3v18h18" /><path d="M7 16l4-4 4 4 5-5" /></svg>
-              </span>
-              <h3>Smart Analytics</h3>
-              <p>Har bir mashqdan keyin batafsil hisobot. Qayerda yutqazayotganingizni aniq ko'ring.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="unitap-section" id="testimonials">
-        <div className="unitap-section-inner">
-          <span className="unitap-eyebrow u-reveal">TESTIMONIALS</span>
-          <h2 className="unitap-h2 u-reveal" data-reveal-delay="0.05s">
-            Talabalar <span className="unitap-h2-line">nima deydi</span>?
-          </h2>
-          <div className="unitap-testimonials u-stagger">
-            <div className="unitap-testi">
-              <span className="unitap-testi-stars">
-                {[0, 1, 2, 3, 4].map((i) => (
-                  <svg key={i} width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                    <polygon points="12 2 15 8.5 22 9.3 17 14 18.2 21 12 17.8 5.8 21 7 14 2 9.3 9 8.5" />
-                  </svg>
-                ))}
-              </span>
-              <p className="unitap-testi-quote">"3 oyda SAT ballimni 1180 dan 1480 gacha ko'tardim. AI tutor har bir savolni tushuntirib bergani juda yoqdi. Eng yaxshi sarmoya!"</p>
-              <div className="unitap-testi-author">
-                <div className="unitap-testi-avatar">S</div>
-                <div className="unitap-testi-meta">
-                  <span className="unitap-testi-name">SARDOR A.</span>
-                  <span className="unitap-testi-role">+300 POINTS</span>
-                </div>
-              </div>
-            </div>
-            <div className="unitap-testi peach">
-              <span className="unitap-testi-stars">
-                {[0, 1, 2, 3, 4].map((i) => (
-                  <svg key={i} width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                    <polygon points="12 2 15 8.5 22 9.3 17 14 18.2 21 12 17.8 5.8 21 7 14 2 9.3 9 8.5" />
-                  </svg>
-                ))}
-              </span>
-              <p className="unitap-testi-quote">"Algebra'da 800 oldim! Mock imtihonlar va batafsil tushuntirishlar juda foydali bo'ldi. Repetitorga pul sarflash kerak emas edi."</p>
-              <div className="unitap-testi-author">
-                <div className="unitap-testi-avatar">M</div>
-                <div className="unitap-testi-meta">
-                  <span className="unitap-testi-name">MADINA Y.</span>
-                  <span className="unitap-testi-role">ALGEBRA — SCORE 800</span>
-                </div>
-              </div>
-            </div>
-            <div className="unitap-testi green">
-              <span className="unitap-testi-stars">
-                {[0, 1, 2, 3, 4].map((i) => (
-                  <svg key={i} width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                    <polygon points="12 2 15 8.5 22 9.3 17 14 18.2 21 12 17.8 5.8 21 7 14 2 9.3 9 8.5" />
-                  </svg>
-                ))}
-              </span>
-              <p className="unitap-testi-quote">"Kundalik 20 daqiqa mashq qilib, imtihonda 1520 ball oldim. Platformaning adaptive tizimi juda zo'r — faqat zaif joylarimga e'tibor berdi."</p>
-              <div className="unitap-testi-author">
-                <div className="unitap-testi-avatar">J</div>
-                <div className="unitap-testi-meta">
-                  <span className="unitap-testi-name">JASUR K.</span>
-                  <span className="unitap-testi-role">SAT — 1520</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="unitap-final-cta">
-        <div className="unitap-final-cta-bg" />
-        <div className="unitap-final-cta-shape s1" />
-        <div className="unitap-final-cta-shape s2" />
-        <div className="unitap-final-cta-shape s3" />
-        <div className="unitap-final-cta-inner u-stagger">
-          <h2>Imtihongacha <em>vaqtingizni</em><br />behuda ketkazmang.</h2>
-          <p>12,400+ talaba allaqachon UFQ bilan natijalarini oshirdi. Siz ham qo'shiling — birinchi mock imtihon bepul.</p>
-          <Link to="/auth" className="unitap-btn primary">HOZIROQ BOSHLASH →</Link>
-        </div>
-      </section>
-
-      <footer className="unitap-footer">
-        <div className="unitap-footer-inner">
-          <div className="unitap-footer-grid">
-            <div>
-              <div className="unitap-footer-brand-mark">
-                <img className="mark" src="/ufq-logo.png" alt="UFQ" width="36" height="36" />
-                UFQ
-              </div>
-              <p className="unitap-footer-tag">
-                Matematika imtihonlariga tayyorlanish uchun eng zamonaviy platforma.
-                Maqsadingizga biz bilan erishing.
+        {/* 4. USLUB */}
+        <section className="ob-section ob-uslub ob-pattern" id="uslub" data-orbi="think" data-orbi-say="think">
+          <BgLayer name="study" />
+          <div className="ob-container ob-uslub-grid">
+            <div className="ob-uslub-side">
+              <span className="ob-eyebrow" data-reveal>USLUB</span>
+              <h2 className="ob-h2" data-reveal style={{ '--i': 1 }}>Toʻrtta oddiy <span className="hl">qadam</span> bilan natijaga erishing.</h2>
+              <p className="ob-lead" data-reveal style={{ '--i': 2 }}>
+                Bizning platformamiz imtihonga tayyorlanish jarayonini soddalashtiradi.
+                Faqat roʻyxatdan oʻting, darajangizni aniqlang va har kuni 20 daqiqa mashq qiling.
               </p>
             </div>
-            <div className="unitap-footer-col">
-              <span className="unitap-footer-heading">PLATFORM</span>
-              <a href="#methodology">Methodology</a>
-              <a href="#curriculum">Curriculum</a>
-              <a href="#results">Results</a>
-              <a href="#pricing">Pricing</a>
-            </div>
-            <div className="unitap-footer-col">
-              <span className="unitap-footer-heading">SUBJECTS</span>
-              <Link to="/advanced-math">Advanced Math</Link>
-              <Link to="/data-analysis">Data Analysis</Link>
-              <Link to="/problem-solving">Problem Solving</Link>
-              <Link to="/algebra">Algebra</Link>
-              <Link to="/geometry">Geometry</Link>
-            </div>
-            <div className="unitap-footer-col">
-              <span className="unitap-footer-heading">SUPPORT</span>
-              <Link to="/support">Help Center</Link>
-              <Link to="/auth">Sign In</Link>
-              <Link to="/auth">Sign Up</Link>
-              <a href="mailto:umrqulov8@gmail.com">Contact</a>
+            <div className="ob-stack" ref={stackRef}>
+              {STEPS.map((s, i) => (
+                <article className="ob-stack-card ob-card" style={{ '--n': i }} key={s.n}>
+                  <div className="ob-step-num" aria-hidden="true">{s.n}</div>
+                  <div>
+                    <span className="ob-step-tag">{s.n} / {s.tag}</span>
+                    <h3 className="ob-step-title">{s.title}</h3>
+                    <p className="ob-step-desc">{s.text}</p>
+                  </div>
+                  <span className="ob-ico" style={{ '--ic': s.color }}><Icon name={s.icon} /></span>
+                </article>
+              ))}
             </div>
           </div>
-          <div className="unitap-footer-bottom">
-            <span>© 2026 UFQ. All rights reserved.</span>
-            <span>Built for ambitious students.</span>
+        </section>
+
+        {/* 5. STATS / BENTO */}
+        <section className="ob-section" id="natijalar" data-orbi="celebrate" data-orbi-say="celebrate" style={{ paddingTop: 40 }}>
+          <div className="ob-container">
+            <div className="ob-head">
+              <span className="ob-eyebrow" data-reveal>NATIJALAR</span>
+              <h2 className="ob-h2" data-reveal style={{ '--i': 1 }}>Raqamlar <span className="hl">gapiradi</span>.</h2>
+            </div>
+            {/* TODO(jasper): real data? — the numbers below are placeholder stats from the old site. */}
+            <div className="ob-bento">
+              <div className="ob-tile big" data-reveal>
+                <OrbiImage pose="score" size={640} alt="Orbi natija kartochkasini ushlab turibdi" />
+                <Sparkle style={{ top: '10%', left: '12%' }} />
+                <Sparkle style={{ top: '34%', left: '4%', width: 14, height: 14, animationDelay: '1s' }} />
+                <BigNum />
+              </div>
+              <Stat to={12400} label="Faol talabalar" className="t2" />
+              <Stat to={4.9} decimals={1} label="Foydalanuvchi reytingi" className="t3" />
+              <div className="ob-tile t4" data-reveal style={{ '--i': 2 }}>
+                <div>
+                  <div className="ob-num">98%</div>
+                  <div className="ob-num-label">Maqsadga erishgan</div>
+                </div>
+                <Ring />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* 6. FANLAR */}
+        <section className="ob-section ob-fanlar" id="fanlar" data-orbi="study" data-orbi-say="study">
+          <BgLayer name="sky" />
+          <div className="ob-container">
+            <div className="ob-head center">
+              <span className="ob-eyebrow" data-reveal>FANLAR</span>
+              <h2 className="ob-h2" data-reveal style={{ '--i': 1, maxWidth: '20ch' }}>Sizga kerak boʻlgan <span className="hl">hamma narsa</span> bitta platformada.</h2>
+              <p className="ob-lead" data-reveal style={{ '--i': 2 }}>Boshqa darsliklar, qoʻshimcha darslar yoki qimmat repetitorlar kerak emas. Hammasi shu yerda.</p>
+            </div>
+            <div className="ob-feature-grid">
+              {FEATURES.map((f, i) => (
+                <article className="ob-feature ob-glass" key={f.title} data-reveal style={{ '--i': i }}>
+                  <span className="ob-ico sm" style={{ '--ic': f.color }}><Icon name={f.icon} /></span>
+                  <h3>{f.title}</h3>
+                  <p>{f.text}</p>
+                </article>
+              ))}
+            </div>
+            <div className="ob-subjects" data-reveal>
+              {SUBJECTS.map(s => (
+                <Link key={s.to} to={s.to} className="ob-subject-chip" style={{ '--sc': s.color }}>
+                  <b>{s.uz}</b>
+                  <small>{s.en}</small>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* 7. NEGA UFQ */}
+        <section className="ob-section ob-nega ob-pattern" id="nega" data-orbi="point">
+          <div className="ob-container">
+            <div className="ob-head">
+              <span className="ob-eyebrow" data-reveal>NEGA UFQ?</span>
+              <h2 className="ob-h2" data-reveal style={{ '--i': 1 }}>Nega <span className="hl">UFQ</span>?</h2>
+              <p className="ob-lead" data-reveal style={{ '--i': 2 }}>Boshqa platformalardan farqli — har bir xususiyat natijaga yoʻnaltirilgan.</p>
+            </div>
+            <div className="ob-why-grid">
+              {WHY.map((w, i) => (
+                <article className="ob-why ob-card" key={w.title} data-reveal style={{ '--i': i }}>
+                  <Majolica />
+                  <span className="ob-ico sm" style={{ '--ic': w.color }}><Icon name={w.icon} /></span>
+                  <h3>{w.title}</h3>
+                  <p>{w.text}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* 8. NARX */}
+        <section className="ob-section ob-narx" id="narx" data-orbi="point" data-orbi-say="pricing">
+          <div className="ob-container">
+            <div className="ob-head center">
+              <span className="ob-eyebrow" data-reveal>NARX</span>
+            </div>
+            <div className="ob-plan" data-reveal style={{ '--i': 1 }}>
+              <span className="ob-ribbon">PRO</span>
+              <h3>Bitta obuna — toʻliq kirish</h3>
+              <p>Barcha fanlar, barcha darajalar, barcha imkoniyatlar. Yashirin toʻlovlar yoʻq, qoʻshimcha xarajatlar yoʻq.</p>
+              <div className="ob-plan-tags">
+                <span className="ob-plan-tag">BARCHA FANLAR</span>
+                <span className="ob-plan-tag">AI YORDAM</span>
+                <span className="ob-plan-tag">CHEKSIZ</span>
+              </div>
+              <Link to="/auth" className="ob-btn big">BOSHLASH <Icon name="arrow" width="22" height="22" /></Link>
+            </div>
+          </div>
+        </section>
+
+        {/* 9. FIKRLAR */}
+        <section className="ob-section ob-fikrlar" id="fikrlar" data-orbi="celebrate" data-orbi-say="celebrate-2">
+          <BgLayer name="results" />
+          <div className="ob-container">
+            <div className="ob-head">
+              <span className="ob-eyebrow" style={{ color: 'var(--ob-lapis-dark)' }} data-reveal>FIKRLAR</span>
+              <h2 className="ob-h2" data-reveal style={{ '--i': 1 }}>Talabalar <span className="hl">nima deydi</span>?</h2>
+            </div>
+            <div className="ob-testis">
+              {TESTIS.map((t, i) => (
+                <article className="ob-testi ob-glass" key={t.name} data-reveal style={{ '--i': i }}>
+                  <div className="ob-stars" role="img" aria-label="5 ta yulduz">{[0, 1, 2, 3, 4].map(k => <Star key={k} />)}</div>
+                  <p className="ob-quote">“{t.quote}”</p>
+                  <div className="ob-testi-author">
+                    <span className="ob-avatar" style={{ '--av': t.color }} aria-hidden="true">{t.initial}</span>
+                    <div>
+                      <span className="ob-testi-name">{t.name}</span>
+                      <span className="ob-badge">{t.badge}</span>
+                    </div>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* 10. OXIRGI CHAQIRIQ */}
+        <section className="ob-section ob-night" id="cta" data-orbi="point" data-orbi-hide="true">
+          <BgLayer name="night" />
+          <div className="ob-stars-bg" aria-hidden="true">
+            {Array.from({ length: 36 }, (_, i) => (
+              <i key={i} style={{ left: `${(i * 37) % 100}%`, top: `${(i * 53) % 100}%`, '--d': `${(i % 9) * 0.35}s`, width: i % 5 === 0 ? 4 : 3, height: i % 5 === 0 ? 4 : 3 }} />
+            ))}
+          </div>
+          <div className="ob-container ob-cta-grid">
+            <div>
+              <h2 data-reveal>Imtihongacha <em>vaqtingizni</em> behuda ketkazmang.</h2>
+              <p className="lead" data-reveal style={{ '--i': 1 }}>12,400+ talaba allaqachon UFQ bilan natijalarini oshirdi. Siz ham qoʻshiling — birinchi mock imtihon bepul.</p>
+              <div data-reveal style={{ '--i': 2 }}>
+                <Link to="/auth" className="ob-btn big cta-gold">HOZIROQ BOSHLASH <Icon name="arrow" width="22" height="22" /></Link>
+              </div>
+            </div>
+            <div className="ob-cta-orbi" data-reveal>
+              <div className="ob-say" aria-hidden="true">Qani, boshladik!</div>
+              <OrbiImage pose="point" alt="Orbi sizni boshlashga chorlayapti" />
+            </div>
+          </div>
+        </section>
+      </main>
+
+      {/* 11. FOOTER */}
+      <footer className="ob-footer" id="footer" data-orbi="tea">
+        <div className="ob-ikat" aria-hidden="true" />
+        <div className="ob-container ob-footer-inner">
+          <div className="ob-footer-orbi"><OrbiImage pose="tea" size={320} alt="Orbi choy ichmoqda" /></div>
+          <div className="ob-footer-grid">
+            <div>
+              <BrandMark />
+              <p className="ob-footer-tag">Matematika imtihonlariga tayyorlanish uchun eng zamonaviy platforma. Maqsadingizga biz bilan erishing.</p>
+            </div>
+            <div className="ob-footer-col">
+              <h4>PLATFORMA</h4>
+              <a href="#uslub">Uslub</a>
+              <a href="#fanlar">Fanlar</a>
+              <a href="#natijalar">Natijalar</a>
+              <a href="#narx">Narx</a>
+            </div>
+            <div className="ob-footer-col">
+              <h4>FANLAR</h4>
+              <Link to="/advanced-math">Murakkab matematika</Link>
+              <Link to="/data-analysis">Ma'lumotlar tahlili</Link>
+              <Link to="/problem-solving">Masala yechish</Link>
+              <Link to="/algebra">Algebra</Link>
+              <Link to="/geometry">Geometriya</Link>
+            </div>
+            <div className="ob-footer-col">
+              <h4>YORDAM</h4>
+              <Link to="/support">Yordam markazi</Link>
+              <Link to="/auth">Kirish</Link>
+              <Link to="/auth">Roʻyxatdan oʻtish</Link>
+              <a href="mailto:umrqulov8@gmail.com">Aloqa</a>
+            </div>
+          </div>
+          <div className="ob-footer-bottom">
+            <span>© 2026 UFQ. Barcha huquqlar himoyalangan.</span>
+            <span>Maqsadli talabalar uchun yaratilgan.</span>
           </div>
         </div>
       </footer>
-      </main>
-    </>
+    </div>
+  )
+}
+
+function BigNum() {
+  const [ref, text] = useCountUp({ to: 1520 })
+  return (
+    <div style={{ position: 'relative', zIndex: 1 }}>
+      <div className="ob-num" ref={ref} aria-label="1520">{text}</div>
+      <div className="ob-num-label">Oʻrtacha SAT ball</div>
+    </div>
   )
 }
