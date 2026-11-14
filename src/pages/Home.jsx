@@ -10,7 +10,6 @@ const NAV = [
   ['#uslub', 'USLUB'],
   ['#fanlar', 'FANLAR'],
   ['#natijalar', 'NATIJALAR'],
-  ['#narx', 'NARX'],
 ]
 
 const MARQUEE = ['Algebra', 'Geometriya', 'Murakkab matematika', "Ma'lumotlar tahlili", 'Masala yechish', 'Amaliy testlar', 'AI ustoz', 'Oʻquv reja', 'Nazoratli imtihonlar']
@@ -302,26 +301,6 @@ export default function Home() {
           </div>
         </section>
 
-        {/* 8. NARX */}
-        <section className="ob-section ob-narx" id="narx" data-orbi="point" data-orbi-say="pricing">
-          <div className="ob-container">
-            <div className="ob-head center">
-              <span className="ob-eyebrow" data-reveal>NARX</span>
-            </div>
-            <div className="ob-plan" data-reveal style={{ '--i': 1 }}>
-              <span className="ob-ribbon">PRO</span>
-              <h3>Bitta obuna — toʻliq kirish</h3>
-              <p>Barcha fanlar, barcha darajalar, barcha imkoniyatlar. Yashirin toʻlovlar yoʻq, qoʻshimcha xarajatlar yoʻq.</p>
-              <div className="ob-plan-tags">
-                <span className="ob-plan-tag">BARCHA FANLAR</span>
-                <span className="ob-plan-tag">AI YORDAM</span>
-                <span className="ob-plan-tag">CHEKSIZ</span>
-              </div>
-              <Link to="/auth" className="ob-btn big">BOSHLASH <Icon name="arrow" width="22" height="22" /></Link>
-            </div>
-          </div>
-        </section>
-
         {/* 9. FIKRLAR */}
         <section className="ob-section ob-fikrlar" id="fikrlar" data-orbi="celebrate" data-orbi-say="celebrate-2">
           <BgLayer name="results" />
@@ -376,7 +355,6 @@ export default function Home() {
       <footer className="ob-footer" id="footer" data-orbi="tea">
         <div className="ob-ikat" aria-hidden="true" />
         <div className="ob-container ob-footer-inner">
-          <div className="ob-footer-orbi"><OrbiImage pose="tea" size={320} alt="Orbi choy ichmoqda" /></div>
           <div className="ob-footer-grid">
             <div>
               <BrandMark />
@@ -387,7 +365,6 @@ export default function Home() {
               <a href="#uslub">Uslub</a>
               <a href="#fanlar">Fanlar</a>
               <a href="#natijalar">Natijalar</a>
-              <a href="#narx">Narx</a>
             </div>
             <div className="ob-footer-col">
               <h4>FANLAR</h4>
