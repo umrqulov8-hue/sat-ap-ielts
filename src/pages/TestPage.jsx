@@ -567,18 +567,18 @@ export default function TestPage() {
   if (loadError) return (
     <div className="bb-empty-state">
       <div className="bb-empty-icon">⚠️</div>
-      <h2 className="bb-empty-title">Savollarni yuklab bo'lmadi</h2>
+      <h2 className="bb-empty-title">Could not load the questions</h2>
       <p className="bb-empty-text">{loadError}</p>
-      <button className="bb-empty-btn" onClick={() => { setLoading(true); setReloadKey(k => k + 1) }}>Qayta urinish</button>
+      <button className="bb-empty-btn" onClick={() => { setLoading(true); setReloadKey(k => k + 1) }}>Try again</button>
     </div>
   )
   if (!topic) return <div className="test-loading"><div className="test-loading-text">TOPIC NOT FOUND</div></div>
   if (!questions.length) return (
     <div className="bb-empty-state">
       <div className="bb-empty-icon">📭</div>
-      <h2 className="bb-empty-title">Bu modulda savollar yo'q</h2>
-      <p className="bb-empty-text">"{topic.title}" moduliga hozircha savollar qo'shilmagan. Boshqa modulni tanlang.</p>
-      <button className="bb-empty-btn" onClick={() => navigate('/dashboard')}>Bosh sahifaga qaytish</button>
+      <h2 className="bb-empty-title">No questions in this module</h2>
+      <p className="bb-empty-text">"{topic.title}" has no questions yet. Pick another module.</p>
+      <button className="bb-empty-btn" onClick={() => navigate('/dashboard')}>Back to dashboard</button>
     </div>
   )
 

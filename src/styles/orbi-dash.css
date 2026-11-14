@@ -213,3 +213,109 @@ html body .profile-page .profile-avatar { border: 3px solid #fff; border-radius:
 html body .profile-page .details-title, html body .profile-page .section-title { border-bottom: 2px dashed #EADBC2; font-family: var(--ob-font-display); letter-spacing: 0.02em; text-transform: none; }
 html body .profile-page :is(.details-title, .section-title)::after { height: 4px; bottom: -3px; width: 56px; background: #E4AE45; border: 0; border-radius: 4px; }
 html body .profile-page .detail-item { border-radius: 16px; box-shadow: 0 3px 0 #EADBC2; }
+
+/* ==========================================================================
+   TEST SCREEN (Bluebook-style: /test/..., /sat-test/...) — Orbi dunyosi
+   ========================================================================== */
+html body .bb { background: #FFF7EA; font-family: var(--ob-font-body); color: #14213D; }
+
+/* top bar */
+html body .bb-top { background: #1F45A8; color: #fff; height: 60px; padding: 0 22px; box-shadow: 0 4px 0 #15327E; position: relative; z-index: 2; }
+html body .bb-top-title { font-family: var(--ob-font-display); font-weight: 700; font-size: 18px; color: #fff; }
+html body .bb-icon-btn { color: #fff; border-radius: 12px; padding: 8px; }
+html body .bb-icon-btn:hover { background: rgba(255, 255, 255, 0.2); color: #fff; }
+html body .bb-timer { font-family: var(--ob-font-display); font-weight: 800; font-size: 20px; color: #14213D; background: #E4AE45; border-radius: 999px; padding: 2px 16px; box-shadow: 0 3px 0 #B9852A; }
+html body .bb-divider { display: none; }
+
+/* body */
+html body .bb-body { background: #FFF7EA; padding: 28px; }
+html body .bb-body-split .bb-left { background: #FFFBF3; border-right: 2px dashed #EADBC2; }
+html body .bb-body-split .bb-right { background: #FFF7EA; }
+html body .bb-body-split .bb-q-header, html body .bb-q-header { background: transparent; border-bottom: 2px dashed #EADBC2; padding: 12px 18px; }
+html body .bb-body-split .bb-q-text, html body .bb-q-text { color: #14213D; font-size: 17px; background: transparent; }
+html body .bb-passage-split, html body .bb-body-inner .bb-passage { color: #14213D; }
+html body .bb-body-split .bb-left-img, html body .bb-body-inner .bb-q-img { border: 2px solid #EADBC2; border-radius: 18px; background: #fff; box-shadow: 0 4px 0 #EADBC2; mix-blend-mode: normal; }
+
+html body .bb-q-num { background: #1F45A8; color: #fff; border-radius: 10px; width: 34px; height: 34px; font-family: var(--ob-font-display); font-size: 17px; box-shadow: 0 3px 0 #15327E; }
+html body .bb-mark-btn { color: #51607A; border-radius: 999px; font-weight: 800; font-family: var(--ob-font-body); }
+html body .bb-mark-btn:hover, html body .bb-mark-btn.marked { color: #C8372D; }
+html body .bb-abc-btn { border: 2px solid #EADBC2; background: #fff; border-radius: 999px; color: #14213D; font-weight: 800; padding: 4px 12px; }
+html body .bb-abc-btn:hover, html body .bb-abc-btn.active { background: #1F45A8; color: #fff; border-color: #1F45A8; }
+
+/* answer choices */
+html body .bb-choice {
+  background: #fff; border: 2px solid #EADBC2; border-radius: 18px; box-shadow: 0 4px 0 #EADBC2; padding: 13px 16px;
+  font-weight: 700; color: #14213D; transition: transform 0.12s ease, box-shadow 0.12s ease, border-color 0.15s ease, background 0.15s ease;
+}
+html body .bb-choice:hover { background: #fff; border-color: #1F45A8; transform: translateY(-1px); box-shadow: 0 5px 0 #C9D6F3; }
+html body .bb-choice:active { transform: translateY(3px); box-shadow: 0 1px 0 #EADBC2; }
+html body .bb-choice.selected { background: #E7EDFC; border-color: #1F45A8; box-shadow: 0 4px 0 #15327E; }
+html body .bb-choice.struck { opacity: 0.45; }
+html body .bb-choice-letter { border: 2px solid #EADBC2; border-radius: 50%; width: 32px; height: 32px; font-family: var(--ob-font-display); font-weight: 800; font-size: 15px; background: #FFF7EA; color: #14213D; }
+html body .bb-choice.selected .bb-choice-letter { background: #1F45A8; color: #fff; border-color: #1F45A8; }
+html body .bb-written-input { border: 2px solid #EADBC2; border-radius: 16px; background: #fff; padding: 12px 16px; font-family: var(--ob-font-body); font-weight: 700; font-size: 16px; color: #14213D; }
+html body .bb-written-input:focus { background: #fff; border-color: #1F45A8; box-shadow: 0 0 0 4px rgba(31, 69, 168, 0.16); }
+
+/* bottom bar */
+html body .bb-bottom { background: #fff; border-top: 2px solid #EADBC2; padding: 12px 24px; }
+html body .bb-bottom-name { color: #14213D; font-family: var(--ob-font-display); font-weight: 700; font-size: 16px; letter-spacing: 0.02em; text-transform: none; }
+html body :is(.bb-counter-btn, .bb-prev-btn, .bb-mark-nav-btn) {
+  background: #fff; color: #14213D; border: 2px solid #EADBC2; border-radius: 14px; box-shadow: 0 3px 0 #EADBC2;
+  font-family: var(--ob-font-display); font-weight: 700; font-size: 14px; letter-spacing: 0.03em; padding: 8px 18px;
+}
+html body :is(.bb-counter-btn, .bb-prev-btn, .bb-mark-nav-btn):hover:not(:disabled) { background: #FFF7EA; color: #14213D; }
+html body :is(.bb-counter-btn, .bb-prev-btn, .bb-mark-nav-btn):active:not(:disabled) { transform: translateY(3px); box-shadow: none; }
+html body .bb-mark-nav-btn.marked { background: #FBE2DF; border-color: #C8372D; color: #C8372D; box-shadow: 0 3px 0 #C8372D; }
+html body :is(.bb-next-btn, .bb-review-btn, .bb-empty-btn) {
+  background: #1F45A8; color: #fff; border: 0; border-radius: 14px; box-shadow: 0 4px 0 #15327E;
+  font-family: var(--ob-font-display); font-weight: 700; font-size: 15px; letter-spacing: 0.04em; padding: 10px 26px;
+}
+html body :is(.bb-next-btn, .bb-review-btn, .bb-empty-btn):hover:not(:disabled) { background: #1F45A8; color: #fff; filter: brightness(1.08); }
+html body :is(.bb-next-btn, .bb-review-btn, .bb-empty-btn):active:not(:disabled) { transform: translateY(4px); box-shadow: none; }
+html body .bb-next-btn:disabled { background: #D9CDB4; box-shadow: 0 4px 0 #C2B393; opacity: 1; }
+
+/* question-number modal */
+html body .bb-modal-overlay { background: rgba(20, 33, 61, 0.5); }
+html body .bb-modal { border: 2px solid #EADBC2; border-radius: 26px; box-shadow: 0 8px 0 #EADBC2, 0 30px 60px rgba(20, 33, 61, 0.25); overflow: hidden; }
+html body .bb-modal-header { background: #1F45A8; color: #fff; border-bottom: 0; font-family: var(--ob-font-display); font-size: 17px; letter-spacing: 0.04em; text-transform: none; }
+html body .bb-modal-close { color: #fff; }
+html body .bb-modal-close:hover { color: #E4AE45; }
+html body :is(.bb-modal-legend, .bb-modal-grid, .bb-modal-footer) { background: #fff; }
+html body .bb-modal-legend { color: #51607A; font-weight: 800; }
+html body .bb-legend-box { border-radius: 6px; }
+html body .bb-legend-current { background: #1F45A8; border-color: #1F45A8; }
+html body .bb-legend-unanswered { border-color: #C9B993; }
+html body .bb-legend-review { border-color: #C8372D; background: #FBE2DF; }
+html body .bb-grid-cell { border: 2px dashed #D9CDB4; border-radius: 12px; color: #14213D; font-family: var(--ob-font-display); font-size: 15px; }
+html body .bb-grid-cell:hover { background: #E7EDFC; }
+html body .bb-grid-cell.current { background: #1F45A8; color: #fff; border: 2px solid #15327E; box-shadow: 0 3px 0 #15327E; }
+html body .bb-grid-cell.answered { background: #BDE6CF; border: 2px solid #13804F; color: #0C5E39; }
+html body .bb-grid-cell.review { border: 2px solid #C8372D; background: #FBE2DF; color: #C8372D; }
+html body .bb-modal-footer { border-top: 2px dashed #EADBC2; }
+html body .bb-modal-footer .bb-review-btn { width: 100%; border: 0; border-radius: 14px; text-transform: none; padding: 12px; background: #1F45A8; color: #fff; box-shadow: 0 4px 0 #15327E; }
+html body .bb-modal-footer .bb-review-btn:hover { background: #1F45A8; color: #fff; filter: brightness(1.08); }
+
+/* calculator, reference, empty states */
+html body :is(.bb-calc-modal, .bb-ref-panel) { border-radius: 22px; border: 2px solid #EADBC2; box-shadow: 0 8px 0 #EADBC2, 0 24px 50px rgba(20, 33, 61, 0.22); overflow: hidden; }
+html body :is(.bb-calc-header, .bb-ref-header) { background: #1F45A8; color: #fff; font-family: var(--ob-font-display); }
+html body .bb-ref-section h3, html body .bb-ref-formulas h3 { font-family: var(--ob-font-display); }
+html body .bb-empty-state { background: #FFF7EA; font-family: var(--ob-font-body); }
+html body .bb-empty-title { font-family: var(--ob-font-display); font-weight: 800; color: #14213D; }
+
+/* drawing toolbar */
+html body .draw-toolbar { border: 2px solid #EADBC2; border-radius: 22px; background: #fff; box-shadow: 0 6px 0 #EADBC2, 0 14px 30px rgba(20, 33, 61, 0.16); padding: 8px 10px; }
+html body .draw-toolbar .draw-tool-button { border-radius: 14px; color: #14213D; }
+html body .draw-toolbar .draw-tool-button:hover { background: #E7EDFC; }
+html body .draw-toolbar .draw-tool-button.active { background: #1F45A8; color: #fff; box-shadow: 0 3px 0 #15327E; }
+html body .draw-toolbar .draw-color-button.selected { border-color: #14213D; }
+html body .draw-toolbar-separator { background: #EADBC2; }
+html body .shape-picker-menu { border-radius: 22px; border: 2px solid #EADBC2; box-shadow: 0 6px 0 #EADBC2, 0 20px 40px rgba(20, 33, 61, 0.2); background: #fff; }
+html body .shape-picker-options button { border-radius: 14px; border: 2px solid #EADBC2; }
+html body .shape-picker-options button:hover, html body .shape-picker-options button.selected { background: #E7EDFC; border-color: #1F45A8; }
+
+@media (max-width: 720px) {
+  html body .bb-top { padding: 0 12px; height: 54px; }
+  html body .bb-bottom { padding: 10px 12px; }
+  html body .bb-body { padding: 16px; }
+  html body :is(.bb-next-btn, .bb-review-btn) { padding: 9px 18px; }
+}
