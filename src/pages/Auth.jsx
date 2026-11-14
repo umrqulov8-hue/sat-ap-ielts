@@ -244,6 +244,9 @@ export default function Auth() {
             <OrbiImage pose="wave" size={320} eager alt="Orbi salomlashmoqda" />
             <span>Xush kelibsan!</span>
           </div>
+          <button type="button" className="ob-auth-switch" onClick={() => switchMode(mode === 'signin' ? 'signup' : 'signin')}>
+            {mode === 'signin' ? "Yangi misiz? Ro'yxatdan o'ting" : 'Hisobingiz bormi? Kirish'}
+          </button>
 
           {signedUp ? (
             <div className="modal-form-inner modal-success-wrap">

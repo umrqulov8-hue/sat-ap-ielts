@@ -447,3 +447,9 @@
   .modal-backdrop.ob-auth .modal-marketing-center { display: none; }
   .modal-backdrop.ob-auth .modal-marketing-brand { font-size: 1.1rem; }
 }
+
+.ob-auth-switch { display: none; align-self: flex-start; margin: 0 auto 6px; width: 100%; max-width: 360px; text-align: left; background: none; border: 0; padding: 4px 0; font-family: var(--ob-font-body); font-weight: 800; font-size: 14px; color: var(--ob-lapis); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+@media (max-width: 720px) {
+  .modal-backdrop.ob-auth .modal-marketing { display: none; }
+  .ob-auth-switch { display: block; }
+}
