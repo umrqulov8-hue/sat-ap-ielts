@@ -469,3 +469,11 @@ html body .detail-icon { border: 2px solid #EADBC2; border-radius: 12px; backgro
 html body :is(.module-icon, .stat-icon, .skill-icon) { border: 2px solid #EADBC2; border-radius: 12px; box-shadow: none; }
 html body .detail-label { color: #6B7893; font-weight: 800; }
 html body .detail-value { color: #14213D; font-family: var(--ob-font-display); font-weight: 800; }
+
+/* Detail rows: give the icon and text room, so nothing sticks to the edges */
+html body .detail-item { display: flex; align-items: center; gap: 1rem; padding: 0.9rem 1.2rem; overflow: visible; }
+html body .detail-icon { width: 48px; height: 48px; flex: 0 0 48px; display: grid; place-items: center; margin: 0; }
+html body .detail-content { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+html body .detail-label { font-size: 0.7rem; letter-spacing: 0.1em; }
+html body .detail-value { font-size: 1.15rem; line-height: 1.2; overflow-wrap: anywhere; }
+html body .details-grid { gap: 1rem 1.25rem; }
