@@ -8,3 +8,7 @@ dist
 /images-extra/
 scripts/
 sql-*.sql
+
+# Orbi source PNGs (only optimized outputs are committed)
+public/companion/orbi-*.png
+public/bg/*.png
