@@ -462,3 +462,10 @@ html body .cal-legend { color: #51607A; font-weight: 800; }
 html body .cal-dot { border: 2px solid #C9B993; border-radius: 0; }
 html body .cal-dot.filled { background: #13804F; border-color: #0C5E39; }
 html body .cal-dot.empty { background: #fff; }
+
+/* Detail rows (profile / personal details): soft icon chip inside a rounded row */
+html body .detail-item { border-radius: 18px; border: 2px solid #EADBC2; box-shadow: 0 3px 0 #EADBC2; background: #fff; overflow: hidden; }
+html body .detail-icon { border: 2px solid #EADBC2; border-radius: 12px; background: #FFF7EA; color: #1F45A8; box-shadow: none; }
+html body :is(.module-icon, .stat-icon, .skill-icon) { border: 2px solid #EADBC2; border-radius: 12px; box-shadow: none; }
+html body .detail-label { color: #6B7893; font-weight: 800; }
+html body .detail-value { color: #14213D; font-family: var(--ob-font-display); font-weight: 800; }
