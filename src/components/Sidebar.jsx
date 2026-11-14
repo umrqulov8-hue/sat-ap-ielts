@@ -22,25 +22,25 @@ const ROUTE_PREFETCH = {
 const NAV_ITEMS = [
   {
     section: null,
-    items: [{ label: 'DASHBOARD', path: '/dashboard', icon: '<rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/>' }]
+    items: [{ label: 'BOSH SAHIFA', path: '/dashboard', icon: '<rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/>' }]
   },
   {
-    section: 'MATH',
+    section: 'MATEMATIKA',
     items: [
-      { label: 'ADVANCED MATH', path: '/advanced-math', icon: '<path d="M22 12h-4l-3 9L9 3l-3 9H2"/>' },
-      { label: 'DATA ANALYSIS', path: '/data-analysis', icon: '<path d="M12 20V10"/><path d="M18 20V4"/><path d="M6 20v-4"/>' },
-      { label: 'PROBLEM SOLVING', path: '/problem-solving', icon: '<circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/>' },
+      { label: 'MURAKKAB MATEMATIKA', path: '/advanced-math', icon: '<path d="M22 12h-4l-3 9L9 3l-3 9H2"/>' },
+      { label: "MA'LUMOTLAR TAHLILI", path: '/data-analysis', icon: '<path d="M12 20V10"/><path d="M18 20V4"/><path d="M6 20v-4"/>' },
+      { label: 'MASALA YECHISH', path: '/problem-solving', icon: '<circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/>' },
       { label: 'ALGEBRA', path: '/algebra', icon: '<path d="M18 4H6l6 8-6 8h12"/>' },
-      { label: 'GEOMETRY', path: '/geometry', icon: '<path d="M12 3l9 18H3z"/>' }
+      { label: 'GEOMETRIYA', path: '/geometry', icon: '<path d="M12 3l9 18H3z"/>' }
     ]
   },
   {
-    section: 'PRACTICE',
+    section: 'MASHQ',
     items: [
-      { label: 'STUDY', path: '/study', icon: '<polygon points="6 3 20 12 6 21 6 3"/>' },
-      { label: 'SAT TESTS', path: '/practice/sat-tests', icon: '<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/>' },
-      { label: 'TEST HISTORY', path: '/test-history', icon: '<path d="M3 3v18h18"/><path d="M7 16l4-4 4 4 5-5"/>' },
-      { label: 'STUDY PLAN', path: '/study-plan', icon: '<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>' }
+      { label: 'VIDEO DARSLAR', path: '/study', icon: '<polygon points="6 3 20 12 6 21 6 3"/>' },
+      { label: 'SAT TESTLAR', path: '/practice/sat-tests', icon: '<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/>' },
+      { label: 'TEST TARIXI', path: '/test-history', icon: '<path d="M3 3v18h18"/><path d="M7 16l4-4 4 4 5-5"/>' },
+      { label: 'OʻQUV REJA', path: '/study-plan', icon: '<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>' }
     ]
   }
 ]
@@ -52,7 +52,7 @@ export default function Sidebar() {
   const { profile, isAdmin, isOwner } = useUser()
 
   const handleLogout = async () => {
-    if (window.confirm('Are you sure you want to logout?')) {
+    if (window.confirm('Hisobdan chiqmoqchimisiz?')) {
       await supabase.auth.signOut()
       navigate('/')
     }
@@ -115,17 +115,17 @@ export default function Sidebar() {
           <div className="snav-divider" />
 
           <div className="nav-section">
-            <span className="nav-section-label">ACCOUNT</span>
+            <span className="nav-section-label">HISOB</span>
             <div className="snav-wrap">
               <Link to="/settings" className={`snav-item${currentPath === '/settings' ? ' active' : ''}`}>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72l1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
-                SETTINGS
+                SOZLAMALAR
               </Link>
             </div>
             <div className="snav-wrap">
               <Link to="/support" className={`snav-item${currentPath === '/support' ? ' active' : ''}`}>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-                SUPPORT
+                YORDAM
               </Link>
             </div>
             {(isAdmin || isOwner) ? <><div className="snav-wrap">
@@ -136,7 +136,7 @@ export default function Sidebar() {
                 <div className="snav-wrap">
                 <Link to="/admin/subjects" className={'snav-item' + (currentPath === '/admin/subjects' ? ' active' : '')}>
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
-                  TRACK ADMIN
+                  FANLAR ADMIN
                 </Link></div>
                 <div className="snav-wrap">
                 <Link to="/admin/sat-tests" className={'snav-item' + (currentPath === '/admin/sat-tests' ? ' active' : '')}>
@@ -157,15 +157,15 @@ export default function Sidebar() {
         <Link to="/profile" className="sidebar-user">
           <div className="user-avatar">{initials}</div>
           <div className="user-info">
-            <span className="user-name">{(profile?.display_name || 'STUDENT').toUpperCase()}</span>
-            <span className="user-plan small-caps">{(profile?.plan_type || 'FREE') + ' PLAN'}</span>
+            <span className="user-name">{(profile?.display_name || 'TALABA').toUpperCase()}</span>
+            <span className="user-plan small-caps">{(profile?.plan_type || 'FREE') + ' REJA'}</span>
           </div>
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="9 18 15 12 9 6" /></svg>
         </Link>
         <div className="snav-wrap">
           <button className="snav-item logout" onClick={handleLogout}>
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" /><polyline points="16 17 21 12 16 7" /><line x1="21" y1="12" x2="9" y2="12" /></svg>
-            LOGOUT
+            CHIQISH
           </button>
         </div>
       </div>

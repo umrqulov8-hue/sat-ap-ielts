@@ -49,7 +49,8 @@ export default function DashLayout() {
   }, [])
 
   const today = new Date()
-  const dateStr = `${today.toLocaleString('en-US', { month: 'long' }).toUpperCase()} ${today.getDate()}, ${today.getFullYear()}`
+  const MONTHS = ['YANVAR', 'FEVRAL', 'MART', 'APREL', 'MAY', 'IYUN', 'IYUL', 'AVGUST', 'SENTABR', 'OKTABR', 'NOYABR', 'DEKABR']
+  const dateStr = `${today.getDate()} ${MONTHS[today.getMonth()]} ${today.getFullYear()}`
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -80,8 +81,8 @@ export default function DashLayout() {
                 <span /><span /><span />
               </button>
               <div>
-                <h1 className="header-title">{pageTitle || 'DASHBOARD'}</h1>
-                <p className="header-sub">{pageSub || 'Welcome back'}</p>
+                <h1 className="header-title">{pageTitle || 'BOSH SAHIFA'}</h1>
+                <p className="header-sub">{pageSub || 'Xush kelibsiz'}</p>
               </div>
             </div>
             <div className="header-right" style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>

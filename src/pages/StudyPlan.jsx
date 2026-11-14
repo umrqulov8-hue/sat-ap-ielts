@@ -132,7 +132,7 @@ export default function StudyPlan() {
   }, [toast])
 
   useEffect(() => {
-    setPageTitle('STUDY PLAN')
+    setPageTitle('OʻQUV REJA')
     setPageSub('Rejalashtir va natijangni kuzat')
     setPageClass('')
     loadData().then(planData => {

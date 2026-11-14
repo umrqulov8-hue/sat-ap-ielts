@@ -80,10 +80,10 @@ export default function SubjectPage({ slug, title, subtitle, tag }) {
       })
     }
     const diffList = [
-      { id: 'easy', name: 'Easy', count: counts.easy, color: '#10b981' },
-      { id: 'medium', name: 'Medium', count: counts.medium, color: '#f59e0b' },
-      { id: 'hard', name: 'Hard', count: counts.hard, color: '#ef4444' },
-      { id: 'mixing', name: 'Mixing', count: counts.mixing, color: '#8b5cf6' }
+      { id: 'easy', name: 'Oson', count: counts.easy, color: '#10b981' },
+      { id: 'medium', name: 'Oʻrtacha', count: counts.medium, color: '#f59e0b' },
+      { id: 'hard', name: 'Qiyin', count: counts.hard, color: '#ef4444' },
+      { id: 'mixing', name: 'Aralash', count: counts.mixing, color: '#8b5cf6' }
     ]
     setTopics(diffList)
 
@@ -99,11 +99,11 @@ export default function SubjectPage({ slug, title, subtitle, tag }) {
   }, [profile?.id, slug, time])
 
   useEffect(() => {
-    setPageTitle(title)
+    setPageTitle((SUBJECT_UZ[slug] || title).toUpperCase())
     setPageSub(subtitle)
     setPageClass('')
     refreshData()
-  }, [title, subtitle, setPageTitle, setPageSub, setPageClass, refreshData])
+  }, [title, subtitle, slug, setPageTitle, setPageSub, setPageClass, refreshData])
 
   const handleStart = (t) => {
     if (!t.count) return
@@ -127,13 +127,13 @@ export default function SubjectPage({ slug, title, subtitle, tag }) {
         <div className="stat-card">
           <div className="stat-card-top">
             <div className="stat-label-row">
-              <span className="stat-tag lavender">SCORE</span>
-              <span className="stat-label">CURRENT SCORE</span>
+              <span className="stat-tag lavender">BALL</span>
+              <span className="stat-label">HOZIRGI BALL</span>
             </div>
           </div>
           <div className="stat-value">{score > 0 ? score : '—'}</div>
           <div className="stat-footer">
-            <span className="stat-footer-label">TARGET: {target}</span>
+            <span className="stat-footer-label">MAQSAD: {target}</span>
             <div className="stat-bar"><div className="stat-bar-fill lavender" style={{ width: `${score > 0 ? Math.min(100, Math.round((score / target) * 100)) : 0}%` }} /></div>
           </div>
         </div>
@@ -141,25 +141,25 @@ export default function SubjectPage({ slug, title, subtitle, tag }) {
           <div className="stat-card-top">
             <div className="stat-label-row">
               <span className="stat-tag green">TEST</span>
-              <span className="stat-label">TESTS COMPLETED</span>
+              <span className="stat-label">TOPSHIRILGAN TESTLAR</span>
             </div>
-            <span className="stat-trend">ALL TIME</span>
+            <span className="stat-trend">BUTUN DAVR</span>
           </div>
           <div className="stat-value tests">{tests}</div>
           <div className="stat-footer">
-            <span className="stat-footer-label">ALL-TIME COMPLETIONS</span>
+            <span className="stat-footer-label">BARCHA TOPSHIRILGANLAR</span>
           </div>
         </div>
         <div className="stat-card">
           <div className="stat-card-top">
             <div className="stat-label-row">
               <span className="stat-tag peach">ACC</span>
-              <span className="stat-label">ACCURACY RATE</span>
+              <span className="stat-label">ANIQLIK</span>
             </div>
           </div>
           <div className="stat-value">{accuracy > 0 ? accuracy + '%' : '—'}</div>
           <div className="stat-footer">
-            <span className="stat-footer-label">LAST 5 TESTS</span>
+            <span className="stat-footer-label">OXIRGI 5 TEST</span>
             <div className="stat-bar"><div className="stat-bar-fill peach" style={{ width: `${accuracy}%` }} /></div>
           </div>
         </div>
@@ -167,12 +167,12 @@ export default function SubjectPage({ slug, title, subtitle, tag }) {
           <div className="stat-card-top">
             <div className="stat-label-row">
               <span className="stat-tag yellow">TIME</span>
-              <span className="stat-label">STUDY TIME</span>
+              <span className="stat-label">OʻQISH VAQTI</span>
             </div>
           </div>
           <div className="stat-value time">{time > 0 ? time : '—'}</div>
           <div className="stat-footer">
-            <span className="stat-footer-label">HOURS THIS WEEK</span>
+            <span className="stat-footer-label">SHU HAFTA SOATLARI</span>
             <div className="stat-bar"><div className="stat-bar-fill yellow" style={{ width: `${time > 0 ? Math.min(100, time * 3.3) : 0}%` }} /></div>
           </div>
         </div>
@@ -180,16 +180,16 @@ export default function SubjectPage({ slug, title, subtitle, tag }) {
 
       {topics.length > 0 && (
         <>
-          <h2 className="section-title">PRACTICE BY DIFFICULTY</h2>
+          <h2 className="section-title">QIYINLIK DARAJASI BOʻYICHA MASHQ</h2>
           <div className="study-grid study-grid-3">
             {topics.map((t) => (
               <div key={t.id} className={'study-card shadow-wrap' + (!t.count ? ' disabled' : '')} onClick={() => handleStart(t)} aria-disabled={!t.count}>
                 <div className="shadow-box" />
                 <div className="study-card-inner" style={{ '--sc': accent }}>
                   <div className="study-card-name" style={{ color: t.color, fontWeight: 700, fontSize: '1.2rem', textShadow: '0 1px 2px rgba(0,0,0,0.1)' }}>{t.name}</div>
-                  <div className="study-card-count">{t.count} questions available</div>
+                  <div className="study-card-count">{t.count} ta savol mavjud</div>
                   <button className="btn-module study-card-btn" disabled={!t.count} onClick={(e) => { e.stopPropagation(); handleStart(t) }}>
-                    {t.count ? 'START' : 'COMING SOON'}
+                    {t.count ? 'BOSHLASH' : 'TEZ ORADA'}
                   </button>
                 </div>
               </div>

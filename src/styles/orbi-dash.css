@@ -1,0 +1,205 @@
+/* ==========================================================================
+   ORBI DUNYOSI for the app (dashboard, subjects, study, profile, settings, tests).
+   Loaded after the older dashboard CSS. Selectors carry an extra `html body`
+   prefix so they win over those files no matter which chunk loads last.
+   ========================================================================== */
+
+/* ---- Tokens: remap the old pastel/neo-brutalist variables to Orbi's palette ---- */
+html:root {
+  --dark: #14213D;
+  --black: #14213D;
+  --cream: #FFF7EA;
+  --lavender: #CFDAF6;      /* lapis tint */
+  --peach: #F8D5C0;
+  --green: #BDE6CF;         /* emerald tint */
+  --yellow: #F6DE9E;        /* gold tint */
+  --pink: #C8372D;
+  --mint: #BDE6CF;
+  --blue: #CFDAF6;
+  --muted: #51607A;
+  --gray-100: #FBF3E4;
+  --gray-200: #F3E6CF;
+  --gray-300: #EADBC2;
+  --gray-400: #C9B993;
+  --gray-500: #6B7893;
+  --gray-600: #51607A;
+  --gray-700: #3A4660;
+  --navy-light: #1F45A8;
+  --success: #13804F;
+  --error: #C8372D;
+  --ob-edge: #EADBC2;
+  --ob-font-display: 'Baloo 2', 'Nunito', system-ui, sans-serif;
+  --ob-font-body: 'Nunito', system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+
+html body { font-family: var(--ob-font-body); background: #FFF7EA; color: #14213D; }
+html body button, html body input, html body select, html body textarea { font-family: var(--ob-font-body); }
+
+/* ---- Headings and big numbers use the rounded display face ---- */
+html body :is(.header-title, .stat-value, .section-title, .card-title, .profile-name, .th-title, .tr-title,
+  .sat-list-title, .modal-form-heading, .details-title, .support-subtitle, .support-side-title, .admin-card-title,
+  .th-stat-val, .skill-score, .module-score, .sat-q-num, .admin-stat-val, .ai-forecast-value, .sidebar-logo-text) {
+  font-family: var(--ob-font-display);
+  letter-spacing: 0;
+  font-weight: 800;
+}
+html body .header-title { font-size: clamp(1.9rem, 3.4vw, 2.6rem); color: #14213D; }
+html body .header-sub { font-weight: 700; color: #51607A; opacity: 1; }
+html body .stat-value { font-size: 3rem; color: #1F45A8; font-variant-numeric: tabular-nums; }
+html body .section-title { font-size: 1.5rem; letter-spacing: 0.02em; margin-bottom: 1.25rem; border-bottom: 2px dashed #EADBC2; text-transform: none; }
+html body .section-title::after { height: 4px; bottom: -3px; width: 56px; background: #E4AE45; border: 0; border-radius: 4px; }
+html body .stat-label-row { flex-wrap: wrap; row-gap: 0.25rem; }
+html body .stat-label, html body .stat-footer-label { font-family: var(--ob-font-body); font-weight: 800; letter-spacing: 0.08em; }
+
+/* ---- Shell ---- */
+html body .dash-layout { background: #FFF7EA; }
+html body .dash-main { background: transparent; }
+html body .dash-header { background: rgba(255, 247, 234, 0.92); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+html body .dash-header.scrolled { border-bottom-color: #EADBC2; }
+html body .header-date {
+  border: 2px solid #EADBC2; border-radius: 999px; background: #fff; box-shadow: 0 3px 0 #EADBC2;
+  font-family: var(--ob-font-body); font-weight: 800; letter-spacing: 0.06em; padding: 0 1rem;
+}
+html body .header-date::before { border: 0; border-radius: 50%; background: #13804F; width: 8px; height: 8px; }
+html body .header-date:hover { transform: translateY(-1px); box-shadow: 0 4px 0 #EADBC2; border-color: #EADBC2; }
+
+/* ---- Sidebar ---- */
+html body .dash-sidebar { background: #fff; border-right: 2px solid #EADBC2; }
+html body .sidebar-header { border-bottom: 2px solid #EADBC2; }
+html body .sidebar-header::after { display: none; }
+html body .sidebar-logo-icon { background: transparent; border: 0; box-shadow: none; border-radius: 10px; overflow: hidden; }
+html body .sidebar-logo-icon img { width: 36px; height: 36px; object-fit: contain; }
+html body .sidebar-logo-text { font-size: 1.7rem; color: #1F45A8; }
+html body .sidebar-badge { border: 2px solid #EADBC2; border-radius: 999px; background: #FFF7EA; font-family: var(--ob-font-display); letter-spacing: 0.08em; font-size: 0.7rem; padding: 0.2rem 0.6rem; }
+html body .nav-section-label { font-family: var(--ob-font-display); font-size: 0.8rem; letter-spacing: 0.14em; color: #C8372D; }
+html body .nav-section-label::before { background: #E4AE45; border: 0; border-radius: 50%; width: 7px; height: 7px; }
+html body .snav-item {
+  border: 2px solid transparent; border-radius: 14px; font-family: var(--ob-font-display); font-weight: 700;
+  font-size: 1rem; letter-spacing: 0.04em; padding: 0.6rem 0.85rem; color: #14213D;
+}
+html body .snav-item:hover { background: #FFF7EA; border-color: #EADBC2; transform: none; box-shadow: none; }
+html body .snav-item.active, html body .snav-item.active:hover {
+  background: #1F45A8; color: #fff; border-color: #15327E; box-shadow: 0 4px 0 #15327E; margin: 0 0 4px; transform: none;
+}
+html body .snav-badge { border-radius: 999px; border: 0; background: #14213D; color: #E4AE45; }
+html body .snav-item.active .snav-badge { background: #fff; color: #1F45A8; }
+html body .snav-item.logout:hover { background: #FBE2DF; border-color: #C8372D; color: #C8372D; box-shadow: none; transform: none; }
+html body .snav-divider { background: #EADBC2; opacity: 1; height: 2px; }
+html body .sidebar-footer { border-top: 2px solid #EADBC2; }
+html body .sidebar-footer::before { display: none; }
+html body .sidebar-user { border: 2px solid #EADBC2; border-radius: 18px; background: #FFF7EA; box-shadow: 0 4px 0 #EADBC2; }
+html body .sidebar-user:hover { background: #fff; transform: translateY(-1px); box-shadow: 0 5px 0 #EADBC2; }
+html body .user-avatar { border: 0; border-radius: 50%; background: #1F45A8; color: #fff; font-family: var(--ob-font-display); }
+html body .sidebar-user:hover .user-avatar { background: #E4AE45; color: #14213D; }
+
+/* ---- Hard offset shadows become soft bottom edges ---- */
+html body .shadow-wrap > .shadow-box { display: none; }
+
+/* ---- Cards ---- */
+html body :is(.stat-card, .dash-card, .module-card, .study-card-inner, .settings-card, .profile-card, .skill-card,
+  .admin-card-item, .admin-stat-card, .admin-stat-block, .support-side-card, .support-hero, .faq-item, .th-summary,
+  .th-stat, .study-task-card, .study-day-col, .study-subj-stat, .ai-forecast-card, .detail-item, .qa-btn,
+  .sat-module-preview, .sat-list-row, .th-row, .activity-item, .module-row, .reminder-banner, .calendar-container,
+  .edit-modal, .sat-break, .admin-users-wrap, .admin-recent, .tr-header, .personal-details, .profile-stats, .study-today-summary) {
+  background: #fff; border: 2px solid #EADBC2; border-radius: 22px; box-shadow: 0 6px 0 #EADBC2;
+}
+html body :is(.stat-card, .dash-card, .module-card, .qa-btn, .sat-list-row, .th-row, .study-task-card):hover {
+  transform: translateY(-3px); box-shadow: 0 9px 0 #EADBC2;
+}
+html body :is(.stat-card, .qa-btn, .module-card):active { transform: translateY(2px); box-shadow: 0 2px 0 #EADBC2; }
+html body .stat-card-small { border-radius: 16px; }
+html body :is(.activity-item, .module-row, .detail-item, .th-row) { box-shadow: 0 3px 0 #EADBC2; border-radius: 18px; }
+html body .card-header { border-bottom: 2px dashed #EADBC2; }
+
+/* ---- Tags, chips, badges ---- */
+html body :is(.stat-tag, .module-tag, .study-tag, .admin-card-tag, .ai-badge, .admin-role-badge, .stat-trend, .study-prio) {
+  border: 0; border-radius: 999px; font-family: var(--ob-font-display); font-weight: 700; letter-spacing: 0.08em; padding: 0.3rem 0.7rem; color: #14213D;
+}
+html body .stat-tag.lavender { background: #CFDAF6; }
+html body .stat-tag.peach { background: #F8D5C0; }
+html body .stat-tag.green { background: #BDE6CF; }
+html body .stat-tag.yellow { background: #F6DE9E; }
+html body .stat-tag.pink { background: #C8372D; color: #fff; }
+html body .stat-trend { background: #FFF7EA; border: 2px solid #EADBC2; }
+html body .stat-trend.up { background: #13804F; color: #fff; border-color: #0C5E39; }
+
+/* ---- Progress bars ---- */
+html body :is(.stat-bar, .module-progress, .study-subj-bar, .study-day-progress, .admin-subj-bar-bg) {
+  border: 0; border-radius: 999px; background: #F3E6CF; height: 10px; overflow: hidden;
+}
+html body :is(.stat-bar-fill, .module-progress-bar, .study-day-progress-fill, .admin-subj-bar-fill) { border-radius: 999px; background: #1F45A8; }
+html body .stat-bar-fill.lavender { background: #1F45A8; }
+html body .stat-bar-fill.green { background: #13804F; }
+html body .stat-bar-fill.peach { background: #C8372D; }
+html body .stat-bar-fill.yellow { background: #E4AE45; }
+
+/* ---- Chunky buttons ---- */
+html body :is(.btn-module, .btn-settings, .btn-support-side, .profile-edit-btn, .sat-next-btn, .sat-review-btn,
+  .th-review-btn, .sat-break-btn, .modal-submit, .ai-analyze-btn, .study-day-action-btn, .study-day-add, .sat-move-btn) {
+  background: #1F45A8; color: #fff; border: 0; border-radius: 16px; box-shadow: 0 4px 0 #15327E;
+  font-family: var(--ob-font-display); font-weight: 700; letter-spacing: 0.04em; transition: transform 0.12s ease, box-shadow 0.12s ease, filter 0.15s ease;
+}
+html body :is(.btn-module, .btn-settings, .btn-support-side, .profile-edit-btn, .sat-next-btn, .sat-review-btn,
+  .th-review-btn, .sat-break-btn, .ai-analyze-btn, .study-day-action-btn, .study-day-add, .sat-move-btn):hover:not(:disabled) { filter: brightness(1.07); transform: none; box-shadow: 0 4px 0 #15327E; }
+html body :is(.btn-module, .btn-settings, .btn-support-side, .profile-edit-btn, .sat-next-btn, .sat-review-btn,
+  .th-review-btn, .sat-break-btn, .ai-analyze-btn, .study-day-action-btn, .study-day-add, .sat-move-btn):active:not(:disabled) { transform: translateY(4px); box-shadow: 0 0 0 #15327E; }
+html body :is(.btn-module, .sat-next-btn):disabled { background: #D9CDB4; box-shadow: 0 4px 0 #C2B393; color: #fff; }
+html body .sat-del-btn, html body .admin-icon-btn-danger { border-radius: 12px; }
+html body :is(.sat-icon-btn, .admin-icon-btn, .cal-nav) { border: 2px solid #EADBC2; border-radius: 12px; background: #fff; box-shadow: 0 3px 0 #EADBC2; }
+
+/* ---- Form fields ---- */
+html body :is(.settings-input, .support-search, .admin-search-input, .support-textarea, .admin-role-select, .admin-textarea-passage) {
+  border: 2px solid #EADBC2; border-radius: 14px; background: #fff; font-family: var(--ob-font-body); font-weight: 700; box-shadow: none;
+}
+html body :is(.settings-input, .support-search, .admin-search-input, .support-textarea, .admin-role-select):focus {
+  outline: none; border-color: #1F45A8; box-shadow: 0 0 0 4px rgba(31, 69, 168, 0.16);
+}
+html body .admin-search-box { border: 2px solid #EADBC2; border-radius: 14px; background: #fff; box-shadow: none; }
+html body .settings-label { font-family: var(--ob-font-display); letter-spacing: 0.08em; }
+html body .toggle-switch { border-radius: 999px; }
+html body .toggle-slider { border-radius: 999px; }
+
+/* ---- FAQ / lists ---- */
+html body .faq-item { box-shadow: 0 4px 0 #EADBC2; border-radius: 18px; }
+html body .faq-q { font-family: var(--ob-font-display); letter-spacing: 0.02em; }
+
+/* ---- Study cards (subject / difficulty) ---- */
+html body .study-card { border: 0; background: transparent; box-shadow: none; }
+html body .study-card:hover .study-card-inner { transform: translateY(-3px); box-shadow: 0 9px 0 #EADBC2; }
+html body .study-card.disabled .study-card-inner { opacity: 0.6; }
+html body .study-card-name { font-family: var(--ob-font-display); font-weight: 800; text-shadow: none; }
+
+/* ---- Modals, calendar, toasts ---- */
+html body :is(.calendar-modal, .edit-modal) { border-radius: 26px; border: 2px solid #EADBC2; box-shadow: 0 10px 0 #EADBC2, 0 30px 60px rgba(20, 33, 61, 0.2); }
+html body :is(.calendar-backdrop, .edit-modal-overlay) { background: rgba(20, 33, 61, 0.5); backdrop-filter: none; }
+html body .toast { border-radius: 16px; border: 2px solid #EADBC2; box-shadow: 0 5px 0 #EADBC2; font-family: var(--ob-font-body); font-weight: 800; }
+html body .settings-toast { border-radius: 14px; border: 2px solid #13804F; background: #E6F5EC; color: #0C5E39; }
+
+/* ---- Loading ---- */
+html body .loading-spinner { border-radius: 50%; border-color: #EADBC2; border-top-color: #1F45A8; }
+
+/* ---- Bluebook-style test screens (/test/..., /sat-test/...) ---- */
+html body :is(.bb, .sat-page) { font-family: var(--ob-font-body); }
+html body .bb-modal-overlay { background: rgba(20, 33, 61, 0.5); }
+
+/* ---- Subject header band (SubjectPage) ---- */
+html body .ob-subject-band { margin-top: 0; }
+
+/* ---- Orbi helper elements inside the app ---- */
+.ob-dash-hello { display: flex; align-items: center; gap: 18px; padding: 18px 24px; margin-bottom: 1.5rem; background: #fff; border: 2px solid #EADBC2; border-radius: 24px; box-shadow: 0 6px 0 #EADBC2; position: relative; overflow: hidden; }
+.ob-dash-hello img { width: 96px; height: 96px; object-fit: contain; flex: none; filter: drop-shadow(0 8px 8px rgba(20, 33, 61, 0.2)); }
+.ob-dash-hello h2 { font-family: var(--ob-font-display); font-weight: 800; font-size: 1.6rem; line-height: 1.1; color: #14213D; margin: 0 0 4px; }
+.ob-dash-hello p { margin: 0; color: #51607A; font-weight: 700; font-size: 1rem; }
+.ob-dash-hello::after { content: ''; position: absolute; right: -30px; top: -30px; width: 140px; height: 140px; border-radius: 50%; background: radial-gradient(circle, rgba(228, 174, 69, 0.28), transparent 70%); pointer-events: none; }
+
+/* ---- Phones ---- */
+@media (max-width: 900px) {
+  html body .dash-sidebar { border-right: 0; }
+  html body .stat-value { font-size: 2.4rem; }
+  .ob-dash-hello { padding: 14px 16px; gap: 12px; }
+  .ob-dash-hello img { width: 68px; height: 68px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html body :is(.stat-card, .dash-card, .qa-btn, .module-card, .sat-list-row, .th-row, .study-task-card, .btn-module):hover { transform: none; }
+}

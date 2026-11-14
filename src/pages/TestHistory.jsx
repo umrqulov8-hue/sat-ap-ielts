@@ -13,8 +13,8 @@ export default function TestHistory() {
   const [analysis, setAnalysis] = useState({})
 
   useEffect(() => {
-    setPageTitle('TEST HISTORY')
-    setPageSub('Your practice test results')
+    setPageTitle('TEST TARIXI')
+    setPageSub('Amaliy test natijalaringiz')
     setPageClass('test-history')
   }, [setPageTitle, setPageSub, setPageClass])
 
