@@ -327,10 +327,10 @@
 
 /* ---------- Auth modal restyle ---------- */
 .modal-backdrop.ob-auth { background: rgba(20, 33, 61, 0.45); backdrop-filter: blur(6px); }
-.ob-auth .modal { border-radius: 28px; border: 0; box-shadow: 0 30px 60px rgba(20, 33, 61, 0.25); overflow: hidden; font-family: var(--ob-font-body); }
-.ob-auth .modal-marketing { background: linear-gradient(160deg, #1F45A8 0%, #15327E 55%, #13804F 130%); color: var(--ob-cream); }
+.ob-auth .modal { border-radius: 0; border: 0; box-shadow: 0 30px 60px rgba(20, 33, 61, 0.25); overflow: hidden; font-family: var(--ob-font-body); }
+.ob-auth .modal-marketing { background: linear-gradient(160deg, #1F45A8 0%, #15327E 100%); opacity: 1; color: var(--ob-cream); }
 .ob-auth .modal-marketing-brand, .ob-auth .modal-marketing-heading, .ob-auth .modal-form-heading { font-family: var(--ob-font-display); }
-.ob-auth .modal-form-panel { background: rgba(255, 255, 255, 0.82); backdrop-filter: blur(14px); }
+.ob-auth .modal-form-panel { background: var(--ob-cream); backdrop-filter: none; }
 .ob-auth input { border: 2px solid var(--ob-edge); border-radius: 14px; font-family: var(--ob-font-body); font-weight: 700; background: #fff; }
 .ob-auth input:focus { outline: none; border-color: var(--ob-lapis); box-shadow: 0 0 0 4px rgba(31, 69, 168, 0.18); }
 .ob-auth .modal-submit, .ob-auth .modal-google, .ob-auth .modal-marketing-btn { border-radius: 16px; font-family: var(--ob-font-display); font-weight: 700; }
@@ -435,3 +435,15 @@
 /* Images carry width/height attributes (no layout shift); let CSS size them. */
 .ob-404 img, .ob-cta-orbi img, .ob-tile.big img, .ob-footer-orbi img { height: auto; }
 .ob-footer-orbi img { width: 100%; display: block; }
+
+/* Auth modal on phones: stacked panels, solid, no overlap or offset shadows. */
+@media (max-width: 720px) {
+  .modal-backdrop.ob-auth .modal { max-height: calc(100vh - 24px); overflow-y: auto; }
+  .modal-backdrop.ob-auth .modal-marketing { margin-bottom: 0; box-shadow: none; border: 0; transform: none !important; opacity: 1; background: linear-gradient(160deg, #1F45A8 0%, #15327E 100%); }
+  .modal-backdrop.ob-auth .modal-form-panel { box-shadow: none; border: 0; overflow-y: visible; }
+}
+@media (max-width: 720px) {
+  .modal-backdrop.ob-auth .modal-marketing { background: #1F45A8 !important; padding: 12px 16px; min-height: 0; flex-direction: row; align-items: center; justify-content: space-between; }
+  .modal-backdrop.ob-auth .modal-marketing-center { display: none; }
+  .modal-backdrop.ob-auth .modal-marketing-brand { font-size: 1.1rem; }
+}
