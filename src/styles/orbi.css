@@ -454,11 +454,9 @@
   .ob-auth-switch { display: block; }
 }
 
-/* Desktop auth: the blue panel sits 28px lower (as before); that strip above it is solid cream, never see-through. */
+/* Desktop auth: no strip above the blue panel; the form panel is cut to the same height, so both start at the same line. */
 @media (min-width: 721px) {
   .modal-backdrop.ob-auth .modal { box-shadow: none; }
-  .modal-backdrop.ob-auth .modal::before { content: ''; position: absolute; top: 0; left: 0; width: 50%; height: 28px; background: var(--ob-cream); z-index: 0; transition: transform 0.9s cubic-bezier(0.77, 0, 0.175, 1); }
-  .modal-backdrop.ob-auth .modal.signup::before { transform: translateX(100%); }
   .modal-backdrop.ob-auth .modal-marketing { box-shadow: none; border: 0; }
-  .modal-backdrop.ob-auth .modal-form-panel { box-shadow: none; }
+  .modal-backdrop.ob-auth .modal-form-panel { box-shadow: none; top: 28px; height: calc(100% - 28px); }
 }
