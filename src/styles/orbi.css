@@ -464,11 +464,11 @@
 }
 
 /* ==========================================================================
-   Doppi cursor: the mouse pointer is a small Chust doppi everywhere.
-   White doppi embroidery on the normal pointer, gold on clickable things.
+   Mouse cursor: a classic black arrow with a small embroidered Chust doppi
+   beside it (white stitching normally, gold over clickable things).
    Text fields keep the usual text cursor; the drawing canvas keeps its own.
    ========================================================================== */
-html, body { cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='24' viewBox='0 0 32 24'%3E%3Cpath d='M3 21C4 11 9 4 16 3c7 1 12 8 13 18z' fill='%23121212' stroke='%23fff' stroke-width='1.6' stroke-linejoin='round'/%3E%3Cpath d='M6.5 17.5h19' stroke='%23ffffff' stroke-width='1.8' stroke-dasharray='2 2.4' stroke-linecap='round'/%3E%3Cpath d='M8 12.5C11 8.5 21 8.5 24 12.5' fill='none' stroke='%23ffffff' stroke-width='1.4' stroke-dasharray='1.6 2.2' stroke-linecap='round'/%3E%3C/svg%3E") 8 6, auto; }
+html, body { cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Cpath d='M3 2v21l5.2-4.6 3.4 7.6 3.6-1.6-3.3-7.4H18z' fill='%23121212' stroke='%23fff' stroke-width='1.6' stroke-linejoin='round'/%3E%3Cpath d='M18.5 30c.4-5 3.4-8.6 6.6-9 3.2.4 6.2 4 6.5 9z' fill='%23121212' stroke='%23fff' stroke-width='1.3' stroke-linejoin='round'/%3E%3Cpath d='M20.5 27.3h9' stroke='%23ffffff' stroke-width='1.5' stroke-dasharray='1.8 2' stroke-linecap='round'/%3E%3C/svg%3E") 3 2, auto; }
 html body :is(a, button, [role="button"], [role="tab"], label, summary, select, .bb-choice):not(:disabled),
-html body [onclick] { cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='24' viewBox='0 0 32 24'%3E%3Cpath d='M3 21C4 11 9 4 16 3c7 1 12 8 13 18z' fill='%23121212' stroke='%23fff' stroke-width='1.6' stroke-linejoin='round'/%3E%3Cpath d='M6.5 17.5h19' stroke='%23E4AE45' stroke-width='1.8' stroke-dasharray='2 2.4' stroke-linecap='round'/%3E%3Cpath d='M8 12.5C11 8.5 21 8.5 24 12.5' fill='none' stroke='%23E4AE45' stroke-width='1.4' stroke-dasharray='1.6 2.2' stroke-linecap='round'/%3E%3C/svg%3E") 8 6, pointer !important; }
+html body [onclick] { cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Cpath d='M3 2v21l5.2-4.6 3.4 7.6 3.6-1.6-3.3-7.4H18z' fill='%23121212' stroke='%23fff' stroke-width='1.6' stroke-linejoin='round'/%3E%3Cpath d='M18.5 30c.4-5 3.4-8.6 6.6-9 3.2.4 6.2 4 6.5 9z' fill='%23121212' stroke='%23fff' stroke-width='1.3' stroke-linejoin='round'/%3E%3Cpath d='M20.5 27.3h9' stroke='%23E4AE45' stroke-width='1.5' stroke-dasharray='1.8 2' stroke-linecap='round'/%3E%3C/svg%3E") 3 2, pointer !important; }
 @media (pointer: coarse) { html, body { cursor: auto; } }
