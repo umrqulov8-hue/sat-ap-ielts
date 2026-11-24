@@ -200,7 +200,7 @@ a.tile:hover .go{transform:rotate(-45deg);background:#003049;color:#FFFFFF}
 </div>
 </sc-if>
 <footer style="display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding-top: 12px; font-size: 12px; color: rgba(0,48,73,.5)">
-<span>Numbers on this screen are sample data.</span>
+<span>Mistakes come from the practice sets you have saved.</span>
 <span>SAT is a trademark of the College Board, which is not affiliated with Ufq.</span>
 </footer>
 </main>
@@ -208,10 +208,13 @@ a.tile:hover .go{transform:rotate(-45deg);background:#003049;color:#FFFFFF}
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1000}}'>
 class Component extends DCLogic {
-constructor(props) { super(props); this.state = { topic: '', f: 'all' }; }
+constructor(props) { super(props); this.state = { topic: '', f: 'all', M: null };
+const off = window.Ufq.cover('Collecting your mistakes…');
+window.Ufq.mistakes().then((M) => { off(); this.setState({ M }); }).catch((err) => { off(); window.Ufq.toast(err.message || 'Could not load your mistakes.'); this.setState({ M: [] }); });
+}
 renderVals() {
 const s = this.state;
-const M = [
+const SAMPLE_M = [
 ['misread', 'Algebra', 'Yesterday', 'If 4x + 9 = 37, what is the value of 2x ?', 'A · 7', 'B · 14', 'Solved for x and stopped. The question asked for 2x.', 1],
 ['concept', 'Algebra', '3 days ago', 'A line passes through (0, 3) and (2, 11). What is its slope?', 'C · 3', 'D · 4', 'Divided run by rise instead of rise by run.', 0],
 ['time', 'Algebra', '6 days ago', 'For what value of k does 3x + ky = 12 have no solution together with 6x + 8y = 5?', '—', 'B · 4', 'Ran out of time on the module — skipped without guessing.', 0],
@@ -225,7 +228,8 @@ const M = [
 ['concept', 'Advanced Math', '2 weeks ago', 'Which of the following is a solution to x² − 5x + 6 = 0 ?', 'D · 5', 'B · 3', 'Moved the 6 across instead of factoring into (x − 2)(x − 3).', 0],
 ['misread', 'Geometry', '1 week ago', 'A rectangle has a perimeter of 30 and a width of 5. What is its area?', 'A · 75', 'C · 50', 'Used half the perimeter (15) as the length instead of 15 − 5 = 10.', 0]
 ];
-const GROUP = { 'Algebra': 'Math', 'Geometry': 'Math', 'Advanced Math': 'Math', 'Problem-Solving & Data': 'Math' };
+const M = this.state.M || [];
+const GROUP = { 'Algebra': 'Math', 'Geometry & Trig': 'Math', 'Geometry': 'Math', 'Advanced Math': 'Math', 'Problem-Solving & Data': 'Math' };
 const TY = { misread: ['Misread', '#C1121F', '#FFFFFF'], concept: ['Concept', '#003049', '#FFFFFF'], careless: ['Careless', '#669BBC', '#FFFFFF'], time: ['Time', '#F6DDB0', '#003049'] };
 const names = [...new Set(M.map(m => m[1]))];
 const topics = names.map((name, i) => {

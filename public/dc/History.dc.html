@@ -181,7 +181,7 @@ a.tile:hover .go{transform:rotate(-45deg);background:#003049;color:#FFFFFF}
 <main style="padding: clamp(20px, 2.6vw, 36px); display: flex; flex-direction: column; gap: 24px; min-width: 0">
 <header style="display: flex; justify-content: space-between; align-items: flex-end; gap: 20px; flex-wrap: wrap">
 <div style="display: flex; flex-direction: column; gap: 6px">
-<span class="cap fu" style="color: #669BBC">History · every attempt · sample data</span>
+<span class="cap fu" style="color: #669BBC">History · every attempt</span>
 <h1 class="srf" style="margin: 0; font-size: clamp(40px, 4.4vw, 68px); line-height: 1"><span class="mask ld"><span>Your <em style="color: #C1121F">history.</em></span></span></h1>
 </div>
 <a href="Report.dc.html" class="ghost fu" style="animation-delay: .2s">Open report <span aria-hidden="true">→</span></a>
@@ -234,7 +234,7 @@ a.tile:hover .go{transform:rotate(-45deg);background:#003049;color:#FFFFFF}
 </div>
 
 <footer style="display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding-top: 12px; font-size: 12px; color: rgba(0,48,73,.5)">
-<span>Results on this screen are sample data.</span>
+<span>Results are saved from the practice sets you complete.</span>
 <span>SAT is a trademark of the College Board, which is not affiliated with Ufq.</span>
 </footer>
 </main>
@@ -255,17 +255,20 @@ const H0 = [
 ];
 const TAGS = { mock: ['Mock test', '#C1121F'], practice: ['Practice set', '#669BBC'] };
 class Component extends DCLogic {
-constructor(props) { super(props); this.state = { f: 'all', sort: 'new', open: 1 }; }
+constructor(props) { super(props); this.state = { f: 'all', sort: 'new', open: 0, H: null };
+const off = window.Ufq.cover('Loading your history…');
+window.Ufq.history().then((H) => { off(); this.setState({ H, open: H.length ? H[0].id : 0 }); }).catch((err) => { off(); window.Ufq.toast(err.message || 'Could not load your history.'); this.setState({ H: [] }); });
+}
 renderVals() {
 const s = this.state;
-const all = H0, mocks = all.filter(x => x.ty === 'mock');
+const all = this.state.H || [], mocks = all.filter(x => x.ty === 'mock');
 let list = all.filter(x => s.f === 'all' || x.ty === s.f);
 list = list.slice().sort((a, b) => s.sort === 'new' ? b.ts - a.ts : (b.acc - a.acc));
-const avg = Math.round(all.reduce((t, x) => t + x.acc, 0) / all.length);
+const avg = all.length ? Math.round(all.reduce((t, x) => t + x.acc, 0) / all.length) : 0;
 const mins = all.reduce((t, x) => t + x.min, 0);
 const sums = [
 { label: 'Attempts', v: String(all.length), sub: mocks.length + ' mocks · ' + (all.length - mocks.length) + ' practice sets' },
-{ label: 'Best mock', v: String(Math.max.apply(null, mocks.map(x => x.sc))), sub: 'of 800 · Math' },
+{ label: 'Best mock', v: mocks.length ? String(Math.max.apply(null, mocks.map(x => x.sc))) : '—', sub: 'of 800 · Math' },
 { label: 'Average accuracy', v: avg + '%', sub: 'across every attempt' },
 { label: 'Time studied', v: Math.floor(mins / 60) + ' h ' + (mins % 60) + ' m', sub: 'in these attempts' }
 ].map((m, i) => Object.assign(m, { delay: (i * 0.08) + 's' }));

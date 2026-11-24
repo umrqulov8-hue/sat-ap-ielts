@@ -187,7 +187,7 @@ a.tile:hover .go{transform:rotate(-45deg);background:#003049;color:#FFFFFF}
 </div>
 <div class="domg" style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px">
 <sc-for list="{{doms}}" as="d" hint-placeholder-count="4">
-<a href="Practice.dc.html" class="dom swap" style="animation-delay: {{d.delay}}; gap: 14px; padding: 20px; min-height: 250px">
+<a href="Practice.dc.html?d={{d.slug}}" class="dom swap" style="animation-delay: {{d.delay}}; gap: 14px; padding: 20px; min-height: 250px">
 <div style="display: flex; justify-content: space-between; gap: 8px"><span class="cap" style="color: rgba(0,48,73,.55)">{{d.sec}}</span><span class="cap" style="color: {{d.c}}">{{d.stage}}</span></div>
 <span class="srf" style="font-size: 26px; line-height: 1.05">{{d.name}}</span>
 <div aria-hidden="true" style="display: flex; gap: 4px"><span class="pip" style="background: {{d.p1}}"></span><span class="pip" style="background: {{d.p2}}"></span><span class="pip" style="background: {{d.p3}}"></span><span class="pip" style="background: {{d.p4}}"></span></div>
@@ -219,9 +219,10 @@ const D = [
 ['Geometry & Trig', 'math', 0, 150, ['Right triangles', 'Circles', 'Area & volume']]
 ];
 const colorOf = (st) => st === 0 ? '#C1121F' : st === 1 ? '#669BBC' : '#003049';
+const SLUG = { 'Algebra': 'algebra', 'Advanced Math': 'advanced-math', 'Problem-Solving & Data': 'problem-solving,data-analysis', 'Geometry & Trig': 'geometry' };
 const doms = D.map(([name, sec, st, q, sk], i) => {
 const c = colorOf(st); const p = (k) => k <= st ? c : '#E3E9EE';
-return { name, sec: 'Math', stage: STAGES[st], c, p1: p(0), p2: p(1), p3: p(2), p4: p(3), q: String(q), skills: sk.map(t => ({ t })), delay: (i * 0.05).toFixed(2) + 's' };
+return { slug: SLUG[name], name, sec: 'Math', stage: STAGES[st], c, p1: p(0), p2: p(1), p3: p(2), p4: p(3), q: String(q), skills: sk.map(t => ({ t })), delay: (i * 0.05).toFixed(2) + 's' };
 });
 return { doms, domCount: String(doms.length) };
 }

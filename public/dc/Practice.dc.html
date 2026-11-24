@@ -245,7 +245,7 @@ html,body{margin:0;background:#003049}
 <button type="button" class="tile" onClick="{{retry}}" style="border: 0; text-align: left; cursor: pointer; font: inherit"><span class="go" aria-hidden="true">↺</span><span class="cap" style="color: #669BBC">2 · Fix</span><span class="srf" style="font-size: 28px; line-height: 1.1">Retry this set</span><span style="font-size: 14px; color: rgba(0,48,73,.7)">Same five questions, fresh start — see if the fixes stuck.</span></button>
 <a href="PracticeHub.dc.html" class="tile"><span class="go" aria-hidden="true">→</span><span class="cap" style="color: #669BBC">3 · Next</span><span class="srf" style="font-size: 28px; line-height: 1.1">{{nextTopic}}</span><span style="font-size: 14px; color: rgba(0,48,73,.7)">Your next best set, picked from what you just missed.</span></a>
 </section>
-<span style="font-size: 12px; color: rgba(0,48,73,.5)">Times and skill levels on this screen are sample data.</span>
+<span style="font-size: 12px; color: rgba(0,48,73,.5)">Times are measured as you work; results are saved to your history.</span>
 </div>
 </main>
 </sc-if>
@@ -353,17 +353,34 @@ const FIG_CIR = svgUri(320, 300, '<circle cx="160" cy="150" r="110" fill="none" 
 class Component extends DCLogic {
 constructor(props) {
 super(props);
-this.state = { q: 0, ans: {}, marked: {}, crossed: {}, crossMode: false, nav: false, review: false, done: false, rev: null, hideTimer: false };
+this.state = { q: 0, ans: {}, marked: {}, crossed: {}, crossMode: false, nav: false, review: false, done: false, rev: null, hideTimer: false, Q: null, title: '', tick: 0 };
+this._t0 = Date.now(); this.tm = {}; this._q = 0; this._qt = Date.now(); this.saved = false;
+const params = new URLSearchParams(location.search);
+this._slugs = (params.get('d') || '').split(',').filter(Boolean); this._n = Number(params.get('n')) || 10;
+const cover = document.createElement('div'); cover.setAttribute('aria-live', 'polite');
+cover.style.cssText = 'position:fixed;inset:0;z-index:2147483000;background:#FFFFFF;display:flex;align-items:center;justify-content:center;font:500 22px "Newsreader",Georgia,serif;font-style:italic;color:#003049';
+cover.textContent = 'Preparing your set…'; document.body.appendChild(cover);
+const done = () => { cover.remove(); };
+window.Ufq.loadQuestions({ slugs: this._slugs, count: this._n }).then((qs) => {
+if (!qs.length) { window.Ufq.toast('No questions are available for this set yet.'); setTimeout(() => location.assign('/practice'), 1600); return; }
+const names = [...new Set(qs.map((q) => q.subject))];
+this._t0 = Date.now(); this._qt = Date.now(); this.tm = {};
+this.setState({ Q: qs, title: this._slugs.length === 1 || names.length === 1 ? names[0] : 'Mixed practice' }); done();
+}).catch((err) => { window.Ufq.toast(err && err.message ? err.message : 'Could not load questions.'); done(); setTimeout(() => location.assign('/practice'), 1800); });
+this._iv = setInterval(() => { if (!this.state.done && this.state.Q) this.setState({ tick: Date.now() }); }, 1000);
 }
 renderVals() {
-const Q = [
+const SAMPLE = [
 { fig: FIG_TRI, stem: 'In right triangle ABC, angle C is 90°, AC = 5 and AB = 13. What is sin B ?', opts: ['5/13', '12/13', '5/12', '13/5'], c: 'A', steps: ['sin B = B ga qarama-qarshi katet / gipotenuza.', 'B ga qarama-qarshi katet — AC = 5, gipotenuza — AB = 13.', 'sin B = 5/13 — javob A.'], trap: 'B yonidagi katetni (BC = 12) olish — bu cos B beradi.' },
 { stem: 'The legs of a right triangle are 6 and 8. What is the length of the hypotenuse?', opts: ['10', '12', '14', '48'], c: 'A', steps: ['Pifagor teoremasi: c² = a² + b².', 'c² = 36 + 64 = 100.', 'c = 10 — javob A.'], trap: '6 + 8 = 14 deb katetlarni shunchaki qo‘shish.' },
 { fig: FIG_CIR, stem: 'A circle has a radius of 4. What is the area of the circle?', opts: ['8π', '16π', '4π', '64π'], c: 'B', steps: ['Doira yuzi: A = πr².', 'A = π · 4² = 16π.', 'Javob B.'], trap: '8π — bu aylana uzunligi (2πr), yuz emas.' },
 { stem: 'Two angles of a triangle measure 35° and 65°. What is the measure of the third angle?', opts: ['70°', '80°', '90°', '100°'], c: 'B', steps: ['Uchburchak burchaklari yig‘indisi 180°.', '180 − 35 − 65 = 80.', 'Javob B — 80°.'], trap: 'Ichki burchak o‘rniga tashqi burchakni (100°) topib qo‘yish.' },
 { stem: 'For an acute angle θ, cos θ = 3/5. What is sin θ ?', opts: ['3/4', '4/5', '5/3', '4/3'], c: 'B', steps: ['3-4-5 uchburchakni chizing: yondosh katet 3, gipotenuza 5.', 'Qarama-qarshi katet 4 bo‘ladi.', 'sin θ = 4/5 — javob B.'], trap: '4/3 — bu tan θ, sin emas.' }
 ];
+const Q = this.state.Q || SAMPLE;
 const s = this.state;
+const nowT = Date.now();
+if (this._q !== s.q) { this.tm[this._q] = (this.tm[this._q] || 0) + Math.round((nowT - this._qt) / 1000); this._q = s.q; this._qt = nowT; }
 const total = Q.length;
 const cur = Q[s.q];
 const answered = Object.keys(s.ans).length;
@@ -387,9 +404,9 @@ cross: () => { const c = Object.assign({}, this.state.crossed); const m = Object
 const mode = s.rev !== null ? 'rev' : s.done ? 'done' : s.review ? 'review' : 'q';
 const testing = mode === 'q';
 const correctN = Q.filter((x, i) => s.ans[i] === x.c).length;
-const SK = ['Right-triangle trig', 'Pythagorean theorem', 'Circles', 'Triangle angles', 'Right-triangle trig'];
-const TL = ['B', 'C', 'A', 'D', 'D'];
-const TM = [64, 38, 52, 71, 108];
+const SK = Q.map((x) => x.skill || 'Practice');
+const TL = Q.map((x) => x.trapLetter || '');
+const TM = Q.map((x, i) => (this.tm[i] || 0) + (i === s.q && mode === 'q' ? Math.round((nowT - this._qt) / 1000) : 0));
 const fmt = (t) => Math.floor(t / 60) + ':' + String(t % 60).padStart(2, '0');
 const rows = Q.map((x, i) => {
 const y = s.ans[i]; const ok = y === x.c;
@@ -454,10 +471,10 @@ const last = s.q === total - 1;
 const revOk = ry === R.c;
 const V = {
 ...toolVals,
-partName: mode === 'rev' ? 'Answer review' : mode === 'done' ? 'Results' : mode === 'review' ? 'Review' : 'Geometry & Trigonometry',
-subName: 'Practice set 3 · 5 questions',
+partName: mode === 'rev' ? 'Answer review' : mode === 'done' ? 'Results' : mode === 'review' ? 'Review' : (s.title || 'Practice'),
+subName: 'Practice set · ' + total + ' questions',
 isMath: testing,
-timer: s.hideTimer ? '' : '07:42', timerOp: s.hideTimer || !testing ? '0' : '1', timerBtn: s.hideTimer ? 'Show' : 'Hide',
+timer: s.hideTimer ? '' : (() => { const e = Math.floor((nowT - this._t0) / 1000); return String(Math.floor(e / 60)).padStart(2, '0') + ':' + String(e % 60).padStart(2, '0'); })(), timerOp: s.hideTimer || !testing ? '0' : '1', timerBtn: s.hideTimer ? 'Show' : 'Hide',
 toggleTimer: () => this.setState({ hideTimer: !this.state.hideTimer }),
 showQ: testing, showReview: mode === 'review', showDone: mode === 'done', showRev: mode === 'rev',
 hasPassage: !!cur.fig, fig: cur.fig || '', cols: cur.fig ? 'minmax(0, 1fr) minmax(0, 1fr)' : '1fr',
@@ -475,12 +492,21 @@ back: () => { const t = this.state; if (t.rev !== null) this.setState({ rev: nul
 showNext: testing || mode === 'rev',
 nextLabel: mode === 'rev' ? (s.rev === total - 1 ? 'Results' : 'Next') : last ? 'Review' : 'Next',
 next: () => { const t = this.state; if (t.rev !== null) { this.setState({ rev: t.rev === total - 1 ? null : t.rev + 1 }); return; } if (t.q === total - 1) this.setState({ review: true, nav: false }); else this.setState({ q: t.q + 1, nav: false }); },
-submit: () => this.setState({ done: true, review: false }),
+submit: () => {
+const t = this.state; if (!this.saved && t.Q) {
+this.saved = true; this.tm[this._q] = (this.tm[this._q] || 0) + Math.round((Date.now() - this._qt) / 1000);
+const qs = t.Q; const answers = qs.map((x, i) => { const y = t.ans[i]; return { qIdx: i, selected: y === undefined ? null : 'ABCD'.indexOf(y), correct: y === x.c, question: x.raw }; });
+const subjectIds = [...new Set(qs.map((x) => x.subjectId))];
+window.Ufq.savePractice({ title: (t.title || 'Practice') + ' · ' + qs.length + ' questions', subjectId: subjectIds.length === 1 ? subjectIds[0] : null, subjectTitle: t.title || 'Mixed', score: answers.filter((a) => a.correct).length, total: qs.length, minutes: Math.max(1, Math.round((Date.now() - this._t0) / 60000)), answers })
+.then(() => window.Ufq.toast('Result saved', 'ok')).catch((err) => { this.saved = false; window.Ufq.toast('Could not save the result: ' + (err && err.message || 'error')); });
+}
+this.setState({ done: true, review: false });
+},
 correctCount: String(correctN), rows, skills, why, insight, statTiles, accPct: accN + '%', ringOff: String(100 - accN), ringC: accN >= 80 ? '#003049' : accN >= 50 ? '#669BBC' : '#C1121F', headA: accN === 100 ? 'Perfect' : accN >= 80 ? 'Strong' : accN >= 50 ? 'Getting' : 'Rough', headB: accN === 100 ? 'set.' : accN >= 80 ? 'set.' : accN >= 50 ? 'there.' : 'start.', missN: String(missed.length), nextTopic: weak.length ? weak[0] + ' · set 2' : 'Circles · set 2',
 retry: () => this.setState({ q: 0, ans: {}, marked: {}, crossed: {}, review: false, done: false, rev: null }),
 rvNum: String((s.rev || 0) + 1), rvStem: R.stem, rvStemP: fr(R.stem), rvOpts: rvOpts.map(o => Object.assign({}, o, { p: fr(o.v) })),
 rvVerdict: ry ? (revOk ? 'Correct' : 'Incorrect — you chose ' + ry) : 'Omitted', rvColor: revOk ? '#003049' : '#C1121F',
-rvSteps: R.steps.map(t => ({ t, p: fr(t) })), rvTrap: R.trap
+rvSteps: R.steps.map(t => ({ t, p: fr(t) })), rvTrap: R.trap || 'Check each option against exactly what the question asks.'
 };
 this.keyAct = { next: V.showNext ? V.next : null, back: V.canBack ? V.back : null, pick: (L) => { if (!testing) return; const o = opts.find(x => x.k === L); if (o) o.pick(); }, mark: testing ? V.toggleMark : null, calc: V.openCalc };
 if (typeof window !== 'undefined' && !this._kh) { this._kh = (e) => { const tg = e.target && e.target.tagName; if (tg === 'INPUT' || tg === 'TEXTAREA') return; const a = this.keyAct || {}; const k = e.key; if ((e.ctrlKey || e.metaKey) && (k === 'k' || k === 'K')) { e.preventDefault(); if (a.calc) a.calc(); return; } if (e.ctrlKey || e.metaKey || e.altKey) return; if (k === 'ArrowRight' && a.next) a.next(); else if (k === 'ArrowLeft' && a.back) a.back(); else if (/^[abcd]$/i.test(k) && a.pick) a.pick(k.toUpperCase()); else if ((k === 'm' || k === 'M') && a.mark) a.mark(); }; window.addEventListener('keydown', this._kh); }

@@ -142,6 +142,176 @@
   };
   window.Ufq = Ufq;
 
+  /* ---------------- LaTeX -> readable text (the design renders plain text, simple fractions included) ---------------- */
+  var SUP = { '0': '⁰', '1': '¹', '2': '²', '3': '³', '4': '⁴', '5': '⁵', '6': '⁶', '7': '⁷', '8': '⁸', '9': '⁹', '+': '⁺', '-': '⁻', 'n': 'ⁿ', 'x': 'ˣ', 'y': 'ʸ', 'k': 'ᵏ', 't': 'ᵗ' };
+  var SUB = { '0': '₀', '1': '₁', '2': '₂', '3': '₃', '4': '₄', '5': '₅', '6': '₆', '7': '₇', '8': '₈', '9': '₉', 'n': 'ₙ', 'x': 'ₓ' };
+  var SYM = { pi: 'π', theta: 'θ', alpha: 'α', beta: 'β', gamma: 'γ', delta: 'δ', lambda: 'λ', mu: 'μ', sigma: 'σ', phi: 'φ', omega: 'ω', cdot: '·', times: '×', div: '÷', le: '≤', leq: '≤', ge: '≥', geq: '≥', ne: '≠', neq: '≠', pm: '±', mp: '∓', infty: '∞', circ: '°', degree: '°', angle: '∠', triangle: '△', approx: '≈', to: '→', rightarrow: '→', in: '∈', cup: '∪', cap: '∩', lt: '<', gt: '>', ldots: '…', dots: '…', cdots: '…', perp: '⊥', parallel: '∥', sim: '~', cong: '≅', prime: '′' };
+  function mapChars(str, table) {
+    var ok = str.split('').every(function (c) { return table[c]; });
+    return ok ? str.split('').map(function (c) { return table[c]; }).join('') : null;
+  }
+  function conv(m) {
+    var t = m, prev;
+    t = t.replace(/\\(?:left|right|big|Big|bigg|Bigg)\b\s*/g, '').replace(/\\[,;:! ]|\\quad|\\qquad/g, ' ');
+    t = t.replace(/\\(?:text|textbf|mathrm|mathbf|mathit|operatorname|mbox)\s*\{([^{}]*)\}/g, '$1');
+    t = t.replace(/\\[dt]frac/g, '\\frac');
+    do { // innermost fractions first
+      prev = t;
+      t = t.replace(/\\frac\s*\{([^{}]*)\}\s*\{([^{}]*)\}/g, function (_, a, b) {
+        var simple = function (x) { return /^[A-Za-z0-9.]+$/.test(x.trim()); };
+        return (simple(a) ? a.trim() : '(' + a + ')') + '/' + (simple(b) ? b.trim() : '(' + b + ')');
+      });
+    } while (t !== prev);
+    do {
+      prev = t;
+      t = t.replace(/\\sqrt\s*\[([^\]]*)\]\s*\{([^{}]*)\}/g, function (_, n, x) { return (n === '3' ? '∛' : n === '4' ? '∜' : '^' + n + '√') + '(' + x + ')'; });
+      t = t.replace(/\\sqrt\s*\{([^{}]*)\}/g, function (_, x) { return /^[A-Za-z0-9.]+$/.test(x) ? '√' + x : '√(' + x + ')'; });
+    } while (t !== prev);
+    t = t.replace(/\\sqrt\s*([A-Za-z0-9])/g, '√$1');
+    t = t.replace(/\\overline\s*\{([^{}]*)\}/g, function (_, x) { return x.split('').join('̅') + '̅'; });
+    t = t.replace(/\\(?:vec|hat|bar)\s*\{([^{}]*)\}/g, '$1');
+    t = t.replace(/\^\s*\{?\\circ\}?/g, '°');
+    t = t.replace(/\^\s*\{([^{}]*)\}/g, function (_, x) { return mapChars(x, SUP) || '^(' + x + ')'; });
+    t = t.replace(/\^\s*([A-Za-z0-9+\-])/g, function (_, x) { return SUP[x] || '^' + x; });
+    t = t.replace(/_\s*\{([^{}]*)\}/g, function (_, x) { return mapChars(x, SUB) || '_(' + x + ')'; });
+    t = t.replace(/_\s*([0-9n])/g, function (_, x) { return SUB[x] || '_' + x; });
+    t = t.replace(/\\%/g, '%').replace(/\\\$/g, '$').replace(/\\&/g, '&').replace(/\\#/g, '#');
+    t = t.replace(/\\(sin|cos|tan|cot|sec|csc|log|ln|min|max|lim)\b/g, '$1');
+    t = t.replace(/\\([A-Za-z]+)/g, function (all, name) { return Object.prototype.hasOwnProperty.call(SYM, name) ? SYM[name] : name; });
+    t = t.replace(/[{}]/g, '').replace(/\\\\/g, ' ').replace(/\\/g, '');
+    return t;
+  }
+  Ufq.tex = function (input) {
+    if (input == null) return '';
+    var s = String(input);
+    s = s.replace(/<br\s*\/?>/gi, ' ').replace(/<\/?(?:p|div|b|i|em|strong|u|span|sub|sup)[^>]*>/gi, '');
+    s = s.replace(/&nbsp;/g, ' ').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&').replace(/&quot;/g, '"');
+    s = s.replace(/\$\$([\s\S]+?)\$\$/g, function (_, a) { return conv(a); }).replace(/\$([^$]+)\$/g, function (_, a) { return conv(a); });
+    s = s.replace(/\\\(([\s\S]+?)\\\)/g, function (_, a) { return conv(a); }).replace(/\\\[([\s\S]+?)\\\]/g, function (_, a) { return conv(a); });
+    if (/\\[A-Za-z]/.test(s)) s = conv(s);
+    return s.replace(/\s+/g, ' ').trim();
+  };
+
+  /* ---------------- questions + saving results ---------------- */
+  var SLUGS = { 'algebra': 1, 'geometry': 1, 'advanced-math': 1, 'data-analysis': 1, 'problem-solving': 1 };
+  Ufq.subjects = function () {
+    if (!Ufq._subjects) {
+      Ufq._subjects = fetch(cfg.url + '/rest/v1/subjects?select=id,slug,title&order=order_index', { headers: { apikey: cfg.key } })
+        .then(function (r) { return r.json(); }).then(function (rows) { return rows.filter(function (x) { return SLUGS[x.slug]; }); });
+    }
+    return Ufq._subjects;
+  };
+  function shuffle(a) { for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+  function steps(text) {
+    var t = Ufq.tex(text || '');
+    if (!t) return [];
+    var parts = t.split(/\n+|(?<=[.!?])\s+(?=[A-Z0-9])/).map(function (x) { return x.trim(); }).filter(Boolean);
+    return parts.slice(0, 5);
+  }
+  /* options: { slugs: ['algebra', ...] (empty = all five), count: 10 } -> [{id, subjectId, subject, stem, opts[], c, fig, steps[], trap, skill}] */
+  Ufq.loadQuestions = function (o) {
+    o = o || {};
+    var count = Math.max(1, Math.min(Number(o.count) || 10, 40));
+    return Ufq.subjects().then(function (subjects) {
+      var chosen = subjects.filter(function (x) { return !(o.slugs && o.slugs.length) || o.slugs.indexOf(x.slug) > -1; });
+      var byId = {}; chosen.forEach(function (x) { byId[x.id] = x; });
+      var ids = chosen.map(function (x) { return x.id; }).join(',');
+      var base = '/rest/v1/questions?question_type=eq.multiple_choice&subject_id=in.(' + ids + ')';
+      return Ufq.rest(base + '&select=id&limit=2000').then(function (rows) {
+        var pick = shuffle(rows.map(function (r) { return r.id; })).slice(0, count * 2);
+        if (!pick.length) return [];
+        return Ufq.rest('/rest/v1/questions?select=id,subject_id,difficulty,question_text,options,correct_index,image_url,explanation&id=in.(' + pick.join(',') + ')').then(function (qs) {
+          var out = [];
+          shuffle(qs).forEach(function (q) {
+            var options = Array.isArray(q.options) ? q.options : [];
+            if (options.length < 2 || options.length > 4 || out.length >= count) return;
+            var sub = byId[q.subject_id] || {};
+            out.push({
+              id: q.id, subjectId: q.subject_id, subject: sub.title || 'Math',
+              stem: Ufq.tex(q.question_text), opts: options.map(function (x) { return Ufq.tex(x); }),
+              c: 'ABCD'[q.correct_index] || 'A', correctIndex: q.correct_index,
+              fig: q.image_url || '', steps: steps(q.explanation), trap: '', skill: sub.title || 'Math',
+              raw: { id: q.id, question_text: q.question_text, options: q.options, correct_index: q.correct_index, explanation: q.explanation, question_type: 'multiple_choice' },
+            });
+          });
+          return out;
+        });
+      });
+    });
+  };
+
+  /* full-screen cover while a page loads its real data; call the returned function to remove it */
+  Ufq.cover = function (text) {
+    var c = document.createElement('div');
+    c.style.cssText = 'position:fixed;inset:0;z-index:2147483000;background:#FFFFFF;display:flex;align-items:center;justify-content:center;font:500 22px "Newsreader",Georgia,serif;font-style:italic;color:#003049';
+    c.textContent = text || 'Loading…';
+    (document.body || document.documentElement).appendChild(c);
+    return function () { c.remove(); };
+  };
+  var DOMAIN_INDEX = { 'Algebra': 0, 'Advanced Math': 1, 'Problem Solving': 2, 'Data Analysis': 2, 'Geometry': 3 };
+  var MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  /* real practice attempts, newest first, in the shape the History page uses */
+  Ufq.history = function () {
+    return Ufq.rest('/rest/v1/practice_tests?select=id,title,subject,score,total,duration,taken_at,answers&order=taken_at.desc&limit=200').then(function (rows) {
+      var list = rows.map(function (r, i) {
+        var d = new Date(r.taken_at);
+        var acc = r.total ? Math.round(r.score / r.total * 100) : 0;
+        var dom = [0, 0, 0, 0]; var di = DOMAIN_INDEX[r.subject]; if (di !== undefined) dom[di] = acc;
+        return { id: i + 1, rid: r.id, d: MON[d.getMonth()] + ' ' + d.getDate(), t: r.title, ty: 'practice', acc: acc, min: Math.max(1, Number(r.duration) || 1), sc: r.score, max: r.total, ts: d.getTime(), subject: r.subject, dom: dom, answers: r.answers, note: 'Saved from your practice set.' };
+      });
+      list.forEach(function (x, i) {
+        var prev = list.slice(i + 1).find(function (y) { return y.subject === x.subject; });
+        x.delta = prev ? (x.acc - prev.acc >= 0 ? '+' : '') + (x.acc - prev.acc) : 'First';
+      });
+      return list;
+    });
+  };
+
+
+  var GROUPS = { 'Algebra': 'Algebra', 'Geometry': 'Geometry & Trig', 'Advanced Math': 'Advanced Math', 'Problem Solving': 'Problem-Solving & Data', 'Data Analysis': 'Problem-Solving & Data' };
+  function ago(ts) {
+    var d = Math.floor((Date.now() - ts) / 86400000);
+    return d <= 0 ? 'Today' : d === 1 ? 'Yesterday' : d < 7 ? d + ' days ago' : d < 14 ? '1 week ago' : Math.floor(d / 7) + ' weeks ago';
+  }
+  /* open mistakes from saved attempts, in the Mistakes page's row shape:
+     [type, domain, when, stem, 'B · yours', 'C · right', why, streak] */
+  Ufq.mistakes = function () {
+    return Ufq.history().then(function (list) {
+      var seen = {}, out = [];
+      list.forEach(function (t) {
+        (t.answers || []).forEach(function (a) {
+          var q = a && a.question; if (!q || a.correct || !q.id || seen[q.id]) return;
+          seen[q.id] = 1;
+          var opts = Array.isArray(q.options) ? q.options : [];
+          var mine = (a.selected === null || a.selected === undefined) ? '—' : 'ABCD'[a.selected] + ' · ' + Ufq.tex(opts[a.selected]);
+          var right = 'ABCD'[q.correct_index] + ' · ' + Ufq.tex(opts[q.correct_index]);
+          var why = (Ufq.tex(q.explanation || '').split(/(?<=[.!?])\s+/)[0]) || 'Open the review for this question to see the steps.';
+          out.push([mine === '—' ? 'time' : 'concept', GROUPS[t.subject] || 'Algebra', ago(t.ts), Ufq.tex(q.question_text), mine, right, why, 0]);
+        });
+      });
+      return out;
+    });
+  };
+
+  /* result: { title, subjectId (or null), subjectTitle, score, total, minutes, answers:[{qIdx, selected, correct, question}] } */
+  Ufq.savePractice = function (r) {
+    var u = Ufq.user(); if (!u) return Promise.reject(new Error('Not signed in'));
+    var uid = u.id;
+    var row = { user_id: uid, subject_id: r.subjectId || null, title: r.title, subject: r.subjectTitle || 'Mixed', score: r.score, total: r.total, duration: String(r.minutes || 0), answers: r.answers };
+    return Ufq.rest('/rest/v1/practice_tests', { method: 'POST', headers: { Prefer: 'return=representation' }, body: JSON.stringify(row) }).then(function (saved) {
+      var pct = r.total ? r.score / r.total : 0;
+      var jobs = [Ufq.rest('/rest/v1/user_activity', { method: 'POST', body: JSON.stringify({ user_id: uid, action: 'Test completed', detail: r.title + ' — ' + r.score + '/' + r.total + ' (' + Math.round(pct * 100) + '%)' }) })];
+      if (r.subjectId) {
+        var scaled = Math.round(pct * 800);
+        jobs.push(Ufq.rest('/rest/v1/user_scores?select=score&user_id=eq.' + uid + '&subject_id=eq.' + r.subjectId).then(function (ex) {
+          if (ex && ex.length && ex[0].score >= scaled) return null;
+          return Ufq.rest('/rest/v1/user_scores?on_conflict=user_id,subject_id', { method: 'POST', headers: { Prefer: 'resolution=merge-duplicates' }, body: JSON.stringify({ user_id: uid, subject_id: r.subjectId, score: scaled, max_score: 800, last_updated: new Date().toISOString() }) });
+        }));
+      }
+      return Promise.all(jobs).then(function () { return saved; });
+    });
+  };
+
   /* ---------------- OAuth / recovery return (#access_token=...) ---------------- */
   var hash = location.hash && location.hash.indexOf('access_token=') > -1 ? new URLSearchParams(location.hash.slice(1)) : null;
   if (hash && hash.get('access_token')) {
@@ -183,6 +353,13 @@
     var el = e.target && e.target.closest && e.target.closest('a,button');
     if (!el || !/^(sign out|log out)$/i.test((el.textContent || '').replace(/\s+/g, ' ').trim())) return;
     e.preventDefault(); e.stopPropagation(); Ufq.signOut();
+  }, true);
+
+  // full mock tests run on the site's real SAT test engine (questions, modules, timer, scoring)
+  document.addEventListener('click', function (e) {
+    var a = e.target && e.target.closest && e.target.closest('a[href]');
+    if (!a || !/MockTest\.dc\.html(\?|#|$)/.test(a.getAttribute('href') || '')) return;
+    e.preventDefault(); e.stopPropagation(); location.assign('/practice/sat-tests');
   }, true);
 
   // keep the browser's relative links working when the page is shown at a clean URL
