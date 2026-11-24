@@ -237,10 +237,10 @@
   };
 
   var QCOLS = 'id,subject_id,difficulty,question_text,options,correct_index,image_url,explanation,question_type';
-  function countOf(subjectId) {
+  function countOf(subjectId, hard) {
     return ensureFresh().then(function (s) {
       var h = authHeaders(s && s.access_token); h.Prefer = 'count=exact'; h.Range = '0-0'; h['Range-Unit'] = 'items';
-      return fetch(cfg.url + '/rest/v1/questions?select=id&subject_id=eq.' + subjectId, { headers: h }).then(function (r) {
+      return fetch(cfg.url + '/rest/v1/questions?select=id&subject_id=eq.' + subjectId + (hard ? '&difficulty=in.(hard,elite)' : ''), { headers: h }).then(function (r) {
         var m = /\/(\d+)$/.exec(r.headers.get('content-range') || ''); return m ? Number(m[1]) : 0;
       });
     });
@@ -266,7 +266,7 @@
     var want = Math.max(1, Math.min(Number(o.count) || 10, 40));
     return Ufq.subjects().then(function (subjects) {
       var chosen = subjects.filter(function (x) { return !(o.slugs && o.slugs.length) || o.slugs.indexOf(x.slug) > -1; });
-      return Promise.all(chosen.map(function (x) { return countOf(x.id).then(function (n) { return { sub: x, n: n }; }); })).then(function (pools) {
+      return Promise.all(chosen.map(function (x) { return countOf(x.id, o.hard).then(function (n) { return { sub: x, n: n }; }); })).then(function (pools) {
         pools = pools.filter(function (p) { return p.n > 0; });
         var total = pools.reduce(function (t, p) { return t + p.n; }, 0);
         if (!total) return [];
@@ -277,7 +277,7 @@
           var key = p.sub.id + ':' + r;
           if (used[key]) return null;
           used[key] = 1;
-          return Ufq.rest('/rest/v1/questions?select=' + QCOLS + '&subject_id=eq.' + p.sub.id + '&order=id&limit=1&offset=' + r)
+          return Ufq.rest('/rest/v1/questions?select=' + QCOLS + '&subject_id=eq.' + p.sub.id + (o.hard ? '&difficulty=in.(hard,elite)' : '') + '&order=id&limit=1&offset=' + r)
             .then(function (rows) { return rows && rows[0] ? { q: rows[0], sub: p.sub } : null; });
         }
         function round() {
@@ -298,6 +298,17 @@
     });
   };
 
+
+  /* how many questions the bank holds per subject: { algebra: 724, ... } */
+  Ufq.bankCounts = function () {
+    if (!Ufq._bank) {
+      Ufq._bank = Ufq.subjects().then(function (subs) {
+        return Promise.all(subs.map(function (x) { return countOf(x.id).then(function (n) { return [x.slug, n]; }); }));
+      }).then(function (pairs) { var o = {}; pairs.forEach(function (p) { o[p[0]] = p[1]; }); return o; });
+    }
+    return Ufq._bank;
+  };
+
   /* full-screen cover while a page loads its real data; call the returned function to remove it */
   Ufq.cover = function (text) {
     var c = document.createElement('div');
@@ -315,7 +326,7 @@
         var d = new Date(r.taken_at);
         var acc = r.total ? Math.round(r.score / r.total * 100) : 0;
         var dom = [0, 0, 0, 0]; var di = DOMAIN_INDEX[r.subject]; if (di !== undefined) dom[di] = acc;
-        return { id: i + 1, rid: r.id, d: MON[d.getMonth()] + ' ' + d.getDate(), t: r.title, ty: 'practice', acc: acc, min: Math.max(1, Number(r.duration) || 1), sc: r.score, max: r.total, ts: d.getTime(), subject: r.subject, dom: dom, answers: r.answers, note: 'Saved from your practice set.' };
+        return { id: i + 1, rid: r.id, d: MON[d.getMonth()] + ' ' + d.getDate(), t: r.title, ty: r.subject === 'SAT' ? 'mock' : 'practice', acc: acc, min: Math.max(1, Number(r.duration) || 1), sc: r.score, max: r.total, ts: d.getTime(), subject: r.subject, dom: dom, answers: r.answers, note: 'Saved from your practice set.' };
       });
       list.forEach(function (x, i) {
         var prev = list.slice(i + 1).find(function (y) { return y.subject === x.subject; });
@@ -411,25 +422,16 @@
       });
     });
   };
+  (function () { var raw = Ufq.dashboard; Ufq.dashboard = function (fresh) { if (!fresh && Ufq._dashP && Date.now() - Ufq._dashT < 20000) return Ufq._dashP; Ufq._dashT = Date.now(); Ufq._dashP = raw(); return Ufq._dashP; }; })();
   /* remove the design's sample-only areas and fix role-based links */
-  var REMOVED = { Plan: 1, Report: 1, Notifications: 1, Lesson: 1 };
-  if (page && REMOVED[page]) { location.replace('/dashboard'); return; }
-  if (page === 'MockTests') { location.replace('/practice/sat-tests'); return; }
-  if (page === 'Admin') { location.replace('/admin/questions'); return; }
-  (function () {
-    var st = document.createElement('style');
-    st.textContent = 'a.nv[href="/plan"],a.nv[href="/report"],a.nv[href="/notifications"],a.nv[href="/lesson"],a.nv[href="/admin"],a[href="/admin"],button[aria-label="Notifications"]{display:none!important}';
-    (document.head || document.documentElement).appendChild(st);
-  })();
+  var hideAdmin = document.createElement('style'); hideAdmin.textContent = 'a.nv[href="/admin"]{display:none!important}'; (document.head || document.documentElement).appendChild(hideAdmin);
   if (Ufq.isSignedIn()) {
     Ufq.rest('/rest/v1/profiles?select=role&id=eq.' + (Ufq.user() || {}).id).then(function (rows) {
       var role = rows && rows[0] && rows[0].role;
       if (role === 'admin' || role === 'owner') {
         var st2 = document.createElement('style');
-        st2.textContent = 'a.nv[href="/admin"],a[href="/admin"],a[href="/admin/questions"]{display:flex!important}';
+        st2.textContent = 'a.nv[href="/admin"]{display:flex!important}';
         document.head.appendChild(st2);
-        var fix = function () { document.querySelectorAll('a[href="/admin"]').forEach(function (a) { a.setAttribute('href', '/admin/questions'); }); };
-        fix(); new MutationObserver(fix).observe(document.documentElement, { childList: true, subtree: true });
       }
     }).catch(function () { /* not an admin */ });
     Ufq.trackLogin();
@@ -444,6 +446,163 @@
     el.textContent = sv && sv.motion ? '*,*::before,*::after{animation-duration:.001s!important;animation-delay:0s!important;transition-duration:.001s!important}' : '';
   };
   Ufq.applyPrefs();
+
+
+  /* ---------------- plan, mock tests, notifications ---------------- */
+  var MONTHS = { Jan: 0, Feb: 1, Mar: 2, Apr: 3, May: 4, Jun: 5, Jul: 6, Aug: 7, Sep: 8, Oct: 9, Nov: 10, Dec: 11 };
+  /* weeks between the join date and the test month chosen in the goal (14 when unknown) */
+  Ufq.plan = function (R) {
+    var g = Ufq.goal(), join = new Date(((R && R.join) || Ufq.today()) + 'T00:00:00'), now = new Date();
+    var total = 14, test = null;
+    var m = /^([A-Za-z]{3}) (\d{4})$/.exec(g.date || '');
+    if (m && MONTHS[m[1]] !== undefined) { test = new Date(Number(m[2]), MONTHS[m[1]], 15); total = Math.max(4, Math.min(30, Math.ceil((test - join) / 604800000))); }
+    var week = Math.max(1, Math.min(total, Math.floor((now - join) / 604800000) + 1));
+    return { total: total, week: week, daysLeft: test ? Math.max(0, Math.round((test - now) / 86400000)) : null };
+  };
+  /* full-length SAT tests from the question bank + this user's attempts */
+  Ufq.satTests = function () {
+    return Promise.all([
+      Ufq.rest('/rest/v1/sat_tests?select=id,title,total_questions&total_questions=gt.0&order=created_at.asc'),
+      Ufq.rest('/rest/v1/practice_tests?select=id,title,score,total,taken_at&subject=eq.SAT&order=taken_at.desc&limit=100'),
+    ]).then(function (r) {
+      return (r[0] || []).map(function (t) {
+        var att = (r[1] || []).filter(function (a) { return a.title === t.title; })[0] || null;
+        return { id: t.id, title: t.title, questions: t.total_questions, attempt: att };
+      });
+    });
+  };
+  function agoMin(ts) {
+    var m = Math.round((Date.now() - ts) / 60000);
+    return m < 1 ? 'just now' : m < 60 ? m + ' min ago' : m < 1440 ? Math.round(m / 60) + ' h ago' : m < 2880 ? 'Yesterday' : Math.round(m / 1440) + ' days ago';
+  }
+  /* notifications worked out from the user's own activity */
+  Ufq.notifications = function (R, tests) {
+    var out = [], id = 0, g = function (ts) { return Date.now() - ts < 86400000 ? 'Today' : 'Earlier'; };
+    var wk = R.weakest, plan = Ufq.plan(R);
+    var doneToday = (R.history || []).some(function (h) { return Ufq.today() === ymd(new Date(h.ts)); });
+    if (!doneToday) out.push({ id: ++id, key: 'today-' + Ufq.today(), k: 'plan', t: 'Today’s session is waiting', s: (wk ? wk.name : 'Mixed practice') + ' — ten questions, about 15 minutes.', when: 'Today', g: 'Today', unread: true, href: '/practice/session?n=10' + (wk ? '&d=' + wk.q : ''), cta: 'Start session' });
+    if (R.last) out.push({ id: ++id, key: 'last-' + R.last.rid, k: 'test', t: R.last.t + ': ' + R.last.sc + '/' + R.last.max, s: 'Your latest attempt was saved. Open History to see every answer.', when: agoMin(R.last.ts), g: g(R.last.ts), unread: true, href: '/history', cta: 'Open history' });
+    if (R.streak >= 2) out.push({ id: ++id, key: 'streak-' + R.streak, k: 'streak', t: R.streak + '-day streak', s: 'You have studied ' + R.streak + ' days in a row. Longest so far: ' + R.longest + '.', when: 'Today', g: 'Today', unread: true, href: '/dashboard', cta: 'See progress' });
+    if (R.mistakes) out.push({ id: ++id, key: 'mist-' + R.mistakes, k: 'mistake', t: R.mistakes + ' mistake' + (R.mistakes === 1 ? '' : 's') + ' ready to redo', s: 'Practice them again to clear them from your log.', when: 'Today', g: 'Today', unread: true, href: '/mistakes', cta: 'Redo mistakes' });
+    var ready = (tests || []).filter(function (t) { return !t.attempt; })[0];
+    if (ready) out.push({ id: ++id, key: 'mock-' + ready.id, k: 'test', t: ready.title + ' is ready', s: 'A full-length test with ' + ready.questions + ' questions.', when: 'Available', g: 'Earlier', unread: true, href: '/mock-tests', cta: 'Open mock tests' });
+    out.push({ id: ++id, key: 'week-' + plan.week, k: 'plan', t: 'Week ' + plan.week + ' of ' + plan.total, s: plan.daysLeft !== null ? plan.daysLeft + ' days to your test. Keep the pace.' : 'Set your test date in Settings to see the countdown.', when: 'This week', g: 'Earlier', unread: true, href: '/plan', cta: 'Open plan' });
+    var readSet = {}; try { readSet = JSON.parse(localStorage.getItem('ufq_notif_read') || '{}'); } catch (e) { readSet = {}; }
+    var dropped = {}; try { dropped = JSON.parse(localStorage.getItem('ufq_notif_gone') || '{}'); } catch (e) { dropped = {}; }
+    return out.filter(function (n) { return !dropped[n.key]; }).map(function (n) { n.unread = !readSet[n.key]; return n; });
+  };
+  Ufq.notifState = function (items, gone) {
+    var read = {}, drop = {}; try { read = JSON.parse(localStorage.getItem('ufq_notif_read') || '{}'); drop = JSON.parse(localStorage.getItem('ufq_notif_gone') || '{}'); } catch (e) { /* ignore */ }
+    items.forEach(function (n) { if (!n.unread) read[n.key] = 1; else delete read[n.key]; });
+    (gone || []).forEach(function (k) { drop[k] = 1; });
+    try { localStorage.setItem('ufq_notif_read', JSON.stringify(read)); localStorage.setItem('ufq_notif_gone', JSON.stringify(drop)); } catch (e) { /* ignore */ }
+  };
+  /* sidebar: real target line, initial, streak-freeze count */
+  Ufq.decorate = function (R) {
+    var g = Ufq.goal();
+    var line = 'Target ' + g.target + (g.date ? ' · ' + g.date.replace(/ \d{4}$/, '') : '');
+    var init = ((Ufq.displayName() || 'U').trim()[0] || 'U').toUpperCase();
+    var apply = function () {
+      document.querySelectorAll('a.acct').forEach(function (a) {
+        var spans = a.querySelectorAll('span');
+        if (spans[0] && spans[0].textContent !== init) spans[0].textContent = init;
+        spans.forEach(function (sp) { if (/^Target \d+/.test(sp.textContent) && sp.textContent !== line) sp.textContent = line; });
+      });
+      var fr = document.querySelector('[data-ufq="freeze"]');
+      if (fr && R) {
+        var used = 0, d = new Date();
+        for (var i = 1; i < 7; i++) { var dd = new Date(); dd.setDate(dd.getDate() - i); if (!R.days[ymd(dd)] && ymd(dd) >= R.join) used++; }
+        var left = used > 0 ? 0 : 1; var txt = left + ' left';
+        if (fr.textContent !== txt) fr.textContent = txt;
+      }
+    };
+    apply(); new MutationObserver(apply).observe(document.body || document.documentElement, { childList: true, subtree: true, characterData: true });
+  };
+  if (Ufq.isSignedIn() && page && !PUBLIC[page]) {
+    Ufq.dashboard().then(function (R) { Ufq.decorate(R); }).catch(function () { Ufq.decorate(null); });
+  }
+  if (page === 'Admin' && Ufq.isSignedIn()) {
+    Ufq.rest('/rest/v1/profiles?select=role&id=eq.' + (Ufq.user() || {}).id).then(function (rows) {
+      var role = rows && rows[0] && rows[0].role;
+      if (role !== 'admin' && role !== 'owner') location.replace('/dashboard');
+    }).catch(function () { location.replace('/dashboard'); });
+  }
+
+
+  /* everything this user has saved, as a downloadable file */
+  Ufq.exportData = function () {
+    return Promise.all([Ufq.history(), Ufq.rest('/rest/v1/login_streaks?select=login_date&order=login_date'), Ufq.rest('/rest/v1/user_scores?select=*')]).then(function (r) {
+      var data = { account: { email: Ufq.email(), name: Ufq.displayName() }, goal: Ufq.goal(), attempts: r[0], login_days: (r[1] || []).map(function (x) { return x.login_date; }), scores: r[2] };
+      var blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+      var a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'ufq-my-data.json';
+      document.body.appendChild(a); a.click(); setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 500);
+    });
+  };
+  /* removes the user's saved results (their sign-in itself can only be removed by an admin) and signs out */
+  Ufq.deleteMyData = function () {
+    var uid = (Ufq.user() || {}).id; if (!uid) return Promise.reject(new Error('Not signed in'));
+    var del = function (t) { return Ufq.rest('/rest/v1/' + t + '?user_id=eq.' + uid, { method: 'DELETE', headers: { Prefer: 'return=minimal' } }); };
+    return Promise.all(['practice_tests', 'user_scores', 'user_activity', 'login_streaks', 'user_total_scores'].map(del)).then(function () {
+      ['ufq_goal', 'ufq_settings', 'ufq_notif_read', 'ufq_notif_gone', 'ufq_notif_prefs', 'ufq_login_' + uid].forEach(function (k) { try { localStorage.removeItem(k); } catch (e) { /* ignore */ } });
+    });
+  };
+
+
+  /* ---------------- admin: real questions, users, tests ---------------- */
+  var DOM_BY_SLUG = { 'algebra': 'Algebra', 'advanced-math': 'Advanced Math', 'problem-solving': 'Problem-Solving & Data', 'data-analysis': 'Problem-Solving & Data', 'geometry': 'Geometry & Trig' };
+  var SLUG_BY_DOM = { 'Algebra': 'algebra', 'Advanced Math': 'advanced-math', 'Problem-Solving & Data': 'problem-solving', 'Geometry & Trig': 'geometry' };
+  var DIFF_NUM = { easy: 1, medium: 2, hard: 3, elite: 3, mixing: 2 };
+  function adminQ(row, slugById) {
+    var mc = row.question_type !== 'written';
+    var opts = Array.isArray(row.options) ? row.options : [];
+    return { id: row.id, stem: row.question_text, dom: DOM_BY_SLUG[slugById[row.subject_id]] || 'Algebra', sk: 'General', d: DIFF_NUM[row.difficulty] || 2, t: mc ? 'MC' : 'Grid', cr: 0, st: 'Live',
+      ch: mc ? opts.concat(['', '', '', '']).slice(0, Math.max(4, opts.length)) : ['', '', '', ''], c: mc ? Math.max(0, row.correct_index) : 0, ans: mc ? '' : (row.explanation || ''), ex: mc ? (row.explanation || '') : '',
+      img: row.image_url || '', lay: 'auto', iw: 0, ih: 0 };
+  }
+  Ufq.adminLoad = function () {
+    return Ufq.subjects().then(function (subs) {
+      var slugById = {}, idBySlug = {}; subs.forEach(function (x) { slugById[x.id] = x.slug; idBySlug[x.slug] = x.id; });
+      var me = Ufq.user() || {};
+      return Promise.all([
+        Ufq.rest('/rest/v1/questions?select=id,subject_id,difficulty,question_text,options,correct_index,image_url,explanation,question_type&order=created_at.desc&limit=400'),
+        Ufq.bankCounts(),
+        Ufq.rest('/rest/v1/profiles?select=id,display_name,role,created_at&order=created_at.asc&limit=500').catch(function () { return []; }),
+        Ufq.satTests().catch(function () { return []; }),
+      ]).then(function (r) {
+        var total = Object.keys(r[1]).reduce(function (t, k) { return t + r[1][k]; }, 0);
+        var users = (r[2] || []).map(function (p) {
+          var mine = p.id === me.id, d = new Date(p.created_at);
+          return { id: mine ? 1 : p.id, n: mine ? 'You' : (p.display_name || 'Student'), e: mine ? (me.email || '') : '—', r: p.role === 'owner' ? 'Owner' : p.role === 'admin' ? 'Admin' : 'Student', s: 'Active', j: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][d.getMonth()] + ' ' + d.getFullYear(), la: '—', m: '—', k: '—', qd: '—', ac: '—' };
+        });
+        if (!users.some(function (u) { return u.id === 1; })) users.unshift({ id: 1, n: 'You', e: me.email || '', r: 'Admin', s: 'Active', j: '—', la: 'Now', m: '—', k: '—', qd: '—', ac: '—' });
+        var tests = (r[3] || []).map(function (t, i) { return { id: t.id, n: t.title, ty: 'Full mock', st: 'Published', at: t.attempt ? 1 : 0, avg: '—', mods: [] }; });
+        return { questions: r[0].map(function (q) { return adminQ(q, slugById); }), total: total, users: users, tests: tests, idBySlug: idBySlug, slugById: slugById };
+      });
+    });
+  };
+  Ufq.adminSaveQuestion = function (e, idBySlug) {
+    var mc = e.t === 'MC';
+    var body = { question_text: e.stem, options: mc ? e.ch.filter(function (x) { return String(x).trim() !== ''; }) : [], correct_index: mc ? e.c : -1, question_type: mc ? 'multiple_choice' : 'written', explanation: mc ? (e.ex || '') : (e.ans || ''), image_url: e.img || '', difficulty: e.d === 1 ? 'easy' : e.d === 3 ? 'hard' : 'medium', subject_id: idBySlug[SLUG_BY_DOM[e.dom] || 'algebra'] };
+    var isNew = !e.id || String(e.id).indexOf('-') < 0 || /^Q-/.test(String(e.id));
+    if (isNew) return Ufq.rest('/rest/v1/questions', { method: 'POST', headers: { Prefer: 'return=representation' }, body: JSON.stringify(body) }).then(function (rows) { return rows[0]; });
+    return Ufq.rest('/rest/v1/questions?id=eq.' + e.id, { method: 'PATCH', headers: { Prefer: 'return=representation' }, body: JSON.stringify(body) }).then(function (rows) { return rows[0]; });
+  };
+  Ufq.setRole = function (profileId, role) {
+    return Ufq.rest('/rest/v1/profiles?id=eq.' + profileId, { method: 'PATCH', headers: { Prefer: 'return=minimal' }, body: JSON.stringify({ role: role === 'Admin' ? 'admin' : role === 'Owner' ? 'owner' : 'user' }) });
+  };
+
+
+  /* name edits from the Profile page */
+  Ufq.saveName = function (name) {
+    var u = Ufq.user(); if (!u || !name.trim()) return Promise.resolve();
+    return ensureFresh().then(function (s) {
+      return Promise.all([
+        api('/auth/v1/user', { method: 'PUT', headers: authHeaders(s.access_token), body: JSON.stringify({ data: { display_name: name.trim(), full_name: name.trim() } }) }).then(function (nu) { s.user = nu; save(s); }),
+        Ufq.rest('/rest/v1/profiles?id=eq.' + u.id, { method: 'PATCH', headers: { Prefer: 'return=minimal' }, body: JSON.stringify({ display_name: name.trim() }) }),
+      ]);
+    });
+  };
+  Ufq.saveGoal = function (target, date) { try { localStorage.setItem('ufq_goal', JSON.stringify({ target: target, date: date })); } catch (e) { /* ignore */ } };
 
   /* result: { title, subjectId (or null), subjectTitle, score, total, minutes, answers:[{qIdx, selected, correct, question}] } */
   Ufq.savePractice = function (r) {
@@ -511,7 +670,7 @@
   document.addEventListener('click', function (e) {
     var a = e.target && e.target.closest && e.target.closest('a[href]');
     if (!a || !/^(\/mock-test|[^?#]*MockTest\.dc\.html)(\?|#|$)/.test(a.getAttribute('href') || '')) return;
-    e.preventDefault(); e.stopPropagation(); location.assign('/practice/sat-tests');
+    e.preventDefault(); e.stopPropagation(); location.assign(window.__ufqMock ? '/sat-test/' + window.__ufqMock : '/practice/sat-tests');
   }, true);
 
   // keep the browser's relative links working when the page is shown at a clean URL

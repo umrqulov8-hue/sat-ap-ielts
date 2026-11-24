@@ -165,6 +165,10 @@ a.tile:hover .go{transform:rotate(-45deg);background:#003049;color:#FFFFFF}
 <a class="nv" href="/admin"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"></path><path d="M9 12l2 2 4-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg>Admin<span class="ownb">Owner</span></a>
 <div class="sideExtra" style="margin-top: auto; display: flex; flex-direction: column; gap: 12px">
 <a class="nv" href="/help"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"></circle><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6V14M12 17.2v.3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path></svg>Help</a>
+<div style="border-radius: 18px; background: rgba(255,255,255,.1); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); padding: 16px; display: flex; flex-direction: column; gap: 8px">
+<span class="cap" style="color: #F6DDB0">Streak freeze</span>
+<span style="font-size: 14px; line-height: 1.45">Miss a day and one freeze keeps your streak alive. <b data-ufq="freeze">1 left</b> this week.</span>
+</div>
 <div style="display: flex; align-items: center; gap: 6px">
 <a href="/profile" class="acct" style="flex: 1; min-width: 0; display: flex; align-items: center; gap: 12px; padding: 8px 6px; border-radius: 14px; text-decoration: none">
 <span aria-hidden="true" style="flex: none; width: 38px; height: 38px; border-radius: 50%; background: #F6DDB0; color: #003049; display: grid; place-items: center; font-weight: 600">U</span>
@@ -177,12 +181,12 @@ a.tile:hover .go{transform:rotate(-45deg);background:#003049;color:#FFFFFF}
 <main style="padding: clamp(20px, 2.6vw, 36px); display: flex; flex-direction: column; gap: 24px; min-width: 0">
 <header style="display: flex; justify-content: space-between; align-items: flex-end; gap: 20px; flex-wrap: wrap">
 <div style="display: flex; flex-direction: column; gap: 6px">
-<span class="cap fu" style="color: #669BBC">Notifications · sample data</span>
+<span class="cap fu" style="color: #669BBC">Notifications</span>
 <h1 class="srf" style="margin: 0; font-size: clamp(40px, 4.4vw, 68px); line-height: 1"><span class="mask ld"><span>What’s <em style="color: #C1121F">new.</em></span></span></h1>
 </div>
 <div class="fu" style="display: flex; gap: 10px; flex-wrap: wrap; animation-delay: .2s">
 <button type="button" class="ghost" onClick="{{readAll}}" style="opacity: {{raOp}}; pointer-events: {{raPe}}">Mark all read</button>
-<button type="button" class="ghost" onClick="{{reset}}" style="opacity: {{rsOp}}; pointer-events: {{rsPe}}">Restore sample</button>
+<button type="button" class="ghost" onClick="{{reset}}" style="opacity: {{rsOp}}; pointer-events: {{rsPe}}">Restore dismissed</button>
 </div>
 </header>
 
@@ -241,7 +245,7 @@ a.tile:hover .go{transform:rotate(-45deg);background:#003049;color:#FFFFFF}
 <sc-if value="{{toastOn}}" hint-placeholder-val="{{ false }}"><div class="toast" role="status">{{toastMsg}}</div></sc-if>
 
 <footer style="display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding-top: 12px; font-size: 12px; color: rgba(0,48,73,.5)">
-<span>Notifications on this screen are sample data.</span>
+<span>Notifications are worked out from your own activity.</span>
 <span>SAT is a trademark of the College Board, which is not affiliated with Ufq.</span>
 </footer>
 </main>
@@ -273,7 +277,12 @@ const P0 = [
 { id: 'mail', t: 'Email copies', s: 'Also send these to my email.', on: false }
 ];
 class Component extends DCLogic {
-constructor(props) { super(props); this.state = { f: 'all', items: N0, prefs: P0, tm: '19:00', toast: '' }; }
+constructor(props) { super(props); this.state = { f: 'all', items: [], prefs: P0, tm: '19:00', toast: '' };
+try { const sv = JSON.parse(localStorage.getItem('ufq_notif_prefs') || 'null'); if (sv) this.state = Object.assign(this.state, sv); } catch (e) {}
+const off = window.Ufq.cover('Checking what’s new…');
+Promise.all([window.Ufq.dashboard(), window.Ufq.satTests().catch(() => [])]).then(([R, tests]) => { off(); this.setState({ items: window.Ufq.notifications(R, tests) }); }).catch(() => { off(); });
+}
+persist(extra) { try { localStorage.setItem('ufq_notif_prefs', JSON.stringify({ prefs: this.state.prefs, tm: this.state.tm })); } catch (e) {} }
 say(m) { clearTimeout(this._t); this.setState({ toast: m }); this._t = setTimeout(() => this.setState({ toast: '' }), 2200); }
 renderVals() {
 const s = this.state, items = s.items;
@@ -285,15 +294,15 @@ let prevG = '';
 const rows = list.map((n, i) => { const K = KINDS[n.k]; const head = n.g !== prevG; prevG = n.g;
 return { head, group: n.g, delay: (i * 0.05) + 's', t: n.t, s: n.s, when: n.when, unread: n.unread, unreadS: n.unread ? 'true' : 'false', ic: K.ic, bg: K.bg, fg: K.fg, href: n.href, cta: n.cta,
 tlabel: n.unread ? 'Mark as read' : 'Mark as unread',
-toggle: () => this.setState({ items: this.state.items.map(x => x.id === n.id ? Object.assign({}, x, { unread: !x.unread }) : x) }),
-drop: () => { this.setState({ items: this.state.items.filter(x => x.id !== n.id) }); this.say('Notification dismissed.'); } }; });
-const prefs = s.prefs.map(p => ({ t: p.t, s: p.s, on: p.on ? 'true' : 'false', tog: () => { this.setState({ prefs: this.state.prefs.map(x => x.id === p.id ? Object.assign({}, x, { on: !x.on }) : x) }); this.say(p.t + (p.on ? ' is off.' : ' is on.')); } }));
-const times = ['07:00', '19:00', '21:00'].map(label => ({ label, on: s.tm === label ? 'true' : 'false', go: () => { this.setState({ tm: label }); this.say('Reminder set for ' + label + '.'); } }));
+toggle: () => { const items = this.state.items.map(x => x.id === n.id ? Object.assign({}, x, { unread: !x.unread }) : x); this.setState({ items }); window.Ufq.notifState(items); },
+drop: () => { this.setState({ items: this.state.items.filter(x => x.id !== n.id) }); window.Ufq.notifState(this.state.items, [n.key]); this.say('Notification dismissed.'); } }; });
+const prefs = s.prefs.map(p => ({ t: p.t, s: p.s, on: p.on ? 'true' : 'false', tog: () => { this.setState({ prefs: this.state.prefs.map(x => x.id === p.id ? Object.assign({}, x, { on: !x.on }) : x) }); setTimeout(() => this.persist(), 0); this.say(p.t + (p.on ? ' is off.' : ' is on.')); } }));
+const times = ['07:00', '19:00', '21:00'].map(label => ({ label, on: s.tm === label ? 'true' : 'false', go: () => { this.setState({ tm: label }); setTimeout(() => this.persist(), 0); this.say('Reminder set for ' + label + '.'); } }));
 const emptyMsg = items.length ? 'Nothing here for this filter. Try another tab.' : 'Nothing new right now. We’ll tell you when there is.';
 return { segs, rows, hasRows: rows.length > 0, empty: rows.length === 0, emptyMsg, prefs, times,
-readAll: () => { this.setState({ items: this.state.items.map(n => Object.assign({}, n, { unread: false })) }); this.say('All notifications marked as read.'); },
-reset: () => this.setState({ items: N0, f: 'all' }),
-raOp: unreadN ? '1' : '.4', raPe: unreadN ? 'auto' : 'none', rsOp: items.length === N0.length ? '.4' : '1', rsPe: items.length === N0.length ? 'none' : 'auto',
+readAll: () => { const items = this.state.items.map(n => Object.assign({}, n, { unread: false })); this.setState({ items }); window.Ufq.notifState(items); this.say('All notifications marked as read.'); },
+reset: () => { try { localStorage.removeItem('ufq_notif_gone'); localStorage.removeItem('ufq_notif_read'); } catch (e) {} location.reload(); },
+raOp: unreadN ? '1' : '.4', raPe: unreadN ? 'auto' : 'none', rsOp: '1', rsPe: 'auto',
 toastOn: !!s.toast, toastMsg: s.toast };
 }
 }

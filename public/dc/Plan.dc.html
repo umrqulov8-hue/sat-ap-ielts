@@ -154,6 +154,10 @@ a.tile:hover .go{transform:rotate(-45deg);background:#003049;color:#FFFFFF}
 <a class="nv" href="/admin"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"></path><path d="M9 12l2 2 4-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg>Admin<span class="ownb">Owner</span></a>
 <div class="sideExtra" style="margin-top: auto; display: flex; flex-direction: column; gap: 12px">
 <a class="nv" href="/help"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"></circle><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6V14M12 17.2v.3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path></svg>Help</a>
+<div style="border-radius: 18px; background: rgba(255,255,255,.1); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); padding: 16px; display: flex; flex-direction: column; gap: 8px">
+<span class="cap" style="color: #F6DDB0">Streak freeze</span>
+<span style="font-size: 14px; line-height: 1.45">Miss a day and one freeze keeps your streak alive. <b data-ufq="freeze">1 left</b> this week.</span>
+</div>
 <div style="display: flex; align-items: center; gap: 6px">
 <a href="/profile" class="acct" style="flex: 1; min-width: 0; display: flex; align-items: center; gap: 12px; padding: 8px 6px; border-radius: 14px; text-decoration: none">
 <span aria-hidden="true" style="flex: none; width: 38px; height: 38px; border-radius: 50%; background: #F6DDB0; color: #003049; display: grid; place-items: center; font-weight: 600">U</span>
@@ -166,13 +170,13 @@ a.tile:hover .go{transform:rotate(-45deg);background:#003049;color:#FFFFFF}
 <main style="padding: clamp(20px, 2.6vw, 36px); display: flex; flex-direction: column; gap: 24px; min-width: 0">
 <header style="display: flex; justify-content: space-between; align-items: flex-end; gap: 20px; flex-wrap: wrap">
 <div style="display: flex; flex-direction: column; gap: 6px">
-<span class="cap fu" style="color: #669BBC">Plan · 14 weeks to test day</span>
+<span class="cap fu" style="color: #669BBC">Plan · {{totalWeeks}} weeks to test day</span>
 <h1 class="srf" style="margin: 0; font-size: clamp(40px, 4.4vw, 68px); line-height: 1"><span class="mask ld"><span>One step at a <em style="color: #C1121F">time.</em></span></span></h1>
 </div>
 <a href="/settings" class="ghost fu" style="animation-delay: .2s">Adjust schedule</a>
 </header>
 <div class="tile ti" style="background: #FFFFFF; box-shadow: inset 0 0 0 1px rgba(0,48,73,.1); gap: 18px">
-<div style="display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap"><span class="cap" style="color: #669BBC">Phases</span><span class="cap" style="color: rgba(0,48,73,.55)">You are in week 3</span></div>
+<div style="display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap"><span class="cap" style="color: #669BBC">Phases</span><span class="cap" style="color: rgba(0,48,73,.55)">You are in week {{weekNo}}</span></div>
 <div style="position: relative; display: grid; grid-template-columns: 4fr 5fr 4fr 1fr; gap: 6px">
 <sc-for list="{{phases}}" as="p" hint-placeholder-count="4">
 <button type="button" onClick="{{p.pick}}" aria-pressed="{{p.on}}" style="border: 0; text-align: left; cursor: pointer; font: inherit; color: {{p.fg}}; background: {{p.bg}}; border-radius: 14px; padding: 14px 16px; min-height: 92px; display: flex; flex-direction: column; justify-content: space-between; transition: background .35s, color .35s">
@@ -206,7 +210,7 @@ a.tile:hover .go{transform:rotate(-45deg);background:#003049;color:#FFFFFF}
 </sc-for>
 </section>
 <footer style="display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding-top: 12px; font-size: 12px; color: rgba(0,48,73,.5)">
-<span>Numbers on this screen are sample data.</span>
+<span>Your plan starts the day you joined and follows your weakest domains.</span>
 <span>SAT is a trademark of the College Board, which is not affiliated with Ufq.</span>
 </footer>
 </main>
@@ -214,28 +218,35 @@ a.tile:hover .go{transform:rotate(-45deg);background:#003049;color:#FFFFFF}
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1000}}'>
 class Component extends DCLogic {
-constructor(props) { super(props); this.state = { open: 2, phase: 0 }; }
+constructor(props) { super(props); this.state = { open: 0, phase: 0, R: null };
+const off = window.Ufq.cover('Building your plan…');
+window.Ufq.dashboard().then((R) => { const pl = window.Ufq.plan(R); off(); this.setState({ R, open: pl.week - 1 }); }).catch(() => { off(); }); }
 renderVals() {
 const s = this.state;
 const PH = [['Foundation', 'Weeks 1–4', 'Close the widest gaps first: Geometry, Problem-Solving and systems of equations. One mock early to set your baseline.'], ['Build', 'Weeks 5–9', 'Mixed practice across all four domains, harder second-module questions, a mock every other week.'], ['Sharpen', 'Weeks 10–13', 'Timed modules, pace work and the mistake log. Two full mocks under test conditions.'], ['Taper', 'Week 14', 'Light review only. Sleep, logistics, a calm final day.']];
 const phases = PH.map(([name, weeks], i) => ({ name, weeks, on: s.phase === i ? 'true' : 'false', bg: s.phase === i ? '#003049' : '#F4F6F8', fg: s.phase === i ? '#FFFFFF' : '#003049', pick: () => this.setState({ phase: i }) }));
 const F = ['Algebra review', 'Linear equations & systems', 'Geometry & Trigonometry', 'Problem-Solving & Data', 'Advanced Math', 'Nonlinear functions', 'Mixed · module 2 level', 'Statistics & probability', 'Mixed · timed sets', 'Pace · Math', 'Pace · Hard questions', 'Mistake log sweep', 'Final mock week', 'Taper'];
+const R = s.R || { domains: [], weakest: null, join: window.Ufq.today(), history: [] };
+const plan = window.Ufq.plan(R); const cur = plan.week - 1;
 const phaseOf = (i) => i < 4 ? 0 : i < 9 ? 1 : i < 13 ? 2 : 3;
 const mocks = { 1: 'Mock 1', 2: 'Mock 2', 6: 'Mock 3', 10: 'Mock 4' };
 const DAYS = (i) => [['Mon', F[i] + ' · lesson', '35 min'], ['Tue', '12 questions', '25 min'], ['Wed', 'Mixed review', '30 min'], ['Thu', F[i] + ' · harder set', '35 min'], ['Sat', mocks[i] ? mocks[i] + ' · full length' : 'Mistake log', mocks[i] ? '1 h 10 min' : '20 min']];
-const weeks = F.map((focus, i) => {
-const st = i < 2 ? 'done' : i === 2 ? 'now' : 'next';
+const ORDER = R.domains.length ? R.domains.slice().sort((a, b) => a.score - b.score) : [];
+const DOMQ = F.map((_, i) => (ORDER.length && i < 12 ? ORDER[i % ORDER.length].q : ''));
+const weeks = F.map((focus0, i) => {
+const focus = ORDER.length && i < 12 ? ORDER[i % ORDER.length].name + ' · ' + ['review', 'practice', 'harder set'][Math.floor(i / ORDER.length) % 3] : focus0;
+const st = i < cur ? 'done' : i === cur ? 'now' : 'next';
 return {
 label: 'Week ' + (i + 1), focus, phase: PH[phaseOf(i)][0] + (mocks[i] ? ' · ' + mocks[i] : ''),
 dot: st === 'done' ? '#003049' : st === 'now' ? '#C1121F' : 'transparent', dotRing: st === 'next' ? 'inset 0 0 0 1.5px rgba(0,48,73,.35)' : 'none',
 tag: st === 'done' ? 'Done' : st === 'now' ? 'This week' : mocks[i] ? 'Mock' : 'Planned',
 tagBg: st === 'now' ? '#C1121F' : st === 'done' ? '#F4F6F8' : 'transparent', tagFg: st === 'now' ? '#FFFFFF' : '#003049',
 open: s.open === i ? 'true' : 'false', isOpen: s.open === i,
-days: DAYS(i).map(([d, t, m], j) => ({ d, t, m, go: st === 'done' ? '✓' : '→', href: j === 0 ? '/lesson' : j === 4 ? (mocks[i] ? '/mock-tests' : '/mistakes') : '/practice/session' })),
+days: DAYS(i).map(([d, t, m], j) => ({ d, t, m, go: st === 'done' ? '✓' : '→', href: j === 0 ? '/lesson' : j === 4 ? (mocks[i] ? '/mock-tests' : '/mistakes') : '/practice/session?n=10' + (DOMQ[i] ? '&d=' + DOMQ[i] : '') })),
 toggle: () => this.setState({ open: this.state.open === i ? -1 : i })
 };
 });
-return { phases, weeks, phaseNote: PH[s.phase][2] };
+return { phases, weeks, phaseNote: PH[s.phase][2], totalWeeks: String(plan.total), weekNo: String(plan.week) };
 }
 }
 </script>

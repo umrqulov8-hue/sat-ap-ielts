@@ -355,12 +355,12 @@ super(props);
 this.state = { q: 0, ans: {}, marked: {}, crossed: {}, crossMode: false, nav: false, review: false, done: false, rev: null, hideTimer: (() => { try { const sv = JSON.parse(localStorage.getItem('ufq_settings') || 'null'); return !!sv && sv.timer === false; } catch (e) { return false; } })(), Q: null, title: '', tick: 0 };
 this._t0 = Date.now(); this.tm = {}; this._q = 0; this._qt = Date.now(); this.saved = false;
 const params = new URLSearchParams(location.search);
-this._slugs = (params.get('d') || '').split(',').filter(Boolean); this._n = Number(params.get('n')) || 10;
+this._slugs = (params.get('d') || '').split(',').filter(Boolean); this._n = Number(params.get('n')) || 10; this._hard = params.get('h') === '1';
 const cover = document.createElement('div'); cover.setAttribute('aria-live', 'polite');
 cover.style.cssText = 'position:fixed;inset:0;z-index:2147483000;background:#FFFFFF;display:flex;align-items:center;justify-content:center;font:500 22px "Newsreader",Georgia,serif;font-style:italic;color:#003049';
 cover.textContent = 'Preparing your set…'; document.body.appendChild(cover);
 const done = () => { cover.remove(); };
-window.Ufq.loadQuestions({ slugs: this._slugs, count: this._n }).then((qs) => {
+window.Ufq.loadQuestions({ slugs: this._slugs, count: this._n, hard: this._hard }).then((qs) => {
 if (!qs.length) { window.Ufq.toast('No questions are available for this set yet.'); setTimeout(() => location.assign('/practice'), 1600); return; }
 const names = [...new Set(qs.map((q) => q.subject))];
 this._t0 = Date.now(); this._qt = Date.now(); this.tm = {};
