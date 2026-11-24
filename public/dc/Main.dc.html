@@ -1,0 +1,386 @@
+<!doctype html>
+<html lang="en">
+<head>
+<base href="/dc/"><script src="config.js"></script><script src="bridge.js"></script>
+<script>try{sessionStorage.removeItem('ufqApp')}catch(e){}</script>
+<link rel="preload" as="image" href="./assets/d30958deea0f2c30d185036d50b38dc8.webp">
+<script>try{var f=sessionStorage.getItem('ufqWipe');if(f){var w=f==='wipeW',W='max(124vw, 177.78vh)',o=w?'.82':'.1';var s=document.createElement('style');s.textContent='html{min-height:100vh;background:'+(w?'linear-gradient(170deg, rgba(0,48,73,.3), rgba(0,48,73,.95) 65%)':'linear-gradient(180deg, rgba(0,48,73,.15) 0%, rgba(0,48,73,0) 35%, rgba(0,48,73,.88) 78%)')+',linear-gradient(rgba(0,48,73,'+o+'),rgba(0,48,73,'+o+')),url(./assets/d30958deea0f2c30d185036d50b38dc8.webp) calc((124vw - '+W+') * .25 - 12vw) calc((100vh - '+W+' * .5625) * .5) / '+W+' auto no-repeat,#003049!important}body{background:transparent!important}';document.head.appendChild(s);setTimeout(function(){s.remove()},2600)}}catch(e){}</script>
+<style>html,body{margin:0;background:#003049}</style>
+<meta charset="utf-8">
+<title>Ufq — Earn every point</title>
+<script src="./_runtime/react.js"></script>
+<script src="./_runtime/react-dom.js"></script>
+<script src="./_runtime/support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..600&amp;family=Inter+Tight:wght@400..700&amp;display=swap" rel="stylesheet">
+<style>
+html{scroll-behavior:smooth}
+html,body{margin:0;background:#003049}
+*{box-sizing:border-box}
+::selection{background:#C1121F;color:#FFFFFF}
+a{color:#003049}
+.srf{font-family:'Newsreader','Times New Roman',serif;font-optical-sizing:auto;font-weight:400;letter-spacing:-0.025em}
+.cap{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase}
+.wrap{max-width:1440px;margin:0 auto;padding-inline:clamp(20px,3vw,44px)}
+.mask{display:block;overflow:hidden;padding:.06em 0 .14em;margin:-.06em 0 -.14em}
+.mask>span{display:block}
+
+/* inline image pills inside headlines (Watson-style) */
+.pillimg{display:inline-block;vertical-align:-.08em;height:.78em;width:1.7em;border-radius:999px;overflow:hidden;margin:0 .06em;box-shadow:inset 0 0 0 2px #003049}
+.pillimg img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 1s cubic-bezier(.16,1,.3,1)}
+.pillimg:hover img{transform:scale(1.18)}
+@keyframes pillIn{from{width:0;margin:0}to{width:1.7em;margin:0 .06em}}
+.pillIn{animation:pillIn 1.2s cubic-bezier(.16,1,.3,1) both}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;gap:12px;min-height:48px;padding:0 22px;border-radius:999px;background:#C1121F;color:#FFFFFF!important;text-decoration:none;font:600 15px 'Inter Tight',sans-serif;border:0;cursor:pointer;position:relative;overflow:hidden;isolation:isolate;transition:transform .6s cubic-bezier(.34,1.56,.64,1)}
+.btn::before{content:"";position:absolute;inset:0;background:#780000;transform:scaleX(0);transform-origin:right;transition:transform .6s cubic-bezier(.16,1,.3,1);z-index:-1}
+.btn:hover::before{transform:scaleX(1);transform-origin:left}
+.btn:active{transform:scale(.97)}
+.btn .ar{display:inline-grid;overflow:hidden;height:1.2em;line-height:1.2em}
+.btn .ar span{grid-area:1/1;transition:transform .5s cubic-bezier(.16,1,.3,1)}
+.btn .ar span+span{transform:translateX(-140%)}
+.btn:hover .ar span:first-child{transform:translateX(140%)}.btn:hover .ar span+span{transform:none}
+.btn.navy{background:#003049}
+.nl{position:relative;text-decoration:none;font-size:14px;font-weight:500;color:#003049}
+.nl::after{content:"";position:absolute;left:0;right:0;bottom:-3px;height:1px;background:currentColor;transform:scaleX(0);transform-origin:right;transition:transform .5s cubic-bezier(.16,1,.3,1)}
+.nl:hover::after{transform:scaleX(1);transform-origin:left}
+.tab{display:flex;align-items:baseline;gap:10px;padding:12px 16px;border:0;border-radius:999px;background:transparent;cursor:pointer;color:#003049;box-shadow:inset 0 0 0 1px rgba(0,48,73,.28);font:600 14px 'Inter Tight',sans-serif;transition:background .4s,color .4s,box-shadow .4s}
+.tab:hover{box-shadow:inset 0 0 0 1px #003049}
+.tab[aria-pressed="true"]{background:#003049;color:#FFFFFF;box-shadow:none}
+.tab .n{font-family:'Newsreader',serif;font-size:18px;font-style:italic}
+
+/* load */
+@keyframes rise{from{transform:translateY(110%)}to{transform:none}}
+.ld>span{animation:rise 1.3s cubic-bezier(.16,1,.3,1) both}
+@keyframes up{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+.fu{animation:up 1.1s cubic-bezier(.16,1,.3,1) both}
+@keyframes swap{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.swap{animation:swap .6s cubic-bezier(.16,1,.3,1) both}
+
+/* counter */
+@property --q{syntax:'<integer>';inherits:true;initial-value:44}
+.qcount{--q:44;counter-reset:q var(--q)}
+.qcount::before{content:counter(q)}
+@keyframes qc{from{--q:0}to{--q:44}}
+
+/* scroll (base = final state) */
+@keyframes driftL{from{transform:none}to{transform:translateX(-8vw)}}
+@keyframes driftR{from{transform:none}to{transform:translateX(8vw)}}
+@keyframes expand{from{clip-path:inset(10% 12% round 28px)}to{clip-path:inset(0 0 round 0)}}
+@keyframes par{from{transform:translateY(-8%) scale(1.15)}to{transform:translateY(8%) scale(1.15)}}
+@keyframes capUp{from{opacity:0;transform:translateY(50px)}to{opacity:1;transform:none}}
+@keyframes inUp{from{opacity:0;transform:translateY(60px)}to{opacity:1;transform:none}}
+@keyframes navOn{0%,100%{opacity:.35}30%,70%{opacity:1}}
+@keyframes barOn{0%,100%{transform:scaleY(0)}30%,70%{transform:scaleY(1)}}
+@keyframes imgIn{from{clip-path:inset(0 0 100% 0);transform:scale(1.2)}to{clip-path:inset(0 0 0 0);transform:none}}
+@keyframes clipText{from{transform:scale(1.6);background-position:50% 0%}to{transform:none;background-position:50% 100%}}
+@keyframes lineIn{from{transform:translateY(110%)}to{transform:none}}
+@supports (animation-timeline: view()){
+.driftL{animation:driftL linear both;animation-timeline:scroll(root);animation-range:0px 900px}
+.driftR{animation:driftR linear both;animation-timeline:scroll(root);animation-range:0px 900px}
+.expand{animation:expand linear both;animation-timeline:view();animation-range:entry 0% cover 45%}
+.par{animation:par linear both;animation-timeline:view();animation-range:entry 0% exit 100%}
+.capUp{animation:capUp linear both;animation-timeline:view();animation-range:entry 40% cover 50%}
+.inUp{animation:inUp linear both;animation-timeline:view();animation-range:entry 0% entry 70%}
+.qcount{animation:qc linear both;animation-timeline:view();animation-range:entry 30% cover 50%}
+.imgIn{animation:imgIn linear both;animation-timeline:view();animation-range:entry 0% cover 40%}
+.clipText{animation:clipText linear both;animation-timeline:view();animation-range:entry 0% cover 55%}
+.li>span{animation:lineIn linear both;animation-timeline:view();animation-range:entry 0% entry 70%}
+}
+@keyframes curtainUp{0%,22%{transform:none}100%{transform:translateY(-101%)}}
+.curtainUp{will-change:transform;animation:curtainUp 1s cubic-bezier(.76,0,.24,1) both}
+@keyframes logoOut{0%,25%{opacity:1;transform:none}60%,100%{opacity:0;transform:translateY(-30px)}}
+.srf.curtainLogo{animation:logoOut 1s cubic-bezier(.16,1,.3,1) both;background-position:-60% 0}
+.srf.silver.still{animation:none;background-position:-60% 0}
+@media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}.curtainUp{display:none}}
+@media (max-width: 980px){.hide-md{display:none!important}.idx{display:none!important}}
+#contact::placeholder{color:rgba(255,255,255,.5)}
+
+
+/* contents index: progress rail + active item */
+@keyframes ixOn{0%,100%{opacity:.38;transform:none}6%,94%{opacity:1;transform:translateX(8px)}}
+@keyframes ixNum{0%,100%{color:#003049}6%,94%{color:#C1121F}}
+@keyframes ixGrow{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+.ix{transition:opacity .3s}
+@supports (animation-timeline: view()){
+.ixFill{animation:ixGrow linear both;animation-timeline:--chap;animation-range:entry 60% exit 40%}
+.ix1{animation:ixOn linear both;animation-timeline:--c1;animation-range:cover 50vh cover calc(100% - 50vh)}
+.ix2{animation:ixOn linear both;animation-timeline:--c2;animation-range:cover 50vh cover calc(100% - 50vh)}
+.ix3{animation:ixOn linear both;animation-timeline:--c3;animation-range:cover 50vh cover calc(100% - 50vh)}
+.ix4{animation:ixOn linear both;animation-timeline:--c4;animation-range:cover 50vh cover calc(100% - 50vh)}
+.ix1 .ixn{animation:ixNum linear both;animation-timeline:--c1;animation-range:cover 50vh cover calc(100% - 50vh)}
+.ix2 .ixn{animation:ixNum linear both;animation-timeline:--c2;animation-range:cover 50vh cover calc(100% - 50vh)}
+.ix3 .ixn{animation:ixNum linear both;animation-timeline:--c3;animation-range:cover 50vh cover calc(100% - 50vh)}
+.ix4 .ixn{animation:ixNum linear both;animation-timeline:--c4;animation-range:cover 50vh cover calc(100% - 50vh)}
+}
+/* finish-line scene */
+@property --fs{syntax:'<integer>';inherits:true;initial-value:80}
+.finCount{--fs:80;counter-reset:fs var(--fs)}
+.finCount::before{content:counter(fs) "0"}
+@keyframes fsUp{from{--fs:20}to{--fs:80}}
+@keyframes finRise{from{clip-path:inset(0 50% 0 50%);transform:scale(1.12);letter-spacing:.02em}to{clip-path:inset(0 0 0 0);transform:none;letter-spacing:-0.05em}}
+@keyframes finPan{from{background-position:20% 30%}to{background-position:80% 85%}}
+@keyframes tape{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes ruleIn{from{width:0}to{width:64px}}
+@keyframes fadeUp2{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+@supports (animation-timeline: view()){
+.fin{view-timeline-name:--fin}
+.finNum{animation:finRise linear both,finPan linear both;animation-timeline:--fin,--fin;animation-range:entry 10% cover 45%,entry 0% exit 100%}
+.finRule{animation:ruleIn linear both;animation-timeline:--fin;animation-range:entry 0% cover 25%}
+.finCount{animation:fsUp linear both;animation-timeline:--fin;animation-range:entry 20% cover 50%}
+.finScore{animation:fadeUp2 linear both;animation-timeline:--fin;animation-range:cover 25% cover 40%}
+.finLine>span{animation:lineIn linear both;animation-timeline:--fin;animation-range:cover 35% cover 50%}
+.finLine2>span{animation:lineIn linear both;animation-timeline:--fin;animation-range:cover 40% cover 55%}
+}
+/* fixed, background-less header */
+.blendbar{position:fixed;top:0;left:0;right:0;z-index:60;mix-blend-mode:difference;pointer-events:none}
+.fixPill{position:fixed;top:0;left:0;right:0;z-index:61;pointer-events:none}
+@media (max-width: 980px){.blendbar .wrap{padding-right:200px!important}}
+.silver{background-image:linear-gradient(100deg,#AEB5C0 0%,#FFFFFF 22%,#8E97A5 38%,#FFFFFF 52%,#C7CDD6 70%,#FFFFFF 86%,#AEB5C0 100%);background-size:260% 100%;-webkit-background-clip:text;background-clip:text;color:transparent!important;animation:sheen 5s linear infinite}
+@keyframes sheen{from{background-position:0% 0}to{background-position:-260% 0}}
+.blendbar .nl::after{background:#FFFFFF}
+
+</style>
+<style>
+@keyframes introSweep{0%{clip-path:inset(0 100% 0 0)}42%,50%{clip-path:inset(0 0 0 0)}100%{clip-path:inset(0 0 0 100%)}}
+@keyframes introLogo{0%,18%{opacity:0;transform:translateY(14px)}34%,48%{opacity:1;transform:none}60%,100%{opacity:0;transform:none}}
+.introSweep{animation:introSweep 1.9s cubic-bezier(.76,0,.24,1) both}
+.introSweep .srf{animation:introLogo 1.9s ease both;background-position:-60% 0}
+@media (prefers-reduced-motion: reduce){.introSweep{display:none}}
+</style>
+<style>
+@keyframes backOut{0%{width:50%}100%{width:0}}
+.backOut{position:fixed;left:0;top:0;bottom:0;overflow:hidden;z-index:102;pointer-events:none;background:#003049;animation:backOut 1.1s .1s cubic-bezier(.76,0,.24,1) both}
+@keyframes backFull{0%{width:100%}100%{width:0}}
+@keyframes backCover{0%{clip-path:inset(0 0 0 50%)}100%{clip-path:inset(0 0 0 100%)}}
+</style>
+</helmet>
+
+<div style="background: #FFFFFF; color: #003049; font-family: 'Inter Tight', 'Helvetica Neue', Arial, sans-serif; font-size: 16px; line-height: 1.5; overflow-x: clip; timeline-scope: --c1, --c2, --c3, --c4, --chap">
+
+<!-- entry curtain: lifts away on arrival (also when coming back from sign-up) -->
+<sc-if value="{{intro}}" hint-placeholder-val="{{ true }}">
+<div class="introSweep" aria-hidden="true" style="position: fixed; inset: 0; z-index: 101; background: #003049; display: grid; place-items: center; pointer-events: none">
+<span class="srf silver" style="font-size: clamp(56px, 7vw, 96px); font-style: italic; line-height: 1.1; padding-right: 6px">Ufq.</span>
+</div>
+</sc-if>
+<sc-if value="{{back}}" hint-placeholder-val="{{ false }}"><div class="backOut" aria-hidden="true" style="animation-name: none; width: 100%; clip-path: inset(0); animation: backFull 1.15s .1s cubic-bezier(.76,0,.24,1) both"><div style="position: absolute; top: 0; bottom: 0; left: 0; width: 100vw"><div style="position: absolute; inset: 0; overflow: hidden"><div aria-hidden="true" style="position: absolute; left: -12%; right: -12%; top: 0; height: 100vh"><img src="./assets/d30958deea0f2c30d185036d50b38dc8.webp" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 25% 50%; opacity: .9"></div><div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,48,73,.15) 0%, rgba(0,48,73,0) 35%, rgba(0,48,73,.88) 78%)"></div></div></div></div></sc-if>
+<!-- exit curtain to the sign-up screen -->
+<div aria-hidden="true" style="position: fixed; inset: 0; z-index: 100; background: #003049; pointer-events: none; overflow: hidden; clip-path: {{curtain}}; transition: clip-path .9s cubic-bezier(.76,0,.24,1)"><div style="position: absolute; inset: 0; overflow: hidden"><div aria-hidden="true" style="position: absolute; left: -12%; right: -12%; top: 0; height: 100vh"><img src="./assets/d30958deea0f2c30d185036d50b38dc8.webp" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 25% 50%; opacity: .9"></div><div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,48,73,.15) 0%, rgba(0,48,73,0) 35%, rgba(0,48,73,.88) 78%)"></div></div></div>
+<a href="Auth.dc.html" ref="{{authRef}}" tabindex="-1" aria-hidden="true" style="position: fixed; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); left: 0; top: 0">Sign up</a>
+<!-- fixed header: no background. Logo + links blend with whatever is behind them (difference) and carry a moving silver sheen -->
+<header class="blendbar" aria-label="Site">
+<div class="wrap" style="display: flex; justify-content: space-between; align-items: center; gap: 20px; padding-top: 24px; padding-right: clamp(210px, 18vw, 250px)">
+<a href="#top" class="srf silver" style="pointer-events: auto; text-decoration: none; font-size: 32px; line-height: 1.1; font-style: italic; padding-right: 4px">Ufq.</a>
+<nav aria-label="Main" class="hide-md" style="display: flex; gap: clamp(18px, 2.4vw, 36px); align-items: center; pointer-events: auto">
+<a class="nl silver" href="#test">The test</a>
+<a class="nl silver" href="#weakest">Domains</a>
+</nav>
+</div>
+</header>
+<div class="fixPill">
+<div class="wrap" style="display: flex; justify-content: flex-end; padding-top: 20px">
+<a class="btn" href="Auth.dc.html" onClick="{{goAuth}}" style="pointer-events: auto; min-height: 44px; font-size: 14px; box-shadow: 0 10px 30px -12px rgba(120,0,0,.6)">Get started <span class="ar" aria-hidden="true"><span>→</span><span>→</span></span></a>
+</div>
+</div>
+
+<main>
+
+<!-- ============ HERO ============ -->
+<section id="top" style="padding: clamp(130px, 12vw, 180px) 0 clamp(48px, 5vw, 72px)">
+<div class="wrap" style="display: flex; flex-direction: column; gap: clamp(40px, 5vw, 64px)">
+<div class="cap fu" style="animation-delay: .8s; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; color: #669BBC"><span style="color: #003049">Digital SAT Math preparation · Uzbekistan</span><span>Questions in English · Explanations in Uzbek</span></div>
+<h1 class="srf" style="margin: 0; font-size: clamp(52px, 8.8vw, 140px); line-height: .98">
+<span class="driftL" style="display: block"><span class="mask ld"><span style="animation-delay: .8s">Earn every <span class="pillimg pillIn" style="animation-delay: 1.30s"><img src="./assets/ce9b4a11d2641379c824819b64e03a4a.webp" alt="A red stopwatch"></span> point,</span></span></span>
+<span class="driftR" style="display: block; padding-left: clamp(0px, 9vw, 150px)"><span class="mask ld" style="--d: .1s"><span style="animation-delay: 0.90s"><em style="color: #C1121F">one</em> <span class="pillimg pillIn" style="animation-delay: 1.42s"><img src="./assets/b4c14031eef2f86baae3c5d9d7b436e6.webp" alt="A paper airplane on navy paper"></span> question</span></span></span>
+<span class="driftL" style="display: block"><span class="mask ld"><span style="animation-delay: 1.00s">at a <span class="pillimg pillIn" style="animation-delay: 1.54s"><img src="./assets/3c8e2de8bb60b1111b1aa7416baaab0c.webp" alt="A runner on a red track"></span> time.</span></span></span>
+</h1>
+<div class="fu" style="animation-delay: 1.70s; display: flex; justify-content: space-between; align-items: flex-end; gap: 32px; flex-wrap: wrap; padding-top: 28px; border-top: 1px solid #003049">
+<p style="margin: 0; max-width: 460px; font-size: 18px; line-height: 1.55">Ufq finds exactly where your score slips — by domain, by question type, by mistake — and builds your preparation around it.</p>
+<div style="display: flex; gap: 14px; align-items: center; flex-wrap: wrap">
+<a class="nl" href="#test">How it works</a>
+<a class="btn" href="Auth.dc.html" onClick="{{goAuth}}">Get started <span class="ar" aria-hidden="true"><span>→</span><span>→</span></span></a>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ============ FULL-BLEED PHOTO ============ -->
+<section aria-label="Step by step" style="padding: 0 0 clamp(100px, 10vw, 150px)">
+<div class="expand" style="position: relative; height: min(88vh, 820px); min-height: 520px; overflow: hidden; background: #003049">
+<img class="par" src="./assets/d30958deea0f2c30d185036d50b38dc8.webp" alt="A cream staircase with a red handrail climbing against a navy wall" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 30% 50%; transform: scale(1.15)">
+<div class="wrap" style="position: relative; height: 100%; display: flex; justify-content: flex-end; align-items: flex-start; padding-top: clamp(40px, 6vw, 80px)">
+<div class="capUp" style="max-width: min(440px, 100%); display: flex; flex-direction: column; gap: 12px; color: #FFFFFF; text-align: right">
+<span class="cap" style="color: #F6DDB0">The climb</span>
+<span class="srf" style="font-size: clamp(30px, 3.6vw, 56px); line-height: 1.02">Two hundred to eight hundred. <em style="color: #F6DDB0">One step at a time.</em></span>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ============ EDITORIAL INDEX + CHAPTERS ============ -->
+<section style="padding-bottom: clamp(100px, 10vw, 150px)">
+<div class="wrap" style="display: flex; gap: clamp(32px, 5vw, 80px); align-items: flex-start">
+
+<aside class="idx" aria-label="Contents" style="flex: 0 0 240px; position: sticky; top: 120px">
+<div class="cap" style="color: #669BBC; margin-bottom: 20px">Contents</div>
+<div style="position: relative; padding-left: 22px">
+<span aria-hidden="true" style="position: absolute; left: 0; top: 4px; bottom: 4px; width: 2px; background: rgba(0,48,73,.14); border-radius: 2px"></span>
+<span class="ixFill" aria-hidden="true" style="position: absolute; left: 0; top: 4px; bottom: 4px; width: 2px; background: #C1121F; border-radius: 2px; transform-origin: top"></span>
+<ol style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 18px">
+<li class="ix ix1"><a href="#test" style="text-decoration: none; display: flex; gap: 12px; align-items: baseline"><span class="srf ixn" style="font-style: italic; font-size: 18px">01</span><span style="font-weight: 600; font-size: 15px">The test</span></a></li>
+<li class="ix ix2"><a href="#weakest" style="text-decoration: none; display: flex; gap: 12px; align-items: baseline"><span class="srf ixn" style="font-style: italic; font-size: 18px">02</span><span style="font-weight: 600; font-size: 15px">Find your weakest</span></a></li>
+<li class="ix ix3"><a href="#languages" style="text-decoration: none; display: flex; gap: 12px; align-items: baseline"><span class="srf ixn" style="font-style: italic; font-size: 18px">03</span><span style="font-weight: 600; font-size: 15px">Two languages</span></a></li>
+<li class="ix ix4"><a href="#plan" style="text-decoration: none; display: flex; gap: 12px; align-items: baseline"><span class="srf ixn" style="font-style: italic; font-size: 18px">04</span><span style="font-weight: 600; font-size: 15px">Your plan</span></a></li>
+</ol>
+</div>
+</aside>
+
+<div style="flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; view-timeline-name: --chap">
+
+<!-- 01 -->
+<article id="test" style="view-timeline-name: --c1; padding: 24px 0 96px; border-top: 1px solid #003049; display: flex; flex-direction: column; gap: 40px">
+<div style="display: flex; justify-content: space-between; gap: 16px"><span class="cap">01 · The test</span><span class="cap" style="color: #669BBC">Digital SAT</span></div>
+<h2 class="srf" style="margin: 0; font-size: clamp(40px, 5vw, 76px); line-height: 1"><span class="mask li"><span>Forty-four questions.</span></span><span class="mask li"><span><em style="color: #C1121F">The clock is running.</em></span></span></h2>
+<div class="inUp" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr)); border-top: 1px solid rgba(0,48,73,.2)">
+<div style="padding: 24px 20px 0 0; display: flex; flex-direction: column; gap: 6px"><span class="srf qcount" role="img" aria-label="44" style="font-size: clamp(72px, 7vw, 112px); line-height: .9; font-variant-numeric: tabular-nums"></span><span style="font-size: 15px">questions — two modules of 22, all Math</span></div>
+<div style="padding: 24px 20px 0; border-left: 1px solid rgba(0,48,73,.2); display: flex; flex-direction: column; gap: 6px"><span class="srf" style="font-size: clamp(72px, 7vw, 112px); line-height: .9">70</span><span style="font-size: 15px">minutes, across two adaptive modules</span></div>
+<div style="padding: 24px 0 0 20px; border-left: 1px solid rgba(0,48,73,.2); display: flex; flex-direction: column; gap: 6px"><span class="srf" style="font-size: clamp(72px, 7vw, 112px); line-height: .9; color: #C1121F">800</span><span style="font-size: 15px">top Math score — reachable only through the harder second module</span></div>
+</div>
+</article>
+
+<!-- 02 -->
+<article id="weakest" style="view-timeline-name: --c2; padding: 24px 0 96px; border-top: 1px solid #003049; display: flex; flex-direction: column; gap: 36px">
+<div style="display: flex; justify-content: space-between; gap: 16px"><span class="cap">02 · Find your weakest</span><span class="cap" style="color: #669BBC">Four domains</span></div>
+<h2 class="srf" style="margin: 0; font-size: clamp(40px, 5vw, 76px); line-height: 1"><span class="mask li"><span>Four domains.</span></span><span class="mask li"><span><em style="color: #C1121F">Find your weakest.</em></span></span></h2>
+<div class="inUp" role="group" aria-label="SAT domains" style="display: flex; flex-wrap: wrap; gap: 8px">
+<button type="button" class="tab" aria-pressed="{{p0}}" onClick="{{k0}}"><span class="n">01</span>Algebra</button>
+<button type="button" class="tab" aria-pressed="{{p1}}" onClick="{{k1}}"><span class="n">02</span>Advanced Math</button>
+<button type="button" class="tab" aria-pressed="{{p2}}" onClick="{{k2}}"><span class="n">03</span>Problem-Solving &amp; Data</button>
+<button type="button" class="tab" aria-pressed="{{p3}}" onClick="{{k3}}"><span class="n">04</span>Geometry &amp; Trig</button>
+</div>
+<div class="inUp" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr)); gap: 14px">
+<div class="swap" style="padding: 28px; border-radius: 4px; background: #003049; color: #FFFFFF; display: flex; flex-direction: column; gap: 12px; min-height: 230px">
+<span class="cap" style="color: #669BBC">{{d.section}}</span>
+<span class="srf" style="font-size: clamp(32px, 3vw, 48px); line-height: 1">{{d.name}}</span>
+<span style="color: #E6DCC6; max-width: 46ch">{{d.desc}}</span>
+</div>
+<div style="padding: 28px; border-radius: 4px; box-shadow: inset 0 0 0 1px #003049; display: flex; flex-direction: column; gap: 14px; min-height: 230px">
+<span class="cap" style="color: #669BBC">Sample question</span>
+<span class="srf" style="font-size: 24px; line-height: 1.3; letter-spacing: -0.01em">{{d.q}}</span>
+<span style="margin-top: auto; padding: 12px 14px; background: #EEF2F5; font-size: 14px; line-height: 1.5"><b style="color: #C1121F">UZ ·</b> {{d.tip}}</span>
+</div>
+</div>
+</article>
+
+<!-- 03 -->
+<article id="languages" style="view-timeline-name: --c3; padding: 24px 0 96px; border-top: 1px solid #003049; display: flex; flex-direction: column; gap: 36px">
+<div style="display: flex; justify-content: space-between; gap: 16px"><span class="cap">03 · Two languages</span><span class="cap" style="color: #669BBC">EN · UZ</span></div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr)); gap: 32px; align-items: center">
+<h2 class="srf" style="margin: 0; font-size: clamp(40px, 5vw, 76px); line-height: 1"><span class="mask li"><span>Practise in English.</span></span><span class="mask li"><span><em style="color: #C1121F">Understand in Uzbek.</em></span></span></h2>
+<div class="imgIn" style="aspect-ratio: 4 / 3; overflow: hidden; border-radius: 4px"><img src="./assets/b4c14031eef2f86baae3c5d9d7b436e6.webp" alt="A cream paper airplane on navy paper" style="width: 100%; height: 100%; object-fit: cover; display: block"></div>
+</div>
+<div class="inUp" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: 14px">
+<div style="padding: 24px; box-shadow: inset 0 0 0 1px #003049; display: flex; flex-direction: column; gap: 8px"><span class="cap" style="color: #669BBC">EN · The question</span><span class="srf" style="font-size: 24px; line-height: 1.3">A price falls from $80 to $60. By what percent did it decrease?</span></div>
+<div style="padding: 24px; background: #C1121F; color: #FFFFFF; display: flex; flex-direction: column; gap: 8px"><span class="cap">UZ · Tushuntirish</span><span class="srf" style="font-size: 24px; line-height: 1.3">Foiz o‘zgarish boshlang‘ich qiymatga bo‘linadi: 20 / 80 = 25%.</span></div>
+</div>
+</article>
+
+<!-- 04 -->
+<article id="plan" style="view-timeline-name: --c4; padding: 24px 0 24px; border-top: 1px solid #003049; display: flex; flex-direction: column; gap: 36px">
+<div style="display: flex; justify-content: space-between; gap: 16px"><span class="cap">04 · Your plan</span><span class="cap" style="color: #669BBC">Week by week</span></div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr)); gap: 32px; align-items: center">
+<div class="imgIn" style="aspect-ratio: 4 / 3; overflow: hidden; border-radius: 4px"><img src="./assets/ce9b4a11d2641379c824819b64e03a4a.webp" alt="A red stopwatch on navy paper" style="width: 100%; height: 100%; object-fit: cover; display: block"></div>
+<div style="display: flex; flex-direction: column; gap: 24px">
+<h2 class="srf" style="margin: 0; font-size: clamp(40px, 5vw, 76px); line-height: 1"><span class="mask li"><span>One topic a day.</span></span><span class="mask li"><span><em style="color: #C1121F">Nothing forgotten.</em></span></span></h2>
+<p class="inUp" style="margin: 0; font-size: 17px; max-width: 44ch">Your target and test date become a week-by-week plan. Old mistakes come back on schedule until they stop happening.</p>
+<div class="inUp" style="display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 6px; text-align: center; max-width: 420px">
+<div style="display: flex; flex-direction: column; gap: 8px; align-items: center"><span class="cap" style="font-size: 10px">Mo</span><span style="width: 30px; height: 30px; border-radius: 50%; background: #003049"></span></div>
+<div style="display: flex; flex-direction: column; gap: 8px; align-items: center"><span class="cap" style="font-size: 10px">Tu</span><span style="width: 30px; height: 30px; border-radius: 50%; background: #003049"></span></div>
+<div style="display: flex; flex-direction: column; gap: 8px; align-items: center"><span class="cap" style="font-size: 10px; color: #C1121F">We</span><span style="width: 30px; height: 30px; border-radius: 50%; background: #C1121F"></span></div>
+<div style="display: flex; flex-direction: column; gap: 8px; align-items: center"><span class="cap" style="font-size: 10px">Th</span><span style="width: 30px; height: 30px; border-radius: 50%; box-shadow: inset 0 0 0 1px #003049"></span></div>
+<div style="display: flex; flex-direction: column; gap: 8px; align-items: center"><span class="cap" style="font-size: 10px">Fr</span><span style="width: 30px; height: 30px; border-radius: 50%; box-shadow: inset 0 0 0 1px #003049"></span></div>
+<div style="display: flex; flex-direction: column; gap: 8px; align-items: center"><span class="cap" style="font-size: 10px">Sa</span><span style="width: 30px; height: 30px; border-radius: 50%; box-shadow: inset 0 0 0 1px #003049"></span></div>
+<div style="display: flex; flex-direction: column; gap: 8px; align-items: center"><span class="cap" style="font-size: 10px">Su</span><span style="width: 30px; height: 30px; border-radius: 50%; background: #EEF2F5"></span></div>
+</div>
+</div>
+</div>
+</article>
+</div>
+</div>
+</section>
+
+<!-- ============ IMAGE-FILLED NUMBER (the finish line) ============ -->
+<section class="fin" aria-label="800" style="padding: clamp(80px, 8vw, 120px) 0 clamp(110px, 11vw, 160px); text-align: center; overflow: hidden">
+<div class="wrap" style="display: flex; flex-direction: column; align-items: center; gap: 22px">
+<div class="cap finLabel" style="display: flex; align-items: center; gap: 14px; color: #669BBC"><span class="finRule" style="width: 64px; height: 1px; background: #669BBC"></span>The finish line<span class="finRule" style="width: 64px; height: 1px; background: #669BBC"></span></div>
+<div class="finWrap" style="position: relative; width: 100%">
+<div class="srf finNum" role="img" aria-label="800" style="display: inline-block; font-size: clamp(180px, 34vw, 520px); line-height: 1.02; padding: .06em .04em .02em; letter-spacing: -0.05em; color: transparent; background-image: url('./assets/3c8e2de8bb60b1111b1aa7416baaab0c.webp'); background-size: cover; background-position: 50% 70%; -webkit-background-clip: text; background-clip: text">800</div>
+</div>
+<div class="finScore" style="display: flex; align-items: baseline; gap: 12px; font-weight: 600"><span class="cap" style="color: #669BBC">Your score</span><span class="srf finCount" aria-hidden="true" style="font-size: 32px; font-variant-numeric: tabular-nums; color: #C1121F"></span></div>
+<p class="srf" style="margin: 0; font-size: clamp(24px, 2.4vw, 34px); max-width: 680px; line-height: 1.25">
+<span class="mask finLine"><span><em>Every lane leads somewhere.</em></span></span>
+<span class="mask finLine2"><span>Know exactly how far you are from yours.</span></span>
+</p>
+</div>
+</section>
+
+<!-- ============ CTA ============ -->
+<section id="start" style="background: #003049; color: #FFFFFF; padding: clamp(100px, 10vw, 150px) 0 28px">
+<div class="wrap" style="display: flex; flex-direction: column; gap: clamp(56px, 7vw, 96px)">
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr)); gap: 40px; align-items: end">
+<h2 class="srf" style="margin: 0; font-size: clamp(48px, 7vw, 112px); line-height: .98"><span class="mask li"><span>Find your</span></span><span class="mask li"><span><em style="color: #F6DDB0">starting point.</em></span></span></h2>
+<div class="inUp" style="display: flex; flex-direction: column; gap: 18px">
+<p style="margin: 0; font-size: 18px; color: #DCE6EC; max-width: 44ch">A real-format Math practice set and a report for every domain — then a plan built around your test date. Next intake: [DATE].</p>
+<form onSubmit="{{submit}}" style="display: flex; gap: 8px; flex-wrap: wrap; padding: 6px; border-radius: 999px; box-shadow: inset 0 0 0 1px rgba(255,255,255,.4)">
+<label for="contact" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Email</label>
+<input id="contact" type="text" placeholder="Email" style="flex: 1 1 200px; min-width: 0; min-height: 48px; padding: 0 18px; border: 0; background: transparent; outline: none; color: #FFFFFF; font: 400 16px 'Inter Tight', sans-serif">
+<button type="submit" class="btn">{{btn}} <span class="ar" aria-hidden="true"><span>→</span><span>→</span></span></button>
+</form>
+</div>
+</div>
+<footer style="display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; padding-top: 22px; border-top: 1px solid rgba(255,255,255,.25)">
+<span class="srf" style="font-size: 24px; font-style: italic">Ufq<span style="color: #C1121F">.</span></span>
+<nav aria-label="Social" style="display: flex; gap: 22px"><a class="nl" href="#top" style="color: #FFFFFF">Telegram</a><a class="nl" href="#top" style="color: #FFFFFF">Instagram</a></nav>
+<span style="font-size: 12px; color: #B9CBD6">SAT is a trademark of the College Board, which is not affiliated with Ufq.</span>
+</footer>
+</div>
+</section>
+
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":5800}}'>
+class Component extends DCLogic {
+constructor(props) {
+super(props);
+let entry = ''; try { entry = sessionStorage.getItem('ufqWipe') || ''; sessionStorage.removeItem('ufqWipe'); } catch (e) {}
+this._back = entry === 'back';
+this.state = { sel: 0, sent: false, leaving: false };
+}
+renderVals() {
+const D = [
+{ section: 'Math · Domain 01', name: 'Algebra', desc: 'Linear equations, inequalities and systems — a large share of the Math section.', q: 'If 4x + 9 = 37, what is the value of 2x?', tip: 'Savol x ni emas, 2x ni so‘rayapti. Oxirgi qadamni unutmang.' },
+{ section: 'Math · Domain 02', name: 'Advanced Math', desc: 'Quadratics, exponentials and functions — where the harder module pulls ahead.', q: 'The graph of f(x) = (x − 3)² + 5 has its vertex at which point?', tip: '(x − h)² + k ko‘rinishida cho‘qqi doim (h, k).' },
+{ section: 'Math · Domain 03', name: 'Problem-Solving & Data', desc: 'Ratios, percentages, statistics and reading tables and graphs.', q: 'A price falls from $80 to $60. By what percent did it decrease?', tip: 'Foiz o‘zgarish boshlang‘ich qiymatga bo‘linadi: 20 / 80 = 25%.' },
+{ section: 'Math · Domain 04', name: 'Geometry & Trigonometry', desc: 'Area, volume, triangles, circles and right-triangle trigonometry.', q: 'A circle has a circumference of 10π. What is its area?', tip: 'C = 2πr dan r = 5, keyin S = πr² = 25π.' }
+];
+const sel = this.state.sel;
+const v = {
+intro: !this._back, back: this._back,
+curtain: this.state.leaving ? 'inset(0 0 0 0)' : 'inset(0 0 0 100%)',
+authRef: (el) => { this.authLink = el; },
+goAuth: (ev) => { if (!this.authLink) return; if (ev && ev.preventDefault) ev.preventDefault(); this.setState({ leaving: true }); try { sessionStorage.setItem('ufqWipe', 'half'); } catch (e) {} setTimeout(() => { this.authLink.click(); setTimeout(() => this.setState({ leaving: false }), 2500); }, 800); },
+d: D[sel], btn: this.state.sent ? 'Received' : 'Reserve', submit: (e) => { if (e && e.preventDefault) e.preventDefault(); this.setState({ sent: true }); } };
+D.forEach((_, i) => { v['p' + i] = sel === i ? 'true' : 'false'; v['k' + i] = () => this.setState({ sel: i }); });
+return v;
+}
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="en">
+<head>
+<base href="/dc/"><script src="config.js"></script><script src="bridge.js"></script>
+<style>@view-transition{navigation:auto}::view-transition-old(root){animation:.28s cubic-bezier(.4,0,.2,1) both vtOut}::view-transition-new(root){animation:.28s cubic-bezier(.4,0,.2,1) both vtIn}@keyframes vtOut{to{opacity:0}}@keyframes vtIn{from{opacity:0}}.side{view-transition-name:ufqside}@media (prefers-reduced-motion: reduce){@view-transition{navigation:none}}</style>
+<style>html,body{margin:0;background:#FFFFFF}</style>
+<meta charset="utf-8">
+<title>Ufq — Notifications</title>
+<script src="./_runtime/react.js"></script>
+<script src="./_runtime/react-dom.js"></script>
+<script src="./_runtime/support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..600&amp;family=Inter+Tight:wght@400..700&amp;display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+::selection{background:#C1121F;color:#FFFFFF}
+a{color:#003049}
+.srf{font-family:'Newsreader','Times New Roman',serif;font-optical-sizing:auto;font-weight:400;letter-spacing:-0.025em}
+.cap{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase}
+.mask{display:block;overflow:hidden;padding:.06em 0 .14em;margin:-.06em 0 -.14em}
+.mask>span{display:block}
+.silver{background-image:linear-gradient(100deg,#AEB5C0 0%,#FFFFFF 22%,#8E97A5 38%,#FFFFFF 52%,#C7CDD6 70%,#FFFFFF 86%,#AEB5C0 100%);background-size:260% 100%;-webkit-background-clip:text;background-clip:text;color:transparent!important;animation:sheen 5s linear infinite}
+@keyframes sheen{from{background-position:0% 0}to{background-position:-260% 0}}
+.pillimg{display:inline-block;vertical-align:-.08em;height:.78em;width:1.7em;border-radius:999px;overflow:hidden;margin:0 .06em;box-shadow:inset 0 0 0 2px #FFFFFF}
+.pillimg img{width:100%;height:100%;object-fit:cover;display:block}
+@keyframes pillIn{from{width:0;margin:0}to{width:1.7em;margin:0 .06em}}
+.pillIn{animation:pillIn 1.2s cubic-bezier(.16,1,.3,1) both}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:12px;min-height:52px;padding:0 24px;border-radius:999px;background:#C1121F;color:#FFFFFF!important;text-decoration:none;font:600 15px 'Inter Tight',sans-serif;border:0;cursor:pointer;position:relative;overflow:hidden;isolation:isolate;transition:transform .6s cubic-bezier(.34,1.56,.64,1)}
+.btn::before{content:"";position:absolute;inset:0;background:#780000;transform:scaleX(0);transform-origin:right;transition:transform .6s cubic-bezier(.16,1,.3,1);z-index:-1}
+.btn:hover::before{transform:scaleX(1);transform-origin:left}
+.btn:active{transform:scale(.98)}
+.btn.navy{background:#003049}.btn.navy::before{background:#0B4A6B}
+.btn .ar{display:inline-grid;overflow:hidden;height:1.2em;line-height:1.2em}
+.btn .ar span{grid-area:1/1;transition:transform .5s cubic-bezier(.16,1,.3,1)}
+.btn .ar span+span{transform:translateX(-140%)}
+.btn:hover .ar span:first-child{transform:translateX(140%)}.btn:hover .ar span+span{transform:none}
+.ghost{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:46px;padding:0 18px;border-radius:999px;border:0;background:transparent;box-shadow:inset 0 0 0 1px rgba(0,48,73,.3);color:#003049;font:600 14px 'Inter Tight',sans-serif;cursor:pointer;text-decoration:none;transition:box-shadow .35s,background .35s}
+.ghost:hover{box-shadow:inset 0 0 0 1px #003049;background:#F4F6F8}
+.lnk{background:none;border:0;padding:0;cursor:pointer;color:#003049;font:600 14px 'Inter Tight',sans-serif;text-decoration:underline;text-underline-offset:3px}
+.lnk:hover{color:#C1121F}
+@keyframes rise{from{transform:translateY(110%)}to{transform:none}}
+.ld>span{animation:rise 1.2s cubic-bezier(.16,1,.3,1) both}
+@keyframes up{from{opacity:0;transform:translateY(20px);filter:blur(6px)}to{opacity:1;transform:none;filter:none}}
+.fu{animation:up 1s cubic-bezier(.16,1,.3,1) both}
+@keyframes curtainUp{0%,22%{transform:none}100%{transform:translateY(-101%)}}
+.curtainUp{will-change:transform;animation:curtainUp 1s cubic-bezier(.76,0,.24,1) both}
+@keyframes logoOut{0%,25%{opacity:1;transform:none}60%,100%{opacity:0;transform:translateY(-30px)}}
+.srf.curtainLogo{animation:logoOut 1s cubic-bezier(.16,1,.3,1) both;background-position:-60% 0}
+.srf.silver.still{animation:none;background-position:-60% 0}
+@keyframes grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.grow{transform-origin:left;animation:grow 1.4s cubic-bezier(.16,1,.3,1) both}
+@supports (animation-timeline: view()){
+.rv{animation:up linear both;animation-timeline:view();animation-range:entry 0% entry 60%}
+.rvg{transform-origin:left;animation:grow linear both;animation-timeline:view();animation-range:entry 10% cover 40%}
+}
+@media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}.curtainUp{display:none}}
+
+html,body{margin:0;background:#FFFFFF}
+.side a.nv{display:flex;align-items:center;gap:12px;min-height:44px;padding:0 14px;border-radius:12px;text-decoration:none;font-weight:500;font-size:15px;color:rgba(0,48,73,.72);transition:background .3s,color .3s}
+.side a.nv:hover{background:#F4F6F8;color:#003049}
+.side a.nv[aria-current="page"]{background:#003049;color:#FFFFFF}
+.side a.nv svg{flex:none}
+.tile{position:relative;border-radius:24px;background:#F4F6F8;padding:24px;display:flex;flex-direction:column;gap:14px;overflow:hidden;text-decoration:none;color:#003049;transition:transform .6s cubic-bezier(.16,1,.3,1),box-shadow .6s cubic-bezier(.16,1,.3,1)}
+a.tile:hover{transform:translateY(-4px);box-shadow:0 24px 48px -28px rgba(0,48,73,.45)}
+.tile .go{position:absolute;top:20px;right:20px;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;box-shadow:inset 0 0 0 1px rgba(0,48,73,.2);transition:transform .5s cubic-bezier(.16,1,.3,1),background .3s,color .3s}
+a.tile:hover .go{transform:rotate(-45deg);background:#003049;color:#FFFFFF}
+@keyframes tileIn{from{opacity:0;transform:translateY(26px) scale(.97);filter:blur(8px)}60%{filter:blur(0)}to{opacity:1;transform:none;filter:none}}
+.ti{animation:tileIn 1s cubic-bezier(.16,1,.3,1) both}
+@keyframes ring{from{stroke-dashoffset:100}}
+.ring{animation:ring 1.8s cubic-bezier(.65,0,.35,1) both}
+@property --n{syntax:'<integer>';initial-value:0;inherits:false}
+.cnt{counter-reset:n var(--n);animation:cnt 1.8s cubic-bezier(.65,0,.35,1) both}
+.cnt::after{content:counter(n)}
+@keyframes cnt{from{--n:400}}
+.task{display:flex;align-items:center;gap:14px;width:100%;padding:14px 0;border:0;border-bottom:1px solid rgba(255,255,255,.16);background:transparent;color:#FFFFFF;text-align:left;font:500 16px 'Inter Tight',sans-serif;cursor:pointer}
+.task .box{flex:none;width:24px;height:24px;border-radius:50%;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.7);display:grid;place-items:center;transition:background .35s,box-shadow .35s}
+.task[aria-pressed="true"] .box{background:#F6DDB0;box-shadow:none}
+.task .tk{opacity:0;transform:scale(.4);transition:opacity .3s,transform .4s cubic-bezier(.34,1.56,.64,1)}
+.task[aria-pressed="true"] .tk{opacity:1;transform:none}
+.task .tt{transition:opacity .35s}
+.task[aria-pressed="true"] .tt{text-decoration:line-through;opacity:.55}
+.seg{min-height:36px;padding:0 14px;border-radius:999px;border:0;background:transparent;font:600 13px 'Inter Tight',sans-serif;color:#003049;cursor:pointer;transition:background .35s,color .35s}
+.seg[aria-pressed="true"]{background:#003049;color:#FFFFFF}
+.dom{display:flex;flex-direction:column;gap:12px;padding:18px;border-radius:18px;background:#FFFFFF;box-shadow:inset 0 0 0 1px rgba(0,48,73,.1);text-decoration:none;color:#003049;transition:box-shadow .4s,transform .5s cubic-bezier(.16,1,.3,1)}
+.dom:hover{box-shadow:inset 0 0 0 1px #003049;transform:translateY(-3px)}
+.pip{flex:1;height:6px;border-radius:6px;transition:background .5s}
+.dayb{flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;gap:8px;padding:12px 4px;border-radius:16px;border:0;background:transparent;cursor:pointer;font:600 12px 'Inter Tight',sans-serif;color:#003049;transition:background .35s,color .35s}
+.dayb:hover{background:#FFFFFF}
+.dayb[aria-pressed="true"]{background:#003049;color:#FFFFFF}
+@keyframes swapIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.swap{animation:swapIn .5s cubic-bezier(.16,1,.3,1) both}
+.kb{animation:kb 18s ease-in-out infinite alternate}
+@keyframes kb{from{transform:scale(1.15)}to{transform:scale(1.02) translate(1%,1%)}}
+@media (max-width: 1180px){.bento{grid-template-columns:repeat(2,minmax(0,1fr))!important}.span4{grid-column:span 2!important}.domg{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+@media (max-width: 820px){.shell{grid-template-columns:1fr!important}.side{position:static!important;height:auto!important;flex-direction:row!important;overflow-x:auto;border-right:0!important;border-bottom:1px solid rgba(0,48,73,.1)}.side .sideExtra{display:none!important}.bento{grid-template-columns:1fr!important}.bento>*{grid-column:auto!important;grid-row:auto!important}}
+.acct{color:#003049;transition:background .3s}.acct:hover,.acct[aria-current="page"]{background:#F4F6F8}.gear{color:rgba(0,48,73,.7);transition:background .3s,color .3s}.gear:hover,.gear[aria-current="page"]{background:#003049;color:#FFFFFF}
+
+
+</style>
+<style>
+.side.dk{background:#003049;color:#FFFFFF;border-right:0!important;overflow:hidden;isolation:isolate}
+@media (max-width: 820px){.side.dk{position:relative!important}}
+.side.dk>.sbg{position:absolute;inset:0;z-index:-1;pointer-events:none}
+.side.dk .srf{color:#FFFFFF}
+.side.dk a.nv{color:rgba(255,255,255,.74)}
+.side.dk a.nv:hover{background:rgba(255,255,255,.12);color:#FFFFFF}
+.side.dk a.nv[aria-current="page"]{background:#FFFFFF;color:#003049;box-shadow:0 10px 24px -14px rgba(0,0,0,.5)}
+.side.dk .acct{color:#FFFFFF}
+.side.dk .acct:hover,.side.dk .acct[aria-current="page"]{background:rgba(255,255,255,.12)}
+.side.dk .gear{color:rgba(255,255,255,.8)}
+.side.dk .gear:hover,.side.dk .gear[aria-current="page"]{background:#FFFFFF;color:#003049}
+@keyframes sideIn{0%{width:100%;opacity:1}74%{width:248px;opacity:1}100%{width:248px;opacity:0}}
+@keyframes lookOut{0%,12%{opacity:1}78%,100%{opacity:0}}
+.panelSide{position:fixed;left:0;top:0;bottom:0;overflow:hidden;background:#003049;z-index:100;pointer-events:none;animation:sideIn 1.35s .1s cubic-bezier(.76,0,.24,1) both}
+.panelSide .lookOut{position:absolute;inset:0;animation:lookOut 1.35s .1s ease-in-out both}
+@media (max-width: 820px){.panelSide{width:100%;animation:panelFade .9s .2s ease both}@keyframes panelFade{from{opacity:1}to{opacity:0}}}
+@media (prefers-reduced-motion: reduce){.panelSide{display:none}}
+</style>
+<style>.ownb{margin-left:auto;font:600 9px 'Inter Tight',sans-serif;letter-spacing:.1em;text-transform:uppercase;padding:3px 7px;border-radius:999px;background:rgba(246,221,176,.22);color:#F6DDB0}.side.dk a.nv[aria-current="page"] .ownb{background:#F6DDB0;color:#780000}</style>
+<style>/*resp1*/@media (max-width:820px){.side a.nv{white-space:nowrap;flex:none;padding:0 11px!important;font-size:14px!important}.side{scrollbar-width:none}.side::-webkit-scrollbar{display:none}}@media (min-width:1900px){.shell>main{max-width:1560px;width:100%;margin-inline:auto}}</style>
+<style>.npgrid{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:24px;align-items:start}
+@media (max-width:1100px){.npgrid{grid-template-columns:1fr}}
+.segs{display:inline-flex;max-width:100%;overflow-x:auto;scrollbar-width:none;padding:4px;border-radius:999px;background:#F4F6F8;gap:2px}
+.segs::-webkit-scrollbar{display:none}
+.seg{flex:none;display:inline-flex;align-items:center;gap:8px;border:0;background:transparent;border-radius:999px;padding:9px 16px;font:500 14px 'Inter Tight',sans-serif;color:rgba(0,48,73,.7);cursor:pointer;transition:background .35s,color .35s,box-shadow .35s;white-space:nowrap}
+.seg:hover{color:#003049}
+.seg[aria-selected="true"]{background:#FFFFFF;color:#003049;box-shadow:0 6px 16px -10px rgba(0,48,73,.5),0 0 0 1px rgba(0,48,73,.08)}
+.segn{font:600 11px 'Inter Tight',sans-serif;min-width:20px;height:20px;padding:0 6px;border-radius:999px;display:inline-grid;place-items:center;background:rgba(0,48,73,.08)}
+.seg[aria-selected="true"] .segn{background:#C1121F;color:#FFFFFF}
+@keyframes npIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.npwrap{animation:npIn .7s cubic-bezier(.16,1,.3,1) both}
+.nrow{position:relative;display:flex;gap:14px;align-items:flex-start;padding:18px;border-radius:18px;background:#FFFFFF;box-shadow:inset 0 0 0 1px rgba(0,48,73,.12);transition:box-shadow .35s,transform .45s cubic-bezier(.16,1,.3,1),background .35s}
+.nrow:hover{box-shadow:inset 0 0 0 1px rgba(0,48,73,.4);transform:translateY(-2px)}
+.nrow[data-unread="true"]{background:#F7FAFC;box-shadow:inset 0 0 0 1px rgba(0,48,73,.22)}
+.nic{flex:none;width:42px;height:42px;border-radius:50%;display:grid;place-items:center}
+.udot{position:absolute;top:18px;right:-4px;width:10px;height:10px;border-radius:50%;background:#C1121F;box-shadow:0 0 0 3px #FFFFFF}
+.npprefs{position:sticky;top:24px;padding:24px;border-radius:20px;background:#FFFFFF;box-shadow:inset 0 0 0 1px rgba(0,48,73,.14);display:flex;flex-direction:column}
+@media (max-width:1100px){.npprefs{position:static}}
+.prow{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px 14px;padding:14px 0;border-bottom:1px solid rgba(0,48,73,.1)}
+.sw{flex:none;position:relative;width:46px;height:28px;border:0;border-radius:999px;background:rgba(0,48,73,.22);cursor:pointer;transition:background .35s}
+.sw .swk{position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:#FFFFFF;box-shadow:0 2px 6px rgba(0,48,73,.35);transition:transform .5s cubic-bezier(.34,1.56,.64,1)}
+.sw[aria-checked="true"]{background:#003049}
+.sw[aria-checked="true"] .swk{transform:translateX(18px)}
+.sw:focus-visible,.seg:focus-visible{outline:2px solid #669BBC;outline-offset:2px}
+.toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%);z-index:60;background:#003049;color:#FFFFFF;padding:12px 20px;border-radius:999px;font-size:14px;font-weight:500;box-shadow:0 20px 40px -18px rgba(0,48,73,.6);animation:npIn .5s cubic-bezier(.16,1,.3,1) both}
+@keyframes stepIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.stepIn{animation:stepIn .6s cubic-bezier(.16,1,.3,1) both}
+@keyframes popK{0%{transform:scale(.4);opacity:0}70%{transform:scale(1.08);opacity:1}100%{transform:scale(1)}}
+.pop{animation:popK .7s cubic-bezier(.16,1,.3,1) both}
+</style>
+</helmet>
+<div class="shell" style="background: #FFFFFF; color: #003049; font-family: 'Inter Tight', 'Helvetica Neue', Arial, sans-serif; font-size: 16px; line-height: 1.5; min-height: 100vh; display: grid; grid-template-columns: 248px minmax(0, 1fr)">
+<aside class="side dk" style="position: sticky; top: 0; height: 100vh; display: flex; flex-direction: column; gap: 6px; padding: 22px 16px; border-right: 1px solid rgba(0,48,73,.1)">
+<div class="sbg" aria-hidden="true"><div style="position: absolute; inset: 0; overflow: hidden"><div aria-hidden="true" style="position: absolute; left: -12%; right: -12%; top: 0; height: 100vh"><img src="./assets/d30958deea0f2c30d185036d50b38dc8.webp" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 25% 50%; opacity: .9"></div><div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,48,73,.5) 0%, rgba(0,48,73,.7) 38%, rgba(0,48,73,.94) 100%)"></div></div></div>
+<a href="Main.dc.html" class="srf" style="text-decoration: none; font-size: 32px; font-style: italic; line-height: 1.1; padding: 0 14px 22px">Ufq.</a>
+<a class="nv" href="Dashboard.dc.html"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"></path></svg>Today</a>
+<a class="nv" href="Plan.dc.html"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"></rect><path d="M3 10h18M8 3v4M16 3v4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path></svg>Plan</a>
+<a class="nv" href="PracticeHub.dc.html"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19V5a1 1 0 0 1 1-1h11l4 4v11a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1zM8 9h6M8 13h8M8 17h5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path></svg>Practice</a>
+<a class="nv" href="Mistakes.dc.html"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 1 0 9 9M12 7v5l3 2M17 3h4v4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg>Mistakes</a>
+<a class="nv" href="MockTests.dc.html"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="13" r="8" fill="none" stroke="currentColor" stroke-width="1.8"></circle><path d="M12 9v4l2 2M10 2h4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path></svg>Mock tests</a>
+<a class="nv" href="Report.dc.html"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path></svg>Report</a>
+<a class="nv" href="History.dc.html"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.5-5.8M4 4v4h4M12 8v4l3 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg>History</a>
+<a class="nv" href="Admin.dc.html"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"></path><path d="M9 12l2 2 4-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg>Admin<span class="ownb">Owner</span></a>
+<div class="sideExtra" style="margin-top: auto; display: flex; flex-direction: column; gap: 12px">
+<a class="nv" href="Help.dc.html"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"></circle><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6V14M12 17.2v.3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path></svg>Help</a>
+<div style="border-radius: 18px; background: rgba(255,255,255,.1); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); padding: 16px; display: flex; flex-direction: column; gap: 8px">
+<span class="cap" style="color: #F6DDB0">Streak freeze</span>
+<span style="font-size: 14px; line-height: 1.45">Miss a day and one freeze keeps your streak alive. <b>1 left</b> this week.</span>
+</div>
+<div style="display: flex; align-items: center; gap: 6px">
+<a href="Profile.dc.html" class="acct" style="flex: 1; min-width: 0; display: flex; align-items: center; gap: 12px; padding: 8px 6px; border-radius: 14px; text-decoration: none">
+<span aria-hidden="true" style="flex: none; width: 38px; height: 38px; border-radius: 50%; background: #F6DDB0; color: #003049; display: grid; place-items: center; font-weight: 600">U</span>
+<span style="display: flex; flex-direction: column; line-height: 1.25; min-width: 0"><span style="font-weight: 600; font-size: 14px">Profile</span><span style="font-size: 12px; color: rgba(255,255,255,.6)">Target 750 · May</span></span>
+</a>
+<a href="Settings.dc.html" class="gear" aria-label="Settings" style="flex: none; width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.8"></circle><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z" fill="none" stroke="currentColor" stroke-width="1.5"></path></svg></a>
+</div>
+</div>
+</aside>
+<main style="padding: clamp(20px, 2.6vw, 36px); display: flex; flex-direction: column; gap: 24px; min-width: 0">
+<header style="display: flex; justify-content: space-between; align-items: flex-end; gap: 20px; flex-wrap: wrap">
+<div style="display: flex; flex-direction: column; gap: 6px">
+<span class="cap fu" style="color: #669BBC">Notifications · sample data</span>
+<h1 class="srf" style="margin: 0; font-size: clamp(40px, 4.4vw, 68px); line-height: 1"><span class="mask ld"><span>What’s <em style="color: #C1121F">new.</em></span></span></h1>
+</div>
+<div class="fu" style="display: flex; gap: 10px; flex-wrap: wrap; animation-delay: .2s">
+<button type="button" class="ghost" onClick="{{readAll}}" style="opacity: {{raOp}}; pointer-events: {{raPe}}">Mark all read</button>
+<button type="button" class="ghost" onClick="{{reset}}" style="opacity: {{rsOp}}; pointer-events: {{rsPe}}">Restore sample</button>
+</div>
+</header>
+
+<div class="npgrid">
+<section style="display: flex; flex-direction: column; gap: 16px; min-width: 0">
+<div class="segs fu" role="tablist" aria-label="Filter notifications" style="animation-delay: .1s">
+<sc-for list="{{segs}}" as="g" hint-placeholder-count="5"><button type="button" role="tab" class="seg" aria-selected="{{g.on}}" onClick="{{g.go}}">{{g.label}}<span class="segn">{{g.n}}</span></button></sc-for>
+</div>
+
+<sc-if value="{{hasRows}}" hint-placeholder-val="{{ true }}">
+<div style="display: flex; flex-direction: column; gap: 8px">
+<sc-for list="{{rows}}" as="n" hint-placeholder-count="5">
+<div class="npwrap" style="animation-delay: {{n.delay}}">
+<sc-if value="{{n.head}}" hint-placeholder-val="{{ false }}"><span class="cap" style="display: block; padding: 14px 4px 4px; color: rgba(0,48,73,.55)">{{n.group}}</span></sc-if>
+<article class="nrow" data-unread="{{n.unreadS}}">
+<span class="nic" style="background: {{n.bg}}; color: {{n.fg}}"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="{{n.ic}}" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>
+<div style="display: flex; flex-direction: column; gap: 4px; min-width: 0; flex: 1">
+<div style="display: flex; justify-content: space-between; gap: 12px; align-items: baseline"><span style="font-weight: 600; font-size: 16px">{{n.t}}</span><span style="font-size: 13px; color: rgba(0,48,73,.55); white-space: nowrap">{{n.when}}</span></div>
+<span style="font-size: 15px; color: rgba(0,48,73,.75)">{{n.s}}</span>
+<div style="display: flex; gap: 16px; flex-wrap: wrap; align-items: center; margin-top: 6px">
+<a href="{{n.href}}" class="lnk" style="font-size: 13px">{{n.cta}} →</a>
+<button type="button" class="lnk" onClick="{{n.toggle}}" style="font-size: 13px; text-decoration: none; color: rgba(0,48,73,.6)">{{n.tlabel}}</button>
+<button type="button" class="lnk" onClick="{{n.drop}}" style="font-size: 13px; text-decoration: none; color: rgba(0,48,73,.6)">Dismiss</button>
+</div>
+</div>
+<sc-if value="{{n.unread}}" hint-placeholder-val="{{ true }}"><span class="udot" aria-label="Unread"></span></sc-if>
+</article>
+</div>
+</sc-for>
+</div>
+</sc-if>
+
+<sc-if value="{{empty}}" hint-placeholder-val="{{ false }}">
+<div class="stepIn" style="display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 56px 20px; border-radius: 20px; background: #F4F6F8; text-align: center">
+<svg class="pop" width="56" height="56" viewBox="0 0 72 72" aria-hidden="true"><circle cx="36" cy="36" r="34" fill="#003049"></circle><path d="M22 37l9 9 19-21" fill="none" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+<h2 class="srf" style="margin: 0; font-size: 34px; line-height: 1.1">You’re all <em style="color: #C1121F">caught up.</em></h2>
+<p style="margin: 0; max-width: 380px; font-size: 15px; color: rgba(0,48,73,.7)">{{emptyMsg}}</p>
+</div>
+</sc-if>
+</section>
+
+<aside class="npprefs fu" style="animation-delay: .25s">
+<span class="cap" style="color: #669BBC">Preferences</span>
+<h2 class="srf" style="margin: 4px 0 8px; font-size: 30px; line-height: 1.1">Tell us what <em style="color: #C1121F">matters.</em></h2>
+<sc-for list="{{prefs}}" as="p" hint-placeholder-count="5">
+<div class="prow"><div style="display: flex; flex-direction: column; gap: 2px; min-width: 0"><span style="font-weight: 600; font-size: 15px">{{p.t}}</span><span style="font-size: 13px; color: rgba(0,48,73,.62)">{{p.s}}</span></div>
+<button type="button" role="switch" aria-checked="{{p.on}}" aria-label="{{p.t}}" class="sw" onClick="{{p.tog}}"><span class="swk"></span></button></div>
+</sc-for>
+<div class="prow" style="border-bottom: 0"><div style="display: flex; flex-direction: column; gap: 2px"><span style="font-weight: 600; font-size: 15px">Reminder time</span><span style="font-size: 13px; color: rgba(0,48,73,.62)">Quiet hours 22:00 – 07:00</span></div>
+<div class="segs" role="radiogroup" aria-label="Reminder time" style="padding: 3px">
+<sc-for list="{{times}}" as="m" hint-placeholder-count="3"><button type="button" role="radio" class="seg" aria-checked="{{m.on}}" aria-selected="{{m.on}}" onClick="{{m.go}}" style="padding: 6px 12px; font-size: 13px">{{m.label}}</button></sc-for>
+</div></div>
+</aside>
+</div>
+
+<sc-if value="{{toastOn}}" hint-placeholder-val="{{ false }}"><div class="toast" role="status">{{toastMsg}}</div></sc-if>
+
+<footer style="display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding-top: 12px; font-size: 12px; color: rgba(0,48,73,.5)">
+<span>Notifications on this screen are sample data.</span>
+<span>SAT is a trademark of the College Board, which is not affiliated with Ufq.</span>
+</footer>
+</main>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1000}}'>
+const KINDS = {
+plan: { ic: 'M5 6h14v13H5zM5 10h14M9 4v4M15 4v4', bg: '#E4EDF3', fg: '#003049', label: 'Plan' },
+test: { ic: 'M12 7v5l3 2M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18z', bg: '#FBE7E9', fg: '#C1121F', label: 'Tests' },
+streak: { ic: 'M12 3l2.6 5.6 6 .8-4.4 4.2 1.1 6L12 16.8 6.7 19.6l1.1-6L3.4 9.4l6-.8z', bg: '#F6DDB0', fg: '#780000', label: 'Streak' },
+mistake: { ic: 'M4 12a8 8 0 0 1 14-5.3L20 9M20 4v5h-5M20 12a8 8 0 0 1-14 5.3L4 15M4 20v-5h5', bg: '#E4EDF3', fg: '#003049', label: 'Plan' },
+system: { ic: 'M12 8v.01M12 11v5M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18z', bg: '#F4F6F8', fg: '#003049', label: 'System' }
+};
+const N0 = [
+{ id: 1, k: 'test', t: 'Mock 3 is ready', s: 'A new full-length Math mock was published. Two modules, 70 minutes.', when: '12 min ago', g: 'Today', unread: true, href: 'MockTests.dc.html', cta: 'Open mock tests' },
+{ id: 2, k: 'plan', t: 'Today’s session is waiting', s: 'Right-triangle ratios — 38 minutes, three small steps.', when: '2 h ago', g: 'Today', unread: true, href: 'Dashboard.dc.html', cta: 'Start session' },
+{ id: 3, k: 'streak', t: '12-day streak', s: 'You have studied 12 days in a row. One freeze is still left this week.', when: '5 h ago', g: 'Today', unread: true, href: 'Report.dc.html', cta: 'See progress' },
+{ id: 4, k: 'mistake', t: '3 mistakes ready to redo', s: 'Yesterday’s misses are cleared after two correct answers in a row.', when: 'Yesterday', g: 'Earlier', unread: true, href: 'Mistakes.dc.html', cta: 'Redo mistakes' },
+{ id: 5, k: 'plan', t: 'Week 3 plan updated', s: 'We moved Geometry earlier because it cost you the most points in Mock 1.', when: 'Yesterday', g: 'Earlier', unread: false, href: 'Plan.dc.html', cta: 'View plan' },
+{ id: 6, k: 'test', t: 'Mock 1 result: 600', s: '150 points to your 750 target. Your report shows where they are.', when: 'Sat', g: 'Earlier', unread: false, href: 'History.dc.html', cta: 'View result' },
+{ id: 7, k: 'system', t: 'Welcome to Ufq', s: 'Your account is ready. Ufq is free and open source — no plans, no paywalls.', when: 'Nov 2', g: 'Earlier', unread: false, href: 'Help.dc.html', cta: 'How it works' }
+];
+const P0 = [
+{ id: 'daily', t: 'Daily study reminder', s: 'One nudge at your chosen time.', on: true },
+{ id: 'streak', t: 'Streak alerts', s: 'Tell me before a streak is at risk.', on: true },
+{ id: 'mock', t: 'New mock tests', s: 'When a new full-length mock is published.', on: true },
+{ id: 'weekly', t: 'Weekly progress report', s: 'A short summary every Sunday.', on: false },
+{ id: 'mail', t: 'Email copies', s: 'Also send these to my email.', on: false }
+];
+class Component extends DCLogic {
+constructor(props) { super(props); this.state = { f: 'all', items: N0, prefs: P0, tm: '19:00', toast: '' }; }
+say(m) { clearTimeout(this._t); this.setState({ toast: m }); this._t = setTimeout(() => this.setState({ toast: '' }), 2200); }
+renderVals() {
+const s = this.state, items = s.items;
+const unreadN = items.filter(n => n.unread).length;
+const cnt = (f) => f === 'all' ? items.length : f === 'unread' ? unreadN : items.filter(n => KINDS[n.k].label.toLowerCase() === f).length;
+const segs = [['all', 'All'], ['unread', 'Unread'], ['plan', 'Plan'], ['tests', 'Tests'], ['streak', 'Streak']].map(([f, label]) => ({ label, n: String(cnt(f)), on: s.f === f ? 'true' : 'false', go: () => this.setState({ f }) }));
+const list = items.filter(n => s.f === 'all' ? true : s.f === 'unread' ? n.unread : KINDS[n.k].label.toLowerCase() === s.f);
+let prevG = '';
+const rows = list.map((n, i) => { const K = KINDS[n.k]; const head = n.g !== prevG; prevG = n.g;
+return { head, group: n.g, delay: (i * 0.05) + 's', t: n.t, s: n.s, when: n.when, unread: n.unread, unreadS: n.unread ? 'true' : 'false', ic: K.ic, bg: K.bg, fg: K.fg, href: n.href, cta: n.cta,
+tlabel: n.unread ? 'Mark as read' : 'Mark as unread',
+toggle: () => this.setState({ items: this.state.items.map(x => x.id === n.id ? Object.assign({}, x, { unread: !x.unread }) : x) }),
+drop: () => { this.setState({ items: this.state.items.filter(x => x.id !== n.id) }); this.say('Notification dismissed.'); } }; });
+const prefs = s.prefs.map(p => ({ t: p.t, s: p.s, on: p.on ? 'true' : 'false', tog: () => { this.setState({ prefs: this.state.prefs.map(x => x.id === p.id ? Object.assign({}, x, { on: !x.on }) : x) }); this.say(p.t + (p.on ? ' is off.' : ' is on.')); } }));
+const times = ['07:00', '19:00', '21:00'].map(label => ({ label, on: s.tm === label ? 'true' : 'false', go: () => { this.setState({ tm: label }); this.say('Reminder set for ' + label + '.'); } }));
+const emptyMsg = items.length ? 'Nothing here for this filter. Try another tab.' : 'Nothing new right now. We’ll tell you when there is.';
+return { segs, rows, hasRows: rows.length > 0, empty: rows.length === 0, emptyMsg, prefs, times,
+readAll: () => { this.setState({ items: this.state.items.map(n => Object.assign({}, n, { unread: false })) }); this.say('All notifications marked as read.'); },
+reset: () => this.setState({ items: N0, f: 'all' }),
+raOp: unreadN ? '1' : '.4', raPe: unreadN ? 'auto' : 'none', rsOp: items.length === N0.length ? '.4' : '1', rsPe: items.length === N0.length ? 'none' : 'auto',
+toastOn: !!s.toast, toastMsg: s.toast };
+}
+}
+</script>
+</body>
+</html>

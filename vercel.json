@@ -1,32 +1,139 @@
 {
-  "rewrites": [{ "source": "/((?!api/|assets/|sw\\.js|favicon|robots\\.txt|sitemap\\.xml).*)", "destination": "/index.html" }],
+  "rewrites": [
+    {
+      "source": "/auth",
+      "destination": "/dc/Auth.dc.html"
+    },
+    {
+      "source": "/reset-password",
+      "destination": "/dc/ResetPassword.dc.html"
+    },
+    {
+      "source": "/welcome",
+      "destination": "/dc/Welcome.dc.html"
+    },
+    {
+      "source": "/dashboard",
+      "destination": "/dc/Dashboard.dc.html"
+    },
+    {
+      "source": "/lesson",
+      "destination": "/dc/Lesson.dc.html"
+    },
+    {
+      "source": "/practice",
+      "destination": "/dc/PracticeHub.dc.html"
+    },
+    {
+      "source": "/practice/session",
+      "destination": "/dc/Practice.dc.html"
+    },
+    {
+      "source": "/mock-tests",
+      "destination": "/dc/MockTests.dc.html"
+    },
+    {
+      "source": "/mock-test",
+      "destination": "/dc/MockTest.dc.html"
+    },
+    {
+      "source": "/plan",
+      "destination": "/dc/Plan.dc.html"
+    },
+    {
+      "source": "/mistakes",
+      "destination": "/dc/Mistakes.dc.html"
+    },
+    {
+      "source": "/report",
+      "destination": "/dc/Report.dc.html"
+    },
+    {
+      "source": "/history",
+      "destination": "/dc/History.dc.html"
+    },
+    {
+      "source": "/profile",
+      "destination": "/dc/Profile.dc.html"
+    },
+    {
+      "source": "/settings",
+      "destination": "/dc/Settings.dc.html"
+    },
+    {
+      "source": "/notifications",
+      "destination": "/dc/Notifications.dc.html"
+    },
+    {
+      "source": "/help",
+      "destination": "/dc/Help.dc.html"
+    },
+    {
+      "source": "/admin",
+      "destination": "/dc/Admin.dc.html"
+    },
+    {
+      "source": "/((?!api/|assets/|dc/|sw\\.js|favicon|robots\\.txt|sitemap\\.xml).*)",
+      "destination": "/index.html"
+    }
+  ],
   "functions": {
-    "api/ai.js": { "maxDuration": 60 }
+    "api/ai.js": {
+      "maxDuration": 60
+    }
   },
   "headers": [
     {
       "source": "/(.*)",
       "headers": [
-        { "key": "X-Content-Type-Options", "value": "nosniff" },
-        { "key": "X-Frame-Options", "value": "SAMEORIGIN" },
-        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
-        { "key": "Permissions-Policy", "value": "camera=(), microphone=(), geolocation=()" }
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=()"
+        }
       ]
     },
     {
       "source": "/assets/(.*)",
-      "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
     },
     {
       "source": "/sw.js",
       "headers": [
-        { "key": "Cache-Control", "value": "no-cache, no-store, must-revalidate" },
-        { "key": "Content-Type", "value": "application/javascript; charset=utf-8" }
+        {
+          "key": "Cache-Control",
+          "value": "no-cache, no-store, must-revalidate"
+        },
+        {
+          "key": "Content-Type",
+          "value": "application/javascript; charset=utf-8"
+        }
       ]
     },
     {
       "source": "/api/(.*)",
-      "headers": [{ "key": "Cache-Control", "value": "no-store" }]
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-store"
+        }
+      ]
     }
   ]
 }

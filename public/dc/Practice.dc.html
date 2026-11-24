@@ -1,0 +1,493 @@
+<!doctype html>
+<html lang="en">
+<head>
+<base href="/dc/"><script src="config.js"></script><script src="bridge.js"></script>
+<style>@view-transition{navigation:auto}::view-transition-group(root),::view-transition-old(root),::view-transition-new(root){animation-duration:.22s}.fr{display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;line-height:1.1;margin:0 .14em;font-size:.95em}.fr>span:first-child{border-bottom:1.5px solid currentColor;padding:0 .28em 2px}.fr>span+span{padding-top:2px}
+</style>
+<style>html,body{margin:0;background:#FFFFFF}</style>
+<meta charset="utf-8">
+<title>Ufq — Practice set</title>
+<script src="./_runtime/react.js"></script>
+<script src="./_runtime/react-dom.js"></script>
+<script src="./_runtime/support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..600&amp;family=Inter+Tight:wght@400..700&amp;display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+::selection{background:#C1121F;color:#FFFFFF}
+a{color:#003049}
+.srf{font-family:'Newsreader','Times New Roman',serif;font-optical-sizing:auto;font-weight:400;letter-spacing:-0.025em}
+.cap{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase}
+.mask{display:block;overflow:hidden;padding:.06em 0 .14em;margin:-.06em 0 -.14em}
+.mask>span{display:block}
+.silver{background-image:linear-gradient(100deg,#AEB5C0 0%,#FFFFFF 22%,#8E97A5 38%,#FFFFFF 52%,#C7CDD6 70%,#FFFFFF 86%,#AEB5C0 100%);background-size:260% 100%;-webkit-background-clip:text;background-clip:text;color:transparent!important;animation:sheen 5s linear infinite}
+@keyframes sheen{from{background-position:0% 0}to{background-position:-260% 0}}
+.pillimg{display:inline-block;vertical-align:-.08em;height:.78em;width:1.7em;border-radius:999px;overflow:hidden;margin:0 .06em;box-shadow:inset 0 0 0 2px #FFFFFF}
+.pillimg img{width:100%;height:100%;object-fit:cover;display:block}
+@keyframes pillIn{from{width:0;margin:0}to{width:1.7em;margin:0 .06em}}
+.pillIn{animation:pillIn 1.2s cubic-bezier(.16,1,.3,1) both}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:12px;min-height:52px;padding:0 24px;border-radius:999px;background:#C1121F;color:#FFFFFF!important;text-decoration:none;font:600 15px 'Inter Tight',sans-serif;border:0;cursor:pointer;position:relative;overflow:hidden;isolation:isolate;transition:transform .6s cubic-bezier(.34,1.56,.64,1)}
+.btn::before{content:"";position:absolute;inset:0;background:#780000;transform:scaleX(0);transform-origin:right;transition:transform .6s cubic-bezier(.16,1,.3,1);z-index:-1}
+.btn:hover::before{transform:scaleX(1);transform-origin:left}
+.btn:active{transform:scale(.98)}
+.btn.navy{background:#003049}.btn.navy::before{background:#0B4A6B}
+.btn .ar{display:inline-grid;overflow:hidden;height:1.2em;line-height:1.2em}
+.btn .ar span{grid-area:1/1;transition:transform .5s cubic-bezier(.16,1,.3,1)}
+.btn .ar span+span{transform:translateX(-140%)}
+.btn:hover .ar span:first-child{transform:translateX(140%)}.btn:hover .ar span+span{transform:none}
+.ghost{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:46px;padding:0 18px;border-radius:999px;border:0;background:transparent;box-shadow:inset 0 0 0 1px rgba(0,48,73,.3);color:#003049;font:600 14px 'Inter Tight',sans-serif;cursor:pointer;text-decoration:none;transition:box-shadow .35s,background .35s}
+.ghost:hover{box-shadow:inset 0 0 0 1px #003049;background:#F4F6F8}
+.lnk{background:none;border:0;padding:0;cursor:pointer;color:#003049;font:600 14px 'Inter Tight',sans-serif;text-decoration:underline;text-underline-offset:3px}
+.lnk:hover{color:#C1121F}
+@keyframes rise{from{transform:translateY(110%)}to{transform:none}}
+.ld>span{animation:rise 1.2s cubic-bezier(.16,1,.3,1) both}
+@keyframes up{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+.fu{animation:up 1s cubic-bezier(.16,1,.3,1) both}
+@keyframes curtainUp{0%,22%{transform:none}100%{transform:translateY(-101%)}}
+.curtainUp{will-change:transform;animation:curtainUp 1s cubic-bezier(.76,0,.24,1) both}
+@keyframes logoOut{0%,25%{opacity:1;transform:none}60%,100%{opacity:0;transform:translateY(-30px)}}
+.srf.curtainLogo{animation:logoOut 1s cubic-bezier(.16,1,.3,1) both;background-position:-60% 0}
+.srf.silver.still{animation:none;background-position:-60% 0}
+@keyframes grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.grow{transform-origin:left;animation:grow 1.4s cubic-bezier(.16,1,.3,1) both}
+@supports (animation-timeline: view()){
+.rv{animation:up linear both;animation-timeline:view();animation-range:entry 0% entry 60%}
+.rvg{transform-origin:left;animation:grow linear both;animation-timeline:view();animation-range:entry 10% cover 40%}
+}
+@media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}.curtainUp{display:none}}
+
+html,body{margin:0;background:#003049}
+/* calm test surface */
+.opt{display:flex;align-items:center;gap:16px;width:100%;min-height:60px;padding:12px 18px;border-radius:12px;border:0;background:#FFFFFF;box-shadow:inset 0 0 0 1px rgba(0,48,73,.28);font:500 17px/1.45 'Inter Tight',sans-serif;color:#003049;text-align:left;cursor:pointer;transition:box-shadow .3s,background .3s}
+.opt:hover{box-shadow:inset 0 0 0 1px #003049}
+.opt[aria-pressed="true"]{box-shadow:inset 0 0 0 2px #003049;background:#F4F7F9}
+.opt .let{flex:none;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;box-shadow:inset 0 0 0 1.5px #003049;font:600 14px 'Inter Tight',sans-serif;transition:background .3s,color .3s}
+.opt[aria-pressed="true"] .let{background:#003049;color:#FFFFFF}
+.opt.crossed{opacity:.45}
+.opt.crossed .txt{text-decoration:line-through}
+.xbtn{flex:none;width:34px;height:34px;border-radius:50%;border:0;background:transparent;box-shadow:inset 0 0 0 1px rgba(0,48,73,.3);font:600 12px 'Inter Tight',sans-serif;color:#003049;cursor:pointer;text-decoration:line-through}
+.xbtn:hover{box-shadow:inset 0 0 0 1px #003049}
+.tool{white-space:nowrap;flex:none;display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:0 12px;border-radius:8px;border:0;background:transparent;font:600 14px 'Inter Tight',sans-serif;color:#003049;cursor:pointer;transition:background .25s}
+.tool:hover{background:#EEF2F5}
+.tool[aria-pressed="true"]{background:#003049;color:#FFFFFF}
+.navq{width:44px;height:44px;border-radius:8px;border:0;cursor:pointer;font:600 15px 'Inter Tight',sans-serif;position:relative;transition:transform .25s}
+.navq:hover{transform:translateY(-2px)}
+.flag{position:absolute;top:-6px;right:-6px;width:14px;height:14px;border-radius:3px 3px 3px 0;background:#C1121F}
+@keyframes qIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.qIn{animation:qIn .55s cubic-bezier(.16,1,.3,1) both}
+@keyframes popIn{from{opacity:0;transform:translate(-50%,12px) scale(.98)}to{opacity:1;transform:translate(-50%,0)}}
+.popIn{animation:popIn .4s cubic-bezier(.16,1,.3,1) both}
+@media (max-width: 860px){.split{grid-template-columns:1fr!important}.divider{display:none}.hide-sm{display:none!important}}
+.qbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:6px;border-radius:10px;background:#EEF2F5}
+.qnum{flex:none;display:grid;place-items:center;width:40px;height:40px;border-radius:8px;background:#003049;color:#FFFFFF;font:700 17px 'Inter Tight',sans-serif}
+.qbar .tool{min-height:40px;padding:0 14px;background:#FFFFFF;box-shadow:inset 0 0 0 1px rgba(0,48,73,.18)}
+.qbar .tool:hover{box-shadow:inset 0 0 0 1px #003049;background:#FFFFFF}
+.qbar .tool[aria-pressed="true"]{background:#003049;color:#FFFFFF;box-shadow:none}
+.qrule{border-bottom:2px dashed rgba(0,48,73,.28);padding-bottom:12px}
+.verd{display:inline-flex;align-items:center;gap:8px;padding:0 14px;min-height:40px;border-radius:8px;background:#FFFFFF;font:600 14px 'Inter Tight',sans-serif}
+.tile{position:relative;border-radius:20px;background:#F4F6F8;padding:22px;display:flex;flex-direction:column;gap:12px;overflow:hidden;text-decoration:none;color:#003049;min-height:190px;transition:transform .6s cubic-bezier(.16,1,.3,1),box-shadow .6s cubic-bezier(.16,1,.3,1)}
+.tile:hover{transform:translateY(-4px);box-shadow:0 24px 48px -28px rgba(0,48,73,.45)}
+.tile .go{position:absolute;top:18px;right:18px;width:32px;height:32px;border-radius:50%;display:grid;place-items:center;box-shadow:inset 0 0 0 1px rgba(0,48,73,.2)}
+.tile .srf{margin-top:auto}
+.rcard{border-radius:20px;box-shadow:inset 0 0 0 1px rgba(0,48,73,.14);background:#FFFFFF}
+.rrow{display:grid;grid-template-columns:44px minmax(0,1fr) 118px 52px 52px 90px;gap:12px;align-items:center;padding:14px 18px;border-top:1px solid rgba(0,48,73,.1)}
+@media (max-width: 860px){.rrow{grid-template-columns:44px minmax(0,1fr) 70px 90px!important}.rrow .hide-sm{display:none!important}.rgrid{grid-template-columns:1fr!important}}
+
+.ovl{position:fixed;inset:0;z-index:40;display:grid;place-items:center;padding:16px;background:rgba(0,48,73,.35);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.dlg{width:min(680px,100%);max-height:calc(100vh - 32px);overflow:auto;background:#FFFFFF;border-radius:20px;box-shadow:0 40px 80px -30px rgba(0,48,73,.6);padding:clamp(22px,3vw,34px);display:flex;flex-direction:column;gap:16px}
+@keyframes dlgIn{from{opacity:0;transform:translateY(16px) scale(.98)}to{opacity:1;transform:none}}
+.dlg,.calcp{animation:dlgIn .45s cubic-bezier(.16,1,.3,1) both}
+.calcp{position:fixed;z-index:30;right:clamp(12px,2vw,24px);top:76px;width:min(320px,calc(100vw - 24px));background:#FFFFFF;border-radius:18px;box-shadow:0 0 0 1px rgba(0,48,73,.14),0 30px 60px -24px rgba(0,48,73,.5);padding:14px;display:flex;flex-direction:column;gap:10px}
+.ck{min-height:46px;border-radius:10px;border:0;background:#F4F6F8;color:#003049;font:600 17px 'Inter Tight',sans-serif;cursor:pointer;transition:background .2s,transform .15s}
+.ck:hover{background:#E6ECF0}.ck:active{transform:scale(.96)}
+.ck.op{background:#EEF2F5;color:#003049}.ck.eq{background:#003049;color:#FFFFFF}.ck.clr{color:#C1121F}
+.refc{padding:14px 16px;border-radius:14px;background:#F4F6F8;display:flex;flex-direction:column;gap:4px}
+</style>
+<style>.figbox{width:min(480px,100%);align-self:flex-start;border-radius:16px;padding:14px;background:#FFFFFF;box-shadow:inset 0 0 0 1px rgba(0,48,73,.12)}.figbox img{display:block;width:100%;height:auto}@media (max-width: 860px){.split .divider{display:none}}</style>
+<style>/*resp2*/header>:first-child{min-width:0}header>:first-child>*{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}@media (max-width:520px){header{gap:8px!important}header .hide-sm{display:none!important}}</style>
+</helmet>
+
+<div style="position: relative; background: #FFFFFF; color: #003049; font-family: 'Inter Tight', 'Helvetica Neue', Arial, sans-serif; font-size: 16px; line-height: 1.5; min-height: 100vh; display: flex; flex-direction: column">
+
+<!-- top bar -->
+<header style="position: sticky; top: 0; z-index: 5; background: #FFFFFF; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 16px; padding: 10px clamp(16px, 3vw, 32px); border-bottom: 1px dashed rgba(0,48,73,.35)">
+<div style="display: flex; flex-direction: column; min-width: 0">
+<span style="font-weight: 600; font-size: 15px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{partName}}</span>
+<span style="font-size: 13px; color: rgba(0,48,73,.65)">{{subName}}</span>
+</div>
+<div style="display: flex; flex-direction: column; align-items: center; visibility: {{navVis}}">
+<span style="font: 600 22px 'Inter Tight', sans-serif; font-variant-numeric: tabular-nums; letter-spacing: .02em; min-height: 30px; opacity: {{timerOp}}; transition: opacity .3s">{{timer}}</span>
+<button type="button" class="lnk" onClick="{{toggleTimer}}" style="font-size: 12px; text-decoration: none; padding: 2px 10px; border-radius: 999px; box-shadow: inset 0 0 0 1px rgba(0,48,73,.3)">{{timerBtn}}</button>
+</div>
+<div style="display: flex; justify-content: flex-end; gap: 4px">
+<button type="button" class="tool hide-sm" onClick="{{openDir}}">Directions</button>
+<button type="button" class="tool" onClick="{{openCalc}}" aria-pressed="{{calcOn}}">Calculator</button>
+<button type="button" class="tool hide-sm" onClick="{{openRef}}" aria-pressed="{{refOn}}">Reference</button>
+<a href="PracticeHub.dc.html" class="tool" style="text-decoration: none">Save &amp; exit</a>
+</div>
+</header>
+
+<!-- QUESTION VIEW -->
+<sc-if value="{{showQ}}" hint-placeholder-val="{{ true }}">
+<main class="split" style="flex: 1; display: grid; grid-template-columns: {{cols}}; min-height: 0">
+
+<sc-if value="{{hasPassage}}" hint-placeholder-val="{{ true }}">
+<section style="padding: clamp(28px, 4vw, 56px) clamp(20px, 4vw, 56px); display: flex; justify-content: center">
+<div class="qIn figbox"><img src="{{fig}}" alt="Figure for question {{num}}"></div>
+</section>
+<div class="divider" aria-hidden="true" style="position: absolute; left: 50%; top: 64px; bottom: 64px; width: 1px; background: rgba(0,48,73,.22)"></div>
+</sc-if>
+
+<section style="padding: clamp(28px, 4vw, 56px) clamp(20px, 4vw, 56px); display: flex; justify-content: center">
+<div class="qIn" style="width: min(560px, 100%); display: flex; flex-direction: column; gap: 22px">
+<div class="qrule"><div class="qbar">
+<span class="qnum">{{num}}</span>
+<button type="button" class="tool" onClick="{{toggleMark}}" aria-pressed="{{markedNow}}"><svg width="14" height="16" viewBox="0 0 14 16" aria-hidden="true"><path d="M1 1h12v14l-6-4-6 4z" fill="{{markFill}}" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"></path></svg>Mark for review</button>
+<button type="button" class="tool" onClick="{{toggleCross}}" aria-pressed="{{crossMode}}" aria-label="Answer eliminator" title="Eliminate answers" style="margin-left: auto; text-decoration: line-through; letter-spacing: .04em">ABC</button>
+</div></div>
+<p style="margin: 0; font-size: 18px; line-height: 1.55; font-weight: 500"><sc-for list="{{stemP}}" as="g" hint-placeholder-count="1"><sc-if value="{{g.tx}}" hint-placeholder-val="{{ true }}"><span>{{g.t}}</span></sc-if><sc-if value="{{g.fr}}" hint-placeholder-val="{{ false }}"><span class="fr"><span>{{g.n}}</span><span>{{g.d}}</span></span></sc-if></sc-for></p>
+<div role="radiogroup" aria-label="Answer choices" style="display: flex; flex-direction: column; gap: 12px">
+<sc-for list="{{opts}}" as="o" hint-placeholder-count="4">
+<div style="display: flex; align-items: center; gap: 10px">
+<button type="button" class="opt {{o.cls}}" aria-pressed="{{o.on}}" onClick="{{o.pick}}"><span class="let">{{o.k}}</span><span class="txt"><sc-for list="{{o.p}}" as="g" hint-placeholder-count="1"><sc-if value="{{g.tx}}" hint-placeholder-val="{{ true }}"><span>{{g.t}}</span></sc-if><sc-if value="{{g.fr}}" hint-placeholder-val="{{ false }}"><span class="fr"><span>{{g.n}}</span><span>{{g.d}}</span></span></sc-if></sc-for></span></button>
+<sc-if value="{{o.showX}}" hint-placeholder-val="{{ false }}"><button type="button" class="xbtn" onClick="{{o.cross}}" aria-label="{{o.xLabel}}">{{o.xTxt}}</button></sc-if>
+</div>
+</sc-for>
+</div>
+</div>
+</section>
+</main>
+</sc-if>
+
+<!-- REVIEW VIEW -->
+<sc-if value="{{showReview}}" hint-placeholder-val="{{ false }}">
+<main style="flex: 1; display: flex; justify-content: center; padding: clamp(32px, 6vw, 80px) clamp(20px, 4vw, 56px)">
+<div class="qIn" style="width: min(720px, 100%); display: flex; flex-direction: column; gap: 28px; align-items: center; text-align: center">
+<h1 class="srf" style="margin: 0; font-size: clamp(40px, 5vw, 64px); line-height: 1">Check your <em style="color: #C1121F">work.</em></h1>
+<p style="margin: 0; max-width: 520px; font-size: 17px; color: rgba(0,48,73,.75)">Answered {{answeredCount}} of {{total}}. Submit to see which ones you got right, with a step-by-step explanation for every question.</p>
+<div style="width: 100%; background: #FFFFFF; border-radius: 16px; box-shadow: 0 0 0 1px rgba(0,48,73,.15), 0 24px 50px -30px rgba(0,48,73,.4); padding: 28px; display: flex; flex-direction: column; gap: 20px">
+<div style="display: flex; justify-content: center; gap: 22px; flex-wrap: wrap; font-size: 14px; color: rgba(0,48,73,.75)">
+<span style="display: inline-flex; gap: 8px; align-items: center"><span style="width: 14px; height: 14px; border-radius: 3px; box-shadow: inset 0 0 0 1.5px #003049; border: 0; border-style: dashed"></span>Unanswered</span>
+<span style="display: inline-flex; gap: 8px; align-items: center"><span style="width: 14px; height: 14px; border-radius: 3px; background: #003049"></span>Answered</span>
+<span style="display: inline-flex; gap: 8px; align-items: center"><span style="width: 12px; height: 12px; border-radius: 3px 3px 3px 0; background: #C1121F"></span>For review</span>
+</div>
+<div style="display: flex; justify-content: center; gap: 12px; flex-wrap: wrap">
+<sc-for list="{{navs}}" as="n" hint-placeholder-count="5">
+<button type="button" class="navq" onClick="{{n.go}}" aria-label="{{n.aria}}" style="background: {{n.bg}}; color: {{n.fg}}; box-shadow: {{n.ring}}">{{n.n}}<sc-if value="{{n.marked}}" hint-placeholder-val="{{ false }}"><span class="flag"></span></sc-if></button>
+</sc-for>
+</div>
+</div>
+<button type="button" class="btn" onClick="{{submit}}" style="min-width: 280px">Submit set <span class="ar" aria-hidden="true"><span>→</span><span>→</span></span></button>
+</div>
+</main>
+</sc-if>
+
+<!-- RESULTS VIEW -->
+<sc-if value="{{showDone}}" hint-placeholder-val="{{ false }}">
+<main style="flex: 1; display: flex; justify-content: center; padding: clamp(28px, 4vw, 56px) clamp(20px, 4vw, 56px)">
+<div class="qIn" style="width: min(1040px, 100%); display: flex; flex-direction: column; gap: 22px">
+
+<section class="rcard rgrid" style="display: grid; grid-template-columns: auto minmax(0, 1fr); gap: clamp(20px, 4vw, 48px); align-items: center; padding: clamp(22px, 3vw, 36px)">
+<div style="position: relative; width: 170px; height: 170px; margin: 0 auto">
+<svg viewBox="0 0 120 120" width="170" height="170" aria-hidden="true" style="transform: rotate(-90deg)"><circle cx="60" cy="60" r="50" fill="none" stroke="#EEF2F5" stroke-width="10"></circle><circle cx="60" cy="60" r="50" fill="none" stroke="{{ringC}}" stroke-width="10" stroke-linecap="round" pathLength="100" stroke-dasharray="100" stroke-dashoffset="{{ringOff}}"></circle></svg>
+<div style="position: absolute; inset: 0; display: grid; place-items: center; text-align: center"><div style="display: flex; flex-direction: column; line-height: 1"><span class="srf" style="font-size: 54px">{{accPct}}</span><span class="cap" style="color: #669BBC; margin-top: 6px; font-size: 11px">accuracy</span></div></div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 14px">
+<span class="cap" style="color: #669BBC">{{subName}}</span>
+<h1 class="srf" style="margin: 0; font-size: clamp(38px, 4.6vw, 60px); line-height: 1">{{headA}} <em style="color: #C1121F">{{headB}}</em></h1>
+<p style="margin: 0; max-width: 540px; font-size: 17px; color: rgba(0,48,73,.78)">{{insight}}</p>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 10px; margin-top: 4px">
+<sc-for list="{{statTiles}}" as="t" hint-placeholder-count="4">
+<div style="padding: 12px 14px; border-radius: 14px; background: #F4F6F8; display: flex; flex-direction: column; gap: 2px"><span class="srf" style="font-size: 30px; line-height: 1">{{t.v}}</span><span style="font-size: 12px; color: rgba(0,48,73,.65)">{{t.l}}</span></div>
+</sc-for>
+</div>
+</div>
+</section>
+
+<div class="rgrid" style="display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); gap: 22px; align-items: start">
+<section class="rcard" style="overflow: hidden">
+<div style="padding: 18px 18px 12px; display: flex; justify-content: space-between; align-items: baseline; gap: 12px"><span class="srf" style="font-size: 26px">Question by question</span><span class="cap" style="color: rgba(0,48,73,.55)">pace target 95 s</span></div>
+<div class="rrow cap" style="background: #F4F6F8; color: rgba(0,48,73,.6); border-top: 0; padding-top: 10px; padding-bottom: 10px"><span>#</span><span>Skill</span><span class="hide-sm">Result</span><span>Time</span><span class="hide-sm">Yours</span><span></span></div>
+<sc-for list="{{rows}}" as="r" hint-placeholder-count="5">
+<div class="rrow">
+<span style="display: grid; place-items: center; width: 34px; height: 34px; border-radius: 8px; background: {{r.bg}}; color: #FFFFFF; font-weight: 700">{{r.n}}</span>
+<span style="display: flex; flex-direction: column; min-width: 0"><span style="font-size: 15px; font-weight: 600">{{r.skill}}</span><span style="font-size: 13px; color: rgba(0,48,73,.6); white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{r.stem}}</span></span>
+<span class="hide-sm cap" style="padding: 4px 10px; border-radius: 999px; background: {{r.tagBg}}; color: {{r.tagFg}}; justify-self: start; font-size: 11px">{{r.tag}}</span>
+<span style="font-size: 14px; font-variant-numeric: tabular-nums; color: {{r.tc}}; font-weight: {{r.tw}}">{{r.time}}</span>
+<span class="hide-sm" style="font-weight: 600; color: {{r.yc}}">{{r.y}}</span>
+<button type="button" class="ghost" onClick="{{r.open}}" style="min-height: 36px; padding: 0 14px">Review</button>
+</div>
+</sc-for>
+</section>
+
+<div style="display: flex; flex-direction: column; gap: 22px">
+<section class="rcard" style="padding: 20px 20px 22px; display: flex; flex-direction: column; gap: 14px">
+<span class="srf" style="font-size: 26px">By skill</span>
+<sc-for list="{{skills}}" as="k" hint-placeholder-count="4">
+<div style="display: flex; flex-direction: column; gap: 6px"><div style="display: flex; justify-content: space-between; gap: 10px; font-size: 14px"><span style="font-weight: 600">{{k.name}}</span><span style="color: rgba(0,48,73,.7)">{{k.score}}</span></div><div style="height: 6px; border-radius: 6px; background: #E3E9EE; overflow: hidden"><div style="height: 100%; width: {{k.w}}; border-radius: 6px; background: {{k.c}}"></div></div></div>
+</sc-for>
+</section>
+<section class="rcard" style="padding: 20px 20px 22px; display: flex; flex-direction: column; gap: 12px">
+<span class="srf" style="font-size: 26px">Why points were lost</span>
+<sc-for list="{{why}}" as="w" hint-placeholder-count="2">
+<div style="display: flex; gap: 12px; align-items: flex-start"><span class="cap" style="flex: none; padding: 4px 10px; border-radius: 999px; background: {{w.bg}}; color: {{w.fg}}; font-size: 11px">{{w.tag}}</span><span style="font-size: 14px; color: rgba(0,48,73,.78)">{{w.text}}</span></div>
+</sc-for>
+</section>
+</div>
+</div>
+
+<section class="rgrid" style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px">
+<a href="Mistakes.dc.html" class="tile" style="background: #003049; color: #FFFFFF"><span class="go" aria-hidden="true" style="box-shadow: inset 0 0 0 1px rgba(255,255,255,.4)">→</span><span class="cap" style="color: #F6DDB0">1 · Save</span><span class="srf" style="font-size: 26px; line-height: 1.1">{{missN}} added to your mistake log</span><span style="font-size: 14px; color: rgba(255,255,255,.78)">They come back until you get them right twice in a row.</span></a>
+<button type="button" class="tile" onClick="{{retry}}" style="border: 0; text-align: left; cursor: pointer; font: inherit"><span class="go" aria-hidden="true">↺</span><span class="cap" style="color: #669BBC">2 · Fix</span><span class="srf" style="font-size: 28px; line-height: 1.1">Retry this set</span><span style="font-size: 14px; color: rgba(0,48,73,.7)">Same five questions, fresh start — see if the fixes stuck.</span></button>
+<a href="PracticeHub.dc.html" class="tile"><span class="go" aria-hidden="true">→</span><span class="cap" style="color: #669BBC">3 · Next</span><span class="srf" style="font-size: 28px; line-height: 1.1">{{nextTopic}}</span><span style="font-size: 14px; color: rgba(0,48,73,.7)">Your next best set, picked from what you just missed.</span></a>
+</section>
+<span style="font-size: 12px; color: rgba(0,48,73,.5)">Times and skill levels on this screen are sample data.</span>
+</div>
+</main>
+</sc-if>
+
+<!-- ANSWER REVIEW VIEW (Bluebook-style) -->
+<sc-if value="{{showRev}}" hint-placeholder-val="{{ false }}">
+<main style="flex: 1; display: flex; justify-content: center; padding: clamp(28px, 4vw, 56px) clamp(20px, 4vw, 56px)">
+<div class="qIn" style="width: min(640px, 100%); display: flex; flex-direction: column; gap: 22px">
+<div class="qrule"><div class="qbar">
+<span class="qnum">{{rvNum}}</span>
+<span class="verd" style="color: {{rvColor}}"><span aria-hidden="true" style="width: 8px; height: 8px; border-radius: 50%; background: {{rvColor}}"></span>{{rvVerdict}}</span>
+</div></div>
+<p style="margin: 0; font-size: 18px; line-height: 1.55; font-weight: 500"><sc-for list="{{rvStemP}}" as="g" hint-placeholder-count="1"><sc-if value="{{g.tx}}" hint-placeholder-val="{{ true }}"><span>{{g.t}}</span></sc-if><sc-if value="{{g.fr}}" hint-placeholder-val="{{ false }}"><span class="fr"><span>{{g.n}}</span><span>{{g.d}}</span></span></sc-if></sc-for></p>
+<div style="display: flex; flex-direction: column; gap: 12px">
+<sc-for list="{{rvOpts}}" as="o" hint-placeholder-count="4">
+<div class="opt" style="cursor: default; box-shadow: {{o.ring}}; background: {{o.bg}}"><span class="let" style="background: {{o.lbg}}; color: {{o.lfg}}; box-shadow: inset 0 0 0 1.5px {{o.lring}}">{{o.k}}</span><span class="txt" style="flex: 1"><sc-for list="{{o.p}}" as="g" hint-placeholder-count="1"><sc-if value="{{g.tx}}" hint-placeholder-val="{{ true }}"><span>{{g.t}}</span></sc-if><sc-if value="{{g.fr}}" hint-placeholder-val="{{ false }}"><span class="fr"><span>{{g.n}}</span><span>{{g.d}}</span></span></sc-if></sc-for></span><span class="cap" style="color: {{o.tagc}}">{{o.tag}}</span></div>
+</sc-for>
+</div>
+<section style="margin-top: 6px; border-radius: 14px; background: #F4F6F8; padding: 22px; display: flex; flex-direction: column; gap: 12px">
+<span class="cap" style="color: #669BBC">Explanation · o‘zbek tilida</span>
+<ol style="margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 8px; font-size: 16px; line-height: 1.55">
+<sc-for list="{{rvSteps}}" as="st" hint-placeholder-count="3"><li><sc-for list="{{st.p}}" as="g" hint-placeholder-count="1"><sc-if value="{{g.tx}}" hint-placeholder-val="{{ true }}"><span>{{g.t}}</span></sc-if><sc-if value="{{g.fr}}" hint-placeholder-val="{{ false }}"><span class="fr"><span>{{g.n}}</span><span>{{g.d}}</span></span></sc-if></sc-for></li></sc-for>
+</ol>
+<p style="margin: 4px 0 0; font-size: 15px; color: rgba(0,48,73,.75)"><b style="color: #C1121F">Tuzoq:</b> {{rvTrap}}</p>
+</section>
+</div>
+</main>
+</sc-if>
+
+<!-- question navigator popover -->
+<sc-if value="{{showNav}}" hint-placeholder-val="{{ false }}">
+<div class="popIn" role="dialog" aria-label="Question navigator" style="position: fixed; left: 50%; bottom: 84px; z-index: 6; width: min(420px, calc(100vw - 32px)); background: #FFFFFF; border-radius: 16px; box-shadow: 0 0 0 1px rgba(0,48,73,.15), 0 30px 60px -20px rgba(0,48,73,.45); padding: 22px; display: flex; flex-direction: column; gap: 16px">
+<div style="display: flex; justify-content: space-between; align-items: center"><span style="font-weight: 600">All questions</span><button type="button" class="tool" onClick="{{toggleNav}}" aria-label="Close">✕</button></div>
+<div style="display: flex; gap: 10px; flex-wrap: wrap">
+<sc-for list="{{navs}}" as="n" hint-placeholder-count="5">
+<button type="button" class="navq" onClick="{{n.go}}" aria-label="{{n.aria}}" style="background: {{n.bg}}; color: {{n.fg}}; box-shadow: {{n.ring}}">{{n.n}}<sc-if value="{{n.marked}}" hint-placeholder-val="{{ false }}"><span class="flag"></span></sc-if></button>
+</sc-for>
+</div>
+<button type="button" class="ghost" onClick="{{toReview}}">Go to review page</button>
+</div>
+</sc-if>
+
+<!-- bottom bar -->
+<footer style="position: sticky; bottom: 0; z-index: 5; background: #FFFFFF; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 12px; padding: 12px clamp(16px, 3vw, 32px); border-top: 1px dashed rgba(0,48,73,.35)">
+<span class="srf hide-sm" style="font-size: 22px; font-style: italic">Ufq.</span>
+<button type="button" onClick="{{toggleNav}}" style="visibility: {{navVis}}; display: inline-flex; align-items: center; gap: 8px; min-height: 42px; padding: 0 18px; border-radius: 8px; border: 0; background: #003049; color: #FFFFFF; font: 600 14px 'Inter Tight', sans-serif; cursor: pointer">{{navLabel}} <span aria-hidden="true" style="display: inline-block; transform: rotate({{navRot}}); transition: transform .3s">▴</span></button>
+<div style="display: flex; justify-content: flex-end; gap: 10px">
+<sc-if value="{{canBack}}" hint-placeholder-val="{{ false }}"><button type="button" class="ghost" onClick="{{back}}">Back</button></sc-if>
+<sc-if value="{{showNext}}" hint-placeholder-val="{{ true }}"><button type="button" class="btn navy" onClick="{{next}}" style="min-height: 46px">{{nextLabel}}</button></sc-if>
+</div>
+</footer>
+
+<!-- TOOLS: calculator -->
+<sc-if value="{{toolCalc}}" hint-placeholder-val="{{ false }}">
+<div class="calcp" role="dialog" aria-label="Calculator">
+<div style="display: flex; justify-content: space-between; align-items: center"><span style="font-weight: 600">Calculator</span><button type="button" class="tool" onClick="{{closeTool}}" aria-label="Close calculator" style="min-height: 34px">✕</button></div>
+<div style="padding: 12px 14px; border-radius: 12px; background: #003049; color: #FFFFFF; text-align: right; display: flex; flex-direction: column; gap: 2px; min-height: 76px; justify-content: flex-end">
+<span style="font-size: 13px; color: rgba(255,255,255,.6); min-height: 18px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap">{{calcPrev}}</span>
+<span style="font: 600 26px 'Inter Tight', sans-serif; font-variant-numeric: tabular-nums; overflow-x: auto; white-space: nowrap">{{calcShow}}</span>
+</div>
+<div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px">
+<sc-for list="{{calcKeys}}" as="k" hint-placeholder-count="24"><button type="button" class="ck {{k.cls}}" onClick="{{k.press}}" aria-label="{{k.aria}}">{{k.label}}</button></sc-for>
+</div>
+</div>
+</sc-if>
+
+<!-- TOOLS: reference sheet -->
+<sc-if value="{{toolRef}}" hint-placeholder-val="{{ false }}">
+<div class="ovl" onClick="{{closeTool}}">
+<div class="dlg" role="dialog" aria-modal="true" aria-label="Reference sheet" onClick="{{stop}}" style="width: min(760px, 100%)">
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 12px"><h2 class="srf" style="margin: 0; font-size: 38px; line-height: 1">Reference <em style="color: #C1121F">sheet.</em></h2><button type="button" class="tool" onClick="{{closeTool}}" aria-label="Close reference sheet">✕</button></div>
+<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px">
+<sc-for list="{{refs}}" as="r" hint-placeholder-count="10"><div class="refc"><span class="cap" style="color: #669BBC; font-size: 11px">{{r.t}}</span><span class="srf" style="font-size: 22px; line-height: 1.2">{{r.a}}</span><span style="font-size: 14px; color: rgba(0,48,73,.75)">{{r.b}}</span></div></sc-for>
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px; font-size: 15px; color: rgba(0,48,73,.8); border-top: 1px solid rgba(0,48,73,.12); padding-top: 14px">
+<span>A circle has 360 degrees of arc, or 2π radians.</span>
+<span>The three angles of any triangle add up to 180°.</span>
+</div>
+</div>
+</div>
+</sc-if>
+
+<!-- TOOLS: directions -->
+<sc-if value="{{toolDir}}" hint-placeholder-val="{{ false }}">
+<div class="ovl" onClick="{{closeTool}}">
+<div class="dlg" role="dialog" aria-modal="true" aria-label="Directions" onClick="{{stop}}">
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 12px"><h2 class="srf" style="margin: 0; font-size: 38px; line-height: 1">Math <em style="color: #C1121F">directions.</em></h2><button type="button" class="tool" onClick="{{closeTool}}" aria-label="Close directions">✕</button></div>
+<p style="margin: 0; font-size: 16px; color: rgba(0,48,73,.85)">These questions test a range of math skills. The built-in calculator and the reference sheet are open to you on every question.</p>
+<div style="display: flex; flex-direction: column; gap: 10px; font-size: 15px; color: rgba(0,48,73,.85)">
+<span><b>Unless a question says otherwise:</b> all variables stand for real numbers, figures are drawn to scale and lie in a plane, and a function’s domain is every real x for which f(x) is real.</span>
+<span><b>Multiple choice:</b> pick the one best answer.</span>
+<span><b>Your own answer (grid-in):</b> type one answer. If several are correct, enter just one. Up to 5 characters for a positive answer, 6 for a negative one (the minus sign counts). Fractions and decimals both work — no mixed numbers, and no $, % or commas.</span>
+</div>
+<button type="button" class="btn navy" onClick="{{closeTool}}" style="align-self: flex-start">Close</button>
+</div>
+</div>
+</sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
+const fr = (str) => { const out = []; const re = /(\d+(?:\.\d+)?)\/(\d+(?:\.\d+)?)/g; let last = 0, m; str = String(str); while ((m = re.exec(str))) { if (m.index > last) out.push({ fr: false, tx: true, t: str.slice(last, m.index), n: '', d: '' }); out.push({ fr: true, tx: false, t: '', n: m[1], d: m[2] }); last = m.index + m[0].length; } if (last < str.length || !out.length) out.push({ fr: false, tx: true, t: str.slice(last), n: '', d: '' }); return out; };
+const svgUri = (w, h, body) => 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ' + w + ' ' + h + '" width="' + w + '" height="' + h + '"><rect width="100%" height="100%" fill="#ffffff"/>' + body + '</svg>');
+const FIG_TRI = svgUri(360, 300, '<path d="M60 250 L300 250 L60 60 Z" fill="none" stroke="#003049" stroke-width="3"/><path d="M60 230 h20 v20" fill="none" stroke="#003049" stroke-width="2"/><g font-family="Helvetica,Arial" font-size="20" fill="#003049"><text x="38" y="270">C</text><text x="306" y="270">B</text><text x="40" y="54">A</text><text x="20" y="160">5</text><text x="186" y="142">13</text></g>');
+const FIG_CIR = svgUri(320, 300, '<circle cx="160" cy="150" r="110" fill="none" stroke="#003049" stroke-width="3"/><circle cx="160" cy="150" r="4" fill="#003049"/><path d="M160 150 H270" stroke="#003049" stroke-width="2" stroke-dasharray="6 5"/><text x="206" y="140" font-family="Helvetica,Arial" font-size="22" fill="#003049">4</text>');
+class Component extends DCLogic {
+constructor(props) {
+super(props);
+this.state = { q: 0, ans: {}, marked: {}, crossed: {}, crossMode: false, nav: false, review: false, done: false, rev: null, hideTimer: false };
+}
+renderVals() {
+const Q = [
+{ fig: FIG_TRI, stem: 'In right triangle ABC, angle C is 90°, AC = 5 and AB = 13. What is sin B ?', opts: ['5/13', '12/13', '5/12', '13/5'], c: 'A', steps: ['sin B = B ga qarama-qarshi katet / gipotenuza.', 'B ga qarama-qarshi katet — AC = 5, gipotenuza — AB = 13.', 'sin B = 5/13 — javob A.'], trap: 'B yonidagi katetni (BC = 12) olish — bu cos B beradi.' },
+{ stem: 'The legs of a right triangle are 6 and 8. What is the length of the hypotenuse?', opts: ['10', '12', '14', '48'], c: 'A', steps: ['Pifagor teoremasi: c² = a² + b².', 'c² = 36 + 64 = 100.', 'c = 10 — javob A.'], trap: '6 + 8 = 14 deb katetlarni shunchaki qo‘shish.' },
+{ fig: FIG_CIR, stem: 'A circle has a radius of 4. What is the area of the circle?', opts: ['8π', '16π', '4π', '64π'], c: 'B', steps: ['Doira yuzi: A = πr².', 'A = π · 4² = 16π.', 'Javob B.'], trap: '8π — bu aylana uzunligi (2πr), yuz emas.' },
+{ stem: 'Two angles of a triangle measure 35° and 65°. What is the measure of the third angle?', opts: ['70°', '80°', '90°', '100°'], c: 'B', steps: ['Uchburchak burchaklari yig‘indisi 180°.', '180 − 35 − 65 = 80.', 'Javob B — 80°.'], trap: 'Ichki burchak o‘rniga tashqi burchakni (100°) topib qo‘yish.' },
+{ stem: 'For an acute angle θ, cos θ = 3/5. What is sin θ ?', opts: ['3/4', '4/5', '5/3', '4/3'], c: 'B', steps: ['3-4-5 uchburchakni chizing: yondosh katet 3, gipotenuza 5.', 'Qarama-qarshi katet 4 bo‘ladi.', 'sin θ = 4/5 — javob B.'], trap: '4/3 — bu tan θ, sin emas.' }
+];
+const s = this.state;
+const total = Q.length;
+const cur = Q[s.q];
+const answered = Object.keys(s.ans).length;
+const navs = Q.map((_, i) => {
+const a = s.ans[i] !== undefined;
+const here = i === s.q && !s.review;
+return { n: String(i + 1), marked: !!s.marked[i],
+aria: 'Question ' + (i + 1) + (a ? ', answered' : ', unanswered') + (s.marked[i] ? ', marked for review' : ''),
+bg: a ? '#003049' : '#FFFFFF', fg: a ? '#FFFFFF' : '#003049',
+ring: here ? '0 0 0 3px #FFFFFF, 0 0 0 5px #C1121F' : (a ? 'none' : 'inset 0 0 0 1.5px rgba(0,48,73,.45)'),
+go: () => this.setState({ q: i, review: false, nav: false }) };
+});
+const crossedHere = s.crossed[s.q] || {};
+const opts = cur.opts.map((v, i) => {
+const k = 'ABCD'[i]; const isX = !!crossedHere[k];
+return { k, v, on: s.ans[s.q] === k ? 'true' : 'false', cls: isX ? 'crossed' : '', showX: s.crossMode,
+xTxt: isX ? 'Undo' : k, xLabel: (isX ? 'Restore ' : 'Eliminate ') + k,
+pick: () => { const ans = Object.assign({}, this.state.ans, { [this.state.q]: k }); const c = Object.assign({}, this.state.crossed); c[this.state.q] = Object.assign({}, c[this.state.q] || {}, { [k]: false }); this.setState({ ans, crossed: c }); },
+cross: () => { const c = Object.assign({}, this.state.crossed); const m = Object.assign({}, c[this.state.q] || {}); m[k] = !m[k]; c[this.state.q] = m; const ans = Object.assign({}, this.state.ans); if (m[k] && ans[this.state.q] === k) delete ans[this.state.q]; this.setState({ crossed: c, ans }); } };
+});
+const mode = s.rev !== null ? 'rev' : s.done ? 'done' : s.review ? 'review' : 'q';
+const testing = mode === 'q';
+const correctN = Q.filter((x, i) => s.ans[i] === x.c).length;
+const SK = ['Right-triangle trig', 'Pythagorean theorem', 'Circles', 'Triangle angles', 'Right-triangle trig'];
+const TL = ['B', 'C', 'A', 'D', 'D'];
+const TM = [64, 38, 52, 71, 108];
+const fmt = (t) => Math.floor(t / 60) + ':' + String(t % 60).padStart(2, '0');
+const rows = Q.map((x, i) => {
+const y = s.ans[i]; const ok = y === x.c;
+const kind = ok ? 'ok' : !y ? 'skip' : y === TL[i] ? 'trap' : 'concept';
+const tg = { ok: ['Correct', '#E6EEF3', '#003049'], skip: ['Skipped', '#F6DDB0', '#003049'], trap: ['Fell for trap', '#C1121F', '#FFFFFF'], concept: ['Concept', '#003049', '#FFFFFF'] }[kind];
+const slow = TM[i] > 95;
+return { n: String(i + 1), stem: x.stem, skill: SK[i], c: x.c, y: y || '—', yc: ok ? '#003049' : '#C1121F', bg: ok ? '#003049' : '#C1121F', tag: tg[0], tagBg: tg[1], tagFg: tg[2], time: fmt(TM[i]), tc: slow ? '#C1121F' : '#003049', tw: slow ? '700' : '500', kind, open: () => this.setState({ rev: i }) };
+});
+const accN = Math.round(correctN / total * 100);
+const totalT = TM.reduce((a, b) => a + b, 0);
+const skillNames = [...new Set(SK)];
+const skills = skillNames.map(n => { const idx = SK.map((x, i) => x === n ? i : -1).filter(i => i >= 0); const got = idx.filter(i => rows[i].kind === 'ok').length; const f = got / idx.length; return { name: n, score: got + ' of ' + idx.length, w: Math.round(f * 100) + '%', c: f === 1 ? '#003049' : f >= .5 ? '#669BBC' : '#C1121F', f }; });
+const missed = rows.filter(r => r.kind !== 'ok');
+const why = missed.length === 0 ? [{ tag: 'Clean', bg: '#E6EEF3', fg: '#003049', text: 'No points lost. Try a harder set next.' }] : missed.map(r => ({ tag: r.tag, bg: r.tagBg, fg: r.tagFg, text: 'Q' + r.n + ' · ' + ({ skip: 'Left blank. If time is short, guess — there is no penalty.', trap: 'You picked the answer built to look right (' + TL[+r.n - 1] + '). Check what the question actually asks for.', concept: 'The method was off. Re-read the steps in the review, then redo it.' })[r.kind] }));
+const weak = skills.filter(k => k.f < 1).map(k => k.name);
+const best = skills.filter(k => k.f === 1).map(k => k.name);
+const insight = missed.length === 0 ? 'Every question right, at about ' + Math.round(totalT / total) + ' seconds each. Time to raise the difficulty.' : (best.length ? 'Solid on ' + best.join(' and ').toLowerCase() + '. ' : '') + 'Points left on ' + (weak.join(' and ').toLowerCase() || 'a few questions') + '. Open each miss below to see why.';
+const statTiles = [{ v: correctN + '/' + total, l: 'correct' }, { v: fmt(totalT), l: 'total time' }, { v: Math.round(totalT / total) + ' s', l: 'per question · target 95' }, { v: String(TM.filter(t => t > 95).length), l: 'over the pace target' }];
+const R = s.rev !== null ? Q[s.rev] : Q[0];
+const ry = s.rev !== null ? s.ans[s.rev] : undefined;
+const rvOpts = R.opts.map((v, i) => {
+const k = 'ABCD'[i]; const right = k === R.c; const wrong = k === ry && !right;
+return { k, v,
+ring: right ? 'inset 0 0 0 2px #003049' : wrong ? 'inset 0 0 0 2px #C1121F' : 'inset 0 0 0 1px rgba(0,48,73,.2)',
+bg: right ? '#F4F7F9' : wrong ? '#FCE9E6' : '#FFFFFF',
+lbg: right ? '#003049' : wrong ? '#C1121F' : 'transparent', lfg: right || wrong ? '#FFFFFF' : '#003049', lring: wrong ? '#C1121F' : '#003049',
+tag: right ? (k === ry ? 'Correct · your answer' : 'Correct answer') : wrong ? 'Your answer' : '', tagc: right ? '#003049' : '#C1121F' };
+});
+
+const calcEval = (src) => {
+const t = src.replace(/π/g, 'p').replace(/√/g, 's').replace(/²/g, '^2').replace(/×/g, '*').replace(/÷/g, '/').replace(/−/g, '-');
+let i = 0;
+const num = () => { const j = i; while (i < t.length && /[0-9.]/.test(t[i])) i++; if (j === i) throw new Error('n'); return parseFloat(t.slice(j, i)); };
+const prim = () => { const c = t[i]; if (c === '(') { i++; const v = expr(); if (t[i] === ')') i++; return v; } if (c === '-') { i++; return -prim(); } if (c === 'p') { i++; return Math.PI; } if (c === 's') { i++; return Math.sqrt(prim()); } return num(); };
+const pw = () => { let b = prim(); while (t[i] === '^') { i++; b = Math.pow(b, prim()); } return b; };
+const term = () => { let v = pw(); while (i < t.length && '*/(ps'.indexOf(t[i]) >= 0) { const o = t[i]; if (o === '*' || o === '/') { i++; const r = pw(); v = o === '*' ? v * r : v / r; } else v = v * pw(); } return v; };
+const expr = () => { let v = term(); while (t[i] === '+' || t[i] === '-') { const o = t[i++]; const r = term(); v = o === '+' ? v + r : v - r; } return v; };
+try { const v = expr(); if (i < t.length || !isFinite(v)) return 'Error'; return String(Math.round(v * 1e10) / 1e10); } catch (e) { return 'Error'; }
+};
+const CK = [['C', 'clr', 'Clear'], ['(', 'op', 'Open bracket'], [')', 'op', 'Close bracket'], ['⌫', 'op', 'Delete'], ['7', '', '7'], ['8', '', '8'], ['9', '', '9'], ['÷', 'op', 'Divide'], ['4', '', '4'], ['5', '', '5'], ['6', '', '6'], ['×', 'op', 'Multiply'], ['1', '', '1'], ['2', '', '2'], ['3', '', '3'], ['−', 'op', 'Minus'], ['0', '', '0'], ['.', '', 'Point'], ['π', 'op', 'Pi'], ['+', 'op', 'Plus'], ['x²', 'op', 'Square'], ['√', 'op', 'Square root'], ['ANS', 'op', 'Last answer'], ['=', 'eq', 'Equals']];
+const calcKeys = CK.map(([label, cls, aria]) => ({ label, cls, aria, press: () => {
+const c = this.state.calc || '';
+if (label === 'C') return this.setState({ calc: '', calcPrev: '' });
+if (label === '⌫') return this.setState({ calc: c.slice(0, -1) });
+if (label === '=') { const r = calcEval(c); return this.setState({ calc: r === 'Error' ? c : r, calcPrev: c + ' =' + (r === 'Error' ? ' Error' : ''), calcAns: r === 'Error' ? (this.state.calcAns || '') : r }); }
+if (label === 'x²') return this.setState({ calc: c + '²' });
+if (label === '√') return this.setState({ calc: c + '√(' });
+if (label === 'ANS') return this.setState({ calc: c + (this.state.calcAns || '') });
+return this.setState({ calc: c + label });
+} }));
+const refs = [['Circle', 'A = πr²', 'C = 2πr'], ['Rectangle', 'A = ℓw', 'Perimeter = 2ℓ + 2w'], ['Triangle', 'A = ½bh', 'Angles add to 180°'], ['Pythagorean theorem', 'c² = a² + b²', 'c is the hypotenuse'], ['30°–60°–90°', 'x, x√3, 2x', 'Short leg, long leg, hypotenuse'], ['45°–45°–90°', 's, s, s√2', 'Two equal legs'], ['Rectangular prism', 'V = ℓwh', ''], ['Cylinder', 'V = πr²h', ''], ['Sphere', 'V = ⁴⁄₃πr³', ''], ['Cone', 'V = ⅓πr²h', ''], ['Pyramid', 'V = ⅓ℓwh', '']].map(([t, a, b]) => ({ t, a, b }));
+const tool = this.state.tool || '';
+const toolVals = {
+toolCalc: tool === 'calc', toolRef: tool === 'ref', toolDir: tool === 'dir',
+calcKeys, refs, calcShow: this.state.calc || '0', calcPrev: this.state.calcPrev || '',
+calcOn: tool === 'calc' ? 'true' : 'false', refOn: tool === 'ref' ? 'true' : 'false',
+openCalc: () => this.setState({ tool: this.state.tool === 'calc' ? '' : 'calc' }),
+openRef: () => this.setState({ tool: 'ref' }), openDir: () => this.setState({ tool: 'dir' }),
+closeTool: () => this.setState({ tool: '' }), stop: (e) => { if (e && e.stopPropagation) e.stopPropagation(); }
+};
+const last = s.q === total - 1;
+const revOk = ry === R.c;
+const V = {
+...toolVals,
+partName: mode === 'rev' ? 'Answer review' : mode === 'done' ? 'Results' : mode === 'review' ? 'Review' : 'Geometry & Trigonometry',
+subName: 'Practice set 3 · 5 questions',
+isMath: testing,
+timer: s.hideTimer ? '' : '07:42', timerOp: s.hideTimer || !testing ? '0' : '1', timerBtn: s.hideTimer ? 'Show' : 'Hide',
+toggleTimer: () => this.setState({ hideTimer: !this.state.hideTimer }),
+showQ: testing, showReview: mode === 'review', showDone: mode === 'done', showRev: mode === 'rev',
+hasPassage: !!cur.fig, fig: cur.fig || '', cols: cur.fig ? 'minmax(0, 1fr) minmax(0, 1fr)' : '1fr',
+passage: '', stem: cur.stem, stemP: fr(cur.stem), num: String(s.q + 1), opts: opts.map(o => Object.assign({}, o, { p: fr(o.v) })),
+markedNow: s.marked[s.q] ? 'true' : 'false', markFill: s.marked[s.q] ? '#C1121F' : 'none',
+toggleMark: () => this.setState({ marked: Object.assign({}, this.state.marked, { [this.state.q]: !this.state.marked[this.state.q] }) }),
+crossMode: s.crossMode ? 'true' : 'false', toggleCross: () => this.setState({ crossMode: !this.state.crossMode }),
+navs, showNav: s.nav && testing, navVis: testing ? 'visible' : 'hidden',
+navLabel: 'Question ' + (s.q + 1) + ' of ' + total, navRot: s.nav ? '180deg' : '0deg',
+toggleNav: () => this.setState({ nav: !this.state.nav }),
+toReview: () => this.setState({ review: true, nav: false }),
+answeredCount: String(answered), total: String(total),
+canBack: mode === 'review' || mode === 'rev' || (testing && s.q > 0),
+back: () => { const t = this.state; if (t.rev !== null) this.setState({ rev: null }); else if (t.review) this.setState({ review: false }); else this.setState({ q: Math.max(0, t.q - 1), nav: false }); },
+showNext: testing || mode === 'rev',
+nextLabel: mode === 'rev' ? (s.rev === total - 1 ? 'Results' : 'Next') : last ? 'Review' : 'Next',
+next: () => { const t = this.state; if (t.rev !== null) { this.setState({ rev: t.rev === total - 1 ? null : t.rev + 1 }); return; } if (t.q === total - 1) this.setState({ review: true, nav: false }); else this.setState({ q: t.q + 1, nav: false }); },
+submit: () => this.setState({ done: true, review: false }),
+correctCount: String(correctN), rows, skills, why, insight, statTiles, accPct: accN + '%', ringOff: String(100 - accN), ringC: accN >= 80 ? '#003049' : accN >= 50 ? '#669BBC' : '#C1121F', headA: accN === 100 ? 'Perfect' : accN >= 80 ? 'Strong' : accN >= 50 ? 'Getting' : 'Rough', headB: accN === 100 ? 'set.' : accN >= 80 ? 'set.' : accN >= 50 ? 'there.' : 'start.', missN: String(missed.length), nextTopic: weak.length ? weak[0] + ' · set 2' : 'Circles · set 2',
+retry: () => this.setState({ q: 0, ans: {}, marked: {}, crossed: {}, review: false, done: false, rev: null }),
+rvNum: String((s.rev || 0) + 1), rvStem: R.stem, rvStemP: fr(R.stem), rvOpts: rvOpts.map(o => Object.assign({}, o, { p: fr(o.v) })),
+rvVerdict: ry ? (revOk ? 'Correct' : 'Incorrect — you chose ' + ry) : 'Omitted', rvColor: revOk ? '#003049' : '#C1121F',
+rvSteps: R.steps.map(t => ({ t, p: fr(t) })), rvTrap: R.trap
+};
+this.keyAct = { next: V.showNext ? V.next : null, back: V.canBack ? V.back : null, pick: (L) => { if (!testing) return; const o = opts.find(x => x.k === L); if (o) o.pick(); }, mark: testing ? V.toggleMark : null, calc: V.openCalc };
+if (typeof window !== 'undefined' && !this._kh) { this._kh = (e) => { const tg = e.target && e.target.tagName; if (tg === 'INPUT' || tg === 'TEXTAREA') return; const a = this.keyAct || {}; const k = e.key; if ((e.ctrlKey || e.metaKey) && (k === 'k' || k === 'K')) { e.preventDefault(); if (a.calc) a.calc(); return; } if (e.ctrlKey || e.metaKey || e.altKey) return; if (k === 'ArrowRight' && a.next) a.next(); else if (k === 'ArrowLeft' && a.back) a.back(); else if (/^[abcd]$/i.test(k) && a.pick) a.pick(k.toUpperCase()); else if ((k === 'm' || k === 'M') && a.mark) a.mark(); }; window.addEventListener('keydown', this._kh); }
+return V;
+
+}
+}
+</script>
+</body>
+</html>

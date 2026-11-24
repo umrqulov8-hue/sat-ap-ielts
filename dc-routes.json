@@ -1,0 +1,21 @@
+{
+  "/": "Main",
+  "/auth": "Auth",
+  "/reset-password": "ResetPassword",
+  "/welcome": "Welcome",
+  "/dashboard": "Dashboard",
+  "/lesson": "Lesson",
+  "/practice": "PracticeHub",
+  "/practice/session": "Practice",
+  "/mock-tests": "MockTests",
+  "/mock-test": "MockTest",
+  "/plan": "Plan",
+  "/mistakes": "Mistakes",
+  "/report": "Report",
+  "/history": "History",
+  "/profile": "Profile",
+  "/settings": "Settings",
+  "/notifications": "Notifications",
+  "/help": "Help",
+  "/admin": "Admin"
+}

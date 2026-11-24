@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="en">
+<head>
+<base href="/dc/"><script src="config.js"></script><script src="bridge.js"></script>
+<script>try{var f=sessionStorage.getItem('ufqWipe');if(f){var w=f==='wipeW',W='max(124vw, 177.78vh)',o=w?'.82':'.1';var s=document.createElement('style');s.textContent='html{min-height:100vh;background:'+(w?'linear-gradient(170deg, rgba(0,48,73,.3), rgba(0,48,73,.95) 65%)':'linear-gradient(180deg, rgba(0,48,73,.15) 0%, rgba(0,48,73,0) 35%, rgba(0,48,73,.88) 78%)')+',linear-gradient(rgba(0,48,73,'+o+'),rgba(0,48,73,'+o+')),url(./assets/d30958deea0f2c30d185036d50b38dc8.webp) calc((124vw - '+W+') * .25 - 12vw) calc((100vh - '+W+' * .5625) * .5) / '+W+' auto no-repeat,#003049!important}body{background:transparent!important}';document.head.appendChild(s);setTimeout(function(){s.remove()},2600)}}catch(e){}</script>
+<style>@view-transition{navigation:auto}::view-transition-old(root){animation:.28s cubic-bezier(.4,0,.2,1) both vtOut}::view-transition-new(root){animation:.28s cubic-bezier(.4,0,.2,1) both vtIn}@keyframes vtOut{to{opacity:0}}@keyframes vtIn{from{opacity:0}}.side{view-transition-name:ufqside}@media (prefers-reduced-motion: reduce){@view-transition{navigation:none}}</style>
+<style>html,body{margin:0;background:#FFFFFF}</style>
+<meta charset="utf-8">
+<title>Ufq — Lesson</title>
+<script src="./_runtime/react.js"></script>
+<script src="./_runtime/react-dom.js"></script>
+<script src="./_runtime/support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..600&amp;family=Inter+Tight:wght@400..700&amp;display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+::selection{background:#C1121F;color:#FFFFFF}
+a{color:#003049}
+.srf{font-family:'Newsreader','Times New Roman',serif;font-optical-sizing:auto;font-weight:400;letter-spacing:-0.025em}
+.cap{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase}
+.mask{display:block;overflow:hidden;padding:.06em 0 .14em;margin:-.06em 0 -.14em}
+.mask>span{display:block}
+.silver{background-image:linear-gradient(100deg,#AEB5C0 0%,#FFFFFF 22%,#8E97A5 38%,#FFFFFF 52%,#C7CDD6 70%,#FFFFFF 86%,#AEB5C0 100%);background-size:260% 100%;-webkit-background-clip:text;background-clip:text;color:transparent!important;animation:sheen 5s linear infinite}
+@keyframes sheen{from{background-position:0% 0}to{background-position:-260% 0}}
+.pillimg{display:inline-block;vertical-align:-.08em;height:.78em;width:1.7em;border-radius:999px;overflow:hidden;margin:0 .06em;box-shadow:inset 0 0 0 2px #FFFFFF}
+.pillimg img{width:100%;height:100%;object-fit:cover;display:block}
+@keyframes pillIn{from{width:0;margin:0}to{width:1.7em;margin:0 .06em}}
+.pillIn{animation:pillIn 1.2s cubic-bezier(.16,1,.3,1) both}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:12px;min-height:52px;padding:0 24px;border-radius:999px;background:#C1121F;color:#FFFFFF!important;text-decoration:none;font:600 15px 'Inter Tight',sans-serif;border:0;cursor:pointer;position:relative;overflow:hidden;isolation:isolate;transition:transform .6s cubic-bezier(.34,1.56,.64,1)}
+.btn::before{content:"";position:absolute;inset:0;background:#780000;transform:scaleX(0);transform-origin:right;transition:transform .6s cubic-bezier(.16,1,.3,1);z-index:-1}
+.btn:hover::before{transform:scaleX(1);transform-origin:left}
+.btn:active{transform:scale(.98)}
+.btn.navy{background:#003049}.btn.navy::before{background:#0B4A6B}
+.btn .ar{display:inline-grid;overflow:hidden;height:1.2em;line-height:1.2em}
+.btn .ar span{grid-area:1/1;transition:transform .5s cubic-bezier(.16,1,.3,1)}
+.btn .ar span+span{transform:translateX(-140%)}
+.btn:hover .ar span:first-child{transform:translateX(140%)}.btn:hover .ar span+span{transform:none}
+.ghost{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:46px;padding:0 18px;border-radius:999px;border:0;background:transparent;box-shadow:inset 0 0 0 1px rgba(0,48,73,.3);color:#003049;font:600 14px 'Inter Tight',sans-serif;cursor:pointer;text-decoration:none;transition:box-shadow .35s,background .35s}
+.ghost:hover{box-shadow:inset 0 0 0 1px #003049;background:#F4F6F8}
+.lnk{background:none;border:0;padding:0;cursor:pointer;color:#003049;font:600 14px 'Inter Tight',sans-serif;text-decoration:underline;text-underline-offset:3px}
+.lnk:hover{color:#C1121F}
+@keyframes rise{from{transform:translateY(110%)}to{transform:none}}
+.ld>span{animation:rise 1.2s cubic-bezier(.16,1,.3,1) both}
+@keyframes up{from{opacity:0;transform:translateY(20px);filter:blur(6px)}to{opacity:1;transform:none;filter:none}}
+.fu{animation:up 1s cubic-bezier(.16,1,.3,1) both}
+@keyframes curtainUp{0%,22%{transform:none}100%{transform:translateY(-101%)}}
+.curtainUp{will-change:transform;animation:curtainUp 1s cubic-bezier(.76,0,.24,1) both}
+@keyframes logoOut{0%,25%{opacity:1;transform:none}60%,100%{opacity:0;transform:translateY(-30px)}}
+.srf.curtainLogo{animation:logoOut 1s cubic-bezier(.16,1,.3,1) both;background-position:-60% 0}
+.srf.silver.still{animation:none;background-position:-60% 0}
+@keyframes grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.grow{transform-origin:left;animation:grow 1.4s cubic-bezier(.16,1,.3,1) both}
+@supports (animation-timeline: view()){
+.rv{animation:up linear both;animation-timeline:view();animation-range:entry 0% entry 60%}
+.rvg{transform-origin:left;animation:grow linear both;animation-timeline:view();animation-range:entry 10% cover 40%}
+}
+@media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}.curtainUp{display:none}}
+
+html,body{margin:0;background:#003049}
+/* calm test surface */
+.opt{display:flex;align-items:center;gap:16px;width:100%;min-height:60px;padding:12px 18px;border-radius:12px;border:0;background:#FFFFFF;box-shadow:inset 0 0 0 1px rgba(0,48,73,.28);font:500 17px/1.45 'Inter Tight',sans-serif;color:#003049;text-align:left;cursor:pointer;transition:box-shadow .3s,background .3s}
+.opt:hover{box-shadow:inset 0 0 0 1px #003049}
+.opt[aria-pressed="true"]{box-shadow:inset 0 0 0 2px #003049;background:#F4F7F9}
+.opt .let{flex:none;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;box-shadow:inset 0 0 0 1.5px #003049;font:600 14px 'Inter Tight',sans-serif;transition:background .3s,color .3s}
+.opt[aria-pressed="true"] .let{background:#003049;color:#FFFFFF}
+.opt.crossed{opacity:.45}
+.opt.crossed .txt{text-decoration:line-through}
+.xbtn{flex:none;width:34px;height:34px;border-radius:50%;border:0;background:transparent;box-shadow:inset 0 0 0 1px rgba(0,48,73,.3);font:600 12px 'Inter Tight',sans-serif;color:#003049;cursor:pointer;text-decoration:line-through}
+.xbtn:hover{box-shadow:inset 0 0 0 1px #003049}
+.tool{white-space:nowrap;flex:none;display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:0 12px;border-radius:8px;border:0;background:transparent;font:600 14px 'Inter Tight',sans-serif;color:#003049;cursor:pointer;transition:background .25s}
+.tool:hover{background:#EEF2F5}
+.tool[aria-pressed="true"]{background:#003049;color:#FFFFFF}
+.navq{width:44px;height:44px;border-radius:8px;border:0;cursor:pointer;font:600 15px 'Inter Tight',sans-serif;position:relative;transition:transform .25s}
+.navq:hover{transform:translateY(-2px)}
+.flag{position:absolute;top:-6px;right:-6px;width:14px;height:14px;border-radius:3px 3px 3px 0;background:#C1121F}
+@keyframes qIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.qIn{animation:qIn .55s cubic-bezier(.16,1,.3,1) both}
+@keyframes popIn{from{opacity:0;transform:translate(-50%,12px) scale(.98)}to{opacity:1;transform:translate(-50%,0)}}
+.popIn{animation:popIn .4s cubic-bezier(.16,1,.3,1) both}
+@media (max-width: 860px){.split{grid-template-columns:1fr!important}.divider{display:none}.hide-sm{display:none!important}}
+.qbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:6px;border-radius:10px;background:#EEF2F5}
+.qnum{flex:none;display:grid;place-items:center;width:40px;height:40px;border-radius:8px;background:#003049;color:#FFFFFF;font:700 17px 'Inter Tight',sans-serif}
+.qbar .tool{min-height:40px;padding:0 14px;background:#FFFFFF;box-shadow:inset 0 0 0 1px rgba(0,48,73,.18)}
+.qbar .tool:hover{box-shadow:inset 0 0 0 1px #003049;background:#FFFFFF}
+.qbar .tool[aria-pressed="true"]{background:#003049;color:#FFFFFF;box-shadow:none}
+.qrule{border-bottom:2px dashed rgba(0,48,73,.28);padding-bottom:12px}
+.verd{display:inline-flex;align-items:center;gap:8px;padding:0 14px;min-height:40px;border-radius:8px;background:#FFFFFF;font:600 14px 'Inter Tight',sans-serif}
+.tile{position:relative;border-radius:20px;background:#F4F6F8;padding:22px;display:flex;flex-direction:column;gap:12px;overflow:hidden;text-decoration:none;color:#003049;min-height:190px;transition:transform .6s cubic-bezier(.16,1,.3,1),box-shadow .6s cubic-bezier(.16,1,.3,1)}
+.tile:hover{transform:translateY(-4px);box-shadow:0 24px 48px -28px rgba(0,48,73,.45)}
+.tile .go{position:absolute;top:18px;right:18px;width:32px;height:32px;border-radius:50%;display:grid;place-items:center;box-shadow:inset 0 0 0 1px rgba(0,48,73,.2)}
+.tile .srf{margin-top:auto}
+.rcard{border-radius:20px;box-shadow:inset 0 0 0 1px rgba(0,48,73,.14);background:#FFFFFF}
+.rrow{display:grid;grid-template-columns:44px minmax(0,1fr) 118px 52px 52px 90px;gap:12px;align-items:center;padding:14px 18px;border-top:1px solid rgba(0,48,73,.1)}
+@media (max-width: 860px){.rrow{grid-template-columns:44px minmax(0,1fr) 70px 90px!important}.rrow .hide-sm{display:none!important}.rgrid{grid-template-columns:1fr!important}}
+
+.ovl{position:fixed;inset:0;z-index:40;display:grid;place-items:center;padding:16px;background:rgba(0,48,73,.35);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.dlg{width:min(680px,100%);max-height:calc(100vh - 32px);overflow:auto;background:#FFFFFF;border-radius:20px;box-shadow:0 40px 80px -30px rgba(0,48,73,.6);padding:clamp(22px,3vw,34px);display:flex;flex-direction:column;gap:16px}
+@keyframes dlgIn{from{opacity:0;transform:translateY(16px) scale(.98)}to{opacity:1;transform:none}}
+.dlg,.calcp{animation:dlgIn .45s cubic-bezier(.16,1,.3,1) both}
+.calcp{position:fixed;z-index:30;right:clamp(12px,2vw,24px);top:76px;width:min(320px,calc(100vw - 24px));background:#FFFFFF;border-radius:18px;box-shadow:0 0 0 1px rgba(0,48,73,.14),0 30px 60px -24px rgba(0,48,73,.5);padding:14px;display:flex;flex-direction:column;gap:10px}
+.ck{min-height:46px;border-radius:10px;border:0;background:#F4F6F8;color:#003049;font:600 17px 'Inter Tight',sans-serif;cursor:pointer;transition:background .2s,transform .15s}
+.ck:hover{background:#E6ECF0}.ck:active{transform:scale(.96)}
+.ck.op{background:#EEF2F5;color:#003049}.ck.eq{background:#003049;color:#FFFFFF}.ck.clr{color:#C1121F}
+.refc{padding:14px 16px;border-radius:14px;background:#F4F6F8;display:flex;flex-direction:column;gap:4px}
+
+.lpill{min-height:40px;padding:0 16px;border-radius:999px;border:0;background:transparent;box-shadow:inset 0 0 0 1px rgba(0,48,73,.25);font:600 14px 'Inter Tight',sans-serif;color:#003049;cursor:pointer;transition:background .3s,color .3s}
+.lpill[aria-pressed="true"]{background:#003049;color:#FFFFFF;box-shadow:none}
+.ratio{border-radius:20px;padding:22px;display:flex;flex-direction:column;gap:8px;min-height:200px}
+.side{transition:stroke .5s,stroke-width .5s}
+.lbl{transition:fill .5s}
+.uz{border-radius:14px;background:#F4F6F8;padding:16px 18px;font-size:15px;color:rgba(0,48,73,.85)}
+.uz b{color:#C1121F}
+.dotp{width:10px;height:10px;border-radius:50%;transition:background .4s,transform .4s}
+</style>
+<style>
+@keyframes panelOut{from{width:100%}to{width:0}}
+.panelOut{position:fixed;right:0;top:0;bottom:0;overflow:hidden;background:#003049;z-index:100;pointer-events:none;animation:panelOut 1.05s .12s cubic-bezier(.76,0,.24,1) both}
+@media (prefers-reduced-motion: reduce){.panelIn,.panelOut{display:none}}
+</style>
+</helmet>
+<div style="position: relative; background: #FFFFFF; color: #003049; font-family: 'Inter Tight', 'Helvetica Neue', Arial, sans-serif; font-size: 16px; line-height: 1.5; min-height: 100vh; display: flex; flex-direction: column">
+<sc-if value="{{entryW}}" hint-placeholder-val="{{ false }}"><div class="panelOut" aria-hidden="true"><div style="position: absolute; top: 0; bottom: 0; right: 0; width: 100vw"><div style="position: absolute; inset: 0; overflow: hidden"><div aria-hidden="true" style="position: absolute; left: -12%; right: -12%; top: 0; height: 100vh"><img src="./assets/d30958deea0f2c30d185036d50b38dc8.webp" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 25% 50%; opacity: .18"></div><div style="position: absolute; inset: 0; background: linear-gradient(170deg, rgba(0,48,73,.3), rgba(0,48,73,.95) 65%)"></div></div></div></div></sc-if>
+
+<header style="position: sticky; top: 0; z-index: 5; background: #FFFFFF; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 16px; padding: 12px clamp(16px, 3vw, 32px); border-bottom: 1px solid rgba(0,48,73,.12)">
+<a href="Dashboard.dc.html" class="tool" style="text-decoration: none; justify-self: start">← Today</a>
+<div style="display: flex; align-items: center; gap: 8px" aria-label="Lesson progress"><sc-for list="{{dots}}" as="d" hint-placeholder-count="5"><span class="dotp" style="background: {{d.c}}; transform: scale({{d.s}})"></span></sc-for></div>
+<span class="cap hide-sm" style="justify-self: end; color: rgba(0,48,73,.6)">Lesson · 12 min · Geometry &amp; Trig</span>
+</header>
+
+<main style="flex: 1; display: flex; justify-content: center; padding: clamp(28px, 4vw, 56px) clamp(20px, 4vw, 56px)">
+<div style="width: min(880px, 100%); display: flex; flex-direction: column; gap: 26px">
+
+<sc-if value="{{s0}}" hint-placeholder-val="{{ true }}">
+<div class="qIn" style="display: flex; flex-direction: column; gap: 22px">
+<span class="cap" style="color: #669BBC">Step 1 of 4 · names</span>
+<h1 class="srf" style="margin: 0; font-size: clamp(40px, 5.4vw, 72px); line-height: 1">Every side has a name — <em style="color: #C1121F">from where you stand.</em></h1>
+<p style="margin: 0; max-width: 60ch; font-size: 17px; color: rgba(0,48,73,.8)">In a right triangle the longest side, across from the 90° angle, is always the <b>hypotenuse</b>. The other two change names depending on which angle you look from. Switch the angle and watch.</p>
+</div>
+</sc-if>
+<sc-if value="{{s1}}" hint-placeholder-val="{{ false }}">
+<div class="qIn" style="display: flex; flex-direction: column; gap: 22px">
+<span class="cap" style="color: #669BBC">Step 2 of 4 · the three ratios</span>
+<h1 class="srf" style="margin: 0; font-size: clamp(40px, 5.4vw, 72px); line-height: 1">Three ratios. <em style="color: #C1121F">One word: SOH-CAH-TOA.</em></h1>
+</div>
+</sc-if>
+<sc-if value="{{s2}}" hint-placeholder-val="{{ false }}">
+<div class="qIn" style="display: flex; flex-direction: column; gap: 22px">
+<span class="cap" style="color: #669BBC">Step 3 of 4 · worked example</span>
+<h1 class="srf" style="margin: 0; font-size: clamp(40px, 5.4vw, 72px); line-height: 1">Read the angle <em style="color: #C1121F">before the numbers.</em></h1>
+</div>
+</sc-if>
+<sc-if value="{{s3}}" hint-placeholder-val="{{ false }}">
+<div class="qIn" style="display: flex; flex-direction: column; gap: 22px">
+<span class="cap" style="color: #669BBC">Step 4 of 4 · quick check</span>
+<h1 class="srf" style="margin: 0; font-size: clamp(40px, 5.4vw, 72px); line-height: 1">Two questions. <em style="color: #C1121F">No timer.</em></h1>
+</div>
+</sc-if>
+
+<sc-if value="{{showTri}}" hint-placeholder-val="{{ true }}">
+<div class="rgrid" style="display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: clamp(20px, 3vw, 40px); align-items: center">
+<div style="border-radius: 24px; background: #F4F6F8; padding: clamp(16px, 2vw, 28px)">
+<svg viewBox="-40 0 520 310" width="100%" role="img" aria-label="{{triAria}}">
+<line class="side" x1="80" y1="20" x2="80" y2="260" stroke="{{cBC}}" stroke-width="7" stroke-linecap="round"></line>
+<line class="side" x1="80" y1="260" x2="400" y2="260" stroke="{{cAC}}" stroke-width="7" stroke-linecap="round"></line>
+<line class="side" x1="80" y1="20" x2="400" y2="260" stroke="#003049" stroke-width="7" stroke-linecap="round"></line>
+<path d="M80 236 H104 V260" fill="none" stroke="#003049" stroke-width="2"></path>
+<path d="{{arc}}" fill="none" stroke="#C1121F" stroke-width="4" stroke-linecap="round"></path>
+<text x="62" y="18" font-family="Inter Tight" font-weight="700" font-size="18" fill="#003049">B</text>
+<text x="408" y="272" font-family="Inter Tight" font-weight="700" font-size="18" fill="#003049">A</text>
+<text x="58" y="282" font-family="Inter Tight" font-weight="700" font-size="18" fill="#003049">C</text>
+<text class="lbl" x="66" y="146" text-anchor="end" font-family="Inter Tight" font-weight="600" font-size="15" fill="{{cBC}}">{{lBC}} · 3</text>
+<text class="lbl" x="240" y="292" text-anchor="middle" font-family="Inter Tight" font-weight="600" font-size="15" fill="{{cAC}}">{{lAC}} · 4</text>
+<text x="262" y="124" font-family="Inter Tight" font-weight="600" font-size="15" fill="#003049">hypotenuse · 5</text>
+</svg>
+</div>
+<div style="display: flex; flex-direction: column; gap: 16px">
+<span class="cap" style="color: #669BBC">Look from angle</span>
+<div role="group" aria-label="Choose an angle" style="display: flex; gap: 8px"><sc-for list="{{angles}}" as="a" hint-placeholder-count="2"><button type="button" class="lpill" aria-pressed="{{a.on}}" onClick="{{a.pick}}">Angle {{a.k}}</button></sc-for></div>
+<sc-if value="{{s0}}" hint-placeholder-val="{{ true }}">
+<div style="display: flex; flex-direction: column; gap: 10px; font-size: 16px">
+<span><b style="color: #C1121F">Opposite</b> — across from angle {{ang}}: side {{oppName}}.</span>
+<span><b style="color: #669BBC">Adjacent</b> — touches angle {{ang}}, but isn’t the hypotenuse: side {{adjName}}.</span>
+<span><b>Hypotenuse</b> — across from the right angle: side AB.</span>
+</div>
+<div class="uz"><b>UZ ·</b> Qarama-qarshi katet — burchakning ro‘parasidagi tomon. Yondosh katet — burchakka tegib turgan, lekin gipotenuza bo‘lmagan tomon.</div>
+</sc-if>
+<sc-if value="{{s1}}" hint-placeholder-val="{{ false }}">
+<span style="font-size: 16px; color: rgba(0,48,73,.8)">Same triangle, angle {{ang}}. The ratios change when the angle changes — the triangle doesn’t.</span>
+</sc-if>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{s1}}" hint-placeholder-val="{{ false }}">
+<div class="rgrid" style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px">
+<sc-for list="{{ratios}}" as="r" hint-placeholder-count="3">
+<div class="ratio swap" style="background: {{r.bg}}; color: {{r.fg}}; animation-delay: {{r.d}}">
+<span class="srf" style="font-size: 54px; line-height: .9; font-style: italic">{{r.w}}</span>
+<span style="font-weight: 600">{{r.f}}</span>
+<span style="margin-top: auto; font-size: 15px; opacity: .8">{{r.n}} {{ang}} =</span>
+<span class="srf" style="font-size: 40px; line-height: 1">{{r.v}}</span>
+</div>
+</sc-for>
+</div>
+<div class="uz"><b>UZ ·</b> SOH: sin = qarama-qarshi / gipotenuza. CAH: cos = yondosh / gipotenuza. TOA: tan = qarama-qarshi / yondosh.</div>
+</sc-if>
+
+<sc-if value="{{s2}}" hint-placeholder-val="{{ false }}">
+<div class="rcard" style="padding: clamp(22px, 3vw, 32px); display: flex; flex-direction: column; gap: 16px">
+<span class="cap" style="color: #669BBC">SAT-style question</span>
+<p class="srf" style="margin: 0; font-size: 26px; line-height: 1.3">In right triangle ABC, angle C is 90°, AC = 5 and AB = 13. What is sin B ?</p>
+<div style="display: flex; flex-direction: column; gap: 12px">
+<sc-for list="{{wsteps}}" as="w" hint-placeholder-count="3"><div class="swap" style="display: flex; gap: 14px; align-items: flex-start"><span style="flex: none; width: 30px; height: 30px; border-radius: 50%; background: #003049; color: #FFFFFF; display: grid; place-items: center; font-weight: 700; font-size: 13px">{{w.n}}</span><div style="display: flex; flex-direction: column; gap: 4px"><span style="font-size: 17px; font-weight: 500">{{w.en}}</span><span style="font-size: 14px; color: rgba(0,48,73,.65)">{{w.uz}}</span></div></div></sc-for>
+</div>
+<sc-if value="{{moreSteps}}" hint-placeholder-val="{{ true }}"><button type="button" class="ghost" onClick="{{nextStep}}" style="align-self: flex-start">Show next step</button></sc-if>
+<sc-if value="{{allSteps}}" hint-placeholder-val="{{ false }}"><div class="swap" style="padding: 14px 16px; border-radius: 12px; background: #FCE9E6; color: #780000; font-size: 15px"><b>The trap:</b> taking BC = 12 (next to B) gives 12/13 — that’s cos B, not sin B.</div></sc-if>
+</div>
+</sc-if>
+
+<sc-if value="{{s3}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 18px">
+<sc-for list="{{checks}}" as="c" hint-placeholder-count="2">
+<div class="rcard" style="padding: clamp(20px, 2.6vw, 28px); display: flex; flex-direction: column; gap: 14px">
+<span style="font-size: 18px; font-weight: 500">{{c.q}}</span>
+<div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px">
+<sc-for list="{{c.opts}}" as="o" hint-placeholder-count="4"><button type="button" class="opt" onClick="{{o.pick}}" aria-pressed="{{o.on}}" style="justify-content: center; box-shadow: {{o.ring}}; background: {{o.bg}}"><span class="txt">{{o.v}}</span></button></sc-for>
+</div>
+<sc-if value="{{c.answered}}" hint-placeholder-val="{{ false }}"><span class="swap" style="font-size: 15px; color: {{c.fc}}"><b>{{c.verdict}}</b> {{c.why}}</span></sc-if>
+</div>
+</sc-for>
+</div>
+</sc-if>
+
+<sc-if value="{{s4}}" hint-placeholder-val="{{ false }}">
+<div class="qIn" style="display: flex; flex-direction: column; gap: 24px; align-items: flex-start">
+<svg width="72" height="72" viewBox="0 0 72 72" aria-hidden="true"><circle cx="36" cy="36" r="34" fill="#003049"></circle><path d="M22 37 L32 47 L51 27" fill="none" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+<h1 class="srf" style="margin: 0; font-size: clamp(44px, 6vw, 80px); line-height: 1">Lesson done. <em style="color: #C1121F">{{checkScore}} on the check.</em></h1>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; width: 100%">
+<div class="uz" style="font-size: 16px"><b>1 ·</b> Find the right angle — the side across from it is the hypotenuse.</div>
+<div class="uz" style="font-size: 16px"><b>2 ·</b> Name the other sides from the angle the question asks about.</div>
+<div class="uz" style="font-size: 16px"><b>3 ·</b> SOH-CAH-TOA, then simplify. Watch for cos dressed up as sin.</div>
+</div>
+<div style="display: flex; gap: 12px; flex-wrap: wrap">
+<a href="Practice.dc.html" class="btn">Start 12 Geometry questions <span class="ar" aria-hidden="true"><span>→</span><span>→</span></span></a>
+<a href="Dashboard.dc.html" class="ghost" style="min-height: 52px">Back to Today</a>
+</div>
+</div>
+</sc-if>
+</div>
+</main>
+
+<sc-if value="{{showFoot}}" hint-placeholder-val="{{ true }}">
+<footer style="position: sticky; bottom: 0; z-index: 5; background: #FFFFFF; display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 12px clamp(16px, 3vw, 32px); border-top: 1px solid rgba(0,48,73,.12)">
+<button type="button" class="ghost" onClick="{{back}}" style="visibility: {{backVis}}">Back</button>
+<button type="button" class="btn navy" onClick="{{next}}" style="min-height: 46px; opacity: {{nextOp}}; pointer-events: {{nextPe}}">{{nextLabel}}</button>
+</footer>
+</sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+constructor(props) { super(props); let entry = ''; try { entry = sessionStorage.getItem('ufqWipe') || ''; sessionStorage.removeItem('ufqWipe'); } catch (e) {} this._entryW = entry === 'wipeW'; this.state = { step: 0, ang: 'A', ws: 1, ck: {} }; }
+renderVals() {
+const s = this.state;
+const A = s.ang === 'A';
+const RED = '#C1121F', BLUE = '#669BBC';
+const ratios = [
+['SOH', 'sin = opposite / hypotenuse', 'sin', A ? '3/5' : '4/5', '#003049', '#FFFFFF'],
+['CAH', 'cos = adjacent / hypotenuse', 'cos', A ? '4/5' : '3/5', '#F4F6F8', '#003049'],
+['TOA', 'tan = opposite / adjacent', 'tan', A ? '3/4' : '4/3', '#C1121F', '#FFFFFF']
+].map(([w, f, n, v, bg, fg], i) => ({ w, f, n, v, bg, fg, d: (i * 0.08).toFixed(2) + 's', key: s.ang + i }));
+const WS = [
+['Angle C is 90°, so AB = 13 is the hypotenuse.', 'C to‘g‘ri burchak — demak AB = 13 gipotenuza.'],
+['From angle B, the opposite side is AC = 5.', 'B burchakdan qaraganda qarama-qarshi tomon AC = 5.'],
+['sin B = opposite / hypotenuse = 5/13. Answer: 5/13.', 'sin B = 5/13.']
+];
+const wsteps = WS.slice(0, s.ws).map(([en, uz], i) => ({ n: String(i + 1), en, uz }));
+const C = [
+{ q: 'In a 3-4-5 right triangle, the side of length 4 is next to angle A. What is cos A ?', o: ['3/5', '4/5', '3/4', '5/4'], c: 1, why: 'cos = adjacent / hypotenuse = 4/5.' },
+{ q: 'For an acute angle θ, the opposite side is 8 and the adjacent side is 15. What is tan θ ?', o: ['8/17', '15/17', '8/15', '15/8'], c: 2, why: 'tan = opposite / adjacent = 8/15.' }
+];
+const checks = C.map((x, qi) => { const a = s.ck[qi];
+return { q: x.q, answered: a !== undefined, verdict: a === x.c ? 'Correct.' : 'Not quite.', why: x.why, fc: a === x.c ? '#003049' : RED,
+opts: x.o.map((v, i) => ({ v, on: a === i ? 'true' : 'false', ring: a === undefined ? 'inset 0 0 0 1px rgba(0,48,73,.28)' : i === x.c ? 'inset 0 0 0 2px #003049' : a === i ? 'inset 0 0 0 2px ' + RED : 'inset 0 0 0 1px rgba(0,48,73,.15)', bg: a !== undefined && i === x.c ? '#F4F7F9' : a === i ? '#FCE9E6' : '#FFFFFF',
+pick: () => { if (this.state.ck[qi] !== undefined) return; this.setState({ ck: Object.assign({}, this.state.ck, { [qi]: i }) }); } })) }; });
+const got = C.filter((x, i) => s.ck[i] === x.c).length;
+const st = s.step;
+const canNext = st === 2 ? s.ws === 3 : st === 3 ? Object.keys(s.ck).length === 2 : true;
+return {
+entryW: this._entryW,
+s0: st === 0, s1: st === 1, s2: st === 2, s3: st === 3, s4: st === 4, showTri: st <= 1, showFoot: st < 4,
+dots: [0, 1, 2, 3, 4].map(i => ({ c: i < st ? '#003049' : i === st ? RED : '#E3E9EE', s: i === st ? '1.3' : '1' })),
+ang: s.ang, angles: ['A', 'B'].map(k => ({ k, on: s.ang === k ? 'true' : 'false', pick: () => this.setState({ ang: k }) })),
+cBC: A ? RED : BLUE, cAC: A ? BLUE : RED, lBC: A ? 'opposite' : 'adjacent', lAC: A ? 'adjacent' : 'opposite',
+oppName: A ? 'BC' : 'AC', adjName: A ? 'AC' : 'BC',
+arc: A ? 'M360 260 A40 40 0 0 0 368 236' : 'M80 60 A40 40 0 0 0 112 44',
+triAria: 'Right triangle ABC with the right angle at C. Looking from angle ' + s.ang + '.',
+ratios, wsteps, moreSteps: s.ws < 3, allSteps: s.ws === 3, nextStep: () => this.setState({ ws: Math.min(3, this.state.ws + 1) }),
+checks, checkScore: got + ' of 2',
+backVis: st > 0 ? 'visible' : 'hidden', back: () => this.setState({ step: Math.max(0, this.state.step - 1) }),
+nextLabel: st === 3 ? 'Finish lesson' : 'Continue', nextOp: canNext ? '1' : '.4', nextPe: canNext ? 'auto' : 'none',
+next: () => this.setState({ step: this.state.step + 1 })
+};
+}
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,396 @@
+<!doctype html>
+<html lang="en">
+<head>
+<base href="/dc/"><script src="config.js"></script><script src="bridge.js"></script>
+<script>try{sessionStorage.removeItem('ufqApp')}catch(e){}</script>
+<link rel="preload" as="image" href="./assets/d30958deea0f2c30d185036d50b38dc8.webp">
+<script>try{var f=sessionStorage.getItem('ufqWipe');if(f){var w=f==='wipeW',W='max(124vw, 177.78vh)',o=w?'.82':'.1';var s=document.createElement('style');s.textContent='html{min-height:100vh;background:'+(w?'linear-gradient(170deg, rgba(0,48,73,.3), rgba(0,48,73,.95) 65%)':'linear-gradient(180deg, rgba(0,48,73,.15) 0%, rgba(0,48,73,0) 35%, rgba(0,48,73,.88) 78%)')+',linear-gradient(rgba(0,48,73,'+o+'),rgba(0,48,73,'+o+')),url(./assets/d30958deea0f2c30d185036d50b38dc8.webp) calc((124vw - '+W+') * .25 - 12vw) calc((100vh - '+W+' * .5625) * .5) / '+W+' auto no-repeat,#003049!important}body{background:transparent!important}';document.head.appendChild(s);setTimeout(function(){s.remove()},2600)}}catch(e){}</script>
+<style>html,body{margin:0;background:#003049}</style>
+<meta charset="utf-8">
+<title>Ufq — Create your account</title>
+<script src="./_runtime/react.js"></script>
+<script src="./_runtime/react-dom.js"></script>
+<script src="./_runtime/support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..600&amp;family=Inter+Tight:wght@400..700&amp;display=swap" rel="stylesheet">
+<style>
+html,body{margin:0;background:#003049}
+*{box-sizing:border-box}
+::selection{background:#C1121F;color:#FFFFFF}
+a{color:#003049}
+.srf{font-family:'Newsreader','Times New Roman',serif;font-optical-sizing:auto;font-weight:400;letter-spacing:-0.025em}
+.cap{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase}
+.mask{display:block;overflow:hidden;padding:.06em 0 .14em;margin:-.06em 0 -.14em}
+.mask>span{display:block}
+
+/* silver logo (same as landing) */
+.silver{background-image:linear-gradient(100deg,#AEB5C0 0%,#FFFFFF 22%,#8E97A5 38%,#FFFFFF 52%,#C7CDD6 70%,#FFFFFF 86%,#AEB5C0 100%);background-size:260% 100%;-webkit-background-clip:text;background-clip:text;color:transparent!important;animation:sheen 5s linear infinite}
+@keyframes sheen{from{background-position:0% 0}to{background-position:-260% 0}}
+
+/* inline image pills */
+.pillimg{display:inline-block;vertical-align:-.08em;height:.78em;width:1.7em;border-radius:999px;overflow:hidden;margin:0 .06em;box-shadow:inset 0 0 0 2px #FFFFFF}
+.pillimg img{width:100%;height:100%;object-fit:cover;display:block}
+@keyframes pillIn{from{width:0;margin:0}to{width:1.7em;margin:0 .06em}}
+.pillIn{animation:pillIn 1.2s cubic-bezier(.16,1,.3,1) both}
+
+/* fields with floating labels */
+.field{position:relative}
+.field input{width:100%;height:60px;padding:22px 16px 6px;border:0;border-radius:14px;background:#F4F6F8;box-shadow:inset 0 0 0 1px rgba(0,48,73,.22);font:500 16px 'Inter Tight',sans-serif;color:#003049;outline:none;transition:box-shadow .35s,background .35s}
+.field input:hover{box-shadow:inset 0 0 0 1px rgba(0,48,73,.5)}
+.field input:focus{box-shadow:inset 0 0 0 2px #003049;background:#FFFFFF}
+.field label{position:absolute;left:16px;top:20px;font:500 15px 'Inter Tight',sans-serif;color:rgba(0,48,73,.62);pointer-events:none;transform-origin:left top;transition:transform .35s cubic-bezier(.16,1,.3,1),color .35s}
+.field input:focus+label,.field input:not(:placeholder-shown)+label{transform:translateY(-11px) scale(.78);color:#003049}
+.field input::placeholder{color:transparent}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:12px;min-height:56px;padding:0 24px;border-radius:999px;background:#C1121F;color:#FFFFFF!important;text-decoration:none;font:600 16px 'Inter Tight',sans-serif;border:0;cursor:pointer;position:relative;overflow:hidden;isolation:isolate;width:100%;transition:transform .6s cubic-bezier(.34,1.56,.64,1)}
+.btn::before{content:"";position:absolute;inset:0;background:#780000;transform:scaleX(0);transform-origin:right;transition:transform .6s cubic-bezier(.16,1,.3,1);z-index:-1}
+.btn:hover::before{transform:scaleX(1);transform-origin:left}
+.btn:active{transform:scale(.98)}
+.btn .ar{display:inline-grid;overflow:hidden;height:1.2em;line-height:1.2em}
+.btn .ar span{grid-area:1/1;transition:transform .5s cubic-bezier(.16,1,.3,1)}
+.btn .ar span+span{transform:translateX(-140%)}
+.btn:hover .ar span:first-child{transform:translateX(140%)}.btn:hover .ar span+span{transform:none}
+.ghost{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 18px;border-radius:999px;border:0;background:transparent;box-shadow:inset 0 0 0 1px rgba(0,48,73,.3);color:#003049;font:600 15px 'Inter Tight',sans-serif;cursor:pointer;transition:box-shadow .35s,background .35s}
+.ghost:hover{box-shadow:inset 0 0 0 1px #003049;background:#F4F6F8}
+.tabbtn{position:relative;z-index:1;flex:1;min-height:46px;border:0;background:transparent;cursor:pointer;font:600 15px 'Inter Tight',sans-serif;color:#003049;transition:color .45s}
+.tabbtn[aria-selected="true"]{color:#FFFFFF}
+.chip{min-height:44px;padding:0 16px;border-radius:999px;border:0;background:transparent;box-shadow:inset 0 0 0 1px rgba(0,48,73,.3);color:#003049;font:600 14px 'Inter Tight',sans-serif;cursor:pointer;transition:background .35s,color .35s,box-shadow .35s}
+.chip:hover{box-shadow:inset 0 0 0 1px #003049}
+.chip[aria-pressed="true"]{background:#003049;color:#FFFFFF;box-shadow:none}
+.lnk{background:none;border:0;padding:0;cursor:pointer;color:#003049;font:600 14px 'Inter Tight',sans-serif;text-decoration:underline;text-underline-offset:3px}
+.lnk:hover{color:#C1121F}
+
+/* range */
+.rng{-webkit-appearance:none;appearance:none;width:100%;height:4px;border-radius:4px;background:linear-gradient(90deg,#C1121F var(--fill),rgba(0,48,73,.18) var(--fill));outline:none}
+.rng::-webkit-slider-thumb{-webkit-appearance:none;width:28px;height:28px;border-radius:50%;background:#FFFFFF;box-shadow:inset 0 0 0 2px #003049,0 6px 14px -6px rgba(0,48,73,.6);cursor:pointer;transition:transform .3s}
+.rng::-webkit-slider-thumb:hover{transform:scale(1.15)}
+.rng::-moz-range-thumb{width:28px;height:28px;border-radius:50%;background:#FFFFFF;border:2px solid #003049;cursor:pointer}
+
+/* motion */
+@keyframes rise{from{transform:translateY(110%)}to{transform:none}}
+.ld>span{animation:rise 1.2s cubic-bezier(.16,1,.3,1) both}
+@keyframes up{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+.fu{animation:up 1s cubic-bezier(.16,1,.3,1) both}
+@keyframes kb{from{transform:scale(1.18) translate(-2%,-1%)}to{transform:scale(1.04) translate(1%,1%)}}
+.kb{animation:kb 18s ease-in-out infinite alternate}
+@keyframes panelIn{from{clip-path:inset(0 0 0 100%)}to{clip-path:inset(0 0 0 0)}}
+.panelIn{animation:panelIn 1.3s cubic-bezier(.76,0,.24,1) both}
+@keyframes stepIn{from{opacity:0;transform:translateX(40px)}to{opacity:1;transform:none}}
+.stepIn>*{animation:stepIn .7s cubic-bezier(.16,1,.3,1) both}
+.stepIn>*:nth-child(2){animation-delay:.05s}.stepIn>*:nth-child(3){animation-delay:.1s}.stepIn>*:nth-child(4){animation-delay:.15s}.stepIn>*:nth-child(5){animation-delay:.2s}.stepIn>*:nth-child(6){animation-delay:.25s}.stepIn>*:nth-child(7){animation-delay:.3s}
+@keyframes pop{0%{transform:scale(0)}60%{transform:scale(1.15)}100%{transform:scale(1)}}
+.pop{animation:pop .7s cubic-bezier(.34,1.56,.64,1) both}
+@keyframes draw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+.draw{stroke-dasharray:1;animation:draw .8s .35s cubic-bezier(.65,0,.35,1) both}
+
+/* entry curtain + swap */
+@keyframes curtainUp{0%,40%{transform:none}100%{transform:translateY(-101%)}}
+.curtainUp{will-change:transform;animation:curtainUp 1.3s cubic-bezier(.76,0,.24,1) both}
+@keyframes logoOut{0%,25%{opacity:1;transform:none}60%,100%{opacity:0;transform:translateY(-30px)}}
+.srf.curtainLogo{animation:logoOut 1.3s cubic-bezier(.16,1,.3,1) both;background-position:-60% 0}
+.srf.silver.still{animation:none;background-position:-60% 0}
+@media (max-width: 900px){
+.authRoot{overflow:visible!important}
+.side,.formSide{position:relative!important;width:100%!important;left:auto!important;top:auto!important;bottom:auto!important;transform:none!important}
+.side{min-height:420px}
+}
+/* seamless swap: after the first switch, re-mounted content only fades (no re-played entrance) */
+.swapped .ld>span,.swapped .pillIn{animation:none!important}
+@keyframes softIn{from{opacity:0}to{opacity:1}}
+.swapped .stepIn>*{animation-name:softIn;animation-duration:.6s}
+.roll{display:block;transition:transform .9s cubic-bezier(.76,0,.24,1)}
+.fadeX{transition:opacity .6s ease .45s,transform .9s cubic-bezier(.16,1,.3,1) .4s}
+.veil{transition:opacity .5s cubic-bezier(.65,0,.35,1),filter .5s cubic-bezier(.65,0,.35,1),transform .7s cubic-bezier(.16,1,.3,1)}
+@media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}.curtainUp{display:none}}
+</style>
+<style>
+.wipeDummy{}
+@keyframes wipeHalf{0%{clip-path:inset(0 0 0 0);opacity:1}72%{clip-path:inset(0 50% 0 0);opacity:1}100%{clip-path:inset(0 50% 0 0);opacity:0}}
+@keyframes wipeTop{0%{clip-path:inset(0 0 0 0);opacity:1}72%{clip-path:inset(0 0 0 0);opacity:1}100%{clip-path:inset(0 0 100% 0);opacity:0}}
+.wipeHalf{animation:wipeHalf 1.25s .1s cubic-bezier(.76,0,.24,1) both}
+@media (max-width: 900px){.wipeHalf{animation-name:wipeTop}}
+@media (prefers-reduced-motion: reduce){.wipeHalf{display:none}}
+</style>
+<style>
+@keyframes panelIn{0%{width:100%;opacity:1}72%{width:50%;opacity:1}100%{width:50%;opacity:0}}
+@keyframes panelFade{from{opacity:1}to{opacity:0}}
+.panelIn{position:fixed;left:0;top:0;bottom:0;overflow:hidden;background:#003049;z-index:100;pointer-events:none;animation:panelIn 1.3s .1s cubic-bezier(.76,0,.24,1) both}
+@keyframes panelOut{from{width:100%}to{width:0}}
+.panelOut{position:fixed;right:0;top:0;bottom:0;overflow:hidden;background:#003049;z-index:100;pointer-events:none;animation:panelOut 1.05s .12s cubic-bezier(.76,0,.24,1) both}
+@media (max-width: 900px){.panelIn{width:100%;animation:panelFade .9s .2s ease both}}
+@media (prefers-reduced-motion: reduce){.panelIn,.panelOut{display:none}}
+
+@keyframes growL{from{width:50%}to{width:100%}}
+@keyframes growR{from{width:50%;transform:translateX(100%)}to{width:100%;transform:translateX(0)}}
+.growL{animation:growL .9s cubic-bezier(.76,0,.24,1) both;z-index:50!important}
+.growR{animation:growR .9s cubic-bezier(.76,0,.24,1) both;z-index:50!important}
+</style>
+<style>
+@keyframes lookOut{0%,12%{opacity:1}78%,100%{opacity:0}}
+.lookOut{position:absolute;inset:0;animation:lookOut 1.3s .1s ease-in-out both}
+.late .ld>span{animation-delay:1.25s!important}
+.late .ld+.ld>span{animation-delay:1.35s!important}
+.late .pillIn{animation-delay:1.55s!important}
+</style>
+</helmet>
+
+<div class="authRoot {{rootCls}}" style="position: relative; background: #FFFFFF; color: #003049; font-family: 'Inter Tight', 'Helvetica Neue', Arial, sans-serif; font-size: 16px; line-height: 1.5; min-height: 100vh; overflow: hidden">
+
+<sc-if value="{{entry}}" hint-placeholder-val="{{ false }}"><div class="panelIn" aria-hidden="true"><div style="position: absolute; inset: 0; overflow: hidden"><div aria-hidden="true" style="position: absolute; left: -12%; right: -12%; top: 0; height: 100vh"><img src="./assets/d30958deea0f2c30d185036d50b38dc8.webp" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 25% 50%; opacity: .9"></div><div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,48,73,.15) 0%, rgba(0,48,73,0) 35%, rgba(0,48,73,.88) 78%)"></div></div></div></sc-if>
+
+<!-- exit curtain back to the landing page -->
+<div aria-hidden="true" style="position: fixed; inset: 0; z-index: 101; background: #003049; pointer-events: none; display: grid; place-items: center; clip-path: {{curtain}}; transition: clip-path .75s cubic-bezier(.76,0,.24,1)"><span class="srf silver still" style="font-size: clamp(56px, 7vw, 96px); font-style: italic; line-height: 1.1; padding-right: 6px">Ufq.</span></div>
+<a href="Main.dc.html" ref="{{mainRef}}" tabindex="-1" aria-hidden="true" style="position: fixed; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); left: 0; top: 0">Home</a>
+<a href="Welcome.dc.html" ref="{{welRef}}" tabindex="-1" aria-hidden="true" style="position: fixed; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); left: 0; top: 0">Welcome</a>
+<a href="Dashboard.dc.html" ref="{{dashRef}}" tabindex="-1" aria-hidden="true" style="position: fixed; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); left: 0; top: 0">Dashboard</a>
+
+<!-- ============ LEFT: editorial visual ============ -->
+<aside class="side {{growCls}}" style="position: absolute; top: 0; bottom: 0; left: 0; width: 50%; z-index: 2; transform: translateX({{visX}}); transition: transform 1.1s cubic-bezier(.76,0,.24,1); overflow: hidden; background: #003049; color: #FFFFFF; display: flex; flex-direction: column; justify-content: space-between; padding: clamp(24px, 3vw, 44px)">
+<div aria-hidden="true" style="position: absolute; left: -12%; right: -12%; top: 0; height: 100vh; transform: translateX({{imgX}}); transition: transform 1.1s cubic-bezier(.76,0,.24,1)"><img src="./assets/d30958deea0f2c30d185036d50b38dc8.webp" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 25% 50%; opacity: .9"></div>
+<div aria-hidden="true" style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,48,73,.15) 0%, rgba(0,48,73,0) 35%, rgba(0,48,73,.88) 78%)"></div>
+<div style="position: relative; display: flex; justify-content: space-between; align-items: center; mix-blend-mode: difference">
+<a href="Main.dc.html" onClick="{{goMain}}" class="srf silver" style="text-decoration: none; font-size: 32px; line-height: 1.1; font-style: italic; padding-right: 4px">Ufq.</a>
+<a href="Main.dc.html" onClick="{{goMain}}" class="cap silver" style="text-decoration: none">← Back to site</a>
+</div>
+<div style="position: relative; display: flex; flex-direction: column; gap: 28px">
+<div style="display: grid">
+<h1 class="srf" aria-hidden="{{sHide}}" style="grid-area: 1 / 1; margin: 0; font-size: clamp(44px, 5.2vw, 84px); line-height: 1">
+<span class="mask ld"><span style="animation-delay: .5s"><span class="roll" style="transform: translateY({{sY}}); transition-delay: {{sD1}}">Your <span class="pillimg pillIn" style="animation-delay: .9s"><img src="./assets/3c8e2de8bb60b1111b1aa7416baaab0c.webp" alt=""></span> climb</span></span></span>
+<span class="mask ld"><span style="animation-delay: .6s"><span class="roll" style="transform: translateY({{sY}}); transition-delay: {{sD2}}"><em style="color: #F6DDB0">starts here.</em></span></span></span>
+</h1>
+<h1 class="srf" aria-hidden="{{lHide}}" style="grid-area: 1 / 1; margin: 0; font-size: clamp(44px, 5.2vw, 84px); line-height: 1">
+<span class="mask"><span><span class="roll" style="transform: translateY({{lY}}); transition-delay: {{lD1}}">Welcome <span class="pillimg"><img src="./assets/ce9b4a11d2641379c824819b64e03a4a.webp" alt=""></span> back</span></span></span>
+<span class="mask"><span><span class="roll" style="transform: translateY({{lY}}); transition-delay: {{lD2}}"><em style="color: #F6DDB0">to the climb.</em></span></span></span>
+</h1>
+</div>
+<div class="fu" style="animation-delay: 1.1s; display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; flex-wrap: wrap; padding-top: 20px; border-top: 1px solid rgba(255,255,255,.35)">
+<div style="display: flex; flex-direction: column; gap: 4px">
+<span class="cap" style="display: grid; color: #F6DDB0; overflow: hidden"><span class="roll" style="grid-area: 1 / 1; transform: translateY({{sY}}); transition-delay: {{sD1}}">Your target</span><span class="roll" aria-hidden="{{lHide}}" style="grid-area: 1 / 1; transform: translateY({{lY}}); transition-delay: {{lD1}}">Last target</span></span>
+<span class="srf" style="font-size: clamp(56px, 6vw, 96px); line-height: .9; font-variant-numeric: tabular-nums">{{target}}</span>
+</div>
+<div style="display: grid; max-width: 300px; font-size: 15px; color: #DCE6EC">
+<p class="fadeX" style="grid-area: 1 / 1; margin: 0; opacity: {{sOp}}; transform: translateY({{sNY}})">{{leftNote}}</p>
+<p class="fadeX" aria-hidden="{{lHide}}" style="grid-area: 1 / 1; margin: 0; opacity: {{lOp}}; transform: translateY({{lNY}})">Pick up exactly where you left off — your plan and mistake log are waiting.</p>
+</div>
+</div>
+</div>
+</aside>
+
+<!-- ============ RIGHT: the form ============ -->
+<main class="formSide" style="position: absolute; top: 0; bottom: 0; left: 50%; width: 50%; z-index: 1; transform: translateX({{formX}}); transition: transform 1.1s cubic-bezier(.76,0,.24,1); overflow-y: auto; display: flex; align-items: center; justify-content: center; padding: clamp(32px, 5vw, 72px) clamp(20px, 4vw, 64px)">
+<div style="width: min(460px, 100%); display: flex; flex-direction: column; gap: 28px">
+
+<sc-if value="{{showTabs}}" hint-placeholder-val="{{ true }}">
+<div class="fu" style="animation-delay: .4s; position: relative; display: flex; padding: 5px; border-radius: 999px; box-shadow: inset 0 0 0 1px rgba(0,48,73,.25)" role="tablist" aria-label="Account">
+<span aria-hidden="true" style="position: absolute; top: 5px; bottom: 5px; left: 5px; width: calc(50% - 5px); border-radius: 999px; background: #003049; transform: translateX({{tabX}}); transition: transform .6s cubic-bezier(.65,0,.35,1)"></span>
+<button type="button" class="tabbtn" role="tab" aria-selected="{{isSignup}}" onClick="{{toSignup}}">Create account</button>
+<button type="button" class="tabbtn" role="tab" aria-selected="{{isLogin}}" onClick="{{toLogin}}">Log in</button>
+</div>
+</sc-if>
+
+<div class="veil" style="display: flex; flex-direction: column; gap: 28px; opacity: {{vOp}}; filter: blur({{vBlur}}); transform: translateY({{vY}})">
+<!-- progress (sign-up only) -->
+<sc-if value="{{showProgress}}" hint-placeholder-val="{{ true }}">
+<div style="display: flex; flex-direction: column; gap: 10px">
+<div class="cap" style="display: flex; justify-content: space-between; color: #669BBC"><span>Step {{step}} of 3</span><span>{{stepName}}</span></div>
+<div style="height: 3px; border-radius: 3px; background: rgba(0,48,73,.14); overflow: hidden"><div style="height: 100%; width: {{progress}}; background: #C1121F; transition: width .7s cubic-bezier(.65,0,.35,1)"></div></div>
+</div>
+</sc-if>
+
+<!-- SIGN UP · STEP 1 -->
+<sc-if value="{{s1}}" hint-placeholder-val="{{ true }}">
+<form class="stepIn" onSubmit="{{next}}" style="display: flex; flex-direction: column; gap: 14px">
+<h2 class="srf" style="margin: 0 0 6px; font-size: clamp(34px, 3.4vw, 48px); line-height: 1.02">Create your <em style="color: #C1121F">account.</em></h2>
+<div class="field"><input id="nm" type="text" placeholder="Full name" autocomplete="name"><label for="nm">Full name</label></div>
+<div class="field"><input id="tg" type="email" placeholder="Email" autocomplete="email"><label for="tg">Email</label></div>
+<div class="field"><input id="pw" type="{{pwType}}" placeholder="Password" autocomplete="new-password" style="padding-right: 74px"><label for="pw">Password</label><button type="button" class="lnk" onClick="{{togglePw}}" aria-label="{{pwAria}}" style="position: absolute; right: 16px; top: 20px; font-size: 13px">{{pwLabel}}</button></div>
+<button type="submit" class="btn" style="margin-top: 6px">Continue <span class="ar" aria-hidden="true"><span>→</span><span>→</span></span></button>
+<div style="display: flex; align-items: center; gap: 14px; color: rgba(0,48,73,.55); font-size: 13px"><span style="flex: 1; height: 1px; background: rgba(0,48,73,.18)"></span>or<span style="flex: 1; height: 1px; background: rgba(0,48,73,.18)"></span></div>
+<a href="Welcome.dc.html" onClick="{{goGoogle}}" class="ghost" style="width: 100%; text-decoration: none"><svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.6l6.8-6.8C35.8 2.4 30.3 0 24 0 14.6 0 6.5 5.4 2.6 13.2l7.9 6.1C12.4 13.6 17.7 9.5 24 9.5z"></path><path fill="#4285F4" d="M46.5 24.5c0-1.6-.1-3.1-.4-4.5H24v9h12.7c-.6 3-2.3 5.5-4.8 7.2l7.5 5.8c4.4-4.1 7.1-10.1 7.1-17.5z"></path><path fill="#FBBC05" d="M10.5 28.7A14.5 14.5 0 0 1 9.5 24c0-1.6.3-3.2.8-4.7l-7.9-6.1A24 24 0 0 0 0 24c0 3.9.9 7.5 2.6 10.8l7.9-6.1z"></path><path fill="#34A853" d="M24 48c6.5 0 11.9-2.1 15.9-5.8l-7.5-5.8c-2.1 1.4-4.8 2.3-8.4 2.3-6.3 0-11.6-4.1-13.5-9.8l-7.9 6.1C6.5 42.6 14.6 48 24 48z"></path></svg>Continue with Google</a>
+</form>
+</sc-if>
+
+<!-- SIGN UP · STEP 2 -->
+<sc-if value="{{s2}}" hint-placeholder-val="{{ false }}">
+<form class="stepIn" onSubmit="{{next}}" style="display: flex; flex-direction: column; gap: 22px">
+<h2 class="srf" style="margin: 0; font-size: clamp(34px, 3.4vw, 48px); line-height: 1.02">Where are you <em style="color: #C1121F">aiming?</em></h2>
+<div style="display: flex; flex-direction: column; gap: 14px; padding: 22px; border-radius: 18px; background: #F4F6F8; box-shadow: inset 0 0 0 1px rgba(0,48,73,.18)">
+<div style="display: flex; justify-content: space-between; align-items: baseline"><label for="tgt" class="cap" style="color: #669BBC">Target Math score</label><span class="srf" style="font-size: 44px; line-height: 1; color: #C1121F; font-variant-numeric: tabular-nums">{{target}}</span></div>
+<input id="tgt" class="rng" type="range" min="200" max="800" step="10" value="{{target}}" onInput="{{setTarget}}" style="--fill: {{fill}}">
+<div class="cap" style="display: flex; justify-content: space-between; color: rgba(0,48,73,.5); font-size: 11px"><span>200</span><span>500</span><span>800</span></div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 12px">
+<span class="cap" style="color: #669BBC">When is your test?</span>
+<div role="group" aria-label="Test date" style="display: flex; flex-wrap: wrap; gap: 8px">
+<sc-for list="{{dates}}" as="d" hint-placeholder-count="4">
+<button type="button" class="chip" aria-pressed="{{d.on}}" onClick="{{d.pick}}">{{d.label}}</button>
+</sc-for>
+</div>
+</div>
+<div style="display: grid; grid-template-columns: auto 1fr; gap: 10px">
+<button type="button" class="ghost" onClick="{{back}}" aria-label="Back">←</button>
+<button type="submit" class="btn">Continue <span class="ar" aria-hidden="true"><span>→</span><span>→</span></span></button>
+</div>
+</form>
+</sc-if>
+
+<!-- SIGN UP · STEP 3 -->
+<sc-if value="{{s3}}" hint-placeholder-val="{{ false }}">
+<div class="stepIn" style="display: flex; flex-direction: column; gap: 20px">
+<svg class="pop" width="72" height="72" viewBox="0 0 72 72" aria-hidden="true"><circle cx="36" cy="36" r="34" fill="#003049"></circle><path class="draw" pathLength="1" d="M22 37 L32 47 L51 27" fill="none" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+<h2 class="srf" style="margin: 0; font-size: clamp(34px, 3.4vw, 48px); line-height: 1.02">You’re in. <em style="color: #C1121F">Let’s begin.</em></h2>
+<p style="margin: 0; font-size: 16px; color: rgba(0,48,73,.8)">Your target is <b>{{target}}</b>, test window: <b>{{dateLabel}}</b>. We’ll build your week-by-week plan around them.</p>
+<div style="display: flex; flex-direction: column; border-top: 1px solid rgba(0,48,73,.18)">
+<div style="display: flex; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid rgba(0,48,73,.18); font-size: 15px"><span>Your week-by-week plan</span><span class="cap" style="color: #C1121F">Ready</span></div>
+<div style="display: flex; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid rgba(0,48,73,.18); font-size: 15px; color: rgba(0,48,73,.55)"><span>First practice set</span><span class="cap">Today</span></div>
+<div style="display: flex; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid rgba(0,48,73,.18); font-size: 15px; color: rgba(0,48,73,.55)"><span>Mistake log</span><span class="cap">Fills as you go</span></div>
+</div>
+<a class="btn" href="Welcome.dc.html" onClick="{{goWel}}">Set up my first day <span class="ar" aria-hidden="true"><span>→</span><span>→</span></span></a>
+<button type="button" class="lnk" onClick="{{restart}}" style="align-self: flex-start">Start over</button>
+</div>
+</sc-if>
+
+<!-- FORGOT PASSWORD -->
+<sc-if value="{{isForgot}}" hint-placeholder-val="{{ false }}">
+<form class="stepIn" onSubmit="{{sendReset}}" style="display: flex; flex-direction: column; gap: 14px">
+<sc-if value="{{resetAsk}}" hint-placeholder-val="{{ true }}">
+<h2 class="srf" style="margin: 0 0 6px; font-size: clamp(34px, 3.4vw, 48px); line-height: 1.02">Reset your <em style="color: #C1121F">password.</em></h2>
+<p style="margin: 0; font-size: 15px; color: rgba(0,48,73,.75)">Enter the email you signed up with. We’ll send a link that works for one hour.</p>
+<div class="field"><input id="fe" type="email" placeholder="Email" autocomplete="email"><label for="fe">Email</label></div>
+<button type="submit" class="btn">Send reset link <span class="ar" aria-hidden="true"><span>→</span><span>→</span></span></button>
+</sc-if>
+<sc-if value="{{resetSent}}" hint-placeholder-val="{{ false }}">
+<svg class="pop" width="64" height="64" viewBox="0 0 72 72" aria-hidden="true"><circle cx="36" cy="36" r="34" fill="#003049"></circle><path d="M20 26h32v22H20z M20 26l16 13 16-13" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linejoin="round"></path></svg>
+<h2 class="srf" style="margin: 0; font-size: clamp(34px, 3.4vw, 48px); line-height: 1.02">Check your <em style="color: #C1121F">inbox.</em></h2>
+<p style="margin: 0; font-size: 15px; color: rgba(0,48,73,.75)">If an account uses that email, the reset link is on its way. Nothing there? Look in spam, or sign in with Google instead.</p>
+<a href="ResetPassword.dc.html" class="btn navy" style="align-self: flex-start">Open the link from the email <span class="ar" aria-hidden="true"><span>→</span><span>→</span></span></a>
+<span style="font-size: 12px; color: rgba(0,48,73,.55)">Demo shortcut — in the real app this step happens from your inbox.</span>
+</sc-if>
+<button type="button" class="lnk" onClick="{{closeForgot}}" style="align-self: flex-start">← Back to log in</button>
+</form>
+</sc-if>
+
+<!-- LOG IN -->
+<sc-if value="{{isLoginForm}}" hint-placeholder-val="{{ false }}">
+<form class="stepIn" onSubmit="{{noop}}" style="display: flex; flex-direction: column; gap: 14px">
+<h2 class="srf" style="margin: 0 0 6px; font-size: clamp(34px, 3.4vw, 48px); line-height: 1.02">Welcome <em style="color: #C1121F">back.</em></h2>
+<div class="field"><input id="lg" type="email" placeholder="Email" autocomplete="username"><label for="lg">Email</label></div>
+<div class="field"><input id="lp" type="{{pwType}}" placeholder="Password" autocomplete="current-password" style="padding-right: 74px"><label for="lp">Password</label><button type="button" class="lnk" onClick="{{togglePw}}" aria-label="{{pwAria}}" style="position: absolute; right: 16px; top: 20px; font-size: 13px">{{pwLabel}}</button></div>
+<div style="display: flex; justify-content: flex-end"><button type="button" class="lnk" onClick="{{openForgot}}">Forgot password?</button></div>
+<a class="btn" href="Dashboard.dc.html" onClick="{{goDash}}">Log in <span class="ar" aria-hidden="true"><span>→</span><span>→</span></span></a>
+<div style="display: flex; align-items: center; gap: 14px; color: rgba(0,48,73,.55); font-size: 13px"><span style="flex: 1; height: 1px; background: rgba(0,48,73,.18)"></span>or<span style="flex: 1; height: 1px; background: rgba(0,48,73,.18)"></span></div>
+<a href="Dashboard.dc.html" onClick="{{goGoogle}}" class="ghost" style="width: 100%; text-decoration: none"><svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.6l6.8-6.8C35.8 2.4 30.3 0 24 0 14.6 0 6.5 5.4 2.6 13.2l7.9 6.1C12.4 13.6 17.7 9.5 24 9.5z"></path><path fill="#4285F4" d="M46.5 24.5c0-1.6-.1-3.1-.4-4.5H24v9h12.7c-.6 3-2.3 5.5-4.8 7.2l7.5 5.8c4.4-4.1 7.1-10.1 7.1-17.5z"></path><path fill="#FBBC05" d="M10.5 28.7A14.5 14.5 0 0 1 9.5 24c0-1.6.3-3.2.8-4.7l-7.9-6.1A24 24 0 0 0 0 24c0 3.9.9 7.5 2.6 10.8l7.9-6.1z"></path><path fill="#34A853" d="M24 48c6.5 0 11.9-2.1 15.9-5.8l-7.5-5.8c-2.1 1.4-4.8 2.3-8.4 2.3-6.3 0-11.6-4.1-13.5-9.8l-7.9 6.1C6.5 42.6 14.6 48 24 48z"></path></svg>Continue with Google</a>
+</form>
+</sc-if>
+</div>
+
+<p class="fu" style="animation-delay: .8s; margin: 0; font-size: 12px; color: rgba(0,48,73,.6)">By continuing you agree to the [Terms] and [Privacy Policy]. SAT is a trademark of the College Board, which is not affiliated with Ufq.</p>
+</div>
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+constructor(props) {
+super(props);
+let entry = ''; try { entry = sessionStorage.getItem('ufqWipe') || ''; sessionStorage.removeItem('ufqWipe'); } catch (e) {}
+this._entry = entry === 'half';
+this.state = { tab: 'signup', side: 'signup', veil: false, swapped: false, leaving: false, step: 1, target: 750, date: 1, showPw: false, forgot: 0 };
+}
+swapTo(t) {
+if (this.busy || this.state.side === t) return;
+this.busy = true;
+// 1) panels start crossing, content dissolves
+this.setState({ side: t, veil: true, swapped: true });
+// 2) at mid-cross, while invisible, the content is exchanged
+setTimeout(() => {
+this.setState({ tab: t, step: 1, forgot: 0 });
+// 3) new content condenses back in as the panels settle
+setTimeout(() => { this.setState({ veil: false }); this.busy = false; }, 80);
+}, 520);
+}
+wipeTo(ev, link, flag) { if (ev && ev.preventDefault) ev.preventDefault(); if (!link || this.state.wiping) return; this.setState({ wiping: true }); try { sessionStorage.setItem('ufqWipe', flag); } catch (e) {} setTimeout(() => { link.click(); setTimeout(() => this.setState({ wiping: false }), 2500); }, 950); }
+renderVals() {
+const { tab, step, target, date, showPw } = this.state;
+const signup = tab === 'signup';
+const sideUp = this.state.side === 'signup';
+const veil = this.state.veil;
+const names = ['Account', 'Target', 'Ready'];
+const DATES = ['Mar 2027', 'May 2027', 'Jun 2027', 'Not sure yet'];
+const notes = {
+1: 'Create an account and we’ll build your plan around your target and test date.',
+2: 'Drag the slider — we’ll plan backwards from this number to your test date.',
+3: 'Small daily sessions, then your mistakes come back until they stick.'
+};
+return {
+entry: this._entry, growCls: this.state.wiping ? (sideUp ? 'growL' : 'growR') : '',
+showTabs: !(signup && step === 3),
+isSignup: sideUp ? 'true' : 'false',
+isLogin: sideUp ? 'false' : 'true',
+isLoginB: !signup, isLoginForm: !signup && !this.state.forgot, isForgot: !signup && !!this.state.forgot, resetAsk: this.state.forgot === 1, resetSent: this.state.forgot === 2,
+openForgot: () => this.setState({ forgot: 1 }), closeForgot: () => this.setState({ forgot: 0 }), sendReset: (e) => { if (e && e.preventDefault) e.preventDefault(); const em = ((document.getElementById('fe') || {}).value || '').trim(); if (!/^\S+@\S+\.\S+$/.test(em)) { window.Ufq.toast('Enter the email you signed up with.'); return; } window.Ufq.resetPassword(em).then(() => this.setState({ forgot: 2 })).catch((err) => window.Ufq.toast(err.message)); },
+isSignupB: signup,
+visX: sideUp ? '0%' : '100%',
+formX: sideUp ? '0%' : '-100%',
+imgX: sideUp ? '0%' : '-8%',
+vOp: veil ? '0' : '1',
+vBlur: veil ? '10px' : '0px',
+vY: veil ? '-8px' : '0px',
+rootCls: (this.state.swapped ? 'swapped' : '') + (this._entry ? ' late' : ''),
+curtain: this.state.leaving ? 'inset(0 0 0 0)' : 'inset(100% 0 0 0)',
+wipeClip: this.state.wiping ? (sideUp ? 'inset(0 0 0 50%)' : 'inset(0 50% 0 0)') : 'inset(0 50% 0 50%)', wipeLogo: '0',
+welRef: (el) => { this.welLink = el; }, dashRef: (el) => { this.dashLink = el; },
+goWel: (ev) => { if (ev && ev.preventDefault) ev.preventDefault(); if (!window.Ufq.isSignedIn()) { window.Ufq.toast(this.needsConfirm ? 'Confirm your email first, then log in.' : 'Please log in to continue.', 'ok'); this.swapTo('login'); return; } this.wipeTo(ev, this.welLink, 'half'); },
+goDash: (ev) => { if (ev && ev.preventDefault) ev.preventDefault(); const em = ((document.getElementById('lg') || {}).value || '').trim(), pw = (document.getElementById('lp') || {}).value || ''; if (!em || !pw) { window.Ufq.toast('Enter your email and password.'); return; } if (this.signing) return; this.signing = true; window.Ufq.signIn(em, pw).then(() => { this.signing = false; this.wipeTo(null, this.dashLink, 'wipeA'); }).catch((err) => { this.signing = false; window.Ufq.toast(err.message); }); },
+goGoogle: (ev) => { if (ev && ev.preventDefault) ev.preventDefault(); window.Ufq.google().catch((err) => window.Ufq.toast(err.message)); },
+mainRef: (el) => { this.mainLink = el; },
+goMain: (ev) => { this.wipeTo(ev, this.mainLink, 'back'); },
+sY: sideUp ? '0%' : '-140%',
+lY: sideUp ? '140%' : '0%',
+sD1: sideUp ? '.42s' : '.18s', sD2: sideUp ? '.5s' : '.26s',
+lD1: sideUp ? '.18s' : '.42s', lD2: sideUp ? '.26s' : '.5s',
+sHide: sideUp ? 'false' : 'true', lHide: sideUp ? 'true' : 'false',
+sOp: sideUp ? '1' : '0', lOp: sideUp ? '0' : '1',
+sNY: sideUp ? '0px' : '-10px', lNY: sideUp ? '10px' : '0px',
+tabX: sideUp ? '0%' : '100%',
+showProgress: signup,
+step, stepName: names[step - 1],
+progress: Math.round(step / 3 * 100) + '%',
+s1: signup && step === 1, s2: signup && step === 2, s3: signup && step === 3,
+target, fill: Math.round((target - 200) / 600 * 100) + '%',
+leftNote: notes[signup ? step : 1],
+dates: DATES.map((label, i) => ({ label, on: date === i ? 'true' : 'false', pick: () => this.setState({ date: i }) })),
+dateLabel: DATES[date],
+pwType: showPw ? 'text' : 'password',
+pwLabel: showPw ? 'Hide' : 'Show',
+pwAria: showPw ? 'Hide password' : 'Show password',
+togglePw: () => this.setState({ showPw: !this.state.showPw }),
+setTarget: (e) => this.setState({ target: Number(e.target.value) }),
+next: (e) => { if (e && e.preventDefault) e.preventDefault(); const st = this.state.step;
+if (st === 1) {
+const val = (id) => ((document.getElementById(id) || {}).value || '').trim();
+const nm = val('nm'), em = val('tg'), pw = (document.getElementById('pw') || {}).value || '';
+if (!nm || !/^\S+@\S+\.\S+$/.test(em) || pw.length < 6) { window.Ufq.toast('Enter your name, a valid email and a password of at least 6 characters.'); return; }
+if (this.signing) return; this.signing = true;
+window.Ufq.signUp(em, pw, nm).then((r) => { this.signing = false; this.needsConfirm = !!r.needsConfirm; if (r.needsConfirm) window.Ufq.toast('We sent a confirmation link to ' + em + '. Confirm it, then log in.', 'ok'); this.setState({ step: 2 }); }).catch((err) => { this.signing = false; window.Ufq.toast(err.message); });
+return;
+}
+if (st === 2) { try { localStorage.setItem('ufq_goal', JSON.stringify({ target: this.state.target, date: ['Mar 2027', 'May 2027', 'Jun 2027', 'Not sure yet'][this.state.date] })); } catch (x) {} }
+this.setState({ step: Math.min(3, st + 1) });
+},
+back: () => this.setState({ step: Math.max(1, this.state.step - 1) }),
+restart: () => this.setState({ step: 1 }),
+noop: (e) => { if (e && e.preventDefault) e.preventDefault(); },
+toSignup: () => this.swapTo('signup'),
+toLogin: () => this.swapTo('login')
+};
+}
+}
+</script>
+</body>
+</html>

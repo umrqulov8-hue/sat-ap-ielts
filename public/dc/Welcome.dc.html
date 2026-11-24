@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="en">
+<head>
+<base href="/dc/"><script src="config.js"></script><script src="bridge.js"></script>
+<script>try{sessionStorage.removeItem('ufqApp')}catch(e){}</script>
+<style>html,body{margin:0;background:#FFFFFF}</style>
+<link rel="preload" as="image" href="./assets/d30958deea0f2c30d185036d50b38dc8.webp">
+<script>try{var f=sessionStorage.getItem('ufqWipe');if(f){var w=f==='wipeW',W='max(124vw, 177.78vh)',o=w?'.82':'.1';var s=document.createElement('style');s.textContent='html{min-height:100vh;background:'+(w?'linear-gradient(170deg, rgba(0,48,73,.3), rgba(0,48,73,.95) 65%)':'linear-gradient(180deg, rgba(0,48,73,.15) 0%, rgba(0,48,73,0) 35%, rgba(0,48,73,.88) 78%)')+',linear-gradient(rgba(0,48,73,'+o+'),rgba(0,48,73,'+o+')),url(./assets/d30958deea0f2c30d185036d50b38dc8.webp) calc((124vw - '+W+') * .25 - 12vw) calc((100vh - '+W+' * .5625) * .5) / '+W+' auto no-repeat,#003049!important}body{background:transparent!important}';document.head.appendChild(s);setTimeout(function(){s.remove()},2600)}}catch(e){}</script>
+<meta charset="utf-8">
+<title>Ufq — Welcome</title>
+<script src="./_runtime/react.js"></script>
+<script src="./_runtime/react-dom.js"></script>
+<script src="./_runtime/support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..600&amp;family=Inter+Tight:wght@400..700&amp;display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+::selection{background:#C1121F;color:#FFFFFF}
+a{color:#003049}
+.srf{font-family:'Newsreader','Times New Roman',serif;font-optical-sizing:auto;font-weight:400;letter-spacing:-0.025em}
+.cap{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase}
+.mask{display:block;overflow:hidden;padding:.06em 0 .14em;margin:-.06em 0 -.14em}
+.mask>span{display:block}
+.silver{background-image:linear-gradient(100deg,#AEB5C0 0%,#FFFFFF 22%,#8E97A5 38%,#FFFFFF 52%,#C7CDD6 70%,#FFFFFF 86%,#AEB5C0 100%);background-size:260% 100%;-webkit-background-clip:text;background-clip:text;color:transparent!important;animation:sheen 5s linear infinite}
+@keyframes sheen{from{background-position:0% 0}to{background-position:-260% 0}}
+.pillimg{display:inline-block;vertical-align:-.08em;height:.78em;width:1.7em;border-radius:999px;overflow:hidden;margin:0 .06em;box-shadow:inset 0 0 0 2px #FFFFFF}
+.pillimg img{width:100%;height:100%;object-fit:cover;display:block}
+@keyframes pillIn{from{width:0;margin:0}to{width:1.7em;margin:0 .06em}}
+.pillIn{animation:pillIn 1.2s cubic-bezier(.16,1,.3,1) both}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:12px;min-height:52px;padding:0 24px;border-radius:999px;background:#C1121F;color:#FFFFFF!important;text-decoration:none;font:600 15px 'Inter Tight',sans-serif;border:0;cursor:pointer;position:relative;overflow:hidden;isolation:isolate;transition:transform .6s cubic-bezier(.34,1.56,.64,1)}
+.btn::before{content:"";position:absolute;inset:0;background:#780000;transform:scaleX(0);transform-origin:right;transition:transform .6s cubic-bezier(.16,1,.3,1);z-index:-1}
+.btn:hover::before{transform:scaleX(1);transform-origin:left}
+.btn:active{transform:scale(.98)}
+.btn.navy{background:#003049}.btn.navy::before{background:#0B4A6B}
+.btn .ar{display:inline-grid;overflow:hidden;height:1.2em;line-height:1.2em}
+.btn .ar span{grid-area:1/1;transition:transform .5s cubic-bezier(.16,1,.3,1)}
+.btn .ar span+span{transform:translateX(-140%)}
+.btn:hover .ar span:first-child{transform:translateX(140%)}.btn:hover .ar span+span{transform:none}
+.ghost{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:46px;padding:0 18px;border-radius:999px;border:0;background:transparent;box-shadow:inset 0 0 0 1px rgba(0,48,73,.3);color:#003049;font:600 14px 'Inter Tight',sans-serif;cursor:pointer;text-decoration:none;transition:box-shadow .35s,background .35s}
+.ghost:hover{box-shadow:inset 0 0 0 1px #003049;background:#F4F6F8}
+.lnk{background:none;border:0;padding:0;cursor:pointer;color:#003049;font:600 14px 'Inter Tight',sans-serif;text-decoration:underline;text-underline-offset:3px}
+.lnk:hover{color:#C1121F}
+@keyframes rise{from{transform:translateY(110%)}to{transform:none}}
+.ld>span{animation:rise 1.2s cubic-bezier(.16,1,.3,1) both}
+@keyframes up{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+.fu{animation:up 1s cubic-bezier(.16,1,.3,1) both}
+@keyframes curtainUp{0%,22%{transform:none}100%{transform:translateY(-101%)}}
+.curtainUp{will-change:transform;animation:curtainUp 1s cubic-bezier(.76,0,.24,1) both}
+@keyframes logoOut{0%,25%{opacity:1;transform:none}60%,100%{opacity:0;transform:translateY(-30px)}}
+.srf.curtainLogo{animation:logoOut 1s cubic-bezier(.16,1,.3,1) both;background-position:-60% 0}
+.srf.silver.still{animation:none;background-position:-60% 0}
+@keyframes grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.grow{transform-origin:left;animation:grow 1.4s cubic-bezier(.16,1,.3,1) both}
+@supports (animation-timeline: view()){
+.rv{animation:up linear both;animation-timeline:view();animation-range:entry 0% entry 60%}
+.rvg{transform-origin:left;animation:grow linear both;animation-timeline:view();animation-range:entry 10% cover 40%}
+}
+@media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}.curtainUp{display:none}}
+
+html,body{margin:0;background:#FFFFFF}
+.side a.nv{display:flex;align-items:center;gap:12px;min-height:44px;padding:0 14px;border-radius:12px;text-decoration:none;font-weight:500;font-size:15px;color:rgba(0,48,73,.72);transition:background .3s,color .3s}
+.side a.nv:hover{background:#F4F6F8;color:#003049}
+.side a.nv[aria-current="page"]{background:#003049;color:#FFFFFF}
+.side a.nv svg{flex:none}
+.tile{position:relative;border-radius:24px;background:#F4F6F8;padding:24px;display:flex;flex-direction:column;gap:14px;overflow:hidden;text-decoration:none;color:#003049;transition:transform .6s cubic-bezier(.16,1,.3,1),box-shadow .6s cubic-bezier(.16,1,.3,1)}
+a.tile:hover{transform:translateY(-4px);box-shadow:0 24px 48px -28px rgba(0,48,73,.45)}
+.tile .go{position:absolute;top:20px;right:20px;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;box-shadow:inset 0 0 0 1px rgba(0,48,73,.2);transition:transform .5s cubic-bezier(.16,1,.3,1),background .3s,color .3s}
+a.tile:hover .go{transform:rotate(-45deg);background:#003049;color:#FFFFFF}
+@keyframes tileIn{from{opacity:0;transform:translateY(22px) scale(.985)}to{opacity:1;transform:none}}
+.ti{animation:tileIn .9s cubic-bezier(.16,1,.3,1) both}
+@keyframes ring{from{stroke-dashoffset:100}}
+.ring{animation:ring 1.8s cubic-bezier(.65,0,.35,1) both}
+@property --n{syntax:'<integer>';initial-value:0;inherits:false}
+.cnt{counter-reset:n var(--n);animation:cnt 1.8s cubic-bezier(.65,0,.35,1) both}
+.cnt::after{content:counter(n)}
+@keyframes cnt{from{--n:400}}
+.task{display:flex;align-items:center;gap:14px;width:100%;padding:14px 0;border:0;border-bottom:1px solid rgba(255,255,255,.16);background:transparent;color:#FFFFFF;text-align:left;font:500 16px 'Inter Tight',sans-serif;cursor:pointer}
+.task .box{flex:none;width:24px;height:24px;border-radius:50%;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.7);display:grid;place-items:center;transition:background .35s,box-shadow .35s}
+.task[aria-pressed="true"] .box{background:#F6DDB0;box-shadow:none}
+.task .tk{opacity:0;transform:scale(.4);transition:opacity .3s,transform .4s cubic-bezier(.34,1.56,.64,1)}
+.task[aria-pressed="true"] .tk{opacity:1;transform:none}
+.task .tt{transition:opacity .35s}
+.task[aria-pressed="true"] .tt{text-decoration:line-through;opacity:.55}
+.seg{min-height:36px;padding:0 14px;border-radius:999px;border:0;background:transparent;font:600 13px 'Inter Tight',sans-serif;color:#003049;cursor:pointer;transition:background .35s,color .35s}
+.seg[aria-pressed="true"]{background:#003049;color:#FFFFFF}
+.dom{display:flex;flex-direction:column;gap:12px;padding:18px;border-radius:18px;background:#FFFFFF;box-shadow:inset 0 0 0 1px rgba(0,48,73,.1);text-decoration:none;color:#003049;transition:box-shadow .4s,transform .5s cubic-bezier(.16,1,.3,1)}
+.dom:hover{box-shadow:inset 0 0 0 1px #003049;transform:translateY(-3px)}
+.pip{flex:1;height:6px;border-radius:6px;transition:background .5s}
+.dayb{flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;gap:8px;padding:12px 4px;border-radius:16px;border:0;background:transparent;cursor:pointer;font:600 12px 'Inter Tight',sans-serif;color:#003049;transition:background .35s,color .35s}
+.dayb:hover{background:#FFFFFF}
+.dayb[aria-pressed="true"]{background:#003049;color:#FFFFFF}
+@keyframes swapIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.swap{animation:swapIn .5s cubic-bezier(.16,1,.3,1) both}
+.kb{animation:kb 18s ease-in-out infinite alternate}
+@keyframes kb{from{transform:scale(1.15)}to{transform:scale(1.02) translate(1%,1%)}}
+@media (max-width: 1180px){.bento{grid-template-columns:repeat(2,minmax(0,1fr))!important}.span4{grid-column:span 2!important}.domg{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+@media (max-width: 820px){.shell{grid-template-columns:1fr!important}.side{position:static!important;height:auto!important;flex-direction:row!important;overflow-x:auto;border-right:0!important;border-bottom:1px solid rgba(0,48,73,.1)}.side .sideExtra{display:none!important}.bento{grid-template-columns:1fr!important}.bento>*{grid-column:auto!important;grid-row:auto!important}}
+.acct{color:#003049;transition:background .3s}.acct:hover,.acct[aria-current="page"]{background:#F4F6F8}.gear{color:rgba(0,48,73,.7);transition:background .3s,color .3s}.gear:hover,.gear[aria-current="page"]{background:#003049;color:#FFFFFF}
+
+.sw{position:relative;flex:none;width:48px;height:28px;border-radius:999px;border:0;background:#D5DEE5;cursor:pointer;transition:background .35s}
+.sw::after{content:"";position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:#FFFFFF;box-shadow:0 2px 6px rgba(0,48,73,.25);transition:transform .45s cubic-bezier(.34,1.56,.64,1)}
+.sw[aria-checked="true"]{background:#003049}
+.sw[aria-checked="true"]::after{transform:translateX(20px)}
+.row{display:flex;justify-content:space-between;align-items:center;gap:20px;padding:18px 0;border-bottom:1px solid rgba(0,48,73,.1)}
+.row:last-child{border-bottom:0}
+.chipb{min-height:40px;padding:0 16px;border-radius:999px;border:0;background:transparent;box-shadow:inset 0 0 0 1px rgba(0,48,73,.25);font:600 14px 'Inter Tight',sans-serif;color:#003049;cursor:pointer;transition:background .35s,color .35s,box-shadow .35s}
+.chipb:hover{box-shadow:inset 0 0 0 1px #003049}
+.chipb[aria-pressed="true"]{background:#003049;color:#FFFFFF;box-shadow:none}
+.inp{width:100%;height:52px;padding:0 16px;border:0;border-radius:12px;background:#F4F6F8;box-shadow:inset 0 0 0 1px rgba(0,48,73,.12);font:500 16px 'Inter Tight',sans-serif;color:#003049;outline:none;transition:box-shadow .3s,background .3s}
+.inp:focus{background:#FFFFFF;box-shadow:inset 0 0 0 2px #003049}
+.card{border-radius:24px;background:#FFFFFF;box-shadow:inset 0 0 0 1px rgba(0,48,73,.1);padding:clamp(20px,2.4vw,30px);display:flex;flex-direction:column;gap:6px}
+.rng{-webkit-appearance:none;appearance:none;width:100%;height:4px;border-radius:4px;background:linear-gradient(90deg,#C1121F var(--fill),rgba(0,48,73,.16) var(--fill));outline:none}
+.rng::-webkit-slider-thumb{-webkit-appearance:none;width:26px;height:26px;border-radius:50%;background:#FFFFFF;box-shadow:inset 0 0 0 2px #003049,0 6px 14px -6px rgba(0,48,73,.6);cursor:pointer}
+.rng::-moz-range-thumb{width:26px;height:26px;border-radius:50%;background:#FFFFFF;border:2px solid #003049;cursor:pointer}
+.wk{display:grid;grid-template-columns:90px minmax(0,1fr) auto;gap:20px;align-items:center;width:100%;padding:16px 18px;border:0;border-radius:16px;background:transparent;text-align:left;font:inherit;color:#003049;cursor:pointer;transition:background .35s}
+.wk:hover{background:#F4F6F8}
+.wk[aria-expanded="true"]{background:#F4F6F8}
+@media (max-width: 900px){.setg{grid-template-columns:1fr!important}.setg nav{position:static!important;flex-direction:row!important;flex-wrap:wrap}}
+
+html,body{background:#003049}
+.wl{min-height:100vh;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+@media (max-width: 900px){.wl{grid-template-columns:1fr}.wl .lp{min-height:auto!important;position:relative!important;height:auto!important}.wl .lp .big{font-size:44px!important}}
+.opt2{display:flex;justify-content:space-between;align-items:center;gap:16px;width:100%;padding:20px 22px;border-radius:18px;border:0;background:#FFFFFF;box-shadow:inset 0 0 0 1px rgba(0,48,73,.2);font:inherit;color:#003049;text-align:left;cursor:pointer;transition:box-shadow .35s,background .35s,transform .4s cubic-bezier(.16,1,.3,1)}
+.opt2:hover{box-shadow:inset 0 0 0 1px #003049;transform:translateY(-2px)}
+.opt2[aria-pressed="true"]{background:#003049;color:#FFFFFF;box-shadow:none}
+.opt2 .rd{flex:none;width:24px;height:24px;border-radius:50%;box-shadow:inset 0 0 0 1.5px currentColor;display:grid;place-items:center}
+.opt2[aria-pressed="true"] .rd::after{content:"";width:10px;height:10px;border-radius:50%;background:#F6DDB0}
+.dayc{flex:1;min-width:56px;height:72px;border-radius:16px;border:0;background:#FFFFFF;box-shadow:inset 0 0 0 1px rgba(0,48,73,.2);font:600 15px 'Inter Tight',sans-serif;color:#003049;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;transition:background .35s,color .35s,box-shadow .35s}
+.dayc[aria-pressed="true"]{background:#003049;color:#FFFFFF;box-shadow:none}
+.dayc i{width:6px;height:6px;border-radius:50%;background:currentColor;opacity:.3}
+.dayc[aria-pressed="true"] i{background:#F6DDB0;opacity:1}
+.sumr{display:flex;justify-content:space-between;gap:16px;padding:14px 0;border-top:1px solid rgba(255,255,255,.16);font-size:15px}
+@keyframes stepIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.stepIn{animation:stepIn .7s cubic-bezier(.16,1,.3,1) both}
+</style>
+<style>
+/* L→R panel wipe */
+@keyframes wipeOut{0%{clip-path:inset(0 0 0 0)}100%{clip-path:inset(0 0 0 100%)}}
+@keyframes wipeHalf{0%{clip-path:inset(0 0 0 0);opacity:1}72%{clip-path:inset(0 50% 0 0);opacity:1}100%{clip-path:inset(0 50% 0 0);opacity:0}}
+@keyframes wipeTop{0%{clip-path:inset(0 0 0 0);opacity:1}72%{clip-path:inset(0 0 0 0);opacity:1}100%{clip-path:inset(0 0 100% 0);opacity:0}}
+.wipeOut{animation:wipeOut 1.05s .12s cubic-bezier(.76,0,.24,1) both}
+.wipeHalf{animation:wipeHalf 1.25s .1s cubic-bezier(.76,0,.24,1) both}
+@media (max-width: 900px){.wipeHalf{animation-name:wipeTop}}
+@media (prefers-reduced-motion: reduce){.wipeOut,.wipeHalf{display:none}}
+</style>
+<style>
+@keyframes panelIn{0%{width:100%;opacity:1}72%{width:50%;opacity:1}100%{width:50%;opacity:0}}
+@keyframes panelFade{from{opacity:1}to{opacity:0}}
+.panelIn{position:fixed;left:0;top:0;bottom:0;overflow:hidden;background:#003049;z-index:100;pointer-events:none;animation:panelIn 1.3s .1s cubic-bezier(.76,0,.24,1) both}
+@keyframes panelOut{from{width:100%}to{width:0}}
+.panelOut{position:fixed;right:0;top:0;bottom:0;overflow:hidden;background:#003049;z-index:100;pointer-events:none;animation:panelOut 1.05s .12s cubic-bezier(.76,0,.24,1) both}
+@media (max-width: 900px){.panelIn{width:100%;animation:panelFade .9s .2s ease both}}
+@media (prefers-reduced-motion: reduce){.panelIn,.panelOut{display:none}}
+
+@keyframes lpGrow{from{width:50vw}to{width:100vw}}
+.lpGrow{position:fixed!important;left:0;top:0;height:100vh!important;z-index:100;animation:lpGrow .9s cubic-bezier(.76,0,.24,1) both}
+.wm{grid-column:2}
+@media (max-width: 900px){.wm{grid-column:auto}.lpGrow{position:relative!important;animation:none;width:auto}}
+</style>
+<style>
+@keyframes lookOut{0%,12%{opacity:1}78%,100%{opacity:0}}
+.lookOut{position:absolute;inset:0;animation:lookOut 1.3s .1s ease-in-out both}
+.late .ld>span{animation-delay:1.25s!important}
+.late .ld+.ld>span{animation-delay:1.35s!important}
+.late .pillIn{animation-delay:1.55s!important}
+</style>
+</helmet>
+<div style="position: relative; background: #FFFFFF; color: #003049; font-family: 'Inter Tight', 'Helvetica Neue', Arial, sans-serif; font-size: 16px; line-height: 1.5">
+
+<sc-if value="{{entry}}" hint-placeholder-val="{{ false }}"><div class="panelIn" aria-hidden="true"><div style="position: absolute; inset: 0; overflow: hidden"><div aria-hidden="true" style="position: absolute; left: -12%; right: -12%; top: 0; height: 100vh"><img src="./assets/d30958deea0f2c30d185036d50b38dc8.webp" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 25% 50%; opacity: .18"></div><div style="position: absolute; inset: 0; background: linear-gradient(170deg, rgba(0,48,73,.3), rgba(0,48,73,.95) 65%)"></div></div><div class="lookOut"><div style="position: absolute; inset: 0; overflow: hidden"><div aria-hidden="true" style="position: absolute; left: -12%; right: -12%; top: 0; height: 100vh"><img src="./assets/d30958deea0f2c30d185036d50b38dc8.webp" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 25% 50%; opacity: .9"></div><div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,48,73,.15) 0%, rgba(0,48,73,0) 35%, rgba(0,48,73,.88) 78%)"></div></div></div></div></sc-if>
+<a href="Dashboard.dc.html" ref="{{dashRef}}" tabindex="-1" aria-hidden="true" style="position: fixed; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); left: 0; top: 0">Dashboard</a>
+<a href="Lesson.dc.html" ref="{{lessonRef}}" tabindex="-1" aria-hidden="true" style="position: fixed; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); left: 0; top: 0">Lesson</a>
+
+<div class="wl">
+<aside class="lp {{lpCls}} {{lateCls}}" style="position: sticky; top: 0; height: 100vh; min-height: 560px; background: #003049; color: #FFFFFF; padding: clamp(24px, 3vw, 44px); display: flex; flex-direction: column; gap: 28px; overflow: hidden">
+<div aria-hidden="true" style="position: absolute; left: -12%; right: -12%; top: 0; height: 100vh"><img src="./assets/d30958deea0f2c30d185036d50b38dc8.webp" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 25% 50%; opacity: .18"></div>
+<div aria-hidden="true" style="position: absolute; inset: 0; background: linear-gradient(170deg, rgba(0,48,73,.3), rgba(0,48,73,.95) 65%)"></div>
+<div style="position: relative; display: flex; justify-content: space-between; align-items: center"><span class="srf silver still" style="font-size: 32px; font-style: italic; line-height: 1.1; padding-right: 4px">Ufq.</span><span class="cap" style="color: #F6DDB0">Day one</span></div>
+<div style="position: relative; margin-top: auto; display: flex; flex-direction: column; gap: 18px">
+<span class="cap" style="color: rgba(255,255,255,.6)">Step {{stepNo}} of 4</span>
+<h1 class="srf big" style="margin: 0; font-size: clamp(48px, 5vw, 84px); line-height: .98"><span class="mask ld"><span>Welcome.</span></span><span class="mask ld"><span style="animation-delay: .1s"><em style="color: #F6DDB0">Let’s set the pace.</em></span></span></h1>
+<div style="display: flex; flex-direction: column">
+<sc-for list="{{summary}}" as="m" hint-placeholder-count="4"><div class="sumr"><span style="color: rgba(255,255,255,.65)">{{m.k}}</span><span style="font-weight: 600; color: {{m.c}}">{{m.v}}</span></div></sc-for>
+</div>
+</div>
+</aside>
+
+<main class="wm" style="display: flex; flex-direction: column; padding: clamp(24px, 3vw, 44px) clamp(20px, 5vw, 80px); min-height: 100vh">
+<div style="display: flex; align-items: center; gap: 6px" aria-label="Progress"><sc-for list="{{bars}}" as="b" hint-placeholder-count="4"><span style="flex: 1; height: 4px; border-radius: 4px; background: {{b.c}}; transition: background .5s"></span></sc-for></div>
+<div style="flex: 1; display: flex; flex-direction: column; justify-content: center; padding: clamp(32px, 5vw, 64px) 0; max-width: 620px; width: 100%">
+
+<sc-if value="{{st0}}" hint-placeholder-val="{{ true }}">
+<div class="stepIn" style="display: flex; flex-direction: column; gap: 22px">
+<span class="cap" style="color: #669BBC">Study days</span>
+<h2 class="srf" style="margin: 0; font-size: clamp(36px, 4vw, 56px); line-height: 1.02">Which days will you <em style="color: #C1121F">study?</em></h2>
+<p style="margin: 0; color: rgba(0,48,73,.72)">Your plan only puts work on these days. Five is a good start — you can change it any time.</p>
+<div role="group" aria-label="Study days" style="display: flex; gap: 8px; flex-wrap: wrap"><sc-for list="{{days}}" as="d" hint-placeholder-count="7"><button type="button" class="dayc" aria-pressed="{{d.on}}" onClick="{{d.pick}}">{{d.label}}<i></i></button></sc-for></div>
+<span style="font-size: 14px; color: {{dayHintC}}">{{dayHint}}</span>
+</div>
+</sc-if>
+
+<sc-if value="{{st1}}" hint-placeholder-val="{{ false }}">
+<div class="stepIn" style="display: flex; flex-direction: column; gap: 22px">
+<span class="cap" style="color: #669BBC">Session length</span>
+<h2 class="srf" style="margin: 0; font-size: clamp(36px, 4vw, 56px); line-height: 1.02">How long is a <em style="color: #C1121F">normal day?</em></h2>
+<div role="radiogroup" aria-label="Session length" style="display: flex; flex-direction: column; gap: 10px"><sc-for list="{{lens}}" as="l" hint-placeholder-count="3"><button type="button" class="opt2" aria-pressed="{{l.on}}" onClick="{{l.pick}}"><span style="display: flex; flex-direction: column; gap: 2px"><span class="srf" style="font-size: 28px; line-height: 1">{{l.t}}</span><span style="font-size: 14px; opacity: .75">{{l.s}}</span></span><span class="rd" aria-hidden="true"></span></button></sc-for></div>
+</div>
+</sc-if>
+
+<sc-if value="{{st2}}" hint-placeholder-val="{{ false }}">
+<div class="stepIn" style="display: flex; flex-direction: column; gap: 22px">
+<span class="cap" style="color: #669BBC">Reminder</span>
+<h2 class="srf" style="margin: 0; font-size: clamp(36px, 4vw, 56px); line-height: 1.02">When should we <em style="color: #C1121F">nudge you?</em></h2>
+<p style="margin: 0; color: rgba(0,48,73,.72)">One email to your Google address at study time. Never more than one a day.</p>
+<div role="radiogroup" aria-label="Reminder time" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px"><sc-for list="{{times}}" as="t" hint-placeholder-count="5"><button type="button" class="opt2" aria-pressed="{{t.on}}" onClick="{{t.pick}}" style="flex-direction: column; align-items: flex-start; gap: 4px"><span class="srf" style="font-size: 30px; line-height: 1">{{t.t}}</span><span style="font-size: 13px; opacity: .75">{{t.s}}</span></button></sc-for></div>
+</div>
+</sc-if>
+
+<sc-if value="{{st3}}" hint-placeholder-val="{{ false }}">
+<div class="stepIn" style="display: flex; flex-direction: column; gap: 22px">
+<span class="cap" style="color: #669BBC">Your first week</span>
+<h2 class="srf" style="margin: 0; font-size: clamp(36px, 4vw, 56px); line-height: 1.02">Here’s how it <em style="color: #C1121F">starts.</em></h2>
+<div style="display: flex; flex-direction: column; border-top: 1px solid rgba(0,48,73,.14)">
+<sc-for list="{{week}}" as="w" hint-placeholder-count="5"><div style="display: grid; grid-template-columns: 56px minmax(0, 1fr) auto; gap: 14px; align-items: center; padding: 14px 0; border-bottom: 1px solid rgba(0,48,73,.14)"><span class="cap" style="color: {{w.c}}">{{w.d}}</span><span style="display: flex; flex-direction: column"><span style="font-weight: 600">{{w.t}}</span><span style="font-size: 14px; color: rgba(0,48,73,.62)">{{w.s}}</span></span><span style="font-size: 13px; color: rgba(0,48,73,.6)">{{w.m}}</span></div></sc-for>
+</div>
+<span style="font-size: 14px; color: rgba(0,48,73,.65)">Your score, streak and mistake log start filling in from today.</span>
+</div>
+</sc-if>
+</div>
+
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap">
+<button type="button" class="ghost" onClick="{{back}}" style="visibility: {{backVis}}">Back</button>
+<div style="display: flex; gap: 10px; flex-wrap: wrap; justify-content: flex-end">
+<sc-if value="{{st3}}" hint-placeholder-val="{{ false }}"><a href="Lesson.dc.html" onClick="{{goLesson}}" class="ghost" style="min-height: 52px">Start with the lesson</a></sc-if>
+<button type="button" class="btn" onClick="{{next}}" style="opacity: {{nextOp}}; pointer-events: {{nextPe}}">{{nextLabel}} <span class="ar" aria-hidden="true"><span>→</span><span>→</span></span></button>
+</div>
+</div>
+</main>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+constructor(props) { super(props); let entry = ''; try { entry = sessionStorage.getItem('ufqWipe') || ''; sessionStorage.removeItem('ufqWipe'); } catch (e) {} this._entry = entry === 'half'; this.state = { step: 0, days: { 0: true, 1: true, 2: true, 3: true, 4: true }, len: 1, time: 2, leaving: false }; }
+leave(link) { if (!link || this.state.leaving) return; this.setState({ leaving: true }); try { sessionStorage.setItem('ufqWipe', 'wipeW'); } catch (e) {} setTimeout(() => { link.click(); setTimeout(() => this.setState({ leaving: false }), 2500); }, 950); }
+renderVals() {
+const s = this.state;
+const D = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+const on = D.map((_, i) => !!s.days[i]);
+const nd = on.filter(Boolean).length;
+const days = D.map((label, i) => ({ label, on: on[i] ? 'true' : 'false', pick: () => this.setState({ days: Object.assign({}, this.state.days, { [i]: !this.state.days[i] }) }) }));
+const L = [['20 min', 'Light — one short set a day'], ['40 min', 'Recommended — lesson, set and redos'], ['60 min', 'Intensive — for a close test date']];
+const lens = L.map(([t, sub], i) => ({ t, s: sub, on: s.len === i ? 'true' : 'false', pick: () => this.setState({ len: i }) }));
+const T = [['07:00', 'Before school'], ['16:00', 'After school'], ['19:00', 'Evening'], ['21:00', 'Late'], ['Off', 'No reminders']];
+const times = T.map(([t, sub], i) => ({ t, s: sub, on: s.time === i ? 'true' : 'false', pick: () => this.setState({ time: i }) }));
+const st = s.step;
+const daysLabel = nd === 0 ? '—' : nd === 7 ? 'Every day' : on.every((v, i) => v === (i < 5)) ? 'Mon – Fri' : D.filter((_, i) => on[i]).join(', ');
+const summary = [
+{ k: 'Target', v: '750 · May 2027', c: '#FFFFFF' },
+{ k: 'Study days', v: st >= 0 && nd ? daysLabel + ' · ' + nd + '/week' : '—', c: st > 0 ? '#FFFFFF' : '#F6DDB0' },
+{ k: 'Session', v: st >= 1 ? L[s.len][0] : '—', c: st > 1 ? '#FFFFFF' : st === 1 ? '#F6DDB0' : 'rgba(255,255,255,.4)' },
+{ k: 'Reminder', v: st >= 2 ? (T[s.time][0] === 'Off' ? 'Off' : T[s.time][0] + ' by email') : '—', c: st > 2 ? '#FFFFFF' : st === 2 ? '#F6DDB0' : 'rgba(255,255,255,.4)' }
+];
+const studyIdx = D.map((d, i) => i).filter(i => on[i]);
+const plan = [['Lesson · right-triangle ratios', 'Geometry & Trig', '12 min'], ['12 Geometry questions', 'Practice set', '20 min'], ['Systems of equations', 'Algebra', L[s.len][0]], ['Percentages', 'Problem-Solving & Data', L[s.len][0]], ['Quadratics', 'Advanced Math', L[s.len][0]]];
+const week = studyIdx.slice(0, 4).map((di, j) => ({ d: D[di], t: plan[j][0], s: plan[j][1], m: plan[j][2], c: j === 0 ? '#C1121F' : '#669BBC' })).concat([{ d: 'Sat', t: 'Mock 1 · full-length Math', s: 'Sets your starting score', m: '70 min', c: '#C1121F' }]);
+const ok = st !== 0 || nd > 0;
+return {
+stepNo: String(st + 1), st0: st === 0, st1: st === 1, st2: st === 2, st3: st === 3,
+bars: [0, 1, 2, 3].map(i => ({ c: i <= st ? '#C1121F' : '#E3E9EE' })),
+days, lens, times, summary, week,
+dayHint: nd === 0 ? 'Pick at least one day.' : nd + ' days a week · about ' + (nd * [20, 40, 60][s.len]) + ' minutes in total.', dayHintC: nd === 0 ? '#C1121F' : 'rgba(0,48,73,.65)',
+backVis: st > 0 ? 'visible' : 'hidden', back: () => this.setState({ step: Math.max(0, this.state.step - 1) }),
+nextLabel: st === 3 ? 'Open my dashboard' : 'Continue', nextOp: ok ? '1' : '.4', nextPe: ok ? 'auto' : 'none',
+entry: this._entry, lateCls: this._entry ? 'late' : '', lpCls: s.leaving ? 'lpGrow' : '', wipeClip: s.leaving ? 'inset(0 0 0 50%)' : 'inset(0 50% 0 50%)', wipeLogo: '0',
+lessonRef: (el) => { this.lessonLink = el; },
+goLesson: (ev) => { if (ev && ev.preventDefault) ev.preventDefault(); this.leave(this.lessonLink); },
+dashRef: (el) => { this.dashLink = el; },
+next: () => { if (this.state.step < 3) { this.setState({ step: this.state.step + 1 }); return; } this.leave(this.dashLink); }
+};
+}
+}
+</script>
+</body>
+</html>
