@@ -18,7 +18,10 @@
   var KEY = 'satap_session';
 
   var m = /\/([A-Za-z]+)\.dc\.html$/.exec(location.pathname);
-  var page = m ? m[1] : null;
+  var BY_PATH = {};
+  Object.keys(ROUTES).forEach(function (k) { BY_PATH[ROUTES[k]] = k; });
+  var cleanPath = location.pathname.replace(/\/+$/, '') || '/';
+  var page = m ? m[1] : (BY_PATH[cleanPath] || null);
   var cfg = window.UFQ_CONFIG || { url: '', key: '' };
 
   /* ---------------- session ---------------- */
@@ -208,34 +211,89 @@
     var parts = t.split(/\n+|(?<=[.!?])\s+(?=[A-Z0-9])/).map(function (x) { return x.trim(); }).filter(Boolean);
     return parts.slice(0, 5);
   }
-  /* options: { slugs: ['algebra', ...] (empty = all five), count: 10 } -> [{id, subjectId, subject, stem, opts[], c, fig, steps[], trap, skill}] */
+  /* Written (grid-in) answers: the stored key may list alternatives, "87/2 or 43.5" */
+  function toNumber(raw) {
+    var t = String(raw == null ? '' : raw).trim().replace(/[$,\s]/g, '').replace(/^\+/, '');
+    if (!t) return NaN;
+    var frac = t.match(/^(-?\d+(?:\.\d+)?)\/(\d+(?:\.\d+)?)$/);
+    if (frac) return Number(frac[2]) === 0 ? NaN : Number(frac[1]) / Number(frac[2]);
+    if (/^-?\d*\.?\d+$/.test(t)) return Number(t);
+    return NaN;
+  }
+  Ufq.isWrittenCorrect = function (input, key) {
+    var given = String(input == null ? '' : input).trim();
+    if (!given) return false;
+    var cands = String(key == null ? '' : key).split(/\s+or\s+/i).map(function (x) { return x.trim(); }).filter(Boolean);
+    var g = toNumber(given);
+    for (var i = 0; i < cands.length; i++) {
+      var cand = cands[i];
+      if (given.toLowerCase() === cand.toLowerCase()) return true;
+      var c = toNumber(cand);
+      if (isNaN(g) || isNaN(c)) continue;
+      if (Math.abs(g - c) <= 1e-9 * Math.max(1, Math.abs(c))) return true;
+      if (cand.indexOf('/') > -1 && /^-?\d*\.\d{2,3}$/.test(given.replace(/,/g, '')) && Math.abs(g - c) <= 0.0051) return true;
+    }
+    return false;
+  };
+
+  var QCOLS = 'id,subject_id,difficulty,question_text,options,correct_index,image_url,explanation,question_type';
+  function countOf(subjectId) {
+    return ensureFresh().then(function (s) {
+      var h = authHeaders(s && s.access_token); h.Prefer = 'count=exact'; h.Range = '0-0'; h['Range-Unit'] = 'items';
+      return fetch(cfg.url + '/rest/v1/questions?select=id&subject_id=eq.' + subjectId, { headers: h }).then(function (r) {
+        var m = /\/(\d+)$/.exec(r.headers.get('content-range') || ''); return m ? Number(m[1]) : 0;
+      });
+    });
+  }
+  function toQuestion(q, sub) {
+    var written = q.question_type === 'written';
+    var options = Array.isArray(q.options) ? q.options : [];
+    if (!written && (options.length < 2 || options.length > 4)) return null;
+    var key = written ? Ufq.tex(q.explanation || '') : '';
+    return {
+      id: q.id, subjectId: q.subject_id, subject: sub.title || 'Math',
+      stem: Ufq.tex(q.question_text), written: written, key: key,
+      opts: written ? [] : options.map(function (x) { return Ufq.tex(x); }),
+      c: written ? key : ('ABCD'[q.correct_index] || 'A'),
+      fig: q.image_url || '', steps: written ? (key ? ['The correct answer is ' + key + '.'] : []) : steps(q.explanation), trap: '', skill: sub.title || 'Math',
+      raw: { id: q.id, question_text: q.question_text, options: q.options, correct_index: q.correct_index, explanation: q.explanation, question_type: q.question_type },
+    };
+  }
+  /* options: { slugs: ['algebra', ...] (empty = all five), count: 10 }
+     Draws random questions from the whole bank (multiple choice and written). */
   Ufq.loadQuestions = function (o) {
     o = o || {};
-    var count = Math.max(1, Math.min(Number(o.count) || 10, 40));
+    var want = Math.max(1, Math.min(Number(o.count) || 10, 40));
     return Ufq.subjects().then(function (subjects) {
       var chosen = subjects.filter(function (x) { return !(o.slugs && o.slugs.length) || o.slugs.indexOf(x.slug) > -1; });
-      var byId = {}; chosen.forEach(function (x) { byId[x.id] = x; });
-      var ids = chosen.map(function (x) { return x.id; }).join(',');
-      var base = '/rest/v1/questions?question_type=eq.multiple_choice&subject_id=in.(' + ids + ')';
-      return Ufq.rest(base + '&select=id&limit=2000').then(function (rows) {
-        var pick = shuffle(rows.map(function (r) { return r.id; })).slice(0, count * 2);
-        if (!pick.length) return [];
-        return Ufq.rest('/rest/v1/questions?select=id,subject_id,difficulty,question_text,options,correct_index,image_url,explanation&id=in.(' + pick.join(',') + ')').then(function (qs) {
-          var out = [];
-          shuffle(qs).forEach(function (q) {
-            var options = Array.isArray(q.options) ? q.options : [];
-            if (options.length < 2 || options.length > 4 || out.length >= count) return;
-            var sub = byId[q.subject_id] || {};
-            out.push({
-              id: q.id, subjectId: q.subject_id, subject: sub.title || 'Math',
-              stem: Ufq.tex(q.question_text), opts: options.map(function (x) { return Ufq.tex(x); }),
-              c: 'ABCD'[q.correct_index] || 'A', correctIndex: q.correct_index,
-              fig: q.image_url || '', steps: steps(q.explanation), trap: '', skill: sub.title || 'Math',
-              raw: { id: q.id, question_text: q.question_text, options: q.options, correct_index: q.correct_index, explanation: q.explanation, question_type: 'multiple_choice' },
+      return Promise.all(chosen.map(function (x) { return countOf(x.id).then(function (n) { return { sub: x, n: n }; }); })).then(function (pools) {
+        pools = pools.filter(function (p) { return p.n > 0; });
+        var total = pools.reduce(function (t, p) { return t + p.n; }, 0);
+        if (!total) return [];
+        var got = {}, out = [], rounds = 0;
+        function pickOne(used) {
+          var r = Math.floor(Math.random() * total), p = null;
+          for (var k = 0; k < pools.length; k++) { if (r < pools[k].n) { p = pools[k]; break; } r -= pools[k].n; }
+          var key = p.sub.id + ':' + r;
+          if (used[key]) return null;
+          used[key] = 1;
+          return Ufq.rest('/rest/v1/questions?select=' + QCOLS + '&subject_id=eq.' + p.sub.id + '&order=id&limit=1&offset=' + r)
+            .then(function (rows) { return rows && rows[0] ? { q: rows[0], sub: p.sub } : null; });
+        }
+        function round() {
+          rounds++;
+          var need = Math.min(want - out.length + 4, total), jobs = [], used = {};
+          for (var i = 0; i < need * 3 && jobs.length < need; i++) { var j = pickOne(used); if (j) jobs.push(j); }
+          return Promise.all(jobs).then(function (items) {
+            items.forEach(function (it) {
+              if (!it || got[it.q.id] || out.length >= want) return;
+              var q = toQuestion(it.q, it.sub); if (!q) return;
+              got[it.q.id] = 1; out.push(q);
             });
+            return out.length < want && rounds < 4 ? round() : out;
           });
-          return out;
-        });
+        }
+        return round();
       });
     });
   };
@@ -275,23 +333,117 @@
   }
   /* open mistakes from saved attempts, in the Mistakes page's row shape:
      [type, domain, when, stem, 'B · yours', 'C · right', why, streak] */
-  Ufq.mistakes = function () {
-    return Ufq.history().then(function (list) {
+  Ufq.mistakes = function (given) {
+    return (given ? Promise.resolve(given) : Ufq.history()).then(function (list) {
       var seen = {}, out = [];
       list.forEach(function (t) {
         (t.answers || []).forEach(function (a) {
           var q = a && a.question; if (!q || a.correct || !q.id || seen[q.id]) return;
           seen[q.id] = 1;
           var opts = Array.isArray(q.options) ? q.options : [];
-          var mine = (a.selected === null || a.selected === undefined) ? '—' : 'ABCD'[a.selected] + ' · ' + Ufq.tex(opts[a.selected]);
-          var right = 'ABCD'[q.correct_index] + ' · ' + Ufq.tex(opts[q.correct_index]);
-          var why = (Ufq.tex(q.explanation || '').split(/(?<=[.!?])\s+/)[0]) || 'Open the review for this question to see the steps.';
+          var wr = q.question_type === 'written';
+          var mine = (a.selected === null || a.selected === undefined || a.selected === '') ? '—' : wr ? String(a.selected) : 'ABCD'[a.selected] + ' · ' + Ufq.tex(opts[a.selected]);
+          var right = wr ? Ufq.tex(q.explanation) : 'ABCD'[q.correct_index] + ' · ' + Ufq.tex(opts[q.correct_index]);
+          var why = wr ? 'The correct answer is ' + Ufq.tex(q.explanation) + '.' : ((Ufq.tex(q.explanation || '').split(/(?<=[.!?])\s+/)[0]) || 'Open the review for this question to see the steps.');
           out.push([mine === '—' ? 'time' : 'concept', GROUPS[t.subject] || 'Algebra', ago(t.ts), Ufq.tex(q.question_text), mine, right, why, 0]);
         });
       });
       return out;
     });
   };
+
+
+  /* ---------------- login streak + dashboard numbers ---------------- */
+  function ymd(d) { return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); }
+  Ufq.today = function () { return ymd(new Date()); };
+  Ufq.trackLogin = function () {
+    var u = Ufq.user(); if (!u) return;
+    var today = Ufq.today(), key = 'ufq_login_' + u.id;
+    try { if (localStorage.getItem(key) === today) return; } catch (e) { /* storage blocked */ }
+    Ufq.rest('/rest/v1/login_streaks?on_conflict=user_id,login_date', { method: 'POST', headers: { Prefer: 'resolution=ignore-duplicates,return=minimal' }, body: JSON.stringify({ user_id: u.id, login_date: today }) })
+      .then(function () { try { localStorage.setItem(key, today); } catch (e) { /* ignore */ } }).catch(function () { /* will retry next visit */ });
+  };
+  Ufq.goal = function () {
+    var g = null; try { g = JSON.parse(localStorage.getItem('ufq_goal') || 'null'); } catch (e) { g = null; }
+    return { target: g && g.target ? Number(g.target) : 750, date: g && g.date ? g.date : '' };
+  };
+  var STAGE_AT = [0, 400, 550, 700];
+  function stageOf(score) { return score >= 700 ? 3 : score >= 550 ? 2 : score >= 400 ? 1 : 0; }
+  var DOMAINS = [
+    { name: 'Algebra', slugs: ['algebra'], q: 'algebra' },
+    { name: 'Advanced Math', slugs: ['advanced-math'], q: 'advanced-math' },
+    { name: 'Problem-Solving & Data', slugs: ['problem-solving', 'data-analysis'], q: 'problem-solving,data-analysis' },
+    { name: 'Geometry & Trig', slugs: ['geometry'], q: 'geometry' },
+  ];
+  /* everything the Dashboard shows, from the user's real activity */
+  Ufq.dashboard = function () {
+    return Promise.all([
+      Ufq.subjects(),
+      Ufq.rest('/rest/v1/user_scores?select=subject_id,score'),
+      Ufq.history(),
+      Ufq.rest('/rest/v1/login_streaks?select=login_date&order=login_date.desc&limit=500'),
+    ]).then(function (r) {
+      var subjects = r[0], scores = r[1] || [], hist = r[2] || [], logins = r[3] || [];
+      var idSlug = {}; subjects.forEach(function (x) { idSlug[x.id] = x.slug; });
+      var bySlug = {}; scores.forEach(function (x) { bySlug[idSlug[x.subject_id]] = x.score; });
+      var domains = DOMAINS.map(function (d) {
+        var vals = d.slugs.map(function (sl) { return bySlug[sl]; }).filter(function (v) { return v !== undefined; });
+        var score = vals.length ? Math.round(vals.reduce(function (a, b) { return a + b; }, 0) / vals.length) : 0;
+        return { name: d.name, q: d.q, score: score, started: vals.length > 0, stage: stageOf(score) };
+      });
+      var weakest = domains.slice().sort(function (a, b) { return a.score - b.score; })[0];
+      var days = {}; logins.forEach(function (x) { days[x.login_date] = 1; });
+      hist.forEach(function (h) { days[ymd(new Date(h.ts))] = 1; });
+      var today = Ufq.today();
+      days[today] = 1;
+      var keys = Object.keys(days).sort();
+      var cur = 0, d = new Date(); if (!days[ymd(d)]) d.setDate(d.getDate() - 1);
+      while (days[ymd(d)]) { cur++; d.setDate(d.getDate() - 1); }
+      var longest = 0, run = 0, prev = null;
+      keys.forEach(function (k) { var t = new Date(k + 'T00:00:00'); if (prev && Math.round((t - prev) / 86400000) === 1) run++; else run = 1; if (run > longest) longest = run; prev = t; });
+      var join = keys[0] || today;
+      var weekIn = 0; for (var i = 0; i < 7; i++) { var dd = new Date(); dd.setDate(dd.getDate() - i); if (days[ymd(dd)]) weekIn++; }
+      var now = Date.now(), wk = 7 * 86400000;
+      var thisW = hist.filter(function (h) { return now - h.ts < wk; }), lastW = hist.filter(function (h) { return now - h.ts >= wk && now - h.ts < 2 * wk; });
+      var pct = function (list) { var t = list.reduce(function (a, h) { return a + h.max; }, 0), c = list.reduce(function (a, h) { return a + h.sc; }, 0); return t ? Math.round(c / t * 100) : null; };
+      return Ufq.mistakes(hist).then(function (mis) {
+        return { domains: domains, weakest: weakest, days: days, join: join, today: today, streak: cur, longest: longest, weekIn: weekIn, signedIn: keys.length, since: Math.max(1, Math.round((new Date(today + 'T00:00:00') - new Date(join + 'T00:00:00')) / 86400000) + 1), history: hist, last: hist[0] || null, accWeek: pct(thisW), accPrev: pct(lastW), mistakes: mis.length };
+      });
+    });
+  };
+  /* remove the design's sample-only areas and fix role-based links */
+  var REMOVED = { Plan: 1, Report: 1, Notifications: 1, Lesson: 1 };
+  if (page && REMOVED[page]) { location.replace('/dashboard'); return; }
+  if (page === 'MockTests') { location.replace('/practice/sat-tests'); return; }
+  if (page === 'Admin') { location.replace('/admin/questions'); return; }
+  (function () {
+    var st = document.createElement('style');
+    st.textContent = 'a.nv[href="/plan"],a.nv[href="/report"],a.nv[href="/notifications"],a.nv[href="/lesson"],a.nv[href="/admin"],a[href="/admin"],button[aria-label="Notifications"]{display:none!important}';
+    (document.head || document.documentElement).appendChild(st);
+  })();
+  if (Ufq.isSignedIn()) {
+    Ufq.rest('/rest/v1/profiles?select=role&id=eq.' + (Ufq.user() || {}).id).then(function (rows) {
+      var role = rows && rows[0] && rows[0].role;
+      if (role === 'admin' || role === 'owner') {
+        var st2 = document.createElement('style');
+        st2.textContent = 'a.nv[href="/admin"],a[href="/admin"],a[href="/admin/questions"]{display:flex!important}';
+        document.head.appendChild(st2);
+        var fix = function () { document.querySelectorAll('a[href="/admin"]').forEach(function (a) { a.setAttribute('href', '/admin/questions'); }); };
+        fix(); new MutationObserver(fix).observe(document.documentElement, { childList: true, subtree: true });
+      }
+    }).catch(function () { /* not an admin */ });
+    Ufq.trackLogin();
+  }
+
+
+  /* saved preferences (Settings page) that apply everywhere */
+  Ufq.applyPrefs = function () {
+    var sv = null; try { sv = JSON.parse(localStorage.getItem('ufq_settings') || 'null'); } catch (e) { sv = null; }
+    var el = document.getElementById('ufq-prefs');
+    if (!el) { el = document.createElement('style'); el.id = 'ufq-prefs'; (document.head || document.documentElement).appendChild(el); }
+    el.textContent = sv && sv.motion ? '*,*::before,*::after{animation-duration:.001s!important;animation-delay:0s!important;transition-duration:.001s!important}' : '';
+  };
+  Ufq.applyPrefs();
 
   /* result: { title, subjectId (or null), subjectTitle, score, total, minutes, answers:[{qIdx, selected, correct, question}] } */
   Ufq.savePractice = function (r) {
@@ -358,7 +510,7 @@
   // full mock tests run on the site's real SAT test engine (questions, modules, timer, scoring)
   document.addEventListener('click', function (e) {
     var a = e.target && e.target.closest && e.target.closest('a[href]');
-    if (!a || !/MockTest\.dc\.html(\?|#|$)/.test(a.getAttribute('href') || '')) return;
+    if (!a || !/^(\/mock-test|[^?#]*MockTest\.dc\.html)(\?|#|$)/.test(a.getAttribute('href') || '')) return;
     e.preventDefault(); e.stopPropagation(); location.assign('/practice/sat-tests');
   }, true);
 

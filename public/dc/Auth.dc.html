@@ -1,22 +1,20 @@
 <!doctype html>
 <html lang="en">
 <head>
-<base href="/dc/"><script src="config.js"></script><script src="bridge.js"></script>
+<link rel="stylesheet" href="/dc/fonts.css"><link rel="preload" as="font" type="font/woff2" crossorigin href="/dc/fonts/Newsreader-normal-latin.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="/dc/fonts/Newsreader-italic-latin.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="/dc/fonts/InterTight-normal-latin.woff2"><script src="/dc/config.js"></script><script src="/dc/bridge.js"></script>
 <script>try{sessionStorage.removeItem('ufqApp')}catch(e){}</script>
-<link rel="preload" as="image" href="./assets/d30958deea0f2c30d185036d50b38dc8.webp">
-<script>try{var f=sessionStorage.getItem('ufqWipe');if(f){var w=f==='wipeW',W='max(124vw, 177.78vh)',o=w?'.82':'.1';var s=document.createElement('style');s.textContent='html{min-height:100vh;background:'+(w?'linear-gradient(170deg, rgba(0,48,73,.3), rgba(0,48,73,.95) 65%)':'linear-gradient(180deg, rgba(0,48,73,.15) 0%, rgba(0,48,73,0) 35%, rgba(0,48,73,.88) 78%)')+',linear-gradient(rgba(0,48,73,'+o+'),rgba(0,48,73,'+o+')),url(./assets/d30958deea0f2c30d185036d50b38dc8.webp) calc((124vw - '+W+') * .25 - 12vw) calc((100vh - '+W+' * .5625) * .5) / '+W+' auto no-repeat,#003049!important}body{background:transparent!important}';document.head.appendChild(s);setTimeout(function(){s.remove()},2600)}}catch(e){}</script>
+<link rel="preload" as="image" href="/dc/assets/d30958deea0f2c30d185036d50b38dc8.webp">
+<script>try{var f=sessionStorage.getItem('ufqWipe');if(f){var w=f==='wipeW',W='max(124vw, 177.78vh)',o=w?'.82':'.1';var s=document.createElement('style');s.textContent='html{min-height:100vh;background:'+(w?'linear-gradient(170deg, rgba(0,48,73,.3), rgba(0,48,73,.95) 65%)':'linear-gradient(180deg, rgba(0,48,73,.15) 0%, rgba(0,48,73,0) 35%, rgba(0,48,73,.88) 78%)')+',linear-gradient(rgba(0,48,73,'+o+'),rgba(0,48,73,'+o+')),url(/dc/assets/d30958deea0f2c30d185036d50b38dc8.webp) calc((124vw - '+W+') * .25 - 12vw) calc((100vh - '+W+' * .5625) * .5) / '+W+' auto no-repeat,#003049!important}body{background:transparent!important}';document.head.appendChild(s);setTimeout(function(){s.remove()},2600)}}catch(e){}</script>
 <style>html,body{margin:0;background:#003049}</style>
 <meta charset="utf-8">
 <title>Ufq — Create your account</title>
-<script src="./_runtime/react.js"></script>
-<script src="./_runtime/react-dom.js"></script>
-<script src="./_runtime/support.js"></script>
+<script src="/dc/_runtime/react.js"></script>
+<script src="/dc/_runtime/react-dom.js"></script>
+<script src="/dc/_runtime/support.js"></script>
 </head>
 <body>
 <x-dc>
 <helmet>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..600&amp;family=Inter+Tight:wght@400..700&amp;display=swap" rel="stylesheet">
 <style>
 html,body{margin:0;background:#003049}
 *{box-sizing:border-box}
@@ -141,30 +139,30 @@ a{color:#003049}
 
 <div class="authRoot {{rootCls}}" style="position: relative; background: #FFFFFF; color: #003049; font-family: 'Inter Tight', 'Helvetica Neue', Arial, sans-serif; font-size: 16px; line-height: 1.5; min-height: 100vh; overflow: hidden">
 
-<sc-if value="{{entry}}" hint-placeholder-val="{{ false }}"><div class="panelIn" aria-hidden="true"><div style="position: absolute; inset: 0; overflow: hidden"><div aria-hidden="true" style="position: absolute; left: -12%; right: -12%; top: 0; height: 100vh"><img src="./assets/d30958deea0f2c30d185036d50b38dc8.webp" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 25% 50%; opacity: .9"></div><div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,48,73,.15) 0%, rgba(0,48,73,0) 35%, rgba(0,48,73,.88) 78%)"></div></div></div></sc-if>
+<sc-if value="{{entry}}" hint-placeholder-val="{{ false }}"><div class="panelIn" aria-hidden="true"><div style="position: absolute; inset: 0; overflow: hidden"><div aria-hidden="true" style="position: absolute; left: -12%; right: -12%; top: 0; height: 100vh"><img src="/dc/assets/d30958deea0f2c30d185036d50b38dc8.webp" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 25% 50%; opacity: .9"></div><div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,48,73,.15) 0%, rgba(0,48,73,0) 35%, rgba(0,48,73,.88) 78%)"></div></div></div></sc-if>
 
 <!-- exit curtain back to the landing page -->
 <div aria-hidden="true" style="position: fixed; inset: 0; z-index: 101; background: #003049; pointer-events: none; display: grid; place-items: center; clip-path: {{curtain}}; transition: clip-path .75s cubic-bezier(.76,0,.24,1)"><span class="srf silver still" style="font-size: clamp(56px, 7vw, 96px); font-style: italic; line-height: 1.1; padding-right: 6px">Ufq.</span></div>
-<a href="Main.dc.html" ref="{{mainRef}}" tabindex="-1" aria-hidden="true" style="position: fixed; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); left: 0; top: 0">Home</a>
-<a href="Welcome.dc.html" ref="{{welRef}}" tabindex="-1" aria-hidden="true" style="position: fixed; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); left: 0; top: 0">Welcome</a>
-<a href="Dashboard.dc.html" ref="{{dashRef}}" tabindex="-1" aria-hidden="true" style="position: fixed; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); left: 0; top: 0">Dashboard</a>
+<a href="/" ref="{{mainRef}}" tabindex="-1" aria-hidden="true" style="position: fixed; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); left: 0; top: 0">Home</a>
+<a href="/welcome" ref="{{welRef}}" tabindex="-1" aria-hidden="true" style="position: fixed; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); left: 0; top: 0">Welcome</a>
+<a href="/dashboard" ref="{{dashRef}}" tabindex="-1" aria-hidden="true" style="position: fixed; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); left: 0; top: 0">Dashboard</a>
 
 <!-- ============ LEFT: editorial visual ============ -->
 <aside class="side {{growCls}}" style="position: absolute; top: 0; bottom: 0; left: 0; width: 50%; z-index: 2; transform: translateX({{visX}}); transition: transform 1.1s cubic-bezier(.76,0,.24,1); overflow: hidden; background: #003049; color: #FFFFFF; display: flex; flex-direction: column; justify-content: space-between; padding: clamp(24px, 3vw, 44px)">
-<div aria-hidden="true" style="position: absolute; left: -12%; right: -12%; top: 0; height: 100vh; transform: translateX({{imgX}}); transition: transform 1.1s cubic-bezier(.76,0,.24,1)"><img src="./assets/d30958deea0f2c30d185036d50b38dc8.webp" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 25% 50%; opacity: .9"></div>
+<div aria-hidden="true" style="position: absolute; left: -12%; right: -12%; top: 0; height: 100vh; transform: translateX({{imgX}}); transition: transform 1.1s cubic-bezier(.76,0,.24,1)"><img src="/dc/assets/d30958deea0f2c30d185036d50b38dc8.webp" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 25% 50%; opacity: .9"></div>
 <div aria-hidden="true" style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,48,73,.15) 0%, rgba(0,48,73,0) 35%, rgba(0,48,73,.88) 78%)"></div>
 <div style="position: relative; display: flex; justify-content: space-between; align-items: center; mix-blend-mode: difference">
-<a href="Main.dc.html" onClick="{{goMain}}" class="srf silver" style="text-decoration: none; font-size: 32px; line-height: 1.1; font-style: italic; padding-right: 4px">Ufq.</a>
-<a href="Main.dc.html" onClick="{{goMain}}" class="cap silver" style="text-decoration: none">← Back to site</a>
+<a href="/" onClick="{{goMain}}" class="srf silver" style="text-decoration: none; font-size: 32px; line-height: 1.1; font-style: italic; padding-right: 4px">Ufq.</a>
+<a href="/" onClick="{{goMain}}" class="cap silver" style="text-decoration: none">← Back to site</a>
 </div>
 <div style="position: relative; display: flex; flex-direction: column; gap: 28px">
 <div style="display: grid">
 <h1 class="srf" aria-hidden="{{sHide}}" style="grid-area: 1 / 1; margin: 0; font-size: clamp(44px, 5.2vw, 84px); line-height: 1">
-<span class="mask ld"><span style="animation-delay: .5s"><span class="roll" style="transform: translateY({{sY}}); transition-delay: {{sD1}}">Your <span class="pillimg pillIn" style="animation-delay: .9s"><img src="./assets/3c8e2de8bb60b1111b1aa7416baaab0c.webp" alt=""></span> climb</span></span></span>
+<span class="mask ld"><span style="animation-delay: .5s"><span class="roll" style="transform: translateY({{sY}}); transition-delay: {{sD1}}">Your <span class="pillimg pillIn" style="animation-delay: .9s"><img src="/dc/assets/3c8e2de8bb60b1111b1aa7416baaab0c.webp" alt=""></span> climb</span></span></span>
 <span class="mask ld"><span style="animation-delay: .6s"><span class="roll" style="transform: translateY({{sY}}); transition-delay: {{sD2}}"><em style="color: #F6DDB0">starts here.</em></span></span></span>
 </h1>
 <h1 class="srf" aria-hidden="{{lHide}}" style="grid-area: 1 / 1; margin: 0; font-size: clamp(44px, 5.2vw, 84px); line-height: 1">
-<span class="mask"><span><span class="roll" style="transform: translateY({{lY}}); transition-delay: {{lD1}}">Welcome <span class="pillimg"><img src="./assets/ce9b4a11d2641379c824819b64e03a4a.webp" alt=""></span> back</span></span></span>
+<span class="mask"><span><span class="roll" style="transform: translateY({{lY}}); transition-delay: {{lD1}}">Welcome <span class="pillimg"><img src="/dc/assets/ce9b4a11d2641379c824819b64e03a4a.webp" alt=""></span> back</span></span></span>
 <span class="mask"><span><span class="roll" style="transform: translateY({{lY}}); transition-delay: {{lD2}}"><em style="color: #F6DDB0">to the climb.</em></span></span></span>
 </h1>
 </div>
@@ -211,7 +209,7 @@ a{color:#003049}
 <div class="field"><input id="pw" type="{{pwType}}" placeholder="Password" autocomplete="new-password" style="padding-right: 74px"><label for="pw">Password</label><button type="button" class="lnk" onClick="{{togglePw}}" aria-label="{{pwAria}}" style="position: absolute; right: 16px; top: 20px; font-size: 13px">{{pwLabel}}</button></div>
 <button type="submit" class="btn" style="margin-top: 6px">Continue <span class="ar" aria-hidden="true"><span>→</span><span>→</span></span></button>
 <div style="display: flex; align-items: center; gap: 14px; color: rgba(0,48,73,.55); font-size: 13px"><span style="flex: 1; height: 1px; background: rgba(0,48,73,.18)"></span>or<span style="flex: 1; height: 1px; background: rgba(0,48,73,.18)"></span></div>
-<a href="Welcome.dc.html" onClick="{{goGoogle}}" class="ghost" style="width: 100%; text-decoration: none"><svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.6l6.8-6.8C35.8 2.4 30.3 0 24 0 14.6 0 6.5 5.4 2.6 13.2l7.9 6.1C12.4 13.6 17.7 9.5 24 9.5z"></path><path fill="#4285F4" d="M46.5 24.5c0-1.6-.1-3.1-.4-4.5H24v9h12.7c-.6 3-2.3 5.5-4.8 7.2l7.5 5.8c4.4-4.1 7.1-10.1 7.1-17.5z"></path><path fill="#FBBC05" d="M10.5 28.7A14.5 14.5 0 0 1 9.5 24c0-1.6.3-3.2.8-4.7l-7.9-6.1A24 24 0 0 0 0 24c0 3.9.9 7.5 2.6 10.8l7.9-6.1z"></path><path fill="#34A853" d="M24 48c6.5 0 11.9-2.1 15.9-5.8l-7.5-5.8c-2.1 1.4-4.8 2.3-8.4 2.3-6.3 0-11.6-4.1-13.5-9.8l-7.9 6.1C6.5 42.6 14.6 48 24 48z"></path></svg>Continue with Google</a>
+<a href="/welcome" onClick="{{goGoogle}}" class="ghost" style="width: 100%; text-decoration: none"><svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.6l6.8-6.8C35.8 2.4 30.3 0 24 0 14.6 0 6.5 5.4 2.6 13.2l7.9 6.1C12.4 13.6 17.7 9.5 24 9.5z"></path><path fill="#4285F4" d="M46.5 24.5c0-1.6-.1-3.1-.4-4.5H24v9h12.7c-.6 3-2.3 5.5-4.8 7.2l7.5 5.8c4.4-4.1 7.1-10.1 7.1-17.5z"></path><path fill="#FBBC05" d="M10.5 28.7A14.5 14.5 0 0 1 9.5 24c0-1.6.3-3.2.8-4.7l-7.9-6.1A24 24 0 0 0 0 24c0 3.9.9 7.5 2.6 10.8l7.9-6.1z"></path><path fill="#34A853" d="M24 48c6.5 0 11.9-2.1 15.9-5.8l-7.5-5.8c-2.1 1.4-4.8 2.3-8.4 2.3-6.3 0-11.6-4.1-13.5-9.8l-7.9 6.1C6.5 42.6 14.6 48 24 48z"></path></svg>Continue with Google</a>
 </form>
 </sc-if>
 
@@ -250,7 +248,7 @@ a{color:#003049}
 <div style="display: flex; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid rgba(0,48,73,.18); font-size: 15px; color: rgba(0,48,73,.55)"><span>First practice set</span><span class="cap">Today</span></div>
 <div style="display: flex; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid rgba(0,48,73,.18); font-size: 15px; color: rgba(0,48,73,.55)"><span>Mistake log</span><span class="cap">Fills as you go</span></div>
 </div>
-<a class="btn" href="Welcome.dc.html" onClick="{{goWel}}">Set up my first day <span class="ar" aria-hidden="true"><span>→</span><span>→</span></span></a>
+<a class="btn" href="/welcome" onClick="{{goWel}}">Set up my first day <span class="ar" aria-hidden="true"><span>→</span><span>→</span></span></a>
 <button type="button" class="lnk" onClick="{{restart}}" style="align-self: flex-start">Start over</button>
 </div>
 </sc-if>
@@ -268,7 +266,7 @@ a{color:#003049}
 <svg class="pop" width="64" height="64" viewBox="0 0 72 72" aria-hidden="true"><circle cx="36" cy="36" r="34" fill="#003049"></circle><path d="M20 26h32v22H20z M20 26l16 13 16-13" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linejoin="round"></path></svg>
 <h2 class="srf" style="margin: 0; font-size: clamp(34px, 3.4vw, 48px); line-height: 1.02">Check your <em style="color: #C1121F">inbox.</em></h2>
 <p style="margin: 0; font-size: 15px; color: rgba(0,48,73,.75)">If an account uses that email, the reset link is on its way. Nothing there? Look in spam, or sign in with Google instead.</p>
-<a href="ResetPassword.dc.html" class="btn navy" style="align-self: flex-start">Open the link from the email <span class="ar" aria-hidden="true"><span>→</span><span>→</span></span></a>
+<a href="/reset-password" class="btn navy" style="align-self: flex-start">Open the link from the email <span class="ar" aria-hidden="true"><span>→</span><span>→</span></span></a>
 <span style="font-size: 12px; color: rgba(0,48,73,.55)">Demo shortcut — in the real app this step happens from your inbox.</span>
 </sc-if>
 <button type="button" class="lnk" onClick="{{closeForgot}}" style="align-self: flex-start">← Back to log in</button>
@@ -282,9 +280,9 @@ a{color:#003049}
 <div class="field"><input id="lg" type="email" placeholder="Email" autocomplete="username"><label for="lg">Email</label></div>
 <div class="field"><input id="lp" type="{{pwType}}" placeholder="Password" autocomplete="current-password" style="padding-right: 74px"><label for="lp">Password</label><button type="button" class="lnk" onClick="{{togglePw}}" aria-label="{{pwAria}}" style="position: absolute; right: 16px; top: 20px; font-size: 13px">{{pwLabel}}</button></div>
 <div style="display: flex; justify-content: flex-end"><button type="button" class="lnk" onClick="{{openForgot}}">Forgot password?</button></div>
-<a class="btn" href="Dashboard.dc.html" onClick="{{goDash}}">Log in <span class="ar" aria-hidden="true"><span>→</span><span>→</span></span></a>
+<a class="btn" href="/dashboard" onClick="{{goDash}}">Log in <span class="ar" aria-hidden="true"><span>→</span><span>→</span></span></a>
 <div style="display: flex; align-items: center; gap: 14px; color: rgba(0,48,73,.55); font-size: 13px"><span style="flex: 1; height: 1px; background: rgba(0,48,73,.18)"></span>or<span style="flex: 1; height: 1px; background: rgba(0,48,73,.18)"></span></div>
-<a href="Dashboard.dc.html" onClick="{{goGoogle}}" class="ghost" style="width: 100%; text-decoration: none"><svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.6l6.8-6.8C35.8 2.4 30.3 0 24 0 14.6 0 6.5 5.4 2.6 13.2l7.9 6.1C12.4 13.6 17.7 9.5 24 9.5z"></path><path fill="#4285F4" d="M46.5 24.5c0-1.6-.1-3.1-.4-4.5H24v9h12.7c-.6 3-2.3 5.5-4.8 7.2l7.5 5.8c4.4-4.1 7.1-10.1 7.1-17.5z"></path><path fill="#FBBC05" d="M10.5 28.7A14.5 14.5 0 0 1 9.5 24c0-1.6.3-3.2.8-4.7l-7.9-6.1A24 24 0 0 0 0 24c0 3.9.9 7.5 2.6 10.8l7.9-6.1z"></path><path fill="#34A853" d="M24 48c6.5 0 11.9-2.1 15.9-5.8l-7.5-5.8c-2.1 1.4-4.8 2.3-8.4 2.3-6.3 0-11.6-4.1-13.5-9.8l-7.9 6.1C6.5 42.6 14.6 48 24 48z"></path></svg>Continue with Google</a>
+<a href="/dashboard" onClick="{{goGoogle}}" class="ghost" style="width: 100%; text-decoration: none"><svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.6l6.8-6.8C35.8 2.4 30.3 0 24 0 14.6 0 6.5 5.4 2.6 13.2l7.9 6.1C12.4 13.6 17.7 9.5 24 9.5z"></path><path fill="#4285F4" d="M46.5 24.5c0-1.6-.1-3.1-.4-4.5H24v9h12.7c-.6 3-2.3 5.5-4.8 7.2l7.5 5.8c4.4-4.1 7.1-10.1 7.1-17.5z"></path><path fill="#FBBC05" d="M10.5 28.7A14.5 14.5 0 0 1 9.5 24c0-1.6.3-3.2.8-4.7l-7.9-6.1A24 24 0 0 0 0 24c0 3.9.9 7.5 2.6 10.8l7.9-6.1z"></path><path fill="#34A853" d="M24 48c6.5 0 11.9-2.1 15.9-5.8l-7.5-5.8c-2.1 1.4-4.8 2.3-8.4 2.3-6.3 0-11.6-4.1-13.5-9.8l-7.9 6.1C6.5 42.6 14.6 48 24 48z"></path></svg>Continue with Google</a>
 </form>
 </sc-if>
 </div>

@@ -1,21 +1,19 @@
 <!doctype html>
 <html lang="en">
 <head>
-<base href="/dc/"><script src="config.js"></script><script src="bridge.js"></script>
+<link rel="stylesheet" href="/dc/fonts.css"><link rel="preload" as="font" type="font/woff2" crossorigin href="/dc/fonts/Newsreader-normal-latin.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="/dc/fonts/Newsreader-italic-latin.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="/dc/fonts/InterTight-normal-latin.woff2"><script src="/dc/config.js"></script><script src="/dc/bridge.js"></script>
 <style>@view-transition{navigation:auto}::view-transition-group(root),::view-transition-old(root),::view-transition-new(root){animation-duration:.22s}.fr{display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;line-height:1.1;margin:0 .14em;font-size:.95em}.fr>span:first-child{border-bottom:1.5px solid currentColor;padding:0 .28em 2px}.fr>span+span{padding-top:2px}
 </style>
 <style>html,body{margin:0;background:#FFFFFF}</style>
 <meta charset="utf-8">
 <title>Ufq — Practice set</title>
-<script src="./_runtime/react.js"></script>
-<script src="./_runtime/react-dom.js"></script>
-<script src="./_runtime/support.js"></script>
+<script src="/dc/_runtime/react.js"></script>
+<script src="/dc/_runtime/react-dom.js"></script>
+<script src="/dc/_runtime/support.js"></script>
 </head>
 <body>
 <x-dc>
 <helmet>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..600&amp;family=Inter+Tight:wght@400..700&amp;display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box}
 ::selection{background:#C1121F;color:#FFFFFF}
@@ -127,7 +125,7 @@ html,body{margin:0;background:#003049}
 <button type="button" class="tool hide-sm" onClick="{{openDir}}">Directions</button>
 <button type="button" class="tool" onClick="{{openCalc}}" aria-pressed="{{calcOn}}">Calculator</button>
 <button type="button" class="tool hide-sm" onClick="{{openRef}}" aria-pressed="{{refOn}}">Reference</button>
-<a href="PracticeHub.dc.html" class="tool" style="text-decoration: none">Save &amp; exit</a>
+<a href="/practice" class="tool" style="text-decoration: none">Save &amp; exit</a>
 </div>
 </header>
 
@@ -150,14 +148,15 @@ html,body{margin:0;background:#003049}
 <button type="button" class="tool" onClick="{{toggleCross}}" aria-pressed="{{crossMode}}" aria-label="Answer eliminator" title="Eliminate answers" style="margin-left: auto; text-decoration: line-through; letter-spacing: .04em">ABC</button>
 </div></div>
 <p style="margin: 0; font-size: 18px; line-height: 1.55; font-weight: 500"><sc-for list="{{stemP}}" as="g" hint-placeholder-count="1"><sc-if value="{{g.tx}}" hint-placeholder-val="{{ true }}"><span>{{g.t}}</span></sc-if><sc-if value="{{g.fr}}" hint-placeholder-val="{{ false }}"><span class="fr"><span>{{g.n}}</span><span>{{g.d}}</span></span></sc-if></sc-for></p>
-<div role="radiogroup" aria-label="Answer choices" style="display: flex; flex-direction: column; gap: 12px">
+<sc-if value="{{isMc}}" hint-placeholder-val="{{ true }}"><div role="radiogroup" aria-label="Answer choices" style="display: flex; flex-direction: column; gap: 12px">
 <sc-for list="{{opts}}" as="o" hint-placeholder-count="4">
 <div style="display: flex; align-items: center; gap: 10px">
 <button type="button" class="opt {{o.cls}}" aria-pressed="{{o.on}}" onClick="{{o.pick}}"><span class="let">{{o.k}}</span><span class="txt"><sc-for list="{{o.p}}" as="g" hint-placeholder-count="1"><sc-if value="{{g.tx}}" hint-placeholder-val="{{ true }}"><span>{{g.t}}</span></sc-if><sc-if value="{{g.fr}}" hint-placeholder-val="{{ false }}"><span class="fr"><span>{{g.n}}</span><span>{{g.d}}</span></span></sc-if></sc-for></span></button>
 <sc-if value="{{o.showX}}" hint-placeholder-val="{{ false }}"><button type="button" class="xbtn" onClick="{{o.cross}}" aria-label="{{o.xLabel}}">{{o.xTxt}}</button></sc-if>
 </div>
 </sc-for>
-</div>
+</div></sc-if>
+<sc-if value="{{isWritten}}" hint-placeholder-val="{{ false }}"><div style="display: flex; flex-direction: column; gap: 10px"><label for="wa" class="cap" style="color: #669BBC">Your answer</label><input id="wa" type="text" value="{{wAnswer}}" onInput="{{setW}}" placeholder="Type a number or fraction" autocomplete="off" inputmode="text" style="font: 500 22px 'Inter Tight', sans-serif; color: #003049; background: #FFFFFF; border: 0; border-radius: 12px; box-shadow: inset 0 0 0 1.5px rgba(0,48,73,.35); padding: 16px 18px; outline: none; width: 100%"><span style="font-size: 14px; color: rgba(0,48,73,.6)">Fractions like 3/4 and decimals like 0.75 both work.</span></div></sc-if>
 </div>
 </section>
 </main>
@@ -241,9 +240,9 @@ html,body{margin:0;background:#003049}
 </div>
 
 <section class="rgrid" style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px">
-<a href="Mistakes.dc.html" class="tile" style="background: #003049; color: #FFFFFF"><span class="go" aria-hidden="true" style="box-shadow: inset 0 0 0 1px rgba(255,255,255,.4)">→</span><span class="cap" style="color: #F6DDB0">1 · Save</span><span class="srf" style="font-size: 26px; line-height: 1.1">{{missN}} added to your mistake log</span><span style="font-size: 14px; color: rgba(255,255,255,.78)">They come back until you get them right twice in a row.</span></a>
+<a href="/mistakes" class="tile" style="background: #003049; color: #FFFFFF"><span class="go" aria-hidden="true" style="box-shadow: inset 0 0 0 1px rgba(255,255,255,.4)">→</span><span class="cap" style="color: #F6DDB0">1 · Save</span><span class="srf" style="font-size: 26px; line-height: 1.1">{{missN}} added to your mistake log</span><span style="font-size: 14px; color: rgba(255,255,255,.78)">They come back until you get them right twice in a row.</span></a>
 <button type="button" class="tile" onClick="{{retry}}" style="border: 0; text-align: left; cursor: pointer; font: inherit"><span class="go" aria-hidden="true">↺</span><span class="cap" style="color: #669BBC">2 · Fix</span><span class="srf" style="font-size: 28px; line-height: 1.1">Retry this set</span><span style="font-size: 14px; color: rgba(0,48,73,.7)">Same five questions, fresh start — see if the fixes stuck.</span></button>
-<a href="PracticeHub.dc.html" class="tile"><span class="go" aria-hidden="true">→</span><span class="cap" style="color: #669BBC">3 · Next</span><span class="srf" style="font-size: 28px; line-height: 1.1">{{nextTopic}}</span><span style="font-size: 14px; color: rgba(0,48,73,.7)">Your next best set, picked from what you just missed.</span></a>
+<a href="/practice" class="tile"><span class="go" aria-hidden="true">→</span><span class="cap" style="color: #669BBC">3 · Next</span><span class="srf" style="font-size: 28px; line-height: 1.1">{{nextTopic}}</span><span style="font-size: 14px; color: rgba(0,48,73,.7)">Your next best set, picked from what you just missed.</span></a>
 </section>
 <span style="font-size: 12px; color: rgba(0,48,73,.5)">Times are measured as you work; results are saved to your history.</span>
 </div>
@@ -353,7 +352,7 @@ const FIG_CIR = svgUri(320, 300, '<circle cx="160" cy="150" r="110" fill="none" 
 class Component extends DCLogic {
 constructor(props) {
 super(props);
-this.state = { q: 0, ans: {}, marked: {}, crossed: {}, crossMode: false, nav: false, review: false, done: false, rev: null, hideTimer: false, Q: null, title: '', tick: 0 };
+this.state = { q: 0, ans: {}, marked: {}, crossed: {}, crossMode: false, nav: false, review: false, done: false, rev: null, hideTimer: (() => { try { const sv = JSON.parse(localStorage.getItem('ufq_settings') || 'null'); return !!sv && sv.timer === false; } catch (e) { return false; } })(), Q: null, title: '', tick: 0 };
 this._t0 = Date.now(); this.tm = {}; this._q = 0; this._qt = Date.now(); this.saved = false;
 const params = new URLSearchParams(location.search);
 this._slugs = (params.get('d') || '').split(',').filter(Boolean); this._n = Number(params.get('n')) || 10;
@@ -367,7 +366,7 @@ const names = [...new Set(qs.map((q) => q.subject))];
 this._t0 = Date.now(); this._qt = Date.now(); this.tm = {};
 this.setState({ Q: qs, title: this._slugs.length === 1 || names.length === 1 ? names[0] : 'Mixed practice' }); done();
 }).catch((err) => { window.Ufq.toast(err && err.message ? err.message : 'Could not load questions.'); done(); setTimeout(() => location.assign('/practice'), 1800); });
-this._iv = setInterval(() => { if (!this.state.done && this.state.Q) this.setState({ tick: Date.now() }); }, 1000);
+this._iv = setInterval(() => { const t = this.state; if (t.Q && !t.done && !t.hideTimer && !t.review && t.rev === null && !document.hidden) this.setState({ tick: Date.now() }); }, 1000);
 }
 renderVals() {
 const SAMPLE = [
@@ -378,6 +377,7 @@ const SAMPLE = [
 { stem: 'For an acute angle θ, cos θ = 3/5. What is sin θ ?', opts: ['3/4', '4/5', '5/3', '4/3'], c: 'B', steps: ['3-4-5 uchburchakni chizing: yondosh katet 3, gipotenuza 5.', 'Qarama-qarshi katet 4 bo‘ladi.', 'sin θ = 4/5 — javob B.'], trap: '4/3 — bu tan θ, sin emas.' }
 ];
 const Q = this.state.Q || SAMPLE;
+const okQ = (x, y) => y === undefined ? false : (x.written ? window.Ufq.isWrittenCorrect(y, x.key) : y === x.c);
 const s = this.state;
 const nowT = Date.now();
 if (this._q !== s.q) { this.tm[this._q] = (this.tm[this._q] || 0) + Math.round((nowT - this._qt) / 1000); this._q = s.q; this._qt = nowT; }
@@ -403,13 +403,13 @@ cross: () => { const c = Object.assign({}, this.state.crossed); const m = Object
 });
 const mode = s.rev !== null ? 'rev' : s.done ? 'done' : s.review ? 'review' : 'q';
 const testing = mode === 'q';
-const correctN = Q.filter((x, i) => s.ans[i] === x.c).length;
+const correctN = Q.filter((x, i) => okQ(x, s.ans[i])).length;
 const SK = Q.map((x) => x.skill || 'Practice');
 const TL = Q.map((x) => x.trapLetter || '');
 const TM = Q.map((x, i) => (this.tm[i] || 0) + (i === s.q && mode === 'q' ? Math.round((nowT - this._qt) / 1000) : 0));
 const fmt = (t) => Math.floor(t / 60) + ':' + String(t % 60).padStart(2, '0');
 const rows = Q.map((x, i) => {
-const y = s.ans[i]; const ok = y === x.c;
+const y = s.ans[i]; const ok = okQ(x, y);
 const kind = ok ? 'ok' : !y ? 'skip' : y === TL[i] ? 'trap' : 'concept';
 const tg = { ok: ['Correct', '#E6EEF3', '#003049'], skip: ['Skipped', '#F6DDB0', '#003049'], trap: ['Fell for trap', '#C1121F', '#FFFFFF'], concept: ['Concept', '#003049', '#FFFFFF'] }[kind];
 const slow = TM[i] > 95;
@@ -436,6 +436,9 @@ lbg: right ? '#003049' : wrong ? '#C1121F' : 'transparent', lfg: right || wrong 
 tag: right ? (k === ry ? 'Correct · your answer' : 'Correct answer') : wrong ? 'Your answer' : '', tagc: right ? '#003049' : '#C1121F' };
 });
 
+const rvOk = ry !== undefined && okQ(R, ry);
+const rvOptsW = [{ k: '✓', v: R.key || '—', ring: 'inset 0 0 0 2px #003049', bg: '#F4F7F9', lbg: '#003049', lfg: '#FFFFFF', lring: '#003049', tag: 'Correct answer', tagc: '#003049' }]
+.concat(ry !== undefined ? [{ k: '✎', v: String(ry), ring: rvOk ? 'inset 0 0 0 2px #003049' : 'inset 0 0 0 2px #C1121F', bg: rvOk ? '#F4F7F9' : '#FCE9E6', lbg: rvOk ? '#003049' : '#C1121F', lfg: '#FFFFFF', lring: rvOk ? '#003049' : '#C1121F', tag: 'Your answer', tagc: rvOk ? '#003049' : '#C1121F' }] : []);
 const calcEval = (src) => {
 const t = src.replace(/π/g, 'p').replace(/√/g, 's').replace(/²/g, '^2').replace(/×/g, '*').replace(/÷/g, '/').replace(/−/g, '-');
 let i = 0;
@@ -468,7 +471,7 @@ openRef: () => this.setState({ tool: 'ref' }), openDir: () => this.setState({ to
 closeTool: () => this.setState({ tool: '' }), stop: (e) => { if (e && e.stopPropagation) e.stopPropagation(); }
 };
 const last = s.q === total - 1;
-const revOk = ry === R.c;
+const revOk = okQ(R, ry);
 const V = {
 ...toolVals,
 partName: mode === 'rev' ? 'Answer review' : mode === 'done' ? 'Results' : mode === 'review' ? 'Review' : (s.title || 'Practice'),
@@ -477,6 +480,8 @@ isMath: testing,
 timer: s.hideTimer ? '' : (() => { const e = Math.floor((nowT - this._t0) / 1000); return String(Math.floor(e / 60)).padStart(2, '0') + ':' + String(e % 60).padStart(2, '0'); })(), timerOp: s.hideTimer || !testing ? '0' : '1', timerBtn: s.hideTimer ? 'Show' : 'Hide',
 toggleTimer: () => this.setState({ hideTimer: !this.state.hideTimer }),
 showQ: testing, showReview: mode === 'review', showDone: mode === 'done', showRev: mode === 'rev',
+isMc: !cur.written, isWritten: !!cur.written, wAnswer: s.ans[s.q] === undefined ? '' : String(s.ans[s.q]),
+setW: (e) => { const v = e.target.value; const ans = Object.assign({}, this.state.ans); if (v.trim() === '') delete ans[this.state.q]; else ans[this.state.q] = v; this.setState({ ans }); },
 hasPassage: !!cur.fig, fig: cur.fig || '', cols: cur.fig ? 'minmax(0, 1fr) minmax(0, 1fr)' : '1fr',
 passage: '', stem: cur.stem, stemP: fr(cur.stem), num: String(s.q + 1), opts: opts.map(o => Object.assign({}, o, { p: fr(o.v) })),
 markedNow: s.marked[s.q] ? 'true' : 'false', markFill: s.marked[s.q] ? '#C1121F' : 'none',
@@ -495,7 +500,7 @@ next: () => { const t = this.state; if (t.rev !== null) { this.setState({ rev: t
 submit: () => {
 const t = this.state; if (!this.saved && t.Q) {
 this.saved = true; this.tm[this._q] = (this.tm[this._q] || 0) + Math.round((Date.now() - this._qt) / 1000);
-const qs = t.Q; const answers = qs.map((x, i) => { const y = t.ans[i]; return { qIdx: i, selected: y === undefined ? null : 'ABCD'.indexOf(y), correct: y === x.c, question: x.raw }; });
+const qs = t.Q; const answers = qs.map((x, i) => { const y = t.ans[i]; return { qIdx: i, selected: y === undefined ? null : (x.written ? y : 'ABCD'.indexOf(y)), correct: okQ(x, y), question: x.raw }; });
 const subjectIds = [...new Set(qs.map((x) => x.subjectId))];
 window.Ufq.savePractice({ title: (t.title || 'Practice') + ' · ' + qs.length + ' questions', subjectId: subjectIds.length === 1 ? subjectIds[0] : null, subjectTitle: t.title || 'Mixed', score: answers.filter((a) => a.correct).length, total: qs.length, minutes: Math.max(1, Math.round((Date.now() - this._t0) / 60000)), answers })
 .then(() => window.Ufq.toast('Result saved', 'ok')).catch((err) => { this.saved = false; window.Ufq.toast('Could not save the result: ' + (err && err.message || 'error')); });
@@ -504,7 +509,7 @@ this.setState({ done: true, review: false });
 },
 correctCount: String(correctN), rows, skills, why, insight, statTiles, accPct: accN + '%', ringOff: String(100 - accN), ringC: accN >= 80 ? '#003049' : accN >= 50 ? '#669BBC' : '#C1121F', headA: accN === 100 ? 'Perfect' : accN >= 80 ? 'Strong' : accN >= 50 ? 'Getting' : 'Rough', headB: accN === 100 ? 'set.' : accN >= 80 ? 'set.' : accN >= 50 ? 'there.' : 'start.', missN: String(missed.length), nextTopic: weak.length ? weak[0] + ' · set 2' : 'Circles · set 2',
 retry: () => this.setState({ q: 0, ans: {}, marked: {}, crossed: {}, review: false, done: false, rev: null }),
-rvNum: String((s.rev || 0) + 1), rvStem: R.stem, rvStemP: fr(R.stem), rvOpts: rvOpts.map(o => Object.assign({}, o, { p: fr(o.v) })),
+rvNum: String((s.rev || 0) + 1), rvStem: R.stem, rvStemP: fr(R.stem), rvOpts: (R.written ? rvOptsW : rvOpts).map(o => Object.assign({}, o, { p: fr(o.v) })),
 rvVerdict: ry ? (revOk ? 'Correct' : 'Incorrect — you chose ' + ry) : 'Omitted', rvColor: revOk ? '#003049' : '#C1121F',
 rvSteps: R.steps.map(t => ({ t, p: fr(t) })), rvTrap: R.trap || 'Check each option against exactly what the question asks.'
 };

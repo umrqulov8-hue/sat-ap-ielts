@@ -1,20 +1,18 @@
 <!doctype html>
 <html lang="en">
 <head>
-<base href="/dc/"><script src="config.js"></script><script src="bridge.js"></script>
+<link rel="stylesheet" href="/dc/fonts.css"><link rel="preload" as="font" type="font/woff2" crossorigin href="/dc/fonts/Newsreader-normal-latin.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="/dc/fonts/Newsreader-italic-latin.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="/dc/fonts/InterTight-normal-latin.woff2"><script src="/dc/config.js"></script><script src="/dc/bridge.js"></script>
 <style>@view-transition{navigation:auto}::view-transition-old(root){animation:.28s cubic-bezier(.4,0,.2,1) both vtOut}::view-transition-new(root){animation:.28s cubic-bezier(.4,0,.2,1) both vtIn}@keyframes vtOut{to{opacity:0}}@keyframes vtIn{from{opacity:0}}.side{view-transition-name:ufqside}@media (prefers-reduced-motion: reduce){@view-transition{navigation:none}}</style>
 <style>html,body{margin:0;background:#FFFFFF}</style>
 <meta charset="utf-8">
 <title>Ufq — Profile</title>
-<script src="./_runtime/react.js"></script>
-<script src="./_runtime/react-dom.js"></script>
-<script src="./_runtime/support.js"></script>
+<script src="/dc/_runtime/react.js"></script>
+<script src="/dc/_runtime/react-dom.js"></script>
+<script src="/dc/_runtime/support.js"></script>
 </head>
 <body>
 <x-dc>
 <helmet>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..600&amp;family=Inter+Tight:wght@400..700&amp;display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box}
 ::selection{background:#C1121F;color:#FFFFFF}
@@ -143,28 +141,24 @@ a.tile:hover .go{transform:rotate(-45deg);background:#003049;color:#FFFFFF}
 </helmet>
 <div class="shell" style="background: #FFFFFF; color: #003049; font-family: 'Inter Tight', 'Helvetica Neue', Arial, sans-serif; font-size: 16px; line-height: 1.5; min-height: 100vh; display: grid; grid-template-columns: 248px minmax(0, 1fr)">
 <aside class="side dk" style="position: sticky; top: 0; height: 100vh; display: flex; flex-direction: column; gap: 6px; padding: 22px 16px; border-right: 1px solid rgba(0,48,73,.1)">
-<div class="sbg" aria-hidden="true"><div style="position: absolute; inset: 0; overflow: hidden"><div aria-hidden="true" style="position: absolute; left: -12%; right: -12%; top: 0; height: 100vh"><img src="./assets/d30958deea0f2c30d185036d50b38dc8.webp" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 25% 50%; opacity: .9"></div><div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,48,73,.5) 0%, rgba(0,48,73,.7) 38%, rgba(0,48,73,.94) 100%)"></div></div></div>
-<a href="Main.dc.html" class="srf" style="text-decoration: none; font-size: 32px; font-style: italic; line-height: 1.1; padding: 0 14px 22px">Ufq.</a>
-<a class="nv" href="Dashboard.dc.html"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"></path></svg>Today</a>
-<a class="nv" href="Plan.dc.html"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"></rect><path d="M3 10h18M8 3v4M16 3v4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path></svg>Plan</a>
-<a class="nv" href="PracticeHub.dc.html"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19V5a1 1 0 0 1 1-1h11l4 4v11a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1zM8 9h6M8 13h8M8 17h5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path></svg>Practice</a>
-<a class="nv" href="Mistakes.dc.html"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 1 0 9 9M12 7v5l3 2M17 3h4v4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg>Mistakes</a>
-<a class="nv" href="MockTests.dc.html"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="13" r="8" fill="none" stroke="currentColor" stroke-width="1.8"></circle><path d="M12 9v4l2 2M10 2h4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path></svg>Mock tests</a>
-<a class="nv" href="Report.dc.html"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path></svg>Report</a>
-<a class="nv" href="History.dc.html"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.5-5.8M4 4v4h4M12 8v4l3 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg>History</a>
-<a class="nv" href="Admin.dc.html"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"></path><path d="M9 12l2 2 4-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg>Admin<span class="ownb">Owner</span></a>
+<div class="sbg" aria-hidden="true"><div style="position: absolute; inset: 0; overflow: hidden"><div aria-hidden="true" style="position: absolute; left: -12%; right: -12%; top: 0; height: 100vh"><img src="/dc/assets/d30958deea0f2c30d185036d50b38dc8.webp" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 25% 50%; opacity: .9"></div><div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,48,73,.5) 0%, rgba(0,48,73,.7) 38%, rgba(0,48,73,.94) 100%)"></div></div></div>
+<a href="/" class="srf" style="text-decoration: none; font-size: 32px; font-style: italic; line-height: 1.1; padding: 0 14px 22px">Ufq.</a>
+<a class="nv" href="/dashboard"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"></path></svg>Today</a>
+<a class="nv" href="/plan"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"></rect><path d="M3 10h18M8 3v4M16 3v4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path></svg>Plan</a>
+<a class="nv" href="/practice"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19V5a1 1 0 0 1 1-1h11l4 4v11a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1zM8 9h6M8 13h8M8 17h5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path></svg>Practice</a>
+<a class="nv" href="/mistakes"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 1 0 9 9M12 7v5l3 2M17 3h4v4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg>Mistakes</a>
+<a class="nv" href="/mock-tests"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="13" r="8" fill="none" stroke="currentColor" stroke-width="1.8"></circle><path d="M12 9v4l2 2M10 2h4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path></svg>Mock tests</a>
+<a class="nv" href="/report"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path></svg>Report</a>
+<a class="nv" href="/history"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.5-5.8M4 4v4h4M12 8v4l3 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg>History</a>
+<a class="nv" href="/admin"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"></path><path d="M9 12l2 2 4-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg>Admin<span class="ownb">Owner</span></a>
 <div class="sideExtra" style="margin-top: auto; display: flex; flex-direction: column; gap: 12px">
-<a class="nv" href="Help.dc.html"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"></circle><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6V14M12 17.2v.3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path></svg>Help</a>
-<div style="border-radius: 18px; background: rgba(255,255,255,.1); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); padding: 16px; display: flex; flex-direction: column; gap: 8px">
-<span class="cap" style="color: #F6DDB0">Streak freeze</span>
-<span style="font-size: 14px; line-height: 1.45">Miss a day and one freeze keeps your streak alive. <b>1 left</b> this week.</span>
-</div>
+<a class="nv" href="/help"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"></circle><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6V14M12 17.2v.3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path></svg>Help</a>
 <div style="display: flex; align-items: center; gap: 6px">
-<a href="Profile.dc.html" class="acct" aria-current="page" style="flex: 1; min-width: 0; display: flex; align-items: center; gap: 12px; padding: 8px 6px; border-radius: 14px; text-decoration: none">
+<a href="/profile" class="acct" aria-current="page" style="flex: 1; min-width: 0; display: flex; align-items: center; gap: 12px; padding: 8px 6px; border-radius: 14px; text-decoration: none">
 <span aria-hidden="true" style="flex: none; width: 38px; height: 38px; border-radius: 50%; background: #F6DDB0; color: #003049; display: grid; place-items: center; font-weight: 600">U</span>
 <span style="display: flex; flex-direction: column; line-height: 1.25; min-width: 0"><span style="font-weight: 600; font-size: 14px">Profile</span><span style="font-size: 12px; color: rgba(255,255,255,.6)">Target 750 · May</span></span>
 </a>
-<a href="Settings.dc.html" class="gear" aria-label="Settings" style="flex: none; width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.8"></circle><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z" fill="none" stroke="currentColor" stroke-width="1.5"></path></svg></a>
+<a href="/settings" class="gear" aria-label="Settings" style="flex: none; width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.8"></circle><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z" fill="none" stroke="currentColor" stroke-width="1.5"></path></svg></a>
 </div>
 </div>
 </aside>
@@ -178,16 +172,16 @@ a.tile:hover .go{transform:rotate(-45deg);background:#003049;color:#FFFFFF}
 </header>
 <div class="bento" style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px">
 <section class="tile ti" style="grid-column: span 2; background: #003049; color: #FFFFFF; flex-direction: row; align-items: center; gap: 22px; flex-wrap: wrap; min-height: 200px">
-<img class="kb" src="./assets/d30958deea0f2c30d185036d50b38dc8.webp" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .18">
+<img class="kb" src="/dc/assets/d30958deea0f2c30d185036d50b38dc8.webp" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .18">
 <span aria-hidden="true" style="position: relative; width: 96px; height: 96px; border-radius: 50%; background: #FFFFFF; color: #003049; display: grid; place-items: center; font: 400 44px 'Newsreader', serif">{{initial}}</span>
 <div style="position: relative; display: flex; flex-direction: column; gap: 4px; min-width: 0">
 <span class="srf" style="font-size: 40px; line-height: 1">{{name}}</span>
-<span style="color: rgba(255,255,255,.75)">{{handle}} · member since week 1</span>
+<span style="color: rgba(255,255,255,.75)">{{handle}} · member since {{since}}</span>
 <span class="cap" style="color: #F6DDB0; margin-top: 6px">Target {{target}} · {{dateLabel}}</span>
 </div>
 </section>
-<div class="tile ti" style="animation-delay: .06s"><span class="cap" style="color: #669BBC">Questions solved</span><span class="srf" style="font-size: 56px; line-height: .9; margin-top: auto">412</span><span style="font-size: 14px; color: rgba(0,48,73,.7)">across 4 domains</span></div>
-<div class="tile ti" style="animation-delay: .12s"><span class="cap" style="color: #669BBC">Study time</span><span class="srf" style="font-size: 56px; line-height: .9; margin-top: auto">18 h</span><span style="font-size: 14px; color: rgba(0,48,73,.7)">best streak 14 days</span></div>
+<div class="tile ti" style="animation-delay: .06s"><span class="cap" style="color: #669BBC">Questions solved</span><span class="srf" style="font-size: 56px; line-height: .9; margin-top: auto">{{solved}}</span><span style="font-size: 14px; color: rgba(0,48,73,.7)">in your saved attempts</span></div>
+<div class="tile ti" style="animation-delay: .12s"><span class="cap" style="color: #669BBC">Study time</span><span class="srf" style="font-size: 56px; line-height: .9; margin-top: auto">{{studyTime}}</span><span style="font-size: 14px; color: rgba(0,48,73,.7)">best streak {{bestStreak}} days</span></div>
 </div>
 
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr)); gap: 16px">
@@ -233,11 +227,15 @@ a.tile:hover .go{transform:rotate(-45deg);background:#003049;color:#FFFFFF}
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1000}}'>
 class Component extends DCLogic {
-constructor(props) { super(props); let goal = null; try { goal = JSON.parse(localStorage.getItem('ufq_goal') || 'null'); } catch (e) {} const dates = ['Mar 2027', 'May 2027', 'Jun 2027', 'Not sure yet']; this.state = { name: (window.Ufq && window.Ufq.displayName()) || 'Your name', handle: (window.Ufq && window.Ufq.email()) || 'yourname@gmail.com', target: goal ? goal.target : 750, date: goal && dates.indexOf(goal.date) > -1 ? dates.indexOf(goal.date) : 1 }; }
+constructor(props) { super(props); let goal = null; try { goal = JSON.parse(localStorage.getItem('ufq_goal') || 'null'); } catch (e) {} const dates = ['Mar 2027', 'May 2027', 'Jun 2027', 'Not sure yet']; this.state = { R: null, name: (window.Ufq && window.Ufq.displayName()) || 'Your name', handle: (window.Ufq && window.Ufq.email()) || 'yourname@gmail.com', target: goal ? goal.target : 750, date: goal && dates.indexOf(goal.date) > -1 ? dates.indexOf(goal.date) : 1 };
+window.Ufq.dashboard().then((R) => this.setState({ R })).catch(() => {}); }
 renderVals() {
 const s = this.state;
 const DATES = ['Mar 2027', 'May 2027', 'Jun 2027', 'Not sure yet'];
-const B = [['12', '12-day streak', 'Reached in week 3', true], ['1st', 'First mock test', 'Mock 1 · 600', true], ['400', '400 questions', 'Solved across all domains', true], ['+20', 'First 20 points', 'Since your first week', true], ['30', '30-day streak', '18 days to go', false], ['750', 'Target reached', 'The finish line', false]];
+const R = s.R || { history: [], domains: [], longest: 0, streak: 0, join: window.Ufq.today() };
+const solved = R.history.reduce((t, h) => t + h.max, 0), mins = R.history.reduce((t, h) => t + h.min, 0);
+const bestSc = R.history.reduce((m, h) => Math.max(m, Math.round(h.acc * 8)), 0), started = R.domains.filter((d) => d.started).length, tgt = window.Ufq.goal().target;
+const B = [[String(Math.min(R.longest, 12)), '12-day streak', R.longest >= 12 ? 'Reached' : (12 - R.longest) + ' days to go', R.longest >= 12], ['1st', 'First practice set', R.history.length ? 'Done · ' + R.history[R.history.length - 1].t : 'Not yet', R.history.length >= 1], [String(Math.min(solved, 400)), '400 questions', solved >= 400 ? 'Solved' : (400 - solved) + ' to go', solved >= 400], [String(started), 'Domains started', started >= 4 ? 'All four' : (4 - started) + ' to go', started >= 4], ['30', '30-day streak', R.longest >= 30 ? 'Reached' : (30 - R.longest) + ' days to go', R.longest >= 30], [String(tgt), 'Target reached', bestSc >= tgt ? 'Reached' : (tgt - bestSc) + ' points to go', bestSc >= tgt]];
 const badges = B.map(([big, t, sub, got], i) => ({ big, t, s: sub, bg: got ? (i === 0 ? '#C1121F' : '#F4F6F8') : '#FFFFFF', fg: got && i === 0 ? '#FFFFFF' : got ? '#003049' : 'rgba(0,48,73,.4)', ring: got ? 'none' : 'inset 0 0 0 1px rgba(0,48,73,.15)', delay: (i * 0.05).toFixed(2) + 's' }));
 return {
 name: s.name, handle: s.handle, initial: (s.name.trim()[0] || 'U').toUpperCase(),
@@ -246,6 +244,7 @@ dateLabel: DATES[s.date],
 setName: (e) => this.setState({ name: e.target.value }), setHandle: (e) => this.setState({ handle: e.target.value }),
 setTarget: (e) => this.setState({ target: Number(e.target.value) }),
 dates: DATES.map((label, i) => ({ label, on: s.date === i ? 'true' : 'false', pick: () => this.setState({ date: i }) })),
+solved: String(solved), studyTime: mins >= 60 ? Math.floor(mins / 60) + ' h ' + (mins % 60 ? (mins % 60) + ' m' : '') : mins + ' min', bestStreak: String(R.longest), since: R.join,
 badges, earned: String(B.filter(b => b[3]).length)
 };
 }

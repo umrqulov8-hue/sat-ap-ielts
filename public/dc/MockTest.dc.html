@@ -1,21 +1,19 @@
 <!doctype html>
 <html lang="en">
 <head>
-<base href="/dc/"><script src="config.js"></script><script src="bridge.js"></script>
+<link rel="stylesheet" href="/dc/fonts.css"><link rel="preload" as="font" type="font/woff2" crossorigin href="/dc/fonts/Newsreader-normal-latin.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="/dc/fonts/Newsreader-italic-latin.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="/dc/fonts/InterTight-normal-latin.woff2"><script src="/dc/config.js"></script><script src="/dc/bridge.js"></script>
 <style>@view-transition{navigation:auto}::view-transition-group(root),::view-transition-old(root),::view-transition-new(root){animation-duration:.22s}.fr{display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;line-height:1.1;margin:0 .14em;font-size:.95em}.fr>span:first-child{border-bottom:1.5px solid currentColor;padding:0 .28em 2px}.fr>span+span{padding-top:2px}
 </style>
 <style>html,body{margin:0;background:#FFFFFF}</style>
 <meta charset="utf-8">
 <title>Ufq — Mock test</title>
-<script src="./_runtime/react.js"></script>
-<script src="./_runtime/react-dom.js"></script>
-<script src="./_runtime/support.js"></script>
+<script src="/dc/_runtime/react.js"></script>
+<script src="/dc/_runtime/react-dom.js"></script>
+<script src="/dc/_runtime/support.js"></script>
 </head>
 <body>
 <x-dc>
 <helmet>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..600&amp;family=Inter+Tight:wght@400..700&amp;display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box}
 ::selection{background:#C1121F;color:#FFFFFF}
@@ -135,7 +133,7 @@ html,body{margin:0;background:#003049}
 <button type="button" class="tool" onClick="{{openCalc}}" aria-pressed="{{calcOn}}">Calculator</button>
 <button type="button" class="tool hide-sm" onClick="{{openRef}}" aria-pressed="{{refOn}}">Reference</button>
 </sc-if>
-<a href="MockTests.dc.html" class="tool" style="text-decoration: none">{{exitLabel}}</a>
+<a href="/mock-tests" class="tool" style="text-decoration: none">{{exitLabel}}</a>
 </div>
 </header>
 
@@ -296,9 +294,9 @@ html,body{margin:0;background:#003049}
 </section>
 
 <section class="rgrid" style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px">
-<a href="Mistakes.dc.html" class="tile" style="background: #C1121F; color: #FFFFFF"><span class="go" aria-hidden="true" style="box-shadow: inset 0 0 0 1px rgba(255,255,255,.5)">→</span><span class="cap" style="color: rgba(255,255,255,.85)">Mistake log</span><span class="srf" style="font-size: 26px; line-height: 1.1">{{wrongN}} questions to redo</span><span style="font-size: 14px; color: rgba(255,255,255,.85)">Grouped by topic, waiting for you.</span></a>
-<a href="Report.dc.html" class="tile"><span class="go" aria-hidden="true">→</span><span class="cap" style="color: #669BBC">Report</span><span class="srf" style="font-size: 26px; line-height: 1.1">Compare with Mock 1</span><span style="font-size: 14px; color: rgba(0,48,73,.7)">See every test side by side.</span></a>
-<a href="Plan.dc.html" class="tile"><span class="go" aria-hidden="true">→</span><span class="cap" style="color: #669BBC">Plan</span><span class="srf" style="font-size: 26px; line-height: 1.1">Next week adjusts</span><span style="font-size: 14px; color: rgba(0,48,73,.7)">Your weakest domain moves to the front.</span></a>
+<a href="/mistakes" class="tile" style="background: #C1121F; color: #FFFFFF"><span class="go" aria-hidden="true" style="box-shadow: inset 0 0 0 1px rgba(255,255,255,.5)">→</span><span class="cap" style="color: rgba(255,255,255,.85)">Mistake log</span><span class="srf" style="font-size: 26px; line-height: 1.1">{{wrongN}} questions to redo</span><span style="font-size: 14px; color: rgba(255,255,255,.85)">Grouped by topic, waiting for you.</span></a>
+<a href="/history" class="tile"><span class="go" aria-hidden="true">→</span><span class="cap" style="color: #669BBC">Report</span><span class="srf" style="font-size: 26px; line-height: 1.1">Compare with Mock 1</span><span style="font-size: 14px; color: rgba(0,48,73,.7)">See every test side by side.</span></a>
+<a href="/practice" class="tile"><span class="go" aria-hidden="true">→</span><span class="cap" style="color: #669BBC">Plan</span><span class="srf" style="font-size: 26px; line-height: 1.1">Next week adjusts</span><span style="font-size: 14px; color: rgba(0,48,73,.7)">Your weakest domain moves to the front.</span></a>
 </section>
 <span style="font-size: 12px; color: rgba(0,48,73,.5)">The score is an estimate from a 20-question sample, not an official College Board score.</span>
 </div>

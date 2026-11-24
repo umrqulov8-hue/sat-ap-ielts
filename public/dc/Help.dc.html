@@ -1,20 +1,18 @@
 <!doctype html>
 <html lang="en">
 <head>
-<base href="/dc/"><script src="config.js"></script><script src="bridge.js"></script>
+<link rel="stylesheet" href="/dc/fonts.css"><link rel="preload" as="font" type="font/woff2" crossorigin href="/dc/fonts/Newsreader-normal-latin.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="/dc/fonts/Newsreader-italic-latin.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="/dc/fonts/InterTight-normal-latin.woff2"><script src="/dc/config.js"></script><script src="/dc/bridge.js"></script>
 <style>@view-transition{navigation:auto}::view-transition-old(root){animation:.28s cubic-bezier(.4,0,.2,1) both vtOut}::view-transition-new(root){animation:.28s cubic-bezier(.4,0,.2,1) both vtIn}@keyframes vtOut{to{opacity:0}}@keyframes vtIn{from{opacity:0}}.side{view-transition-name:ufqside}@media (prefers-reduced-motion: reduce){@view-transition{navigation:none}}</style>
 <style>html,body{margin:0;background:#FFFFFF}</style>
 <meta charset="utf-8">
 <title>Ufq — Help</title>
-<script src="./_runtime/react.js"></script>
-<script src="./_runtime/react-dom.js"></script>
-<script src="./_runtime/support.js"></script>
+<script src="/dc/_runtime/react.js"></script>
+<script src="/dc/_runtime/react-dom.js"></script>
+<script src="/dc/_runtime/support.js"></script>
 </head>
 <body>
 <x-dc>
 <helmet>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..600&amp;family=Inter+Tight:wght@400..700&amp;display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box}
 ::selection{background:#C1121F;color:#FFFFFF}
@@ -152,28 +150,24 @@ textarea.inp{height:auto;min-height:120px;padding:14px 16px;resize:vertical;font
 </helmet>
 <div class="shell" style="background: #FFFFFF; color: #003049; font-family: 'Inter Tight', 'Helvetica Neue', Arial, sans-serif; font-size: 16px; line-height: 1.5; min-height: 100vh; display: grid; grid-template-columns: 248px minmax(0, 1fr)">
 <aside class="side dk" style="position: sticky; top: 0; height: 100vh; display: flex; flex-direction: column; gap: 6px; padding: 22px 16px; border-right: 1px solid rgba(0,48,73,.1)">
-<div class="sbg" aria-hidden="true"><div style="position: absolute; inset: 0; overflow: hidden"><div aria-hidden="true" style="position: absolute; left: -12%; right: -12%; top: 0; height: 100vh"><img src="./assets/d30958deea0f2c30d185036d50b38dc8.webp" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 25% 50%; opacity: .9"></div><div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,48,73,.5) 0%, rgba(0,48,73,.7) 38%, rgba(0,48,73,.94) 100%)"></div></div></div>
-<a href="Main.dc.html" class="srf" style="text-decoration: none; font-size: 32px; font-style: italic; line-height: 1.1; padding: 0 14px 22px">Ufq.</a>
-<a class="nv" href="Dashboard.dc.html"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"></path></svg>Today</a>
-<a class="nv" href="Plan.dc.html"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"></rect><path d="M3 10h18M8 3v4M16 3v4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path></svg>Plan</a>
-<a class="nv" href="PracticeHub.dc.html"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19V5a1 1 0 0 1 1-1h11l4 4v11a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1zM8 9h6M8 13h8M8 17h5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path></svg>Practice</a>
-<a class="nv" href="Mistakes.dc.html"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 1 0 9 9M12 7v5l3 2M17 3h4v4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg>Mistakes</a>
-<a class="nv" href="MockTests.dc.html"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="13" r="8" fill="none" stroke="currentColor" stroke-width="1.8"></circle><path d="M12 9v4l2 2M10 2h4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path></svg>Mock tests</a>
-<a class="nv" href="Report.dc.html"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path></svg>Report</a>
-<a class="nv" href="History.dc.html"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.5-5.8M4 4v4h4M12 8v4l3 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg>History</a>
-<a class="nv" href="Admin.dc.html"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"></path><path d="M9 12l2 2 4-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg>Admin<span class="ownb">Owner</span></a>
+<div class="sbg" aria-hidden="true"><div style="position: absolute; inset: 0; overflow: hidden"><div aria-hidden="true" style="position: absolute; left: -12%; right: -12%; top: 0; height: 100vh"><img src="/dc/assets/d30958deea0f2c30d185036d50b38dc8.webp" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 25% 50%; opacity: .9"></div><div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,48,73,.5) 0%, rgba(0,48,73,.7) 38%, rgba(0,48,73,.94) 100%)"></div></div></div>
+<a href="/" class="srf" style="text-decoration: none; font-size: 32px; font-style: italic; line-height: 1.1; padding: 0 14px 22px">Ufq.</a>
+<a class="nv" href="/dashboard"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"></path></svg>Today</a>
+<a class="nv" href="/plan"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"></rect><path d="M3 10h18M8 3v4M16 3v4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path></svg>Plan</a>
+<a class="nv" href="/practice"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19V5a1 1 0 0 1 1-1h11l4 4v11a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1zM8 9h6M8 13h8M8 17h5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path></svg>Practice</a>
+<a class="nv" href="/mistakes"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 1 0 9 9M12 7v5l3 2M17 3h4v4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg>Mistakes</a>
+<a class="nv" href="/mock-tests"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="13" r="8" fill="none" stroke="currentColor" stroke-width="1.8"></circle><path d="M12 9v4l2 2M10 2h4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path></svg>Mock tests</a>
+<a class="nv" href="/report"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path></svg>Report</a>
+<a class="nv" href="/history"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.5-5.8M4 4v4h4M12 8v4l3 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg>History</a>
+<a class="nv" href="/admin"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"></path><path d="M9 12l2 2 4-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg>Admin<span class="ownb">Owner</span></a>
 <div class="sideExtra" style="margin-top: auto; display: flex; flex-direction: column; gap: 12px">
-<a class="nv" href="Help.dc.html" aria-current="page"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"></circle><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6V14M12 17.2v.3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path></svg>Help</a>
-<div style="border-radius: 18px; background: rgba(255,255,255,.1); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); padding: 16px; display: flex; flex-direction: column; gap: 8px">
-<span class="cap" style="color: #F6DDB0">Streak freeze</span>
-<span style="font-size: 14px; line-height: 1.45">Miss a day and one freeze keeps your streak alive. <b>1 left</b> this week.</span>
-</div>
+<a class="nv" href="/help" aria-current="page"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"></circle><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6V14M12 17.2v.3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path></svg>Help</a>
 <div style="display: flex; align-items: center; gap: 6px">
-<a href="Profile.dc.html" class="acct" style="flex: 1; min-width: 0; display: flex; align-items: center; gap: 12px; padding: 8px 6px; border-radius: 14px; text-decoration: none">
+<a href="/profile" class="acct" style="flex: 1; min-width: 0; display: flex; align-items: center; gap: 12px; padding: 8px 6px; border-radius: 14px; text-decoration: none">
 <span aria-hidden="true" style="flex: none; width: 38px; height: 38px; border-radius: 50%; background: #F6DDB0; color: #003049; display: grid; place-items: center; font-weight: 600">U</span>
 <span style="display: flex; flex-direction: column; line-height: 1.25; min-width: 0"><span style="font-weight: 600; font-size: 14px">Profile</span><span style="font-size: 12px; color: rgba(255,255,255,.6)">Target 750 · May</span></span>
 </a>
-<a href="Settings.dc.html" class="gear" aria-label="Settings" style="flex: none; width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.8"></circle><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z" fill="none" stroke="currentColor" stroke-width="1.5"></path></svg></a>
+<a href="/settings" class="gear" aria-label="Settings" style="flex: none; width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.8"></circle><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z" fill="none" stroke="currentColor" stroke-width="1.5"></path></svg></a>
 </div>
 </div>
 </aside>
@@ -201,7 +195,7 @@ textarea.inp{height:auto;min-height:120px;padding:14px 16px;resize:vertical;font
 <section class="card ti" style="animation-delay: .14s; gap: 12px">
 <span class="cap" style="color: #669BBC">Write to us</span>
 <sc-if value="{{notSent}}" hint-placeholder-val="{{ true }}">
-<span style="font-size: 15px; color: rgba(0,48,73,.75)">A wrong answer key, a bug, an idea — tell us. We reply to your Google email.</span>
+<span style="font-size: 15px; color: rgba(0,48,73,.75)">A wrong answer key, a bug, an idea — tell us. We reply to your account email.</span>
 <textarea class="inp" placeholder="What happened?" aria-label="Message" onInput="{{setMsg}}">{{msg}}</textarea>
 <button type="button" class="btn" onClick="{{send}}" style="opacity: {{sendOp}}; pointer-events: {{sendPe}}">Send <span class="ar" aria-hidden="true"><span>→</span><span>→</span></span></button>
 </sc-if>
@@ -238,7 +232,7 @@ const K = [['Next question', ['→']], ['Previous question', ['←']], ['Choose 
 const keys = K.map(([t, ks]) => ({ t, ks: ks.map(k => ({ k })) }));
 const ok = s.msg.trim().length > 3;
 return { faqs, keys, msg: s.msg, sent: s.sent, notSent: !s.sent, sendOp: ok ? '1' : '.4', sendPe: ok ? 'auto' : 'none',
-setMsg: (e) => this.setState({ msg: e.target.value }), send: () => this.setState({ sent: true }), reset: () => this.setState({ sent: false, msg: '' }) };
+setMsg: (e) => this.setState({ msg: e.target.value }), send: () => { const who = window.Ufq ? window.Ufq.email() : ''; window.location.href = 'mailto:umrqulov8@gmail.com?subject=' + encodeURIComponent('Ufq support') + '&body=' + encodeURIComponent(s.msg + (who ? '\n\n— ' + who : '')); this.setState({ sent: true }); }, reset: () => this.setState({ sent: false, msg: '' }) };
 }
 }
 </script>
