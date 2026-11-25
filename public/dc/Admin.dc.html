@@ -312,7 +312,6 @@ a.tile:hover .go{transform:rotate(-45deg);background:#003049;color:#FFFFFF}
 </div>
 <div style="display: flex; gap: 10px; flex-wrap: wrap; align-items: center">
 <span class="rb r-{{meRoleK}}">{{meRole}}</span>
-<button type="button" class="ghost" onClick="{{newTest}}">Manage tests</button>
 <button type="button" class="btn" onClick="{{newQ}}" style="min-height: 46px">New question <span class="ar" aria-hidden="true"><span>+</span><span>+</span></span></button>
 </div>
 </header>
@@ -413,14 +412,14 @@ a.tile:hover .go{transform:rotate(-45deg);background:#003049;color:#FFFFFF}
 <!-- ================= TESTS ================= -->
 <sc-if value="{{pTests}}" hint-placeholder-val="{{ false }}">
 <div class="pane" style="display: flex; flex-direction: column; gap: 14px">
-<div class="tbar"><span style="color: rgba(0,48,73,.7)">Full-length SAT tests students can take in the app. Questions and modules are built in the test builder.</span><button type="button" class="btn" onClick="{{newTest}}" style="min-height: 44px; margin-left: auto">Open test builder</button></div>
+<div class="tbar"><span style="color: rgba(0,48,73,.7)">Full-length SAT tests students can take in the app, with how many attempts each has had.</span></div>
 <div class="tgrid">
 <sc-for list="{{tCards}}" as="t" hint-placeholder-count="6"><div class="acard ti tcard" style="animation-delay: {{t.dl}}">
 <div style="display: flex; justify-content: space-between; align-items: center; gap: 10px"><span class="cap" style="color: #669BBC">{{t.ty}}</span><span class="pill p-{{t.stk}}">{{t.st}}</span></div>
 <h3 class="srf" style="margin: 0; font-size: 28px; line-height: 1.05">{{t.n}}</h3>
 <span style="font-size: 13px; color: rgba(0,48,73,.65)">{{t.modsTxt}}</span>
 <div class="tstats"><span><b class="num">{{t.q}}</b> questions</span><span><b class="num">{{t.at}}</b> attempts</span><span><b class="num">{{t.avg}}</b> avg</span></div>
-<div style="display: flex; gap: 6px; margin-top: auto; flex-wrap: wrap"><button type="button" class="ib strong" onClick="{{t.edit}}">Edit in test builder</button></div>
+
 </div></sc-for>
 </div>
 </div>
@@ -617,7 +616,7 @@ log(a, k) { window.Ufq.adminLog(a, k); return [{ who: 'You', a, k, t: 'Just now'
 say(msg, extra) { clearTimeout(this._tt); this.setState(Object.assign({ toast: msg }, extra || {})); this._tt = setTimeout(() => this.setState({ toast: '' }), 2800); }
 setU(id, patch) { return this.state.users.map(u => u.id === id ? Object.assign({}, u, patch) : u); }
 openEd(x) { this.setState({ dlg: 'q', addDom: null, ed: x ? { id: x.id, stem: x.stem, t: x.t, ch: x.ch.slice(), c: x.c, ans: x.ans, ex: x.ex, dom: x.dom, d: x.d, sk: x.sk, img: x.img || '', lay: x.lay || 'auto', iw: x.iw || 0, ih: x.ih || 0 } : { id: '', stem: '', t: 'MC', ch: ['', '', '', ''], c: 0, ans: '', ex: '', dom: this.state.doms[0], d: 2, sk: '', img: '', lay: 'auto', iw: 0, ih: 0 } }); }
-openTb() { window.location.assign('/admin/sat-tests'); }
+openTb() {}
 saveQ() {
 const s = this.state, e = s.ed;
 if (!e.stem.trim()) { this.say('Write the question first.'); return; }
