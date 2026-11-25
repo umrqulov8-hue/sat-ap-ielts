@@ -347,6 +347,23 @@
     timer = setTimeout(release, 2500);
     return function () { requestAnimationFrame(function () { setTimeout(release, 30); }); };
   };
+  /* the one loading screen: shown only while a question set is being prepared */
+  Ufq.loader = function () {
+    var id = 'ufq-loader';
+    if (!document.getElementById('ufq-loader-css')) {
+      var st = document.createElement('style'); st.id = 'ufq-loader-css';
+      st.textContent = '@keyframes ufqLIn{from{opacity:0}}@keyframes ufqLogo{0%,100%{transform:translateY(0);opacity:.85}50%{transform:translateY(-6px);opacity:1}}@keyframes ufqBar{0%{transform:translateX(-100%)}100%{transform:translateX(250%)}}'
+        + '#ufq-loader{position:fixed;inset:0;z-index:2147483000;background:#FFFFFF;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;animation:ufqLIn .2s ease both;transition:opacity .28s ease}'
+        + '#ufq-loader b{font:italic 500 54px/1 "Newsreader",Georgia,serif;color:#003049;animation:ufqLogo 1.4s ease-in-out infinite}#ufq-loader b i{color:#C1121F;font-style:normal}'
+        + '#ufq-loader span{display:block;width:120px;height:3px;border-radius:3px;background:#E3E9EE;overflow:hidden}#ufq-loader span::after{content:"";display:block;width:40%;height:100%;border-radius:3px;background:#C1121F;animation:ufqBar 1.1s cubic-bezier(.4,0,.2,1) infinite}';
+      (document.head || document.documentElement).appendChild(st);
+    }
+    var old = document.getElementById(id); if (old) old.remove();
+    var c = document.createElement('div'); c.id = id; c.setAttribute('aria-hidden', 'true'); c.innerHTML = '<b>Ufq<i>.</i></b><span></span>';
+    (document.body || document.documentElement).appendChild(c);
+    var t0 = Date.now();
+    return function () { var wait = Math.max(0, 450 - (Date.now() - t0)); setTimeout(function () { c.style.opacity = '0'; setTimeout(function () { c.remove(); }, 300); }, wait); };
+  };
   var DOMAIN_INDEX = { 'Algebra': 0, 'Advanced Math': 1, 'Problem Solving': 2, 'Data Analysis': 2, 'Geometry': 3 };
   var MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
   /* real practice attempts, newest first, in the shape the History page uses */
