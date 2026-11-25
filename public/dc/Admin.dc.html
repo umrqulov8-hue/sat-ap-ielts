@@ -792,20 +792,45 @@ const spread = (cands, n) => { const g = {}; DOMS.forEach((d) => { g[d] = []; })
 const pickBucket = (cands, k) => { if (k <= 0) return []; const sorted = cands.map((x) => [qScore(x), x]).sort((a, c) => c[0] - a[0]).map((a) => a[1]); const wr = sorted.filter((x) => x.t !== 'MC'), mc = sorted.filter((x) => x.t === 'MC'); const w = Math.min(wr.length, Math.round(k * .2)); const got = spread(wr, w).concat(spread(mc, k - w)); if (got.length < k) { const have = {}; got.forEach((x) => { have[x.id] = 1; }); got.push.apply(got, spread(sorted.filter((x) => !have[x.id]), k - got.length)); } return got; };
 const mixFor = (key, size) => { if (key === 'm1') { const e = Math.round(size * .25), h = Math.round(size * .25); return { 1: e, 2: size - e - h, 3: h }; } if (key === 'm2_hard') { const h = Math.round(size * .7); return { 1: 0, 2: size - h, 3: h }; } const e = Math.round(size * .7); return { 1: e, 2: size - e, 3: 0 }; };
 const orderFor = (key) => key === 'm2_hard' ? [3, 2, 1] : key === 'm2_easy' ? [1, 2, 3] : [2, 1, 3];
-const fillInto = (mods, mi) => {
+const fillInto = (mods, mi, factor, dry) => {
 const taken = {}; mods.forEach((m) => Object.keys(m.picks).forEach((k) => { if (m.picks[k]) taken[k] = 1; }));
-const m = mods[mi]; const need = Math.max(0, m.target - cntP(m)); if (!need) return [0, 0];
+const m = mods[mi]; const need = Math.max(0, m.target - cntP(m)); if (!need) return dry ? { chosen: [], need: 0 } : [0, 0];
 const present = { 1: 0, 2: 0, 3: 0 }; Object.keys(m.picks).forEach((k) => { const x = bank.find((y) => y.id === k); if (x) present[x.d] = (present[x.d] || 0) + 1; });
 const tgt = mixFor(m.key, m.target); const order = orderFor(m.key); const want = { 1: 0, 2: 0, 3: 0 };
 order.forEach((d) => { want[d] = Math.max(0, (tgt[d] || 0) - present[d]); });
 let sum = want[1] + want[2] + want[3]; if (sum < need) want[order[0]] += need - sum; while (want[1] + want[2] + want[3] > need) { const d = order.slice().reverse().find((x) => want[x] > 0); want[d]--; }
 let got = 0, carry = 0; const chosen = [];
-order.forEach((d) => { const avail = bank.filter((x) => x.d === d && !elsewhere(x.id) && !taken[x.id]); const k = want[d] + carry; const picked = pickBucket(avail, k); picked.forEach((x) => { taken[x.id] = 1; chosen.push(x); }); carry = k - picked.length; });
+order.forEach((d) => { const avail = bank.filter((x) => x.d === d && !elsewhere(x.id) && !taken[x.id]); const k = Math.ceil(want[d] * (factor || 1)) + carry; const picked = pickBucket(avail, k); picked.forEach((x) => { taken[x.id] = 1; chosen.push(x); }); carry = k - picked.length; });
 if (carry > 0) { const rest = bank.filter((x) => !elsewhere(x.id) && !taken[x.id]); pickBucket(rest, carry).forEach((x) => chosen.push(x)); }
+if (dry) return { chosen, need };
 chosen.forEach((x) => { m.picks[x.id] = true; got++; }); return [got, need];
 };
-const autoFill = (mi) => setMods((mods) => { const r = fillInto(mods, mi); this.say(mods[mi].n + ': ' + r[0] + ' question' + (r[0] === 1 ? '' : 's') + ' picked' + (r[0] < r[1] ? ' — the bank ran out of unused questions.' : '.')); });
-const autoAll = () => setMods((mods) => { let g = 0, n = 0; mods.forEach((m, i) => { const r = fillInto(mods, i); g += r[0]; n += r[1]; }); this.say(g + ' questions picked across the three modules' + (g < n ? ' — the bank ran out of unused questions.' : '.')); });
+/* rule-based shortlist (2.5x) -> the AI picks the best; if the AI is unreachable the rule-based picks are used */
+const pickFor = async (mods, mi) => {
+const m = mods[mi]; const base = fillInto(mods, mi, 1, true); if (!base.need) return { got: 0, need: 0, ai: false };
+let picked = base.chosen, ai = false;
+try {
+const wide = fillInto(mods, mi, 2.5, true).chosen;
+const idx = await window.Ufq.aiPick(m.key, base.need, wide.map((x) => ({ d: x.d, dom: x.dom, t: x.t, s: window.Ufq.tex(x.stem || '') })));
+let got = idx.map((i) => wide[i]).filter(Boolean); const have = {}; got.forEach((x) => { have[x.id] = 1; });
+base.chosen.forEach((x) => { if (got.length < base.need && !have[x.id]) { got.push(x); have[x.id] = 1; } });
+if (got.length >= base.need) { picked = got.slice(0, base.need); ai = true; }
+} catch (e) { /* keep the rule-based picks */ }
+picked.forEach((x) => { m.picks[x.id] = true; });
+return { got: picked.length, need: base.need, ai };
+};
+const runFill = async (indices) => {
+if (this._filling) return; this._filling = true; this.say('Choosing the best questions…');
+try {
+const tb = this.state.tb; const mods = tb.mods.map((m) => ({ key: m.key, n: m.n, target: m.target, picks: Object.assign({}, m.picks) }));
+let g = 0, n = 0, aiAll = true;
+for (const mi of indices) { const r = await pickFor(mods, mi); g += r.got; n += r.need; if (r.need && !r.ai) aiAll = false; }
+this.setState({ tb: Object.assign({}, this.state.tb, { mods: mods.map((m, i) => ({ key: m.key, n: m.n, target: m.target, picks: Object.assign({}, this.state.tb.mods[i].picks, m.picks) })) }) });
+this.say(g + ' question' + (g === 1 ? '' : 's') + ' picked' + (aiAll ? ' with AI' : ' (AI unavailable — rule-based picking used)') + (g < n ? ' — the bank ran out of unused questions.' : '.'));
+} finally { this._filling = false; }
+};
+const autoFill = (mi) => runFill([mi]);
+const autoAll = () => runFill([0, 1, 2]);
 const tbTypes = [22, 44].map((n) => ({ l: n + ' per module', d: 'Module 1, harder Module 2 and easier Module 2 each get ' + n + ' questions', on: b.size === n ? 'true' : 'false', pick: () => this.setState({ tb: Object.assign({}, this.state.tb, { size: n, mods: this.state.tb.mods.map((m) => ({ key: m.key, n: m.n, target: n, picks: m.picks })) }) }) }));
 const tbMods = b.mods.map((m, i) => { const n = cntP(m); return { n: m.n, cnt: String(n), target: String(m.target), pct: Math.min(100, Math.round(n / Math.max(1, m.target) * 100)) + '%', full: n >= m.target ? NAVY : BLUE, on: i === am ? 'true' : 'false',
 pick: () => upTb({ am: i }), auto: () => autoFill(i), clear: () => setMods((mods) => { mods[i].picks = {}; }) }; });

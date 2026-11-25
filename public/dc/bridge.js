@@ -731,6 +731,13 @@
         .catch(function (err) { if (isNew) Ufq.rest('/rest/v1/mock_tests?id=eq.' + id, { method: 'DELETE', headers: { Prefer: 'return=minimal' } }).catch(function () { /* ignore */ }); throw err; });
     });
   };
+  /* the server asks the AI to choose the best `need` of the shortlisted candidates; resolves to indices into `cands` */
+  Ufq.aiPick = function (mod, need, cands) {
+    return ensureFresh().then(function (sess) {
+      return fetch('/api/mock-pick', { method: 'POST', headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + (sess && sess.access_token) }, body: JSON.stringify({ module: mod, need: need, candidates: cands }) })
+        .then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { if (!r.ok) throw new Error(j.error || 'AI error'); return j.picked || []; }); });
+    });
+  };
   Ufq.adminMockQuestions = function (id) { return Ufq.rest('/rest/v1/mock_test_questions?select=module,position,question_id&test_id=eq.' + id + '&order=position&limit=1000'); };
   Ufq.adminDeleteMock = function (id) { return Ufq.rest('/rest/v1/mock_tests?id=eq.' + id, { method: 'DELETE', headers: { Prefer: 'return=minimal' } }); };
   Ufq.adminRemoveInvite = function (email) { return Ufq.rest('/rest/v1/invites?email=eq.' + encodeURIComponent(email), { method: 'DELETE', headers: { Prefer: 'return=minimal' } }); };
