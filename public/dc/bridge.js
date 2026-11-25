@@ -263,13 +263,25 @@
      Draws random questions from the whole bank (multiple choice and written). */
   Ufq.loadQuestions = function (o) {
     o = o || {};
-    var want = Math.max(1, Math.min(Number(o.count) || 10, 120));
+    var all = o.count === 'all';
+    var want = all ? 100000 : Math.max(1, Math.min(Number(o.count) || 10, 120));
     return Ufq.subjects().then(function (subjects) {
       var chosen = subjects.filter(function (x) { return !(o.slugs && o.slugs.length) || o.slugs.indexOf(x.slug) > -1; });
       return Promise.all(chosen.map(function (x) { return countOf(x.id, o.hard).then(function (n) { return { sub: x, n: n }; }); })).then(function (pools) {
         pools = pools.filter(function (p) { return p.n > 0; });
         var total = pools.reduce(function (t, p) { return t + p.n; }, 0);
         if (!total) return [];
+        if (all) {
+          var hq = o.hard ? '&difficulty=in.(hard,elite)' : '';
+          var pageOf = function (p, from) {
+            return Ufq.rest('/rest/v1/questions?select=' + QCOLS + '&subject_id=eq.' + p.sub.id + hq + '&order=id&limit=1000&offset=' + from).then(function (rows) {
+              rows = rows || [];
+              var mapped = rows.map(function (q) { return toQuestion(q, p.sub); }).filter(Boolean);
+              return rows.length === 1000 ? pageOf(p, from + 1000).then(function (rest) { return mapped.concat(rest); }) : mapped;
+            });
+          };
+          return Promise.all(pools.map(function (p) { return pageOf(p, 0); })).then(function (lists) { return shuffle([].concat.apply([], lists)); });
+        }
         var got = {}, out = [], rounds = 0;
         var hardQ = o.hard ? '&difficulty=in.(hard,elite)' : '';
         function round() {

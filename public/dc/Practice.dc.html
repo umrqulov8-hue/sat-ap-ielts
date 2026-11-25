@@ -355,7 +355,7 @@ super(props);
 this.state = { q: 0, ans: {}, marked: {}, crossed: {}, crossMode: false, nav: false, review: false, done: false, rev: null, hideTimer: (() => { try { const sv = JSON.parse(localStorage.getItem('ufq_settings') || 'null'); return !!sv && sv.timer === false; } catch (e) { return false; } })(), Q: null, title: '', tick: 0 };
 this._t0 = Date.now(); this.tm = {}; this._q = 0; this._qt = Date.now(); this.saved = false;
 const params = new URLSearchParams(location.search);
-this._slugs = (params.get('d') || '').split(',').filter(Boolean); this._n = Number(params.get('n')) || 10; this._hard = params.get('h') === '1';
+this._slugs = (params.get('d') || '').split(',').filter(Boolean); this._n = params.get('n') === 'all' ? 'all' : (Number(params.get('n')) || 10); this._hard = params.get('h') === '1';
 const cover = document.createElement('div'); cover.setAttribute('aria-live', 'polite');
 cover.style.cssText = 'position:fixed;inset:0;z-index:2147483000;background:#FFFFFF;display:flex;align-items:center;justify-content:center;font:500 22px "Newsreader",Georgia,serif;font-style:italic;color:#003049';
 cover.textContent = 'Preparing your set…'; document.body.appendChild(cover);
@@ -500,7 +500,8 @@ next: () => { const t = this.state; if (t.rev !== null) { this.setState({ rev: t
 submit: () => {
 const t = this.state; if (!this.saved && t.Q) {
 this.saved = true; this.tm[this._q] = (this.tm[this._q] || 0) + Math.round((Date.now() - this._qt) / 1000);
-const qs = t.Q; const answers = qs.map((x, i) => { const y = t.ans[i]; return { qIdx: i, selected: y === undefined ? null : (x.written ? y : 'ABCD'.indexOf(y)), correct: okQ(x, y), question: x.raw }; });
+const qs = t.Q; const big = qs.length > 150;
+const answers = qs.map((x, i) => { const y = t.ans[i]; const ok = okQ(x, y); return { qIdx: i, selected: y === undefined ? null : (x.written ? y : 'ABCD'.indexOf(y)), correct: ok, question: big && ok ? { id: x.id } : x.raw }; });
 const subjectIds = [...new Set(qs.map((x) => x.subjectId))];
 window.Ufq.savePractice({ title: (t.title || 'Practice') + ' · ' + qs.length + ' questions', subjectId: subjectIds.length === 1 ? subjectIds[0] : null, subjectTitle: t.title || 'Mixed', score: answers.filter((a) => a.correct).length, total: qs.length, minutes: Math.max(1, Math.round((Date.now() - this._t0) / 60000)), answers })
 .then(() => window.Ufq.toast('Result saved', 'ok')).catch((err) => { this.saved = false; window.Ufq.toast('Could not save the result: ' + (err && err.message || 'error')); });
