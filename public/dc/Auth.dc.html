@@ -26,7 +26,7 @@ a{color:#003049}
 .mask>span{display:block}
 
 /* silver logo (same as landing) */
-.silver{background-image:linear-gradient(100deg,#AEB5C0 0%,#FFFFFF 22%,#8E97A5 38%,#FFFFFF 52%,#C7CDD6 70%,#FFFFFF 86%,#AEB5C0 100%);background-size:260% 100%;-webkit-background-clip:text;background-clip:text;color:transparent!important;animation:sheen 5s linear infinite}
+.silver{background-image:linear-gradient(100deg,#AEB5C0 0%,#FFFFFF 22%,#8E97A5 38%,#FFFFFF 52%,#C7CDD6 70%,#FFFFFF 86%,#AEB5C0 100%);background-size:260% 100%;-webkit-background-clip:text;background-clip:text;color:transparent!important;animation:sheen 5s linear 1}
 @keyframes sheen{from{background-position:0% 0}to{background-position:-260% 0}}
 
 /* inline image pills */
@@ -75,7 +75,7 @@ a{color:#003049}
 @keyframes up{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
 .fu{animation:up 1s cubic-bezier(.16,1,.3,1) both}
 @keyframes kb{from{transform:scale(1.18) translate(-2%,-1%)}to{transform:scale(1.04) translate(1%,1%)}}
-.kb{animation:kb 18s ease-in-out infinite alternate}
+.kb{animation:kb 24s ease-out both}
 @keyframes panelIn{from{clip-path:inset(0 0 0 100%)}to{clip-path:inset(0 0 0 0)}}
 .panelIn{animation:panelIn 1.3s cubic-bezier(.76,0,.24,1) both}
 @keyframes stepIn{from{opacity:0;transform:translateX(40px)}to{opacity:1;transform:none}}
