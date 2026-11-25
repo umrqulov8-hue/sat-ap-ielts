@@ -364,12 +364,12 @@
   var MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
   /* real practice attempts, newest first, in the shape the History page uses */
   Ufq.history = function () {
-    return Ufq.rest('/rest/v1/practice_tests?select=id,title,subject,score,total,duration,taken_at,answers&order=taken_at.desc&limit=200').then(function (rows) {
+    return Ufq.rest('/rest/v1/practice_tests?select=id,title,subject,score,total,duration,taken_at&order=taken_at.desc&limit=200').then(function (rows) {
       var list = rows.map(function (r, i) {
         var d = new Date(r.taken_at);
         var acc = r.total ? Math.round(r.score / r.total * 100) : 0;
         var dom = [0, 0, 0, 0]; var di = DOMAIN_INDEX[r.subject]; if (di !== undefined) dom[di] = acc;
-        return { id: i + 1, rid: r.id, d: MON[d.getMonth()] + ' ' + d.getDate(), t: r.title, ty: r.subject === 'SAT' ? 'mock' : 'practice', acc: acc, min: Math.max(1, Number(r.duration) || 1), sc: r.score, max: r.total, ts: d.getTime(), subject: r.subject, dom: dom, answers: r.answers, note: 'Saved from your practice set.' };
+        return { id: i + 1, rid: r.id, d: MON[d.getMonth()] + ' ' + d.getDate(), t: r.title, ty: r.subject === 'SAT' ? 'mock' : 'practice', acc: acc, min: Math.max(1, Number(r.duration) || 1), sc: r.score, max: r.total, ts: d.getTime(), subject: r.subject, dom: dom, answers: null, note: 'Saved from your practice set.' };
       });
       list.forEach(function (x, i) {
         var prev = list.slice(i + 1).find(function (y) { return y.subject === x.subject; });
@@ -387,8 +387,19 @@
   }
   /* open mistakes from saved attempts, in the Mistakes page's row shape:
      [type, domain, when, stem, 'B · yours', 'C · right', why, streak] */
+  /* the saved answers are the heavy part of an attempt: only the latest 40 attempts are fetched, once per page */
+  Ufq.recentAnswers = function () {
+    if (!Ufq._ansP || Date.now() - Ufq._ansT > 20000) {
+      Ufq._ansT = Date.now();
+      Ufq._ansP = Ufq.rest('/rest/v1/practice_tests?select=id,answers&order=taken_at.desc&limit=40').then(function (rows) { var m = {}; (rows || []).forEach(function (r) { m[r.id] = r.answers; }); return m; }).catch(function () { return {}; });
+    }
+    return Ufq._ansP;
+  };
   Ufq.mistakes = function (given) {
-    return (given ? Promise.resolve(given) : Ufq.history()).then(function (list) {
+    return Promise.all([given ? Promise.resolve(given) : Ufq.history(), Ufq.recentAnswers()]).then(function (res) {
+      var list = res[0]; list.forEach(function (t) { if (!t.answers && res[1][t.rid]) t.answers = res[1][t.rid]; });
+      return list;
+    }).then(function (list) {
       var seen = {}, out = [];
       list.forEach(function (t) {
         (t.answers || []).forEach(function (a) {
@@ -436,6 +447,7 @@
       Ufq.rest('/rest/v1/user_scores?select=subject_id,score'),
       Ufq.history(),
       Ufq.rest('/rest/v1/login_streaks?select=login_date&order=login_date.desc&limit=500'),
+      Ufq.recentAnswers(),
     ]).then(function (r) {
       var subjects = r[0], scores = r[1] || [], hist = r[2] || [], logins = r[3] || [];
       var idSlug = {}; subjects.forEach(function (x) { idSlug[x.id] = x.slug; });
@@ -623,7 +635,11 @@
     apply(); new MutationObserver(apply).observe(document.body || document.documentElement, { childList: true, subtree: true, characterData: true });
   };
   if (Ufq.isSignedIn() && page && !PUBLIC[page]) {
-    Ufq.dashboard().then(function (R) { Ufq.decorate(R); }).catch(function () { Ufq.decorate(null); });
+    /* the side menu only needs the sign-in days, not the whole dashboard */
+    Ufq.rest('/rest/v1/login_streaks?select=login_date&order=login_date.desc&limit=500').then(function (rows) {
+      var days = {}, join = Ufq.today(); (rows || []).forEach(function (x) { days[x.login_date] = 1; if (x.login_date < join) join = x.login_date; });
+      Ufq.decorate({ days: days, join: join });
+    }).catch(function () { Ufq.decorate(null); });
   }
   /* every signed-in page: pick up a pending invite once, turn suspended accounts away, guard Admin */
   if (Ufq.isSignedIn() && page && !PUBLIC[page]) {
@@ -640,7 +656,7 @@
 
   /* everything this user has saved, as a downloadable file */
   Ufq.exportData = function () {
-    return Promise.all([Ufq.history(), Ufq.rest('/rest/v1/login_streaks?select=login_date&order=login_date'), Ufq.rest('/rest/v1/user_scores?select=*')]).then(function (r) {
+    return Promise.all([Ufq.rest('/rest/v1/practice_tests?select=*&order=taken_at.desc&limit=1000'), Ufq.rest('/rest/v1/login_streaks?select=login_date&order=login_date'), Ufq.rest('/rest/v1/user_scores?select=*')]).then(function (r) {
       var data = { account: { email: Ufq.email(), name: Ufq.displayName() }, goal: Ufq.goal(), attempts: r[0], login_days: (r[1] || []).map(function (x) { return x.login_date; }), scores: r[2] };
       var blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
       var a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'ufq-my-data.json';
