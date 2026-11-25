@@ -27,7 +27,7 @@
   /* ---------------- session ---------------- */
   /* short-lived read cache: a page opened again within 90 s paints with its real data at once instead of empty-then-filled.
      Any write (POST/PATCH/DELETE) empties it, so results you just saved always show. */
-  var CACHEABLE = /\/rest\/v1\/(practice_tests|user_scores|login_streaks|subjects|mock_tests|mock_test_questions|practice_progress|profiles|user_activity)\?/;
+  var CACHEABLE = /\/rest\/v1\/(user_scores|login_streaks|subjects|mock_tests|practice_progress|profiles)\?/;
   function cacheGet(key) { try { var r = JSON.parse(sessionStorage.getItem(key) || 'null'); if (r && Date.now() - r.t < 90000) return r.v; } catch (e) { /* ignore */ } return undefined; }
   function cachePut(key, v) { try { var j = JSON.stringify({ t: Date.now(), v: v }); if (j.length < 600000) sessionStorage.setItem(key, j); } catch (e) { /* storage full or blocked */ } }
   function cacheClear() { try { Object.keys(sessionStorage).forEach(function (k) { if (k.indexOf('ufq_c:') === 0) sessionStorage.removeItem(k); }); } catch (e) { /* ignore */ } }
@@ -635,10 +635,6 @@
       if (row.suspended) { Ufq.signOut('/auth?suspended=1'); return; }
       if (page === 'Admin' && row.role !== 'admin' && row.role !== 'owner') location.replace('/dashboard');
     }).catch(function () { if (page === 'Admin') location.replace('/dashboard'); });
-  }
-  /* warm the read cache for the other pages while this one is idle, so moving on paints with data straight away */
-  if (Ufq.isSignedIn() && page && !PUBLIC[page] && page !== 'Admin' && page !== 'Practice') {
-    setTimeout(function () { try { Promise.all([Ufq.dashboard(), Ufq.history(), Ufq.satTests(), Ufq.bankCounts(), Ufq.progressList()]).catch(function () { /* warming is best effort */ }); } catch (e) { /* ignore */ } }, 500);
   }
   if (page === 'Auth' && /[?&]suspended=1/.test(location.search)) setTimeout(function () { Ufq.toast('This account has been suspended. Contact your administrator.'); }, 400);
 
