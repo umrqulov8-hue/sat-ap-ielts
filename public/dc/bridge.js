@@ -25,6 +25,13 @@
   var cfg = window.UFQ_CONFIG || { url: '', key: '' };
 
   /* ---------------- session ---------------- */
+  /* short-lived read cache: a page opened again within 90 s paints with its real data at once instead of empty-then-filled.
+     Any write (POST/PATCH/DELETE) empties it, so results you just saved always show. */
+  var CACHEABLE = /\/rest\/v1\/(practice_tests|user_scores|login_streaks|subjects|mock_tests|mock_test_questions|practice_progress|profiles|user_activity)\?/;
+  function cacheGet(key) { try { var r = JSON.parse(sessionStorage.getItem(key) || 'null'); if (r && Date.now() - r.t < 90000) return r.v; } catch (e) { /* ignore */ } return undefined; }
+  function cachePut(key, v) { try { var j = JSON.stringify({ t: Date.now(), v: v }); if (j.length < 600000) sessionStorage.setItem(key, j); } catch (e) { /* storage full or blocked */ } }
+  function cacheClear() { try { Object.keys(sessionStorage).forEach(function (k) { if (k.indexOf('ufq_c:') === 0) sessionStorage.removeItem(k); }); } catch (e) { /* ignore */ } }
+  window.__ufqBootUntil = Date.now() + 900;
   function read() {
     try { return JSON.parse(localStorage.getItem(KEY) || 'null'); } catch (e) { return null; }
   }
@@ -134,12 +141,15 @@
     },
     /* authenticated PostgREST call, e.g. Ufq.rest('/rest/v1/profiles?select=*&id=eq.' + id) */
     rest: function (path, opts) {
+      opts = opts || {};
+      var method = String(opts.method || 'GET').toUpperCase();
+      var key = method === 'GET' && CACHEABLE.test(path) ? 'ufq_c:' + ((Ufq.user() || {}).id || '') + ':' + path : '';
+      if (key) { var hit = cacheGet(key); if (hit !== undefined) return Promise.resolve(hit); }
       return ensureFresh().then(function (s) {
         var token = s && s.access_token;
-        opts = opts || {};
         opts.headers = Object.assign(authHeaders(token), opts.headers || {});
         return api(path, opts);
-      });
+      }).then(function (res) { if (key) cachePut(key, res); else if (method !== 'GET') cacheClear(); return res; });
     },
     go: function (name) { location.assign(ROUTES[name] || '/'); },
     toast: function (message, kind) {
@@ -322,31 +332,17 @@
   /* how many questions the bank holds per subject: { algebra: 724, ... } */
   Ufq.bankCounts = function () {
     if (!Ufq._bank) {
+      var ck = 'ufq_c:bank'; var cached; try { cached = JSON.parse(sessionStorage.getItem(ck) || 'null'); } catch (e) { cached = null; }
+      if (cached && Date.now() - cached.t < 300000) { Ufq._bank = Promise.resolve(cached.v); return Ufq._bank; }
       Ufq._bank = Ufq.subjects().then(function (subs) {
         return Promise.all(subs.map(function (x) { return countOf(x.id).then(function (n) { return [x.slug, n]; }); }));
-      }).then(function (pairs) { var o = {}; pairs.forEach(function (p) { o[p[0]] = p[1]; }); return o; });
+      }).then(function (pairs) { var o = {}; pairs.forEach(function (p) { o[p[0]] = p[1]; }); try { sessionStorage.setItem('ufq_c:bank', JSON.stringify({ t: Date.now(), v: o })); } catch (e) { /* ignore */ } return o; });
     }
     return Ufq._bank;
   };
 
-  /* full-screen cover while a page loads its real data; call the returned function to remove it */
-  /* No loading screen: the first call on a page keeps only the page content invisible (the side menu stays) until its data is
-     in, then fades it in once, so nothing flashes or re-animates. Later calls, and a 2.5 s safety limit, never block. */
-  var held = false;
-  Ufq.cover = function () {
-    if (held) return function () { /* nothing to release */ };
-    held = true;
-    var st = document.createElement('style'); st.textContent = 'main{opacity:0!important}';
-    (document.head || document.documentElement).appendChild(st);
-    var done = false, timer;
-    function release() {
-      if (done) return; done = true; clearTimeout(timer);
-      st.textContent = 'main{animation:ufqFade .22s ease both}@keyframes ufqFade{from{opacity:0}}';
-      setTimeout(function () { st.remove(); }, 400);
-    }
-    timer = setTimeout(release, 2500);
-    return function () { requestAnimationFrame(function () { setTimeout(release, 30); }); };
-  };
+  /* no loading cover: pages paint at once with cached data, then update quietly */
+  Ufq.cover = function () { return function () { /* nothing to remove */ }; };
   /* the one loading screen: shown only while a question set is being prepared */
   Ufq.loader = function () {
     var id = 'ufq-loader';
@@ -639,6 +635,10 @@
       if (row.suspended) { Ufq.signOut('/auth?suspended=1'); return; }
       if (page === 'Admin' && row.role !== 'admin' && row.role !== 'owner') location.replace('/dashboard');
     }).catch(function () { if (page === 'Admin') location.replace('/dashboard'); });
+  }
+  /* warm the read cache for the other pages while this one is idle, so moving on paints with data straight away */
+  if (Ufq.isSignedIn() && page && !PUBLIC[page] && page !== 'Admin' && page !== 'Practice') {
+    setTimeout(function () { try { Promise.all([Ufq.dashboard(), Ufq.history(), Ufq.satTests(), Ufq.bankCounts(), Ufq.progressList()]).catch(function () { /* warming is best effort */ }); } catch (e) { /* ignore */ } }, 500);
   }
   if (page === 'Auth' && /[?&]suspended=1/.test(location.search)) setTimeout(function () { Ufq.toast('This account has been suspended. Contact your administrator.'); }, 400);
 
