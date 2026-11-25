@@ -147,7 +147,7 @@ html,body{margin:0;background:#003049}
 <button type="button" class="tool" onClick="{{toggleMark}}" aria-pressed="{{markedNow}}"><svg width="14" height="16" viewBox="0 0 14 16" aria-hidden="true"><path d="M1 1h12v14l-6-4-6 4z" fill="{{markFill}}" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"></path></svg>Mark for review</button>
 <button type="button" class="tool" onClick="{{toggleCross}}" aria-pressed="{{crossMode}}" aria-label="Answer eliminator" title="Eliminate answers" style="margin-left: auto; text-decoration: line-through; letter-spacing: .04em">ABC</button>
 </div></div>
-<p style="margin: 0; font-size: 18px; line-height: 1.55; font-weight: 500"><sc-for list="{{stemP}}" as="g" hint-placeholder-count="1"><sc-if value="{{g.tx}}" hint-placeholder-val="{{ true }}"><span>{{g.t}}</span></sc-if><sc-if value="{{g.fr}}" hint-placeholder-val="{{ false }}"><span class="fr"><span>{{g.n}}</span><span>{{g.d}}</span></span></sc-if></sc-for></p>
+<p style="margin: 0; font-size: 18px; line-height: 1.55; font-weight: 500; white-space: pre-line"><sc-for list="{{stemP}}" as="g" hint-placeholder-count="1"><sc-if value="{{g.tx}}" hint-placeholder-val="{{ true }}"><span>{{g.t}}</span></sc-if><sc-if value="{{g.fr}}" hint-placeholder-val="{{ false }}"><span class="fr"><span>{{g.n}}</span><span>{{g.d}}</span></span></sc-if></sc-for></p>
 <sc-if value="{{isMc}}" hint-placeholder-val="{{ true }}"><div role="radiogroup" aria-label="Answer choices" style="display: flex; flex-direction: column; gap: 12px">
 <sc-for list="{{opts}}" as="o" hint-placeholder-count="4">
 <div style="display: flex; align-items: center; gap: 10px">

@@ -187,12 +187,12 @@
   Ufq.tex = function (input) {
     if (input == null) return '';
     var s = String(input);
-    s = s.replace(/<br\s*\/?>/gi, ' ').replace(/<\/?(?:p|div|b|i|em|strong|u|span|sub|sup)[^>]*>/gi, '');
+    s = s.replace(/<br\s*\/?>/gi, '\n').replace(/<\/(?:p|div|li|tr)>/gi, '\n').replace(/<\/?(?:p|div|b|i|em|strong|u|span|sub|sup|table|thead|tbody|tr|td|th|ul|ol|li)[^>]*>/gi, ' ');
     s = s.replace(/&nbsp;/g, ' ').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&').replace(/&quot;/g, '"');
     s = s.replace(/\$\$([\s\S]+?)\$\$/g, function (_, a) { return conv(a); }).replace(/\$([^$]+)\$/g, function (_, a) { return conv(a); });
     s = s.replace(/\\\(([\s\S]+?)\\\)/g, function (_, a) { return conv(a); }).replace(/\\\[([\s\S]+?)\\\]/g, function (_, a) { return conv(a); });
     if (/\\[A-Za-z]/.test(s)) s = conv(s);
-    return s.replace(/\s+/g, ' ').trim();
+    return s.replace(/[ \t\f\v]+/g, ' ').replace(/ *\n+ */g, '\n').trim();
   };
 
   /* ---------------- questions + saving results ---------------- */
@@ -263,7 +263,7 @@
      Draws random questions from the whole bank (multiple choice and written). */
   Ufq.loadQuestions = function (o) {
     o = o || {};
-    var want = Math.max(1, Math.min(Number(o.count) || 10, 40));
+    var want = Math.max(1, Math.min(Number(o.count) || 10, 120));
     return Ufq.subjects().then(function (subjects) {
       var chosen = subjects.filter(function (x) { return !(o.slugs && o.slugs.length) || o.slugs.indexOf(x.slug) > -1; });
       return Promise.all(chosen.map(function (x) { return countOf(x.id, o.hard).then(function (n) { return { sub: x, n: n }; }); })).then(function (pools) {
@@ -271,22 +271,21 @@
         var total = pools.reduce(function (t, p) { return t + p.n; }, 0);
         if (!total) return [];
         var got = {}, out = [], rounds = 0;
-        function pickOne(used) {
-          var r = Math.floor(Math.random() * total), p = null;
-          for (var k = 0; k < pools.length; k++) { if (r < pools[k].n) { p = pools[k]; break; } r -= pools[k].n; }
-          var key = p.sub.id + ':' + r;
-          if (used[key]) return null;
-          used[key] = 1;
-          return Ufq.rest('/rest/v1/questions?select=' + QCOLS + '&subject_id=eq.' + p.sub.id + (o.hard ? '&difficulty=in.(hard,elite)' : '') + '&order=id&limit=1&offset=' + r)
-            .then(function (rows) { return rows && rows[0] ? { q: rows[0], sub: p.sub } : null; });
-        }
+        var hardQ = o.hard ? '&difficulty=in.(hard,elite)' : '';
         function round() {
           rounds++;
-          var need = Math.min(want - out.length + 4, total), jobs = [], used = {};
-          for (var i = 0; i < need * 3 && jobs.length < need; i++) { var j = pickOne(used); if (j) jobs.push(j); }
-          return Promise.all(jobs).then(function (items) {
-            items.forEach(function (it) {
-              if (!it || got[it.q.id] || out.length >= want) return;
+          var need = want - out.length + 6, jobs = [];
+          pools.forEach(function (p) {
+            var k = Math.min(p.n, Math.ceil(need * p.n / total) + 2);
+            if (k <= 0) return;
+            var start = Math.floor(Math.random() * Math.max(1, p.n - k + 1));
+            jobs.push(Ufq.rest('/rest/v1/questions?select=' + QCOLS + '&subject_id=eq.' + p.sub.id + hardQ + '&order=id&limit=' + k + '&offset=' + start)
+              .then(function (rows) { return (rows || []).map(function (q) { return { q: q, sub: p.sub }; }); }));
+          });
+          return Promise.all(jobs).then(function (lists) {
+            var all = shuffle([].concat.apply([], lists));
+            all.forEach(function (it) {
+              if (got[it.q.id] || out.length >= want) return;
               var q = toQuestion(it.q, it.sub); if (!q) return;
               got[it.q.id] = 1; out.push(q);
             });

@@ -155,6 +155,8 @@ a.tile:hover .go{transform:rotate(-45deg);background:#003049;color:#FFFFFF}
 <h1 class="srf" style="margin: 0; font-size: clamp(40px, 4.4vw, 68px); line-height: 1"><span class="mask ld"><span>Pick a <em style="color: #C1121F">skill.</em> Or let us pick.</span></span></h1>
 </div>
 </header>
+<div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap"><span class="cap" style="color: #669BBC">Questions per set</span>
+<sc-for list="{{sizes}}" as="z" hint-placeholder-count="5"><button type="button" onClick="{{z.pick}}" aria-pressed="{{z.on}}" style="min-height: 40px; padding: 0 18px; border-radius: 999px; border: 0; cursor: pointer; font: 600 15px 'Inter Tight', sans-serif; background: {{z.bg}}; color: {{z.fg}}; box-shadow: {{z.ring}}">{{z.label}}</button></sc-for></div>
 <div class="bento" style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px">
 <a href="{{recHref}}" class="tile ti" style="grid-column: span 2; background: #003049; color: #FFFFFF; min-height: 280px; padding: clamp(24px, 2.4vw, 34px)">
 <img class="kb" src="/dc/assets/c441794dc228eac1e17452a86de4e371.webp" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .25">
@@ -164,13 +166,13 @@ a.tile:hover .go{transform:rotate(-45deg);background:#003049;color:#FFFFFF}
 <h2 class="srf" style="position: relative; margin: auto 0 0; font-size: clamp(36px, 3.2vw, 52px); line-height: 1">{{recA}} <em style="color: #F6DDB0">{{recB}}</em></h2>
 <span style="position: relative; color: rgba(255,255,255,.78)">{{recLine}}</span>
 </a>
-<a href="/practice/session?n=10" class="tile ti" style="animation-delay: .06s">
+<a href="{{mixHref}}" class="tile ti" style="animation-delay: .06s">
 <span class="go" aria-hidden="true">→</span>
 <span class="cap" style="color: #669BBC">Mixed sprint</span>
-<span class="srf" style="font-size: 30px; line-height: 1.05; margin-top: auto">10 questions,<br>12 minutes.</span>
+<span class="srf" style="font-size: 30px; line-height: 1.05; margin-top: auto">{{sizeTxt}} questions,<br>{{sizeMin}} minutes.</span>
 <span style="font-size: 14px; color: rgba(0,48,73,.7)">All four domains, real-test pace.</span>
 </a>
-<a href="/practice/session?n=10&h=1" class="tile ti" style="animation-delay: .12s; background: #C1121F; color: #FFFFFF">
+<a href="{{hardHref}}" class="tile ti" style="animation-delay: .12s; background: #C1121F; color: #FFFFFF">
 <span class="go" aria-hidden="true" style="box-shadow: inset 0 0 0 1px rgba(255,255,255,.5)">→</span>
 <span class="cap" style="color: rgba(255,255,255,.8)">Hard mode</span>
 <span class="srf" style="font-size: 30px; line-height: 1.05; margin-top: auto">Module 2<br>difficulty.</span>
@@ -185,7 +187,7 @@ a.tile:hover .go{transform:rotate(-45deg);background:#003049;color:#FFFFFF}
 </div>
 <div class="domg" style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px">
 <sc-for list="{{doms}}" as="d" hint-placeholder-count="4">
-<a href="/practice/session?d={{d.slug}}" class="dom swap" style="animation-delay: {{d.delay}}; gap: 14px; padding: 20px; min-height: 250px">
+<a href="{{d.href}}" class="dom swap" style="animation-delay: {{d.delay}}; gap: 14px; padding: 20px; min-height: 250px">
 <div style="display: flex; justify-content: space-between; gap: 8px"><span class="cap" style="color: rgba(0,48,73,.55)">{{d.sec}}</span><span class="cap" style="color: {{d.c}}">{{d.stage}}</span></div>
 <span class="srf" style="font-size: 26px; line-height: 1.05">{{d.name}}</span>
 <div aria-hidden="true" style="display: flex; gap: 4px"><span class="pip" style="background: {{d.p1}}"></span><span class="pip" style="background: {{d.p2}}"></span><span class="pip" style="background: {{d.p3}}"></span><span class="pip" style="background: {{d.p4}}"></span></div>
@@ -206,7 +208,7 @@ a.tile:hover .go{transform:rotate(-45deg);background:#003049;color:#FFFFFF}
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1000}}'>
 class Component extends DCLogic {
-constructor(props) { super(props); this.state = { seg: 'all', R: null, bank: null };
+constructor(props) { super(props); this.state = { seg: 'all', R: null, bank: null, size: (() => { try { return Number(localStorage.getItem('ufq_size')) || 40; } catch (e) { return 40; } })() };
 const off = window.Ufq.cover('Counting the question bank…');
 Promise.all([window.Ufq.dashboard().catch(() => null), window.Ufq.bankCounts()]).then(([R, bank]) => { off(); this.setState({ R, bank }); }).catch((err) => { off(); window.Ufq.toast(err.message || 'Could not load the question bank.'); this.setState({ bank: {} }); });
 }
@@ -224,11 +226,12 @@ const colorOf = (st) => st === 0 ? '#C1121F' : st === 1 ? '#669BBC' : '#003049';
 const SLUG = { 'Algebra': 'algebra', 'Advanced Math': 'advanced-math', 'Problem-Solving & Data': 'problem-solving,data-analysis', 'Geometry & Trig': 'geometry' };
 const doms = D.map(([name, sec, st, q, sk], i) => {
 const c = colorOf(st); const p = (k) => k <= st ? c : '#E3E9EE';
-return { slug: SLUG[name], name, sec: 'Math', stage: STAGES[st], c, p1: p(0), p2: p(1), p3: p(2), p4: p(3), q: q.toLocaleString('en-US'), skills: sk.map(t => ({ t })), delay: (i * 0.05).toFixed(2) + 's' };
+return { href: '/practice/session?d=' + SLUG[name] + '&n=' + s.size, slug: SLUG[name], name, sec: 'Math', stage: STAGES[st], c, p1: p(0), p2: p(1), p3: p(2), p4: p(3), q: q.toLocaleString('en-US'), skills: sk.map(t => ({ t })), delay: (i * 0.05).toFixed(2) + 's' };
 });
 return { doms, domCount: String(doms.length), bankTotal: bankTotal.toLocaleString('en-US'),
-recHref: '/practice/session?n=10' + (wk ? '&d=' + wk.q : ''), recA: wk ? wk.name : 'Mixed', recB: 'practice.',
-recLine: (wk ? wk.name : 'All domains') + ' · 10 questions · about 15 min' };
+recHref: '/practice/session?n=' + s.size + (wk ? '&d=' + wk.q : ''), mixHref: '/practice/session?n=' + s.size, hardHref: '/practice/session?n=' + s.size + '&h=1', sizeTxt: String(s.size), sizeMin: String(Math.round(s.size * 1.2)),
+sizes: [10, 20, 40, 80, 120].map((n) => ({ label: String(n), on: s.size === n ? 'true' : 'false', bg: s.size === n ? '#003049' : '#F4F6F8', fg: s.size === n ? '#FFFFFF' : '#003049', ring: s.size === n ? 'none' : 'inset 0 0 0 1px rgba(0,48,73,.15)', pick: () => { try { localStorage.setItem('ufq_size', String(n)); } catch (e) {} this.setState({ size: n }); } })), recA: wk ? wk.name : 'Mixed', recB: 'practice.',
+recLine: (wk ? wk.name : 'All domains') + ' · ' + s.size + ' questions · about ' + Math.round(s.size * 1.5) + ' min' };
 }
 }
 </script>
