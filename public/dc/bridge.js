@@ -435,7 +435,7 @@
   };
   (function () { var raw = Ufq.dashboard; Ufq.dashboard = function (fresh) { if (!fresh && Ufq._dashP && Date.now() - Ufq._dashT < 20000) return Ufq._dashP; Ufq._dashT = Date.now(); Ufq._dashP = raw(); return Ufq._dashP; }; })();
   /* remove the design's sample-only areas and fix role-based links */
-  var hideAdmin = document.createElement('style'); hideAdmin.textContent = 'a.nv[href="/admin"]{display:none!important}'; (document.head || document.documentElement).appendChild(hideAdmin);
+  var hideAdmin = document.createElement('style'); hideAdmin.textContent = 'a.nv[href="/admin"]{display:none!important}.drawer,.dlg,.dlg *{scrollbar-width:none}.drawer::-webkit-scrollbar,.dlg::-webkit-scrollbar,.dlg *::-webkit-scrollbar{display:none}'; (document.head || document.documentElement).appendChild(hideAdmin);
   if (Ufq.isSignedIn()) {
     Ufq.rest('/rest/v1/profiles?select=role&id=eq.' + (Ufq.user() || {}).id).then(function (rows) {
       var role = rows && rows[0] && rows[0].role;
@@ -470,15 +470,36 @@
     var week = Math.max(1, Math.min(total, Math.floor((now - join) / 604800000) + 1));
     return { total: total, week: week, daysLeft: test ? Math.max(0, Math.round((test - now) / 86400000)) : null };
   };
-  /* full-length SAT tests from the question bank + this user's attempts */
+  /* paged read of a PostgREST list (the API returns at most 1000 rows per request); the path needs a stable &order= */
+  Ufq.restAll = function (path) {
+    var out = [];
+    function go(off) { return Ufq.rest(path + '&limit=1000&offset=' + off).then(function (rows) { out = out.concat(rows || []); return rows && rows.length === 1000 ? go(off + 1000) : out; }); }
+    return go(0);
+  };
+  /* ---------------- adaptive mock tests: Module 1, then a harder or an easier Module 2 ---------------- */
   Ufq.satTests = function () {
     return Promise.all([
-      Ufq.rest('/rest/v1/sat_tests?select=id,title,total_questions&total_questions=gt.0&order=created_at.asc'),
-      Ufq.rest('/rest/v1/practice_tests?select=id,title,score,total,taken_at&subject=eq.SAT&order=taken_at.desc&limit=100'),
+      Ufq.rest('/rest/v1/mock_tests?select=id,title,module_size,created_at&order=created_at.asc'),
+      Ufq.restAll('/rest/v1/mock_test_questions?select=test_id,module&order=id'),
+      Ufq.rest('/rest/v1/practice_tests?select=id,title,score,total,taken_at&subject=eq.SAT&order=taken_at.desc&limit=200'),
     ]).then(function (r) {
-      return (r[0] || []).map(function (t) {
-        var att = (r[1] || []).filter(function (a) { return a.title === t.title; })[0] || null;
-        return { id: t.id, title: t.title, questions: t.total_questions, attempt: att };
+      var cnt = {}; (r[1] || []).forEach(function (x) { var c = cnt[x.test_id] = cnt[x.test_id] || {}; c[x.module] = (c[x.module] || 0) + 1; });
+      return (r[0] || []).filter(function (t) { var c = cnt[t.id] || {}; return c.m1 && c.m2_hard && c.m2_easy; }).map(function (t) {
+        var c = cnt[t.id], att = (r[2] || []).filter(function (a) { return a.title === t.title; })[0] || null;
+        return { id: t.id, title: t.title, questions: c.m1 + Math.max(c.m2_hard, c.m2_easy), size: t.module_size, attempt: att };
+      });
+    });
+  };
+  Ufq.mockInfo = function (id) { return Ufq.rest('/rest/v1/mock_tests?select=id,title,module_size&id=eq.' + id).then(function (rows) { return rows && rows[0] || null; }); };
+  /* mod: 'm1' | 'm2_hard' | 'm2_easy' -> questions in their saved order, ready for the practice screen */
+  Ufq.mockModule = function (testId, mod) {
+    return Promise.all([Ufq.subjects(), Ufq.rest('/rest/v1/mock_test_questions?select=position,question_id&test_id=eq.' + testId + '&module=eq.' + mod + '&order=position&limit=1000')]).then(function (r) {
+      var subs = {}; r[0].forEach(function (x) { subs[x.id] = x; });
+      var ids = (r[1] || []).map(function (x) { return x.question_id; });
+      if (!ids.length) return [];
+      return Ufq.rest('/rest/v1/questions?select=' + QCOLS + '&id=in.(' + ids.join(',') + ')&limit=1000').then(function (rows) {
+        var by = {}; rows.forEach(function (q) { by[q.id] = q; });
+        return ids.map(function (id) { return by[id]; }).filter(Boolean).map(function (q) { return toQuestion(q, subs[q.subject_id] || { title: 'Math' }); }).filter(Boolean);
       });
     });
   };
@@ -608,7 +629,7 @@
         soft(rpc('get_all_logins'), []),
         soft(rpc('get_question_stats'), []),
         Ufq.bankCounts(),
-        soft(Ufq.satTests(), []),
+        soft(Ufq.adminMocks(), { tests: [], rows: [] }),
         soft(Ufq.rest('/rest/v1/admin_audit?select=*&order=created_at.desc&limit=300'), []),
         soft(Ufq.rest('/rest/v1/invites?select=*&order=created_at.desc'), []),
       ]).then(function (r) {
@@ -651,13 +672,16 @@
         return Promise.all([Ufq.adminQuestions({}, slugById, stats), hardP]).then(function (qr) {
           var questions = qr[0];
           var hardestQs = qr[1].map(function (r) { return adminQ(r, slugById, stats); }).sort(function (a, b2) { return a.cr - b2.cr; });
-          var tests = sats.map(function (t) {
+          var perTest = {}, used = {};
+          (sats.rows || []).forEach(function (x) { var c = perTest[x.test_id] = perTest[x.test_id] || { m1: 0, m2_hard: 0, m2_easy: 0 }; c[x.module]++; used[x.question_id] = x.test_id; });
+          var tests = (sats.tests || []).map(function (t) {
             var A = attempts.filter(function (a) { return a.subject === 'SAT' && a.title === t.title; });
             var avg = A.length ? Math.round(A.reduce(function (x, a) { return x + (a.total ? a.score / a.total : 0); }, 0) / A.length * 100) + '%' : '—';
-            return { id: t.id, n: t.title, ty: 'Full mock', st: 'Published', at: A.length, avg: avg, q: t.questions, mods: [] };
+            var c = perTest[t.id] || { m1: 0, m2_hard: 0, m2_easy: 0 };
+            return { id: t.id, n: t.title, ty: 'Adaptive mock', st: c.m1 && c.m2_hard && c.m2_easy ? 'Published' : 'Incomplete', at: A.length, avg: avg, q: c.m1 + c.m2_hard + c.m2_easy, size: t.module_size, counts: c, mods: [] };
           });
           var aud = audit.map(function (a) { return { who: a.who_name || 'Admin', a: a.action, k: a.kind || 'Content', t: agoMin(new Date(a.created_at).getTime()) }; });
-          return { questions: questions, total: total, users: users, tests: tests, idBySlug: idBySlug, slugById: slugById, stats: stats, aud: aud,
+          return { questions: questions, total: total, users: users, tests: tests, used: used, slugByIdX: slugById, idBySlug: idBySlug, slugById: slugById, stats: stats, aud: aud,
             kpi: { students: profiles.filter(function (p) { return p.role === 'user'; }).length, active: Object.keys(activeWeek).length, tests7: week.length, avgScore: avgScore },
             sig: signSeries, wau: wau, hist: hist, domAcc: domAcc, hardest: hardestQs };
         });
@@ -687,6 +711,28 @@
       location.href = 'mailto:' + encodeURIComponent(email) + '?subject=' + encodeURIComponent('You are invited to Ufq') + '&body=' + encodeURIComponent('Hi!\n\nI invited you to Ufq as ' + (role === 'Admin' ? 'an Admin' : 'a Student') + '. Sign up with this email address here:\n' + link + '\n');
     });
   };
+  /* the whole bank, light, for the mock-test builder */
+  Ufq.adminBank = function (slugById, stats) { return Ufq.restAll('/rest/v1/questions?select=' + QSEL + '&order=id').then(function (rows) { return rows.map(function (r) { return adminQ(r, slugById, stats); }); }); };
+  Ufq.adminMocks = function () {
+    return Promise.all([Ufq.rest('/rest/v1/mock_tests?select=*&order=created_at.asc'), Ufq.restAll('/rest/v1/mock_test_questions?select=test_id,module,position,question_id&order=id')]).then(function (r) { return { tests: r[0] || [], rows: r[1] || [] }; });
+  };
+  /* t: { id?, title, size }; mods: { m1: [qid], m2_hard: [qid], m2_easy: [qid] } */
+  Ufq.adminSaveMock = function (t, mods) {
+    var me = Ufq.user() || {}, isNew = !t.id;
+    var head = isNew
+      ? Ufq.rest('/rest/v1/mock_tests', { method: 'POST', headers: { Prefer: 'return=representation' }, body: JSON.stringify({ title: t.title, module_size: t.size, created_by: me.id }) })
+      : Ufq.rest('/rest/v1/mock_tests?id=eq.' + t.id, { method: 'PATCH', headers: { Prefer: 'return=representation' }, body: JSON.stringify({ title: t.title, module_size: t.size }) });
+    return head.then(function (rows) {
+      var id = rows[0].id, ins = [];
+      ['m1', 'm2_hard', 'm2_easy'].forEach(function (k) { (mods[k] || []).forEach(function (qid, i) { ins.push({ test_id: id, module: k, position: i, question_id: qid }); }); });
+      return Ufq.rest('/rest/v1/mock_test_questions?test_id=eq.' + id, { method: 'DELETE', headers: { Prefer: 'return=minimal' } })
+        .then(function () { return ins.length ? Ufq.rest('/rest/v1/mock_test_questions', { method: 'POST', headers: { Prefer: 'return=minimal' }, body: JSON.stringify(ins) }) : null; })
+        .then(function () { return rows[0]; })
+        .catch(function (err) { if (isNew) Ufq.rest('/rest/v1/mock_tests?id=eq.' + id, { method: 'DELETE', headers: { Prefer: 'return=minimal' } }).catch(function () { /* ignore */ }); throw err; });
+    });
+  };
+  Ufq.adminMockQuestions = function (id) { return Ufq.rest('/rest/v1/mock_test_questions?select=module,position,question_id&test_id=eq.' + id + '&order=position&limit=1000'); };
+  Ufq.adminDeleteMock = function (id) { return Ufq.rest('/rest/v1/mock_tests?id=eq.' + id, { method: 'DELETE', headers: { Prefer: 'return=minimal' } }); };
   Ufq.adminRemoveInvite = function (email) { return Ufq.rest('/rest/v1/invites?email=eq.' + encodeURIComponent(email), { method: 'DELETE', headers: { Prefer: 'return=minimal' } }); };
 
 
@@ -768,7 +814,7 @@
   document.addEventListener('click', function (e) {
     var a = e.target && e.target.closest && e.target.closest('a[href]');
     if (!a || !/^(\/mock-test|[^?#]*MockTest\.dc\.html)(\?|#|$)/.test(a.getAttribute('href') || '')) return;
-    e.preventDefault(); e.stopPropagation(); location.assign(window.__ufqMock ? '/sat-test/' + window.__ufqMock : '/practice/sat-tests');
+    e.preventDefault(); e.stopPropagation(); if (window.__ufqMock) location.assign('/practice/session?mock=' + window.__ufqMock); else Ufq.toast('No mock test has been published yet.');
   }, true);
 
   // keep the browser's relative links working when the page is shown at a clean URL

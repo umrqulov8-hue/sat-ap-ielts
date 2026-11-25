@@ -229,7 +229,7 @@ const M = s.M || [];
 const firstReady = M.findIndex((t) => !t.attempt);
 const T = M.map((t, i) => [t.title, t.questions + ' questions', t.attempt ? 'done' : 'ready', t.attempt ? t.attempt.score + '/' + t.attempt.total : '', t.attempt ? 'Taken ' + new Date(t.attempt.taken_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) + '.' : (i === firstReady ? 'Recommended next — a quiet hour and a half.' : 'Ready when you are.'), '', t.id, t.attempt ? t.attempt.id : '']);
 const tests = T.map(([name, kind, st, score, note, unlock, tid, aid], i) => ({
-name, kind, note, score: score || '', unlock: unlock || '', report: aid ? '/test-review/' + aid : '/history',
+name, kind, note, score: score || '', unlock: unlock || '', report: '/history',
 status: st === 'done' ? 'Completed' : st === 'ready' ? 'Ready' : 'Locked',
 canStart: st === 'ready', hasReport: st === 'done', locked: st === 'locked',
 bg: st === 'ready' ? '#003049' : st === 'done' ? '#F4F6F8' : '#FFFFFF',
@@ -238,7 +238,7 @@ ring: st === 'locked' ? 'inset 0 0 0 1px rgba(0,48,73,.15)' : 'none',
 capc: st === 'ready' ? '#F6DDB0' : '#669BBC',
 badgeBg: st === 'ready' ? '#C1121F' : st === 'done' ? '#FFFFFF' : 'transparent',
 badgeFg: st === 'ready' ? '#FFFFFF' : '#003049',
-open: () => { window.__ufqMock = tid; this.setState({ open: { name, len: kind + '. Timed, scored.' }, checks: {} }); },
+open: () => { window.__ufqMock = tid; this.setState({ open: { name, len: kind + ': Module 1, then a Module 2 matched to how you did.' }, checks: {} }); },
 delay: (i * 0.06).toFixed(2) + 's'
 }));
 const C = ['A quiet room for the whole sitting', 'Phone away, notifications off', 'Paper and pencil for scratch work'];

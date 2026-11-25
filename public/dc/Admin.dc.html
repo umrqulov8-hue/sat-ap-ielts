@@ -412,16 +412,18 @@ a.tile:hover .go{transform:rotate(-45deg);background:#003049;color:#FFFFFF}
 <!-- ================= TESTS ================= -->
 <sc-if value="{{pTests}}" hint-placeholder-val="{{ false }}">
 <div class="pane" style="display: flex; flex-direction: column; gap: 14px">
-<div class="tbar"><span style="color: rgba(0,48,73,.7)">Full-length SAT tests students can take in the app, with how many attempts each has had.</span></div>
+<div class="tbar"><span style="color: rgba(0,48,73,.7)">Adaptive mock tests built from the question bank. Students start with Module 1; their score decides whether Module 2 is harder or easier.</span><button type="button" class="btn" onClick="{{newTest}}" style="min-height: 44px; margin-left: auto">New mock test</button></div>
 <div class="tgrid">
 <sc-for list="{{tCards}}" as="t" hint-placeholder-count="6"><div class="acard ti tcard" style="animation-delay: {{t.dl}}">
 <div style="display: flex; justify-content: space-between; align-items: center; gap: 10px"><span class="cap" style="color: #669BBC">{{t.ty}}</span><span class="pill p-{{t.stk}}">{{t.st}}</span></div>
 <h3 class="srf" style="margin: 0; font-size: 28px; line-height: 1.05">{{t.n}}</h3>
 <span style="font-size: 13px; color: rgba(0,48,73,.65)">{{t.modsTxt}}</span>
 <div class="tstats"><span><b class="num">{{t.q}}</b> questions</span><span><b class="num">{{t.at}}</b> attempts</span><span><b class="num">{{t.avg}}</b> avg</span></div>
+<div style="display: flex; gap: 6px; margin-top: auto; flex-wrap: wrap"><button type="button" class="ib strong" onClick="{{t.edit}}">Edit</button><button type="button" class="ib" onClick="{{t.del}}">Delete</button></div>
 
 </div></sc-for>
 </div>
+<sc-if value="{{noTests}}" hint-placeholder-val="{{ false }}"><p style="margin: 0; padding: 28px; text-align: center; color: rgba(0,48,73,.6)">No mock tests yet. Press “New mock test”, then Auto-fill picks the best unused questions from the bank.</p></sc-if>
 </div>
 </sc-if>
 
@@ -559,32 +561,32 @@ a.tile:hover .go{transform:rotate(-45deg);background:#003049;color:#FFFFFF}
 <div style="display: flex; justify-content: space-between; align-items: center; gap: 12px"><h2 class="srf" style="margin: 0; font-size: 38px; line-height: 1">{{tbTitle}}</h2><button type="button" class="ib" onClick="{{closeDlg}}" aria-label="Close">✕</button></div>
 <div class="edg tb">
 <div style="display: flex; flex-direction: column; gap: 16px; min-width: 0">
-<label class="flab">Test name<input class="ainp" type="text" value="{{tb.n}}" onInput="{{tbName}}" placeholder="e.g. Mock 4 · full-length Math"></label>
-<div style="display: flex; flex-direction: column; gap: 8px"><span class="flab">Format</span><div class="segs"><sc-for list="{{tbTypes}}" as="r" hint-placeholder-count="3"><button type="button" class="sg" aria-pressed="{{r.on}}" onClick="{{r.pick}}" title="{{r.d}}">{{r.l}}</button></sc-for></div></div>
+<label class="flab">Test name<input class="ainp" type="text" value="{{tb.n}}" onInput="{{tbName}}" placeholder="e.g. Mock 1"></label>
+<div style="display: flex; flex-direction: column; gap: 8px"><span class="flab">Questions per module</span><div class="segs"><sc-for list="{{tbTypes}}" as="r" hint-placeholder-count="3"><button type="button" class="sg" aria-pressed="{{r.on}}" onClick="{{r.pick}}" title="{{r.d}}">{{r.l}}</button></sc-for></div></div>
 <div style="display: flex; flex-direction: column; gap: 10px">
+<p style="margin: 0; font-size: 13px; color: rgba(0,48,73,.65)">Everyone starts with Module 1. Two mistakes or fewer sends them to the harder Module 2; more than that, to the easier one. Each question can belong to one mock test only.</p>
 <div style="display: flex; justify-content: space-between; align-items: center"><span class="flab">Modules</span><button type="button" class="lnk2" onClick="{{autoAll}}">Auto-fill all</button></div>
 <sc-for list="{{tbMods}}" as="m" hint-placeholder-count="2"><div class="modc" aria-current="{{m.on}}" onClick="{{m.pick}}">
-<div style="display: flex; align-items: center; gap: 10px"><span style="font-weight: 600; flex: 1">{{m.n}}</span><span class="num" style="font-weight: 600">{{m.cnt}}<span style="opacity: .5"> / {{m.target}}</span></span><sc-if value="{{m.canRm}}" hint-placeholder-val="{{ false }}"><button type="button" class="ib xs" onClick="{{m.rm}}" aria-label="Remove {{m.n}}">✕</button></sc-if></div>
+<div style="display: flex; align-items: center; gap: 10px"><span style="font-weight: 600; flex: 1">{{m.n}}</span><span class="num" style="font-weight: 600">{{m.cnt}}<span style="opacity: .5"> / {{m.target}}</span></span></div>
 <span class="crbar"><span style="width: {{m.pct}}; background: {{m.full}}"></span></span>
-<div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap"><span style="font-size: 12px; opacity: .7">Questions</span><span class="step"><button type="button" onClick="{{m.dec}}" aria-label="Fewer">−</button><input type="text" inputmode="numeric" value="{{m.target}}" onInput="{{m.setT}}" aria-label="Questions in {{m.n}}"><button type="button" onClick="{{m.inc}}" aria-label="More">+</button></span><button type="button" class="ib xs strong" onClick="{{m.auto}}">Auto-fill</button><button type="button" class="ib xs" onClick="{{m.clear}}">Clear</button></div>
+<div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap"><button type="button" class="ib xs strong" onClick="{{m.auto}}">Auto-fill</button><button type="button" class="ib xs" onClick="{{m.clear}}">Clear</button></div>
 </div></sc-for>
-<button type="button" class="ib" onClick="{{addMod}}" style="align-self: flex-start">+ {{addModL}}</button>
 </div>
-<div class="tsum"><div><span class="cap">Picked</span><b class="srf">{{tbCount}}</b></div><div><span class="cap">Target</span><b class="srf">{{tbTarget}}</b></div><div><span class="cap">Time</span><b class="srf">{{tbMin}}</b></div></div>
+<div class="tsum"><div><span class="cap">Picked</span><b class="srf">{{tbCount}}</b></div><div><span class="cap">Target</span><b class="srf">{{tbTarget}}</b></div><div><span class="cap">Minutes</span><b class="srf">{{tbMin}}</b></div></div>
 </div>
 <div class="prev" style="gap: 10px">
 <span class="cap" style="color: #669BBC">Question bank</span>
 <div class="srch" style="min-width: 0"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"></circle><path d="M20 20l-4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path></svg><input type="search" placeholder="Search the bank" value="{{tbQ}}" onInput="{{setTbQ}}" aria-label="Search the bank"></div>
 <div class="segs wrap"><sc-for list="{{tbDomSegs}}" as="r" hint-placeholder-count="5"><button type="button" class="sg" aria-pressed="{{r.on}}" onClick="{{r.pick}}">{{r.l}}</button></sc-for></div>
 <div class="segs"><sc-for list="{{tbDifSegs}}" as="r" hint-placeholder-count="4"><button type="button" class="sg" aria-pressed="{{r.on}}" onClick="{{r.pick}}">{{r.l}}</button></sc-for></div>
-<span style="font-size: 12px; color: rgba(0,48,73,.6)">{{tbPool}} · Auto-fill uses these filters.</span>
+<span style="font-size: 12px; color: rgba(0,48,73,.6)">{{tbPool}} · Auto-fill ignores these filters and picks by difficulty.</span>
 <div style="display: flex; flex-direction: column; gap: 6px; max-height: 380px; overflow: auto; padding-right: 4px">
 <sc-for list="{{tbPick}}" as="p" hint-placeholder-count="8"><button type="button" class="pkrow" aria-pressed="{{p.on}}" onClick="{{p.pick}}"><span class="pkb" aria-hidden="true">✓</span><span class="qid">{{p.id}}</span><span style="flex: 1; min-width: 0; text-align: left; overflow: hidden; text-overflow: ellipsis; white-space: nowrap">{{p.stem}}</span><sc-if value="{{p.fig}}" hint-placeholder-val="{{ false }}"><span class="ktag">{{p.fig}}</span></sc-if><sc-if value="{{p.where}}" hint-placeholder-val="{{ false }}"><span class="ktag inm">in {{p.where}}</span></sc-if><span class="ktag">{{p.dom}}</span></button></sc-for>
 <sc-if value="{{tbMore}}" hint-placeholder-val="{{ false }}"><button type="button" class="ib" onClick="{{tbShowMore}}" style="align-self: center">Show more</button></sc-if>
 </div>
 </div>
 </div>
-<div style="display: flex; gap: 10px; justify-content: space-between; flex-wrap: wrap; align-items: center"><span style="font-size: 13px; color: rgba(0,48,73,.6)">{{tbMsg}}</span><span style="display: flex; gap: 10px"><button type="button" class="ghost" onClick="{{tbDraft}}" style="opacity: {{tbOp}}; pointer-events: {{tbPe}}">Save as draft</button><button type="button" class="btn" onClick="{{tbLive}}" style="min-height: 48px; opacity: {{tbOp}}; pointer-events: {{tbPe}}">Publish test</button></span></div>
+<div style="display: flex; gap: 10px; justify-content: space-between; flex-wrap: wrap; align-items: center"><span style="font-size: 13px; color: rgba(0,48,73,.6)">{{tbMsg}}</span><span style="display: flex; gap: 10px"><button type="button" class="btn" onClick="{{tbLive}}" style="min-height: 48px; opacity: {{tbOp}}; pointer-events: {{tbPe}}">Save mock test</button></span></div>
 </div></div>
 </sc-if>
 
@@ -595,17 +597,17 @@ a.tile:hover .go{transform:rotate(-45deg);background:#003049;color:#FFFFFF}
 <script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1100}}'>
 const RED = '#C1121F', NAVY = '#003049', BLUE = '#669BBC';
 const DOMS = ['Algebra', 'Advanced Math', 'Problem-Solving & Data', 'Geometry & Trig'];
-const MODS = (ty) => [{ n: 'Module 1', target: 22, picks: {} }];
+const MODS = (size) => [{ key: 'm1', n: 'Module 1', target: size, picks: {} }, { key: 'm2_hard', n: 'Module 2 · harder', target: size, picks: {} }, { key: 'm2_easy', n: 'Module 2 · easier', target: size, picks: {} }];
 const ini = (n) => n === 'You' ? 'Y' : n === 'System' ? 'S' : String(n || '?').split(' ').map(w => w[0]).slice(0, 2).join('').toUpperCase();
 const sp = (arr, w, h) => { const mx = Math.max.apply(null, arr), mn = Math.min.apply(null, arr); return arr.map((v, i) => (i ? 'L' : 'M') + (i * w / (arr.length - 1)).toFixed(1) + ' ' + (h - 3 - (v - mn) / ((mx - mn) || 1) * (h - 6)).toFixed(1)).join(' '); };
 const id0 = (id) => 'Q-' + String(id).slice(0, 6);
-const errText = (err) => { const m = String((err && err.message) || err || ''); return /function|schema cache|PGRST20|42883/i.test(m) ? 'Run the admin SQL migration in Supabase first (supabase/migrations/20261125_admin_panel.sql).' : (m || 'Something went wrong.'); };
+const errText = (err) => { const m = String((err && err.message) || err || ''); if (/mock_test/.test(m)) return 'Run the mock-tests SQL in Supabase first (supabase/migrations/20261126_mock_tests.sql).'; return /function|schema cache|PGRST20|42883/i.test(m) ? 'Run the admin SQL migration in Supabase first (supabase/migrations/20261125_admin_panel.sql).' : (m || 'Something went wrong.'); };
 class Component extends DCLogic {
 constructor(props) {
 super(props);
-this.state = { tab: 'overview', q: '', rf: 'All', sf: 'All', sel: 0, users: [{ id: 1, rid: null, n: 'You', e: window.Ufq.email(), r: 'Admin', s: 'Active', j: '—', la: 'Now', m: '—', k: '—', qd: '—', ac: '—' }], qs: [], ts: [], total: 0, idBySlug: {}, slugById: {}, kpi: { students: 0, active: 0, tests7: 0, avgScore: 0 }, sig: new Array(30).fill(0), wauS: new Array(8).fill(0), histS: [], domS: [], hardQ: [], doms: DOMS.slice(), addDom: null, qlim: 20, aud: [], dlg: '', conf: '', toast: '', qq: '', df: 'All', dif: 'All', af: 'All', invE: '', invR: 'Student', ed: null, tb: null, delq: null, qBusy: false };
+this.state = { tab: 'overview', q: '', rf: 'All', sf: 'All', sel: 0, users: [{ id: 1, rid: null, n: 'You', e: window.Ufq.email(), r: 'Admin', s: 'Active', j: '—', la: 'Now', m: '—', k: '—', qd: '—', ac: '—' }], qs: [], ts: [], total: 0, idBySlug: {}, slugById: {}, kpi: { students: 0, active: 0, tests7: 0, avgScore: 0 }, sig: new Array(30).fill(0), wauS: new Array(8).fill(0), histS: [], domS: [], hardQ: [], doms: DOMS.slice(), addDom: null, qlim: 20, aud: [], dlg: '', conf: '', toast: '', qq: '', df: 'All', dif: 'All', af: 'All', invE: '', invR: 'Student', ed: null, tb: null, delq: null, delt: null, qBusy: false, bank: null, used: {}, stats: {} };
 const off = window.Ufq.cover('Loading the admin data…');
-window.Ufq.adminLoad().then((D) => { off(); this.setState({ users: D.users, qs: D.questions, ts: D.tests, total: D.total, idBySlug: D.idBySlug, slugById: D.slugById, aud: D.aud, kpi: D.kpi, sig: D.sig, wauS: D.wau, histS: D.hist, domS: D.domAcc, hardQ: D.hardest }); }).catch((err) => { off(); window.Ufq.toast(errText(err)); });
+window.Ufq.adminLoad().then((D) => { off(); this.setState({ users: D.users, qs: D.questions, ts: D.tests, total: D.total, idBySlug: D.idBySlug, slugById: D.slugById, aud: D.aud, kpi: D.kpi, used: D.used || {}, stats: D.stats || {}, sig: D.sig, wauS: D.wau, histS: D.hist, domS: D.domAcc, hardQ: D.hardest }); }).catch((err) => { off(); window.Ufq.toast(errText(err)); });
 }
 reloadQs(over) {
 const f = Object.assign({}, this.state, over || {});
@@ -616,7 +618,30 @@ log(a, k) { window.Ufq.adminLog(a, k); return [{ who: 'You', a, k, t: 'Just now'
 say(msg, extra) { clearTimeout(this._tt); this.setState(Object.assign({ toast: msg }, extra || {})); this._tt = setTimeout(() => this.setState({ toast: '' }), 2800); }
 setU(id, patch) { return this.state.users.map(u => u.id === id ? Object.assign({}, u, patch) : u); }
 openEd(x) { this.setState({ dlg: 'q', addDom: null, ed: x ? { id: x.id, stem: x.stem, t: x.t, ch: x.ch.slice(), c: x.c, ans: x.ans, ex: x.ex, dom: x.dom, d: x.d, sk: x.sk, img: x.img || '', lay: x.lay || 'auto', iw: x.iw || 0, ih: x.ih || 0 } : { id: '', stem: '', t: 'MC', ch: ['', '', '', ''], c: 0, ans: '', ex: '', dom: this.state.doms[0], d: 2, sk: '', img: '', lay: 'auto', iw: 0, ih: 0 } }); }
-openTb() {}
+openTb(t) {
+const s = this.state; const off = window.Ufq.cover('Loading the question bank…');
+const bankP = s.bank ? Promise.resolve(s.bank) : window.Ufq.adminBank(s.slugById, s.stats);
+const rowsP = t ? window.Ufq.adminMockQuestions(t.id) : Promise.resolve([]);
+Promise.all([bankP, rowsP]).then(([bank, rows]) => {
+off(); const size = t ? t.size : 22; const mods = MODS(size);
+rows.forEach((r) => { const m = mods.find((x) => x.key === r.module); if (m) m.picks[r.question_id] = true; });
+this.setState({ bank, dlg: 't', tb: { id: t ? t.id : 0, n: t ? t.n : '', size, mods, am: 0, dom: 'All', dif: 'Mixed', q: '', lim: 30 } });
+}).catch((err) => { off(); this.say(errText(err)); });
+}
+saveT() {
+const s = this.state, b = s.tb, name = b.n.trim(); const mods = {};
+b.mods.forEach((m) => { mods[m.key] = Object.keys(m.picks).filter((k) => m.picks[k]); });
+window.Ufq.adminSaveMock({ id: b.id || null, title: name, size: b.size }, mods).then((row) => {
+const counts = { m1: mods.m1.length, m2_hard: mods.m2_hard.length, m2_easy: mods.m2_easy.length };
+const total = counts.m1 + counts.m2_hard + counts.m2_easy; const full = counts.m1 && counts.m2_hard && counts.m2_easy;
+const used = Object.assign({}, s.used); Object.keys(used).forEach((k) => { if (used[k] === row.id) delete used[k]; });
+['m1', 'm2_hard', 'm2_easy'].forEach((k) => mods[k].forEach((qid) => { used[qid] = row.id; }));
+const prev = s.ts.find((t) => t.id === row.id);
+const rec = { id: row.id, n: name, ty: 'Adaptive mock', st: full ? 'Published' : 'Incomplete', at: prev ? prev.at : 0, avg: prev ? prev.avg : '—', q: total, size: b.size, counts, mods: [] };
+const ts = prev ? s.ts.map((t) => t.id === row.id ? rec : t) : s.ts.concat([rec]);
+this.say('“' + name + '” saved' + (full ? ' — students can take it now.' : '. Fill all three modules to publish it.'), { ts, used, dlg: '', tb: null, aud: this.log((prev ? 'edited mock test ' : 'created mock test ') + name, 'Content'), tab: 'tests' });
+}).catch((err) => this.say(errText(err)));
+}
 saveQ() {
 const s = this.state, e = s.ed;
 if (!e.stem.trim()) { this.say('Write the question first.'); return; }
@@ -697,6 +722,7 @@ const CFS = {
 transfer: du0 ? ['Transfer ownership?', du0.n + ' becomes the Owner with full control. You become an Admin and can’t undo this yourself.', 'TRANSFER', 'Transfer ownership'] : null,
 suspend: du0 ? (du0.s === 'Suspended' ? ['Reactivate ' + du0.n + '?', 'They can sign in and study again straight away.', '', 'Reactivate'] : ['Suspend ' + du0.n + '?', 'They can’t sign in until you reactivate them. Their progress is kept.', '', 'Suspend']) : null,
 remove: du0 ? (du0.s === 'Invited' ? ['Cancel the invite for ' + du0.e + '?', 'They keep no access.', '', 'Cancel invite'] : ['Remove ' + du0.n + '?', 'Their account, plan and results are deleted for good.', 'REMOVE', 'Remove user']) : null,
+delt: s.delt ? ['Delete “' + s.delt.n + '”?', 'Its questions go back to the bank and can be used in another mock test. Students’ saved results are kept.', '', 'Delete test'] : null,
 delq: s.delq ? ['Delete ' + id0(s.delq.id) + '?', 'The question is removed from the bank for every student. Results already saved are kept.', '', 'Delete question'] : null
 };
 const CF = CFS[s.dlg] || null;
@@ -706,6 +732,7 @@ if (!cfOk) return;
 const d = s.dlg;
 const fail = (err) => this.say(errText(err), { dlg: '', conf: '' });
 if (d === 'delq') { const x = s.delq; if (!x) return; window.Ufq.adminDeleteQuestion(x.id).then(() => this.say(id0(x.id) + ' was deleted.', { qs: s.qs.filter(y => y.id !== x.id), total: Math.max(0, s.total - 1), delq: null, dlg: '', conf: '', aud: this.log('deleted question ' + id0(x.id), 'Content') })).catch(fail); return; }
+if (d === 'delt') { const t = s.delt; if (!t) return; window.Ufq.adminDeleteMock(t.id).then(() => { const used = Object.assign({}, s.used); Object.keys(used).forEach((k) => { if (used[k] === t.id) delete used[k]; }); this.say('“' + t.n + '” was deleted.', { ts: s.ts.filter((y) => y.id !== t.id), used, delt: null, dlg: '', conf: '', aud: this.log('deleted mock test ' + t.n, 'Content') }); }).catch(fail); return; }
 if (!du0) return;
 if (d === 'transfer') window.Ufq.adminTransfer(du0.rid).then(() => this.say(du0.n + ' is now the Owner.', { users: s.users.map(u => u.id === du0.id ? Object.assign({}, u, { r: 'Owner' }) : u.r === 'Owner' ? Object.assign({}, u, { r: 'Admin' }) : u), aud: this.log('transferred ownership to ' + du0.n, 'Roles'), dlg: '', conf: '' })).catch(fail);
 else if (d === 'suspend') { const flag = du0.s !== 'Suspended'; window.Ufq.adminSuspend(du0.rid, flag).then(() => this.say(du0.n + (flag ? ' is suspended.' : ' is active again.'), { users: this.setU(du0.id, { s: flag ? 'Suspended' : 'Active' }), aud: this.log((flag ? 'suspended ' : 'reactivated ') + du0.n, 'Users'), dlg: '' })).catch(fail); }
@@ -745,39 +772,51 @@ const LAYS = [['auto', 'Auto'], ['side', 'Figure left'], ['stack', 'Figure above
 const domOk = s.addDom !== null && s.addDom.trim().length > 1 && !s.doms.some(d => d.toLowerCase() === s.addDom.trim().toLowerCase());
 const addDomain = () => { if (!domOk) return; const d = s.addDom.trim(); this.say('Domain “' + d + '” added.', { doms: s.doms.concat([d]), addDom: null, ed: s.ed ? Object.assign({}, s.ed, { dom: d }) : s.ed, aud: this.log('added the domain ' + d, 'Content') }); };
 /* tests */
-const live = s.qs.filter(x => x.st === 'Live');
-const byId = {}; s.qs.forEach(x => { byId[x.id] = x; });
-const cntP = (m) => Object.keys(m.picks).filter(k => m.picks[k]).length;
-const totQ = (t) => t.mods.reduce((a, m) => a + cntP(m), 0);
-const minsOf = (ty, mods) => ty === 'Practice set' ? Math.max(5, Math.round(mods.reduce((a, m) => a + cntP(m), 0) * 1.5)) : mods.length * 35;
-const tCards = s.ts.map((t, i) => ({ n: t.n, ty: t.ty, q: t.q || 0, min: 0, at: String(t.at), avg: t.avg, st: t.st, stk: rk(t.st), dl: (i * 0.05) + 's', tl: '', modsTxt: 'Full-length SAT Math test', edit: () => this.openTb(t), dup: () => {}, toggle: () => {} }));
-const b = s.tb || { n: '', ty: 'Full mock', mods: MODS('Full mock'), am: 0, dom: 'All', dif: 'Mixed', q: '', lim: 30 };
+const bank = s.bank || [];
+const testName = (id) => { const t = s.ts.find((x) => x.id === id); return t ? t.n : 'another test'; };
+const cntP = (m) => Object.keys(m.picks).filter((k) => m.picks[k]).length;
+const tCards = s.ts.map((t, i) => ({ n: t.n, ty: t.ty, q: t.q || 0, at: String(t.at), avg: t.avg, st: t.st, stk: t.st === 'Published' ? 'live' : 'draft', dl: (i * 0.05) + 's',
+modsTxt: 'Module 1 · ' + (t.counts ? t.counts.m1 : 0) + ' — harder · ' + (t.counts ? t.counts.m2_hard : 0) + ' — easier · ' + (t.counts ? t.counts.m2_easy : 0),
+edit: () => this.openTb(t), del: () => this.setState({ dlg: 'delt', delt: t, conf: '' }) }));
+const b = s.tb || { n: '', size: 22, mods: MODS(22), am: 0, dom: 'All', dif: 'Mixed', q: '', lim: 30 };
 const upTb = (p) => this.setState({ tb: Object.assign({}, this.state.tb, p) });
-const setMods = (fn) => { const tb = this.state.tb; const mods = tb.mods.map(m => ({ n: m.n, target: m.target, picks: Object.assign({}, m.picks) })); fn(mods, tb); upTb({ mods }); };
-const usedIn = {}; b.mods.forEach((m, mi) => Object.keys(m.picks).forEach(k => { if (m.picks[k]) usedIn[k] = mi; }));
+const setMods = (fn) => { const tb = this.state.tb; const mods = tb.mods.map((m) => ({ key: m.key, n: m.n, target: m.target, picks: Object.assign({}, m.picks) })); fn(mods, tb); upTb({ mods }); };
+const usedIn = {}; b.mods.forEach((m, mi) => Object.keys(m.picks).forEach((k) => { if (m.picks[k]) usedIn[k] = mi; }));
 const am = Math.min(b.am, b.mods.length - 1);
-const pool = (tb) => live.filter(x => (tb.dom === 'All' || x.dom === tb.dom) && (tb.dif === 'Mixed' || DL[x.d] === tb.dif));
-const fillInto = (mods, tb, mi) => { const used = {}; mods.forEach((m, j) => { if (j !== mi) Object.keys(m.picks).forEach(k => { if (m.picks[k]) used[k] = 1; }); });
-const m = mods[mi]; const cand = pool(tb).filter(x => !used[x.id] && !m.picks[x.id]);
-for (let k = cand.length - 1; k > 0; k--) { const j = Math.floor(Math.random() * (k + 1)); const t = cand[k]; cand[k] = cand[j]; cand[j] = t; }
-const need = Math.max(0, m.target - cntP(m)); const got = cand.slice(0, need); got.forEach(x => { m.picks[x.id] = true; }); return [got.length, need]; };
-const autoFill = (mi) => setMods((mods, tb) => { const r = fillInto(mods, tb, mi); this.say(mods[mi].n + ': ' + r[0] + ' question' + (r[0] === 1 ? '' : 's') + ' picked at random' + (r[0] < r[1] ? ' — not enough questions match the filter.' : '.')); });
-const autoAll = () => setMods((mods, tb) => { let g = 0, n = 0; mods.forEach((m, i) => { const r = fillInto(mods, tb, i); g += r[0]; n += r[1]; }); this.say(g + ' questions picked across ' + mods.length + (mods.length === 1 ? ' module' : ' modules') + (g < n ? ' — the filter ran short.' : '.')); });
-const TY = [['Full mock', 'Two modules of 22 · 35 minutes each'], ['Module', 'One module of 22 · 35 minutes'], ['Practice set', 'Any size · about 1.5 minutes a question']];
-const tbTypes = TY.map(([l, d]) => ({ l, d, on: b.ty === l ? 'true' : 'false', pick: () => upTb({ ty: l, mods: MODS(l), am: 0 }) }));
+const elsewhere = (id) => s.used[id] && s.used[id] !== b.id;
+const DIFN = { Easy: 1, Medium: 2, Hard: 3 };
+const pool = (tb) => bank.filter((x) => (tb.dom === 'All' || x.dom === tb.dom) && (tb.dif === 'Mixed' || x.d === DIFN[tb.dif]));
+/* auto-fill: best unused questions, balanced over the four domains, graded by difficulty for the module */
+const qScore = (x) => { let sc = 0; const st = s.stats[x.id]; const okForm = x.t === 'MC' ? x.ch.filter((c) => String(c).trim()).length === 4 : (x.ans || '').trim().length > 0; if (okForm) sc += 3; if ((x.ex || '').length > 20 || x.t !== 'MC') sc += 2; const L = (x.stem || '').length; if (L >= 30 && L <= 500) sc += 1; if (st && st.attempts >= 5) { const r = st.correct / st.attempts; sc += (r > .15 && r < .9) ? 2 : -1; } return sc + Math.random() * 1.5; };
+const spread = (cands, n) => { const g = {}; DOMS.forEach((d) => { g[d] = []; }); cands.forEach((x) => { (g[x.dom] || (g[x.dom] = [])).push(x); }); const keys = Object.keys(g); const out = []; let more = true; while (out.length < n && more) { more = false; for (const k of keys) { if (out.length >= n) break; if (g[k].length) { out.push(g[k].shift()); more = true; } } } return out; };
+const pickBucket = (cands, k) => { if (k <= 0) return []; const sorted = cands.map((x) => [qScore(x), x]).sort((a, c) => c[0] - a[0]).map((a) => a[1]); const wr = sorted.filter((x) => x.t !== 'MC'), mc = sorted.filter((x) => x.t === 'MC'); const w = Math.min(wr.length, Math.round(k * .2)); const got = spread(wr, w).concat(spread(mc, k - w)); if (got.length < k) { const have = {}; got.forEach((x) => { have[x.id] = 1; }); got.push.apply(got, spread(sorted.filter((x) => !have[x.id]), k - got.length)); } return got; };
+const mixFor = (key, size) => { if (key === 'm1') { const e = Math.round(size * .25), h = Math.round(size * .25); return { 1: e, 2: size - e - h, 3: h }; } if (key === 'm2_hard') { const h = Math.round(size * .7); return { 1: 0, 2: size - h, 3: h }; } const e = Math.round(size * .7); return { 1: e, 2: size - e, 3: 0 }; };
+const orderFor = (key) => key === 'm2_hard' ? [3, 2, 1] : key === 'm2_easy' ? [1, 2, 3] : [2, 1, 3];
+const fillInto = (mods, mi) => {
+const taken = {}; mods.forEach((m) => Object.keys(m.picks).forEach((k) => { if (m.picks[k]) taken[k] = 1; }));
+const m = mods[mi]; const need = Math.max(0, m.target - cntP(m)); if (!need) return [0, 0];
+const present = { 1: 0, 2: 0, 3: 0 }; Object.keys(m.picks).forEach((k) => { const x = bank.find((y) => y.id === k); if (x) present[x.d] = (present[x.d] || 0) + 1; });
+const tgt = mixFor(m.key, m.target); const order = orderFor(m.key); const want = { 1: 0, 2: 0, 3: 0 };
+order.forEach((d) => { want[d] = Math.max(0, (tgt[d] || 0) - present[d]); });
+let sum = want[1] + want[2] + want[3]; if (sum < need) want[order[0]] += need - sum; while (want[1] + want[2] + want[3] > need) { const d = order.slice().reverse().find((x) => want[x] > 0); want[d]--; }
+let got = 0, carry = 0; const chosen = [];
+order.forEach((d) => { const avail = bank.filter((x) => x.d === d && !elsewhere(x.id) && !taken[x.id]); const k = want[d] + carry; const picked = pickBucket(avail, k); picked.forEach((x) => { taken[x.id] = 1; chosen.push(x); }); carry = k - picked.length; });
+if (carry > 0) { const rest = bank.filter((x) => !elsewhere(x.id) && !taken[x.id]); pickBucket(rest, carry).forEach((x) => chosen.push(x)); }
+chosen.forEach((x) => { m.picks[x.id] = true; got++; }); return [got, need];
+};
+const autoFill = (mi) => setMods((mods) => { const r = fillInto(mods, mi); this.say(mods[mi].n + ': ' + r[0] + ' question' + (r[0] === 1 ? '' : 's') + ' picked' + (r[0] < r[1] ? ' — the bank ran out of unused questions.' : '.')); });
+const autoAll = () => setMods((mods) => { let g = 0, n = 0; mods.forEach((m, i) => { const r = fillInto(mods, i); g += r[0]; n += r[1]; }); this.say(g + ' questions picked across the three modules' + (g < n ? ' — the bank ran out of unused questions.' : '.')); });
+const tbTypes = [22, 44].map((n) => ({ l: n + ' per module', d: 'Module 1, harder Module 2 and easier Module 2 each get ' + n + ' questions', on: b.size === n ? 'true' : 'false', pick: () => this.setState({ tb: Object.assign({}, this.state.tb, { size: n, mods: this.state.tb.mods.map((m) => ({ key: m.key, n: m.n, target: n, picks: m.picks })) }) }) }));
 const tbMods = b.mods.map((m, i) => { const n = cntP(m); return { n: m.n, cnt: String(n), target: String(m.target), pct: Math.min(100, Math.round(n / Math.max(1, m.target) * 100)) + '%', full: n >= m.target ? NAVY : BLUE, on: i === am ? 'true' : 'false',
-pick: () => upTb({ am: i }), auto: () => autoFill(i), clear: () => setMods(mods => { mods[i].picks = {}; }),
-inc: () => setMods(mods => { mods[i].target = Math.min(200, mods[i].target + 1); }), dec: () => setMods(mods => { mods[i].target = Math.max(1, mods[i].target - 1); }),
-setT: (ev) => { const v = parseInt(ev.target.value, 10); setMods(mods => { mods[i].target = isNaN(v) ? 1 : Math.max(1, Math.min(500, v)); }); },
-canRm: b.mods.length > 1, rm: () => { const tb = this.state.tb; if (tb.mods.length < 2) return; this.setState({ tb: Object.assign({}, tb, { am: 0, mods: tb.mods.filter((_, j) => j !== i) }) }); } }; });
-const addMod = () => setMods(mods => { mods.push({ n: (b.ty === 'Practice set' ? 'Set ' : 'Module ') + (mods.length + 1), target: b.ty === 'Practice set' ? 10 : 22, picks: {} }); });
+pick: () => upTb({ am: i }), auto: () => autoFill(i), clear: () => setMods((mods) => { mods[i].picks = {}; }) }; });
 const tq = b.q.trim().toLowerCase();
-const plist = pool(b).filter(x => !tq || (x.id + ' ' + x.stem).toLowerCase().indexOf(tq) >= 0);
-const tbPick = plist.slice(0, b.lim).map(x => { const u = usedIn[x.id]; return { id: x.id, stem: x.stem || 'Figure question', dom: short(x.dom), fig: x.img ? 'Figure' : '', on: u === am ? 'true' : 'false', where: u !== undefined && u !== am ? b.mods[u].n : '',
-pick: () => setMods(mods => { const cur = mods[am].picks[x.id]; mods.forEach(m => { delete m.picks[x.id]; }); if (!cur) mods[am].picks[x.id] = true; }) }; });
+const plist = pool(b).filter((x) => !tq || (x.id + ' ' + x.stem).toLowerCase().indexOf(tq) >= 0).sort((x, y) => (elsewhere(x.id) ? 1 : 0) - (elsewhere(y.id) ? 1 : 0));
+const tbPick = plist.slice(0, b.lim).map((x) => { const u = usedIn[x.id]; const ext = elsewhere(x.id); return { id: id0(x.id), stem: window.Ufq.tex(x.stem || '') || 'Figure question', dom: short(x.dom) + ' · ' + ['', 'Easy', 'Medium', 'Hard'][x.d], fig: x.img ? 'Figure' : '', on: u === am ? 'true' : 'false', where: ext ? testName(s.used[x.id]) : (u !== undefined && u !== am ? b.mods[u].n : ''),
+pick: () => { if (ext) { this.say('This question is already in “' + testName(s.used[x.id]) + '”.'); return; } setMods((mods) => { const cur = mods[am].picks[x.id]; mods.forEach((m) => { delete m.picks[x.id]; }); if (!cur) mods[am].picks[x.id] = true; }); } }; });
 const nAll = b.mods.reduce((a, m) => a + cntP(m), 0);
 const tbOk = b.n.trim().length > 2 && nAll > 0;
-const short2 = b.mods.filter(m => cntP(m) < m.target);
+const short2 = b.mods.filter((m) => cntP(m) < m.target);
+const freeCount = bank.filter((x) => !elsewhere(x.id) && !usedIn[x.id]).length;
 /* analytics */
 const H = s.histS;
 const hmx = Math.max.apply(null, [1].concat(H.map(h => h[1])));
@@ -813,7 +852,7 @@ openInvite: () => this.setState({ dlg: 'invite', invE: '', invR: 'Student' }),
 drawer: !!du0, du, roleOpts, roleNote, suspendL, acctOp, acctPe, closeDrawer: () => this.setState({ sel: 0 }),
 askSuspend: () => du0 && du0.s === 'Invited' ? this.say('This person has not signed up yet — you can cancel the invite instead.') : this.setState({ dlg: 'suspend', conf: '' }), askRemove: () => this.setState({ dlg: 'remove', conf: '' }),
 dConfirm: !!CF, cfT: CF ? CF[0] : '', cfB: CF ? CF[1] : '', cfNeed: CF ? CF[2] : '', cfBtn: CF ? CF[3] : '', conf: s.conf, setConf: (ev) => this.setState({ conf: ev.target.value }), cfOp: cfOk ? '1' : '.35', cfPe: cfOk ? 'auto' : 'none', doConfirm,
-closeDlg: () => this.setState({ dlg: '', conf: '', delq: null }), stop: (ev) => { if (ev && ev.stopPropagation) ev.stopPropagation(); },
+closeDlg: () => this.setState({ dlg: '', conf: '', delq: null, delt: null }), stop: (ev) => { if (ev && ev.stopPropagation) ev.stopPropagation(); },
 dInvite: s.dlg === 'invite', invE: s.invE, setInvE: (ev) => this.setState({ invE: ev.target.value }), invRoles, invOp: invOk ? '1' : '.35', invPe: invOk ? 'auto' : 'none', sendInvite,
 qq: s.qq, setQQ: (ev) => { const v = ev.target.value; this.setState({ qq: v, qlim: 20 }); clearTimeout(this._qt); this._qt = setTimeout(() => this.reloadQs({ qq: v }), 350); }, domSegs, difSegs, qRows, noQs: qRows.length === 0, qCount: (s.qBusy ? 'Searching… ' : '') + 'Showing ' + qf.length + ' of ' + s.total.toLocaleString('en-US') + ' questions in the bank' + (s.qs.length >= 400 ? ' (newest 400 loaded — search or filter to find others)' : ''), qMore, showMore: () => this.setState({ qlim: s.qlim + 20 }), qMoreL: 'Show ' + Math.min(20, qf.length - s.qlim) + ' more',
 dQ: s.dlg === 'q' && !!s.ed, ed: e, edTitle: e.id ? 'Edit ' + id0(e.id) : 'New question',
@@ -829,14 +868,14 @@ edDifs: [1, 2, 3].map(d => ({ l: DL[d], on: e.d === d ? 'true' : 'false', pick: 
 edPrevStem: e.stem || (e.img ? 'Question text under the figure.' : 'Your question appears here as students will see it.'), edPrevAns: e.ans || '—', edPrevEx: e.ex || 'Tushuntirish shu yerda ko‘rinadi.',
 edMsg, edMsgC: edOk ? BLUE : 'rgba(0,48,73,.6)', edOp: edOk ? '1' : '.4', edPe: edOk ? 'auto' : 'none',
 saveLive: () => edOk && this.saveQ(),
-tCards, dT: s.dlg === 't' && !!s.tb, tb: b, tbTitle: b.id ? 'Edit test' : 'Build a test', tbName: (ev) => upTb({ n: ev.target.value }), tbTypes, tbMods, addMod, addModL: b.ty === 'Practice set' ? 'Add set' : 'Add module',
-tbDomSegs: ['All'].concat(s.doms).map(d => ({ l: short(d), on: b.dom === d ? 'true' : 'false', pick: () => upTb({ dom: d, lim: 30 }) })),
-tbDifSegs: ['Mixed', 'Easy', 'Medium', 'Hard'].map(d => ({ l: d, on: b.dif === d ? 'true' : 'false', pick: () => upTb({ dif: d, lim: 30 }) })),
+tCards, noTests: tCards.length === 0, dT: s.dlg === 't' && !!s.tb, tb: b, tbTitle: b.id ? 'Edit mock test' : 'New mock test', tbName: (ev) => upTb({ n: ev.target.value }), tbTypes, tbMods,
+tbDomSegs: ['All'].concat(s.doms).map((d) => ({ l: short(d), on: b.dom === d ? 'true' : 'false', pick: () => upTb({ dom: d, lim: 30 }) })),
+tbDifSegs: ['Mixed', 'Easy', 'Medium', 'Hard'].map((d) => ({ l: d, on: b.dif === d ? 'true' : 'false', pick: () => upTb({ dif: d, lim: 30 }) })),
 tbQ: b.q, setTbQ: (ev) => upTb({ q: ev.target.value, lim: 30 }), tbPick, tbMore: plist.length > b.lim, tbShowMore: () => upTb({ lim: b.lim + 30 }),
-tbPool: pool(b).length + ' live questions match · picking into ' + b.mods[am].n, autoAll,
-tbCount: String(nAll), tbTarget: String(b.mods.reduce((a, m) => a + m.target, 0)), tbMin: minsOf(b.ty, b.mods) + 'm',
-tbMsg: !tbOk ? (b.n.trim().length <= 2 ? 'Give the test a name.' : 'Pick questions or use Auto-fill.') : short2.length ? short2.map(m => m.n).join(', ') + ' not full yet — you can save now and finish later.' : 'Every module is full. Ready to publish.',
-tbOp: tbOk ? '1' : '.4', tbPe: tbOk ? 'auto' : 'none', tbDraft: () => tbOk && this.saveT('Draft'), tbLive: () => tbOk && this.saveT('Published'),
+tbPool: plist.length + ' questions match · ' + freeCount + ' of ' + bank.length + ' in the bank are still unused · picking into ' + b.mods[am].n, autoAll,
+tbCount: String(nAll), tbTarget: String(b.mods.reduce((a, m) => a + m.target, 0)), tbMin: Math.round(b.size * 35 / 22 * 2) + 'm',
+tbMsg: !tbOk ? (b.n.trim().length <= 2 ? 'Give the test a name.' : 'Pick questions or use Auto-fill.') : short2.length ? short2.map((m) => m.n + ' ' + cntP(m) + '/' + m.target).join(' · ') + ' — fill every module to publish.' : 'Ready. Module 1 first, then the harder or easier Module 2 by how many they miss.',
+tbOp: tbOk ? '1' : '.4', tbPe: tbOk ? 'auto' : 'none', tbLive: () => tbOk && this.saveT(),
 hist, domAcc, hardest, wau, roleCards, perms, audSegs, audAll,
 toastOn: !!s.toast, toastMsg: s.toast
 };
