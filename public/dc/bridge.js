@@ -77,7 +77,16 @@
   var Ufq = {
     config: cfg,
     session: read,
-    user: function () { var s = read(); return s && s.user || null; },
+    user: function () {
+      var s = read(); if (!s) return null;
+      if (s.user && s.user.id) return s.user;
+      /* a session saved without its user object: rebuild it from the access token */
+      try {
+        var p = JSON.parse(decodeURIComponent(escape(atob(String(s.access_token).split('.')[1].replace(/-/g, '+').replace(/_/g, '/')))));
+        if (p && p.sub) return { id: p.sub, email: p.email || '', user_metadata: p.user_metadata || {} };
+      } catch (e) { /* not a readable token */ }
+      return s.user || null;
+    },
     isSignedIn: function () { var s = read(); return !!(s && s.access_token); },
     displayName: function () {
       var u = Ufq.user(); if (!u) return '';
@@ -321,8 +330,23 @@
   };
 
   /* full-screen cover while a page loads its real data; call the returned function to remove it */
-  /* kept for the pages that call it: data now loads quietly in the background, with no full-screen loading cover */
-  Ufq.cover = function () { return function () { /* nothing to remove */ }; };
+  /* No loading screen: the first call on a page keeps only the page content invisible (the side menu stays) until its data is
+     in, then fades it in once, so nothing flashes or re-animates. Later calls, and a 2.5 s safety limit, never block. */
+  var held = false;
+  Ufq.cover = function () {
+    if (held) return function () { /* nothing to release */ };
+    held = true;
+    var st = document.createElement('style'); st.textContent = 'main{opacity:0!important}';
+    (document.head || document.documentElement).appendChild(st);
+    var done = false, timer;
+    function release() {
+      if (done) return; done = true; clearTimeout(timer);
+      st.textContent = 'main{animation:ufqFade .22s ease both}@keyframes ufqFade{from{opacity:0}}';
+      setTimeout(function () { st.remove(); }, 400);
+    }
+    timer = setTimeout(release, 2500);
+    return function () { requestAnimationFrame(function () { setTimeout(release, 30); }); };
+  };
   var DOMAIN_INDEX = { 'Algebra': 0, 'Advanced Math': 1, 'Problem Solving': 2, 'Data Analysis': 2, 'Geometry': 3 };
   var MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
   /* real practice attempts, newest first, in the shape the History page uses */
