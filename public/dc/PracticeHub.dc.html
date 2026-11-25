@@ -155,6 +155,10 @@ a.tile:hover .go{transform:rotate(-45deg);background:#003049;color:#FFFFFF}
 <h1 class="srf" style="margin: 0; font-size: clamp(40px, 4.4vw, 68px); line-height: 1"><span class="mask ld"><span>Pick a <em style="color: #C1121F">skill.</em> Or let us pick.</span></span></h1>
 </div>
 </header>
+<sc-if value="{{hasSaved}}" hint-placeholder-val="{{ false }}"><div style="display: flex; flex-direction: column; gap: 10px">
+<span class="cap" style="color: #C1121F">Continue where you left off</span>
+<sc-for list="{{saved}}" as="p" hint-placeholder-count="1"><div style="display: flex; align-items: center; gap: 14px; flex-wrap: wrap; padding: 14px 18px; border-radius: 16px; background: #F4F6F8"><span style="flex: 1; min-width: 180px; display: flex; flex-direction: column; gap: 2px"><b>{{p.title}}</b><span style="font-size: 13px; color: rgba(0,48,73,.65)">{{p.prog}} · saved {{p.when}}</span></span><a href="{{p.href}}" class="btn navy" style="min-height: 42px">Continue</a><button type="button" onClick="{{p.drop}}" style="min-height: 42px; padding: 0 14px; border-radius: 999px; border: 0; background: transparent; color: rgba(0,48,73,.6); cursor: pointer; font: 600 14px 'Inter Tight', sans-serif">Discard</button></div></sc-for>
+</div></sc-if>
 <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap"><span class="cap" style="color: #669BBC">Questions per set</span>
 <sc-for list="{{sizes}}" as="z" hint-placeholder-count="6"><button type="button" onClick="{{z.pick}}" aria-pressed="{{z.on}}" style="min-height: 40px; padding: 0 18px; border-radius: 999px; border: 0; cursor: pointer; font: 600 15px 'Inter Tight', sans-serif; background: {{z.bg}}; color: {{z.fg}}; box-shadow: {{z.ring}}">{{z.label}}</button></sc-for></div>
 <div class="bento" style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px">
@@ -208,8 +212,9 @@ a.tile:hover .go{transform:rotate(-45deg);background:#003049;color:#FFFFFF}
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1000}}'>
 class Component extends DCLogic {
-constructor(props) { super(props); this.state = { seg: 'all', R: null, bank: null, size: (() => { try { const v = localStorage.getItem('ufq_size'); return v === 'all' ? 'all' : (Number(v) || 40); } catch (e) { return 40; } })() };
-const off = window.Ufq.cover('Counting the question bank…');
+constructor(props) { super(props); this.state = { seg: 'all', R: null, bank: null, saved: [], size: (() => { try { const v = localStorage.getItem('ufq_size'); return v === 'all' ? 'all' : (Number(v) || 40); } catch (e) { return 40; } })() };
+window.Ufq.progressList().then((saved) => this.setState({ saved })).catch(() => {});
+const off = window.Ufq.cover();
 Promise.all([window.Ufq.dashboard().catch(() => null), window.Ufq.bankCounts()]).then(([R, bank]) => { off(); this.setState({ R, bank }); }).catch((err) => { off(); window.Ufq.toast(err.message || 'Could not load the question bank.'); this.setState({ bank: {} }); });
 }
 renderVals() {
@@ -228,7 +233,9 @@ const doms = D.map(([name, sec, st, q, sk], i) => {
 const c = colorOf(st); const p = (k) => k <= st ? c : '#E3E9EE';
 return { href: '/practice/session?d=' + SLUG[name] + '&n=' + s.size, slug: SLUG[name], name, sec: 'Math', stage: STAGES[st], c, p1: p(0), p2: p(1), p3: p(2), p4: p(3), q: q.toLocaleString('en-US'), skills: sk.map(t => ({ t })), delay: (i * 0.05).toFixed(2) + 's' };
 });
-return { doms, domCount: String(doms.length), bankTotal: bankTotal.toLocaleString('en-US'),
+const ago = (iso) => { const m = Math.round((Date.now() - new Date(iso).getTime()) / 60000); return m < 1 ? 'just now' : m < 60 ? m + ' min ago' : m < 1440 ? Math.round(m / 60) + ' h ago' : Math.round(m / 1440) + ' days ago'; };
+const saved = (s.saved || []).map((p) => ({ title: p.title, prog: p.answered + ' of ' + p.total + ' answered', when: ago(p.updated_at), href: '/practice/session?resume=' + p.id, drop: () => { window.Ufq.deleteProgress(p.id); this.setState({ saved: this.state.saved.filter((x) => x.id !== p.id) }); } }));
+return { saved, hasSaved: saved.length > 0, doms, domCount: String(doms.length), bankTotal: bankTotal.toLocaleString('en-US'),
 recHref: '/practice/session?n=' + s.size + (wk ? '&d=' + wk.q : ''), mixHref: '/practice/session?n=' + s.size, hardHref: '/practice/session?n=' + s.size + '&h=1', mixA: s.size === 'all' ? 'Every question,' : s.size + ' questions,', mixB: s.size === 'all' ? 'at your own pace.' : Math.round(s.size * 1.2) + ' minutes.',
 sizes: [10, 20, 40, 80, 120, 'all'].map((n) => ({ label: n === 'all' ? 'Full' : String(n), on: s.size === n ? 'true' : 'false', bg: s.size === n ? '#003049' : '#F4F6F8', fg: s.size === n ? '#FFFFFF' : '#003049', ring: s.size === n ? 'none' : 'inset 0 0 0 1px rgba(0,48,73,.15)', pick: () => { try { localStorage.setItem('ufq_size', String(n)); } catch (e) {} this.setState({ size: n }); } })), recA: wk ? wk.name : 'Mixed', recB: 'practice.',
 recLine: (wk ? wk.name : 'All domains') + ' · ' + (s.size === 'all' ? 'every question, your own pace' : s.size + ' questions · about ' + Math.round(s.size * 1.5) + ' min') };

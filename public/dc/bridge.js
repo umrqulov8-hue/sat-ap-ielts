@@ -321,13 +321,8 @@
   };
 
   /* full-screen cover while a page loads its real data; call the returned function to remove it */
-  Ufq.cover = function (text) {
-    var c = document.createElement('div');
-    c.style.cssText = 'position:fixed;inset:0;z-index:2147483000;background:#FFFFFF;display:flex;align-items:center;justify-content:center;font:500 22px "Newsreader",Georgia,serif;font-style:italic;color:#003049';
-    c.textContent = text || 'Loading…';
-    (document.body || document.documentElement).appendChild(c);
-    return function () { c.remove(); };
-  };
+  /* kept for the pages that call it: data now loads quietly in the background, with no full-screen loading cover */
+  Ufq.cover = function () { return function () { /* nothing to remove */ }; };
   var DOMAIN_INDEX = { 'Algebra': 0, 'Advanced Math': 1, 'Problem Solving': 2, 'Data Analysis': 2, 'Geometry': 3 };
   var MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
   /* real practice attempts, newest first, in the shape the History page uses */
@@ -490,6 +485,46 @@
       });
     });
   };
+  /* questions by id, keeping the given order (used to resume a saved practice set) */
+  Ufq.questionsByIds = function (ids) {
+    return Ufq.subjects().then(function (subjects) {
+      var subs = {}; subjects.forEach(function (x) { subs[x.id] = x; });
+      var chunks = []; for (var i = 0; i < ids.length; i += 60) chunks.push(ids.slice(i, i + 60));
+      return Promise.all(chunks.map(function (c) { return Ufq.rest('/rest/v1/questions?select=' + QCOLS + '&id=in.(' + c.join(',') + ')&limit=100'); })).then(function (parts) {
+        var by = {}; parts.forEach(function (rows) { (rows || []).forEach(function (q) { by[q.id] = q; }); });
+        return ids.map(function (id) { return by[id]; }).filter(Boolean).map(function (q) { return toQuestion(q, subs[q.subject_id] || { title: 'Math' }); }).filter(Boolean);
+      });
+    });
+  };
+  /* ---- saved practice progress ("Save & archive"): database first, this browser as a fallback ---- */
+  function lsGet(k, d) { try { return JSON.parse(localStorage.getItem(k) || 'null') || d; } catch (e) { return d; } }
+  function lsSet(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) { /* ignore */ } }
+  Ufq.newId = function () { return (window.crypto && crypto.randomUUID) ? crypto.randomUUID() : 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) { var r = Math.random() * 16 | 0; return (c === 'x' ? r : (r & 3 | 8)).toString(16); }); };
+  Ufq.saveProgress = function (p) {
+    var uid = (Ufq.user() || {}).id; if (!uid) return Promise.reject(new Error('Not signed in'));
+    var row = { id: p.id, user_id: uid, title: p.title, total: p.total, answered: p.answered, state: p.state, updated_at: new Date().toISOString() };
+    var idx = lsGet('ufq_progress_idx_' + uid, []).filter(function (x) { return x.id !== p.id; });
+    idx.unshift({ id: p.id, title: p.title, total: p.total, answered: p.answered, updated_at: row.updated_at });
+    lsSet('ufq_progress_idx_' + uid, idx); lsSet('ufq_progress_' + p.id, p.state);
+    return Ufq.rest('/rest/v1/practice_progress?on_conflict=id', { method: 'POST', headers: { Prefer: 'resolution=merge-duplicates,return=minimal' }, body: JSON.stringify(row) }).catch(function () { /* table missing: saved in this browser only */ });
+  };
+  Ufq.progressList = function () {
+    var uid = (Ufq.user() || {}).id; if (!uid) return Promise.resolve([]);
+    var local = lsGet('ufq_progress_idx_' + uid, []);
+    return Ufq.rest('/rest/v1/practice_progress?select=id,title,total,answered,updated_at&order=updated_at.desc&limit=20').then(function (rows) {
+      var seen = {}; rows.forEach(function (r) { seen[r.id] = 1; });
+      return rows.concat(local.filter(function (x) { return !seen[x.id]; }));
+    }).catch(function () { return local; });
+  };
+  Ufq.loadProgress = function (id) {
+    return Ufq.rest('/rest/v1/practice_progress?select=state&id=eq.' + id).then(function (rows) { return rows && rows[0] ? rows[0].state : lsGet('ufq_progress_' + id, null); }).catch(function () { return lsGet('ufq_progress_' + id, null); });
+  };
+  Ufq.deleteProgress = function (id) {
+    var uid = (Ufq.user() || {}).id;
+    lsSet('ufq_progress_idx_' + uid, lsGet('ufq_progress_idx_' + uid, []).filter(function (x) { return x.id !== id; }));
+    try { localStorage.removeItem('ufq_progress_' + id); } catch (e) { /* ignore */ }
+    return Ufq.rest('/rest/v1/practice_progress?id=eq.' + id, { method: 'DELETE', headers: { Prefer: 'return=minimal' } }).catch(function () { /* ignore */ });
+  };
   Ufq.mockInfo = function (id) { return Ufq.rest('/rest/v1/mock_tests?select=id,title,module_size&id=eq.' + id).then(function (rows) { return rows && rows[0] || null; }); };
   /* mod: 'm1' | 'm2_hard' | 'm2_easy' -> questions in their saved order, ready for the practice screen */
   Ufq.mockModule = function (testId, mod) {
@@ -579,7 +614,7 @@
   Ufq.deleteMyData = function () {
     var uid = (Ufq.user() || {}).id; if (!uid) return Promise.reject(new Error('Not signed in'));
     var del = function (t) { return Ufq.rest('/rest/v1/' + t + '?user_id=eq.' + uid, { method: 'DELETE', headers: { Prefer: 'return=minimal' } }); };
-    return Promise.all(['practice_tests', 'user_scores', 'user_activity', 'login_streaks', 'user_total_scores'].map(del)).then(function () {
+    return Promise.all(['practice_tests', 'user_scores', 'user_activity', 'login_streaks', 'user_total_scores', 'practice_progress'].map(del)).then(function () {
       ['ufq_goal', 'ufq_settings', 'ufq_notif_read', 'ufq_notif_gone', 'ufq_notif_prefs', 'ufq_login_' + uid].forEach(function (k) { try { localStorage.removeItem(k); } catch (e) { /* ignore */ } });
     });
   };

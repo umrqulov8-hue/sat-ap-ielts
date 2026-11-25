@@ -99,7 +99,7 @@ html,body{margin:0;background:#003049}
 .dlg{width:min(680px,100%);max-height:calc(100vh - 32px);overflow:auto;background:#FFFFFF;border-radius:20px;box-shadow:0 40px 80px -30px rgba(0,48,73,.6);padding:clamp(22px,3vw,34px);display:flex;flex-direction:column;gap:16px}
 @keyframes dlgIn{from{opacity:0;transform:translateY(16px) scale(.98)}to{opacity:1;transform:none}}
 .dlg,.calcp{animation:dlgIn .45s cubic-bezier(.16,1,.3,1) both}
-.calcp{position:fixed;z-index:30;right:clamp(12px,2vw,24px);top:76px;width:min(320px,calc(100vw - 24px));background:#FFFFFF;border-radius:18px;box-shadow:0 0 0 1px rgba(0,48,73,.14),0 30px 60px -24px rgba(0,48,73,.5);padding:14px;display:flex;flex-direction:column;gap:10px}
+.calcp{position:fixed;z-index:30;right:clamp(12px,2vw,24px);top:76px;width:min(560px,calc(100vw - 24px));height:min(640px,calc(100vh - 100px));min-width:300px;min-height:360px;resize:both;overflow:hidden;background:#FFFFFF;border-radius:18px;box-shadow:0 0 0 1px rgba(0,48,73,.14),0 30px 60px -24px rgba(0,48,73,.5);padding:10px;flex-direction:column;gap:8px}
 .ck{min-height:46px;border-radius:10px;border:0;background:#F4F6F8;color:#003049;font:600 17px 'Inter Tight',sans-serif;cursor:pointer;transition:background .2s,transform .15s}
 .ck:hover{background:#E6ECF0}.ck:active{transform:scale(.96)}
 .ck.op{background:#EEF2F5;color:#003049}.ck.eq{background:#003049;color:#FFFFFF}.ck.clr{color:#C1121F}
@@ -125,7 +125,7 @@ html,body{margin:0;background:#003049}
 <button type="button" class="tool hide-sm" onClick="{{openDir}}">Directions</button>
 <button type="button" class="tool" onClick="{{openCalc}}" aria-pressed="{{calcOn}}">Calculator</button>
 <button type="button" class="tool hide-sm" onClick="{{openRef}}" aria-pressed="{{refOn}}">Reference</button>
-<a href="/practice" class="tool" style="text-decoration: none">Save &amp; exit</a>
+<sc-if value="{{canSave}}" hint-placeholder-val="{{ true }}"><button type="button" class="tool" onClick="{{saveExit}}">Save &amp; archive</button></sc-if>
 </div>
 </header>
 
@@ -297,19 +297,12 @@ html,body{margin:0;background:#003049}
 </div>
 </footer>
 
-<!-- TOOLS: calculator -->
-<sc-if value="{{toolCalc}}" hint-placeholder-val="{{ false }}">
-<div class="calcp" role="dialog" aria-label="Calculator">
-<div style="display: flex; justify-content: space-between; align-items: center"><span style="font-weight: 600">Calculator</span><button type="button" class="tool" onClick="{{closeTool}}" aria-label="Close calculator" style="min-height: 34px">✕</button></div>
-<div style="padding: 12px 14px; border-radius: 12px; background: #003049; color: #FFFFFF; text-align: right; display: flex; flex-direction: column; gap: 2px; min-height: 76px; justify-content: flex-end">
-<span style="font-size: 13px; color: rgba(255,255,255,.6); min-height: 18px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap">{{calcPrev}}</span>
-<span style="font: 600 26px 'Inter Tight', sans-serif; font-variant-numeric: tabular-nums; overflow-x: auto; white-space: nowrap">{{calcShow}}</span>
+<!-- TOOLS: Desmos calculator (stays mounted so your graph survives closing the panel) -->
+<div class="calcp" role="dialog" aria-label="Calculator" style="display: {{calcDisp}}">
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 8px"><span style="display: flex; gap: 4px"><button type="button" class="tool" aria-pressed="{{cmG}}" onClick="{{setCmG}}" style="min-height: 34px">Graphing</button><button type="button" class="tool" aria-pressed="{{cmS}}" onClick="{{setCmS}}" style="min-height: 34px">Scientific</button></span><button type="button" class="tool" onClick="{{closeTool}}" aria-label="Close calculator" style="min-height: 34px">✕</button></div>
+<iframe title="Desmos graphing calculator" src="{{calcSrcG}}" style="display: {{cmGD}}; flex: 1; min-height: 0; width: 100%; border: 0; border-radius: 12px; background: #FFFFFF"></iframe>
+<iframe title="Desmos scientific calculator" src="{{calcSrcS}}" style="display: {{cmSD}}; flex: 1; min-height: 0; width: 100%; border: 0; border-radius: 12px; background: #FFFFFF"></iframe>
 </div>
-<div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px">
-<sc-for list="{{calcKeys}}" as="k" hint-placeholder-count="24"><button type="button" class="ck {{k.cls}}" onClick="{{k.press}}" aria-label="{{k.aria}}">{{k.label}}</button></sc-for>
-</div>
-</div>
-</sc-if>
 
 <!-- TOOLS: reference sheet -->
 <sc-if value="{{toolRef}}" hint-placeholder-val="{{ false }}">
@@ -355,19 +348,32 @@ super(props);
 this.state = { q: 0, ans: {}, marked: {}, crossed: {}, crossMode: false, nav: false, review: false, done: false, rev: null, hideTimer: (() => { try { const sv = JSON.parse(localStorage.getItem('ufq_settings') || 'null'); return !!sv && sv.timer === false; } catch (e) { return false; } })(), Q: null, title: '', tick: 0 };
 this._t0 = Date.now(); this.tm = {}; this._q = 0; this._qt = Date.now(); this.saved = false;
 const params = new URLSearchParams(location.search);
-this._mock = params.get('mock') || ''; this._slugs = (params.get('d') || '').split(',').filter(Boolean); this._n = params.get('n') === 'all' ? 'all' : (Number(params.get('n')) || 10); this._hard = params.get('h') === '1';
+this._resume = params.get('resume') || ''; this._pid = this._resume; this._mock = params.get('mock') || ''; this._slugs = (params.get('d') || '').split(',').filter(Boolean); this._n = params.get('n') === 'all' ? 'all' : (Number(params.get('n')) || 10); this._hard = params.get('h') === '1';
 const cover = document.createElement('div'); cover.setAttribute('aria-live', 'polite');
 cover.style.cssText = 'position:fixed;inset:0;z-index:2147483000;background:#FFFFFF;display:flex;align-items:center;justify-content:center;font:500 22px "Newsreader",Georgia,serif;font-style:italic;color:#003049';
-cover.textContent = 'Preparing your set…'; document.body.appendChild(cover);
+document.body.appendChild(cover);
 const done = () => { cover.remove(); };
-const first = this._mock ? window.Ufq.mockInfo(this._mock).then((info) => { if (!info) throw new Error('This mock test no longer exists.'); this._info = info; return window.Ufq.mockModule(this._mock, 'm1'); }) : window.Ufq.loadQuestions({ slugs: this._slugs, count: this._n, hard: this._hard });
+const first = this._resume ? window.Ufq.loadProgress(this._resume).then((st) => { if (!st || !st.qids) throw new Error('This saved set could not be found.'); this._saved = st; return window.Ufq.questionsByIds(st.qids); }) : this._mock ? window.Ufq.mockInfo(this._mock).then((info) => { if (!info) throw new Error('This mock test no longer exists.'); this._info = info; return window.Ufq.mockModule(this._mock, 'm1'); }) : window.Ufq.loadQuestions({ slugs: this._slugs, count: this._n, hard: this._hard });
 first.then((qs) => {
 if (!qs.length) { window.Ufq.toast('No questions are available for this set yet.'); setTimeout(() => location.assign(this._mock ? '/mock-tests' : '/practice'), 1600); return; }
 const names = [...new Set(qs.map((q) => q.subject))];
 this._t0 = Date.now(); this._qt = Date.now(); this.tm = {};
+if (this._saved) { const st = this._saved; const idx = {}; qs.forEach((x, i) => { idx[x.id] = i; }); const ans = {}, marked = {}, tm = {}; Object.keys(st.ansById || {}).forEach((id) => { if (idx[id] !== undefined) ans[idx[id]] = st.ansById[id]; }); Object.keys(st.markedById || {}).forEach((id) => { if (idx[id] !== undefined) marked[idx[id]] = true; }); Object.keys(st.tmById || {}).forEach((id) => { if (idx[id] !== undefined) tm[idx[id]] = st.tmById[id]; });
+let q0 = idx[st.curId] !== undefined ? idx[st.curId] : 0; if (ans[q0] !== undefined && q0 < qs.length - 1) q0++;
+this._t0 = Date.now() - (st.elapsed || 0) * 1000; this.tm = tm; this._q = q0; this._qt = Date.now();
+this.setState({ Q: qs, ans, marked, q: q0, mockStage: 0, title: st.title || 'Practice' }); done(); window.Ufq.toast('Continuing from question ' + (q0 + 1) + ' of ' + qs.length, 'ok'); return; }
 this.setState({ Q: qs, mockStage: this._mock ? 1 : 0, title: this._mock ? this._info.title : (this._slugs.length === 1 || names.length === 1 ? names[0] : 'Mixed practice') }); done();
 }).catch((err) => { window.Ufq.toast(err && err.message ? err.message : 'Could not load questions.'); done(); setTimeout(() => location.assign(this._mock ? '/mock-tests' : '/practice'), 1800); });
 this._iv = setInterval(() => { const t = this.state; if (t.Q && !t.done && !t.hideTimer && !t.review && t.rev === null && !document.hidden) this.setState({ tick: Date.now() }); }, 1000);
+}
+saveExit() {
+const t = this.state; if (!t.Q || t.done || this._mock) return;
+this.tm[this._q] = (this.tm[this._q] || 0) + Math.round((Date.now() - this._qt) / 1000); this._qt = Date.now();
+const qids = t.Q.map((x) => x.id), ansById = {}, markedById = {}, tmById = {};
+t.Q.forEach((x, i) => { if (t.ans[i] !== undefined) ansById[x.id] = t.ans[i]; if (t.marked[i]) markedById[x.id] = true; if (this.tm[i]) tmById[x.id] = this.tm[i]; });
+if (!this._pid) this._pid = window.Ufq.newId();
+const state = { qids, ansById, markedById, tmById, curId: t.Q[t.q] ? t.Q[t.q].id : qids[0], elapsed: Math.floor((Date.now() - this._t0) / 1000), title: t.title };
+window.Ufq.saveProgress({ id: this._pid, title: (t.title || 'Practice') + ' · ' + qids.length + ' questions', total: qids.length, answered: Object.keys(ansById).length, state }).then(() => { window.Ufq.toast('Progress saved — continue from Practice.', 'ok'); setTimeout(() => location.assign('/practice'), 600); }).catch((err) => window.Ufq.toast('Could not save: ' + (err && err.message || 'error')));
 }
 nextModule() {
 const t = this.state; if (this._loadingM2) return; this._loadingM2 = true;
@@ -480,8 +486,10 @@ return this.setState({ calc: c + label });
 } }));
 const refs = [['Circle', 'A = πr²', 'C = 2πr'], ['Rectangle', 'A = ℓw', 'Perimeter = 2ℓ + 2w'], ['Triangle', 'A = ½bh', 'Angles add to 180°'], ['Pythagorean theorem', 'c² = a² + b²', 'c is the hypotenuse'], ['30°–60°–90°', 'x, x√3, 2x', 'Short leg, long leg, hypotenuse'], ['45°–45°–90°', 's, s, s√2', 'Two equal legs'], ['Rectangular prism', 'V = ℓwh', ''], ['Cylinder', 'V = πr²h', ''], ['Sphere', 'V = ⁴⁄₃πr³', ''], ['Cone', 'V = ⅓πr²h', ''], ['Pyramid', 'V = ⅓ℓwh', '']].map(([t, a, b]) => ({ t, a, b }));
 const tool = this.state.tool || '';
+if (tool === 'calc') { if ((this._cm || 'g') === 'g') this._cg = true; else this._cs = true; }
 const toolVals = {
-toolCalc: tool === 'calc', toolRef: tool === 'ref', toolDir: tool === 'dir',
+calcDisp: tool === 'calc' ? 'flex' : 'none', cmG: (this._cm || 'g') === 'g' ? 'true' : 'false', cmS: this._cm === 's' ? 'true' : 'false', cmGD: this._cm === 's' ? 'none' : 'block', cmSD: this._cm === 's' ? 'block' : 'none', calcSrcG: this._cg ? 'https://www.desmos.com/calculator' : 'about:blank', calcSrcS: this._cs ? 'https://www.desmos.com/scientific' : 'about:blank', setCmG: () => { this._cm = 'g'; this._cg = true; this.setState({ tick: Date.now() }); }, setCmS: () => { this._cm = 's'; this._cs = true; this.setState({ tick: Date.now() }); },
+toolRef: tool === 'ref', toolCalc: tool === 'calc', toolDir: tool === 'dir',
 calcKeys, refs, calcShow: this.state.calc || '0', calcPrev: this.state.calcPrev || '',
 calcOn: tool === 'calc' ? 'true' : 'false', refOn: tool === 'ref' ? 'true' : 'false',
 openCalc: () => this.setState({ tool: this.state.tool === 'calc' ? '' : 'calc' }),
@@ -533,11 +541,12 @@ const big = qs.length > 150;
 const answers = qs.map((x, i) => { const y = ansAll[i]; const ok = okQ(x, y); return { qIdx: i, module: this._mock ? (i < n1 ? 1 : 2) : undefined, selected: y === undefined ? null : (x.written ? y : 'ABCD'.indexOf(y)), correct: ok, question: big && ok ? { id: x.id } : x.raw }; });
 const subjectIds = [...new Set(qs.map((x) => x.subjectId))];
 window.Ufq.savePractice({ title: this._mock ? this._info.title : (t.title || 'Practice') + ' · ' + qs.length + ' questions', subjectId: !this._mock && subjectIds.length === 1 ? subjectIds[0] : null, subjectTitle: this._mock ? 'SAT' : (t.title || 'Mixed'), score: answers.filter((a) => a.correct).length, total: qs.length, minutes: Math.max(1, Math.round((Date.now() - this._t0) / 60000)), answers })
-.then(() => window.Ufq.toast('Result saved', 'ok')).catch((err) => { this.saved = false; window.Ufq.toast('Could not save the result: ' + (err && err.message || 'error')); });
+.then(() => { if (this._pid) window.Ufq.deleteProgress(this._pid); window.Ufq.toast('Result saved', 'ok'); }).catch((err) => { this.saved = false; window.Ufq.toast('Could not save the result: ' + (err && err.message || 'error')); });
 }
 this.setState({ done: true, review: false });
 },
 correctCount: String(correctN), rows, skills, why, insight, statTiles, accPct: accN + '%', ringOff: String(100 - accN), ringC: accN >= 80 ? '#003049' : accN >= 50 ? '#669BBC' : '#C1121F', headA: accN === 100 ? 'Perfect' : accN >= 80 ? 'Strong' : accN >= 50 ? 'Getting' : 'Rough', headB: accN === 100 ? 'set.' : accN >= 80 ? 'set.' : accN >= 50 ? 'there.' : 'start.', missN: String(missed.length), nextTopic: weak.length ? weak[0] + ' · set 2' : 'Circles · set 2',
+canSave: !this._mock && testing && !s.done, saveExit: () => this.saveExit(),
 submitLabel: this._mock && s.mockStage === 1 ? 'Finish Module 1' : this._mock ? 'Submit test' : 'Submit set',
 retry: () => { if (this._mock) { location.assign('/mock-tests'); return; } this.setState({ q: 0, ans: {}, marked: {}, crossed: {}, review: false, done: false, rev: null }); },
 rvNum: String((s.rev || 0) + 1), rvStem: R.stem, rvStemP: fr(R.stem), rvOpts: (R.written ? rvOptsW : rvOpts).map(o => Object.assign({}, o, { p: fr(o.v) })),
