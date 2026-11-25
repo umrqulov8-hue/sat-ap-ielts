@@ -276,14 +276,14 @@ html,body{margin:0;background:#003049}
 
 <!-- question navigator popover -->
 <sc-if value="{{showNav}}" hint-placeholder-val="{{ false }}">
-<div class="popIn" role="dialog" aria-label="Question navigator" style="position: fixed; left: 50%; bottom: 84px; z-index: 6; width: min(420px, calc(100vw - 32px)); background: #FFFFFF; border-radius: 16px; box-shadow: 0 0 0 1px rgba(0,48,73,.15), 0 30px 60px -20px rgba(0,48,73,.45); padding: 22px; display: flex; flex-direction: column; gap: 16px">
-<div style="display: flex; justify-content: space-between; align-items: center"><span style="font-weight: 600">All questions</span><button type="button" class="tool" onClick="{{toggleNav}}" aria-label="Close">✕</button></div>
-<div style="display: flex; gap: 10px; flex-wrap: wrap">
+<div class="popIn" role="dialog" aria-label="Question navigator" style="position: fixed; left: 50%; bottom: 84px; z-index: 6; width: min(420px, calc(100vw - 32px)); background: #FFFFFF; border-radius: 16px; box-shadow: 0 0 0 1px rgba(0,48,73,.15), 0 30px 60px -20px rgba(0,48,73,.45); padding: 22px; display: flex; flex-direction: column; gap: 16px; max-height: min(70vh, calc(100vh - 150px)); overflow: hidden">
+<div style="display: flex; justify-content: space-between; align-items: center; flex: none"><span style="font-weight: 600">All questions</span><button type="button" class="tool" onClick="{{toggleNav}}" aria-label="Close">✕</button></div>
+<div style="display: flex; gap: 10px; flex-wrap: wrap; overflow-y: auto; flex: 1 1 auto; min-height: 0; padding: 6px; margin: -6px; overscroll-behavior: contain">
 <sc-for list="{{navs}}" as="n" hint-placeholder-count="5">
 <button type="button" class="navq" onClick="{{n.go}}" aria-label="{{n.aria}}" style="background: {{n.bg}}; color: {{n.fg}}; box-shadow: {{n.ring}}">{{n.n}}<sc-if value="{{n.marked}}" hint-placeholder-val="{{ false }}"><span class="flag"></span></sc-if></button>
 </sc-for>
 </div>
-<button type="button" class="ghost" onClick="{{toReview}}">Go to review page</button>
+<button type="button" class="ghost" onClick="{{toReview}}" style="flex: none">Go to review page</button>
 </div>
 </sc-if>
 
