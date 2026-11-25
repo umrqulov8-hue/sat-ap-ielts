@@ -161,3 +161,26 @@ end;
 $$;
 revoke all on function public.get_all_profiles() from public, anon;
 grant execute on function public.get_all_profiles() to authenticated;
+
+-- 9. How often each question is answered correctly (admin charts) ---------------------------
+create or replace function public.get_question_stats()
+returns table (question_id text, attempts bigint, correct bigint)
+language plpgsql stable security definer
+set search_path = ''
+as $$
+begin
+  if not exists (select 1 from public.profiles p where p.id = auth.uid() and p.role in ('admin', 'owner')) then
+    raise exception 'Not authorized';
+  end if;
+  return query
+    select (a.value -> 'question' ->> 'id') as question_id,
+           count(*)::bigint as attempts,
+           count(*) filter (where (a.value ->> 'correct') = 'true')::bigint as correct
+    from public.practice_tests t
+    cross join lateral jsonb_array_elements(case when jsonb_typeof(t.answers) = 'array' then t.answers else '[]'::jsonb end) as a(value)
+    where (a.value -> 'question' ->> 'id') is not null
+    group by 1;
+end;
+$$;
+revoke all on function public.get_question_stats() from public, anon;
+grant execute on function public.get_question_stats() to authenticated;

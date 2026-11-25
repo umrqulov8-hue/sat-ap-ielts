@@ -117,9 +117,9 @@
           location.assign(cfg.url + '/auth/v1/authorize?provider=google&redirect_to=' + encodeURIComponent(location.origin + '/auth'));
         });
     },
-    signOut: function () {
+    signOut: function (to) {
       var s = read();
-      var done = function () { save(null); location.assign('/'); };
+      var done = function () { save(null); location.assign(typeof to === 'string' ? to : '/'); };
       if (!s) return done();
       fetch(cfg.url + '/auth/v1/logout', { method: 'POST', headers: authHeaders(s.access_token) }).then(done, done);
     },
@@ -532,13 +532,18 @@
   if (Ufq.isSignedIn() && page && !PUBLIC[page]) {
     Ufq.dashboard().then(function (R) { Ufq.decorate(R); }).catch(function () { Ufq.decorate(null); });
   }
-  if (page === 'Admin' && Ufq.isSignedIn()) {
-    Ufq.rest('/rest/v1/profiles?select=role&id=eq.' + (Ufq.user() || {}).id).then(function (rows) {
-      var role = rows && rows[0] && rows[0].role;
-      if (role !== 'admin' && role !== 'owner') location.replace('/dashboard');
-    }).catch(function () { location.replace('/dashboard'); });
+  /* every signed-in page: pick up a pending invite once, turn suspended accounts away, guard Admin */
+  if (Ufq.isSignedIn() && page && !PUBLIC[page]) {
+    var me0 = Ufq.user() || {};
+    var claimed = ''; try { claimed = sessionStorage.getItem('ufq_claimed') || ''; } catch (e) { /* ignore */ }
+    var claim = claimed === me0.id ? Promise.resolve() : Ufq.rest('/rest/v1/rpc/claim_invite', { method: 'POST', body: '{}' }).then(function () { try { sessionStorage.setItem('ufq_claimed', me0.id); } catch (e) { /* ignore */ } }).catch(function () { /* migration not applied yet */ });
+    claim.then(function () { return Ufq.rest('/rest/v1/profiles?select=role,suspended&id=eq.' + me0.id).catch(function () { return Ufq.rest('/rest/v1/profiles?select=role&id=eq.' + me0.id); }); }).then(function (rows) {
+      var row = rows && rows[0] || {};
+      if (row.suspended) { Ufq.signOut('/auth?suspended=1'); return; }
+      if (page === 'Admin' && row.role !== 'admin' && row.role !== 'owner') location.replace('/dashboard');
+    }).catch(function () { if (page === 'Admin') location.replace('/dashboard'); });
   }
-
+  if (page === 'Auth' && /[?&]suspended=1/.test(location.search)) setTimeout(function () { Ufq.toast('This account has been suspended. Contact your administrator.'); }, 400);
 
   /* everything this user has saved, as a downloadable file */
   Ufq.exportData = function () {
@@ -559,48 +564,130 @@
   };
 
 
-  /* ---------------- admin: real questions, users, tests ---------------- */
+  /* ---------------- admin: everything the Admin page shows comes from the database ---------------- */
   var DOM_BY_SLUG = { 'algebra': 'Algebra', 'advanced-math': 'Advanced Math', 'problem-solving': 'Problem-Solving & Data', 'data-analysis': 'Problem-Solving & Data', 'geometry': 'Geometry & Trig' };
+  var DOM_BY_TITLE = { 'Algebra': 'Algebra', 'Advanced Math': 'Advanced Math', 'Problem Solving': 'Problem-Solving & Data', 'Data Analysis': 'Problem-Solving & Data', 'Geometry': 'Geometry & Trig' };
   var SLUG_BY_DOM = { 'Algebra': 'algebra', 'Advanced Math': 'advanced-math', 'Problem-Solving & Data': 'problem-solving', 'Geometry & Trig': 'geometry' };
   var DIFF_NUM = { easy: 1, medium: 2, hard: 3, elite: 3, mixing: 2 };
-  function adminQ(row, slugById) {
+  var QSEL = 'id,subject_id,difficulty,question_text,options,correct_index,image_url,explanation,question_type,created_at';
+  function adminQ(row, slugById, stats) {
     var mc = row.question_type !== 'written';
     var opts = Array.isArray(row.options) ? row.options : [];
-    return { id: row.id, stem: row.question_text, dom: DOM_BY_SLUG[slugById[row.subject_id]] || 'Algebra', sk: 'General', d: DIFF_NUM[row.difficulty] || 2, t: mc ? 'MC' : 'Grid', cr: 0, st: 'Live',
+    var st = stats && stats[row.id];
+    return { id: row.id, stem: row.question_text, dom: DOM_BY_SLUG[slugById[row.subject_id]] || 'Algebra', sk: DOM_BY_SLUG[slugById[row.subject_id]] || 'General', d: DIFF_NUM[row.difficulty] || 2, t: mc ? 'MC' : 'Grid',
+      cr: st && st.attempts >= 3 ? Math.round(st.correct / st.attempts * 100) : 0, st: 'Live',
       ch: mc ? opts.concat(['', '', '', '']).slice(0, Math.max(4, opts.length)) : ['', '', '', ''], c: mc ? Math.max(0, row.correct_index) : 0, ans: mc ? '' : (row.explanation || ''), ex: mc ? (row.explanation || '') : '',
       img: row.image_url || '', lay: 'auto', iw: 0, ih: 0 };
   }
+  var MON3 = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  function rpc(name, args) { return Ufq.rest('/rest/v1/rpc/' + name, { method: 'POST', body: JSON.stringify(args || {}) }); }
+  Ufq.adminRpc = rpc;
+
+  /* o: { term, dom, diff ('Easy'|'Medium'|'Hard') } -> newest 400 matching questions */
+  Ufq.adminQuestions = function (o, slugById, stats) {
+    o = o || {};
+    var q = '/rest/v1/questions?select=' + QSEL + '&order=created_at.desc&limit=400';
+    if (o.term && o.term.trim().length >= 2) q += '&question_text=ilike.*' + encodeURIComponent(o.term.trim().replace(/[*%,()]/g, ' ')) + '*';
+    if (o.dom && o.dom !== 'All') {
+      var ids = Object.keys(slugById).filter(function (id) { return DOM_BY_SLUG[slugById[id]] === o.dom; });
+      if (!ids.length) return Promise.resolve([]);
+      q += '&subject_id=in.(' + ids.join(',') + ')';
+    }
+    if (o.diff && o.diff !== 'All') q += '&difficulty=in.(' + (o.diff === 'Easy' ? 'easy' : o.diff === 'Hard' ? 'hard,elite' : 'medium,mixing') + ')';
+    return Ufq.rest(q).then(function (rows) { return rows.map(function (r) { return adminQ(r, slugById, stats); }); });
+  };
+
   Ufq.adminLoad = function () {
     return Ufq.subjects().then(function (subs) {
       var slugById = {}, idBySlug = {}; subs.forEach(function (x) { slugById[x.id] = x.slug; idBySlug[x.slug] = x.id; });
       var me = Ufq.user() || {};
+      var soft = function (p, d) { return p.catch(function () { return d; }); };
       return Promise.all([
-        Ufq.rest('/rest/v1/questions?select=id,subject_id,difficulty,question_text,options,correct_index,image_url,explanation,question_type&order=created_at.desc&limit=400'),
+        soft(rpc('get_all_profiles'), []),
+        soft(rpc('get_all_practice_tests'), []),
+        soft(rpc('get_all_logins'), []),
+        soft(rpc('get_question_stats'), []),
         Ufq.bankCounts(),
-        Ufq.rest('/rest/v1/profiles?select=id,display_name,role,created_at&order=created_at.asc&limit=500').catch(function () { return []; }),
-        Ufq.satTests().catch(function () { return []; }),
+        soft(Ufq.satTests(), []),
+        soft(Ufq.rest('/rest/v1/admin_audit?select=*&order=created_at.desc&limit=300'), []),
+        soft(Ufq.rest('/rest/v1/invites?select=*&order=created_at.desc'), []),
       ]).then(function (r) {
-        var total = Object.keys(r[1]).reduce(function (t, k) { return t + r[1][k]; }, 0);
-        var users = (r[2] || []).map(function (p) {
-          var mine = p.id === me.id, d = new Date(p.created_at);
-          return { id: mine ? 1 : p.id, n: mine ? 'You' : (p.display_name || 'Student'), e: mine ? (me.email || '') : '—', r: p.role === 'owner' ? 'Owner' : p.role === 'admin' ? 'Admin' : 'Student', s: 'Active', j: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][d.getMonth()] + ' ' + d.getFullYear(), la: '—', m: '—', k: '—', qd: '—', ac: '—' };
+        var profiles = r[0] || [], attempts = r[1] || [], logins = r[2] || [], statRows = r[3] || [], bank = r[4], sats = r[5] || [], audit = r[6] || [], invites = r[7] || [];
+        var stats = {}; statRows.forEach(function (x) { stats[x.question_id] = { attempts: Number(x.attempts), correct: Number(x.correct) }; });
+        var total = Object.keys(bank).reduce(function (t, k) { return t + bank[k]; }, 0);
+        var today = new Date(); var dayKey = function (d) { return ymd(d); };
+        var loginsBy = {}; logins.forEach(function (l) { (loginsBy[l.user_id] = loginsBy[l.user_id] || {})[l.login_date] = 1; });
+        var attBy = {}; attempts.forEach(function (a) { (attBy[a.user_id] = attBy[a.user_id] || []).push(a); });
+        var streakOf = function (days) { var c = 0, d = new Date(); if (!days[dayKey(d)]) d.setDate(d.getDate() - 1); while (days[dayKey(d)]) { c++; d.setDate(d.getDate() - 1); } return c; };
+        var users = profiles.map(function (p) {
+          var mine = p.id === me.id, d = new Date(p.created_at), A = attBy[p.id] || [], days = loginsBy[p.id] || {};
+          var lastTs = Math.max.apply(null, [0].concat(A.map(function (a) { return new Date(a.taken_at).getTime(); }), Object.keys(days).map(function (k) { return new Date(k + 'T00:00:00').getTime(); })));
+          var sumT = A.reduce(function (t, a) { return t + a.total; }, 0), sumC = A.reduce(function (t, a) { return t + a.score; }, 0);
+          var best = A.reduce(function (m, a) { return Math.max(m, a.total ? Math.round(a.score / a.total * 800) : 0); }, 0);
+          return { id: mine ? 1 : p.id, rid: p.id, n: mine ? 'You' : (p.display_name || (p.email || 'Student').split('@')[0]), e: p.email || '—',
+            r: p.role === 'owner' ? 'Owner' : p.role === 'admin' ? 'Admin' : 'Student', s: p.suspended ? 'Suspended' : 'Active',
+            j: MON3[d.getMonth()] + ' ' + d.getFullYear(), la: lastTs ? (mine ? 'Now' : agoMin(lastTs)) : 'Never', m: best || '—', k: Object.keys(days).length ? streakOf(days) : '—', qd: sumT || '—', ac: sumT ? Math.round(sumC / sumT * 100) + '%' : '—' };
         });
-        if (!users.some(function (u) { return u.id === 1; })) users.unshift({ id: 1, n: 'You', e: me.email || '', r: 'Admin', s: 'Active', j: '—', la: 'Now', m: '—', k: '—', qd: '—', ac: '—' });
-        var tests = (r[3] || []).map(function (t, i) { return { id: t.id, n: t.title, ty: 'Full mock', st: 'Published', at: t.attempt ? 1 : 0, avg: '—', mods: [] }; });
-        return { questions: r[0].map(function (q) { return adminQ(q, slugById); }), total: total, users: users, tests: tests, idBySlug: idBySlug, slugById: slugById };
+        invites.filter(function (i) { return !i.accepted; }).forEach(function (i) {
+          users.push({ id: 'inv:' + i.email, rid: null, n: i.email.split('@')[0], e: i.email, r: i.role === 'admin' ? 'Admin' : 'Student', s: 'Invited', j: MON3[new Date(i.created_at).getMonth()] + ' ' + new Date(i.created_at).getFullYear(), la: 'Not yet', m: '—', k: '—', qd: '—', ac: '—' });
+        });
+        if (!users.some(function (u) { return u.id === 1; })) users.unshift({ id: 1, rid: me.id, n: 'You', e: me.email || '', r: 'Admin', s: 'Active', j: '—', la: 'Now', m: '—', k: '—', qd: '—', ac: '—' });
+        // charts
+        var daysBack = function (n) { var d = new Date(); d.setDate(d.getDate() - n); return d; };
+        var signSeries = []; for (var i = 29; i >= 0; i--) { var key = dayKey(daysBack(i)); signSeries.push(logins.filter(function (l) { return l.login_date === key; }).length); }
+        var wau = []; for (var w = 7; w >= 0; w--) { var from = daysBack(w * 7 + 6), to = daysBack(w * 7), set = {}; logins.forEach(function (l) { var t = new Date(l.login_date + 'T00:00:00'); if (t >= new Date(ymd(from) + 'T00:00:00') && t <= new Date(ymd(to) + 'T23:59:59')) set[l.user_id] = 1; }); wau.push(Object.keys(set).length); }
+        var wkAgo = Date.now() - 7 * 86400000, moAgo = Date.now() - 30 * 86400000;
+        var week = attempts.filter(function (a) { return new Date(a.taken_at).getTime() > wkAgo; });
+        var scaled = attempts.filter(function (a) { return a.total && new Date(a.taken_at).getTime() > moAgo; }).map(function (a) { return Math.round(a.score / a.total * 800); });
+        var avgScore = scaled.length ? Math.round(scaled.reduce(function (t, x) { return t + x; }, 0) / scaled.length) : 0;
+        var activeWeek = {}; logins.forEach(function (l) { if (new Date(l.login_date + 'T00:00:00').getTime() > wkAgo) activeWeek[l.user_id] = 1; });
+        var hist = []; for (var b = 200; b <= 750; b += 50) hist.push([String(b), attempts.filter(function (a) { if (!a.total) return false; var sc = Math.round(a.score / a.total * 800); return sc >= b && sc < b + 50 + (b === 750 ? 51 : 0); }).length]);
+        var domAcc = ['Algebra', 'Advanced Math', 'Problem-Solving & Data', 'Geometry & Trig'].map(function (name) {
+          var A = attempts.filter(function (a) { return DOM_BY_TITLE[a.subject] === name; }), t = A.reduce(function (x, a) { return x + a.total; }, 0), c = A.reduce(function (x, a) { return x + a.score; }, 0);
+          return [name, t ? Math.round(c / t * 100) : 0];
+        });
+        var hardIds = statRows.filter(function (x) { return Number(x.attempts) >= 3; }).sort(function (a, b2) { return a.correct / a.attempts - b2.correct / b2.attempts; }).slice(0, 5).map(function (x) { return x.question_id; });
+        var hardP = hardIds.length ? soft(Ufq.rest('/rest/v1/questions?select=' + QSEL + '&id=in.(' + hardIds.join(',') + ')'), []) : Promise.resolve([]);
+        return Promise.all([Ufq.adminQuestions({}, slugById, stats), hardP]).then(function (qr) {
+          var questions = qr[0];
+          var hardestQs = qr[1].map(function (r) { return adminQ(r, slugById, stats); }).sort(function (a, b2) { return a.cr - b2.cr; });
+          var tests = sats.map(function (t) {
+            var A = attempts.filter(function (a) { return a.subject === 'SAT' && a.title === t.title; });
+            var avg = A.length ? Math.round(A.reduce(function (x, a) { return x + (a.total ? a.score / a.total : 0); }, 0) / A.length * 100) + '%' : '—';
+            return { id: t.id, n: t.title, ty: 'Full mock', st: 'Published', at: A.length, avg: avg, q: t.questions, mods: [] };
+          });
+          var aud = audit.map(function (a) { return { who: a.who_name || 'Admin', a: a.action, k: a.kind || 'Content', t: agoMin(new Date(a.created_at).getTime()) }; });
+          return { questions: questions, total: total, users: users, tests: tests, idBySlug: idBySlug, slugById: slugById, stats: stats, aud: aud,
+            kpi: { students: profiles.filter(function (p) { return p.role === 'user'; }).length, active: Object.keys(activeWeek).length, tests7: week.length, avgScore: avgScore },
+            sig: signSeries, wau: wau, hist: hist, domAcc: domAcc, hardest: hardestQs };
+        });
       });
     });
+  };
+  Ufq.adminLog = function (action, kind) {
+    var me = Ufq.user() || {};
+    return Ufq.rest('/rest/v1/admin_audit', { method: 'POST', headers: { Prefer: 'return=minimal' }, body: JSON.stringify({ who: me.id, who_name: Ufq.displayName() || me.email || 'Admin', action: action, kind: kind || 'Content' }) }).catch(function () { /* log is best effort */ });
   };
   Ufq.adminSaveQuestion = function (e, idBySlug) {
     var mc = e.t === 'MC';
     var body = { question_text: e.stem, options: mc ? e.ch.filter(function (x) { return String(x).trim() !== ''; }) : [], correct_index: mc ? e.c : -1, question_type: mc ? 'multiple_choice' : 'written', explanation: mc ? (e.ex || '') : (e.ans || ''), image_url: e.img || '', difficulty: e.d === 1 ? 'easy' : e.d === 3 ? 'hard' : 'medium', subject_id: idBySlug[SLUG_BY_DOM[e.dom] || 'algebra'] };
-    var isNew = !e.id || String(e.id).indexOf('-') < 0 || /^Q-/.test(String(e.id));
+    var isNew = !e.id || /^Q-/.test(String(e.id));
     if (isNew) return Ufq.rest('/rest/v1/questions', { method: 'POST', headers: { Prefer: 'return=representation' }, body: JSON.stringify(body) }).then(function (rows) { return rows[0]; });
     return Ufq.rest('/rest/v1/questions?id=eq.' + e.id, { method: 'PATCH', headers: { Prefer: 'return=representation' }, body: JSON.stringify(body) }).then(function (rows) { return rows[0]; });
   };
-  Ufq.setRole = function (profileId, role) {
-    return Ufq.rest('/rest/v1/profiles?id=eq.' + profileId, { method: 'PATCH', headers: { Prefer: 'return=minimal' }, body: JSON.stringify({ role: role === 'Admin' ? 'admin' : role === 'Owner' ? 'owner' : 'user' }) });
+  Ufq.adminDeleteQuestion = function (id) { return Ufq.rest('/rest/v1/questions?id=eq.' + id, { method: 'DELETE', headers: { Prefer: 'return=minimal' } }); };
+  Ufq.setRole = function (profileId, role) { return rpc('set_user_role', { target_user_id: profileId, new_role: role === 'Admin' ? 'admin' : role === 'Owner' ? 'owner' : 'user' }); };
+  Ufq.adminSuspend = function (profileId, flag) { return rpc('admin_set_suspended', { target: profileId, flag: flag }); };
+  Ufq.adminRemove = function (profileId) { return rpc('admin_remove_user', { target: profileId }); };
+  Ufq.adminTransfer = function (profileId) { return rpc('transfer_ownership', { new_owner: profileId }); };
+  Ufq.adminInvite = function (email, role) {
+    var me = Ufq.user() || {};
+    return Ufq.rest('/rest/v1/invites?on_conflict=email', { method: 'POST', headers: { Prefer: 'resolution=merge-duplicates,return=minimal' }, body: JSON.stringify({ email: email.toLowerCase(), role: role === 'Admin' ? 'admin' : 'user', invited_by: me.id, accepted: false }) }).then(function () {
+      var link = location.origin + '/auth';
+      location.href = 'mailto:' + encodeURIComponent(email) + '?subject=' + encodeURIComponent('You are invited to Ufq') + '&body=' + encodeURIComponent('Hi!\n\nI invited you to Ufq as ' + (role === 'Admin' ? 'an Admin' : 'a Student') + '. Sign up with this email address here:\n' + link + '\n');
+    });
   };
+  Ufq.adminRemoveInvite = function (email) { return Ufq.rest('/rest/v1/invites?email=eq.' + encodeURIComponent(email), { method: 'DELETE', headers: { Prefer: 'return=minimal' } }); };
 
 
   /* name edits from the Profile page */

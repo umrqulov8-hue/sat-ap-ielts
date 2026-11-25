@@ -258,7 +258,7 @@ const times = T.map(([t, sub], i) => ({ t, s: sub, on: s.time === i ? 'true' : '
 const st = s.step;
 const daysLabel = nd === 0 ? '—' : nd === 7 ? 'Every day' : on.every((v, i) => v === (i < 5)) ? 'Mon – Fri' : D.filter((_, i) => on[i]).join(', ');
 const summary = [
-{ k: 'Target', v: '750 · May 2027', c: '#FFFFFF' },
+{ k: 'Target', v: (() => { const g = window.Ufq.goal(); return g.target + (g.date ? ' · ' + g.date : ''); })(), c: '#FFFFFF' },
 { k: 'Study days', v: st >= 0 && nd ? daysLabel + ' · ' + nd + '/week' : '—', c: st > 0 ? '#FFFFFF' : '#F6DDB0' },
 { k: 'Session', v: st >= 1 ? L[s.len][0] : '—', c: st > 1 ? '#FFFFFF' : st === 1 ? '#F6DDB0' : 'rgba(255,255,255,.4)' },
 { k: 'Reminder', v: st >= 2 ? (T[s.time][0] === 'Off' ? 'Off' : T[s.time][0] + ' by email') : '—', c: st > 2 ? '#FFFFFF' : st === 2 ? '#F6DDB0' : 'rgba(255,255,255,.4)' }
@@ -278,7 +278,7 @@ entry: this._entry, lateCls: this._entry ? 'late' : '', lpCls: s.leaving ? 'lpGr
 lessonRef: (el) => { this.lessonLink = el; },
 goLesson: (ev) => { if (ev && ev.preventDefault) ev.preventDefault(); this.leave(this.lessonLink); },
 dashRef: (el) => { this.dashLink = el; },
-next: () => { if (this.state.step < 3) { this.setState({ step: this.state.step + 1 }); return; } this.leave(this.dashLink); }
+next: () => { if (this.state.step < 3) { this.setState({ step: this.state.step + 1 }); return; } try { const cur = JSON.parse(localStorage.getItem('ufq_settings') || '{}'); localStorage.setItem('ufq_settings', JSON.stringify(Object.assign(cur, { days: this.state.days, min: this.state.len, time: this.state.time, remind: this.state.time !== 4 }))); } catch (e) {} this.leave(this.dashLink); }
 };
 }
 }
