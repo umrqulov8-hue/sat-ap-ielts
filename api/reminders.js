@@ -22,8 +22,14 @@ export default async function handler(request, response) {
   if (!CRON_SECRET || !serviceKey || !brevo || !from || !url) return response.status(503).json({ error: 'Email reminders are not configured yet.' })
   if (request.headers.authorization !== `Bearer ${CRON_SECRET}`) return response.status(401).json({ error: 'Not allowed.' })
 
+  // New-style keys (sb_secret_...) go in `apikey` only: they are not tokens, so sending them as Bearer is rejected.
+  // The older service_role key is a token and needs both headers.
+  const key = serviceKey.trim()
+  const kind = key.startsWith('sb_secret_') ? 'secret' : key.startsWith('sb_publishable_') ? 'publishable' : key.startsWith('eyJ') ? 'jwt' : 'unrecognised'
+  const dbHeaders = kind === 'secret' ? { apikey: key } : { apikey: key, Authorization: `Bearer ${key}` }
+
   const db = async path => {
-    const r = await fetch(url + path, { headers: { apikey: serviceKey, Authorization: `Bearer ${serviceKey}` }, signal: AbortSignal.timeout(15000) })
+    const r = await fetch(url + path, { headers: dbHeaders, signal: AbortSignal.timeout(15000) })
     if (!r.ok) throw new Error('database ' + r.status)
     return r.json()
   }
@@ -68,9 +74,10 @@ export default async function handler(request, response) {
         else { failed++; console.error('brevo send failed:', r.status) }
       }
     }
+    console.log('reminders done: optedIn', people.length, 'sent', sent, 'failed', failed)
     return response.status(200).json({ optedIn: people.length, sent, failed })
   } catch (error) {
-    console.error('reminders failed:', error?.message || 'Error')
+    console.error('reminders failed:', error?.message || 'Error', '| database key type:', kind)
     return response.status(502).json({ error: 'Reminder run failed.' })
   }
 }
