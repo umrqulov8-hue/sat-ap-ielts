@@ -568,7 +568,7 @@ a.tile:hover .go{transform:rotate(-45deg);background:#003049;color:#FFFFFF}
 <div class="seats" data-n="{{m.maxPlayers}}">
 <sc-for list="{{seats}}" as="p" hint-placeholder-count="5">
 <sc-if value="{{p.filled}}" hint-placeholder-val="{{ true }}"><div class="seat on" data-me="{{p.meS}}"><span class="av" style="background: {{p.bg}}; color: {{p.fg}}">{{p.ini}}</span><span class="sn">{{p.nick}}</span><sc-if value="{{p.host}}" hint-placeholder-val="{{ false }}"><span class="crown2" aria-label="Host"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 17l-1-9 5 4 4-6 4 6 5-4-1 9z" fill="#F6DDB0" stroke="#780000" stroke-width="1.5" stroke-linejoin="round"></path></svg></span></sc-if></div></sc-if>
-<sc-if value="{{p.empty}}" hint-placeholder-val="{{ false }}"><div class="seat"><span class="av e"></span><span class="sn" style="opacity: .45">Open seat</span></div></sc-if>
+<sc-if value="{{p.empty}}" hint-placeholder-val="{{ false }}"><button type="button" class="seat sinv" onClick="{{openInvite}}" aria-label="Open seat: invite a friend"><span class="av e"></span><span class="sn" style="opacity: .45">Open seat</span><span class="sinvt">+ Invite a friend</span></button></sc-if>
 </sc-for>
 </div>
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: 14px; align-items: start">
@@ -585,7 +585,14 @@ a.tile:hover .go{transform:rotate(-45deg);background:#003049;color:#FFFFFF}
 <div style="display: flex; align-items: center; gap: 12px"><span class="lbar" style="flex: 1"><span></span></span></div>
 <span style="font-size: 15px; color: rgba(0,48,73,.75)">Waiting for <b>{{m.host}}</b> to start the match…</span>
 </sc-if>
-<sc-if value="{{canInvite}}" hint-placeholder-val="{{ false }}"><div style="display: flex; flex-direction: column; gap: 8px"><span style="font-weight: 600; font-size: 14px">Invite an online friend</span><sc-for list="{{inviteList}}" as="f" hint-placeholder-count="2"><div style="display: flex; align-items: center; gap: 10px"><span aria-hidden="true" style="width: 10px; height: 10px; border-radius: 50%; background: #1F9D55"></span><span style="flex: 1; min-width: 0">{{f.nick}}</span><button type="button" class="gbtn nv" onClick="{{f.invite}}" style="min-height: 38px; padding: 0 16px">{{f.label}}</button></div></sc-for></div></sc-if>
+<style>.sinv{border:0;font:inherit;color:inherit;cursor:pointer;width:100%;background:transparent}.sinv:hover{background:#F4F6F8}.sinvt{font:600 13px 'Inter Tight',sans-serif;color:#C1121F}</style>
+<button type="button" class="gbtn nv" onClick="{{toggleInvite}}" aria-expanded="{{invExp}}">{{invBtn}}</button>
+<sc-if value="{{invOpen}}" hint-placeholder-val="{{ false }}"><div id="invbox" style="display: flex; flex-direction: column; gap: 8px; border-radius: 16px; background: #F4F6F8; padding: 14px">
+<sc-for list="{{inviteList}}" as="f" hint-placeholder-count="3"><div style="display: flex; align-items: center; gap: 10px; min-width: 0"><span aria-hidden="true" style="width: 10px; height: 10px; border-radius: 50%; flex: none; background: {{f.dot}}"></span><span style="flex: 1; min-width: 0; display: flex; flex-direction: column; line-height: 1.3"><b style="font-size: 14px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap">{{f.nick}}</b><span style="font-size: 12px; color: rgba(0,48,73,.6)">{{f.status}}</span></span><sc-if value="{{f.online}}" hint-placeholder-val="{{ true }}"><button type="button" class="gbtn nv" onClick="{{f.invite}}" style="min-height: 38px; padding: 0 16px">{{f.label}}</button></sc-if></div></sc-for>
+<sc-if value="{{invEmpty}}" hint-placeholder-val="{{ false }}"><span style="font-size: 14px; color: rgba(0,48,73,.7)">{{invEmptyText}}</span></sc-if>
+<a href="/games/friends" style="font: 600 13px 'Inter Tight', sans-serif; color: #C1121F">Add or manage friends →</a>
+<span style="font-size: 12px; color: rgba(0,48,73,.55)">Only friends who are online can be invited. Or send anyone the code above.</span>
+</div></sc-if>
 <button type="button" class="gbtn gh" onClick="{{leave}}">{{leaveLabel}}</button>
 <sc-if value="{{isHost}}" hint-placeholder-val="{{ true }}"><button type="button" class="gbtn gh" onClick="{{keepAndBack}}">Keep it open, go back</button><span style="font-size: 13px; color: rgba(0,48,73,.6)">Only you can start while you are on the site. If you close the site, after a few minutes the match starts by itself when two or more players are waiting; with fewer it closes.</span></sc-if>
 </section>
@@ -1146,8 +1153,12 @@ _rv() {
     isHost: !!m.isHost, notHost: !m.isHost, startDis: (m.players.length < 2 || s.busy) ? 'true' : 'false', startLabel: s.busy === 'start' ? 'Starting…' : 'Start match · ' + m.players.length + ' players',
     startHint: m.players.length < 2 ? 'You need at least one more player to start.' : m.players.length < m.maxPlayers ? m.players.length + ' of ' + m.maxPlayers + ' seats taken. Start now or wait for more.' : 'Every seat is taken. Ready when you are.',
     startMatch: () => this.startMatch(), leave: () => this.leave(),
-    canInvite: (s.friends || []).some(f => f.online && !m.players.some(p => p.nick === f.nick)),
-    inviteList: (s.friends || []).filter(f => f.online && !m.players.some(p => p.nick === f.nick)).slice(0, 8).map(f => ({ nick: f.nick, label: (s.invited || {})[f.nick] ? 'Invited' : 'Invite', invite: () => window.Ufq.friends.invite(f.nick, s.m.id).then(r => { if (r.error) { this.say(r.error === 'closed' ? 'This lobby is no longer open.' : 'Couldn’t invite.'); return; } this.setState({ invited: Object.assign({}, this.state.invited, { [f.nick]: true }) }); this.say('Invite sent to ' + f.nick + '.'); setTimeout(() => this.setState({ invited: Object.assign({}, this.state.invited, { [f.nick]: false }) }), 30000); }).catch(() => this.say('Couldn’t invite.')) })), leaveLabel: m.isHost ? 'Delete lobby' : 'Leave lobby', keepAndBack: () => this.backToList('Your lobby stays open while you are on this page.'),
+    invOpen: !!s.invOpen, invExp: s.invOpen ? 'true' : 'false', invBtn: s.invOpen ? 'Hide friends' : 'Invite friends',
+    toggleInvite: () => { this.setState({ invOpen: !s.invOpen }); if (!s.invOpen && window.Ufq.friends) window.Ufq.friends.ping(); },
+    openInvite: () => { this.setState({ invOpen: true }); if (window.Ufq.friends) window.Ufq.friends.ping(); setTimeout(() => { const el = document.getElementById('invbox'); if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' }); }, 60); },
+    inviteList: (s.friends || []).filter(f => !m.players.some(p => p.nick === f.nick)).slice(0, 30).map(f => ({ nick: f.nick, online: f.online, dot: f.online ? '#1F9D55' : '#C5CDD3', status: f.online ? 'Online · ' + (f.activity || 'On the site') : 'Offline', label: (s.invited || {})[f.nick] ? 'Invited' : 'Invite', invite: () => { if ((s.invited || {})[f.nick]) return; window.Ufq.friends.invite(f.nick, s.m.id).then(r => { if (r.error) { this.say(r.error === 'closed' ? 'This lobby is no longer open.' : 'Couldn’t invite.'); return; } this.setState({ invited: Object.assign({}, this.state.invited, { [f.nick]: true }) }); this.say('Invite sent to ' + f.nick + '.'); setTimeout(() => this.setState({ invited: Object.assign({}, this.state.invited, { [f.nick]: false }) }), 30000); }).catch(() => this.say('Couldn’t invite.')); } })),
+    invEmpty: !(s.friends || []).some(f => !m.players.some(p => p.nick === f.nick)),
+    invEmptyText: (s.friends || []).length ? 'All your friends are already here.' : 'You have no friends added yet.',
     cd: String(s.cd), cdCls: s.cd % 2 ? 'cdA' : 'cdB',
     qNum: String(s.qi + 1), secs: String(secs), tScale: String(Math.max(0, Math.min(1, s.left / D_MS))), timeC: secs <= 10 ? '#C1121F' : '#003049',
     dots: Array.from({ length: 10 }, (x, i) => ({ c: i < s.answers.length ? (s.answers[i].correct ? '#003049' : '#C1121F') : i === s.qi ? '#669BBC' : '#E3E9EE', sy: i === s.qi ? '1.6' : '1' })),
