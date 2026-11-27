@@ -174,7 +174,7 @@
       return subjectsMap().then(function (slugs) { return Promise.all([sample('easy', 3, slugs, {}), sample('medium', 4, slugs, {}), sample('hard', 3, slugs, {})]); }).then(function (p) {
         var ids = [].concat(p[0], p[1], p[2]).map(function (q) { return q.id; });
         return rpc('game_create_match', { p_name: opt.name || '', p_visibility: opt.visibility, p_password: opt.password || '', p_max: opt.maxPlayers, p_questions: ids });
-      }).then(function (raw) { return self._full(raw); });
+      }).then(function (raw) { try { localStorage.setItem('ufq_lobby', raw.id); } catch (e) { /* ignore */ } return self._full(raw); });
     },
     joinMatch: function (idOrCode, password) {
       var self = this;
@@ -185,7 +185,7 @@
     },
     getMatch: function (id) { var self = this; return rpc('game_get_match', { p_id: id }).then(function (raw) { return self._full(raw); }); },
     startMatch: function (id) { var self = this; return rpc('game_start_match', { p_id: id }).then(function (raw) { return self._full(raw); }); },
-    leaveMatch: function (id) { delete matches[id]; return rpc('game_leave_match', { p_id: id }); },
+    leaveMatch: function (id) { delete matches[id]; try { localStorage.removeItem('ufq_lobby'); } catch (e) { /* ignore */ } return rpc('game_leave_match', { p_id: id }); },
     /* called every second during play: shows the last known standings and, in the background, sends my progress and fetches theirs */
     liveStandings: function (m, mine) {
       var id = m.id, now = Date.now(), c = matches[id];

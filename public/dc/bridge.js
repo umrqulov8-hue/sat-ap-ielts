@@ -698,6 +698,15 @@
     if (st.mock !== false) Ufq.satTests().then(function (t) { var r = t.filter(function (x) { return !x.attempt; })[0]; if (r) notify('m' + r.id, r.title + ' is waiting', 'A mock test you have not taken yet.', '/mock-tests'); }).catch(function () { /* ignore */ });
   };
   if (Ufq.isSignedIn() && page && !PUBLIC[page] && page !== 'Practice') setTimeout(function () { Ufq.reminders(); }, 1500);
+  /* someone who opened a duel lobby stays "online" for it while they are anywhere on the site */
+  if (Ufq.isSignedIn() && page && !PUBLIC[page]) {
+    var beat = function () {
+      var has = ''; try { has = localStorage.getItem('ufq_lobby') || ''; } catch (e) { return; }
+      if (!has) return;
+      Ufq.rest('/rest/v1/rpc/game_heartbeat', { method: 'POST', body: '{}' }).then(function (alive) { if (alive === false) try { localStorage.removeItem('ufq_lobby'); } catch (e) { /* ignore */ } }).catch(function () { /* older database */ });
+    };
+    setTimeout(beat, 2000); setInterval(beat, 40000);
+  }
   if (page === 'Auth' && /[?&]suspended=1/.test(location.search)) setTimeout(function () { Ufq.toast('This account has been suspended. Contact your administrator.'); }, 400);
 
   /* everything this user has saved, as a downloadable file */

@@ -586,7 +586,7 @@ a.tile:hover .go{transform:rotate(-45deg);background:#003049;color:#FFFFFF}
 <span style="font-size: 15px; color: rgba(0,48,73,.75)">Waiting for <b>{{m.host}}</b> to start the match…</span>
 </sc-if>
 <button type="button" class="gbtn gh" onClick="{{leave}}">{{leaveLabel}}</button>
-<sc-if value="{{isHost}}" hint-placeholder-val="{{ true }}"><button type="button" class="gbtn gh" onClick="{{keepAndBack}}">Keep it open, go back</button><span style="font-size: 13px; color: rgba(0,48,73,.6)">If you leave the games page, the lobby closes by itself after a few minutes, or passes to a player who is still waiting.</span></sc-if>
+<sc-if value="{{isHost}}" hint-placeholder-val="{{ true }}"><button type="button" class="gbtn gh" onClick="{{keepAndBack}}">Keep it open, go back</button><span style="font-size: 13px; color: rgba(0,48,73,.6)">Only you can start while you are on the site. If you close the site, after a few minutes the match starts by itself when two or more players are waiting; with fewer it closes.</span></sc-if>
 </section>
 </div>
 </main>
@@ -925,7 +925,7 @@ poll() {
     GameData.getMatch(s.m.id).then(m => {
       this._pollBusy = false;
       if (this.state.phase !== 'lobby') return;
-      if (m.isHost && !s.m.isHost) this.say('The host left — you are the host now.');
+      if (m.status === 'playing' && !m.isHost && !m.players.some(p => p.host)) this.say('The owner is offline — the match is starting.');
       const before = new Set(s.m.players.map(p => p.nick)); const fresh = m.players.filter(p => !before.has(p.nick));
       if (fresh.length) { Sfx.play('tick'); this.setState({ feed: fresh.map(p => ({ nick: p.nick, txt: 'joined the lobby', c: '#669BBC' })).concat(this.state.feed).slice(0, 5) }); }
       this.setState({ m });
