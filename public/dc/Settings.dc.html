@@ -203,8 +203,10 @@ a.tile:hover .go{transform:rotate(-45deg);background:#003049;color:#FFFFFF}
 </sc-if>
 <sc-if value="{{tNotif}}" hint-placeholder-val="{{ false }}">
 <section class="card swap">
-<span class="cap" style="color: #669BBC">Notifications · This browser</span>
+<span class="cap" style="color: #669BBC">Notifications</span>
 <sc-if value="{{needPerm}}" hint-placeholder-val="{{ false }}"><div class="row"><div style="display: flex; flex-direction: column; gap: 2px"><span style="font-weight: 600">Allow notifications</span><span style="font-size: 14px; color: rgba(0,48,73,.62)">{{permText}}</span></div><button type="button" class="ghost" onClick="{{askPerm}}">Allow</button></div></sc-if>
+<div class="row"><div style="display: flex; flex-direction: column; gap: 2px"><span style="font-weight: 600">Email me a daily reminder</span><span style="font-size: 14px; color: rgba(0,48,73,.62)">Around 18:00 Tashkent, only on days you haven’t practised.</span></div><button type="button" role="switch" class="sw" aria-checked="{{emailRemind}}" onClick="{{t_emailRemind}}" aria-label="Email me a daily reminder"><i></i></button></div>
+<div class="row"><div style="display: flex; flex-direction: column; gap: 2px"><span style="font-weight: 600">Email me a weekly report</span><span style="font-size: 14px; color: rgba(0,48,73,.62)">Sunday evening.</span></div><button type="button" role="switch" class="sw" aria-checked="{{emailWeekly}}" onClick="{{t_emailWeekly}}" aria-label="Email me a weekly report"><i></i></button></div>
 <div class="row"><div style="display: flex; flex-direction: column; gap: 2px"><span style="font-weight: 600">Daily reminder</span><span style="font-size: 14px; color: rgba(0,48,73,.62)">A browser notification at your study time, while Ufq is open.</span></div><button type="button" role="switch" class="sw" aria-checked="{{remind}}" onClick="{{t_remind}}" aria-label="Daily reminder"></button></div>
 <div class="row"><div style="display: flex; flex-direction: column; gap: 2px"><span style="font-weight: 600">Weekly report</span><span style="font-size: 14px; color: rgba(0,48,73,.62)">On Sunday, a summary notification when you open Ufq.</span></div><button type="button" role="switch" class="sw" aria-checked="{{weekly}}" onClick="{{t_weekly}}" aria-label="Weekly report"></button></div>
 <div class="row"><div style="display: flex; flex-direction: column; gap: 2px"><span style="font-weight: 600">Mock test reminders</span><span style="font-size: 14px; color: rgba(0,48,73,.62)">A notification when a mock test you haven’t taken is waiting.</span></div><button type="button" role="switch" class="sw" aria-checked="{{mock}}" onClick="{{t_mock}}" aria-label="Mock test reminders"></button></div>
@@ -263,6 +265,10 @@ try { const sv = JSON.parse(localStorage.getItem('ufq_settings') || 'null'); if 
 const baseSet = this.setState.bind(this);
 this.setState = (p, cb) => { baseSet(p, cb); try { const st = Object.assign({}, this.state, typeof p === 'object' && p ? p : {}); delete st.del; delete st.delText; delete st.req; delete st.tab; localStorage.setItem('ufq_settings', JSON.stringify(st)); } catch (e) {} if (p && p.motion !== undefined && window.Ufq) window.Ufq.applyPrefs(); };
 }
+setEmail(key) {
+const on = !((window.Ufq.user() || {}).user_metadata || {})[key];
+window.Ufq.setEmailPrefs({ [key]: on }).then(() => { this.setState({ tick: Date.now() }); window.Ufq.toast(on ? 'Email switched on.' : 'Email switched off.', 'ok'); }).catch((err) => window.Ufq.toast(err.message || 'Could not save.'));
+}
 renderVals() {
 const s = this.state;
 const TABS = [['study', 'Study'], ['lang', 'Language'], ['notif', 'Notifications'], ['access', 'Accessibility'], ['account', 'Account']];
@@ -273,6 +279,8 @@ tStudy: s.tab === 'study', tLang: s.tab === 'lang', tNotif: s.tab === 'notif', t
 mins: pickList(['20 min', '40 min', '60 min', '90 min'], 'min'),
 langs: pickList(['O‘zbekcha', 'English', 'Both'], 'lang'),
 times: pickList(['07:00', '18:00', '21:00'], 'time'),
+emailRemind: (window.Ufq.user() || {}).user_metadata?.email_remind === true ? 'true' : 'false', emailWeekly: (window.Ufq.user() || {}).user_metadata?.email_weekly === true ? 'true' : 'false',
+t_emailRemind: () => this.setEmail('email_remind'), t_emailWeekly: () => this.setEmail('email_weekly'),
 needPerm: 'Notification' in window && Notification.permission !== 'granted', permText: 'Notification' in window && Notification.permission === 'denied' ? 'Blocked in your browser — allow it in the site settings of the address bar.' : 'Needed for the reminders below.', askPerm: () => { if (!('Notification' in window)) return; Notification.requestPermission().then(() => { this.setState({ tick: Date.now() }); window.Ufq.reminders(); }); },
 days: ['M', 'T', 'W', 'T', 'F', 'S', 'S'].map((label, i) => ({ label, on: s.days[i] ? 'true' : 'false', pick: () => this.setState({ days: Object.assign({}, this.state.days, { [i]: !this.state.days[i] }) }) }))
 };

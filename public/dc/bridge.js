@@ -886,6 +886,12 @@
       ]);
     });
   };
+  /* email reminder choices live on the account, so the server that sends them can see them */
+  Ufq.setEmailPrefs = function (data) {
+    return ensureFresh().then(function (s) {
+      return api('/auth/v1/user', { method: 'PUT', headers: authHeaders(s.access_token), body: JSON.stringify({ data: data }) }).then(function (u) { s.user = u; save(s); });
+    });
+  };
   Ufq.saveGoal = function (target, date) { try { localStorage.setItem('ufq_goal', JSON.stringify({ target: target, date: date })); } catch (e) { /* ignore */ } };
 
   /* result: { title, subjectId (or null), subjectTitle, score, total, minutes, answers:[{qIdx, selected, correct, question}] } */
