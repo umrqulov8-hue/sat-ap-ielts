@@ -2,15 +2,31 @@
 <html lang="uz">
   <head>
     <meta charset="UTF-8" />
-    <script>if (location.pathname === '/') location.replace('/dc/Main.dc.html' + location.search + location.hash)</script>
+    <script>
+      /* "/" opens the home page; addresses of the previous version of the site go to their new pages.
+         The previous React app stays in src/ but is no longer served. */
+      (function () {
+        var p = location.pathname.replace(/\/+$/, '') || '/';
+        var map = [
+          [/^\/$/, '/dc/Main.dc.html'],
+          [/^\/(algebra|geometry|advanced-math|data-analysis|problem-solving)$/, '/practice'],
+          [/^\/study-plan$/, '/plan'],
+          [/^\/study(\/|$)/, '/lesson'],
+          [/^\/admin\/.+/, '/admin'],
+          [/^\/(practice\/sat-tests|sat-test\/.+)$/, '/mock-tests'],
+          [/^\/(test-history|test-review(\/.*)?)$/, '/history'],
+          [/^\/support$/, '/help'],
+          [/^\/test\/.+/, '/practice']
+        ];
+        for (var i = 0; i < map.length; i++) {
+          if (map[i][0].test(p)) { location.replace(map[i][1] + location.search + location.hash); return; }
+        }
+        location.replace('/dc/NotFound.dc.html');
+      })();
+    </script>
     <link rel="icon" type="image/png" href="/favicon-64.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <meta name="theme-color" content="#002748" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800;900&display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800;900&display=swap" media="print" onload="this.media='all';this.onload=null">
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800;900&display=swap"></noscript>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="UFQ — SAT va AP imtihonlariga tayyorlanish platformasi. Online testlar, o'quv rejalari va shaxsiy statistikalar." />
     <meta name="keywords" content="SAT, AP, imtihon, test, matematika, o'qish, tayyorlanish" />
@@ -24,7 +40,6 @@
     <title>UFQ</title>
   </head>
   <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
+    <noscript><a href="/dc/Main.dc.html">UFQ</a></noscript>
   </body>
 </html>

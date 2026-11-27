@@ -5,10 +5,14 @@
 <style>@view-transition{navigation:none}::view-transition-old(root){animation:none}::view-transition-new(root){animation:.22s ease-out both vtIn}@keyframes vtIn{from{opacity:0}}.side{view-transition-name:ufqside}::view-transition-group(ufqside){animation:none}::view-transition-old(ufqside){display:none}::view-transition-new(ufqside){animation:none}@media (prefers-reduced-motion: reduce){@view-transition{navigation:none}}</style>
 <style>html,body{margin:0;background:#FFFFFF}</style>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Ufq — Admin</title>
 <script src="/dc/_runtime/react.js"></script>
 <script src="/dc/_runtime/react-dom.js"></script>
 <script src="/dc/_runtime/support.js"></script>
+<link rel="stylesheet" href="/dc/katex/katex.min.css">
+<link rel="stylesheet" href="/dc/katex/ufq-math.css">
+<script src="/dc/math.js" defer></script>
 </head>
 <body>
 <x-dc>
@@ -175,7 +179,7 @@ a.tile:hover .go{transform:rotate(-45deg);background:#003049;color:#FFFFFF}
 .qrow{display:flex;align-items:center;gap:16px;padding:16px 18px;border-radius:18px;background:#FFFFFF;box-shadow:inset 0 0 0 1px rgba(0,48,73,.1);transition:box-shadow .35s,transform .45s cubic-bezier(.16,1,.3,1)}
 .qrow:hover{box-shadow:inset 0 0 0 1px rgba(0,48,73,.2),0 18px 34px -26px rgba(0,48,73,.5);transform:translateY(-2px)}
 .qid{flex:none;font:600 12px 'Inter Tight',sans-serif;letter-spacing:.04em;color:#669BBC;font-variant-numeric:tabular-nums}
-.qstem{font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.qstem{display:block;font-weight:500;max-height:4.4em;overflow:hidden;line-height:1.5}.mclamp{display:block;flex:1;min-width:0;text-align:left;max-height:3.2em;overflow:hidden;line-height:1.5}.qstem ufq-math,.mclamp ufq-math{display:block}.qstem ufq-math p,.mclamp ufq-math p{margin:0;text-align:left!important}
 .dots{display:inline-flex;gap:3px}.dots i{width:6px;height:6px;border-radius:50%;background:#003049}
 .crbox{flex:none;width:130px;display:flex;flex-direction:column;gap:4px}
 .crbar{display:block;height:6px;border-radius:6px;background:#EEF2F5;overflow:hidden}
@@ -397,7 +401,7 @@ a.tile:hover .go{transform:rotate(-45deg);background:#003049;color:#FFFFFF}
 <sc-for list="{{qRows}}" as="x" hint-placeholder-count="8"><div class="qrow ti" style="animation-delay: {{x.dl}}">
 <span class="qid">{{x.id}}</span>
 <sc-if value="{{x.hasImg}}" hint-placeholder-val="{{ false }}"><span class="qthumb"><img src="{{x.img}}" alt=""></span></sc-if>
-<div style="display: flex; flex-direction: column; gap: 6px; min-width: 0; flex: 1"><span class="qstem">{{x.stem}}</span><span style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center; font-size: 12px; color: rgba(0,48,73,.65)"><span class="ktag">{{x.dom}}</span><span>{{x.sk}}</span><span>·</span><span>{{x.t}}</span><span>·</span><span class="dots" aria-label="{{x.dl2}}"><i style="opacity: 1"></i><i style="opacity: {{x.o2}}"></i><i style="opacity: {{x.o3}}"></i></span><span>{{x.dl2}}</span><sc-if value="{{x.hasImg}}" hint-placeholder-val="{{ false }}"><span class="ktag fig">{{x.figL}}</span></sc-if></span></div>
+<div style="display: flex; flex-direction: column; gap: 6px; min-width: 0; flex: 1"><span class="qstem"><ufq-math text="{{x.raw}}"></ufq-math></span><span style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center; font-size: 12px; color: rgba(0,48,73,.65)"><span class="ktag">{{x.dom}}</span><span>{{x.sk}}</span><span>·</span><span>{{x.t}}</span><span>·</span><span class="dots" aria-label="{{x.dl2}}"><i style="opacity: 1"></i><i style="opacity: {{x.o2}}"></i><i style="opacity: {{x.o3}}"></i></span><span>{{x.dl2}}</span><sc-if value="{{x.hasImg}}" hint-placeholder-val="{{ false }}"><span class="ktag fig">{{x.figL}}</span></sc-if></span></div>
 <div class="crbox"><span class="num" style="font-weight: 600; color: {{x.crc}}">{{x.cr}}</span><span class="crbar"><span style="width: {{x.crw}}; background: {{x.crc}}"></span></span><span style="font-size: 11px; color: rgba(0,48,73,.55)">answer correctly</span></div>
 <span class="pill p-{{x.stk}}">{{x.st}}</span>
 <div style="display: flex; gap: 6px"><button type="button" class="ib" onClick="{{x.edit}}" aria-label="Edit {{x.id}}">Edit</button><button type="button" class="ib" onClick="{{x.toggle}}">{{x.tl}}</button></div>
@@ -460,7 +464,7 @@ a.tile:hover .go{transform:rotate(-45deg);background:#003049;color:#FFFFFF}
 <div class="g2">
 <div class="acard ti" style="animation-delay: .14s; display: flex; flex-direction: column; gap: 10px">
 <span class="cap" style="color: #C1121F">Hardest live questions</span>
-<sc-for list="{{hardest}}" as="x" hint-placeholder-count="5"><button type="button" class="attn" onClick="{{x.edit}}"><span class="qid">{{x.id}}</span><span style="flex: 1; min-width: 0; text-align: left; overflow: hidden; text-overflow: ellipsis; white-space: nowrap">{{x.stem}}</span><span class="num" style="font-weight: 600; color: #C1121F">{{x.cr}}</span></button></sc-for>
+<sc-for list="{{hardest}}" as="x" hint-placeholder-count="5"><button type="button" class="attn" onClick="{{x.edit}}"><span class="qid">{{x.id}}</span><span class="mclamp"><ufq-math text="{{x.raw}}"></ufq-math></span><span class="num" style="font-weight: 600; color: #C1121F">{{x.cr}}</span></button></sc-for>
 </div>
 <div class="acard ti" style="animation-delay: .2s; display: flex; flex-direction: column; gap: 14px">
 <span class="cap" style="color: #669BBC">Weekly active students</span>
@@ -550,11 +554,11 @@ a.tile:hover .go{transform:rotate(-45deg);background:#003049;color:#FFFFFF}
 <div class="flab">Figure <span style="font-weight: 500; color: rgba(0,48,73,.55)">· optional — a triangle, graph, table or a photo of the question</span></div>
 <sc-if value="{{edNoImg}}" hint-placeholder-val="{{ true }}"><label class="drop"><input type="file" accept="image/*" onChange="{{onFile}}" style="position: absolute; inset: 0; opacity: 0; cursor: pointer" aria-label="Upload a figure"><svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 16V4M7 9l5-5 5 5M4 20h16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg><span style="font-weight: 600">Upload an image</span><span style="font-size: 13px; opacity: .7">PNG, JPG or SVG · up to 4 MB · the layout is picked from its shape</span></label></sc-if>
 <sc-if value="{{edHasImg}}" hint-placeholder-val="{{ false }}"><div class="imgcard"><img src="{{edImg}}" alt="Uploaded figure"><div style="display: flex; flex-direction: column; gap: 8px; min-width: 0; flex: 1"><span style="font-size: 13px; color: rgba(0,48,73,.6)">{{edImgInfo}}</span><div class="segs"><sc-for list="{{edLays}}" as="r" hint-placeholder-count="3"><button type="button" class="sg" aria-pressed="{{r.on}}" onClick="{{r.pick}}">{{r.l}}</button></sc-for></div><div style="display: flex; gap: 6px"><label class="ib" style="position: relative; display: inline-flex; align-items: center; overflow: hidden">Replace<input type="file" accept="image/*" onChange="{{onFile}}" style="position: absolute; inset: 0; opacity: 0; cursor: pointer" aria-label="Replace figure"></label><button type="button" class="ib" onClick="{{rmImg}}">Remove</button></div></div></div></sc-if>
-<label class="flab">Question<textarea class="ainp ta" onInput="{{edStem}}" placeholder="Write the question as students will see it" aria-label="Question text">{{ed.stem}}</textarea></label>
+<label class="flab">Question<textarea class="ainp ta" value="{{ed.stem}}" onInput="{{edStem}}" placeholder="Write the question as students will see it" aria-label="Question text"></textarea></label>
 <div style="display: flex; flex-direction: column; gap: 8px"><span class="flab">Answer type</span><div class="segs"><sc-for list="{{edTypes}}" as="r" hint-placeholder-count="2"><button type="button" class="sg" aria-pressed="{{r.on}}" onClick="{{r.pick}}">{{r.l}}</button></sc-for></div></div>
 <sc-if value="{{edMC}}" hint-placeholder-val="{{ true }}"><div style="display: flex; flex-direction: column; gap: 8px"><span class="flab">Choices · tap the letter of the correct one</span><sc-for list="{{edChoices}}" as="c" hint-placeholder-count="4"><div class="chrow"><button type="button" class="chl" aria-pressed="{{c.on}}" onClick="{{c.pick}}" aria-label="Mark {{c.L}} correct">{{c.L}}</button><input class="ainp" type="text" value="{{c.v}}" onInput="{{c.set}}" placeholder="Choice {{c.L}}" aria-label="Choice {{c.L}}"></div></sc-for></div></sc-if>
 <sc-if value="{{edGrid}}" hint-placeholder-val="{{ false }}"><label class="flab">Correct answer<input class="ainp" type="text" value="{{ed.ans}}" onInput="{{edAns}}" placeholder="e.g. 3/4 or 0.75" maxlength="6"></label></sc-if>
-<label class="flab">Explanation (Uzbek)<textarea class="ainp ta" onInput="{{edEx}}" placeholder="Qadamma-qadam tushuntirish" aria-label="Explanation">{{ed.ex}}</textarea></label>
+<label class="flab">Explanation (Uzbek)<textarea class="ainp ta" value="{{ed.ex}}" onInput="{{edEx}}" placeholder="Qadamma-qadam tushuntirish" aria-label="Explanation"></textarea></label>
 <div style="display: flex; flex-direction: column; gap: 8px"><span class="flab">Domain</span><div class="segs wrap"><sc-for list="{{edDoms}}" as="r" hint-placeholder-count="4"><button type="button" class="sg" aria-pressed="{{r.on}}" onClick="{{r.pick}}">{{r.l}}</button></sc-for><sc-if value="{{notAddingDom}}" hint-placeholder-val="{{ true }}"><button type="button" class="sg addsg" onClick="{{openAddDom}}">+ New domain</button></sc-if></div>
 <sc-if value="{{addingDom}}" hint-placeholder-val="{{ false }}"><div class="chrow addrow"><input class="ainp" type="text" value="{{addDomV}}" onInput="{{setAddDom}}" placeholder="e.g. Statistics or Word problems" aria-label="New domain name" autocomplete="off"><button type="button" class="ib strong" onClick="{{addDomain}}" style="min-height: 44px; opacity: {{domOp}}; pointer-events: {{domPe}}">Add</button><button type="button" class="ib" onClick="{{cancelAddDom}}" style="min-height: 44px">Cancel</button></div></sc-if></div>
 <div class="g2b"><label class="flab">Skill<input class="ainp" type="text" value="{{ed.sk}}" onInput="{{edSk}}" placeholder="e.g. Right-triangle ratios"></label><div style="display: flex; flex-direction: column; gap: 8px"><span class="flab">Difficulty</span><div class="segs"><sc-for list="{{edDifs}}" as="r" hint-placeholder-count="3"><button type="button" class="sg" aria-pressed="{{r.on}}" onClick="{{r.pick}}">{{r.l}}</button></sc-for></div></div></div>
@@ -562,16 +566,17 @@ a.tile:hover .go{transform:rotate(-45deg);background:#003049;color:#FFFFFF}
 <div class="prev">
 <span class="cap" style="color: #669BBC">Student preview</span>
 <div class="pq"><span class="pnum">1</span><span style="flex: 1; height: 1px; background: repeating-linear-gradient(90deg, rgba(0,48,73,.35) 0 4px, transparent 4px 8px)"></span></div>
-<sc-if value="{{pvSide}}" hint-placeholder-val="{{ false }}"><div class="pvside"><div class="pvfig"><img src="{{edImg}}" alt="Figure"></div><div class="pvq"><p class="pvstem">{{edPrevStem}}</p><sc-if value="{{edMC}}" hint-placeholder-val="{{ true }}"><sc-for list="{{edChoices}}" as="c" hint-placeholder-count="4"><div class="pch" aria-current="{{c.on}}"><span class="pcl">{{c.L}}</span><span>{{c.pv}}</span></div></sc-for></sc-if><sc-if value="{{edGrid}}" hint-placeholder-val="{{ false }}"><div class="pch" style="justify-content: space-between"><span>Answer box</span><b>{{edPrevAns}}</b></div></sc-if></div></div></sc-if>
+<sc-if value="{{pvSide}}" hint-placeholder-val="{{ false }}"><div class="pvside"><div class="pvfig"><img src="{{edImg}}" alt="Figure"></div><div class="pvq"><div class="pvstem"><ufq-math text="{{edPrevStem}}"></ufq-math></div><sc-if value="{{edMC}}" hint-placeholder-val="{{ true }}"><sc-for list="{{edChoices}}" as="c" hint-placeholder-count="4"><div class="pch" aria-current="{{c.on}}"><span class="pcl">{{c.L}}</span><span><ufq-math text="{{c.pv}}"></ufq-math></span></div></sc-for></sc-if><sc-if value="{{edGrid}}" hint-placeholder-val="{{ false }}"><div class="pch" style="justify-content: space-between"><span>Answer box</span><b><ufq-math text="{{edPrevAns}}"></ufq-math></b></div></sc-if></div></div></sc-if>
 <sc-if value="{{pvStack}}" hint-placeholder-val="{{ false }}"><div class="pvfig wide"><img src="{{edImg}}" alt="Figure"></div></sc-if>
-<sc-if value="{{pvPlainOrStack}}" hint-placeholder-val="{{ true }}"><div class="pvq"><p class="pvstem">{{edPrevStem}}</p><sc-if value="{{edMC}}" hint-placeholder-val="{{ true }}"><sc-for list="{{edChoices}}" as="c" hint-placeholder-count="4"><div class="pch" aria-current="{{c.on}}"><span class="pcl">{{c.L}}</span><span>{{c.pv}}</span></div></sc-for></sc-if><sc-if value="{{edGrid}}" hint-placeholder-val="{{ false }}"><div class="pch" style="justify-content: space-between"><span>Answer box</span><b>{{edPrevAns}}</b></div></sc-if></div></sc-if>
-<div style="border-radius: 12px; background: #FFFFFF; padding: 12px 14px; font-size: 14px; color: rgba(0,48,73,.8)"><b style="color: #C1121F">UZ · </b>{{edPrevEx}}</div>
+<sc-if value="{{pvPlainOrStack}}" hint-placeholder-val="{{ true }}"><div class="pvq"><div class="pvstem"><ufq-math text="{{edPrevStem}}"></ufq-math></div><sc-if value="{{edMC}}" hint-placeholder-val="{{ true }}"><sc-for list="{{edChoices}}" as="c" hint-placeholder-count="4"><div class="pch" aria-current="{{c.on}}"><span class="pcl">{{c.L}}</span><span><ufq-math text="{{c.pv}}"></ufq-math></span></div></sc-for></sc-if><sc-if value="{{edGrid}}" hint-placeholder-val="{{ false }}"><div class="pch" style="justify-content: space-between"><span>Answer box</span><b><ufq-math text="{{edPrevAns}}"></ufq-math></b></div></sc-if></div></sc-if>
+<div style="border-radius: 12px; background: #FFFFFF; padding: 12px 14px; font-size: 14px; color: rgba(0,48,73,.8)"><b style="color: #C1121F">UZ · </b><ufq-math text="{{edPrevEx}}"></ufq-math></div>
 </div>
 </div>
 <div style="display: flex; gap: 10px; justify-content: space-between; flex-wrap: wrap; align-items: center"><span style="font-size: 13px; color: {{edMsgC}}">{{edMsg}}</span><span style="display: flex; gap: 10px"><button type="button" class="btn" onClick="{{saveLive}}" style="min-height: 48px; opacity: {{edOp}}; pointer-events: {{edPe}}">Save question</button></span></div>
 </div></div>
 </sc-if>
 
+<style>@media (max-width:760px){.dlg{padding:18px!important}.dlg .edg{grid-template-columns:minmax(0,1fr)!important}.dlg .edg>*{min-width:0!important}.dlg .segs{flex-wrap:wrap;border-radius:16px}}</style>
 <sc-if value="{{dT}}" hint-placeholder-val="{{ false }}">
 <div class="ovl" onClick="{{closeDlg}}"><div class="dlg wide xl" role="dialog" aria-modal="true" aria-label="Test builder" onClick="{{stop}}">
 <div style="display: flex; justify-content: space-between; align-items: center; gap: 12px"><h2 class="srf" style="margin: 0; font-size: 38px; line-height: 1">{{tbTitle}}</h2><button type="button" class="ib" onClick="{{closeDlg}}" aria-label="Close">✕</button></div>
@@ -597,7 +602,7 @@ a.tile:hover .go{transform:rotate(-45deg);background:#003049;color:#FFFFFF}
 <div class="segs"><sc-for list="{{tbDifSegs}}" as="r" hint-placeholder-count="4"><button type="button" class="sg" aria-pressed="{{r.on}}" onClick="{{r.pick}}">{{r.l}}</button></sc-for></div>
 <span style="font-size: 12px; color: rgba(0,48,73,.6)">{{tbPool}} · Auto-fill ignores these filters and picks by difficulty.</span>
 <div style="display: flex; flex-direction: column; gap: 6px; max-height: 380px; overflow: auto; padding-right: 4px">
-<sc-for list="{{tbPick}}" as="p" hint-placeholder-count="8"><button type="button" class="pkrow" aria-pressed="{{p.on}}" onClick="{{p.pick}}"><span class="pkb" aria-hidden="true">✓</span><span class="qid">{{p.id}}</span><span style="flex: 1; min-width: 0; text-align: left; overflow: hidden; text-overflow: ellipsis; white-space: nowrap">{{p.stem}}</span><sc-if value="{{p.fig}}" hint-placeholder-val="{{ false }}"><span class="ktag">{{p.fig}}</span></sc-if><sc-if value="{{p.where}}" hint-placeholder-val="{{ false }}"><span class="ktag inm">in {{p.where}}</span></sc-if><span class="ktag">{{p.dom}}</span></button></sc-for>
+<sc-for list="{{tbPick}}" as="p" hint-placeholder-count="8"><button type="button" class="pkrow" aria-pressed="{{p.on}}" onClick="{{p.pick}}"><span class="pkb" aria-hidden="true">✓</span><span class="qid">{{p.id}}</span><span class="mclamp"><ufq-math text="{{p.raw}}"></ufq-math></span><sc-if value="{{p.fig}}" hint-placeholder-val="{{ false }}"><span class="ktag">{{p.fig}}</span></sc-if><sc-if value="{{p.where}}" hint-placeholder-val="{{ false }}"><span class="ktag inm">in {{p.where}}</span></sc-if><span class="ktag">{{p.dom}}</span></button></sc-for>
 <sc-if value="{{tbMore}}" hint-placeholder-val="{{ false }}"><button type="button" class="ib" onClick="{{tbShowMore}}" style="align-self: center">Show more</button></sc-if>
 </div>
 </div>
@@ -769,7 +774,7 @@ const difSegs = ['All', 'Easy', 'Medium', 'Hard'].map(d => ({ l: d, on: s.dif ==
 const qf = s.qs.filter(x => (s.df === 'All' || x.dom === s.df) && (s.dif === 'All' || DL[x.d] === s.dif) && (!qq || (x.id + ' ' + x.stem).toLowerCase().indexOf(qq) >= 0));
 const crC = (v) => v < 35 ? RED : v < 55 ? '#E0A458' : BLUE;
 const layOf = (x) => !x.img ? '' : x.lay === 'auto' ? ((x.iw && x.ih && x.iw / x.ih >= 1.4) ? 'stack' : 'side') : x.lay;
-const qRows = qf.slice(0, s.qlim).map((x, i) => ({ id: id0(x.id), rid: x.id, stem: window.Ufq.tex(x.stem || '') || 'Figure question', dom: x.dom, sk: x.sk, t: x.t === 'MC' ? 'Multiple choice' : 'Grid-in', dl2: DL[x.d], o2: x.d >= 2 ? '1' : '.2', o3: x.d >= 3 ? '1' : '.2', cr: x.cr ? x.cr + '%' : 'New', crw: (x.cr || 0) + '%', crc: x.cr ? crC(x.cr) : 'rgba(0,48,73,.3)', st: x.st, stk: rk(x.st), dl: Math.min(i * 0.03, 0.36) + 's',
+const qRows = qf.slice(0, s.qlim).map((x, i) => ({ id: id0(x.id), rid: x.id, stem: window.Ufq.tex(x.stem || '') || 'Figure question', raw: x.stem || 'Figure question', dom: x.dom, sk: x.sk, t: x.t === 'MC' ? 'Multiple choice' : 'Grid-in', dl2: DL[x.d], o2: x.d >= 2 ? '1' : '.2', o3: x.d >= 3 ? '1' : '.2', cr: x.cr ? x.cr + '%' : 'New', crw: (x.cr || 0) + '%', crc: x.cr ? crC(x.cr) : 'rgba(0,48,73,.3)', st: x.st, stk: rk(x.st), dl: Math.min(i * 0.03, 0.36) + 's',
 hasImg: !!x.img, img: x.img, figL: layOf(x) === 'stack' ? 'Figure · above' : 'Figure · left',
 edit: () => this.openEd(x), tl: 'Delete',
 toggle: () => this.setState({ dlg: 'delq', delq: x, conf: '' }) }));
@@ -853,7 +858,7 @@ const tbMods = b.mods.map((m, i) => { const n = cntP(m); return { n: m.n, cnt: S
 pick: () => upTb({ am: i }), auto: () => autoFill(i), clear: () => setMods((mods) => { mods[i].picks = {}; }) }; });
 const tq = b.q.trim().toLowerCase();
 const plist = pool(b).filter((x) => !tq || (x.id + ' ' + x.stem).toLowerCase().indexOf(tq) >= 0).sort((x, y) => (elsewhere(x.id) ? 1 : 0) - (elsewhere(y.id) ? 1 : 0));
-const tbPick = plist.slice(0, b.lim).map((x) => { const u = usedIn[x.id]; const ext = elsewhere(x.id); return { id: id0(x.id), stem: window.Ufq.tex(x.stem || '') || 'Figure question', dom: short(x.dom) + ' · ' + ['', 'Easy', 'Medium', 'Hard'][x.d], fig: x.img ? 'Figure' : '', on: u === am ? 'true' : 'false', where: ext ? testName(s.used[x.id]) : (u !== undefined && u !== am ? b.mods[u].n : ''),
+const tbPick = plist.slice(0, b.lim).map((x) => { const u = usedIn[x.id]; const ext = elsewhere(x.id); return { id: id0(x.id), stem: window.Ufq.tex(x.stem || '') || 'Figure question', raw: x.stem || 'Figure question', dom: short(x.dom) + ' · ' + ['', 'Easy', 'Medium', 'Hard'][x.d], fig: x.img ? 'Figure' : '', on: u === am ? 'true' : 'false', where: ext ? testName(s.used[x.id]) : (u !== undefined && u !== am ? b.mods[u].n : ''),
 pick: () => { if (ext) { this.say('This question is already in “' + testName(s.used[x.id]) + '”.'); return; } setMods((mods) => { const cur = mods[am].picks[x.id]; mods.forEach((m) => { delete m.picks[x.id]; }); if (!cur) mods[am].picks[x.id] = true; }); } }; });
 const nAll = b.mods.reduce((a, m) => a + cntP(m), 0);
 const tbOk = b.n.trim().length > 2 && nAll > 0;
@@ -872,7 +877,7 @@ const dMin = dHas ? dAcc.filter(d => d[1] > 0).sort((x, y) => x[1] - y[1])[0] : 
 const domAcc = dAcc.map(([n, v], i) => ({ n, v, w: v + '%', c: dMin && n === dMin[0] ? RED : NAVY, dl: (0.2 + i * 0.08) + 's' }));
 const domA = dMin ? short(dMin[0]) + ' is the' : 'No accuracy data';
 const domEm = dMin ? 'widest gap.' : 'yet.';
-const hardest = s.hardQ.filter(x => x.cr).slice(0, 5).map(x => ({ id: id0(x.id), stem: window.Ufq.tex(x.stem || ''), cr: x.cr + '%', edit: () => this.openEd(x) }));
+const hardest = s.hardQ.filter(x => x.cr).slice(0, 5).map(x => ({ id: id0(x.id), stem: window.Ufq.tex(x.stem || ''), raw: x.stem || '', cr: x.cr + '%', edit: () => this.openEd(x) }));
 const W8 = s.wauS, wmx = Math.max.apply(null, [1].concat(W8));
 const wau = W8.map((v, i) => ({ v, l: i === 7 ? 'Now' : '−' + (7 - i) + 'w', h: Math.round(v / wmx * 100) + '%', c: i === 7 ? RED : NAVY, dl: (i * 0.05) + 's' }));
 /* roles */

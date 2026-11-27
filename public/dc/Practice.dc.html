@@ -3,9 +3,10 @@
 <head>
 <link rel="stylesheet" href="/dc/fonts.css"><link rel="preload" as="font" type="font/woff2" crossorigin href="/dc/fonts/Newsreader-normal-latin.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="/dc/fonts/Newsreader-italic-latin.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="/dc/fonts/InterTight-normal-latin.woff2"><script src="/dc/config.js"></script><script src="/dc/bridge.js"></script>
 <style>@view-transition{navigation:none}::view-transition-group(root),::view-transition-old(root),::view-transition-new(root){animation-duration:.22s}.fr{display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;line-height:1.1;margin:0 .14em;font-size:.95em}.fr>span:first-child{border-bottom:1.5px solid currentColor;padding:0 .28em 2px}.fr>span+span{padding-top:2px}
-</style>
+.rstem p{margin:0;display:inline;text-align:left!important}.rstem br{display:none}</style>
 <style>html,body{margin:0;background:#FFFFFF}</style>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Ufq — Practice set</title>
 <script src="/dc/_runtime/react.js"></script>
 <script src="/dc/_runtime/react-dom.js"></script>
@@ -117,6 +118,7 @@ html,body{margin:0;background:#003049}
 <div style="position: relative; background: #FFFFFF; color: #003049; font-family: 'Inter Tight', 'Helvetica Neue', Arial, sans-serif; font-size: 16px; line-height: 1.5; min-height: 100vh; display: flex; flex-direction: column">
 
 <!-- top bar -->
+<style>@media (max-width:600px){header{grid-template-columns:auto minmax(0,1fr)!important;gap:8px!important;padding:8px 10px!important}header>div:first-child{display:none!important}header>div:last-child{justify-content:flex-start!important;overflow-x:auto;scrollbar-width:none}header .tool{white-space:nowrap;flex:none;padding-left:8px!important;padding-right:8px!important;font-size:14px}}</style>
 <header style="position: sticky; top: 0; z-index: 5; background: #FFFFFF; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 16px; padding: 10px clamp(16px, 3vw, 32px); border-bottom: 1px dashed rgba(0,48,73,.35)">
 <div style="display: flex; flex-direction: column; min-width: 0">
 <span style="font-weight: 600; font-size: 15px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{partName}}</span>
@@ -220,7 +222,7 @@ html,body{margin:0;background:#003049}
 <sc-for list="{{rows}}" as="r" hint-placeholder-count="5">
 <div class="rrow">
 <span style="display: grid; place-items: center; width: 34px; height: 34px; border-radius: 8px; background: {{r.bg}}; color: #FFFFFF; font-weight: 700">{{r.n}}</span>
-<span style="display: flex; flex-direction: column; min-width: 0"><span style="font-size: 15px; font-weight: 600">{{r.skill}}</span><span style="font-size: 13px; color: rgba(0,48,73,.6); white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{r.stem}}</span></span>
+<span style="display: flex; flex-direction: column; min-width: 0"><span style="font-size: 15px; font-weight: 600">{{r.skill}}</span><span style="font-size: 13px; color: rgba(0,48,73,.6); max-height: 1.9em; line-height: 1.7; overflow: hidden"><ufq-math class="rstem" text="{{r.raw}}"></ufq-math></span></span>
 <span class="hide-sm cap" style="padding: 4px 10px; border-radius: 999px; background: {{r.tagBg}}; color: {{r.tagFg}}; justify-self: start; font-size: 11px">{{r.tag}}</span>
 <span style="font-size: 14px; font-variant-numeric: tabular-nums; color: {{r.tc}}; font-weight: {{r.tw}}">{{r.time}}</span>
 <span class="hide-sm" style="font-weight: 600; color: {{r.yc}}">{{r.y}}</span>
@@ -444,7 +446,7 @@ const y = s.ans[i]; const ok = okQ(x, y);
 const kind = ok ? 'ok' : !y ? 'skip' : y === TL[i] ? 'trap' : 'concept';
 const tg = { ok: ['Correct', '#E6EEF3', '#003049'], skip: ['Skipped', '#F6DDB0', '#003049'], trap: ['Fell for trap', '#C1121F', '#FFFFFF'], concept: ['Concept', '#003049', '#FFFFFF'] }[kind];
 const slow = TM[i] > 95;
-return { n: String(i + 1), stem: x.stem, skill: SK[i], c: x.c, y: y || '—', yc: ok ? '#003049' : '#C1121F', bg: ok ? '#003049' : '#C1121F', tag: tg[0], tagBg: tg[1], tagFg: tg[2], time: fmt(TM[i]), tc: slow ? '#C1121F' : '#003049', tw: slow ? '700' : '500', kind, open: () => this.setState({ rev: i }) };
+return { n: String(i + 1), stem: x.stem, raw: x.stemRaw || x.stem, skill: SK[i], c: x.c, y: y || '—', yc: ok ? '#003049' : '#C1121F', bg: ok ? '#003049' : '#C1121F', tag: tg[0], tagBg: tg[1], tagFg: tg[2], time: fmt(TM[i]), tc: slow ? '#C1121F' : '#003049', tw: slow ? '700' : '500', kind, open: () => this.setState({ rev: i }) };
 });
 const accN = Math.round(correctN / total * 100);
 const totalT = TM.reduce((a, b) => a + b, 0);

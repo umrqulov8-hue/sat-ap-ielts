@@ -5,6 +5,7 @@
 <style>@view-transition{navigation:none}::view-transition-old(root){animation:none}::view-transition-new(root){animation:.22s ease-out both vtIn}@keyframes vtIn{from{opacity:0}}.side{view-transition-name:ufqside}::view-transition-group(ufqside){animation:none}::view-transition-old(ufqside){display:none}::view-transition-new(ufqside){animation:none}@media (prefers-reduced-motion: reduce){@view-transition{navigation:none}}</style>
 <style>html,body{margin:0;background:#FFFFFF}</style>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Ufq — Help</title>
 <script src="/dc/_runtime/react.js"></script>
 <script src="/dc/_runtime/react-dom.js"></script>
@@ -200,7 +201,7 @@ textarea.inp{height:auto;min-height:120px;padding:14px 16px;resize:vertical;font
 <span class="cap" style="color: #669BBC">Write to us</span>
 <sc-if value="{{notSent}}" hint-placeholder-val="{{ true }}">
 <span style="font-size: 15px; color: rgba(0,48,73,.75)">A wrong answer key, a bug, an idea — tell us. We reply to your account email.</span>
-<textarea class="inp" placeholder="What happened?" aria-label="Message" onInput="{{setMsg}}">{{msg}}</textarea>
+<textarea class="inp" placeholder="What happened?" aria-label="Message" value="{{msg}}" onInput="{{setMsg}}"></textarea>
 <button type="button" class="btn" onClick="{{send}}" style="opacity: {{sendOp}}; pointer-events: {{sendPe}}">Send <span class="ar" aria-hidden="true"><span>→</span><span>→</span></span></button>
 </sc-if>
 <sc-if value="{{sent}}" hint-placeholder-val="{{ false }}">
