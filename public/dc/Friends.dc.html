@@ -499,7 +499,29 @@ a.tile:hover .go{transform:rotate(-45deg);background:#003049;color:#FFFFFF}
 </div>
 </div>
 </aside>
-<main style="padding: clamp(20px, 2.6vw, 36px); display: flex; flex-direction: column; gap: 22px; min-width: 0; max-width: 900px">
+<main style="padding: clamp(20px, 2.6vw, 36px); display: flex; flex-direction: column; gap: 22px; min-width: 0">
+<style>
+.fgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(300px,100%),1fr));gap:14px}
+.fcard{border-radius:22px;background:#FFFFFF;box-shadow:inset 0 0 0 1px rgba(0,48,73,.12);padding:18px;display:flex;flex-direction:column;gap:14px;transition:transform .35s cubic-bezier(.16,1,.3,1),box-shadow .35s;animation:fin .5s cubic-bezier(.16,1,.3,1) both;min-width:0}
+.fcard:hover{transform:translateY(-3px);box-shadow:inset 0 0 0 1px rgba(0,48,73,.12),0 24px 40px -28px rgba(0,48,73,.55)}
+@keyframes fin{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.fav{position:relative;width:52px;height:52px;border-radius:50%;flex:none;display:grid;place-items:center;font:700 18px 'Inter Tight',sans-serif;text-transform:uppercase}
+.fav i{position:absolute;right:0;bottom:0;width:14px;height:14px;border-radius:50%;box-shadow:0 0 0 3px #FFFFFF}
+.fstat{flex:1;min-width:0;border-radius:14px;background:#F4F6F8;padding:10px 12px;display:flex;flex-direction:column;gap:2px}
+.fstat b{font:400 24px/1 'Newsreader',serif}.fstat>span{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:rgba(0,48,73,.55)}
+.ftabs{display:flex;gap:4px;padding:5px;border-radius:999px;background:#F1F4F7;width:max-content;max-width:100%;overflow-x:auto;scrollbar-width:none}
+.ftab{border:0;background:transparent;border-radius:999px;min-height:42px;padding:0 18px;font:600 14px 'Inter Tight',sans-serif;color:#003049;cursor:pointer;white-space:nowrap;display:inline-flex;align-items:center;gap:7px}
+.ftab[aria-selected="true"]{background:#003049;color:#FFFFFF}
+.fbadge{min-width:20px;height:20px;border-radius:999px;background:#C1121F;color:#FFFFFF;font-size:11px;display:inline-grid;place-items:center;padding:0 6px}
+.fbtn{border:0;border-radius:999px;min-height:40px;padding:0 15px;font:600 13px 'Inter Tight',sans-serif;cursor:pointer;background:#EEF2F5;color:#003049;transition:transform .15s;white-space:nowrap}
+.fbtn:active{transform:scale(.95)}.fbtn.red{background:#C1121F;color:#FFFFFF}.fbtn.nv{background:#003049;color:#FFFFFF}
+.finp{min-height:46px;border-radius:12px;border:0;box-shadow:inset 0 0 0 1.5px rgba(0,48,73,.22);padding:0 14px;font:500 15px 'Inter Tight',sans-serif;color:#003049;background:#FFFFFF;min-width:0}
+.frow{display:flex;align-items:center;gap:14px;padding:12px 16px;border-radius:18px;background:#F4F6F8;animation:fin .45s cubic-bezier(.16,1,.3,1) both;min-width:0}
+.fveil{position:fixed;inset:0;z-index:50;background:rgba(0,48,73,.35);display:flex;justify-content:flex-end}
+.fdrawer{width:min(420px,100%);height:100%;overflow:auto;background:#FFFFFF;padding:24px;display:flex;flex-direction:column;gap:18px;animation:fdr .45s cubic-bezier(.16,1,.3,1) both;scrollbar-width:none}
+@keyframes fdr{from{transform:translateX(40px);opacity:0}to{transform:none;opacity:1}}
+@media (prefers-reduced-motion:reduce){.fcard,.frow,.fdrawer{animation:none}}
+</style>
 <header style="display: flex; justify-content: space-between; align-items: flex-end; gap: 20px; flex-wrap: wrap">
 <div style="display: flex; flex-direction: column; gap: 6px">
 <span class="cap" style="color: #669BBC">Games · friends</span>
@@ -511,53 +533,127 @@ a.tile:hover .go{transform:rotate(-45deg);background:#003049;color:#FFFFFF}
 <sc-if value="{{needName}}" hint-placeholder-val="{{ false }}"><section style="border-radius: 24px; background: #FBF3E3; padding: 22px; display: flex; flex-direction: column; gap: 12px">
 <b style="font-size: 18px">Choose your username</b>
 <span style="font-size: 14px; color: rgba(0,48,73,.7)">Friends find you by this name. 3–20 letters, numbers, dots or underscores. Your real name and email stay private.</span>
-<div style="display: flex; gap: 10px; flex-wrap: wrap"><input type="text" value="{{name}}" onInput="{{setName}}" placeholder="e.g. sardor_07" aria-label="Username" maxlength="20" style="flex: 1; min-width: 200px; min-height: 46px; border-radius: 12px; border: 0; box-shadow: inset 0 0 0 1.5px rgba(0,48,73,.25); padding: 0 14px; font: inherit"><button type="button" class="gbtn" onClick="{{saveName}}" style="min-height: 46px">Save username</button></div>
+<div style="display: flex; gap: 10px; flex-wrap: wrap"><input class="finp" type="text" value="{{name}}" onInput="{{setName}}" placeholder="e.g. sardor_07" aria-label="Username" maxlength="20" style="flex: 1; min-width: 200px"><button type="button" class="fbtn red" onClick="{{saveName}}" style="min-height: 46px">Save username</button></div>
 </section></sc-if>
 
-<sc-if value="{{hasName}}" hint-placeholder-val="{{ true }}"><section style="border-radius: 24px; background: #003049; color: #FFFFFF; padding: 22px; display: flex; flex-direction: column; gap: 12px">
-<span style="font-size: 14px; color: rgba(255,255,255,.7)">Your username — tell it to friends: <b style="color: #F6DDB0; font-size: 18px">{{username}}</b></span>
-<div style="display: flex; gap: 10px; flex-wrap: wrap"><input type="text" value="{{add}}" onInput="{{setAdd}}" onKeyDown="{{addKey}}" placeholder="Friend’s username" aria-label="Friend’s username" maxlength="20" style="flex: 1; min-width: 200px; min-height: 46px; border-radius: 12px; border: 0; padding: 0 14px; font: inherit; color: #003049"><button type="button" class="gbtn" onClick="{{sendReq}}" style="min-height: 46px">Send request</button></div>
+<sc-if value="{{hasName}}" hint-placeholder-val="{{ true }}">
+<section style="border-radius: 26px; background: #003049; color: #FFFFFF; padding: clamp(18px, 2.4vw, 28px); display: flex; flex-direction: column; gap: 18px">
+<div style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap">
+<span class="fav" style="width: 66px; height: 66px; font-size: 22px; background: #F6DDB0; color: #780000">{{myIni}}</span>
+<div style="flex: 1; min-width: 180px; display: flex; flex-direction: column; gap: 2px"><span class="srf" style="font-size: 34px; line-height: 1.05; overflow-wrap: anywhere">{{username}}</span><span style="font-size: 13px; color: rgba(255,255,255,.65)">{{summary}}</span></div>
+<span style="display: flex; gap: 8px; flex-wrap: wrap"><button type="button" class="fbtn" onClick="{{copyName}}">{{copyNameLabel}}</button><button type="button" class="fbtn red" onClick="{{shareLink}}">{{shareLabel}}</button></span>
+</div>
+<div style="display: flex; gap: 10px; flex-wrap: wrap">
+<sc-for list="{{myStats}}" as="m" hint-placeholder-count="4"><div class="fstat" style="background: rgba(255,255,255,.08); min-width: 110px"><b style="color: #F6DDB0">{{m.v}}</b><span style="color: rgba(255,255,255,.6)">{{m.l}}</span></div></sc-for>
+</div>
+<div style="display: flex; gap: 10px; flex-wrap: wrap; border-top: 1px solid rgba(255,255,255,.15); padding-top: 16px">
+<input class="finp" type="text" value="{{add}}" onInput="{{setAdd}}" onKeyDown="{{addKey}}" placeholder="Add a friend by username" aria-label="Friend’s username" maxlength="20" style="flex: 1; min-width: 200px; box-shadow: none">
+<button type="button" class="fbtn red" onClick="{{sendReq}}" style="min-height: 46px">Send request</button>
+</div>
 <sc-if value="{{msg}}" hint-placeholder-val="{{ false }}"><span role="status" style="font-size: 14px; color: #F6DDB0">{{msg}}</span></sc-if>
-</section></sc-if>
-
-<sc-if value="{{hasIncoming}}" hint-placeholder-val="{{ false }}"><section style="display: flex; flex-direction: column; gap: 10px">
-<span class="cap" style="color: #C1121F">Friend requests</span>
-<sc-for list="{{incoming}}" as="r" hint-placeholder-count="1"><div class="drow" style="background: #FBF3E3"><b style="flex: 1; min-width: 0">{{r.nick}}</b><button type="button" class="gbtn nv" onClick="{{r.accept}}" style="min-height: 42px; padding: 0 18px">Accept</button><button type="button" class="gbtn gh" onClick="{{r.decline}}" style="min-height: 42px; padding: 0 18px">Decline</button></div></sc-for>
-</section></sc-if>
-
-<section style="display: flex; flex-direction: column; gap: 10px">
-<div style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px; border-top: 1px solid #003049; padding-top: 16px"><h2 class="srf" style="margin: 0; font-size: 34px">Your <em style="color: #C1121F">friends.</em></h2><span class="cap" style="color: rgba(0,48,73,.55)">{{onlineTxt}}</span></div>
-<sc-if value="{{noFriends}}" hint-placeholder-val="{{ false }}"><p style="margin: 0; color: rgba(0,48,73,.65)">No friends yet. Ask a friend for their username and send a request.</p></sc-if>
-<sc-for list="{{friends}}" as="f" hint-placeholder-count="3"><div class="drow" style="background: #F4F6F8; flex-wrap: wrap">
-<span aria-hidden="true" style="width: 12px; height: 12px; border-radius: 50%; flex: none; background: {{f.dot}}"></span>
-<span style="flex: 1; min-width: 140px; display: flex; flex-direction: column"><b>{{f.nick}}</b><span style="font-size: 13px; color: rgba(0,48,73,.6)">{{f.status}}</span></span>
-<sc-if value="{{f.online}}" hint-placeholder-val="{{ true }}"><button type="button" class="gbtn" onClick="{{f.invite}}" style="min-height: 42px; padding: 0 18px">{{f.inviteLabel}}</button></sc-if>
-<button type="button" class="gbtn gh" onClick="{{f.remove}}" style="min-height: 42px; padding: 0 14px">Remove</button>
-</div></sc-for>
-<sc-if value="{{hasOutgoing}}" hint-placeholder-val="{{ false }}"><p style="margin: 0; font-size: 13px; color: rgba(0,48,73,.6)">Waiting for an answer from: {{outgoing}}</p></sc-if>
-<p style="margin: 0; font-size: 13px; color: rgba(0,48,73,.55)">“Invite to duel” opens a private match and sends your friend a pop-up they can accept or decline.</p>
 </section>
+</sc-if>
+
+<div class="ftabs" role="tablist" aria-label="Friends sections"><sc-for list="{{tabs}}" as="t" hint-placeholder-count="4"><button type="button" class="ftab" role="tab" aria-selected="{{t.on}}" onClick="{{t.pick}}">{{t.label}}<sc-if value="{{t.badge}}" hint-placeholder-val="{{ false }}"><span class="fbadge">{{t.badge}}</span></sc-if></button></sc-for></div>
+
+<sc-if value="{{isFriends}}" hint-placeholder-val="{{ true }}">
+<div style="display: flex; flex-direction: column; gap: 14px">
+<div style="display: flex; gap: 10px; flex-wrap: wrap; align-items: center">
+<input class="finp" type="search" value="{{q}}" onInput="{{setQ}}" placeholder="Search your friends" aria-label="Search your friends" style="flex: 1; min-width: 180px; max-width: 340px">
+<button type="button" class="fbtn {{onlyCls}}" onClick="{{toggleOnline}}" aria-pressed="{{onlyOn}}">Online only</button>
+<span class="cap" style="margin-left: auto; color: rgba(0,48,73,.55)">{{onlineTxt}}</span>
+</div>
+<div class="fgrid">
+<sc-for list="{{cards}}" as="f" hint-placeholder-count="3"><article class="fcard" style="animation-delay: {{f.delay}}">
+<div style="display: flex; align-items: center; gap: 14px; min-width: 0">
+<span class="fav" style="background: {{f.bg}}; color: {{f.fg}}">{{f.ini}}<i style="background: {{f.dot}}"></i></span>
+<span style="flex: 1; min-width: 0; display: flex; flex-direction: column"><b style="font-size: 17px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap">{{f.nick}}</b><span style="font-size: 13px; color: {{f.statusC}}">{{f.status}}</span></span>
+<button type="button" class="fbtn" onClick="{{f.open}}" aria-label="Profile of {{f.nick}}">Profile</button>
+</div>
+<div style="display: flex; gap: 8px"><div class="fstat"><b>{{f.week}}</b><span>this week</span></div><div class="fstat"><b>{{f.wins}}</b><span>duels won</span></div><div class="fstat"><b>{{f.vs}}</b><span>you vs them</span></div></div>
+<div style="display: flex; gap: 8px; flex-wrap: wrap">
+<sc-if value="{{f.online}}" hint-placeholder-val="{{ true }}"><button type="button" class="fbtn red" onClick="{{f.invite}}" style="flex: 1">{{f.inviteLabel}}</button></sc-if>
+<button type="button" class="fbtn" onClick="{{f.play}}">Let’s play</button>
+<button type="button" class="fbtn" onClick="{{f.study}}">Study?</button>
+<button type="button" class="fbtn" onClick="{{f.gg}}">GG</button>
+</div>
+</article></sc-for>
+</div>
+<sc-if value="{{noFriends}}" hint-placeholder-val="{{ false }}"><div style="border-radius: 22px; background: #F4F6F8; padding: 28px; text-align: center; display: flex; flex-direction: column; gap: 8px"><b style="font-size: 18px">No friends yet</b><span style="color: rgba(0,48,73,.65)">Send your link to a classmate, or type their username above.</span></div></sc-if>
+<sc-if value="{{noMatch}}" hint-placeholder-val="{{ false }}"><p style="margin: 0; color: rgba(0,48,73,.65)">No friend matches that filter.</p></sc-if>
+<sc-if value="{{hasRecent}}" hint-placeholder-val="{{ false }}"><div style="display: flex; flex-direction: column; gap: 8px; border-top: 1px solid rgba(0,48,73,.15); padding-top: 14px"><span class="cap" style="color: #669BBC">Played with recently</span>
+<sc-for list="{{recent}}" as="r" hint-placeholder-count="2"><div class="frow"><b style="flex: 1; min-width: 0">{{r.nick}}</b><button type="button" class="fbtn nv" onClick="{{r.add}}">Add friend</button></div></sc-for></div></sc-if>
+</div>
+</sc-if>
+
+<sc-if value="{{isBoard}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 10px">
+<span style="font-size: 14px; color: rgba(0,48,73,.65)">This week, only you and your friends. Best 1-minute Speed Round + best Survival + 150 per duel won.</span>
+<sc-for list="{{board}}" as="r" hint-placeholder-count="4"><div class="frow" style="background: {{r.row}}; animation-delay: {{r.delay}}"><span class="srf" style="font-size: 28px; width: 34px; flex: none">{{r.rank}}</span><span class="fav" style="width: 40px; height: 40px; font-size: 14px; background: {{r.bg}}; color: {{r.fg}}">{{r.ini}}</span><span style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 6px"><b style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap">{{r.nick}}</b><span style="height: 6px; border-radius: 6px; background: rgba(0,48,73,.1); overflow: hidden"><span style="display: block; height: 100%; width: {{r.w}}; background: {{r.bar}}"></span></span></span><b style="font-variant-numeric: tabular-nums">{{r.pts}}</b></div></sc-for>
+</div>
+</sc-if>
+
+<sc-if value="{{isFeed}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 10px">
+<sc-for list="{{feed}}" as="x" hint-placeholder-count="5"><div class="frow" style="animation-delay: {{x.delay}}"><span class="fav" style="width: 40px; height: 40px; font-size: 14px; background: {{x.bg}}; color: {{x.fg}}">{{x.ini}}</span><span style="flex: 1; min-width: 0"><b>{{x.nick}}</b> {{x.text}}<span style="display: block; font-size: 12px; color: rgba(0,48,73,.55)">{{x.when}}</span></span><a href="{{x.href}}" class="fbtn" style="text-decoration: none; display: inline-flex; align-items: center">Beat it</a></div></sc-for>
+<sc-if value="{{noFeed}}" hint-placeholder-val="{{ false }}"><p style="margin: 0; color: rgba(0,48,73,.65)">Nothing in the last 7 days. When friends play Speed Round or Survival, their scores show here.</p></sc-if>
+</div>
+</sc-if>
+
+<sc-if value="{{isRequests}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 10px">
+<sc-for list="{{incoming}}" as="r" hint-placeholder-count="1"><div class="frow" style="background: #FBF3E3"><b style="flex: 1; min-width: 0">{{r.nick}}</b><button type="button" class="fbtn nv" onClick="{{r.accept}}">Accept</button><button type="button" class="fbtn" onClick="{{r.decline}}">Decline</button></div></sc-for>
+<sc-for list="{{outgoing}}" as="r" hint-placeholder-count="1"><div class="frow"><span style="flex: 1; min-width: 0"><b>{{r.nick}}</b> <span style="font-size: 13px; color: rgba(0,48,73,.55)">· waiting for an answer</span></span><button type="button" class="fbtn" onClick="{{r.cancel}}">Cancel</button></div></sc-for>
+<sc-if value="{{noRequests}}" hint-placeholder-val="{{ false }}"><p style="margin: 0; color: rgba(0,48,73,.65)">No open requests.</p></sc-if>
+</div>
+</sc-if>
+
+<sc-if value="{{hasHint}}" hint-placeholder-val="{{ false }}"><p style="margin: 0; font-size: 13px; color: #780000; background: #FCE9E6; padding: 12px 16px; border-radius: 14px">Scores, activity and messages need one more setup step: run supabase/migrations/20261202_friends_plus.sql.</p></sc-if>
+
+<sc-if value="{{drawer}}" hint-placeholder-val="{{ false }}"><div class="fveil" onClick="{{closeP}}"><div class="fdrawer" role="dialog" aria-modal="true" aria-label="Friend profile" onClick="{{stop}}">
+<div style="display: flex; align-items: center; gap: 14px"><span class="fav" style="width: 64px; height: 64px; font-size: 22px; background: {{p.bg}}; color: {{p.fg}}">{{p.ini}}<i style="background: {{p.dot}}"></i></span><span style="flex: 1; min-width: 0; display: flex; flex-direction: column"><span class="srf" style="font-size: 30px; line-height: 1.1; overflow-wrap: anywhere">{{p.nick}}</span><span style="font-size: 13px; color: rgba(0,48,73,.6)">{{p.status}}</span></span><button type="button" class="fbtn" onClick="{{closeP}}" aria-label="Close">✕</button></div>
+<div style="border-radius: 20px; background: #FBF3E3; padding: 18px; display: flex; flex-direction: column; gap: 10px">
+<span class="cap" style="color: #780000">Head to head</span>
+<div style="display: flex; justify-content: space-between; align-items: baseline"><span><b class="srf" style="font-size: 40px">{{p.wins}}</b> you</span><span style="font-size: 13px; color: rgba(0,48,73,.6)">{{p.draws}}</span><span>them <b class="srf" style="font-size: 40px">{{p.losses}}</b></span></div>
+<span style="height: 10px; border-radius: 10px; background: #C1121F; overflow: hidden"><span style="display: block; height: 100%; width: {{p.share}}; background: #003049"></span></span>
+</div>
+<span class="cap" style="color: #669BBC">You vs {{p.nick}}</span>
+<sc-for list="{{p.compare}}" as="c" hint-placeholder-count="3"><div style="display: flex; flex-direction: column; gap: 6px"><span style="font-size: 13px; color: rgba(0,48,73,.65)">{{c.l}}</span><div style="display: flex; align-items: center; gap: 8px"><span style="width: 54px; font-weight: 600">{{c.a}}</span><span style="flex: 1; display: flex; flex-direction: column; gap: 4px"><span style="height: 8px; border-radius: 8px; width: {{c.wa}}; background: #003049"></span><span style="height: 8px; border-radius: 8px; width: {{c.wb}}; background: #669BBC"></span></span><span style="width: 54px; text-align: right; color: #669BBC; font-weight: 600">{{c.b}}</span></div></div></sc-for>
+<sc-if value="{{p.online}}" hint-placeholder-val="{{ false }}"><button type="button" class="fbtn red" onClick="{{p.invite}}" style="min-height: 48px">Invite to duel</button></sc-if>
+<button type="button" class="fbtn" onClick="{{p.remove}}" style="color: #780000">Remove friend</button>
+</div></div></sc-if>
 </main>
 
 </div>
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
+const PAL = [['#003049', '#FFFFFF'], ['#C1121F', '#FFFFFF'], ['#669BBC', '#FFFFFF'], ['#F6DDB0', '#780000'], ['#780000', '#F6DDB0'], ['#EEF2F5', '#003049']];
+const av = (n) => { let h = 0; for (const c of String(n)) h = (h * 31 + c.charCodeAt(0)) >>> 0; const p = PAL[h % PAL.length]; return { bg: p[0], fg: p[1], ini: String(n).replace(/[^A-Za-z0-9]/g, '').slice(0, 2) || '?' }; };
+const num = (v) => Number(v || 0).toLocaleString('en-US');
+const ago = (sec) => sec === null || sec === undefined ? 'a while ago' : sec < 90 ? 'just now' : sec < 3600 ? Math.round(sec / 60) + ' min ago' : sec < 86400 ? Math.round(sec / 3600) + ' h ago' : Math.round(sec / 86400) + ' d ago';
+const NUDGE = { play: 'Let’s play', study: 'Study?', gg: 'GG' };
 class Component extends DCLogic {
-constructor(props) { super(props); this.state = { d: null, name: '', add: '', msg: '', busy: '' }; }
-componentDidMount() { this._off = window.Ufq.friends.onUpdate((d) => this.setState({ d })); window.Ufq.friends.ping(); }
-componentWillUnmount() { if (this._off) this._off(); }
+constructor(props) { super(props); const add = new URLSearchParams(location.search).get('add') || ''; if (add) history.replaceState(null, '', location.pathname); this.state = { d: null, hub: null, noHub: false, name: '', add: add.slice(0, 20), msg: add ? 'Press “Send request” to add ' + add.slice(0, 20) + '.' : '', busy: '', tab: 'friends', q: '', only: false, open: '', copied: '' }; }
+componentDidMount() {
+this._off = window.Ufq.friends.onUpdate((d) => this.setState({ d }));
+window.Ufq.friends.ping(); this.loadHub(); this._iv = setInterval(() => { if (!document.hidden) this.loadHub(); }, 20000);
+}
+componentWillUnmount() { if (this._off) this._off(); clearInterval(this._iv); clearTimeout(this._ct); }
+loadHub() { window.Ufq.friends.hub().then((hub) => this.setState({ hub, noHub: false })).catch(() => this.setState({ noHub: true })); }
+refresh() { window.Ufq.friends.ping(); this.loadHub(); }
+copy(text, which) { const done = () => { this.setState({ copied: which }); clearTimeout(this._ct); this._ct = setTimeout(() => this.setState({ copied: '' }), 1800); }; try { navigator.clipboard.writeText(text).then(done, () => window.prompt('Copy:', text)); } catch (e) { window.prompt('Copy:', text); } }
 saveName() {
 const n = this.state.name.trim();
 if (!/^[A-Za-z0-9._]{3,20}$/.test(n)) { window.Ufq.toast('3–20 letters, numbers, dots or underscores.'); return; }
 window.Ufq.friends.setUsername(n).then(() => window.Ufq.toast('Username saved.', 'ok')).catch((e) => window.Ufq.toast(/duplicate|unique/i.test(String(e.message)) ? 'That username is taken — try another.' : 'Could not save the username.'));
 }
-sendReq() {
-const n = this.state.add.trim(); if (!n || this.state.busy) return;
+sendReq(who) {
+const n = (who || this.state.add).trim(); if (!n || this.state.busy) return;
 this.setState({ busy: 'add', msg: '' });
 window.Ufq.friends.send(n).then((r) => {
 const m = { notfound: 'Nobody uses the username “' + n + '”.', self: 'That is your own username.', already: 'You are already friends.', sent: 'You already sent them a request.', nick: 'Choose your username first.', limit: 'You have too many unanswered requests.' };
 this.setState({ busy: '', msg: r.error ? (m[r.error] || 'Could not send the request.') : r.ok === 'accepted' ? 'You are now friends with ' + n + '.' : 'Request sent to ' + n + '.', add: r.error ? n : '' });
-window.Ufq.friends.ping();
+this.refresh();
 }).catch(() => this.setState({ busy: '', msg: 'Could not send the request. Try again.' }));
 }
 invite(nick) {
@@ -568,18 +664,52 @@ window.UfqGameData.createMatch({ name: this.state.d.username + ' vs ' + nick, vi
 .then((m) => window.Ufq.friends.invite(nick, m.id).then(() => location.assign('/games/duel?match=' + m.id)))
 .catch(() => { this.setState({ busy: '' }); window.Ufq.toast('Could not create the match.'); });
 }
+nudge(nick, kind) {
+window.Ufq.friends.nudge(nick, kind).then((r) => { if (r.error) window.Ufq.toast(r.error === 'slow' ? 'Wait a few seconds before sending another.' : 'Could not send it.'); else window.Ufq.toast('“' + NUDGE[kind] + '” sent to ' + nick + '.', 'ok'); }).catch(() => window.Ufq.toast('Messages need the new setup step first.'));
+}
 renderVals() {
-const s = this.state, d = s.d || { username: '', friends: [], incoming: [], outgoing: [] };
-const online = d.friends.filter((f) => f.online).length;
+const s = this.state, d = s.d || { username: '', friends: [], incoming: [], outgoing: [] }, hub = s.hub || { me: {}, friends: [], feed: [], recent: [] };
+const stats = {}; (hub.friends || []).forEach((f) => { stats[f.nick] = f; });
+const all = d.friends.map((f) => Object.assign({ h2h: { wins: 0, losses: 0, draws: 0 } }, stats[f.nick] || {}, f));
+const online = all.filter((f) => f.online).length;
+const q = s.q.trim().toLowerCase();
+const shown = all.filter((f) => (!s.only || f.online) && (!q || f.nick.toLowerCase().indexOf(q) >= 0));
+const statusOf = (f) => f.online ? 'Online · ' + (f.activity || 'On the site') : 'Offline · seen ' + ago(f.lastSeen);
+const cards = shown.map((f, i) => Object.assign(av(f.nick), { nick: f.nick, delay: Math.min(i * 0.05, 0.4) + 's', online: f.online, dot: f.online ? '#1F9D55' : '#C5CDD3', status: statusOf(f), statusC: f.online ? '#1F7A45' : 'rgba(0,48,73,.55)', week: num(f.week), wins: num(f.duelWins), vs: f.h2h.wins + '–' + f.h2h.losses, inviteLabel: s.busy === f.nick ? 'Inviting…' : 'Invite to duel', invite: () => this.invite(f.nick), play: () => this.nudge(f.nick, 'play'), study: () => this.nudge(f.nick, 'study'), gg: () => this.nudge(f.nick, 'gg'), open: () => this.setState({ open: f.nick }) }));
+const me = hub.me || {};
+const rows = all.map((f) => ({ nick: f.nick, pts: f.week || 0, me: false })).concat(d.username ? [{ nick: d.username, pts: me.week || 0, me: true }] : []).sort((a, b) => b.pts - a.pts);
+const max = Math.max(1, rows.length ? rows[0].pts : 1);
+const board = rows.map((r, i) => Object.assign(av(r.nick), { rank: String(i + 1), nick: r.me ? r.nick + ' (you)' : r.nick, pts: num(r.pts), w: Math.max(2, Math.round(r.pts / max * 100)) + '%', row: r.me ? '#FBF3E3' : '#F4F6F8', bar: i === 0 ? '#C1121F' : '#003049', delay: Math.min(i * 0.04, 0.4) + 's' }));
+const myRank = rows.findIndex((r) => r.me) + 1;
+const feed = (hub.feed || []).map((x, i) => Object.assign(av(x.nick), { nick: x.nick, text: 'scored ' + num(x.score) + (x.game === 'speed' ? ' in a ' + (x.mode / 60) + '-minute Speed Round' : ' in Survival'), when: ago(x.age), href: x.game === 'speed' ? '/games/speed' : '/games/survival', delay: Math.min(i * 0.03, 0.4) + 's' }));
+const pf = all.filter((f) => f.nick === s.open)[0];
+let p = { compare: [] };
+if (pf) {
+const games = pf.h2h.wins + pf.h2h.losses;
+const pair = (l, a, b) => { const m = Math.max(1, a || 0, b || 0); return { l, a: num(a), b: num(b), wa: Math.max(3, Math.round((a || 0) / m * 100)) + '%', wb: Math.max(3, Math.round((b || 0) / m * 100)) + '%' }; };
+p = Object.assign(av(pf.nick), { nick: pf.nick, dot: pf.online ? '#1F9D55' : '#C5CDD3', status: statusOf(pf), online: pf.online, wins: String(pf.h2h.wins), losses: String(pf.h2h.losses), draws: pf.h2h.draws ? pf.h2h.draws + ' draw' + (pf.h2h.draws > 1 ? 's' : '') : (games ? '' : 'no duels yet'), share: games ? Math.round(pf.h2h.wins / games * 100) + '%' : '50%',
+compare: [pair('This week’s points', me.week, pf.week), pair('Best 1-minute Speed Round', me.speed, pf.speed), pair('Best Survival', me.survival, pf.survival), pair('Duels won', me.duelWins, pf.duelWins)],
+invite: () => this.invite(pf.nick), remove: () => { if (window.confirm('Remove ' + pf.nick + ' from your friends?')) { this.setState({ open: '' }); window.Ufq.friends.remove(pf.nick).then(() => this.loadHub()); } } });
+}
+const link = location.origin + '/games/friends?add=' + encodeURIComponent(d.username);
+const nReq = d.incoming.length;
+const tabs = [['friends', 'Friends', 0], ['board', 'Leaderboard', 0], ['feed', 'Activity', 0], ['requests', 'Requests', nReq]].map(([k, label, badge]) => ({ label, badge: badge ? String(badge) : '', on: s.tab === k ? 'true' : 'false', pick: () => this.setState({ tab: k }) }));
 return {
-needName: !!s.d && !d.username, hasName: !!d.username, username: d.username,
+needName: !!s.d && !d.username, hasName: !!d.username, username: d.username, myIni: av(d.username || '?').ini,
+summary: all.length + (all.length === 1 ? ' friend' : ' friends') + ' · ' + online + ' online' + (myRank && all.length ? ' · you are #' + myRank + ' this week' : ''),
+copyName: () => this.copy(d.username, 'name'), copyNameLabel: s.copied === 'name' ? 'Copied ✓' : 'Copy username',
+shareLink: () => { if (navigator.share) navigator.share({ title: 'Play SAT Math with me on Ufq', url: link }).catch(() => {}); else this.copy(link, 'link'); }, shareLabel: s.copied === 'link' ? 'Link copied ✓' : 'Share my link',
+myStats: [{ v: num(me.week), l: 'points this week' }, { v: num(me.speed), l: 'best speed round' }, { v: num(me.survival), l: 'best survival' }, { v: num(me.duelWins), l: 'duels won' }],
 name: s.name, setName: (e) => this.setState({ name: e.target.value }), saveName: () => this.saveName(),
 add: s.add, setAdd: (e) => this.setState({ add: e.target.value, msg: '' }), addKey: (e) => { if (e.key === 'Enter') this.sendReq(); }, sendReq: () => this.sendReq(), msg: s.msg,
-hasIncoming: d.incoming.length > 0,
-incoming: d.incoming.map((nick) => ({ nick, accept: () => window.Ufq.friends.respond(nick, true).then(() => window.Ufq.toast('You and ' + nick + ' are friends.', 'ok')), decline: () => window.Ufq.friends.respond(nick, false) })),
-noFriends: !!s.d && d.friends.length === 0, onlineTxt: s.d ? online + ' online · ' + d.friends.length + ' total' : '',
-friends: d.friends.map((f) => ({ nick: f.nick, online: f.online, dot: f.online ? '#1F9D55' : '#C5CDD3', status: f.online ? 'Online · ' + (f.activity || 'On the site') : 'Offline', inviteLabel: s.busy === f.nick ? 'Inviting…' : 'Invite to duel', invite: () => this.invite(f.nick), remove: () => { if (window.confirm('Remove ' + f.nick + ' from your friends?')) window.Ufq.friends.remove(f.nick); } })),
-hasOutgoing: d.outgoing.length > 0, outgoing: d.outgoing.join(', ')
+tabs, isFriends: s.tab === 'friends', isBoard: s.tab === 'board', isFeed: s.tab === 'feed', isRequests: s.tab === 'requests',
+q: s.q, setQ: (e) => this.setState({ q: e.target.value }), toggleOnline: () => this.setState({ only: !s.only }), onlyOn: s.only ? 'true' : 'false', onlyCls: s.only ? 'nv' : '',
+onlineTxt: online + ' online · ' + all.length + ' total', cards, noFriends: !!s.d && all.length === 0, noMatch: all.length > 0 && cards.length === 0,
+hasRecent: (hub.recent || []).length > 0, recent: (hub.recent || []).map((nick) => ({ nick, add: () => this.sendReq(nick) })),
+board, feed, noFeed: feed.length === 0,
+incoming: d.incoming.map((nick) => ({ nick, accept: () => window.Ufq.friends.respond(nick, true).then(() => { window.Ufq.toast('You and ' + nick + ' are friends.', 'ok'); this.loadHub(); }), decline: () => window.Ufq.friends.respond(nick, false) })),
+outgoing: d.outgoing.map((nick) => ({ nick, cancel: () => window.Ufq.friends.remove(nick) })), noRequests: d.incoming.length === 0 && d.outgoing.length === 0,
+hasHint: s.noHub, drawer: !!pf, p, closeP: () => this.setState({ open: '' }), stop: (e) => { if (e && e.stopPropagation) e.stopPropagation(); }
 };
 }
 }

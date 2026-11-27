@@ -703,34 +703,54 @@
   var ACTIVITY = { Practice: 'Practising', Duel: 'In a duel', SpeedRound: 'Playing Speed Round', Survival: 'Playing Survival', Games: 'In Games', Friends: 'In Games', Leaderboard: 'In Games', Lesson: 'In a lesson' };
   function frpc(name, args) { return Ufq.rest('/rest/v1/rpc/' + name, { method: 'POST', body: JSON.stringify(args || {}), keepCache: true }); }
   function invitePopup(inv) {
+    popupCard('Duel invite from ' + inv.from, inv.from + ' invites you to a duel', [
+      { label: 'Accept', primary: true, run: function (close, buttons) {
+        buttons.forEach(function (x) { x.disabled = true; });
+        frpc('invite_answer', { p_id: inv.id, p_accept: true }).then(function (r) {
+          close();
+          if (r && r.matchId) location.assign('/games/duel?match=' + r.matchId);
+          else Ufq.toast(r && r.error === 'full' ? 'That match is full.' : 'That match is no longer open.');
+        }).catch(function () { close(); Ufq.toast('Could not accept the invite.'); });
+      } },
+      { label: 'Decline', run: function (close) { close(); frpc('invite_answer', { p_id: inv.id, p_accept: false }).catch(function () { /* nothing to undo */ }); } },
+    ], Math.max(5, 60 - (inv.age || 0)), inv.match || '');
+  }
+  var NUDGE_TEXT = { play: 'Let’s play a duel!', study: 'Time to practise together?', gg: 'Good game!' }, nOff = false;
+  function takeNudges() {
+    if (nOff || page === 'Practice') return;
+    frpc('friend_nudges_take').then(function (list) { (list || []).forEach(nudgePopup); }).catch(function () { nOff = true; /* older database */ });
+  }
+  function nudgePopup(n) {
+    popupCard('Message from ' + n.from, n.from + ': ' + (NUDGE_TEXT[n.kind] || ''), [
+      { label: 'Reply', primary: true, run: function (close) { close(); location.assign('/games/friends'); } },
+      { label: 'Close', run: function (close) { close(); } },
+    ], 20);
+  }
+  /* the corner card shared by invites and friends' messages */
+  function popupCard(aria, heading, actions, seconds, subText) {
     var box = document.getElementById('ufq-invites');
     if (!box) { box = document.createElement('div'); box.id = 'ufq-invites'; box.style.cssText = 'position:fixed;right:16px;bottom:16px;z-index:2147483100;display:flex;flex-direction:column;gap:10px;width:min(340px,calc(100vw - 32px));font-family:"Inter Tight",system-ui,sans-serif'; document.body.appendChild(box); }
-    var card = document.createElement('div');
-    card.setAttribute('role', 'alertdialog'); card.setAttribute('aria-label', 'Duel invite from ' + inv.from);
-    card.style.cssText = 'background:#003049;color:#fff;border-radius:18px;padding:16px;box-shadow:0 24px 50px -20px rgba(0,48,73,.7);display:flex;flex-direction:column;gap:10px;animation:ufqInv .35s cubic-bezier(.16,1,.3,1) both';
     if (!document.getElementById('ufq-inv-css')) { var st = document.createElement('style'); st.id = 'ufq-inv-css'; st.textContent = '@keyframes ufqInv{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}'; document.head.appendChild(st); }
-    var title = document.createElement('b'); title.textContent = inv.from + ' invites you to a duel';
-    var sub = document.createElement('span'); sub.textContent = inv.match || ''; sub.style.cssText = 'font-size:13px;opacity:.75';
-    var row = document.createElement('div'); row.style.cssText = 'display:flex;gap:8px';
-    var mkBtn = function (label, primary) { var x = document.createElement('button'); x.type = 'button'; x.textContent = label; x.style.cssText = 'flex:1;min-height:42px;border-radius:999px;border:0;cursor:pointer;font:600 14px "Inter Tight",sans-serif;' + (primary ? 'background:#C1121F;color:#fff' : 'background:rgba(255,255,255,.14);color:#fff'); row.appendChild(x); return x; };
-    var yes = mkBtn('Accept', true), no = mkBtn('Decline', false);
-    var close = function () { clearTimeout(timer); card.remove(); };
-    var timer = setTimeout(close, Math.max(5, 60 - (inv.age || 0)) * 1000);
-    yes.onclick = function () {
-      yes.disabled = no.disabled = true;
-      frpc('invite_answer', { p_id: inv.id, p_accept: true }).then(function (r) {
-        close();
-        if (r && r.matchId) location.assign('/games/duel?match=' + r.matchId);
-        else Ufq.toast(r && r.error === 'full' ? 'That match is full.' : 'That match is no longer open.');
-      }).catch(function () { close(); Ufq.toast('Could not accept the invite.'); });
-    };
-    no.onclick = function () { close(); frpc('invite_answer', { p_id: inv.id, p_accept: false }).catch(function () { /* nothing to undo */ }); };
-    card.appendChild(title); card.appendChild(sub); card.appendChild(row); box.appendChild(card);
+    var card = document.createElement('div');
+    card.setAttribute('role', 'alertdialog'); card.setAttribute('aria-label', aria);
+    card.style.cssText = 'background:#003049;color:#fff;border-radius:18px;padding:16px;box-shadow:0 24px 50px -20px rgba(0,48,73,.7);display:flex;flex-direction:column;gap:10px;animation:ufqInv .35s cubic-bezier(.16,1,.3,1) both';
+    var title = document.createElement('b'); title.textContent = heading; card.appendChild(title);
+    if (subText) { var sub = document.createElement('span'); sub.textContent = subText; sub.style.cssText = 'font-size:13px;opacity:.75'; card.appendChild(sub); }
+    var row = document.createElement('div'); row.style.cssText = 'display:flex;gap:8px'; card.appendChild(row);
+    var timer = null, buttons = [], close = function () { clearTimeout(timer); card.remove(); };
+    actions.forEach(function (a) {
+      var x = document.createElement('button'); x.type = 'button'; x.textContent = a.label;
+      x.style.cssText = 'flex:1;min-height:42px;border-radius:999px;border:0;cursor:pointer;font:600 14px "Inter Tight",sans-serif;color:#fff;background:' + (a.primary ? '#C1121F' : 'rgba(255,255,255,.14)');
+      x.onclick = function () { a.run(close, buttons); }; buttons.push(x); row.appendChild(x);
+    });
+    timer = setTimeout(close, seconds * 1000);
+    box.appendChild(card);
   }
   function fPing() {
     if (fOff) return Promise.resolve(null);
     return frpc('friends_ping', { p_activity: ACTIVITY[page] || 'On the site' }).then(function (r) {
       fLast = r;
+      takeNudges();
       var quiet = page === 'Practice'; /* never interrupt a running question set or mock test */
       (r.invites || []).forEach(function (inv) { if (!quiet && !fSeen['i' + inv.id]) { fSeen['i' + inv.id] = 1; invitePopup(inv); } });
       (r.incoming || []).forEach(function (nick) {
@@ -752,6 +772,8 @@
     send: function (name) { return frpc('friend_send', { p_username: name }); },
     respond: function (name, accept) { return frpc('friend_respond', { p_username: name, p_accept: accept }).then(fPing); },
     remove: function (name) { return frpc('friend_remove', { p_username: name }).then(fPing); },
+    hub: function () { return frpc('friends_hub'); },
+    nudge: function (name, kind) { return frpc('friend_nudge', { p_username: name, p_kind: kind }); },
     invite: function (name, matchId) { return frpc('invite_send', { p_username: name, p_match: matchId }); },
     setUsername: function (name) {
       return Ufq.rest('/rest/v1/game_profiles?on_conflict=user_id', { method: 'POST', headers: { Prefer: 'resolution=merge-duplicates,return=minimal' }, body: JSON.stringify({ user_id: (Ufq.user() || {}).id, nick: name }) }).then(fPing);
