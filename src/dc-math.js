@@ -10,6 +10,11 @@ function clean(node, out) {
     if (child.nodeType === 3) { out.appendChild(document.createTextNode(child.nodeValue)); continue }
     if (child.nodeType !== 1) continue
     if (child.tagName === 'SCRIPT' || child.tagName === 'STYLE') continue
+    if (child.tagName === 'IMG') {
+      const src = child.getAttribute('src') || ''
+      if (/^(https:|\/|data:image\/)/.test(src)) { const img = document.createElement('img'); img.src = src; img.alt = child.getAttribute('alt') || ''; img.style.cssText = 'display:block;max-width:100%;max-height:300px;margin:.6em auto'; out.appendChild(img) }
+      continue
+    }
     if (!ALLOWED.has(child.tagName)) { clean(child, out); continue }
     const el = document.createElement(child.tagName)
     if (/text-align\s*:\s*center/i.test(child.getAttribute('style') || '') || child.getAttribute('align') === 'center') el.style.textAlign = 'center'

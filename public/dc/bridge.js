@@ -11,7 +11,7 @@
     Main: '/', Auth: '/auth', ResetPassword: '/reset-password', Welcome: '/welcome', Dashboard: '/dashboard',
     Lesson: '/lesson', PracticeHub: '/practice', Practice: '/practice/session', MockTests: '/mock-tests',
     MockTest: '/mock-test', Plan: '/plan', Mistakes: '/mistakes', Report: '/report', History: '/history',
-    Profile: '/profile', Settings: '/settings', Notifications: '/notifications', Help: '/help', Admin: '/admin',
+    Profile: '/profile', Settings: '/settings', Notifications: '/notifications', Help: '/help', Admin: '/admin', Games: '/games', SpeedRound: '/games/speed', Survival: '/games/survival', Leaderboard: '/games/leaderboard', Duel: '/games/duel', GameReview: '/games/review',
     NotFound: '/404',
   };
   var PUBLIC = { Main: 1, Auth: 1, ResetPassword: 1, NotFound: 1, Help: 1 };
@@ -150,6 +150,13 @@
         opts.headers = Object.assign(authHeaders(token), opts.headers || {});
         return api(path, opts);
       }).then(function (res) { if (key) cachePut(key, res); else if (method !== 'GET') cacheClear(); return res; });
+    },
+    /* number of rows a filtered query matches, without downloading them */
+    restCount: function (path) {
+      return ensureFresh().then(function (s) {
+        var h = authHeaders(s && s.access_token); h.Prefer = 'count=exact'; h.Range = '0-0'; h['Range-Unit'] = 'items';
+        return fetch(cfg.url + path, { headers: h }).then(function (r) { var m = /\/(\d+)$/.exec(r.headers.get('content-range') || ''); return m ? Number(m[1]) : 0; });
+      });
     },
     go: function (name) { location.assign(ROUTES[name] || '/'); },
     toast: function (message, kind) {

@@ -73,6 +73,30 @@
       "destination": "/dc/Admin.dc.html"
     },
     {
+      "source": "/games",
+      "destination": "/dc/Games.dc.html"
+    },
+    {
+      "source": "/games/speed",
+      "destination": "/dc/SpeedRound.dc.html"
+    },
+    {
+      "source": "/games/survival",
+      "destination": "/dc/Survival.dc.html"
+    },
+    {
+      "source": "/games/leaderboard",
+      "destination": "/dc/Leaderboard.dc.html"
+    },
+    {
+      "source": "/games/duel",
+      "destination": "/dc/Duel.dc.html"
+    },
+    {
+      "source": "/games/review",
+      "destination": "/dc/GameReview.dc.html"
+    },
+    {
       "source": "/((?!api/|assets/|dc/|sw\\.js|favicon|robots\\.txt|sitemap\\.xml).*)",
       "destination": "/index.html"
     }

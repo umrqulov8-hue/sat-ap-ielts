@@ -1,0 +1,1098 @@
+<!doctype html>
+<html lang="en">
+<head>
+<link rel="stylesheet" href="/dc/fonts.css">
+<style>@view-transition{navigation:none}</style>
+<style>html,body{margin:0;background:#FFFFFF}</style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ufq — Duel</title>
+<script src="/dc/config.js"></script>
+<script src="/dc/bridge.js"></script>
+<link rel="stylesheet" href="/dc/katex/katex.min.css">
+<link rel="stylesheet" href="/dc/katex/ufq-math.css">
+<script src="/dc/math.js" defer></script>
+<script src="/dc/games-data.js"></script>
+<script src="/dc/_runtime/react.js"></script>
+<script src="/dc/_runtime/react-dom.js"></script>
+<script src="/dc/_runtime/support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+*{box-sizing:border-box}
+::selection{background:#C1121F;color:#FFFFFF}
+a{color:#003049}
+.srf{font-family:'Newsreader','Times New Roman',serif;font-optical-sizing:auto;font-weight:400;letter-spacing:-0.025em}
+.cap{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase}
+.mask{display:block;overflow:hidden;padding:.06em 0 .14em;margin:-.06em 0 -.14em}
+.mask>span{display:block}
+.silver{background-image:linear-gradient(100deg,#AEB5C0 0%,#FFFFFF 22%,#8E97A5 38%,#FFFFFF 52%,#C7CDD6 70%,#FFFFFF 86%,#AEB5C0 100%);background-size:260% 100%;-webkit-background-clip:text;background-clip:text;color:transparent!important;animation:sheen 5s linear infinite}
+@keyframes sheen{from{background-position:0% 0}to{background-position:-260% 0}}
+.pillimg{display:inline-block;vertical-align:-.08em;height:.78em;width:1.7em;border-radius:999px;overflow:hidden;margin:0 .06em;box-shadow:inset 0 0 0 2px #FFFFFF}
+.pillimg img{width:100%;height:100%;object-fit:cover;display:block}
+@keyframes pillIn{from{width:0;margin:0}to{width:1.7em;margin:0 .06em}}
+.pillIn{animation:pillIn 1.2s cubic-bezier(.16,1,.3,1) both}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:12px;min-height:52px;padding:0 24px;border-radius:999px;background:#C1121F;color:#FFFFFF!important;text-decoration:none;font:600 15px 'Inter Tight',sans-serif;border:0;cursor:pointer;position:relative;overflow:hidden;isolation:isolate;transition:transform .6s cubic-bezier(.34,1.56,.64,1)}
+.btn::before{content:"";position:absolute;inset:0;background:#780000;transform:scaleX(0);transform-origin:right;transition:transform .6s cubic-bezier(.16,1,.3,1);z-index:-1}
+.btn:hover::before{transform:scaleX(1);transform-origin:left}
+.btn:active{transform:scale(.98)}
+.btn.navy{background:#003049}.btn.navy::before{background:#0B4A6B}
+.btn .ar{display:inline-grid;overflow:hidden;height:1.2em;line-height:1.2em}
+.btn .ar span{grid-area:1/1;transition:transform .5s cubic-bezier(.16,1,.3,1)}
+.btn .ar span+span{transform:translateX(-140%)}
+.btn:hover .ar span:first-child{transform:translateX(140%)}.btn:hover .ar span+span{transform:none}
+.ghost{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:46px;padding:0 18px;border-radius:999px;border:0;background:transparent;box-shadow:inset 0 0 0 1px rgba(0,48,73,.3);color:#003049;font:600 14px 'Inter Tight',sans-serif;cursor:pointer;text-decoration:none;transition:box-shadow .35s,background .35s}
+.ghost:hover{box-shadow:inset 0 0 0 1px #003049;background:#F4F6F8}
+.lnk{background:none;border:0;padding:0;cursor:pointer;color:#003049;font:600 14px 'Inter Tight',sans-serif;text-decoration:underline;text-underline-offset:3px}
+.lnk:hover{color:#C1121F}
+@keyframes rise{from{transform:translateY(110%)}to{transform:none}}
+.ld>span{animation:rise 1.2s cubic-bezier(.16,1,.3,1) both}
+@keyframes up{from{opacity:0;transform:translateY(20px);filter:blur(6px)}to{opacity:1;transform:none;filter:none}}
+.fu{animation:up 1s cubic-bezier(.16,1,.3,1) both}
+@keyframes curtainUp{0%,22%{transform:none}100%{transform:translateY(-101%)}}
+.curtainUp{will-change:transform;animation:curtainUp 1s cubic-bezier(.76,0,.24,1) both}
+@keyframes logoOut{0%,25%{opacity:1;transform:none}60%,100%{opacity:0;transform:translateY(-30px)}}
+.srf.curtainLogo{animation:logoOut 1s cubic-bezier(.16,1,.3,1) both;background-position:-60% 0}
+.srf.silver.still{animation:none;background-position:-60% 0}
+@keyframes grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.grow{transform-origin:left;animation:grow 1.4s cubic-bezier(.16,1,.3,1) both}
+@supports (animation-timeline: view()){
+.rv{animation:up linear both;animation-timeline:view();animation-range:entry 0% entry 60%}
+.rvg{transform-origin:left;animation:grow linear both;animation-timeline:view();animation-range:entry 10% cover 40%}
+}
+@media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}.curtainUp{display:none}}
+
+html,body{margin:0;background:#FFFFFF}
+.side a.nv{display:flex;align-items:center;gap:12px;min-height:44px;padding:0 14px;border-radius:12px;text-decoration:none;font-weight:500;font-size:15px;color:rgba(0,48,73,.72);transition:background .3s,color .3s}
+.side a.nv:hover{background:#F4F6F8;color:#003049}
+.side a.nv[aria-current="page"]{background:#003049;color:#FFFFFF}
+.side a.nv svg{flex:none}
+.tile{position:relative;border-radius:24px;background:#F4F6F8;padding:24px;display:flex;flex-direction:column;gap:14px;overflow:hidden;text-decoration:none;color:#003049;transition:transform .6s cubic-bezier(.16,1,.3,1),box-shadow .6s cubic-bezier(.16,1,.3,1)}
+a.tile:hover{transform:translateY(-4px);box-shadow:0 24px 48px -28px rgba(0,48,73,.45)}
+.tile .go{position:absolute;top:20px;right:20px;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;box-shadow:inset 0 0 0 1px rgba(0,48,73,.2);transition:transform .5s cubic-bezier(.16,1,.3,1),background .3s,color .3s}
+a.tile:hover .go{transform:rotate(-45deg);background:#003049;color:#FFFFFF}
+@keyframes tileIn{from{opacity:0;transform:translateY(26px) scale(.97);filter:blur(8px)}60%{filter:blur(0)}to{opacity:1;transform:none;filter:none}}
+.ti{animation:tileIn 1s cubic-bezier(.16,1,.3,1) both}
+@keyframes ring{from{stroke-dashoffset:100}}
+.ring{animation:ring 1.8s cubic-bezier(.65,0,.35,1) both}
+@property --n{syntax:'<integer>';initial-value:0;inherits:false}
+.cnt{counter-reset:n var(--n);animation:cnt 1.8s cubic-bezier(.65,0,.35,1) both}
+.cnt::after{content:counter(n)}
+@keyframes cnt{from{--n:400}}
+.task{display:flex;align-items:center;gap:14px;width:100%;padding:14px 0;border:0;border-bottom:1px solid rgba(255,255,255,.16);background:transparent;color:#FFFFFF;text-align:left;font:500 16px 'Inter Tight',sans-serif;cursor:pointer}
+.task .box{flex:none;width:24px;height:24px;border-radius:50%;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.7);display:grid;place-items:center;transition:background .35s,box-shadow .35s}
+.task[aria-pressed="true"] .box{background:#F6DDB0;box-shadow:none}
+.task .tk{opacity:0;transform:scale(.4);transition:opacity .3s,transform .4s cubic-bezier(.34,1.56,.64,1)}
+.task[aria-pressed="true"] .tk{opacity:1;transform:none}
+.task .tt{transition:opacity .35s}
+.task[aria-pressed="true"] .tt{text-decoration:line-through;opacity:.55}
+.seg{min-height:36px;padding:0 14px;border-radius:999px;border:0;background:transparent;font:600 13px 'Inter Tight',sans-serif;color:#003049;cursor:pointer;transition:background .35s,color .35s}
+.seg[aria-pressed="true"]{background:#003049;color:#FFFFFF}
+.dom{display:flex;flex-direction:column;gap:12px;padding:18px;border-radius:18px;background:#FFFFFF;box-shadow:inset 0 0 0 1px rgba(0,48,73,.1);text-decoration:none;color:#003049;transition:box-shadow .4s,transform .5s cubic-bezier(.16,1,.3,1)}
+.dom:hover{box-shadow:inset 0 0 0 1px #003049;transform:translateY(-3px)}
+.pip{flex:1;height:6px;border-radius:6px;transition:background .5s}
+.dayb{flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;gap:8px;padding:12px 4px;border-radius:16px;border:0;background:transparent;cursor:pointer;font:600 12px 'Inter Tight',sans-serif;color:#003049;transition:background .35s,color .35s}
+.dayb:hover{background:#FFFFFF}
+.dayb[aria-pressed="true"]{background:#003049;color:#FFFFFF}
+@keyframes swapIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.swap{animation:swapIn .5s cubic-bezier(.16,1,.3,1) both}
+.kb{animation:kb 18s ease-in-out infinite alternate}
+@keyframes kb{from{transform:scale(1.15)}to{transform:scale(1.02) translate(1%,1%)}}
+@media (max-width: 1180px){.bento{grid-template-columns:repeat(2,minmax(0,1fr))!important}.span4{grid-column:span 2!important}.domg{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+@media (max-width: 820px){.shell{grid-template-columns:1fr!important}.side{position:static!important;height:auto!important;flex-direction:row!important;overflow-x:auto;border-right:0!important;border-bottom:1px solid rgba(0,48,73,.1)}.side .sideExtra{display:none!important}.bento{grid-template-columns:1fr!important}.bento>*{grid-column:auto!important;grid-row:auto!important}}
+.acct{color:#003049;transition:background .3s}.acct:hover,.acct[aria-current="page"]{background:#F4F6F8}.gear{color:rgba(0,48,73,.7);transition:background .3s,color .3s}.gear:hover,.gear[aria-current="page"]{background:#003049;color:#FFFFFF}
+
+
+</style>
+<style>
+.side.dk{background:#003049;color:#FFFFFF;border-right:0!important;overflow:hidden;isolation:isolate}
+@media (max-width: 820px){.side.dk{position:relative!important}}
+.side.dk>.sbg{position:absolute;inset:0;z-index:-1;pointer-events:none}
+.side.dk .srf{color:#FFFFFF}
+.side.dk a.nv{color:rgba(255,255,255,.74)}
+.side.dk a.nv:hover{background:rgba(255,255,255,.12);color:#FFFFFF}
+.side.dk a.nv[aria-current="page"]{background:#FFFFFF;color:#003049;box-shadow:0 10px 24px -14px rgba(0,0,0,.5)}
+.side.dk .acct{color:#FFFFFF}
+.side.dk .acct:hover,.side.dk .acct[aria-current="page"]{background:rgba(255,255,255,.12)}
+.side.dk .gear{color:rgba(255,255,255,.8)}
+.side.dk .gear:hover,.side.dk .gear[aria-current="page"]{background:#FFFFFF;color:#003049}
+@keyframes sideIn{0%{width:100%;opacity:1}74%{width:248px;opacity:1}100%{width:248px;opacity:0}}
+@keyframes lookOut{0%,12%{opacity:1}78%,100%{opacity:0}}
+.panelSide{position:fixed;left:0;top:0;bottom:0;overflow:hidden;background:#003049;z-index:100;pointer-events:none;animation:sideIn 1.35s .1s cubic-bezier(.76,0,.24,1) both}
+.panelSide .lookOut{position:absolute;inset:0;animation:lookOut 1.35s .1s ease-in-out both}
+@media (max-width: 820px){.panelSide{width:100%;animation:panelFade .9s .2s ease both}@keyframes panelFade{from{opacity:1}to{opacity:0}}}
+@media (prefers-reduced-motion: reduce){.panelSide{display:none}}
+</style>
+<style>.ownb{margin-left:auto;font:600 9px 'Inter Tight',sans-serif;letter-spacing:.1em;text-transform:uppercase;padding:3px 7px;border-radius:999px;background:rgba(246,221,176,.22);color:#F6DDB0}.side.dk a.nv[aria-current="page"] .ownb{background:#F6DDB0;color:#780000}</style>
+<style>/*resp1*/@media (max-width:820px){.side a.nv{white-space:nowrap;flex:none;padding:0 11px!important;font-size:14px!important}.side{scrollbar-width:none}.side::-webkit-scrollbar{display:none}}@media (min-width:1900px){.shell>main{max-width:1560px;width:100%;margin-inline:auto}}</style>
+<style>/*tong*/.tg{--s:1}
+.tg .tg-body{transform-box:fill-box;transform-origin:50% 100%}
+.tg .tg-eyes{transform-box:fill-box;transform-origin:50% 50%;animation:tgBlink 5.2s infinite}
+.tg .tg-rays{transform-box:fill-box;transform-origin:50% 100%;animation:tgRays 4.5s ease-in-out infinite}
+.tg-idle .tg-body,.tg-think .tg-body,.tg-oops .tg-body{animation:tgBob 4s ease-in-out infinite}
+.tg-happy .tg-body{animation:tgBob 2.6s ease-in-out infinite}
+.tg-cheer .tg-body{animation:tgJump 1.1s cubic-bezier(.34,1.56,.64,1) infinite}
+.tg-cheer .tg-rays{animation:tgRays .9s ease-in-out infinite}
+.tg-sleep .tg-body{animation:tgBreath 5s ease-in-out infinite}
+.tg-sleep .tg-eyes{animation:none}
+.tg-sleep .tg-z{animation:tgZ 3.6s ease-in-out infinite}
+@keyframes tgBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+@keyframes tgJump{0%,100%{transform:translateY(0) scale(1,1)}18%{transform:translateY(0) scale(1.05,.94)}50%{transform:translateY(-14px) scale(.98,1.04)}}
+@keyframes tgBreath{0%,100%{transform:scale(1)}50%{transform:scale(1.03,1.04)}}
+@keyframes tgRays{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.07);opacity:.85}}
+@keyframes tgBlink{0%,93%,100%{transform:scaleY(1)}96%{transform:scaleY(.08)}}
+@keyframes tgZ{0%,100%{opacity:.35}50%{opacity:1}}
+@media (prefers-reduced-motion: reduce){.tg *{animation:none!important}}
+.tg .tg-hl,.tg .tg-hr{transform-box:fill-box;transform-origin:50% 100%}
+.tg-cheer .tg-hl{animation:tgWave .9s ease-in-out infinite}.tg-cheer .tg-hr{animation:tgWave .9s .45s ease-in-out infinite}
+.tg-happy .tg-hl,.tg-happy .tg-hr{animation:tgTap 2.6s ease-in-out infinite}
+@keyframes tgWave{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-12px) rotate(-8deg)}}
+@keyframes tgTap{0%,100%{transform:translateY(0)}50%{transform:translateY(-2px)}}
+.tgwrap{display:block;flex:none;width:140px;aspect-ratio:200/150;overflow:hidden;border-radius:0 0 18px 18px}
+.tgwrap svg{height:auto}
+.tgcard{position:relative;display:flex;align-items:flex-end;gap:18px;padding:16px 24px 0 16px;border-radius:22px;background:linear-gradient(100deg,#FBF3E3 0%,#FFFFFF 62%);box-shadow:inset 0 0 0 1px rgba(0,48,73,.1);overflow:hidden}
+.tgbtn{flex:none;border:0;background:none;padding:0;cursor:pointer;transition:transform .5s cubic-bezier(.34,1.56,.64,1)}
+.tgbtn:hover{transform:translateY(-3px)}.tgbtn:active{transform:scale(.96)}
+.tgbtn:focus-visible{outline:2px solid #669BBC;outline-offset:4px;border-radius:16px}
+.tgbub{position:relative;flex:1;min-width:0;display:flex;flex-direction:column;gap:6px;padding:4px 0 18px}
+.tgmsg{margin:0;font-family:'Newsreader',serif;font-size:clamp(20px,1.7vw,25px);line-height:1.25;letter-spacing:-.01em;color:#003049;max-width:62ch}
+.tgact{display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin-top:4px}
+.tgdots{display:flex;gap:6px;margin-left:auto}
+.tgdots span{width:6px;height:6px;border-radius:999px;background:rgba(0,48,73,.18);transition:width .5s cubic-bezier(.16,1,.3,1),background .4s}
+.tgdots span[data-on="true"]{width:20px;background:#C1121F}
+@keyframes tgMsgA{from{opacity:0;transform:translateY(8px);filter:blur(4px)}to{opacity:1;transform:none;filter:none}}
+@keyframes tgMsgB{from{opacity:0;transform:translateY(8px);filter:blur(4px)}to{opacity:1;transform:none;filter:none}}
+.tgA{animation:tgMsgA .7s cubic-bezier(.16,1,.3,1) both}.tgB{animation:tgMsgB .7s cubic-bezier(.16,1,.3,1) both}
+.tgmini{display:flex;align-items:flex-end;gap:14px}
+.tgmini .tgwrap{width:84px}
+.tgmini p{position:relative;margin:0 0 10px;padding:12px 16px;border-radius:16px 16px 16px 4px;background:#FBF3E3;color:#003049;font-size:15px;line-height:1.45;max-width:46ch;box-shadow:inset 0 0 0 1px rgba(0,48,73,.08);animation:tgMsgA .7s .25s cubic-bezier(.16,1,.3,1) both}
+.tgmini.sm .tgwrap{width:64px}.tgmini.sm p{font-size:14px;padding:10px 14px;margin-bottom:6px}
+@media (max-width:640px){.tgcard{padding:14px 16px 0 10px;gap:12px}.tgcard .tgwrap{width:86px}.tgmsg{font-size:19px}.tgdots{margin-left:0}}
+</style>
+<style>/*games*//* ---------- math ---------- */
+.mx{display:inline;overflow-wrap:anywhere}
+.mx .mv{font-family:'Newsreader','Times New Roman',serif;font-style:italic;font-size:1.12em;padding:0 .02em}
+.mx .mn,.mx .mdeg,.mx .mf,.mx .mtx{font-family:'Newsreader','Times New Roman',serif;font-size:1.08em}
+.mx .mf{padding-right:.12em}
+.mx .mo{font-family:'Newsreader',serif;font-size:1.08em;padding:0 .22em;display:inline-block}
+.mx .mp{font-family:'Newsreader',serif;font-size:1.08em}
+.mx .msp{display:inline-block;width:.25em}
+.mx .msup{font-size:.68em;vertical-align:.62em;line-height:0;padding-left:.04em;font-style:normal}
+.mx .msub{font-size:.68em;vertical-align:-.3em;line-height:0}
+.mfrac{display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;margin:0 .14em;line-height:1.12}
+.mfrac>.mnum{padding:0 .22em .06em;border-bottom:1.5px solid currentColor;font-size:.92em}
+.mfrac>.mden{padding:.08em .22em 0;font-size:.92em}
+.msqrt{display:inline-flex;align-items:stretch;margin:0 .06em}
+.msqrt .mrad{font-family:'Newsreader',serif;font-size:1.15em;line-height:1}
+.msqrt .mrin{border-top:1.5px solid currentColor;padding:.05em .1em 0;margin-left:-.02em}
+.qp{margin:0;font-size:clamp(18px,2.2vw,21px);line-height:1.6;font-weight:500}
+.qd{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;row-gap:6px;padding:14px 0;font-size:clamp(20px,2.8vw,26px);max-width:100%}
+/* ---------- game shell ---------- */
+.gm{min-height:100vh;background:#FFFFFF;color:#003049;font-family:'Inter Tight','Helvetica Neue',Arial,sans-serif;font-size:16px;line-height:1.5;display:flex;flex-direction:column;outline:none}
+.gbar{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:12px;padding:10px clamp(14px,3vw,28px);background:#FFFFFF;border-bottom:1px solid rgba(0,48,73,.1)}
+.gstage{flex:1;width:min(760px,100%);margin:0 auto;padding:clamp(18px,4vw,44px) clamp(16px,4vw,28px) 40px;display:flex;flex-direction:column;gap:20px}
+.icob{flex:none;display:inline-grid;place-items:center;width:44px;height:44px;border-radius:14px;border:0;background:#F4F6F8;color:#003049;cursor:pointer;text-decoration:none;transition:transform .4s cubic-bezier(.34,1.56,.64,1),background .3s}
+.icob:hover{background:#E8EEF2}.icob:active{transform:scale(.94)}
+.icob:focus-visible,.opt2:focus-visible,.gbtn:focus-visible,.gcard:focus-visible,.tab2:focus-visible{outline:2px solid #669BBC;outline-offset:3px}
+.chipk{display:inline-grid;place-items:center;min-width:22px;height:22px;padding:0 6px;border-radius:7px;box-shadow:inset 0 0 0 1px rgba(0,48,73,.25);font:600 11px 'Inter Tight',sans-serif;color:rgba(0,48,73,.7)}
+.gbtn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:56px;padding:0 26px;border-radius:999px;border:0;cursor:pointer;font:600 16px 'Inter Tight',sans-serif;text-decoration:none;background:#C1121F;color:#FFFFFF;transition:transform .5s cubic-bezier(.34,1.56,.64,1)}
+.gbtn:hover{transform:translateY(-2px)}.gbtn:active{transform:scale(.97)}
+.gbtn.nv{background:#003049}.gbtn.gh{background:transparent;color:#003049;box-shadow:inset 0 0 0 1.5px rgba(0,48,73,.3)}
+.gbtn[aria-disabled="true"]{opacity:.45;pointer-events:none}
+/* options */
+.opts2{display:flex;flex-direction:column;gap:10px}
+.opt2{position:relative;display:flex;align-items:center;gap:14px;width:100%;min-height:62px;padding:12px 16px;border:0;border-radius:16px;background:#FFFFFF;box-shadow:inset 0 0 0 1.5px rgba(0,48,73,.22);color:#003049;text-align:left;font:500 18px 'Inter Tight',sans-serif;cursor:pointer;transition:transform .35s cubic-bezier(.16,1,.3,1),box-shadow .25s,background .25s,opacity .3s}
+.opt2:hover{box-shadow:inset 0 0 0 1.5px #003049;transform:translateY(-1px)}
+.opt2 .ol{flex:none;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;box-shadow:inset 0 0 0 1.5px currentColor;font:600 14px 'Inter Tight',sans-serif;transition:background .25s,color .25s}
+.opt2 .ot{flex:1;min-width:0}
+.opt2 .ok2{flex:none;opacity:0;transform:scale(.4);transition:opacity .25s,transform .4s cubic-bezier(.34,1.56,.64,1)}
+.opt2[data-s="right"]{background:#003049;color:#FFFFFF;box-shadow:none;animation:pulse2 .4s cubic-bezier(.34,1.56,.64,1)}
+.opt2[data-s="right"] .ol{background:#FFFFFF;color:#003049;box-shadow:none}
+.opt2[data-s="right"] .ok2,.opt2[data-s="reveal"] .ok2{opacity:1;transform:none}
+.opt2[data-s="reveal"]{box-shadow:inset 0 0 0 2px #003049;background:#EEF4F8}
+.opt2[data-s="wrong"]{background:#C1121F;color:#FFFFFF;box-shadow:none;animation:shake2 .38s cubic-bezier(.36,.07,.19,.97)}
+.opt2[data-s="wrong"] .ol{background:#FFFFFF;color:#C1121F;box-shadow:none}
+.opt2[data-s="dim"]{opacity:.38}
+.opt2[data-s="gone"]{opacity:.18;transform:scale(.98);pointer-events:none}
+.opt2[data-lock="true"]{pointer-events:none}
+@keyframes pulse2{0%{transform:scale(1)}45%{transform:scale(1.025)}100%{transform:scale(1)}}
+@keyframes shake2{10%,90%{transform:translateX(-2px)}20%,80%{transform:translateX(4px)}30%,50%,70%{transform:translateX(-6px)}40%,60%{transform:translateX(6px)}}
+/* question enter (alternating class re-triggers) */
+@keyframes qInA{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+@keyframes qInB{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+.qA{animation:qInA .45s cubic-bezier(.16,1,.3,1) both}.qB{animation:qInB .45s cubic-bezier(.16,1,.3,1) both}
+.qA .opt2,.qB .opt2{animation:qInA .45s cubic-bezier(.16,1,.3,1) backwards}
+.qA .opt2:nth-child(2),.qB .opt2:nth-child(2){animation-delay:.04s}.qA .opt2:nth-child(3),.qB .opt2:nth-child(3){animation-delay:.08s}.qA .opt2:nth-child(4),.qB .opt2:nth-child(4){animation-delay:.12s}
+.qA .opt2[data-s="right"],.qB .opt2[data-s="right"]{animation:pulse2 .4s cubic-bezier(.34,1.56,.64,1)}
+.qA .opt2[data-s="wrong"],.qB .opt2[data-s="wrong"]{animation:shake2 .38s cubic-bezier(.36,.07,.19,.97)}
+/* timer bar */
+.tbar{position:relative;height:8px;border-radius:999px;background:#EEF2F5;overflow:hidden}
+.tbar>span{position:absolute;inset:0;transform-origin:left;border-radius:999px;transition:transform .1s linear}
+/* score + floats */
+@keyframes popS{0%{transform:scale(1)}40%{transform:scale(1.18)}100%{transform:scale(1)}}
+@keyframes popS2{0%{transform:scale(1)}40%{transform:scale(1.18)}100%{transform:scale(1)}}
+.popA{display:inline-block;animation:popS .35s cubic-bezier(.34,1.56,.64,1)}.popB{display:inline-block;animation:popS2 .35s cubic-bezier(.34,1.56,.64,1)}
+@keyframes floatUpA{0%{opacity:0;transform:translateY(6px) scale(.9)}20%{opacity:1;transform:translateY(0) scale(1)}100%{opacity:0;transform:translateY(-26px)}}
+@keyframes floatUpB{0%{opacity:0;transform:translateY(6px) scale(.9)}20%{opacity:1;transform:translateY(0) scale(1)}100%{opacity:0;transform:translateY(-26px)}}
+.flA{animation:floatUpA .9s cubic-bezier(.16,1,.3,1) both}.flB{animation:floatUpB .9s cubic-bezier(.16,1,.3,1) both}
+/* countdown */
+@keyframes cdA{0%{opacity:0;transform:scale(1.8)}25%{opacity:1;transform:scale(1)}80%{opacity:1;transform:scale(.96)}100%{opacity:0;transform:scale(.7)}}
+@keyframes cdB{0%{opacity:0;transform:scale(1.8)}25%{opacity:1;transform:scale(1)}80%{opacity:1;transform:scale(.96)}100%{opacity:0;transform:scale(.7)}}
+.cdA{animation:cdA 1s cubic-bezier(.16,1,.3,1) both}.cdB{animation:cdB 1s cubic-bezier(.16,1,.3,1) both}
+/* generic enters */
+@keyframes riseG{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+.rg{animation:riseG .7s cubic-bezier(.16,1,.3,1) both}
+@keyframes slideIn{from{opacity:0;transform:translateX(-24px)}to{opacity:1;transform:none}}
+.si{animation:slideIn .6s cubic-bezier(.16,1,.3,1) both}
+@keyframes popIn{0%{opacity:0;transform:scale(.6)}70%{opacity:1;transform:scale(1.06)}100%{opacity:1;transform:scale(1)}}
+.pi{animation:popIn .55s cubic-bezier(.34,1.56,.64,1) both}
+@keyframes loadBar{from{transform:scaleX(.05)}to{transform:scaleX(.92)}}
+.lbar{height:4px;border-radius:999px;background:#EEF2F5;overflow:hidden}.lbar>span{display:block;height:100%;background:#003049;transform-origin:left;animation:loadBar 2.4s cubic-bezier(.16,1,.3,1) both}
+.skel{border-radius:14px;background:#F1F4F7}
+/* stats */
+.stat2{display:flex;flex-direction:column;gap:4px;padding:16px;border-radius:16px;background:#F4F6F8}
+.stat2 .v{font-family:'Newsreader',serif;font-size:clamp(28px,4vw,38px);line-height:1;letter-spacing:-.02em}
+.stat2 .k{font-size:13px;color:rgba(0,48,73,.66)}
+.grid4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+@media (max-width:620px){.grid4{grid-template-columns:repeat(2,minmax(0,1fr))}}
+/* dialog + banners */
+.scrim{position:fixed;inset:0;z-index:80;background:rgba(0,30,46,.9);display:grid;place-items:center;padding:16px;animation:riseG .01s both}
+.dlg2{width:min(440px,100%);background:#FFFFFF;border-radius:24px;padding:26px;display:flex;flex-direction:column;gap:14px;box-shadow:0 40px 80px -30px rgba(0,0,0,.5);animation:popIn .45s cubic-bezier(.34,1.56,.64,1) both}
+.bnr{display:flex;align-items:center;gap:12px;padding:12px 16px;border-radius:14px;font-size:14px}
+.bnr.off{background:#FBF3E3;color:#780000}.bnr.err{background:#FBE7E9;color:#780000}.bnr.info{background:#EEF4F8;color:#003049}
+.toast2{position:fixed;left:50%;bottom:24px;z-index:90;transform:translateX(-50%);background:#003049;color:#FFFFFF;padding:12px 20px;border-radius:999px;font-size:14px;font-weight:600;box-shadow:0 20px 40px -18px rgba(0,48,73,.6);animation:riseG .45s cubic-bezier(.16,1,.3,1) both;white-space:nowrap;max-width:calc(100vw - 32px);overflow:hidden;text-overflow:ellipsis}
+.pill2{display:inline-flex;align-items:center;gap:6px;padding:5px 11px;border-radius:999px;font:600 12px 'Inter Tight',sans-serif;letter-spacing:.02em}
+.rules2{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.rules2 li{display:grid;grid-template-columns:44px minmax(0,1fr);gap:14px;align-items:start;padding:14px 0;border-bottom:1px solid rgba(0,48,73,.1)}
+.rules2 li:last-child{border-bottom:0}
+.rules2 .ri{width:44px;height:44px;border-radius:14px;display:grid;place-items:center;background:#F4F6F8}
+.swi{position:relative;flex:none;width:46px;height:28px;border:0;border-radius:999px;background:rgba(0,48,73,.22);cursor:pointer;transition:background .3s}
+.swi>span{position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:#FFFFFF;box-shadow:0 2px 6px rgba(0,48,73,.35);transition:transform .45s cubic-bezier(.34,1.56,.64,1)}
+.swi[aria-checked="true"]{background:#003049}.swi[aria-checked="true"]>span{transform:translateX(18px)}
+.swi:focus-visible{outline:2px solid #669BBC;outline-offset:2px}
+.gm .tg,.gm .tg *{animation-iteration-count:2!important}
+@media (max-width:520px){.opt2{font-size:17px;min-height:58px;padding:10px 12px}.hide-xs{display:none!important}}
+@media (prefers-reduced-motion: reduce){.gm *,.gm *::before{animation:none!important;transition:none!important}}
+.tab2{min-height:44px;padding:0 16px;border-radius:999px;border:0;background:#F4F6F8;color:rgba(0,48,73,.75);font:600 14px 'Inter Tight',sans-serif;cursor:pointer;transition:background .3s,color .3s,transform .4s cubic-bezier(.34,1.56,.64,1)}
+.tab2:hover{color:#003049}.tab2[aria-selected="true"]{background:#003049;color:#FFFFFF}
+.rcard2{display:flex;flex-direction:column;gap:14px;padding:clamp(16px,3vw,24px);border-radius:22px;box-shadow:inset 0 0 0 1px rgba(0,48,73,.14);background:#FFFFFF}
+.ropt{display:flex;align-items:center;gap:12px;padding:10px 14px;border-radius:14px;box-shadow:inset 0 0 0 1px rgba(0,48,73,.14);font-size:17px}
+.ropt .ol{flex:none;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;box-shadow:inset 0 0 0 1.5px currentColor;font:600 13px 'Inter Tight',sans-serif}
+.ropt .rtag{font:600 12px 'Inter Tight',sans-serif;letter-spacing:.02em;white-space:nowrap}
+.ropt[data-s="right"]{box-shadow:inset 0 0 0 2px #003049;background:#EEF4F8}
+.ropt[data-s="right"] .ol{background:#003049;color:#FFFFFF;box-shadow:none}
+.ropt[data-s="mine"]{box-shadow:inset 0 0 0 2px #C1121F;background:#FBE7E9;color:#780000}
+.ropt[data-s="mine"] .ol{background:#C1121F;color:#FFFFFF;box-shadow:none}
+.ropt[data-s="none"]{opacity:.55}
+.codein{flex:1;min-width:0;height:56px;padding:0 16px;border:0;border-radius:16px;background:#F4F6F8;box-shadow:inset 0 0 0 1.5px rgba(0,48,73,.22);font:600 22px 'Inter Tight',sans-serif;letter-spacing:.24em;text-transform:uppercase;color:#003049;outline:none;transition:box-shadow .3s,background .3s}
+.codein:focus{box-shadow:inset 0 0 0 2px #003049;background:#FFFFFF}
+.codein[aria-invalid="true"]{box-shadow:inset 0 0 0 2px #C1121F}
+.codebox{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px;max-width:520px}
+.codebox>span{display:grid;place-items:center;aspect-ratio:3/4;border-radius:16px;background:#003049;color:#FFFFFF;font-family:'Newsreader',serif;font-size:clamp(34px,9vw,56px)}
+.drow{display:flex;align-items:center;gap:14px;padding:14px 16px;border-radius:18px;box-shadow:inset 0 0 0 1px rgba(0,48,73,.14);flex-wrap:wrap}
+.vs{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:12px;align-items:center}
+.vsc{display:flex;flex-direction:column;gap:6px;padding:20px;border-radius:22px;background:#F4F6F8;min-width:0}
+.vsc .cap{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.vsc[data-w="true"]{background:#003049;color:#FFFFFF}
+.cmp{display:grid;grid-template-columns:36px minmax(0,1fr) 90px 90px;gap:10px;align-items:center;padding:12px 18px;border-top:1px solid rgba(0,48,73,.08)}
+@media (max-width:520px){.cmp{grid-template-columns:28px minmax(0,1fr) 70px 70px;padding:10px 14px}.vs{grid-template-columns:1fr;}.vs>.srf{display:none}}
+.wk{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:24px;align-items:end;padding:clamp(22px,3vw,34px);border-radius:26px;background:#003049;color:#FFFFFF;overflow:hidden}
+.wkr{display:flex;flex-direction:column;gap:6px;align-items:flex-end;text-align:right}
+@media (max-width:640px){.wk{grid-template-columns:1fr}.wkr{align-items:flex-start;text-align:left}}
+.ggrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+@media (max-width:860px){.ggrid{grid-template-columns:1fr}}
+.gcard{position:relative;display:flex;flex-direction:column;gap:18px;min-height:300px;padding:clamp(20px,2.6vw,30px);border-radius:26px;overflow:hidden;transition:transform .6s cubic-bezier(.16,1,.3,1)}
+.gcard:hover{transform:translateY(-4px)}
+.gart{position:absolute;top:18px;right:18px;transition:transform .7s cubic-bezier(.16,1,.3,1)}
+.gcard:hover .gart{transform:rotate(-6deg) scale(1.06)}
+.gart .ghand{transform-box:fill-box;transform-origin:50% 100%;transition:transform 1s cubic-bezier(.16,1,.3,1)}
+.gcard:hover .ghand{transform:rotate(300deg)}
+.gart .gp1,.gart .gp2,.gart .gp3{transform-box:fill-box;transform-origin:50% 100%;transition:transform .7s cubic-bezier(.34,1.56,.64,1)}
+.gcard:hover .gp1{transform:scaleY(1.08)}.gcard:hover .gp2{transform:scaleY(.9)}.gcard:hover .gp3{transform:scaleY(1.15)}
+.gart .gd1,.gart .gd2{transition:transform .7s cubic-bezier(.34,1.56,.64,1)}
+.gcard:hover .gd1{transform:translateX(-6px)}.gcard:hover .gd2{transform:translateX(6px)}
+.gart .gstep{transition:transform .7s cubic-bezier(.16,1,.3,1)}.gcard:hover .gstep{transform:translate(4px,-4px)}
+@media (max-width:520px){.gart svg{width:72px;height:72px}.gcard{min-height:260px}}
+.optin{display:flex;flex-direction:column;gap:16px;padding:clamp(20px,3vw,30px);border-radius:24px;background:#FBF3E3}
+.podium{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;align-items:end}
+.pod{display:flex;flex-direction:column;gap:8px;align-items:flex-start;justify-content:flex-end;padding:18px;border-radius:22px;background:#F4F6F8;min-width:0;animation:riseG .7s cubic-bezier(.16,1,.3,1) backwards}
+.pod[data-r="1"]{order:2;min-height:210px;background:#003049;color:#FFFFFF}
+.pod[data-r="2"]{order:1;min-height:170px;background:#EEF4F8}
+.pod[data-r="3"]{order:3;min-height:140px;background:#FBF3E3}
+.pod[data-me="true"]{box-shadow:inset 0 0 0 2.5px #C1121F}
+@media (max-width:560px){.podium{grid-template-columns:1fr}.pod{min-height:0!important;flex-direction:row;align-items:center;gap:14px}.pod[data-r="1"]{order:1}.pod[data-r="2"]{order:2}.pod[data-r="3"]{order:3}.pod>.srf:last-child{margin-left:auto}}
+.lblist{position:relative;border-radius:22px;box-shadow:inset 0 0 0 1px rgba(0,48,73,.14);overflow:hidden}
+.lbrow{display:grid;grid-template-columns:44px minmax(0,1fr) minmax(0,1.2fr) 90px;gap:14px;align-items:center;min-height:56px;padding:8px 20px;border-top:1px solid rgba(0,48,73,.08);background:#FFFFFF;animation:riseG .55s cubic-bezier(.16,1,.3,1) backwards}
+.lbrow:first-child{border-top:0}
+.lbrow[data-me="true"]{background:#FBE7E9}
+.lbrow.pin{position:sticky;bottom:0;box-shadow:0 -10px 24px -16px rgba(0,48,73,.4)}
+.lbbar{display:block;height:6px;border-radius:999px;background:#EEF2F5;overflow:hidden}
+.lbbar>span{display:block;height:100%;background:#003049;transform-origin:left;transition:transform .8s cubic-bezier(.16,1,.3,1)}
+.lbgap{text-align:center;padding:6px;color:rgba(0,48,73,.4);letter-spacing:.3em;border-top:1px solid rgba(0,48,73,.08)}
+@media (max-width:520px){.lbrow{grid-template-columns:34px minmax(0,1fr) 76px;padding:8px 14px}}
+.gcard h2{max-width:calc(100% - 100px)}
+@media (max-width:640px){.rsblk{align-items:flex-start!important;text-align:left!important}}
+/* ---------- motion kit v2 ---------- */
+.burst{position:fixed;left:50%;top:34%;width:0;height:0;pointer-events:none;z-index:70}
+.burst>span{position:absolute;left:0;top:0;border-radius:2px;opacity:0;animation:burstK 1.25s var(--d) cubic-bezier(.12,.8,.3,1) forwards}
+@keyframes burstK{0%{opacity:1;transform:translate(0,0) rotate(0) scale(.4)}15%{opacity:1}100%{opacity:0;transform:translate(var(--x),var(--y)) rotate(var(--r)) scale(1)}}
+.cbanner{position:fixed;left:0;right:0;top:42%;z-index:60;pointer-events:none;text-align:center;font-family:'Newsreader',serif;font-style:italic;font-size:clamp(56px,12vw,120px);line-height:1;color:#C1121F}
+.cbA{animation:cbK .95s cubic-bezier(.16,1,.3,1) forwards}.cbB{animation:cbK2 .95s cubic-bezier(.16,1,.3,1) forwards}
+@keyframes cbK2{0%{opacity:0;transform:translateX(-18%) skewX(-8deg)}25%{opacity:1;transform:none}70%{opacity:1;transform:translateX(2%)}100%{opacity:0;transform:translateX(16%) skewX(6deg)}}
+@keyframes cbK{0%{opacity:0;transform:translateX(-18%) skewX(-8deg)}25%{opacity:1;transform:none}70%{opacity:1;transform:translateX(2%)}100%{opacity:0;transform:translateX(16%) skewX(6deg)}}
+.segc{position:relative;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));padding:5px;border-radius:999px;background:#F4F6F8;max-width:420px}
+.segc .segthumb{position:absolute;top:5px;bottom:5px;left:5px;width:calc((100% - 10px) / 3);border-radius:999px;background:#003049;box-shadow:0 10px 20px -12px rgba(0,48,73,.8);transition:transform .55s cubic-bezier(.34,1.4,.64,1)}
+.segc button{position:relative;z-index:1;min-height:48px;border:0;background:transparent;border-radius:999px;font:600 15px 'Inter Tight',sans-serif;color:rgba(0,48,73,.7);cursor:pointer;transition:color .35s}
+.segc button[aria-checked="true"]{color:#FFFFFF}
+.segc button:focus-visible{outline:2px solid #669BBC;outline-offset:2px}
+.mask2{display:block;overflow:hidden;padding:.04em 0 .12em;margin:-.04em 0 -.12em}
+.mask2>span{display:block;animation:rise2 1s cubic-bezier(.16,1,.3,1) both}
+@keyframes rise2{from{transform:translateY(105%)}to{transform:none}}
+@keyframes ringOut{0%{opacity:.6;transform:scale(.6)}100%{opacity:0;transform:scale(1.8)}}
+@keyframes ringOut2{0%{opacity:.6;transform:scale(.6)}100%{opacity:0;transform:scale(1.8)}}
+.cdring{position:absolute;inset:0;margin:auto;width:min(60vw,360px);height:min(60vw,360px);border-radius:50%;border:2px solid #F6DDB0}.cdring.cdA{animation:ringOut 1s cubic-bezier(.16,1,.3,1) both}.cdring.cdB{animation:ringOut2 1s cubic-bezier(.16,1,.3,1) both}
+/* ---------- matches ---------- */
+.lobgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(280px,100%),1fr));gap:12px}
+.lob{display:flex;flex-direction:column;gap:12px;min-height:200px;padding:18px;border-radius:22px;background:#FFFFFF;box-shadow:inset 0 0 0 1px rgba(0,48,73,.14);animation:riseG .6s cubic-bezier(.16,1,.3,1) backwards;transition:transform .5s cubic-bezier(.16,1,.3,1),box-shadow .3s}
+.lob:hover{transform:translateY(-3px);box-shadow:inset 0 0 0 1.5px #003049}
+.lob[data-st="full"],.lob[data-st="playing"]{background:#F7F9FA}
+.meter{display:flex;flex-wrap:wrap;gap:4px}
+.meter>span{flex:1 0 8px;max-width:28px;height:8px;border-radius:999px}
+.codechip{display:flex;flex-direction:column;gap:2px;align-items:flex-start;padding:14px 18px;border-radius:18px;background:#003049;color:#FFFFFF}
+.seats{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(150px,46%),1fr));gap:10px}
+.seats[data-n="2"]{grid-template-columns:repeat(2,minmax(0,1fr))}
+.seat{position:relative;display:flex;align-items:center;gap:10px;min-height:64px;padding:10px 12px;border-radius:18px;box-shadow:inset 0 0 0 1.5px rgba(0,48,73,.14);background:#FFFFFF}
+.seats[data-n="2"] .seat{flex-direction:column;justify-content:center;min-height:170px}
+.seats[data-n="2"] .seat .av{width:72px;height:72px;font-size:26px}
+.seat.on{animation:seatIn .6s cubic-bezier(.34,1.56,.64,1) both;box-shadow:none;background:#F4F6F8}
+.seat[data-me="true"]{background:#FBF3E3;box-shadow:inset 0 0 0 2px #C1121F}
+@keyframes seatIn{0%{opacity:0;transform:scale(.7) translateY(10px)}100%{opacity:1;transform:none}}
+.seat .sn{font-weight:600;font-size:14px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.crown2{position:absolute;top:-8px;left:8px;animation:popIn .6s .2s cubic-bezier(.34,1.56,.64,1) both}
+.av{flex:none;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;font:700 14px 'Inter Tight',sans-serif;letter-spacing:.02em}
+.av.e{background:transparent;box-shadow:inset 0 0 0 1.5px rgba(0,48,73,.25);border-style:dashed}
+.av.sm{width:28px;height:28px;font-size:11px}.av.lg{width:64px;height:64px;font-size:22px}
+.playgrid{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:24px;width:min(1120px,100%);margin:0 auto;padding:0 clamp(0px,2vw,20px)}
+.live{position:sticky;top:150px;align-self:start;display:flex;flex-direction:column;gap:10px;padding:clamp(18px,3vw,28px) 0}
+.liveb{position:relative}
+.liver{position:absolute;left:0;right:0;top:0;height:40px;display:flex;align-items:center;gap:8px;padding:0 10px;border-radius:12px;transition:transform .7s cubic-bezier(.16,1,.3,1),opacity .4s}
+.liver[data-me="true"]{background:#FBE7E9}
+@media (max-width:980px){.playgrid{grid-template-columns:1fr}.live{position:static;order:-1;padding:12px 16px 0}.liveb{height:auto!important}.liver{position:static;transform:none!important;display:none}.liver[data-me="true"]{display:flex}}
+.sheet{width:min(520px,100%);max-height:calc(100vh - 32px);overflow-y:auto}
+@media (max-width:560px){.scrim{place-items:end center;padding:0}.sheet,.dlg2{border-radius:24px 24px 0 0;width:100%;animation:sheetUp .5s cubic-bezier(.16,1,.3,1) both}}
+@keyframes sheetUp{from{transform:translateY(100%)}to{transform:none}}
+.podium2{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;align-items:end;min-height:300px}
+.pcol{display:flex;flex-direction:column;align-items:center;gap:8px;min-width:0}
+.pcol[data-r="1"]{order:2}.pcol[data-r="2"]{order:1}.pcol[data-r="3"]{order:3}
+.pnick{font-weight:600;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pbar{width:100%;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:4px;padding-top:14px;border-radius:18px 18px 6px 6px;background:#F4F6F8;transform-origin:bottom;animation:barUp .9s cubic-bezier(.16,1,.3,1) backwards}
+.pcol[data-r="1"] .pbar{height:200px;background:#003049;color:#FFFFFF}.pcol[data-r="2"] .pbar{height:156px;background:#EEF4F8}.pcol[data-r="3"] .pbar{height:124px;background:#FBF3E3}
+.pcol[data-me="true"] .pbar{box-shadow:inset 0 0 0 3px #C1121F}
+@keyframes barUp{from{transform:scaleY(0)}to{transform:none}}
+.pdrop{animation:dropIn .7s cubic-bezier(.34,1.56,.64,1) backwards}
+@keyframes dropIn{0%{opacity:0;transform:translateY(-40px) scale(.6)}100%{opacity:1;transform:none}}
+@keyframes spin1{to{transform:rotate(360deg)}}
+@keyframes spin2{to{transform:rotate(360deg)}}
+.spinA{animation:spin1 .7s cubic-bezier(.16,1,.3,1)}.spinB{animation:spin2 .7s cubic-bezier(.16,1,.3,1)}
+@keyframes shakeT{10%,90%{transform:translateX(-1px)}20%,80%{transform:translateX(3px)}30%,50%,70%{transform:translateX(-5px)}40%,60%{transform:translateX(5px)}}
+@keyframes shakeT2{10%,90%{transform:translateX(-1px)}20%,80%{transform:translateX(3px)}30%,50%,70%{transform:translateX(-5px)}40%,60%{transform:translateX(5px)}}
+.shA{animation:shakeT .4s cubic-bezier(.36,.07,.19,.97)}.shB{animation:shakeT2 .4s cubic-bezier(.36,.07,.19,.97)}
+
+.dlg2 .codein,.dlg2 input{flex:none}
+/* ---------- leaderboard v2 ---------- */
+.lbwrap{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.3fr);gap:14px;align-items:stretch}
+@media (max-width:900px){.lbwrap{grid-template-columns:1fr}}
+.hero1{position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:8px;padding:clamp(22px,3vw,32px);padding-top:70px;border-radius:26px;background:#003049;color:#FFFFFF;overflow:hidden;animation:riseG .7s cubic-bezier(.16,1,.3,1) backwards}
+.hero1[data-me="true"]{box-shadow:inset 0 0 0 3px #C1121F}
+.crownW{position:absolute;top:14px;left:clamp(22px,3vw,32px);animation:crownDrop 1s .9s cubic-bezier(.34,1.56,.64,1) backwards;transform-origin:50% 100%}
+.crownW svg{width:72px;height:48px}
+@keyframes crownDrop{0%{opacity:0;transform:translateY(-60px) rotate(-18deg) scale(.6)}60%{opacity:1;transform:translateY(4px) rotate(4deg)}100%{transform:none}}
+.dlt{display:inline-flex;align-items:center;gap:3px;padding:2px 7px;border-radius:999px;font:700 12px 'Inter Tight',sans-serif;white-space:nowrap;animation:dltIn .6s .6s cubic-bezier(.34,1.56,.64,1) backwards}
+@keyframes dltIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.lbrow{grid-template-columns:44px minmax(0,1fr) minmax(0,1fr) 60px 90px!important}
+@media (max-width:520px){.lbrow{grid-template-columns:30px minmax(0,1fr) 46px 64px!important}}
+.movers{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:14px 16px;border-radius:18px;background:#F4F6F8}
+.mvchip{display:inline-flex;gap:6px;align-items:center;padding:6px 12px;border-radius:999px;background:#FFFFFF;font-size:13px;box-shadow:inset 0 0 0 1px rgba(0,48,73,.1)}
+.histc{display:grid;grid-template-columns:auto minmax(0,1fr);gap:20px;align-items:center;padding:16px 20px;border-radius:20px;box-shadow:inset 0 0 0 1px rgba(0,48,73,.14)}
+.sparkw{position:relative;overflow:hidden}
+.sparkcover{position:absolute;inset:0;background:#FFFFFF;transform-origin:right;animation:uncover 1.4s .5s cubic-bezier(.65,0,.35,1) both}
+@keyframes uncover{from{transform:scaleX(1)}to{transform:scaleX(0)}}
+@media (max-width:520px){.histc{grid-template-columns:1fr}}
+.rwgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+@media (max-width:1000px){.rwgrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:520px){.rwgrid{grid-template-columns:1fr}}
+.rwc{display:flex;flex-direction:column;gap:6px;padding:20px;border-radius:22px;background:#F4F6F8;animation:rwIn .8s cubic-bezier(.34,1.3,.64,1) backwards;transition:transform .5s cubic-bezier(.16,1,.3,1)}
+.rwc:hover{transform:translateY(-4px)}
+.rwc:hover .medal{transform:rotate(-10deg) scale(1.08)}
+.rwc[data-tone="gold"]{background:#003049;color:#FFFFFF}
+.rwc[data-got="true"]{box-shadow:inset 0 0 0 2px #C1121F}
+.medal{display:inline-block;transition:transform .6s cubic-bezier(.34,1.56,.64,1)}
+@keyframes rwIn{from{opacity:0;transform:translateY(26px) rotate(-2deg)}to{opacity:1;transform:none}}
+/* ---------- page wipe ---------- */
+.wipeC{position:fixed;z-index:200;width:20px;height:20px;border-radius:50%;pointer-events:none;transform:translate(-50%,-50%) scale(0);animation:wipeGrow .62s cubic-bezier(.76,0,.24,1) forwards}
+@keyframes wipeGrow{to{transform:translate(-50%,-50%) scale(var(--s))}}
+.wipeIn{position:fixed;inset:0;z-index:200;pointer-events:none;transform-origin:top;animation:wipeLift .8s .05s cubic-bezier(.76,0,.24,1) forwards}
+@keyframes wipeLift{0%{transform:translateY(0)}100%{transform:translateY(-101%)}}
+@media (prefers-reduced-motion: reduce){.wipeC,.wipeIn{display:none}}
+/* ---------- countdown: stone into water ---------- */
+.cdstage{position:relative;flex:1;min-height:100vh;display:grid;place-items:center;background:#003049;color:#FFFFFF;overflow:hidden}
+.cdnum{position:relative;z-index:2;font-size:clamp(160px,34vw,300px);line-height:1}
+.cdcap{position:absolute;left:0;right:0;bottom:14vh;z-index:2;text-align:center;color:#F6DDB0}
+.ripples{position:absolute;left:50%;top:50%;width:0;height:0;z-index:1}
+.ripples>span{position:absolute;left:0;top:0;width:min(130vmin,1000px);height:min(130vmin,1000px);border-radius:50%;border:2.5px solid rgba(246,221,176,.8);opacity:0;transform:translate(-50%,-50%) scale(.02)}
+.ripples>span.splash{width:min(34vmin,260px);height:min(34vmin,260px);border:0;background:radial-gradient(closest-side,rgba(246,221,176,.32),rgba(246,221,176,0))}
+.ripples.cdA>span{animation:ripA 1.6s cubic-bezier(.12,.6,.3,1) both}.ripples.cdB>span{animation:ripB 1.6s cubic-bezier(.12,.6,.3,1) both}
+.ripples>span:nth-child(1){animation-delay:.16s!important}.ripples>span:nth-child(2){animation-delay:.34s!important}.ripples>span:nth-child(3){animation-delay:.56s!important}
+.ripples.cdA>span.splash{animation:splA .8s .12s cubic-bezier(.16,1,.3,1) both!important}.ripples.cdB>span.splash{animation:splB .8s .12s cubic-bezier(.16,1,.3,1) both!important}
+@keyframes ripA{0%{opacity:0;transform:translate(-50%,-50%) scale(.02)}8%{opacity:.9}100%{opacity:0;transform:translate(-50%,-50%) scale(1)}}
+@keyframes ripB{0%{opacity:0;transform:translate(-50%,-50%) scale(.02)}8%{opacity:.9}100%{opacity:0;transform:translate(-50%,-50%) scale(1)}}
+@keyframes splA{0%{opacity:0;transform:translate(-50%,-50%) scale(.2)}30%{opacity:1}100%{opacity:0;transform:translate(-50%,-50%) scale(1.6)}}
+@keyframes splB{0%{opacity:0;transform:translate(-50%,-50%) scale(.2)}30%{opacity:1}100%{opacity:0;transform:translate(-50%,-50%) scale(1.6)}}
+.cdnum.cdA{animation:dropA .85s cubic-bezier(.3,1.4,.5,1) both}.cdnum.cdB{animation:dropB .85s cubic-bezier(.3,1.4,.5,1) both}
+@keyframes dropA{0%{opacity:0;transform:translateY(-70px) scale(1.2)}20%{opacity:1;transform:translateY(0) scale(.94,1.04)}35%{transform:scale(1.03,.97)}50%,82%{opacity:1;transform:none}100%{opacity:0;transform:translateY(10px) scale(.96)}}
+@keyframes dropB{0%{opacity:0;transform:translateY(-70px) scale(1.2)}20%{opacity:1;transform:translateY(0) scale(.94,1.04)}35%{transform:scale(1.03,.97)}50%,82%{opacity:1;transform:none}100%{opacity:0;transform:translateY(10px) scale(.96)}}
+/* ---------- hub entry choreography ---------- */
+.wk{animation:wkIn .9s .08s cubic-bezier(.16,1,.3,1) backwards}
+@keyframes wkIn{from{opacity:0;transform:translateY(24px) scale(.97)}to{opacity:1;transform:none}}
+.gcard.gin{animation:gIn .95s cubic-bezier(.16,1,.3,1) backwards}
+@keyframes gIn{from{opacity:0;transform:translateY(46px) rotate(1.2deg) scale(.97)}to{opacity:1;transform:none}}
+.gin .gart{animation:artIn 1s cubic-bezier(.34,1.4,.64,1) backwards;animation-delay:inherit}
+@keyframes artIn{from{opacity:0;transform:scale(.5) rotate(-20deg)}to{opacity:1;transform:none}}
+.gin .ghand{animation:handIn 1.4s .5s cubic-bezier(.16,1,.3,1) backwards}
+@keyframes handIn{from{transform:rotate(-200deg)}to{transform:none}}
+.gin .gp1,.gin .gp2,.gin .gp3{animation:barIn .9s cubic-bezier(.34,1.4,.64,1) backwards}
+.gin .gp2{animation-delay:.55s}.gin .gp1{animation-delay:.7s}.gin .gp3{animation-delay:.85s}
+@keyframes barIn{from{transform:scaleY(0)}to{transform:none}}
+.gin .gd1{animation:dl1 1s .5s cubic-bezier(.34,1.4,.64,1) backwards}.gin .gd2{animation:dl2 1s .5s cubic-bezier(.34,1.4,.64,1) backwards}
+@keyframes dl1{from{transform:translateX(-26px);opacity:0}to{transform:none;opacity:1}}@keyframes dl2{from{transform:translateX(26px);opacity:0}to{transform:none;opacity:1}}
+.gin .gstep{animation:stIn 1s .5s cubic-bezier(.16,1,.3,1) backwards}
+@keyframes stIn{from{transform:translate(-14px,14px);opacity:0}to{transform:none;opacity:1}}
+</style>
+</helmet>
+<div class="gm" tabIndex="-1" onKeyDown="{{onKey}}" ref="{{rootRef}}">
+
+<sc-if value="{{showBar}}" hint-placeholder-val="{{ true }}">
+<header class="gbar">
+<a href="/games" class="icob" aria-label="Back to Games" onClick="{{goGamesDuel}}"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></a>
+<span style="font-weight: 600">{{barTitle}}</span>
+<span style="margin-left: auto"></span>
+<button type="button" class="icob" onClick="{{toggleSound}}" aria-pressed="{{soundOn}}" aria-label="Sound"><sc-if value="{{soundIs}}" hint-placeholder-val="{{ false }}"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10v4h4l5 4V6L8 10H4zM16 9a4 4 0 0 1 0 6M18.5 6.5a7.5 7.5 0 0 1 0 11" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg></sc-if><sc-if value="{{soundNot}}" hint-placeholder-val="{{ true }}"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10v4h4l5 4V6L8 10H4zM17 10l4 4M21 10l-4 4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg></sc-if></button>
+</header>
+</sc-if>
+
+<!-- ================= BROWSE ================= -->
+<sc-if value="{{isBrowse}}" hint-placeholder-val="{{ true }}">
+<main class="gstage" style="width: min(1120px, 100%)">
+<sc-if value="{{offline}}" hint-placeholder-val="{{ false }}"><div class="bnr off rg" role="status"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 9a15 15 0 0 1 20 0M5.5 12.5a10 10 0 0 1 13 0M9 16a5 5 0 0 1 6 0M12 19.5h.01M3 3l18 18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path></svg><span>You’re offline. Questions already loaded still work; results save when you reconnect.</span></div></sc-if>
+<div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 20px; flex-wrap: wrap">
+<div class="rg" style="display: flex; flex-direction: column; gap: 8px">
+<span class="cap" style="color: #669BBC">Game 4 · 2 to 20 players</span>
+<h1 class="srf" style="margin: 0; font-size: clamp(48px, 9vw, 88px); line-height: .95"><span class="mask2"><span>Du<em style="color: #C1121F">el.</em></span></span></h1>
+<p style="margin: 0; max-width: 48ch; font-size: 17px; color: rgba(0,48,73,.75)">One-on-one or a room of twenty. Join an open match below, or start your own — public for anyone, private with a password.</p>
+</div>
+<div class="rg" style="animation-delay: .1s; display: flex; flex-direction: column; gap: 10px; align-items: stretch; min-width: min(340px, 100%)">
+<button type="button" class="gbtn" onClick="{{openCreate}}">+ Create match</button>
+<form onSubmit="{{joinCode}}" style="display: flex; gap: 8px">
+<label for="jcode" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Match code</label>
+<input id="jcode" class="codein" style="height: 52px; font-size: 18px" type="text" autoComplete="off" maxLength="6" placeholder="CODE" value="{{code}}" onChange="{{onCode}}">
+<button type="submit" class="gbtn nv" style="min-height: 52px" aria-disabled="{{codeDis}}">Join</button>
+</form>
+</div>
+</div>
+
+<sc-if value="{{hasMine}}" hint-placeholder-val="{{ false }}">
+<div class="drow rg" style="animation-delay: .12s; background: #FBF3E3; box-shadow: none"><span class="pill2" style="background: #C1121F; color: #FFFFFF">Your match</span><span style="font-weight: 600; flex: 1; min-width: 0">{{mine.name}} · {{mine.count}}/{{mine.maxPlayers}} players</span><button type="button" class="gbtn nv" onClick="{{mine.open}}" style="min-height: 44px; padding: 0 18px">Open lobby</button></div>
+</sc-if>
+
+<div class="rg" style="animation-delay: .14s; display: flex; gap: 8px; flex-wrap: wrap; align-items: center">
+<sc-for list="{{filters}}" as="f" hint-placeholder-count="4"><button type="button" class="tab2" aria-pressed="{{f.on}}" aria-selected="{{f.on}}" onClick="{{f.go}}">{{f.label}} <span style="opacity: .6">{{f.n}}</span></button></sc-for>
+<span style="flex: 1"></span>
+<label for="lsearch" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Search matches</label>
+<input id="lsearch" class="codein" style="flex: 0 1 220px; height: 44px; font-size: 15px; letter-spacing: 0; text-transform: none; font-weight: 500" type="search" placeholder="Search host or name" value="{{sq}}" onChange="{{onQ}}">
+<button type="button" class="icob" onClick="{{refresh}}" aria-label="Refresh list"><span class="{{spinCls}}" style="display: inline-grid"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11a8 8 0 0 0-14.3-4.9L4 8M4 4v4h4M4 13a8 8 0 0 0 14.3 4.9L20 16M20 20v-4h-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></button>
+</div>
+
+<sc-if value="{{isLoading}}" hint-placeholder-val="{{ false }}"><div class="lobgrid"><div class="skel" style="height: 190px"></div><div class="skel" style="height: 190px"></div><div class="skel" style="height: 190px"></div></div></sc-if>
+<sc-if value="{{isError}}" hint-placeholder-val="{{ false }}"><div class="bnr err" role="alert"><span style="flex: 1">{{errMsg}}</span><button type="button" class="lnk" onClick="{{refresh}}">Try again</button></div></sc-if>
+<sc-if value="{{isEmpty}}" hint-placeholder-val="{{ false }}"><div class="rg" style="padding: 28px; border-radius: 22px; background: #F4F6F8"><div class="tgmini"><span class="tgwrap"><svg class="tg {{tgE.cls}}" viewBox="0 0 200 170" width="100%" height="100%" role="img" aria-label="Tong, your Ufq companion" style="display: block; overflow: visible">
+<defs><radialGradient id="tgb" cx="42%" cy="34%" r="75%"><stop offset="0" stop-color="#FFF6DF"></stop><stop offset=".55" stop-color="#F6DDB0"></stop><stop offset="1" stop-color="#E9BC76"></stop></radialGradient></defs>
+<g class="tg-rays" stroke-linecap="round" fill="none" stroke="#C1121F"><path d="M100 12 V28" stroke-width="6"></path><path d="M62 21 L68 33" stroke-width="5" opacity=".9"></path><path d="M138 21 L132 33" stroke-width="5" opacity=".9"></path><path d="M30 46 L42 55" stroke-width="6"></path><path d="M170 46 L158 55" stroke-width="6"></path><path d="M12 84 L26 88" stroke-width="5" opacity=".9"></path><path d="M188 84 L174 88" stroke-width="5" opacity=".9"></path></g>
+<g class="tg-body">
+<circle cx="100" cy="94" r="62" fill="url(#tgb)" stroke="#E2B26A" stroke-width="1.5"></circle>
+<path d="M52 66 Q66 46 90 42" fill="none" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round" opacity=".7"></path>
+<ellipse cx="66" cy="108" rx="11" ry="7" fill="#C1121F" opacity=".22"></ellipse><ellipse cx="134" cy="108" rx="11" ry="7" fill="#C1121F" opacity=".22"></ellipse>
+<g class="tg-eyes"><path d="{{tgE.eL}}" fill="{{tgE.eF}}" stroke="{{tgE.eS}}" stroke-width="3.6" stroke-linecap="round"></path><path d="{{tgE.eR}}" fill="{{tgE.eF}}" stroke="{{tgE.eS}}" stroke-width="3.6" stroke-linecap="round"></path>
+<circle cx="84" cy="82" r="1.9" fill="#FFFFFF" opacity="{{tgE.hl}}"></circle><circle cx="120" cy="82" r="1.9" fill="#FFFFFF" opacity="{{tgE.hl}}"></circle></g>
+<g opacity="{{tgE.bo}}" stroke="#003049" stroke-width="3" stroke-linecap="round" fill="none"><path d="M74 70 Q82 64 90 68"></path><path d="M110 68 Q118 64 126 70"></path></g>
+<path d="{{tgE.mD}}" fill="{{tgE.mF}}" stroke="#003049" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"></path>
+</g>
+<path d="M0 132 Q40 118 100 122 T200 132 V170 H0Z" fill="{{tgE.hill}}"></path>
+<path d="M0 132 Q40 118 100 122 T200 132" fill="none" stroke="#F6DDB0" stroke-width="2.5" stroke-linecap="round" opacity=".7"></path>
+<g class="tg-hands"><g class="tg-hl"><ellipse cx="58" cy="127" rx="14" ry="9.5" fill="#F6DDB0" stroke="#E2B26A" stroke-width="1.5"></ellipse><path d="M52 124v6M58 123v7M64 124v6" stroke="#D9A55C" stroke-width="1.6" stroke-linecap="round"></path></g><g class="tg-hr"><ellipse cx="142" cy="127" rx="14" ry="9.5" fill="#F6DDB0" stroke="#E2B26A" stroke-width="1.5"></ellipse><path d="M136 124v6M142 123v7M148 124v6" stroke="#D9A55C" stroke-width="1.6" stroke-linecap="round"></path></g></g>
+<g opacity="{{tgE.zz}}" class="tg-z" fill="#003049" font-family="Newsreader, serif" font-style="italic" font-weight="500"><text x="150" y="52" font-size="26">z</text><text x="166" y="34" font-size="20">z</text></g>
+</svg></span><p>No open matches right now. Start one — others will see it here.</p></div></div></sc-if>
+<sc-if value="{{listA}}" hint-placeholder-val="{{ true }}"><div class="lobgrid"><sc-for list="{{lobbies}}" as="l" hint-placeholder-count="6">
+<article class="lob" data-st="{{l.st}}" style="animation-delay: {{l.delay}}">
+<div style="display: flex; gap: 6px; flex-wrap: wrap; align-items: center"><span class="pill2" style="background: {{l.visBg}}; color: {{l.visFg}}; padding: 4px 9px">{{l.visTxt}}</span><span class="pill2" style="background: #F4F6F8; padding: 4px 9px">{{l.sizeTxt}}</span><span style="margin-left: auto; font-size: 12px; color: rgba(0,48,73,.55)">{{l.ago}}</span></div>
+<div style="display: flex; flex-direction: column; gap: 2px; min-width: 0"><h3 class="srf" style="margin: 0; font-size: 26px; line-height: 1.05; overflow: hidden; text-overflow: ellipsis; white-space: nowrap">{{l.name}}</h3><span style="font-size: 13px; color: rgba(0,48,73,.65)">Host · {{l.host}}</span></div>
+<div class="meter" aria-label="{{l.aria}}"><sc-for list="{{l.pips}}" as="p" hint-placeholder-count="5"><span style="background: {{p.c}}"></span></sc-for></div>
+<div style="display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: auto"><span style="font-weight: 700">{{l.count}}<span style="font-weight: 500; color: rgba(0,48,73,.55)"> / {{l.max}}</span> <span style="font-weight: 500; font-size: 13px; color: {{l.stC}}">· {{l.stTxt}}</span></span><button type="button" class="gbtn {{l.btnCls}}" onClick="{{l.join}}" aria-disabled="{{l.dis}}" aria-label="{{l.joinAria}}" style="min-height: 44px; padding: 0 18px">{{l.cta}}</button></div>
+</article>
+</sc-for></div></sc-if>
+<sc-if value="{{listB}}" hint-placeholder-val="{{ false }}"><div class="lobgrid"><sc-for list="{{lobbies}}" as="l" hint-placeholder-count="6">
+<article class="lob" data-st="{{l.st}}" style="animation-delay: {{l.delay}}">
+<div style="display: flex; gap: 6px; flex-wrap: wrap; align-items: center"><span class="pill2" style="background: {{l.visBg}}; color: {{l.visFg}}; padding: 4px 9px">{{l.visTxt}}</span><span class="pill2" style="background: #F4F6F8; padding: 4px 9px">{{l.sizeTxt}}</span><span style="margin-left: auto; font-size: 12px; color: rgba(0,48,73,.55)">{{l.ago}}</span></div>
+<div style="display: flex; flex-direction: column; gap: 2px; min-width: 0"><h3 class="srf" style="margin: 0; font-size: 26px; line-height: 1.05; overflow: hidden; text-overflow: ellipsis; white-space: nowrap">{{l.name}}</h3><span style="font-size: 13px; color: rgba(0,48,73,.65)">Host · {{l.host}}</span></div>
+<div class="meter" aria-label="{{l.aria}}"><sc-for list="{{l.pips}}" as="p" hint-placeholder-count="5"><span style="background: {{p.c}}"></span></sc-for></div>
+<div style="display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: auto"><span style="font-weight: 700">{{l.count}}<span style="font-weight: 500; color: rgba(0,48,73,.55)"> / {{l.max}}</span> <span style="font-weight: 500; font-size: 13px; color: {{l.stC}}">· {{l.stTxt}}</span></span><button type="button" class="gbtn {{l.btnCls}}" onClick="{{l.join}}" aria-disabled="{{l.dis}}" aria-label="{{l.joinAria}}" style="min-height: 44px; padding: 0 18px">{{l.cta}}</button></div>
+</article>
+</sc-for></div></sc-if>
+<p style="margin: 0; font-size: 12px; color: rgba(0,48,73,.55)">Other players and their matches are sample data. Demo password for private matches: <b>ufq2026</b>.</p>
+</main>
+</sc-if>
+
+<!-- ================= LOBBY ================= -->
+<sc-if value="{{isLobby}}" hint-placeholder-val="{{ false }}">
+<main class="gstage" style="width: min(1040px, 100%)">
+<div class="rg" style="display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; flex-wrap: wrap">
+<div style="display: flex; flex-direction: column; gap: 8px; min-width: 0">
+<div style="display: flex; gap: 8px; flex-wrap: wrap"><span class="pill2" style="background: {{visBg}}; color: {{visFg}}">{{visIcon}} {{visLabel}}</span><span class="pill2" style="background: #F4F6F8"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.5" fill="none" stroke="currentColor" stroke-width="1.8"></circle><path d="M2.5 20a6.5 6.5 0 0 1 13 0M16 4.5a3.5 3.5 0 0 1 0 7M18 13.5a6.5 6.5 0 0 1 3.5 6.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path></svg> {{m.count}} / {{m.maxPlayers}}</span><span class="pill2" style="background: #F4F6F8">10 questions · 45 s</span></div>
+<h1 class="srf" style="margin: 0; font-size: clamp(40px, 7vw, 68px); line-height: .98; overflow-wrap: anywhere"><span class="mask2"><span>{{m.name}}</span></span></h1>
+<span style="font-size: 15px; color: rgba(0,48,73,.7)">{{lobbySub}}</span>
+</div>
+<div class="codechip"><span class="cap" style="font-size: 10px; opacity: .7">Code</span><span class="srf" style="font-size: 30px; letter-spacing: .12em">{{m.code}}</span><button type="button" class="lnk" onClick="{{copyCode}}" style="color: #F6DDB0">{{copyLabel}}</button></div>
+</div>
+<sc-if value="{{showPass}}" hint-placeholder-val="{{ false }}"><div class="bnr info"><span>Password for this private match: <b>{{hostPass}}</b> — only people you tell can join.</span></div></sc-if>
+<div class="seats" data-n="{{m.maxPlayers}}">
+<sc-for list="{{seats}}" as="p" hint-placeholder-count="5">
+<sc-if value="{{p.filled}}" hint-placeholder-val="{{ true }}"><div class="seat on" data-me="{{p.meS}}"><span class="av" style="background: {{p.bg}}; color: {{p.fg}}">{{p.ini}}</span><span class="sn">{{p.nick}}</span><sc-if value="{{p.host}}" hint-placeholder-val="{{ false }}"><span class="crown2" aria-label="Host"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 17l-1-9 5 4 4-6 4 6 5-4-1 9z" fill="#F6DDB0" stroke="#780000" stroke-width="1.5" stroke-linejoin="round"></path></svg></span></sc-if></div></sc-if>
+<sc-if value="{{p.empty}}" hint-placeholder-val="{{ false }}"><div class="seat"><span class="av e"></span><span class="sn" style="opacity: .45">Open seat</span></div></sc-if>
+</sc-for>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: 14px; align-items: start">
+<section class="rcard2" aria-label="Lobby activity" style="gap: 8px">
+<span class="cap" style="color: rgba(0,48,73,.6)">Activity</span>
+<sc-for list="{{feed}}" as="f" hint-placeholder-count="3"><div class="si" style="font-size: 14px; display: flex; gap: 8px"><span style="width: 8px; height: 8px; margin-top: 6px; border-radius: 50%; background: {{f.c}}; flex: none"></span><span><b>{{f.nick}}</b> {{f.txt}}</span></div></sc-for>
+</section>
+<section class="rcard2" style="gap: 12px">
+<sc-if value="{{isHost}}" hint-placeholder-val="{{ true }}">
+<span style="font-size: 15px; color: rgba(0,48,73,.75)">{{startHint}}</span>
+<button type="button" class="gbtn" onClick="{{startMatch}}" aria-disabled="{{startDis}}">{{startLabel}}</button>
+</sc-if>
+<sc-if value="{{notHost}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; align-items: center; gap: 12px"><span class="lbar" style="flex: 1"><span></span></span></div>
+<span style="font-size: 15px; color: rgba(0,48,73,.75)">Waiting for <b>{{m.host}}</b> to start the match…</span>
+</sc-if>
+<button type="button" class="gbtn gh" onClick="{{leave}}">Leave lobby</button>
+</section>
+</div>
+</main>
+</sc-if>
+
+<!-- ================= COUNTDOWN ================= -->
+<sc-if value="{{isCount}}" hint-placeholder-val="{{ false }}">
+<main class="cdstage" aria-live="assertive">
+<div class="ripples {{cdCls}}" aria-hidden="true"><span></span><span></span><span></span><span class="splash"></span></div>
+<span class="srf cdnum {{cdCls}}">{{cd}}</span>
+<span class="cap cdcap">{{m.count}} players · same 10 questions</span>
+</main>
+</sc-if>
+
+<!-- ================= PLAY ================= -->
+<sc-if value="{{isPlay}}" hint-placeholder-val="{{ false }}">
+<header class="gbar" style="flex-direction: column; align-items: stretch; gap: 10px">
+<div style="display: flex; align-items: center; gap: 12px">
+<button type="button" class="icob" onClick="{{askQuit}}" aria-label="Quit match"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path></svg></button>
+<div style="display: flex; flex-direction: column; line-height: 1.1"><span class="cap" style="font-size: 10px; color: rgba(0,48,73,.6)">Question</span><span class="srf" style="font-size: 24px">{{qNum}}<span style="font-size: 16px; color: rgba(0,48,73,.5)"> / 10</span></span></div>
+<span class="pill2 {{placeCls}}" style="background: #003049; color: #FFFFFF">{{placeTxt}}</span>
+<span class="srf" style="margin-left: auto; font-size: 30px; line-height: 1; color: {{timeC}}" aria-label="Seconds left">{{secs}}</span>
+<div style="position: relative; display: flex; flex-direction: column; align-items: flex-end; line-height: 1; min-width: 64px">
+<span class="cap" style="font-size: 10px; color: rgba(0,48,73,.6)">You</span>
+<span class="srf {{popCls}}" style="font-size: 30px">{{myScore}}</span>
+<sc-if value="{{flOn}}" hint-placeholder-val="{{ false }}"><span class="{{flCls}}" style="position: absolute; right: 0; top: 100%; margin-top: 2px; font-weight: 700; white-space: nowrap">{{flTxt}}</span></sc-if>
+</div>
+</div>
+<div style="display: grid; grid-template-columns: repeat(10, minmax(0, 1fr)); gap: 4px" aria-hidden="true"><sc-for list="{{dots}}" as="t" hint-placeholder-count="10"><span style="height: 6px; border-radius: 999px; background: {{t.c}}; transform: scaleY({{t.sy}}); transition: transform .3s, background .3s"></span></sc-for></div>
+<div class="tbar" role="progressbar" aria-label="Time for this question" aria-valuemin="0" aria-valuemax="45" aria-valuenow="{{secs}}"><span style="transform: scaleX({{tScale}}); background: {{timeC}}"></span></div>
+</header>
+<div class="playgrid">
+<main class="gstage" style="gap: 16px; margin: 0; width: 100%">
+<sc-if value="{{offline}}" hint-placeholder-val="{{ false }}"><div class="bnr off rg" role="status"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 9a15 15 0 0 1 20 0M5.5 12.5a10 10 0 0 1 13 0M9 16a5 5 0 0 1 6 0M12 19.5h.01M3 3l18 18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path></svg><span>You’re offline. Questions already loaded still work; results save when you reconnect.</span></div></sc-if>
+<section class="{{qCls}}" style="display: flex; flex-direction: column; gap: 18px" aria-live="polite">
+<div style="display: flex; gap: 8px; flex-wrap: wrap"><span class="pill2" style="background: #F4F6F8">{{q.dom}}</span><span class="pill2" style="background: {{dBg}}; color: {{dFg}}">{{q.dLabel}}</span></div>
+<div class="qp"><ufq-math text="{{q.raw}}"></ufq-math></div>
+<div class="opts2" role="group" aria-label="Answer choices"><sc-for list="{{opts}}" as="o" hint-placeholder-count="4"><button type="button" class="opt2" data-s="{{o.s}}" data-lock="{{lock}}" onClick="{{o.pick}}" aria-label="{{o.aria}}"><span class="ol">{{o.k}}</span><span class="ot"><span class="mx"><ufq-math text="{{o.raw}}"></ufq-math></span></span><span class="ok2"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></button></sc-for></div>
+</section>
+</main>
+<aside class="live" aria-label="Live standings">
+<span class="cap" style="color: rgba(0,48,73,.6)">Live · {{m.count}} players</span>
+<div class="liveb" style="height: {{liveH}}">
+<sc-for list="{{live}}" as="r" hint-placeholder-count="5">
+<div class="liver" data-me="{{r.meS}}" style="transform: translateY({{r.y}}); opacity: {{r.op}}"><span class="srf" style="width: 22px">{{r.rank}}</span><span class="av sm" style="background: {{r.bg}}; color: {{r.fg}}">{{r.ini}}</span><span style="flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 600; font-size: 14px">{{r.nick}}</span><span style="font-size: 12px; color: rgba(0,48,73,.55)">{{r.n}}/10</span><span style="font-weight: 700; font-size: 14px; min-width: 46px; text-align: right">{{r.pts}}</span></div>
+</sc-for>
+</div>
+</aside>
+</div>
+</sc-if>
+
+<!-- ================= SUBMITTING ================= -->
+<sc-if value="{{isSubmitting}}" hint-placeholder-val="{{ false }}"><main class="gstage"><div style="display: flex; flex-direction: column; gap: 8px; margin-top: 20vh"><div class="lbar"><span></span></div><span style="font-size: 14px; color: rgba(0,48,73,.7)">Waiting for everyone to finish…</span></div></main></sc-if>
+
+<!-- ================= RESULT ================= -->
+<sc-if value="{{isResult}}" hint-placeholder-val="{{ false }}">
+<main class="gstage" style="width: min(960px, 100%)">
+<div class="tgmini rg"><span class="tgwrap"><svg class="tg {{tgR.cls}}" viewBox="0 0 200 170" width="100%" height="100%" role="img" aria-label="Tong, your Ufq companion" style="display: block; overflow: visible">
+<defs><radialGradient id="tgb" cx="42%" cy="34%" r="75%"><stop offset="0" stop-color="#FFF6DF"></stop><stop offset=".55" stop-color="#F6DDB0"></stop><stop offset="1" stop-color="#E9BC76"></stop></radialGradient></defs>
+<g class="tg-rays" stroke-linecap="round" fill="none" stroke="#C1121F"><path d="M100 12 V28" stroke-width="6"></path><path d="M62 21 L68 33" stroke-width="5" opacity=".9"></path><path d="M138 21 L132 33" stroke-width="5" opacity=".9"></path><path d="M30 46 L42 55" stroke-width="6"></path><path d="M170 46 L158 55" stroke-width="6"></path><path d="M12 84 L26 88" stroke-width="5" opacity=".9"></path><path d="M188 84 L174 88" stroke-width="5" opacity=".9"></path></g>
+<g class="tg-body">
+<circle cx="100" cy="94" r="62" fill="url(#tgb)" stroke="#E2B26A" stroke-width="1.5"></circle>
+<path d="M52 66 Q66 46 90 42" fill="none" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round" opacity=".7"></path>
+<ellipse cx="66" cy="108" rx="11" ry="7" fill="#C1121F" opacity=".22"></ellipse><ellipse cx="134" cy="108" rx="11" ry="7" fill="#C1121F" opacity=".22"></ellipse>
+<g class="tg-eyes"><path d="{{tgR.eL}}" fill="{{tgR.eF}}" stroke="{{tgR.eS}}" stroke-width="3.6" stroke-linecap="round"></path><path d="{{tgR.eR}}" fill="{{tgR.eF}}" stroke="{{tgR.eS}}" stroke-width="3.6" stroke-linecap="round"></path>
+<circle cx="84" cy="82" r="1.9" fill="#FFFFFF" opacity="{{tgR.hl}}"></circle><circle cx="120" cy="82" r="1.9" fill="#FFFFFF" opacity="{{tgR.hl}}"></circle></g>
+<g opacity="{{tgR.bo}}" stroke="#003049" stroke-width="3" stroke-linecap="round" fill="none"><path d="M74 70 Q82 64 90 68"></path><path d="M110 68 Q118 64 126 70"></path></g>
+<path d="{{tgR.mD}}" fill="{{tgR.mF}}" stroke="#003049" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"></path>
+</g>
+<path d="M0 132 Q40 118 100 122 T200 132 V170 H0Z" fill="{{tgR.hill}}"></path>
+<path d="M0 132 Q40 118 100 122 T200 132" fill="none" stroke="#F6DDB0" stroke-width="2.5" stroke-linecap="round" opacity=".7"></path>
+<g class="tg-hands"><g class="tg-hl"><ellipse cx="58" cy="127" rx="14" ry="9.5" fill="#F6DDB0" stroke="#E2B26A" stroke-width="1.5"></ellipse><path d="M52 124v6M58 123v7M64 124v6" stroke="#D9A55C" stroke-width="1.6" stroke-linecap="round"></path></g><g class="tg-hr"><ellipse cx="142" cy="127" rx="14" ry="9.5" fill="#F6DDB0" stroke="#E2B26A" stroke-width="1.5"></ellipse><path d="M136 124v6M142 123v7M148 124v6" stroke="#D9A55C" stroke-width="1.6" stroke-linecap="round"></path></g></g>
+<g opacity="{{tgR.zz}}" class="tg-z" fill="#003049" font-family="Newsreader, serif" font-style="italic" font-weight="500"><text x="150" y="52" font-size="26">z</text><text x="166" y="34" font-size="20">z</text></g>
+</svg></span><p>{{tgRMsg}}</p></div>
+<div class="rg" style="animation-delay: .06s; display: flex; flex-direction: column; gap: 6px">
+<span class="cap" style="color: #669BBC">{{m.name}} · {{m.count}} players</span>
+<h1 class="srf" style="margin: 0; font-size: clamp(48px, 9vw, 84px); line-height: .95"><span class="mask2"><span>{{headA}} <em style="color: #C1121F">{{headB}}</em></span></span></h1>
+<sc-if value="{{won}}" hint-placeholder-val="{{ false }}"><span class="pill2 pi" style="align-self: flex-start; animation-delay: .7s; background: #C1121F; color: #FFFFFF">+150 weekly points</span></sc-if>
+</div>
+<div class="podium2">
+<sc-for list="{{pod}}" as="p" hint-placeholder-count="3">
+<div class="pcol" data-r="{{p.rank}}" data-me="{{p.meS}}"><span class="av lg pdrop" style="background: {{p.bg}}; color: {{p.fg}}; animation-delay: {{p.d2}}">{{p.ini}}</span><span class="pnick">{{p.nick}}</span><div class="pbar" style="animation-delay: {{p.d1}}"><span class="srf" style="font-size: clamp(34px, 6vw, 56px); line-height: 1">{{p.rank}}</span><span style="font-weight: 700">{{p.pts}}</span></div></div>
+</sc-for>
+</div>
+<section class="lblist" aria-label="Final standings">
+<sc-for list="{{rows}}" as="r" hint-placeholder-count="6">
+<div class="lbrow" data-me="{{r.meS}}" style="animation-delay: {{r.delay}}"><span class="srf" style="font-size: 20px">{{r.rank}}</span><span style="display: flex; align-items: center; gap: 10px; min-width: 0"><span class="av sm" style="background: {{r.bg}}; color: {{r.fg}}">{{r.ini}}</span><span style="font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap">{{r.nick}}</span></span><span class="hide-xs" style="font-size: 14px; color: rgba(0,48,73,.65)">{{r.right}}/10 right</span><span style="text-align: right; font-weight: 700">{{r.pts}}</span></div>
+</sc-for>
+</section>
+<div class="rg" style="animation-delay: .3s; display: flex; gap: 10px; flex-wrap: wrap">
+<button type="button" class="gbtn" onClick="{{rematch}}">{{rematchLabel}}</button>
+<sc-if value="{{hasMissed}}" hint-placeholder-val="{{ true }}"><a href="/games/review" class="gbtn gh">Review mistakes · {{missedN}}</a></sc-if>
+<button type="button" class="gbtn gh" onClick="{{toBrowse}}">All matches</button>
+</div>
+</main>
+</sc-if>
+
+<!-- ================= CREATE SHEET ================= -->
+<sc-if value="{{showCreate}}" hint-placeholder-val="{{ false }}">
+<div class="scrim" style="background: rgba(0,30,46,.6)"><form class="dlg2 sheet" role="dialog" aria-modal="true" aria-labelledby="cm" onSubmit="{{create}}">
+<div style="display: flex; justify-content: space-between; align-items: center"><h2 id="cm" class="srf" style="margin: 0; font-size: 34px; line-height: 1">New <em style="color: #C1121F">match.</em></h2><button type="button" class="icob" onClick="{{closeCreate}}" aria-label="Close"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path></svg></button></div>
+<label for="mname" style="font-weight: 600; font-size: 14px">Match name <span style="font-weight: 400; color: rgba(0,48,73,.55)">(optional)</span></label>
+<input id="mname" class="codein" style="height: 52px; font-size: 16px; letter-spacing: 0; text-transform: none; font-weight: 500" type="text" maxLength="28" placeholder="Friday sprint" value="{{cName}}" onChange="{{onName}}">
+<span id="vlab" style="font-weight: 600; font-size: 14px">Who can join</span>
+<div class="segc" style="grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: none" role="radiogroup" aria-labelledby="vlab"><span class="segthumb" style="width: calc((100% - 10px) / 2); transform: translateX({{visX}})"></span><sc-for list="{{visOpts}}" as="v" hint-placeholder-count="2"><button type="button" role="radio" aria-checked="{{v.on}}" onClick="{{v.go}}">{{v.label}}</button></sc-for></div>
+<span style="font-size: 13px; color: rgba(0,48,73,.62); margin-top: -6px">{{visHelp}}</span>
+<sc-if value="{{isPriv}}" hint-placeholder-val="{{ false }}"><div class="rg" style="display: flex; flex-direction: column; gap: 6px"><label for="mpass" style="font-weight: 600; font-size: 14px">Password</label><input id="mpass" class="codein" style="height: 52px; font-size: 16px; letter-spacing: .04em; text-transform: none; font-weight: 500" type="text" maxLength="12" autoComplete="off" placeholder="4–12 characters" value="{{cPass}}" onChange="{{onPass}}" aria-invalid="{{passBad}}"></div></sc-if>
+<span id="plab" style="font-weight: 600; font-size: 14px">Players</span>
+<div class="segc" style="grid-template-columns: repeat(4, minmax(0, 1fr)); max-width: none" role="radiogroup" aria-labelledby="plab"><span class="segthumb" style="width: calc((100% - 10px) / 4); transform: translateX({{sizeX}})"></span><sc-for list="{{sizeOpts}}" as="z" hint-placeholder-count="4"><button type="button" role="radio" aria-checked="{{z.on}}" onClick="{{z.go}}">{{z.label}}</button></sc-for></div>
+<span style="font-size: 13px; color: rgba(0,48,73,.62); margin-top: -6px">{{sizeHelp}}</span>
+<sc-if value="{{hasCErr}}" hint-placeholder-val="{{ false }}"><div class="bnr err" role="alert"><span>{{cErr}}</span></div></sc-if>
+<button type="submit" class="gbtn" aria-disabled="{{busyS}}">{{createLabel}}</button>
+</form></div>
+</sc-if>
+
+<!-- ================= PASSWORD ================= -->
+<sc-if value="{{showPw}}" hint-placeholder-val="{{ false }}">
+<div class="scrim" style="background: rgba(0,30,46,.6)"><form class="dlg2" role="dialog" aria-modal="true" aria-labelledby="pw" onSubmit="{{submitPw}}">
+<div style="display: flex; gap: 10px; align-items: center"><span class="pill2" style="background: #003049; color: #FFFFFF"><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 11h12v9H6zM8.5 11V8a3.5 3.5 0 0 1 7 0v3" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"></path></svg> Private</span><span style="font-weight: 600">{{pwName}}</span></div>
+<h2 id="pw" class="srf" style="margin: 0; font-size: 32px; line-height: 1.05">Enter the <em style="color: #C1121F">password.</em></h2>
+<p style="margin: 0; font-size: 15px; color: rgba(0,48,73,.75)">Ask the host — it’s their private room.</p>
+<input id="pwin" class="codein" style="height: 52px; font-size: 18px; letter-spacing: .06em; text-transform: none" type="password" autoComplete="off" placeholder="Password" value="{{pwVal}}" onChange="{{onPw}}" aria-invalid="{{pwBad}}" aria-label="Password">
+<sc-if value="{{pwBadIs}}" hint-placeholder-val="{{ false }}"><span class="{{shakeCls}}" style="font-size: 14px; color: #C1121F; display: block">That password doesn’t match. Try again.</span></sc-if>
+<div style="display: flex; gap: 10px; flex-wrap: wrap"><button type="submit" class="gbtn nv" aria-disabled="{{busyS}}">{{pwBtn}}</button><button type="button" class="gbtn gh" onClick="{{closePw}}">Cancel</button></div>
+</form></div>
+</sc-if>
+
+<sc-if value="{{burstOn}}" hint-placeholder-val="{{ false }}"><div class="burst" aria-hidden="true"><sc-for list="{{burst}}" as="b" hint-placeholder-count="0"><span style="--x: {{b.x}}; --y: {{b.y}}; --r: {{b.r}}; --d: {{b.d}}; background: {{b.c}}; width: {{b.w}}; height: {{b.h}}"></span></sc-for></div></sc-if>
+<sc-if value="{{toastOn}}" hint-placeholder-val="{{ false }}"><div class="toast2 {{toastCls}}" role="status">{{toastMsg}}</div></sc-if>
+<sc-if value="{{confirm}}" hint-placeholder-val="{{ false }}"><div class="scrim"><div class="dlg2" role="alertdialog" aria-modal="true" aria-labelledby="qt"><h2 id="qt" class="srf" style="margin: 0; font-size: 34px; line-height: 1.05">End this <em style="color: #C1121F">run?</em></h2><p style="margin: 0; color: rgba(0,48,73,.75)">{{quitMsg}}</p><div style="display: flex; gap: 10px; flex-wrap: wrap"><button type="button" class="gbtn nv" onClick="{{keepPlaying}}">Keep playing</button><button type="button" class="gbtn gh" onClick="{{endRun}}">End run</button></div></div></div></sc-if>
+<a href="{{wipeHref}}" ref="{{navRef}}" tabIndex="-1" aria-hidden="true" style="position: fixed; left: 0; top: 0; width: 1px; height: 1px; overflow: hidden; opacity: 0; pointer-events: none">Continue</a><sc-if value="{{wipeOn}}" hint-placeholder-val="{{ false }}"><span class="wipeC" aria-hidden="true" style="left: {{wipe.x}}; top: {{wipe.y}}; background: {{wipe.c}}; --s: {{wipe.s}}"></span></sc-if><sc-if value="{{enterOn}}" hint-placeholder-val="{{ false }}"><div class="wipeIn" aria-hidden="true" style="background: {{enterC}}"></div></sc-if>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"simulate": {"editor": "enum", "options": ["none", "loading", "error", "offline", "empty"], "default": "none", "section": "Preview states"}, "$preview": {"width": 1440, "height": 900}}'>
+/* =====================================================================
+   UFQ GAMES — shared code (identical in every Games page)
+   1) MathText: tiny LaTeX-subset renderer for this prototype.
+      In production swap it for KaTeX (katex.renderToString) — screens
+      only call MathText.blocks(stem) and MathText.runs(text).
+   2) GameData: the ONLY data access. Replace its bodies with real API
+      calls; screens never touch storage or the bank directly.
+   ===================================================================== */
+const MathText = (() => {
+  const SYM = { pi: 'π', theta: 'θ', alpha: 'α', beta: 'β', le: '≤', leq: '≤', ge: '≥', geq: '≥', cdot: '·', times: '×', div: '÷', pm: '±', neq: '≠', ne: '≠', circ: '°', degree: '°', angle: '∠', triangle: '△', infty: '∞', approx: '≈', lt: '<', gt: '>' };
+  const FN = { sin: 1, cos: 1, tan: 1, log: 1, ln: 1 };
+  const OPS = '+−=<>≤≥×·±÷≠≈';
+  const atom = (t, cls) => ({ isT: false, isA: true, isF: false, isR: false, t, cls, sup: '', sub: '', hasSup: false, hasSub: false, num: [], den: [], rin: [] });
+  const group = (s, i) => { // s[i] === '{' -> [content, nextIndex]
+    if (s[i] !== '{') return [s[i] || '', i + 1];
+    let d = 0, j = i;
+    for (; j < s.length; j++) { if (s[j] === '{') d++; else if (s[j] === '}') { d--; if (!d) break; } }
+    return [s.slice(i + 1, j), j + 1];
+  };
+  const flat = (s) => parse(s, true).map(a => a.t + (a.sup ? '^' + a.sup : '')).join('');
+  function parse(s, inner) {
+    const out = []; let i = 0;
+    const last = () => { for (let k = out.length - 1; k >= 0; k--) if (out[k].isA) return out[k]; return null; };
+    while (i < s.length) {
+      const c = s[i];
+      if (c === '\\') {
+        if (s[i + 1] === '$' || s[i + 1] === '%') { out.push(atom(s[i + 1], 'mn')); i += 2; continue; }
+        if (s[i + 1] === ',' || s[i + 1] === ' ' || s[i + 1] === ';') { out.push(atom(' ', 'msp')); i += 2; continue; }
+        let j = i + 1; while (j < s.length && /[a-zA-Z]/.test(s[j])) j++;
+        const cmd = s.slice(i + 1, j); i = j;
+        if (cmd === 'frac' || cmd === 'dfrac' || cmd === 'tfrac') {
+          const [n, i2] = group(s, i); const [d, i3] = group(s, i2); i = i3;
+          if (inner) { out.push(atom(flat(n) + '/' + flat(d), 'mn')); continue; }
+          const f = atom('', ''); f.isA = false; f.isF = true; f.num = parse(n, true); f.den = parse(d, true); out.push(f); continue;
+        }
+        if (cmd === 'sqrt') {
+          const [n, i2] = group(s, i); i = i2;
+          if (inner) { out.push(atom('√(' + flat(n) + ')', 'mn')); continue; }
+          const r = atom('', ''); r.isA = false; r.isR = true; r.rin = parse(n, true); out.push(r); continue;
+        }
+        if (cmd === 'text' || cmd === 'mathrm') { const [t, i2] = group(s, i); i = i2; out.push(atom(t, 'mtx')); continue; }
+        if (cmd === 'left' || cmd === 'right') continue;
+        if (FN[cmd]) { out.push(atom(cmd, 'mf')); continue; }
+        const sym = SYM[cmd]; if (sym) { out.push(atom(sym, OPS.includes(sym) ? 'mo' : (sym === '°' ? 'mdeg' : 'mv'))); continue; }
+        out.push(atom(cmd, 'mtx')); continue;
+      }
+      if (c === '^' || c === '_') {
+        const [g, i2] = group(s, i + 1); i = i2; const a = last();
+        if (a) { if (c === '^') { a.sup = flat(g); a.hasSup = true; if (a.sup === '°') { a.t += '°'; a.sup = ''; a.hasSup = false; } } else { a.sub = flat(g); a.hasSub = true; } }
+        continue;
+      }
+      if (c === '{' || c === '}') { i++; continue; }
+      if (c === ' ') { i++; continue; }
+      if (/[0-9.]/.test(c)) { let j = i; while (j < s.length && /[0-9.,]/.test(s[j]) && !(s[j] === ',' && !/[0-9]/.test(s[j + 1] || ''))) j++; out.push(atom(s.slice(i, j), 'mn')); i = j; continue; }
+      if (/[a-zA-Z]/.test(c)) { out.push(atom(c, 'mv')); i++; continue; }
+      const ch = c === '-' ? '−' : c;
+      out.push(atom(ch, OPS.includes(ch) ? 'mo' : 'mp')); i++;
+    }
+    return out;
+  }
+  const text = (t) => ({ isT: true, isA: false, isF: false, isR: false, t, cls: '', sup: '', sub: '', hasSup: false, hasSub: false, num: [], den: [], rin: [] });
+  // inline runs: plain text + $math$ ; "\$" is a literal dollar sign
+  function runs(str) {
+    const out = []; let buf = ''; let i = 0; str = String(str);
+    while (i < str.length) {
+      if (str[i] === '\\' && str[i + 1] === '$') { buf += '$'; i += 2; continue; }
+      if (str[i] === '$') {
+        let j = i + 1; while (j < str.length && !(str[j] === '$' && str[j - 1] !== '\\')) j++;
+        if (buf) { out.push(text(buf)); buf = ''; }
+        parse(str.slice(i + 1, j), false).forEach(a => out.push(a)); i = j + 1; continue;
+      }
+      buf += str[i]; i++;
+    }
+    if (buf) out.push(text(buf));
+    return out;
+  }
+  // stem blocks: paragraphs and centred $$display$$ equations
+  function blocks(str) {
+    return String(str).split('$$').map((part, k) => ({ isP: k % 2 === 0, isD: k % 2 === 1, runs: k % 2 ? parse(part.trim(), false) : runs(part.trim()) })).filter(b => b.runs.length);
+  }
+  const plain = (str) => String(str).replace(/\\\$/g, '$').replace(/\$\$?/g, '').replace(/\\frac\{([^}]*)\}\{([^}]*)\}/g, '$1/$2').replace(/\\(pi|theta)/g, (m, x) => SYM[x]).replace(/\\[a-z]+/g, '').replace(/[{}]/g, '');
+  return { runs, blocks, plain };
+})();
+
+const Rng = (seed) => { let a = seed >>> 0; return () => { a |= 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; };
+const shuffle = (arr, r) => { const a = arr.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(r() * (i + 1)); const t = a[i]; a[i] = a[j]; a[j] = t; } return a; };
+const DOMAINS = ['Algebra', 'Advanced Math', 'Problem-Solving & Data', 'Geometry & Trig'];
+
+const SPEED_MODES = [60, 120, 180];
+const GameData = window.UfqGameData;
+const Sfx = {
+  ctx: null,
+  on() { return GameData._ls('ufq.games.sound') === true; },
+  set(v) { GameData._ls('ufq.games.sound', !!v); },
+  play(kind) {
+    if (!this.on()) return;
+    try {
+      const C = this.ctx || (this.ctx = new (window.AudioContext || window.webkitAudioContext)()); const t = C.currentTime;
+      const f = { ok: [660, 990], bad: [240, 150], tick: [520, 520], win: [523, 1046], go: [440, 880] }[kind] || [440, 440];
+      const o = C.createOscillator(), g = C.createGain(); o.type = 'sine';
+      o.frequency.setValueAtTime(f[0], t); o.frequency.exponentialRampToValueAtTime(f[1], t + .14);
+      g.gain.setValueAtTime(.0001, t); g.gain.exponentialRampToValueAtTime(.1, t + .02); g.gain.exponentialRampToValueAtTime(.0001, t + .24);
+      o.connect(g); g.connect(C.destination); o.start(t); o.stop(t + .26);
+    } catch (e) {}
+  }
+};
+const reduceMotion = () => { try { return window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) { return false; } };
+const fmtLeft = (ms) => { if (ms <= 0) return '0m'; const d = Math.floor(ms / 864e5), h = Math.floor(ms % 864e5 / 3600e3), m = Math.floor(ms % 3600e3 / 60e3); return d ? d + 'd ' + h + 'h' : h ? h + 'h ' + m + 'm' : m + 'm'; };
+const LET = 'ABCD';
+/* question → template-ready view */
+const qView = (q) => ({ id: q.id, raw: q.stem, blocks: MathText.blocks(q.stem), dom: q.dom, d: q.d, dLabel: q.d[0].toUpperCase() + q.d.slice(1) });
+/* ---------- motion helpers (finite, transform/opacity only) ---------- */
+const countUp = (comp, key, to, ms) => {
+  if (comp._cu) cancelAnimationFrame(comp._cu);
+  if (reduceMotion() || !to) { comp.setState({ [key]: to }); return; }
+  const t0 = performance.now();
+  const step = (t) => { const k = Math.min(1, (t - t0) / (ms || 1100)); const e = 1 - Math.pow(1 - k, 4); comp.setState({ [key]: Math.round(to * e) }); if (k < 1) comp._cu = requestAnimationFrame(step); };
+  comp._cu = requestAnimationFrame(step);
+};
+const burstParts = (n, seed) => { const r = Rng(seed || 7); const C = ['#C1121F', '#003049', '#F6DDB0', '#669BBC', '#780000']; return Array.from({ length: n }, (x, i) => { const a = (i / n) * Math.PI * 2 + r() * .4, d = 140 + r() * 220; return { x: Math.round(Math.cos(a) * d) + 'px', y: Math.round(Math.sin(a) * d * .8 - 60) + 'px', r: Math.round(r() * 720 - 360) + 'deg', d: Math.round(r() * 120) + 'ms', c: C[i % C.length], w: (6 + Math.round(r() * 6)) + 'px', h: (10 + Math.round(r() * 10)) + 'px' }; }); };
+/* ---------- page wipe: circle grows from the clicked control, next page lifts it away ---------- */
+const Wipe = {
+  KEY: 'ufq.wipe',
+  read() { const w = GameData._ss(this.KEY); if (w) GameData._ss(this.KEY, null); return w && Date.now() - w.at < 5000 ? w : null; },
+  go(comp, ev, href, color) {
+    if (ev && ev.preventDefault) ev.preventDefault();
+    if (comp._going) return; comp._going = true;
+    let x = window.innerWidth / 2, y = window.innerHeight / 2;
+    try { const r = ev.currentTarget.getBoundingClientRect(); x = r.left + r.width / 2; y = r.top + r.height / 2; } catch (e) {}
+    const far = Math.hypot(Math.max(x, window.innerWidth - x), Math.max(y, window.innerHeight - y));
+    GameData._ss(this.KEY, { c: color, at: Date.now() });
+    comp._wipe = { x: x + 'px', y: y + 'px', s: String((far / 10) * 1.08), c: color }; comp._wipeHref = href; comp.forceUpdate();
+    setTimeout(() => { try { if (comp.navA) comp.navA.click(); } catch (e) {} comp._going = false; }, reduceMotion() ? 20 : 620);
+  }
+};
+const wipeVals = (comp) => {
+  if (comp._enter && !comp._enterT) comp._enterT = setTimeout(() => { comp._enter = null; comp.forceUpdate(); }, 1100);
+  return { navRef: comp.navRef, wipeHref: comp._wipeHref || '/games', wipeOn: !!comp._wipe, wipe: comp._wipe || { x: '0px', y: '0px', s: '1', c: '#003049' }, enterOn: !!comp._enter && !reduceMotion(), enterC: comp._enter ? comp._enter.c : '#003049',
+    goGames: (e) => Wipe.go(comp, e, '/games', '#003049') };
+};
+
+const tong = (mood, hill) => {
+  const M = {
+    idle:  { eL: 'M82 85 a5.2 7.4 0 1 0 .01 0z', eR: 'M118 85 a5.2 7.4 0 1 0 .01 0z', eF: '#003049', eS: 'none', mD: 'M88 108 Q100 118 112 108', mF: 'none', bo: '0', zz: '0', hl: '1', cls: 'tg-idle' },
+    happy: { eL: 'M75 95 Q82 84 89 95', eR: 'M111 95 Q118 84 125 95', eF: 'none', eS: '#003049', mD: 'M86 104 Q100 128 114 104 Z', mF: '#780000', bo: '0', zz: '0', hl: '0', cls: 'tg-happy' },
+    cheer: { eL: 'M75 95 Q82 84 89 95', eR: 'M111 95 Q118 84 125 95', eF: 'none', eS: '#003049', mD: 'M84 102 Q100 132 116 102 Z', mF: '#780000', bo: '0', zz: '0', hl: '0', cls: 'tg-cheer' },
+    think: { eL: 'M86 80 a5.2 7.4 0 1 0 .01 0z', eR: 'M122 80 a5.2 7.4 0 1 0 .01 0z', eF: '#003049', eS: 'none', mD: 'M94 112 Q101 108 108 112', mF: 'none', bo: '1', zz: '0', hl: '1', cls: 'tg-think' },
+    sleep: { eL: 'M75 92 Q82 99 89 92', eR: 'M111 92 Q118 99 125 92', eF: 'none', eS: '#003049', mD: 'M93 110 Q100 115 107 110', mF: 'none', bo: '0', zz: '1', hl: '0', cls: 'tg-sleep' },
+    oops:  { eL: 'M82 88 a5.2 6.4 0 1 0 .01 0z', eR: 'M118 88 a5.2 6.4 0 1 0 .01 0z', eF: '#003049', eS: 'none', mD: 'M90 115 Q100 106 110 115', mF: 'none', bo: '1', zz: '0', hl: '1', cls: 'tg-oops' }
+  };
+  return Object.assign({ hill: hill || '#003049' }, M[mood] || M.idle);
+};
+
+const D_MS = 45000, SIZES = [2, 5, 10, 20];
+const AVC = [['#003049', '#FFFFFF'], ['#C1121F', '#FFFFFF'], ['#F6DDB0', '#780000'], ['#669BBC', '#FFFFFF'], ['#780000', '#FFFFFF'], ['#EEF4F8', '#003049']];
+const avatar = (nick, me) => { let h = 0; for (const c of String(nick)) h = (h * 31 + c.charCodeAt(0)) >>> 0; const p = me ? ['#C1121F', '#FFFFFF'] : AVC[h % AVC.length]; const ini = String(nick).replace(/[^A-Za-z0-9]/g, '').slice(0, 2).toUpperCase() || '?'; return { bg: p[0], fg: p[1], ini }; };
+const ago = (ms) => ms < 60e3 ? 'just now' : Math.floor(ms / 60e3) + 'm ago';
+const ord = (n) => n + (n % 10 === 1 && n % 100 !== 11 ? 'st' : n % 10 === 2 && n % 100 !== 12 ? 'nd' : n % 10 === 3 && n % 100 !== 13 ? 'rd' : 'th');
+class Component extends DCLogic {
+constructor(p) {
+  super(p); this._enter = Wipe.read(); this.navRef = (el) => { this.navA = el; };
+  this.state = { phase: 'browse', st: 'loading', err: '', lobbies: [], f: 'all', q: '', code: '', spin: 0, listK: 0, m: null, feed: [], creating: false, cName: '', cVis: 'public', cPass: '', cSize: 5, cErr: '', busy: '', pw: null, pwVal: '', pwBad: 0, cd: 3, qi: 0, left: D_MS, fb: null, answers: [], confirm: false, copied: false, offline: false, sound: Sfx.on(), toast: '', fl: 0, flTxt: '', pop: 0, live: [], place: 0, res: null, burst: false };
+  this.rootRef = (el) => { this.root = el; }; this._qv = {};
+}
+componentDidMount() {
+  GameData.simulate = this.props.simulate || 'none';
+  this.setState({ offline: typeof navigator !== 'undefined' && navigator.onLine === false });
+  this._on = () => this.setState({ offline: false }); this._off = () => this.setState({ offline: true });
+  window.addEventListener('online', this._on); window.addEventListener('offline', this._off);
+  if (GameData.abandonedRun('duel')) this.say('Your last match ended when you left the page.');
+  this.load(); this._poll = setInterval(() => this.poll(), 1200);
+}
+componentDidUpdate() { const s = this.state; if (this._ph !== s.phase || this._cf !== s.confirm) { this._ph = s.phase; this._cf = s.confirm; if (s.phase === 'play' || s.phase === 'count') this.focus(); } if (this._sim !== this.props.simulate) { this._sim = this.props.simulate; GameData.simulate = this.props.simulate || 'none'; if (s.phase === 'browse') this.load(); } }
+componentWillUnmount() { clearInterval(this._poll); clearInterval(this._iv); clearTimeout(this._to); clearTimeout(this._tt); clearTimeout(this._cd); window.removeEventListener('online', this._on); window.removeEventListener('offline', this._off); if (this.state.phase === 'play') GameData.endRun(); }
+focus() { try { if (this.root) this.root.focus({ preventScroll: true }); } catch (e) {} }
+say(m) { clearTimeout(this._tt); this.setState({ toast: m }); this._tt = setTimeout(() => this.setState({ toast: '' }), 2600); }
+load() {
+  this._sim = this.props.simulate; GameData.simulate = this.props.simulate || 'none';
+  this.setState({ st: 'loading', err: '' });
+  GameData.listMatches().then(l => this.setState({ st: 'ready', lobbies: this.props.simulate === 'empty' ? [] : l, listK: this.state.listK + 1 })).catch(e => this.setState({ st: 'error', err: e.message }));
+}
+poll() {
+  const s = this.state;
+  if (s.phase === 'lobby' && s.m) {
+    GameData.getMatch(s.m.id).then(m => {
+      const before = new Set(s.m.players.map(p => p.nick)); const fresh = m.players.filter(p => !before.has(p.nick));
+      if (fresh.length) { Sfx.play('tick'); this.setState({ feed: fresh.map(p => ({ nick: p.nick, txt: 'joined the lobby', c: '#669BBC' })).concat(this.state.feed).slice(0, 5) }); }
+      this.setState({ m });
+      if (m.status === 'playing' && !m.isHost) this.countdown();
+    }).catch(() => {});
+  }
+}
+openCreate() { this.setState({ creating: true, cErr: '' }); }
+create(e) {
+  if (e && e.preventDefault) e.preventDefault();
+  const s = this.state; if (s.busy) return;
+  if (s.cVis === 'private' && !/^.{4,12}$/.test(s.cPass)) { this.setState({ cErr: 'Private matches need a password of 4 to 12 characters.' }); return; }
+  this.setState({ busy: 'create', cErr: '' });
+  GameData.createMatch({ name: s.cName, visibility: s.cVis, password: s.cPass, maxPlayers: s.cSize })
+    .then(m => { Sfx.play('go'); this.setState({ busy: '', creating: false, phase: 'lobby', m, feed: [{ nick: 'You', txt: 'opened the lobby', c: '#C1121F' }], copied: false }); })
+    .catch(e2 => this.setState({ busy: '', cErr: e2.message === 'offline' ? 'You’re offline. Connect and try again.' : 'Couldn’t create the match. Try again.' }));
+}
+tryJoin(l, password) {
+  if (this.state.busy) return;
+  this.setState({ busy: 'join' });
+  GameData.joinMatch(l.id || l, password).then(r => {
+    this.setState({ busy: '' });
+    if (r.error === 'needpass') { this.setState({ pw: r.match, pwVal: '', pwBad: 0 }); return; }
+    if (r.error === 'wrongpass') { this.setState({ pwBad: this.state.pwBad + 1 }); Sfx.play('bad'); return; }
+    if (r.error) { this.say({ full: 'That match is full.', started: 'That match has already started.', notfound: 'No match uses that code.', format: 'Codes are 6 letters or numbers.' }[r.error] || 'Couldn’t join.'); return; }
+    Sfx.play('go');
+    this.setState({ pw: null, phase: 'lobby', m: r.match, feed: [{ nick: 'You', txt: 'joined the lobby', c: '#C1121F' }].concat(r.match.players.filter(p => !p.me).slice(-3).map(p => ({ nick: p.nick, txt: p.host ? 'is hosting' : 'is here', c: '#669BBC' }))), code: '' });
+  }).catch(e => { this.setState({ busy: '' }); this.say(e.message === 'offline' ? 'You’re offline.' : 'Couldn’t join. Try again.'); });
+}
+startMatch() {
+  const s = this.state; if (s.m.count < 2 || s.busy) return;
+  this.setState({ busy: 'start' });
+  GameData.startMatch(s.m.id).then(m => { this.setState({ busy: '', m }); this.countdown(); }).catch(() => { this.setState({ busy: '' }); this.say('Couldn’t start. Try again.'); });
+}
+countdown() {
+  if (this.state.phase === 'count' || this.state.phase === 'play') return;
+  const go = (n) => { this.setState({ cd: n, phase: 'count' }); Sfx.play('tick'); this._cd = setTimeout(() => (n > 1 ? go(n - 1) : this.play()), reduceMotion() ? 600 : 850); };
+  GameData.getMatch(this.state.m.id).then(m => { this.setState({ m }); go(3); }).catch(() => go(3));
+}
+play() {
+  GameData.beginRun('duel'); Sfx.play('go');
+  this.t0 = performance.now();
+  this.setState({ phase: 'play', qi: 0, answers: [], fb: null, left: D_MS, fl: 0, pop: 0 });
+  this.deadline = performance.now() + D_MS; this.last = performance.now();
+  clearInterval(this._iv); this._iv = setInterval(() => this.tick(), 100);
+}
+tick() {
+  const s = this.state; if (s.phase !== 'play') return;
+  const now = performance.now();
+  if (s.confirm || s.fb) this.deadline += now - this.last;
+  this.last = now;
+  const left = Math.max(0, this.deadline - now);
+  const patch = { left };
+  if (!this._lt || now - this._lt > 900) { this._lt = now; const live = GameData.liveStandings(s.m, s.answers, now - this.t0); const me = live.find(x => x.me); patch.live = live; if (me.rank !== s.place) { patch.place = me.rank; } }
+  this.setState(patch);
+  if (left <= 0 && !s.fb) this.record(null);
+}
+answer(i) { const s = this.state; if (s.phase !== 'play' || s.fb || s.confirm || i < 0 || i > 3) return; this.record(i); }
+record(i) {
+  const s = this.state, q = s.m.qs[s.qi];
+  const ok = i === q.a, secs = Math.ceil(s.left / 1000), pts = ok ? 100 + secs : 0;
+  Sfx.play(ok ? 'ok' : 'bad');
+  const answers = s.answers.concat([{ choice: i, correct: ok, left: ok ? secs : 0, pts }]);
+  this.setState({ answers, fb: { pick: i, ok }, fl: ok ? s.fl + 1 : s.fl, flTxt: '+' + pts, pop: ok ? s.pop + 1 : s.pop });
+  if (i === null) this.say('Time’s up on that one');
+  this._to = setTimeout(() => {
+    if (s.qi + 1 >= s.m.qs.length) this.submit(answers);
+    else { this.deadline = performance.now() + D_MS; this.last = performance.now(); this.setState({ qi: s.qi + 1, fb: null, left: D_MS }); }
+  }, 550);
+}
+submit(answers) {
+  clearInterval(this._iv); GameData.endRun();
+  const m = this.state.m;
+  this.setState({ phase: 'submitting', fb: null, confirm: false });
+  GameData.submitMatch(m.id, answers).then(r => {
+    const missed = r.match.qs.map((q, k) => ({ q, my: answers[k].choice, how: answers[k].choice === null ? 'timeout' : 'wrong', ok: answers[k].correct })).filter(x => !x.ok).map(x => ({ q: x.q, my: x.my, how: x.how }));
+    GameData.saveRun('duel', { score: r.me.pts, missed }).catch(() => {});
+    Sfx.play('win'); this.setState({ phase: 'result', res: r, m: r.match, burst: r.me.rank === 1 });
+  }).catch(() => { this.setState({ phase: 'play' }); this.say('Couldn’t send your answers — retrying…'); setTimeout(() => this.submit(answers), 1500); });
+}
+quitNow() {
+  clearInterval(this._iv); clearTimeout(this._to);
+  const s = this.state; const rest = s.m.qs.slice(s.answers.length).map(() => ({ choice: null, correct: false, left: 0, pts: 0 }));
+  this.submit(s.answers.concat(rest));
+}
+leave() {
+  const s = this.state; if (!s.m) return;
+  if (s.m.isHost || s.m.joined) GameData.leaveMatch(s.m.id).catch(() => {});
+  this.setState({ phase: 'browse', m: null }); this.load();
+}
+onKey(e) {
+  const k = e.key, s = this.state; let done = true;
+  if (s.confirm) { if (k === 'Escape') this.setState({ confirm: false }); else done = false; }
+  else if (s.creating || s.pw) { if (k === 'Escape') this.setState({ creating: false, pw: null }); else done = false; }
+  else if (s.phase === 'play') {
+    const n = '1234'.indexOf(k), l = 'abcd'.indexOf(k.toLowerCase());
+    if (n >= 0) this.answer(n); else if (l >= 0 && k.length === 1) this.answer(l); else if (k === 'Escape') this.setState({ confirm: true }); else done = false;
+  } else done = false;
+  if (done) e.preventDefault();
+}
+_rv() {
+  const s = this.state, ph = s.phase, m = s.m || { players: [], qs: [], name: '', code: '', count: 0, maxPlayers: 2, host: '' };
+  const fmt = (n) => Number(n || 0).toLocaleString('en-US');
+  /* browse */
+  const ql = s.q.trim().toLowerCase();
+  const others = s.lobbies.filter(l => !l.isHost);
+  const fl = { all: () => true, public: (l) => l.visibility === 'public', private: (l) => l.visibility === 'private', space: (l) => !l.full && l.status === 'lobby' };
+  const shown = others.filter(fl[s.f]).filter(l => !ql || (l.name + ' ' + l.host + ' ' + l.code).toLowerCase().includes(ql));
+  const lobbies = shown.map((l, i) => {
+    const st = l.status === 'playing' ? 'playing' : l.full ? 'full' : 'open';
+    return { name: l.name, host: l.host, count: String(l.count), max: String(l.maxPlayers), ago: ago(l.age), delay: (i * 0.05) + 's', st,
+      visTxt: l.visibility === 'private' ? 'Private' : 'Public', visBg: l.visibility === 'private' ? '#003049' : '#EEF4F8', visFg: l.visibility === 'private' ? '#FFFFFF' : '#003049',
+      sizeTxt: l.maxPlayers === 2 ? '1 v 1' : 'Up to ' + l.maxPlayers,
+      pips: Array.from({ length: l.maxPlayers }, (x, k) => ({ c: k < l.count ? (st === 'playing' ? '#669BBC' : '#003049') : '#E3E9EE' })),
+      aria: l.count + ' of ' + l.maxPlayers + ' players', stTxt: st === 'playing' ? 'In progress' : st === 'full' ? 'Full' : 'Waiting', stC: st === 'open' ? '#003049' : '#C1121F',
+      cta: st === 'open' ? (l.visibility === 'private' ? 'Join · password' : 'Join') : st === 'full' ? 'Full' : 'Playing', btnCls: st === 'open' ? (l.visibility === 'private' ? 'nv' : '') : 'gh', dis: st === 'open' ? 'false' : 'true', joinAria: 'Join ' + l.name,
+      join: () => (l.visibility === 'private' ? this.setState({ pw: l, pwVal: '', pwBad: 0 }) : this.tryJoin(l)) };
+  });
+  const mineL = s.lobbies.find(l => l.isHost);
+  const cnt = (k) => String(others.filter(fl[k]).length);
+  /* lobby */
+  const seats = Array.from({ length: m.maxPlayers }, (x, i) => { const p = m.players[i]; if (!p) return { filled: false, empty: true, nick: '', ini: '', bg: '', fg: '', host: false, meS: 'false' }; const a = avatar(p.nick, p.me); return { filled: true, empty: false, nick: p.me ? (p.nick === 'You' ? 'You' : p.nick + ' (you)') : p.nick, ini: a.ini, bg: a.bg, fg: a.fg, host: !!p.host, meS: p.me ? 'true' : 'false' }; });
+  /* play */
+  const q = m.qs && m.qs[s.qi]; const qv = q ? (this._qv[q.id] || (this._qv[q.id] = qView(q))) : { blocks: [], dom: '', dLabel: '', d: '' };
+  const opts = q ? q.ch.map((c, i) => { let st = 'idle'; if (s.fb) st = i === s.fb.pick ? (s.fb.ok ? 'right' : 'wrong') : (i === q.a && !s.fb.ok ? 'reveal' : 'dim'); return { k: LET[i], raw: c, runs: this._qv[q.id + ':' + i] || (this._qv[q.id + ':' + i] = MathText.runs(c)), s: st, pick: () => this.answer(i), aria: 'Answer ' + LET[i] }; }) : [];
+  const secs = Math.ceil(s.left / 1000); const myScore = s.answers.reduce((t, a) => t + a.pts, 0);
+  const order = m.players.map(p => p.me ? 'You' : p.nick);
+  const live = order.map(n => { const r = s.live.find(x => x.nick === n) || { rank: order.indexOf(n) + 1, n: 0, pts: 0, me: n === 'You' }; const a = avatar(n, r.me); return { nick: r.me ? 'You' : n, rank: String(r.rank), n: String(r.n), pts: fmt(r.pts), y: ((r.rank - 1) * 44) + 'px', op: r.rank <= 8 || r.me ? '1' : '0', meS: r.me ? 'true' : 'false', bg: a.bg, fg: a.fg, ini: a.ini }; });
+  /* result */
+  const rows = s.res ? s.res.rows : [];
+  const meR = s.res ? s.res.me : null;
+  const pod = rows.slice(0, 3).map((r, i) => { const a = avatar(r.nick, r.me); return { rank: String(r.rank), nick: r.me ? 'You' : r.nick, pts: fmt(r.pts), meS: r.me ? 'true' : 'false', bg: a.bg, fg: a.fg, ini: a.ini, d1: [0.35, 0.15, 0.5][i] + 's', d2: [1.0, 0.8, 1.15][i] + 's' }; });
+  const won = !!(meR && meR.rank === 1 && rows.length > 1);
+  return {
+    rootRef: this.rootRef, onKey: (e) => this.onKey(e),
+    showBar: ph !== 'play' && ph !== 'count', barTitle: ph === 'lobby' ? 'Lobby' : ph === 'result' ? 'Match result' : 'Duel',
+    isBrowse: ph === 'browse', isLobby: ph === 'lobby', isCount: ph === 'count', isPlay: ph === 'play', isSubmitting: ph === 'submitting', isResult: ph === 'result',
+    offline: s.offline, soundIs: s.sound, soundNot: !s.sound, soundOn: s.sound ? 'true' : 'false', toggleSound: () => { Sfx.set(!s.sound); this.setState({ sound: !s.sound }); },
+    goGamesDuel: (e) => { if (s.phase === 'lobby' && s.m && !s.m.isHost) GameData.leaveMatch(s.m.id).catch(() => {}); Wipe.go(this, e, '/games', '#003049'); },
+    openCreate: () => this.openCreate(), code: s.code, onCode: (e) => this.setState({ code: String(e.target.value || '').toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 6) }), codeDis: s.code.length ? 'false' : 'true',
+    joinCode: (e) => { if (e && e.preventDefault) e.preventDefault(); if (s.code) this.tryJoin(s.code); },
+    hasMine: !!mineL, mine: mineL ? { name: mineL.name, count: String(mineL.count), maxPlayers: String(mineL.maxPlayers), open: () => GameData.joinMatch(mineL.id).then(r => r.match && this.setState({ phase: 'lobby', m: r.match, feed: [] })) } : { name: '', count: '', maxPlayers: '' },
+    filters: [['all', 'All'], ['public', 'Public'], ['private', 'Private'], ['space', 'Has space']].map(([k, label]) => ({ label, n: cnt(k), on: s.f === k ? 'true' : 'false', go: () => this.setState({ f: k, listK: s.listK + 1 }) })),
+    sq: s.q, onQ: (e) => this.setState({ q: String(e.target.value || '').slice(0, 30) }),
+    refresh: () => { this.setState({ spin: s.spin + 1 }); this.load(); }, spinCls: s.spin ? (s.spin % 2 ? 'spinA' : 'spinB') : '',
+    isLoading: s.st === 'loading', isError: s.st === 'error', isEmpty: s.st === 'ready' && lobbies.length === 0,
+    errMsg: s.err === 'offline' ? 'You’re offline, so we can’t see open matches.' : 'We couldn’t load matches. Please try again.',
+    listA: s.st === 'ready' && s.listK % 2 === 1, listB: s.st === 'ready' && s.listK % 2 === 0 && s.listK > 0, lobbies, tgE: tong('sleep'),
+    m: Object.assign({}, m, { count: String(m.count || m.players.length), maxPlayers: String(m.maxPlayers) }),
+    visBg: m.visibility === 'private' ? '#003049' : '#EEF4F8', visFg: m.visibility === 'private' ? '#FFFFFF' : '#003049', visIcon: '', visLabel: m.visibility === 'private' ? 'Private · password' : 'Public · anyone can join',
+    lobbySub: m.isHost ? 'You’re the host. Others can see this match in the list' + (m.visibility === 'private' ? ' but need the password.' : ' and join right away.') : 'Hosted by ' + m.host + '.',
+    copyCode: () => { const done = () => this.setState({ copied: true }); try { navigator.clipboard.writeText(m.code).then(done, done); } catch (e) { done(); } }, copyLabel: s.copied ? 'Copied' : 'Copy code',
+    showPass: !!(m.isHost && m.visibility === 'private'), hostPass: s.cPass,
+    seats, feed: s.feed.map(f => Object.assign({}, f)),
+    isHost: !!m.isHost, notHost: !m.isHost, startDis: (m.players.length < 2 || s.busy) ? 'true' : 'false', startLabel: s.busy === 'start' ? 'Starting…' : 'Start match · ' + m.players.length + ' players',
+    startHint: m.players.length < 2 ? 'You need at least one more player to start.' : m.players.length < m.maxPlayers ? m.players.length + ' of ' + m.maxPlayers + ' seats taken. Start now or wait for more.' : 'Every seat is taken. Ready when you are.',
+    startMatch: () => this.startMatch(), leave: () => this.leave(),
+    cd: String(s.cd), cdCls: s.cd % 2 ? 'cdA' : 'cdB',
+    qNum: String(s.qi + 1), secs: String(secs), tScale: String(Math.max(0, Math.min(1, s.left / D_MS))), timeC: secs <= 10 ? '#C1121F' : '#003049',
+    dots: Array.from({ length: 10 }, (x, i) => ({ c: i < s.answers.length ? (s.answers[i].correct ? '#003049' : '#C1121F') : i === s.qi ? '#669BBC' : '#E3E9EE', sy: i === s.qi ? '1.6' : '1' })),
+    q: qv, qCls: s.qi % 2 ? 'qA' : 'qB', dBg: qv.d === 'hard' ? '#C1121F' : qv.d === 'medium' ? '#EEF4F8' : '#FBF3E3', dFg: qv.d === 'hard' ? '#FFFFFF' : '#003049',
+    opts, lock: s.fb ? 'true' : 'false', myScore: fmt(myScore), popCls: s.pop % 2 ? 'popA' : 'popB', flOn: s.fl > 0, flCls: s.fl % 2 ? 'flA' : 'flB', flTxt: s.flTxt,
+    placeTxt: s.place ? ord(s.place) + ' of ' + m.players.length : 'Live', placeCls: s.place % 2 ? 'popA' : 'popB',
+    live, liveH: (Math.min(8, live.length) * 44) + 'px',
+    askQuit: () => this.setState({ confirm: true }), confirm: s.confirm, quitMsg: 'Your unanswered questions will count as zero and your score will be sent as it is now.', keepPlaying: () => this.setState({ confirm: false }), endRun: () => this.quitNow(),
+    headA: meR ? (won ? 'You' : 'You came') : '', headB: meR ? (won ? 'won.' : ord(meR.rank) + '.') : '', won,
+    tgR: tong(won ? 'cheer' : meR && meR.rank <= 3 ? 'happy' : 'think'), tgRMsg: won ? 'First of ' + rows.length + '. Fast and right — that is how matches are won.' : meR && meR.rank <= 3 ? 'On the podium. The hard three questions decide first place.' : 'Not this time. Review the misses and call a rematch.',
+    pod, rows: rows.map((r, i) => { const a = avatar(r.nick, r.me); return { rank: String(r.rank), nick: r.me ? 'You' : r.nick, pts: fmt(r.pts), right: String(r.right), meS: r.me ? 'true' : 'false', delay: (0.4 + i * 0.04) + 's', bg: a.bg, fg: a.fg, ini: a.ini }; }),
+    rematch: () => { if (m.isHost) { this.setState({ cSize: m.maxPlayers ? Number(m.maxPlayers) : 5, cVis: m.visibility || 'public', creating: true }); } else { this.setState({ phase: 'browse', m: null }); this.load(); } }, rematchLabel: m.isHost ? 'Rematch' : 'Find another match',
+    toBrowse: () => { this.setState({ phase: 'browse', m: null }); this.load(); },
+    hasMissed: s.answers.some(a => !a.correct), missedN: String(s.answers.filter(a => !a.correct).length),
+    burstOn: s.burst && !reduceMotion(), burst: this._bp || (this._bp = burstParts(40, 3)),
+    showCreate: s.creating, closeCreate: () => this.setState({ creating: false }), create: (e) => this.create(e), cName: s.cName, onName: (e) => this.setState({ cName: String(e.target.value || '').slice(0, 28) }),
+    visX: s.cVis === 'private' ? '100%' : '0%', visOpts: [['public', 'Public'], ['private', 'Private']].map(([k, label]) => ({ label, on: s.cVis === k ? 'true' : 'false', go: () => this.setState({ cVis: k, cErr: '' }) })),
+    visHelp: s.cVis === 'private' ? 'Listed for everyone, but only people with the password can get in.' : 'Anyone can see it and join until the seats are full.',
+    isPriv: s.cVis === 'private', cPass: s.cPass, onPass: (e) => this.setState({ cPass: String(e.target.value || '').slice(0, 12), cErr: '' }), passBad: s.cErr ? 'true' : 'false',
+    sizeX: (SIZES.indexOf(s.cSize) * 100) + '%', sizeOpts: SIZES.map(n => ({ label: n === 2 ? '1 v 1' : String(n), on: s.cSize === n ? 'true' : 'false', go: () => this.setState({ cSize: n }) })),
+    sizeHelp: s.cSize === 2 ? 'A classic duel: you and one other player.' : 'Up to ' + s.cSize + ' players. You can start as soon as two are in.',
+    hasCErr: !!s.cErr, cErr: s.cErr, busyS: s.busy ? 'true' : 'false', createLabel: s.busy === 'create' ? 'Creating…' : 'Create match',
+    showPw: !!s.pw, pwName: s.pw ? s.pw.name : '', pwVal: s.pwVal, onPw: (e) => this.setState({ pwVal: String(e.target.value || '').slice(0, 12) }), pwBad: s.pwBad ? 'true' : 'false', pwBadIs: s.pwBad > 0, shakeCls: s.pwBad % 2 ? 'shA' : 'shB',
+    submitPw: (e) => { if (e && e.preventDefault) e.preventDefault(); if (s.pwVal) this.tryJoin(s.pw, s.pwVal); }, closePw: () => this.setState({ pw: null }), pwBtn: s.busy === 'join' ? 'Checking…' : 'Join match',
+    toastOn: !!s.toast, toastMsg: s.toast, toastCls: ''
+  };
+}
+renderVals() { return Object.assign(wipeVals(this), this._rv()); }
+}
+
+</script>
+</body>
+</html>

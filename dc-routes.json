@@ -17,5 +17,11 @@
   "/settings": "Settings",
   "/notifications": "Notifications",
   "/help": "Help",
-  "/admin": "Admin"
+  "/admin": "Admin",
+  "/games": "Games",
+  "/games/speed": "SpeedRound",
+  "/games/survival": "Survival",
+  "/games/leaderboard": "Leaderboard",
+  "/games/duel": "Duel",
+  "/games/review": "GameReview"
 }
