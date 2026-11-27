@@ -503,7 +503,7 @@ a.tile:hover .go{transform:rotate(-45deg);background:#003049;color:#FFFFFF}
 </div>
 
 <sc-if value="{{hasMine}}" hint-placeholder-val="{{ false }}">
-<div class="drow rg" style="animation-delay: .12s; background: #FBF3E3; box-shadow: none"><span class="pill2" style="background: #C1121F; color: #FFFFFF">Your match</span><span style="font-weight: 600; flex: 1; min-width: 0">{{mine.name}} · {{mine.count}}/{{mine.maxPlayers}} players</span><button type="button" class="gbtn nv" onClick="{{mine.open}}" style="min-height: 44px; padding: 0 18px">Open lobby</button></div>
+<div class="drow rg" style="animation-delay: .12s; background: #FBF3E3; box-shadow: none"><span class="pill2" style="background: #C1121F; color: #FFFFFF">Your match</span><span style="font-weight: 600; flex: 1; min-width: 0">{{mine.name}} · {{mine.count}}/{{mine.maxPlayers}} players</span><button type="button" class="gbtn nv" onClick="{{mine.open}}" style="min-height: 44px; padding: 0 18px">Open lobby</button><button type="button" class="gbtn gh" onClick="{{mine.remove}}" style="min-height: 44px; padding: 0 18px">{{mine.removeLabel}}</button></div>
 </sc-if>
 
 <div class="rg" style="animation-delay: .14s; display: flex; gap: 8px; flex-wrap: wrap; align-items: center">
@@ -585,7 +585,8 @@ a.tile:hover .go{transform:rotate(-45deg);background:#003049;color:#FFFFFF}
 <div style="display: flex; align-items: center; gap: 12px"><span class="lbar" style="flex: 1"><span></span></span></div>
 <span style="font-size: 15px; color: rgba(0,48,73,.75)">Waiting for <b>{{m.host}}</b> to start the match…</span>
 </sc-if>
-<button type="button" class="gbtn gh" onClick="{{leave}}">Leave lobby</button>
+<button type="button" class="gbtn gh" onClick="{{leave}}">{{leaveLabel}}</button>
+<sc-if value="{{isHost}}" hint-placeholder-val="{{ true }}"><button type="button" class="gbtn gh" onClick="{{keepAndBack}}">Keep it open, go back</button><span style="font-size: 13px; color: rgba(0,48,73,.6)">If you leave the games page, the lobby closes by itself after a few minutes, or passes to a player who is still waiting.</span></sc-if>
 </section>
 </div>
 </main>
@@ -902,15 +903,34 @@ load() {
   this.setState({ st: 'loading', err: '' });
   GameData.listMatches().then(l => this.setState({ st: 'ready', lobbies: this.props.simulate === 'empty' ? [] : l, listK: this.state.listK + 1 })).catch(e => this.setState({ st: 'error', err: e.message }));
 }
+backToList(msg) { this.setState({ phase: 'browse', m: null }); if (msg) this.say(msg); this.load(); }
+openMine(id) {
+  if (this.state.busy) return;
+  this.setState({ busy: 'join' });
+  GameData.getMatch(id).then(m => {
+    this.setState({ busy: '', phase: 'lobby', m, feed: [], copied: false });
+    if (m.status === 'playing') this.countdown();
+  }).catch(e => { this.setState({ busy: '' }); if (e.message === 'missing') { this.backToList('That lobby is already closed.'); return; } this.say('Couldn’t open the lobby' + (e.detail ? ': ' + String(e.detail).slice(0, 90) : '. Try again.')); });
+}
 poll() {
   const s = this.state;
+  /* on the list: refresh quietly (this also tells the server a host is still here) */
+  if (s.phase === 'browse' && s.st === 'ready' && !document.hidden && Date.now() - (this._listAt || 0) > 8000) {
+    this._listAt = Date.now();
+    GameData.listMatches().then(l => { if (this.state.phase === 'browse') this.setState({ lobbies: l }); }).catch(() => {});
+  }
   if (s.phase === 'lobby' && s.m) {
+    if (this._pollBusy) return;
+    this._pollBusy = true;
     GameData.getMatch(s.m.id).then(m => {
+      this._pollBusy = false;
+      if (this.state.phase !== 'lobby') return;
+      if (m.isHost && !s.m.isHost) this.say('The host left — you are the host now.');
       const before = new Set(s.m.players.map(p => p.nick)); const fresh = m.players.filter(p => !before.has(p.nick));
       if (fresh.length) { Sfx.play('tick'); this.setState({ feed: fresh.map(p => ({ nick: p.nick, txt: 'joined the lobby', c: '#669BBC' })).concat(this.state.feed).slice(0, 5) }); }
       this.setState({ m });
       if (m.status === 'playing' && !m.isHost) this.countdown();
-    }).catch(() => {});
+    }).catch(e => { this._pollBusy = false; if (e && e.message === 'missing' && this.state.phase === 'lobby') this.backToList('This lobby was closed.'); });
   }
 }
 openCreate() { this.setState({ creating: true, cErr: '' }); }
@@ -993,8 +1013,8 @@ quitNow() {
 }
 leave() {
   const s = this.state; if (!s.m) return;
-  if (s.m.isHost || s.m.joined) GameData.leaveMatch(s.m.id).catch(() => {});
-  this.setState({ phase: 'browse', m: null }); this.load();
+  const gone = (s.m.isHost || s.m.joined) ? GameData.leaveMatch(s.m.id).catch(() => this.say('Couldn’t close the lobby. Try again.')) : Promise.resolve();
+  this.setState({ phase: 'browse', m: null, st: 'loading' }); gone.then(() => this.load());
 }
 onKey(e) {
   const k = e.key, s = this.state; let done = true;
@@ -1024,7 +1044,7 @@ _rv() {
       cta: st === 'open' ? (l.visibility === 'private' ? 'Join · password' : 'Join') : st === 'full' ? 'Full' : 'Playing', btnCls: st === 'open' ? (l.visibility === 'private' ? 'nv' : '') : 'gh', dis: st === 'open' ? 'false' : 'true', joinAria: 'Join ' + l.name,
       join: () => (l.visibility === 'private' ? this.setState({ pw: l, pwVal: '', pwBad: 0 }) : this.tryJoin(l)) };
   });
-  const mineL = s.lobbies.find(l => l.isHost);
+  const mineL = s.lobbies.find(l => l.isHost && l.status === 'lobby');
   const cnt = (k) => String(others.filter(fl[k]).length);
   /* lobby */
   const seats = Array.from({ length: m.maxPlayers }, (x, i) => { const p = m.players[i]; if (!p) return { filled: false, empty: true, nick: '', ini: '', bg: '', fg: '', host: false, meS: 'false' }; const a = avatar(p.nick, p.me); return { filled: true, empty: false, nick: p.me ? (p.nick === 'You' ? 'You' : p.nick + ' (you)') : p.nick, ini: a.ini, bg: a.bg, fg: a.fg, host: !!p.host, meS: p.me ? 'true' : 'false' }; });
@@ -1047,7 +1067,7 @@ _rv() {
     goGamesDuel: (e) => { if (s.phase === 'lobby' && s.m && !s.m.isHost) GameData.leaveMatch(s.m.id).catch(() => {}); Wipe.go(this, e, '/games', '#003049'); },
     openCreate: () => this.openCreate(), code: s.code, onCode: (e) => this.setState({ code: String(e.target.value || '').toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 6) }), codeDis: s.code.length ? 'false' : 'true',
     joinCode: (e) => { if (e && e.preventDefault) e.preventDefault(); if (s.code) this.tryJoin(s.code); },
-    hasMine: !!mineL, mine: mineL ? { name: mineL.name, count: String(mineL.count), maxPlayers: String(mineL.maxPlayers), open: () => GameData.joinMatch(mineL.id).then(r => r.match && this.setState({ phase: 'lobby', m: r.match, feed: [] })) } : { name: '', count: '', maxPlayers: '' },
+    hasMine: !!mineL, mine: mineL ? { name: mineL.name, count: String(mineL.count), maxPlayers: String(mineL.maxPlayers), open: () => this.openMine(mineL.id), removeLabel: mineL.status === 'lobby' ? 'Delete' : 'Hide', remove: () => { this.setState({ lobbies: this.state.lobbies.filter(l => l.id !== mineL.id) }); GameData.leaveMatch(mineL.id).then(() => { this.say('Lobby deleted.'); this.load(); }).catch(() => { this.say('Couldn’t delete it. Try again.'); this.load(); }); } } : { name: '', count: '', maxPlayers: '', removeLabel: '' },
     filters: [['all', 'All'], ['public', 'Public'], ['private', 'Private'], ['space', 'Has space']].map(([k, label]) => ({ label, n: cnt(k), on: s.f === k ? 'true' : 'false', go: () => this.setState({ f: k, listK: s.listK + 1 }) })),
     sq: s.q, onQ: (e) => this.setState({ q: String(e.target.value || '').slice(0, 30) }),
     refresh: () => { this.setState({ spin: s.spin + 1 }); this.load(); }, spinCls: s.spin ? (s.spin % 2 ? 'spinA' : 'spinB') : '',
@@ -1062,7 +1082,7 @@ _rv() {
     seats, feed: s.feed.map(f => Object.assign({}, f)),
     isHost: !!m.isHost, notHost: !m.isHost, startDis: (m.players.length < 2 || s.busy) ? 'true' : 'false', startLabel: s.busy === 'start' ? 'Starting…' : 'Start match · ' + m.players.length + ' players',
     startHint: m.players.length < 2 ? 'You need at least one more player to start.' : m.players.length < m.maxPlayers ? m.players.length + ' of ' + m.maxPlayers + ' seats taken. Start now or wait for more.' : 'Every seat is taken. Ready when you are.',
-    startMatch: () => this.startMatch(), leave: () => this.leave(),
+    startMatch: () => this.startMatch(), leave: () => this.leave(), leaveLabel: m.isHost ? 'Delete lobby' : 'Leave lobby', keepAndBack: () => this.backToList('Your lobby stays open while you are on this page.'),
     cd: String(s.cd), cdCls: s.cd % 2 ? 'cdA' : 'cdB',
     qNum: String(s.qi + 1), secs: String(secs), tScale: String(Math.max(0, Math.min(1, s.left / D_MS))), timeC: secs <= 10 ? '#C1121F' : '#003049',
     dots: Array.from({ length: 10 }, (x, i) => ({ c: i < s.answers.length ? (s.answers[i].correct ? '#003049' : '#C1121F') : i === s.qi ? '#669BBC' : '#E3E9EE', sy: i === s.qi ? '1.6' : '1' })),

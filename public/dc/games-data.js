@@ -12,7 +12,8 @@
     var m = String((e && e.message) || e || '');
     if (typeof navigator !== 'undefined' && navigator.onLine === false) throw new Error('offline');
     if (/game_|schema cache|does not exist|PGRST20/i.test(m)) { if (window.Ufq) window.Ufq.toast('Games need one more setup step: run supabase/migrations/20261128_games.sql.'); throw new Error('server'); }
-    throw new Error(/missing/i.test(m) ? 'missing' : 'server');
+    var err = new Error(/missing/i.test(m) ? 'missing' : 'server'); err.detail = m; if (window.console) console.warn('games:', m);
+    throw err;
   }
 
   /* ---------------- questions ---------------- */
