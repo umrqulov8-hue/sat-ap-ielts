@@ -251,6 +251,18 @@ html,body{margin:0;background:#003049}
 </div>
 </main>
 
+<section style="width: 100%; max-width: 1040px; margin: 0 auto; padding: 8px clamp(20px, 4vw, 56px) 56px; display: flex; flex-direction: column; gap: 16px">
+<div style="border-top: 1px solid #003049; padding-top: 18px; display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap"><h2 class="srf" style="margin: 0; font-size: clamp(30px, 3vw, 44px); line-height: 1">Video <em style="color: #C1121F">lessons.</em></h2><span class="cap" style="color: rgba(0,48,73,.55)">{{vidCount}}</span></div>
+<sc-if value="{{noVids}}" hint-placeholder-val="{{ false }}"><p style="margin: 0; color: rgba(0,48,73,.65)">No video lessons have been added yet. An admin can add them in Admin → Videos.</p></sc-if>
+<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px">
+<sc-for list="{{vids}}" as="v" hint-placeholder-count="2"><div style="display: flex; flex-direction: column; gap: 8px">
+<sc-if value="{{v.open}}" hint-placeholder-val="{{ false }}"><iframe src="{{v.embed}}" title="{{v.title}}" allow="accelerometer; autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen style="width: 100%; aspect-ratio: 16 / 9; border: 0; border-radius: 16px; background: #003049"></iframe></sc-if>
+<sc-if value="{{v.closed}}" hint-placeholder-val="{{ false }}"><button type="button" onClick="{{v.play}}" aria-label="Play {{v.title}}" style="width: 100%; aspect-ratio: 16 / 9; border: 0; border-radius: 16px; background: #003049; color: #FFFFFF; cursor: pointer; font-size: 44px">▶</button></sc-if>
+<span class="cap" style="color: #669BBC">{{v.subject}}</span><b style="font-size: 17px">{{v.title}}</b><span style="font-size: 14px; color: rgba(0,48,73,.65)">{{v.desc}}</span>
+</div></sc-for>
+</div>
+</section>
+
 <sc-if value="{{showFoot}}" hint-placeholder-val="{{ true }}">
 <footer style="position: sticky; bottom: 0; z-index: 5; background: #FFFFFF; display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 12px clamp(16px, 3vw, 32px); border-top: 1px solid rgba(0,48,73,.12)">
 <button type="button" class="ghost" onClick="{{back}}" style="visibility: {{backVis}}">Back</button>
@@ -261,7 +273,8 @@ html,body{margin:0;background:#003049}
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
 class Component extends DCLogic {
-constructor(props) { super(props); let entry = ''; try { entry = sessionStorage.getItem('ufqWipe') || ''; sessionStorage.removeItem('ufqWipe'); } catch (e) {} this._entryW = entry === 'wipeW'; this.state = { step: 0, ang: 'A', ws: 1, ck: {} }; }
+constructor(props) { super(props); let entry = ''; try { entry = sessionStorage.getItem('ufqWipe') || ''; sessionStorage.removeItem('ufqWipe'); } catch (e) {} this._entryW = entry === 'wipeW'; this.state = { step: 0, ang: 'A', ws: 1, ck: {}, vids: null, subs: {}, playing: '' };
+Promise.all([window.Ufq.videos(), window.Ufq.subjects()]).then(([vids, subs]) => { const m = {}; subs.forEach((x) => { m[x.id] = x.title; }); this.setState({ vids, subs: m }); }).catch(() => this.setState({ vids: [] })); }
 renderVals() {
 const s = this.state;
 const A = s.ang === 'A';
@@ -288,7 +301,9 @@ pick: () => { if (this.state.ck[qi] !== undefined) return; this.setState({ ck: O
 const got = C.filter((x, i) => s.ck[i] === x.c).length;
 const st = s.step;
 const canNext = st === 2 ? s.ws === 3 : st === 3 ? Object.keys(s.ck).length === 2 : true;
+const vl = (s.vids || []).map((v) => { const yt = window.Ufq.ytEmbed(v.video_url); const open = s.playing === v.id; return { title: v.title, desc: v.description || '', subject: s.subs[v.subject_id] || 'SAT Math', open, closed: !open, embed: yt ? yt + '?autoplay=1' : (/^https:/.test(v.video_url) ? v.video_url : 'about:blank'), play: () => this.setState({ playing: v.id }) }; });
 return {
+vids: vl, noVids: !!s.vids && vl.length === 0, vidCount: s.vids ? vl.length + ' video' + (vl.length === 1 ? '' : 's') : '',
 entryW: this._entryW,
 s0: st === 0, s1: st === 1, s2: st === 2, s3: st === 3, s4: st === 4, showTri: st <= 1, showFoot: st < 4,
 dots: [0, 1, 2, 3, 4].map(i => ({ c: i < st ? '#003049' : i === st ? RED : '#E3E9EE', s: i === st ? '1.3' : '1' })),

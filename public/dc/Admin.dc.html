@@ -427,6 +427,22 @@ a.tile:hover .go{transform:rotate(-45deg);background:#003049;color:#FFFFFF}
 </div>
 </sc-if>
 
+<!-- ================= VIDEOS ================= -->
+<sc-if value="{{pVideos}}" hint-placeholder-val="{{ false }}">
+<div class="pane" style="display: flex; flex-direction: column; gap: 16px">
+<div class="acard" style="display: flex; flex-direction: column; gap: 12px">
+<span class="cap" style="color: #669BBC">Add a video lesson</span>
+<label class="flab">Title<input class="ainp" type="text" value="{{vT}}" onInput="{{setVT}}" placeholder="e.g. Linear equations in 10 minutes"></label>
+<label class="flab">YouTube or video link<input class="ainp" type="url" value="{{vU}}" onInput="{{setVU}}" placeholder="https://www.youtube.com/watch?v=…"></label>
+<label class="flab">Short description<input class="ainp" type="text" value="{{vD}}" onInput="{{setVD}}" placeholder="Optional"></label>
+<div class="segs"><sc-for list="{{vDoms}}" as="r" hint-placeholder-count="4"><button type="button" class="sg" aria-pressed="{{r.on}}" onClick="{{r.pick}}">{{r.l}}</button></sc-for></div>
+<button type="button" class="btn" onClick="{{addVid}}" style="min-height: 46px; align-self: flex-start">Add video</button>
+</div>
+<sc-for list="{{vidRows}}" as="v" hint-placeholder-count="3"><div class="qrow ti"><div style="display: flex; flex-direction: column; gap: 4px; min-width: 0; flex: 1"><b>{{v.title}}</b><span style="font-size: 12px; color: rgba(0,48,73,.6); overflow: hidden; text-overflow: ellipsis; white-space: nowrap">{{v.url}}</span></div><span class="ktag">{{v.subject}}</span><button type="button" class="ib" onClick="{{v.del}}">Delete</button></div></sc-for>
+<sc-if value="{{noVids}}" hint-placeholder-val="{{ false }}"><p style="margin: 0; padding: 20px; text-align: center; color: rgba(0,48,73,.6)">No videos yet.</p></sc-if>
+</div>
+</sc-if>
+
 <!-- ================= ANALYTICS ================= -->
 <sc-if value="{{pAnalytics}}" hint-placeholder-val="{{ false }}">
 <div class="pane" style="display: flex; flex-direction: column; gap: 16px">
@@ -605,7 +621,8 @@ const errText = (err) => { const m = String((err && err.message) || err || ''); 
 class Component extends DCLogic {
 constructor(props) {
 super(props);
-this.state = { tab: 'overview', q: '', rf: 'All', sf: 'All', sel: 0, users: [{ id: 1, rid: null, n: 'You', e: window.Ufq.email(), r: 'Admin', s: 'Active', j: '—', la: 'Now', m: '—', k: '—', qd: '—', ac: '—' }], qs: [], ts: [], total: 0, idBySlug: {}, slugById: {}, kpi: { students: 0, active: 0, tests7: 0, avgScore: 0 }, sig: new Array(30).fill(0), wauS: new Array(8).fill(0), histS: [], domS: [], hardQ: [], doms: DOMS.slice(), addDom: null, qlim: 20, aud: [], dlg: '', conf: '', toast: '', qq: '', df: 'All', dif: 'All', af: 'All', invE: '', invR: 'Student', ed: null, tb: null, delq: null, delt: null, qBusy: false, bank: null, used: {}, stats: {} };
+this.state = { tab: 'overview', q: '', rf: 'All', sf: 'All', sel: 0, users: [{ id: 1, rid: null, n: 'You', e: window.Ufq.email(), r: 'Admin', s: 'Active', j: '—', la: 'Now', m: '—', k: '—', qd: '—', ac: '—' }], qs: [], ts: [], total: 0, idBySlug: {}, slugById: {}, kpi: { students: 0, active: 0, tests7: 0, avgScore: 0 }, sig: new Array(30).fill(0), wauS: new Array(8).fill(0), histS: [], domS: [], hardQ: [], doms: DOMS.slice(), addDom: null, qlim: 20, aud: [], dlg: '', conf: '', toast: '', qq: '', df: 'All', dif: 'All', af: 'All', invE: '', invR: 'Student', ed: null, tb: null, delq: null, delt: null, qBusy: false, bank: null, used: {}, stats: {}, vids: null, vT: '', vU: '', vD: '', vS: 'Algebra' };
+window.Ufq.videos().then((vids) => this.setState({ vids })).catch(() => this.setState({ vids: [] }));
 const off = window.Ufq.cover('Loading the admin data…');
 window.Ufq.adminLoad().then((D) => { off(); this.setState({ users: D.users, qs: D.questions, ts: D.tests, total: D.total, idBySlug: D.idBySlug, slugById: D.slugById, aud: D.aud, kpi: D.kpi, used: D.used || {}, stats: D.stats || {}, sig: D.sig, wauS: D.wau, histS: D.hist, domS: D.domAcc, hardQ: D.hardest }); }).catch((err) => { off(); window.Ufq.toast(errText(err)); });
 }
@@ -661,7 +678,7 @@ const rk = (r) => r.toLowerCase();
 const stC = (st) => st === 'Active' ? BLUE : st === 'Suspended' ? RED : '#F6DDB0';
 const av = (u) => u.r === 'Owner' ? ['#780000', '#F6DDB0'] : u.r === 'Admin' ? [NAVY, '#FFFFFF'] : ['#EEF2F5', NAVY];
 const nFlag = 0;
-const T = [['overview', 'Overview'], ['users', 'Users'], ['questions', 'Questions'], ['tests', 'Tests'], ['analytics', 'Analytics'], ['roles', 'Roles'], ['activity', 'Activity']];
+const T = [['overview', 'Overview'], ['users', 'Users'], ['questions', 'Questions'], ['tests', 'Tests'], ['videos', 'Videos'], ['analytics', 'Analytics'], ['roles', 'Roles'], ['activity', 'Activity']];
 const tabs = T.map(([k, label]) => ({ label, on: s.tab === k ? 'true' : 'false', badge: k === 'questions' && nFlag ? String(nFlag) : '', pick: () => this.setState({ tab: k, sel: 0 }) }));
 const go = (k) => () => this.setState({ tab: k });
 /* overview */
@@ -869,7 +886,7 @@ const audSegs = AF.map(a => ({ l: a, on: s.af === a ? 'true' : 'false', pick: ()
 const audAll = s.aud.filter(a => s.af === 'All' || a.k === s.af).map(audMap);
 return {
 meRole: me.r, meRoleK: rk(me.r), tabs,
-pOverview: s.tab === 'overview', pUsers: s.tab === 'users', pQuestions: s.tab === 'questions', pTests: s.tab === 'tests', pAnalytics: s.tab === 'analytics', pRoles: s.tab === 'roles', pActivity: s.tab === 'activity',
+pOverview: s.tab === 'overview', pUsers: s.tab === 'users', pQuestions: s.tab === 'questions', pTests: s.tab === 'tests', pVideos: s.tab === 'videos', vidRows: (s.vids || []).map((v) => ({ title: v.title, url: v.video_url, subject: Object.keys(s.idBySlug).filter((k) => s.idBySlug[k] === v.subject_id).map((k) => ({ 'algebra': 'Algebra', 'advanced-math': 'Advanced Math', 'problem-solving': 'Problem-Solving & Data', 'data-analysis': 'Problem-Solving & Data', 'geometry': 'Geometry & Trig' })[k] || k)[0] || 'SAT Math', del: () => { if (!window.confirm('Delete the video “' + v.title + '”?')) return; window.Ufq.deleteVideo(v.id).then(() => this.say('Video deleted.', { vids: this.state.vids.filter((x) => x.id !== v.id), aud: this.log('deleted video ' + v.title, 'Content') })).catch((err) => this.say(errText(err))); } })), noVids: !!s.vids && s.vids.length === 0, vT: s.vT, vU: s.vU, vD: s.vD, setVT: (ev) => this.setState({ vT: ev.target.value }), setVU: (ev) => this.setState({ vU: ev.target.value }), setVD: (ev) => this.setState({ vD: ev.target.value }), vDoms: DOMS.map((d) => ({ l: d, on: s.vS === d ? 'true' : 'false', pick: () => this.setState({ vS: d }) })), addVid: () => { const title = s.vT.trim(), url = s.vU.trim(); if (!title) return this.say('Give the video a title.'); if (!window.Ufq.ytEmbed(url) && !/^https:\/\//.test(url)) return this.say('Paste a YouTube link or an https video link.'); const sid = s.idBySlug[{ 'Algebra': 'algebra', 'Advanced Math': 'advanced-math', 'Problem-Solving & Data': 'problem-solving', 'Geometry & Trig': 'geometry' }[s.vS]]; window.Ufq.addVideo({ title, video_url: url, description: s.vD.trim(), video_type: window.Ufq.ytEmbed(url) ? 'youtube' : 'file', subject_id: sid || null, order_index: (s.vids || []).length }).then((row) => this.say('Video added. Students see it on the Lesson page.', { vids: (this.state.vids || []).concat([row]), vT: '', vU: '', vD: '', aud: this.log('added video ' + title, 'Content') })).catch((err) => this.say(errText(err))); }, pAnalytics: s.tab === 'analytics', pRoles: s.tab === 'roles', pActivity: s.tab === 'activity',
 newQ: () => this.openEd(null), newTest: () => this.openTb(null), goActivity: go('activity'),
 kpis, lineD, areaD, lastX: '600', lastY, sigTotal: String(SIG.reduce((a, c) => a + c, 0)), sigA: dAgo(29), sigB: dAgo(14), histA, histEm, domA, domEm, attn, audTop,
 q: s.q, setQ: (ev) => this.setState({ q: ev.target.value }), roleSegs, statSegs, userRows, noUsers: userRows.length === 0, userCount: filtered.length + ' of ' + s.users.length + ' accounts',

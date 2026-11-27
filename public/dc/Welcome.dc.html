@@ -264,8 +264,8 @@ const summary = [
 { k: 'Reminder', v: st >= 2 ? (T[s.time][0] === 'Off' ? 'Off' : T[s.time][0] + ' by email') : '—', c: st > 2 ? '#FFFFFF' : st === 2 ? '#F6DDB0' : 'rgba(255,255,255,.4)' }
 ];
 const studyIdx = D.map((d, i) => i).filter(i => on[i]);
-const plan = [['Lesson · right-triangle ratios', 'Geometry & Trig', '12 min'], ['12 Geometry questions', 'Practice set', '20 min'], ['Systems of equations', 'Algebra', L[s.len][0]], ['Percentages', 'Problem-Solving & Data', L[s.len][0]], ['Quadratics', 'Advanced Math', L[s.len][0]]];
-const week = studyIdx.slice(0, 4).map((di, j) => ({ d: D[di], t: plan[j][0], s: plan[j][1], m: plan[j][2], c: j === 0 ? '#C1121F' : '#669BBC' })).concat([{ d: 'Sat', t: 'Mock 1 · full-length Math', s: 'Sets your starting score', m: '70 min', c: '#C1121F' }]);
+const plan = ['Algebra', 'Advanced Math', 'Problem-Solving & Data', 'Geometry & Trig'].map((d) => [[10, 20, 40][s.len] + ' questions', d, L[s.len][0]]);
+const week = studyIdx.slice(0, 4).map((di, j) => ({ d: D[di], t: plan[j][0], s: plan[j][1], m: plan[j][2], c: j === 0 ? '#C1121F' : '#669BBC' })).concat([{ d: 'Sat', t: 'Mock test', s: 'Two modules, once one is published', m: '70 min', c: '#C1121F' }]);
 const ok = st !== 0 || nd > 0;
 return {
 stepNo: String(st + 1), st0: st === 0, st1: st === 1, st2: st === 2, st3: st === 3,
@@ -278,7 +278,7 @@ entry: this._entry, lateCls: this._entry ? 'late' : '', lpCls: s.leaving ? 'lpGr
 lessonRef: (el) => { this.lessonLink = el; },
 goLesson: (ev) => { if (ev && ev.preventDefault) ev.preventDefault(); this.leave(this.lessonLink); },
 dashRef: (el) => { this.dashLink = el; },
-next: () => { if (this.state.step < 3) { this.setState({ step: this.state.step + 1 }); return; } try { const cur = JSON.parse(localStorage.getItem('ufq_settings') || '{}'); localStorage.setItem('ufq_settings', JSON.stringify(Object.assign(cur, { days: this.state.days, min: this.state.len, time: this.state.time, remind: this.state.time !== 4 }))); } catch (e) {} this.leave(this.dashLink); }
+next: () => { if (this.state.step < 3) { this.setState({ step: this.state.step + 1 }); return; } try { const cur = JSON.parse(localStorage.getItem('ufq_settings') || '{}'); localStorage.setItem('ufq_settings', JSON.stringify(Object.assign(cur, { days: this.state.days, min: this.state.len, time: [0, 1, 1, 2, 1][this.state.time], remind: this.state.time !== 4 }))); } catch (e) {} this.leave(this.dashLink); }
 };
 }
 }

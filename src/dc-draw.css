@@ -1,0 +1,133 @@
+/* Drawing tools on the design's practice screen (rules taken from the app stylesheet, in Ufq colors). */
+.ufq-draw, .shape-picker-menu { --dark: #003049; --cream: #ffffff; --yellow: #f6ddb0; --lavender: #eef2f5; font-family: "Inter Tight", system-ui, sans-serif; }
+.ufq-draw button, .shape-picker-menu button { cursor: pointer; font-family: inherit; }
+.shape-picker-menu button { background: transparent; }
+/* Drawing tools stay compact and reachable on short or narrow screens. */
+.draw-toolbar {
+  position: fixed;
+  z-index: 10001;
+  left: 50%;
+  bottom: calc(72px + env(safe-area-inset-bottom, 0px));
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  box-sizing: border-box;
+  max-width: calc(100vw - 24px);
+  padding: 7px;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  touch-action: pan-x;
+  transform: translateX(-50%);
+  border: 1px solid var(--dark, #1a1a2e);
+  border-radius: 4px;
+  background: var(--cream, #fffdf5);
+  box-shadow: 3px 3px 0 var(--dark, #1a1a2e);
+  scrollbar-width: none;
+}
+
+.draw-toolbar::-webkit-scrollbar { display: none; }
+.draw-toolbar > * { flex: 0 0 auto; }
+
+.draw-toolbar .draw-tool-button {
+  display: inline-flex;
+  width: 40px;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 0;
+  border-radius: 3px;
+  background: transparent;
+  color: #242633;
+  transition: background-color 120ms ease, color 120ms ease;
+}
+
+.draw-toolbar .draw-tool-button:hover { background: var(--lavender, #ebe9ff); }
+.draw-toolbar .draw-tool-button.active { background: var(--dark, #1a1a2e); color: var(--yellow, #ffe066); }
+.draw-toolbar .draw-tool-button:focus-visible,
+.draw-toolbar .draw-color-button:focus-visible {
+  outline: 2px solid var(--dark, #1a1a2e);
+  outline-offset: 2px;
+}
+
+.draw-color-group { display: flex; align-items: center; gap: 5px; margin-right: 3px; }
+.draw-toolbar .draw-color-button {
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  border: 2px solid transparent;
+  border-radius: 50%;
+  background: var(--draw-color);
+}
+.draw-toolbar .draw-color-button.selected { border-color: var(--dark, #1a1a2e); box-shadow: 0 0 0 1px var(--cream, #fffdf5) inset; }
+.draw-toolbar-separator { width: 1px; height: 24px; margin: 0 2px; background: rgba(26, 26, 46, 0.24); }
+.draw-shape-control { position: relative; }
+
+.shape-picker-menu {
+  position: fixed;
+  z-index: 10003;
+  bottom: calc(100% + 8px);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: min(330px, calc(100vw - 24px));
+  max-height: min(330px, 55vh);
+  padding: 12px;
+  overflow-y: auto;
+  border: 1px solid var(--dark, #1a1a2e);
+  border-radius: 4px;
+  background: var(--cream, #fffdf5);
+  box-shadow: 3px 3px 0 var(--dark, #1a1a2e);
+}
+
+.shape-picker-heading {
+  margin: 0 0 6px;
+  color: #65677a;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+}
+.shape-picker-options { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4px; }
+.shape-picker-options button {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 8px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  color: var(--dark, #1a1a2e);
+  text-align: left;
+  font-size: 12px;
+}
+.shape-picker-options button:hover,
+.shape-picker-options button:hover,
+.shape-picker-options button.selected { border-color: var(--dark, #1a1a2e); background: var(--yellow, #ffe066); }
+.shape-picker-symbol {
+  display: grid;
+  width: 24px;
+  height: 24px;
+  flex: 0 0 24px;
+  place-items: center;
+  border: 1px solid rgba(26, 26, 46, 0.24);
+  border-radius: 2px;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+@media (max-width: 640px), (max-height: 480px) {
+  .draw-toolbar {
+    bottom: calc(8px + env(safe-area-inset-bottom, 0px));
+    gap: 4px;
+    max-width: calc(100vw - 16px);
+    padding: 5px;
+    border-radius: 4px;
+  }
+
+  .draw-toolbar .draw-tool-button { width: 34px; height: 34px; border-radius: 2px; }
+  .draw-color-group { gap: 4px; margin-right: 1px; }
+  .draw-toolbar .draw-color-button { width: 18px; height: 18px; }
+  .draw-toolbar-separator { height: 20px; margin: 0 1px; }
+  .draw-toolbar svg { width: 18px; height: 18px; }
+}
+

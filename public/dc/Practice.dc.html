@@ -10,6 +10,8 @@
 <script src="/dc/_runtime/react.js"></script>
 <script src="/dc/_runtime/react-dom.js"></script>
 <script src="/dc/_runtime/support.js"></script>
+<link rel="stylesheet" href="/dc/draw.css">
+<script src="/dc/draw.js" defer></script>
 </head>
 <body>
 <x-dc>
@@ -123,6 +125,7 @@ html,body{margin:0;background:#003049}
 </div>
 <div style="display: flex; justify-content: flex-end; gap: 4px">
 <button type="button" class="tool hide-sm" onClick="{{openDir}}">Directions</button>
+<button type="button" class="tool" onClick="{{toggleDraw}}" aria-pressed="{{drawOn}}">Draw</button>
 <button type="button" class="tool" onClick="{{openCalc}}" aria-pressed="{{calcOn}}">Calculator</button>
 <button type="button" class="tool hide-sm" onClick="{{openRef}}" aria-pressed="{{refOn}}">Reference</button>
 <sc-if value="{{canSave}}" hint-placeholder-val="{{ true }}"><button type="button" class="tool" onClick="{{saveExit}}">Save &amp; archive</button></sc-if>
@@ -355,14 +358,14 @@ const first = this._resume ? window.Ufq.loadProgress(this._resume).then((st) => 
 first.then((qs) => {
 if (!qs.length) { window.Ufq.toast('No questions are available for this set yet.'); setTimeout(() => location.assign(this._mock ? '/mock-tests' : '/practice'), 1600); return; }
 const names = [...new Set(qs.map((q) => q.subject))];
-this._t0 = Date.now(); this._qt = Date.now(); this.tm = {};
+this._t0 = Date.now(); this._modStart = Date.now(); this._qt = Date.now(); this.tm = {};
 if (this._saved) { const st = this._saved; const idx = {}; qs.forEach((x, i) => { idx[x.id] = i; }); const ans = {}, marked = {}, tm = {}; Object.keys(st.ansById || {}).forEach((id) => { if (idx[id] !== undefined) ans[idx[id]] = st.ansById[id]; }); Object.keys(st.markedById || {}).forEach((id) => { if (idx[id] !== undefined) marked[idx[id]] = true; }); Object.keys(st.tmById || {}).forEach((id) => { if (idx[id] !== undefined) tm[idx[id]] = st.tmById[id]; });
 let q0 = idx[st.curId] !== undefined ? idx[st.curId] : 0; if (ans[q0] !== undefined && q0 < qs.length - 1) q0++;
 this._t0 = Date.now() - (st.elapsed || 0) * 1000; this.tm = tm; this._q = q0; this._qt = Date.now();
 this.setState({ Q: qs, ans, marked, q: q0, mockStage: 0, title: st.title || 'Practice' }); done(); window.Ufq.toast('Continuing from question ' + (q0 + 1) + ' of ' + qs.length, 'ok'); return; }
 this.setState({ Q: qs, mockStage: this._mock ? 1 : 0, title: this._mock ? this._info.title : (this._slugs.length === 1 || names.length === 1 ? names[0] : 'Mixed practice') }); done();
 }).catch((err) => { window.Ufq.toast(err && err.message ? err.message : 'Could not load questions.'); done(); setTimeout(() => location.assign(this._mock ? '/mock-tests' : '/practice'), 1800); });
-this._iv = setInterval(() => { const t = this.state; if (t.Q && !t.done && !t.hideTimer && !t.review && t.rev === null && !document.hidden) this.setState({ tick: Date.now() }); }, 1000);
+this._iv = setInterval(() => { const t = this.state; if (!t.Q || t.done) return; if (this._mock) { if (this._left() <= 0 && !this._loadingM2) { window.Ufq.toast('Time is up for this module.'); if (this._submit) this._submit(); return; } this.setState({ tick: Date.now() }); return; } if (!t.hideTimer && !t.review && t.rev === null && !document.hidden) this.setState({ tick: Date.now() }); }, 1000);
 }
 saveExit() {
 const t = this.state; if (!t.Q || t.done || this._mock) return;
@@ -373,6 +376,8 @@ if (!this._pid) this._pid = window.Ufq.newId();
 const state = { qids, ansById, markedById, tmById, curId: t.Q[t.q] ? t.Q[t.q].id : qids[0], elapsed: Math.floor((Date.now() - this._t0) / 1000), title: t.title };
 window.Ufq.saveProgress({ id: this._pid, title: (t.title || 'Practice') + ' · ' + qids.length + ' questions', total: qids.length, answered: Object.keys(ansById).length, state }).then(() => { window.Ufq.toast('Progress saved — continue from Practice.', 'ok'); setTimeout(() => location.assign('/practice'), 600); }).catch((err) => window.Ufq.toast('Could not save: ' + (err && err.message || 'error')));
 }
+/* seconds left in the current mock module: 35 minutes for 22 questions, in proportion for other sizes */
+_left() { const size = (this._info && this._info.module_size) || 22; return Math.round(size * 35 * 60 / 22) - Math.floor((Date.now() - (this._modStart || Date.now())) / 1000); }
 nextModule() {
 const t = this.state; if (this._loadingM2) return; this._loadingM2 = true;
 const okq = (x, y) => y === undefined ? false : (x.written ? window.Ufq.isWrittenCorrect(y, x.key) : y === x.c);
@@ -385,7 +390,7 @@ window.Ufq.mockModule(this._mock, hard ? 'm2_hard' : 'm2_easy').then((q2) => {
 off(); this._loadingM2 = false;
 if (!q2.length) { window.Ufq.toast('Module 2 has no questions yet.'); return; }
 this._m1 = { Q: t.Q, ans: t.ans, tm: Object.assign({}, this.tm), variant: hard ? 'hard' : 'easy', wrong };
-this.tm = {}; this._q = 0; this._qt = Date.now();
+this.tm = {}; this._q = 0; this._qt = Date.now(); this._modStart = Date.now();
 this.setState({ Q: q2, q: 0, ans: {}, marked: {}, crossed: {}, review: false, nav: false, done: false, rev: null, mockStage: 2 });
 window.scrollTo(0, 0);
 }).catch((err) => { off(); this._loadingM2 = false; window.Ufq.toast(err && err.message ? err.message : 'Could not load Module 2.'); });
@@ -405,6 +410,7 @@ const nowT = Date.now();
 if (this._q !== s.q) { this.tm[this._q] = (this.tm[this._q] || 0) + Math.round((nowT - this._qt) / 1000); this._q = s.q; this._qt = nowT; }
 const total = Q.length;
 const cur = Q[s.q];
+if (window.UfqDraw && window.UfqDraw.isOpen()) { if (s.done || s.review || s.rev !== null) window.UfqDraw.close(); else window.UfqDraw.setPage(cur.id || s.q); }
 const answered = Object.keys(s.ans).length;
 const navs = Q.map((_, i) => {
 const a = s.ans[i] !== undefined;
@@ -499,9 +505,9 @@ const revOk = okQ(R, ry);
 const V = {
 ...toolVals,
 partName: this._mock && mode === 'q' ? 'Module ' + (s.mockStage >= 2 ? 2 : 1) : mode === 'rev' ? 'Answer review' : mode === 'done' ? 'Results' : mode === 'review' ? 'Review' : (s.title || 'Practice'),
-subName: this._mock ? 'Mock test · Module ' + (s.mockStage >= 2 ? 2 : 1) + (s.mockStage === 3 ? ' · all questions' : ' · ' + total + ' questions') : 'Practice set · ' + total + ' questions',
+subName: this._mock ? (s.mockStage === 3 && this._m1 ? 'Mock test · Module 2 was the ' + (this._m1.variant === 'hard' ? 'harder' : 'easier') + ' one (' + this._m1.wrong + ' missed in Module 1)' : 'Mock test · Module ' + (s.mockStage >= 2 ? 2 : 1) + ' · ' + total + ' questions') : 'Practice set · ' + total + ' questions',
 isMath: testing,
-timer: s.hideTimer ? '' : (() => { const e = Math.floor((nowT - this._t0) / 1000); return String(Math.floor(e / 60)).padStart(2, '0') + ':' + String(e % 60).padStart(2, '0'); })(), timerOp: s.hideTimer || !testing ? '0' : '1', timerBtn: s.hideTimer ? 'Show' : 'Hide',
+timer: s.hideTimer ? '' : (() => { const e = this._mock ? Math.max(0, this._left()) : Math.floor((nowT - this._t0) / 1000); return String(Math.floor(e / 60)).padStart(2, '0') + ':' + String(e % 60).padStart(2, '0'); })(), timerOp: s.hideTimer || !testing ? '0' : '1', timerBtn: s.hideTimer ? 'Show' : 'Hide',
 toggleTimer: () => this.setState({ hideTimer: !this.state.hideTimer }),
 showQ: testing, showReview: mode === 'review', showDone: mode === 'done', showRev: mode === 'rev',
 isMc: !cur.written, isWritten: !!cur.written, wAnswer: s.ans[s.q] === undefined ? '' : String(s.ans[s.q]),
@@ -545,12 +551,14 @@ this.setState({ done: true, review: false });
 },
 correctCount: String(correctN), rows, skills, why, insight, statTiles, accPct: accN + '%', ringOff: String(100 - accN), ringC: accN >= 80 ? '#003049' : accN >= 50 ? '#669BBC' : '#C1121F', headA: accN === 100 ? 'Perfect' : accN >= 80 ? 'Strong' : accN >= 50 ? 'Getting' : 'Rough', headB: accN === 100 ? 'set.' : accN >= 80 ? 'set.' : accN >= 50 ? 'there.' : 'start.', missN: String(missed.length), nextTopic: weak.length ? weak[0] + ' · set 2' : 'Circles · set 2',
 canSave: !this._mock && testing && !s.done, saveExit: () => this.saveExit(),
+drawOn: window.UfqDraw && window.UfqDraw.isOpen() ? 'true' : 'false', toggleDraw: () => { if (!window.UfqDraw) return; if (!this._dl) { this._dl = true; window.addEventListener('ufq-draw', () => this.setState({ tick: Date.now() })); } window.UfqDraw.toggle(cur.id || s.q); },
 submitLabel: this._mock && s.mockStage === 1 ? 'Finish Module 1' : this._mock ? 'Submit test' : 'Submit set',
 retry: () => { if (this._mock) { location.assign('/mock-tests'); return; } this.setState({ q: 0, ans: {}, marked: {}, crossed: {}, review: false, done: false, rev: null }); },
 rvNum: String((s.rev || 0) + 1), rvStem: R.stem, rvStemP: fr(R.stem), rvOpts: (R.written ? rvOptsW : rvOpts).map(o => Object.assign({}, o, { p: fr(o.v) })),
 rvVerdict: ry ? (revOk ? 'Correct' : 'Incorrect — you chose ' + ry) : 'Omitted', rvColor: revOk ? '#003049' : '#C1121F',
 rvSteps: R.steps.map(t => ({ t, p: fr(t) })), rvTrap: R.trap || 'Check each option against exactly what the question asks.'
 };
+this._submit = V.submit;
 this.keyAct = { next: V.showNext ? V.next : null, back: V.canBack ? V.back : null, pick: (L) => { if (!testing) return; const o = opts.find(x => x.k === L); if (o) o.pick(); }, mark: testing ? V.toggleMark : null, calc: V.openCalc };
 if (typeof window !== 'undefined' && !this._kh) { this._kh = (e) => { const tg = e.target && e.target.tagName; if (tg === 'INPUT' || tg === 'TEXTAREA') return; const a = this.keyAct || {}; const k = e.key; if ((e.ctrlKey || e.metaKey) && (k === 'k' || k === 'K')) { e.preventDefault(); if (a.calc) a.calc(); return; } if (e.ctrlKey || e.metaKey || e.altKey) return; if (k === 'ArrowRight' && a.next) a.next(); else if (k === 'ArrowLeft' && a.back) a.back(); else if (/^[abcd]$/i.test(k) && a.pick) a.pick(k.toUpperCase()); else if ((k === 'm' || k === 'M') && a.mark) a.mark(); }; window.addEventListener('keydown', this._kh); }
 return V;

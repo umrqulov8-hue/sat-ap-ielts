@@ -208,7 +208,7 @@ a.tile:hover .go{transform:rotate(-45deg);background:#003049;color:#FFFFFF}
 class Component extends DCLogic {
 constructor(props) { super(props); this.state = { topic: '', f: 'all', M: null };
 const off = window.Ufq.cover('Collecting your mistakes…');
-window.Ufq.mistakes().then((M) => { off(); this.setState({ M }); }).catch((err) => { off(); window.Ufq.toast(err.message || 'Could not load your mistakes.'); this.setState({ M: [] }); });
+window.Ufq.mistakes(null, 200).then((M) => { off(); this.setState({ M }); }).catch((err) => { off(); window.Ufq.toast(err.message || 'Could not load your mistakes.'); this.setState({ M: [] }); });
 }
 renderVals() {
 const s = this.state;

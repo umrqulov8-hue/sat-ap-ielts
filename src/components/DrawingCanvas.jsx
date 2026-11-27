@@ -58,7 +58,7 @@ function scrollableAncestor(node) {
   return document.scrollingElement;
 }
 
-export default function DrawingCanvas({ isOpen, onClose, pageId = 'default' }) {
+export default function DrawingCanvas({ isOpen, onClose, pageId = 'default', getBounds }) {
   const canvasRef = useRef(null);
 
   const [tool, setTool] = useState('draw'); // 'select', 'draw', 'eraser', 'shape', 'text'
@@ -201,8 +201,8 @@ export default function DrawingCanvas({ isOpen, onClose, pageId = 'default' }) {
     if (!isOpen) return undefined;
     const updateBounds = () => {
       const body = canvasRef.current?.closest('.bb')?.querySelector('.bb-body');
-      if (!body) return;
-      const rect = body.getBoundingClientRect();
+      const rect = getBounds ? getBounds() : body?.getBoundingClientRect();
+      if (!rect) return;
       setCanvasBounds(prev => {
         const next = { top: rect.top, left: rect.left, width: rect.width, height: rect.height, toolbarBottom: Math.max(8, window.innerHeight - rect.bottom + 8) };
         return prev.top === next.top && prev.left === next.left && prev.width === next.width && prev.height === next.height && prev.toolbarBottom === next.toolbarBottom ? prev : next;
@@ -219,7 +219,7 @@ export default function DrawingCanvas({ isOpen, onClose, pageId = 'default' }) {
       window.removeEventListener('resize', updateBounds);
       window.removeEventListener('scroll', updateBounds, true);
     };
-  }, [isOpen]);
+  }, [isOpen, getBounds]);
 
   // The canvas sits above the question, so mouse-wheel / trackpad scrolling
   // is handed to whatever scrollable area is underneath.

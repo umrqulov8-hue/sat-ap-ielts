@@ -388,15 +388,15 @@
   /* open mistakes from saved attempts, in the Mistakes page's row shape:
      [type, domain, when, stem, 'B · yours', 'C · right', why, streak] */
   /* the saved answers are the heavy part of an attempt: only the latest 40 attempts are fetched, once per page */
-  Ufq.recentAnswers = function () {
-    if (!Ufq._ansP || Date.now() - Ufq._ansT > 20000) {
+  Ufq.recentAnswers = function (limit) {
+    if (limit || !Ufq._ansP || Date.now() - Ufq._ansT > 20000) {
       Ufq._ansT = Date.now();
-      Ufq._ansP = Ufq.rest('/rest/v1/practice_tests?select=id,answers&order=taken_at.desc&limit=40').then(function (rows) { var m = {}; (rows || []).forEach(function (r) { m[r.id] = r.answers; }); return m; }).catch(function () { return {}; });
+      Ufq._ansP = Ufq.rest('/rest/v1/practice_tests?select=id,answers&order=taken_at.desc&limit=' + (limit || 40)).then(function (rows) { var m = {}; (rows || []).forEach(function (r) { m[r.id] = r.answers; }); return m; }).catch(function () { return {}; });
     }
     return Ufq._ansP;
   };
-  Ufq.mistakes = function (given) {
-    return Promise.all([given ? Promise.resolve(given) : Ufq.history(), Ufq.recentAnswers()]).then(function (res) {
+  Ufq.mistakes = function (given, limit) {
+    return Promise.all([given ? Promise.resolve(given) : Ufq.history(), Ufq.recentAnswers(limit)]).then(function (res) {
       var list = res[0]; list.forEach(function (t) { if (!t.answers && res[1][t.rid]) t.answers = res[1][t.rid]; });
       return list;
     }).then(function (list) {
@@ -463,8 +463,7 @@
       var today = Ufq.today();
       days[today] = 1;
       var keys = Object.keys(days).sort();
-      var cur = 0, d = new Date(); if (!days[ymd(d)]) d.setDate(d.getDate() - 1);
-      while (days[ymd(d)]) { cur++; d.setDate(d.getDate() - 1); }
+      var cur = Ufq.freezeStreak(days).cur;
       var longest = 0, run = 0, prev = null;
       keys.forEach(function (k) { var t = new Date(k + 'T00:00:00'); if (prev && Math.round((t - prev) / 86400000) === 1) run++; else run = 1; if (run > longest) longest = run; prev = t; });
       var join = keys[0] || today;
@@ -613,6 +612,22 @@
     (gone || []).forEach(function (k) { drop[k] = 1; });
     try { localStorage.setItem('ufq_notif_read', JSON.stringify(read)); localStorage.setItem('ufq_notif_gone', JSON.stringify(drop)); } catch (e) { /* ignore */ }
   };
+  /* streak with the weekly freeze: one missed day per calendar week (Mon-Sun) does not break the run.
+     Today not being done yet never breaks it. */
+  Ufq.freezeStreak = function (days) {
+    var weekOf = function (d) { var m = new Date(d); m.setDate(m.getDate() - ((m.getDay() + 6) % 7)); return ymd(m); };
+    var d = new Date(), used = {}, cur = 0;
+    if (!days[ymd(d)]) d.setDate(d.getDate() - 1);
+    for (;;) {
+      if (days[ymd(d)]) cur++;
+      else {
+        var before = new Date(d); before.setDate(before.getDate() - 1);
+        if (!used[weekOf(d)] && days[ymd(before)]) used[weekOf(d)] = 1; else break;
+      }
+      d.setDate(d.getDate() - 1);
+    }
+    return { cur: cur, usedThisWeek: !!used[weekOf(new Date())] };
+  };
   /* sidebar: real target line, initial, streak-freeze count */
   Ufq.decorate = function (R) {
     var g = Ufq.goal();
@@ -624,12 +639,9 @@
         if (spans[0] && spans[0].textContent !== init) spans[0].textContent = init;
         spans.forEach(function (sp) { if (/^Target \d+/.test(sp.textContent) && sp.textContent !== line) sp.textContent = line; });
       });
-      var fr = document.querySelector('[data-ufq="freeze"]');
-      if (fr && R) {
-        var used = 0, d = new Date();
-        for (var i = 1; i < 7; i++) { var dd = new Date(); dd.setDate(dd.getDate() - i); if (!R.days[ymd(dd)] && ymd(dd) >= R.join) used++; }
-        var left = used > 0 ? 0 : 1; var txt = left + ' left';
-        if (fr.textContent !== txt) fr.textContent = txt;
+      if (R && R.days) {
+        var left = (Ufq.freezeStreak(R.days).usedThisWeek ? 0 : 1) + ' left';
+        document.querySelectorAll('[data-ufq="freeze"]').forEach(function (fr) { if (fr.textContent !== left) fr.textContent = left; });
       }
     };
     apply(); new MutationObserver(apply).observe(document.body || document.documentElement, { childList: true, subtree: true, characterData: true });
@@ -652,6 +664,32 @@
       if (page === 'Admin' && row.role !== 'admin' && row.role !== 'owner') location.replace('/dashboard');
     }).catch(function () { if (page === 'Admin') location.replace('/dashboard'); });
   }
+  /* study reminders as browser notifications, shown while Ufq is open (no email service is connected) */
+  Ufq.reminders = function () {
+    if (!('Notification' in window) || Notification.permission !== 'granted') return;
+    var st = {}; try { st = JSON.parse(localStorage.getItem('ufq_settings') || '{}'); } catch (e) { st = {}; }
+    var today = Ufq.today();
+    var sent = function (k) { try { return !!localStorage.getItem('ufq_sent_' + k); } catch (e) { return true; } };
+    var notify = function (k, title, body, href) {
+      if (sent(k)) return; try { localStorage.setItem('ufq_sent_' + k, '1'); } catch (e) { /* ignore */ }
+      var n = new Notification(title, { body: body, tag: 'ufq-' + k, icon: '/favicon-64.png' });
+      n.onclick = function () { window.focus(); location.assign(href); };
+    };
+    var wantDaily = st.remind !== false && !sent('d' + today), wantWeek = st.weekly !== false && new Date().getDay() === 0 && !sent('w' + today);
+    if (wantDaily || wantWeek) {
+      Ufq.history().then(function (hist) {
+        var studied = hist.some(function (h) { return ymd(new Date(h.ts)) === today; });
+        if (wantDaily && !studied) {
+          var at = ['07:00', '18:00', '21:00'][st.time === undefined ? 1 : st.time] || '18:00';
+          var when = new Date(); when.setHours(Number(at.slice(0, 2)), Number(at.slice(3)), 0, 0);
+          setTimeout(function () { notify('d' + today, 'Time to study', 'Ten questions take about 15 minutes.', '/practice'); }, Math.max(0, when - new Date()));
+        }
+        if (wantWeek) { var n = hist.filter(function (h) { return Date.now() - h.ts < 7 * 86400000; }).length; notify('w' + today, 'Your week on Ufq', n + ' practice attempt' + (n === 1 ? '' : 's') + ' in the last 7 days. See your report.', '/report'); }
+      }).catch(function () { /* try next visit */ });
+    }
+    if (st.mock !== false) Ufq.satTests().then(function (t) { var r = t.filter(function (x) { return !x.attempt; })[0]; if (r) notify('m' + r.id, r.title + ' is waiting', 'A mock test you have not taken yet.', '/mock-tests'); }).catch(function () { /* ignore */ });
+  };
+  if (Ufq.isSignedIn() && page && !PUBLIC[page] && page !== 'Practice') setTimeout(function () { Ufq.reminders(); }, 1500);
   if (page === 'Auth' && /[?&]suspended=1/.test(location.search)) setTimeout(function () { Ufq.toast('This account has been suspended. Contact your administrator.'); }, 400);
 
   /* everything this user has saved, as a downloadable file */
@@ -801,6 +839,12 @@
   };
   /* the whole bank, light, for the mock-test builder */
   Ufq.adminBank = function (slugById, stats) { return Ufq.restAll('/rest/v1/questions?select=' + QSEL + '&order=id').then(function (rows) { return rows.map(function (r) { return adminQ(r, slugById, stats); }); }); };
+  /* video lessons: shown on the Lesson page, managed in Admin */
+  Ufq.videos = function () { return Ufq.rest('/rest/v1/videos?select=id,title,description,video_url,video_type,subject_id,order_index&order=order_index.asc,created_at.asc&limit=500'); };
+  Ufq.addVideo = function (v) { return Ufq.rest('/rest/v1/videos', { method: 'POST', headers: { Prefer: 'return=representation' }, body: JSON.stringify(v) }).then(function (rows) { return rows[0]; }); };
+  Ufq.deleteVideo = function (id) { return Ufq.rest('/rest/v1/videos?id=eq.' + id, { method: 'DELETE', headers: { Prefer: 'return=minimal' } }); };
+  /* a YouTube watch/short/share link -> embeddable address; other https links are kept as video files */
+  Ufq.ytEmbed = function (url) { var m = /(?:youtu\.be\/|youtube\.com\/(?:watch\?(?:.*&)?v=|embed\/|shorts\/|live\/))([A-Za-z0-9_-]{11})/.exec(String(url || '')); return m ? 'https://www.youtube-nocookie.com/embed/' + m[1] : ''; };
   Ufq.adminMocks = function () {
     return Promise.all([Ufq.rest('/rest/v1/mock_tests?select=*&order=created_at.asc'), Ufq.restAll('/rest/v1/mock_test_questions?select=test_id,module,position,question_id&order=id')]).then(function (r) { return { tests: r[0] || [], rows: r[1] || [] }; });
   };
