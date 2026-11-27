@@ -158,7 +158,7 @@
 
     /* ---------------- multiplayer matches (2–20 players) ---------------- */
     _pub: function (m) {
-      var players = (m.players || []).map(function (p) { return { nick: p.nick, me: !!p.me, host: !!p.host }; });
+      var players = (m.players || []).map(function (p) { return { nick: p.nick, me: !!p.me, host: !!p.host, answered: p.answered || 0, points: p.points || 0, right: p.right || 0, finished: !!p.finished, offline: !!p.offline, qAgo: p.qAgo || 0, per: p.per || [] }; });
       return { id: m.id, code: m.code, name: m.name, host: m.host, visibility: m.visibility, maxPlayers: m.maxPlayers, players: players, status: m.status, createdAt: m.createdAt,
         hasPassword: m.visibility === 'private', isHost: !!m.isHost, joined: players.some(function (p) { return p.me; }), count: players.length, full: players.length >= m.maxPlayers, age: Date.now() - m.createdAt };
     },
@@ -196,21 +196,18 @@
       rows.push({ nick: 'You', n: mine.length, pts: mine.reduce(function (t, a) { return t + a.pts; }, 0), me: true });
       return rows.sort(function (a, b) { return b.pts - a.pts || b.n - a.n; }).map(function (x, i) { return Object.assign(x, { rank: i + 1 }); });
     },
+    /* everyone has finished, or the server closed the match */
+    allDone: function (m) { return m.status === 'done' || m.players.every(function (p) { return p.finished; }); },
+    /* send my final answers; the standings are shown only when allDone */
     submitMatch: function (id, answers) {
-      var self = this, tries = 0;
-      /* send my answers, then give the others a little time to finish before showing the standings */
-      var wait = function (raw) {
-        if (raw.players.every(function (p) { return p.finished; }) || tries++ >= 8) return Promise.resolve(raw);
-        return new Promise(function (res) { setTimeout(res, 2000); }).then(function () { return rpc('game_get_match', { p_id: id }); }).then(wait);
-      };
-      return rpc('game_push_answers', { p_id: id, p_per: answers, p_finished: true }).then(wait).then(function (raw) {
-        var rows = raw.players.map(function (p) {
-          var per = p.me ? answers : (p.per || []);
-          return { nick: p.nick, me: !!p.me, pts: p.me ? answers.reduce(function (t, a) { return t + a.pts; }, 0) : p.points, right: p.me ? answers.filter(function (a) { return a.correct; }).length : p.right, per: per, finished: !!p.finished };
-        }).sort(function (a, b) { return b.pts - a.pts; }).map(function (x, i) { return Object.assign(x, { rank: i + 1 }); });
-        if (raw.players.some(function (p) { return !p.finished; })) Ufq().toast('Some players are still answering — places can change.', 'ok');
-        return self._full(raw).then(function (m) { return { match: m, rows: rows, me: rows.filter(function (x) { return x.me; })[0] }; });
-      });
+      var self = this;
+      return rpc('game_push_answers', { p_id: id, p_per: answers, p_finished: true }).then(function (raw) { return self._full(raw); }).then(function (m) { return { done: self.allDone(m), match: m }; });
+    },
+    resultOf: function (m, answers) {
+      var rows = m.players.map(function (p) {
+        return { nick: p.nick, me: !!p.me, pts: p.me ? answers.reduce(function (t, a) { return t + a.pts; }, 0) : p.points, right: p.me ? answers.filter(function (a) { return a.correct; }).length : p.right, per: p.me ? answers : (p.per || []), finished: true };
+      }).sort(function (a, b) { return b.pts - a.pts; }).map(function (x, i) { return Object.assign(x, { rank: i + 1 }); });
+      return { match: m, rows: rows, me: rows.filter(function (x) { return x.me; })[0] };
     }
   };
   window.UfqGameData = G;

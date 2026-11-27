@@ -643,6 +643,23 @@ a.tile:hover .go{transform:rotate(-45deg);background:#003049;color:#FFFFFF}
 <sc-if value="{{isSubmitting}}" hint-placeholder-val="{{ false }}"><main class="gstage"><div style="display: flex; flex-direction: column; gap: 8px; margin-top: 20vh"><div class="lbar"><span></span></div><span style="font-size: 14px; color: rgba(0,48,73,.7)">Waiting for everyone to finish…</span></div></main></sc-if>
 
 <!-- ================= RESULT ================= -->
+<sc-if value="{{isWatch}}" hint-placeholder-val="{{ false }}"><main style="width: 100%; max-width: 820px; margin: 0 auto; padding: 20px 16px 48px; display: flex; flex-direction: column; gap: 16px">
+<div role="status" style="border-radius: 18px; background: #FBF3E3; padding: 14px 18px; display: flex; align-items: center; gap: 12px"><span class="lbar" style="width: 48px; flex: none"><span></span></span><span style="font-weight: 600; font-size: 15px">{{watch.waitTxt}}</span></div>
+<div role="tablist" aria-label="Players" style="display: flex; gap: 8px; flex-wrap: wrap"><sc-for list="{{watch.tabs}}" as="t" hint-placeholder-count="3"><button type="button" role="tab" class="wtab" aria-selected="{{t.on}}" onClick="{{t.pick}}"><b>{{t.nick}}</b><span>{{t.state}}</span></button></sc-for></div>
+<style>.wtab{border:0;border-radius:14px;padding:8px 14px;min-height:48px;display:flex;flex-direction:column;align-items:flex-start;gap:2px;background:#F1F4F7;color:#003049;cursor:pointer;font:600 14px 'Inter Tight',sans-serif}.wtab span{font-weight:500;font-size:12px;opacity:.7}.wtab[aria-selected="true"]{background:#003049;color:#FFFFFF}.wopt{display:flex;align-items:center;gap:12px;min-height:50px;padding:8px 16px;border-radius:14px;box-shadow:inset 0 0 0 1.5px rgba(0,48,73,.2);min-width:0}</style>
+<section style="border-radius: 22px; box-shadow: inset 0 0 0 1px rgba(0,48,73,.14); padding: clamp(16px, 3vw, 26px); display: flex; flex-direction: column; gap: 14px; min-width: 0">
+<div style="display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; align-items: baseline"><span><b style="font-size: 18px">{{watch.title}}</b> <span style="font-size: 14px; color: rgba(0,48,73,.65)">· {{watch.sub}}</span></span><span style="font-weight: 700; font-variant-numeric: tabular-nums">{{watch.points}} pts</span></div>
+<span style="height: 6px; border-radius: 6px; background: #EEF2F5; overflow: hidden"><span style="display: block; height: 100%; width: {{watch.timeW}}; background: #003049; transition: width 1s linear"></span></span>
+<div style="display: flex; gap: 6px; flex-wrap: wrap"><sc-for list="{{watch.dots}}" as="d" hint-placeholder-count="10"><span style="width: 28px; height: 28px; border-radius: 8px; display: grid; place-items: center; font-size: 12px; font-weight: 600; background: {{d.bg}}; color: {{d.fg}}">{{d.n}}</span></sc-for></div>
+<sc-if value="{{watch.playing}}" hint-placeholder-val="{{ false }}"><div style="display: flex; flex-direction: column; gap: 10px">
+<div class="qp"><ufq-math text="{{watch.q}}"></ufq-math></div>
+<sc-for list="{{watch.opts}}" as="o" hint-placeholder-count="4"><div class="wopt"><b>{{o.k}}</b><span style="min-width: 0"><ufq-math text="{{o.raw}}"></ufq-math></span></div></sc-for>
+</div></sc-if>
+<sc-if value="{{watch.doneTxt}}" hint-placeholder-val="{{ false }}"><p style="margin: 0; color: rgba(0,48,73,.7)">{{watch.doneTxt}}</p></sc-if>
+<sc-if value="{{watch.last}}" hint-placeholder-val="{{ false }}"><p style="margin: 0; font-size: 14px; font-weight: 600; color: #780000">{{watch.last}}</p></sc-if>
+</section>
+<a href="/games" class="gbtn gh" style="align-self: flex-start; text-decoration: none">Leave (your score is already saved in the match)</a>
+</main></sc-if>
 <sc-if value="{{isResult}}" hint-placeholder-val="{{ false }}">
 <main class="gstage" style="width: min(960px, 100%)">
 <div class="tgmini rg"><span class="tgwrap"><svg class="tg {{tgR.cls}}" viewBox="0 0 200 170" width="100%" height="100%" role="img" aria-label="Tong, your Ufq companion" style="display: block; overflow: visible">
@@ -923,6 +940,18 @@ poll() {
     this._listAt = Date.now();
     GameData.listMatches().then(l => { if (this.state.phase === 'browse') this.setState({ lobbies: l }); }).catch(() => {});
   }
+  /* finished: watch the others until every player is done or gone */
+  if (s.phase === 'watch' && s.m) {
+    if (this._pollBusy) return;
+    this._pollBusy = true;
+    GameData.getMatch(s.m.id).then(m => {
+      this._pollBusy = false; this._seenAt = Date.now();
+      if (this.state.phase !== 'watch') return;
+      if (GameData.allDone(m) || Date.now() - this._watchFrom > 11 * 60e3) this.showResult(m, this.state.mine);
+      else this.setState({ m });
+    }).catch(() => { this._pollBusy = false; });
+    return;
+  }
   if (s.phase === 'lobby' && s.m) {
     if (this._pollBusy) return;
     this._pollBusy = true;
@@ -1005,10 +1034,16 @@ submit(answers) {
   const m = this.state.m;
   this.setState({ phase: 'submitting', fb: null, confirm: false });
   GameData.submitMatch(m.id, answers).then(r => {
-    const missed = r.match.qs.map((q, k) => ({ q, my: answers[k].choice, how: answers[k].choice === null ? 'timeout' : 'wrong', ok: answers[k].correct })).filter(x => !x.ok).map(x => ({ q: x.q, my: x.my, how: x.how }));
-    GameData.saveRun('duel', { score: r.me.pts, missed }).catch(() => {});
-    Sfx.play('win'); this.setState({ phase: 'result', res: r, m: r.match, burst: r.me.rank === 1 });
+    if (r.done) { this.showResult(r.match, answers); return; }
+    this._watchFrom = Date.now(); this._seenAt = Date.now();
+    this.setState({ phase: 'watch', m: r.match, mine: answers, watching: '' });
   }).catch(() => { this.setState({ phase: 'play' }); this.say('Couldn’t send your answers — retrying…'); setTimeout(() => this.submit(answers), 1500); });
+}
+showResult(match, answers) {
+  const r = GameData.resultOf(match, answers);
+  const missed = r.match.qs.map((q, k) => ({ q, my: answers[k].choice, how: answers[k].choice === null ? 'timeout' : 'wrong', ok: answers[k].correct })).filter(x => !x.ok).map(x => ({ q: x.q, my: x.my, how: x.how }));
+  GameData.saveRun('duel', { score: r.me.pts, missed }).catch(() => {});
+  Sfx.play('win'); this.setState({ phase: 'result', res: r, m: r.match, burst: r.me.rank === 1 });
 }
 quitNow() {
   clearInterval(this._iv); clearTimeout(this._to);
@@ -1029,6 +1064,30 @@ onKey(e) {
     if (n >= 0) this.answer(n); else if (l >= 0 && k.length === 1) this.answer(l); else if (k === 'Escape') this.setState({ confirm: true }); else done = false;
   } else done = false;
   if (done) e.preventDefault();
+}
+watchView(s) {
+  const empty = { tabs: [], q: '', opts: [], dots: [], title: '', sub: '', timeW: '0%', playing: false, doneTxt: '', waitTxt: '', last: '', points: '0' };
+  if (s.phase !== 'watch' || !s.m) return empty;
+  const others = s.m.players.filter(p => !p.me);
+  const left = others.filter(p => !p.finished);
+  const sel = others.find(p => p.nick === s.watching) || left[0] || others[0];
+  const tabs = others.map(p => ({ nick: p.nick, on: sel && p.nick === sel.nick ? 'true' : 'false', state: p.finished ? 'finished' : p.offline ? 'offline…' : 'Q' + Math.min(10, p.answered + 1), pick: () => this.setState({ watching: p.nick }) }));
+  const waitTxt = left.length ? 'Waiting for ' + left.length + ' of ' + others.length + ' player' + (others.length > 1 ? 's' : '') + ' to finish. Results appear when everyone is done.' : 'Everyone is done — calculating…';
+  if (!sel) return Object.assign(empty, { tabs, waitTxt });
+  const idx = sel.answered, playing = !sel.finished && idx < 10;
+  const q = playing && s.m.qs ? s.m.qs[idx] : null;
+  const secs = Math.max(0, 45 - Math.round(sel.qAgo + (Date.now() - (this._seenAt || Date.now())) / 1000));
+  const prev = sel.per[idx - 1], prevQ = prev && s.m.qs ? s.m.qs[idx - 1] : null;
+  return {
+    tabs, waitTxt, playing,
+    title: sel.nick, points: Number(sel.points || 0).toLocaleString('en-US'),
+    sub: sel.finished ? 'Finished' : sel.offline ? 'Connection lost — they will be counted as finished soon' : 'Question ' + (idx + 1) + ' of 10 · ' + secs + ' s left',
+    timeW: playing ? Math.round(secs / 45 * 100) + '%' : '0%',
+    q: q ? q.stem : '', opts: q ? q.ch.map((c, i) => ({ k: 'ABCD'[i], raw: c })) : [],
+    dots: Array.from({ length: 10 }, (x, i) => { const a = sel.per[i]; return { n: String(i + 1), bg: a ? (a.correct ? '#003049' : '#C1121F') : i === idx && playing ? '#669BBC' : '#E3E9EE', fg: a || (i === idx && playing) ? '#FFFFFF' : '#003049' }; }),
+    doneTxt: playing ? '' : sel.finished ? sel.nick + ' has answered everything: ' + (sel.right || 0) + ' of 10 right.' : 'No question to show right now.',
+    last: prev ? 'Their last answer (Q' + idx + '): ' + (prev.choice === null || prev.choice === undefined ? 'time ran out' : 'ABCD'[prev.choice] + (prev.correct ? ' — correct' : ' — wrong' + (prevQ ? ', right answer ' + 'ABCD'[prevQ.a] : ''))) : ''
+  };
 }
 _rv() {
   const s = this.state, ph = s.phase, m = s.m || { players: [], qs: [], name: '', code: '', count: 0, maxPlayers: 2, host: '' };
@@ -1065,8 +1124,8 @@ _rv() {
   const won = !!(meR && meR.rank === 1 && rows.length > 1);
   return {
     rootRef: this.rootRef, onKey: (e) => this.onKey(e),
-    showBar: ph !== 'play' && ph !== 'count', barTitle: ph === 'lobby' ? 'Lobby' : ph === 'result' ? 'Match result' : 'Duel',
-    isBrowse: ph === 'browse', isLobby: ph === 'lobby', isCount: ph === 'count', isPlay: ph === 'play', isSubmitting: ph === 'submitting', isResult: ph === 'result',
+    showBar: ph !== 'play' && ph !== 'count', barTitle: ph === 'lobby' ? 'Lobby' : ph === 'result' ? 'Match result' : ph === 'watch' ? 'Spectating' : 'Duel',
+    isBrowse: ph === 'browse', isLobby: ph === 'lobby', isCount: ph === 'count', isPlay: ph === 'play', isSubmitting: ph === 'submitting', isResult: ph === 'result', isWatch: ph === 'watch', watch: this.watchView(s),
     offline: s.offline, soundIs: s.sound, soundNot: !s.sound, soundOn: s.sound ? 'true' : 'false', toggleSound: () => { Sfx.set(!s.sound); this.setState({ sound: !s.sound }); },
     goGamesDuel: (e) => { if (s.phase === 'lobby' && s.m && !s.m.isHost) GameData.leaveMatch(s.m.id).catch(() => {}); Wipe.go(this, e, '/games', '#003049'); },
     openCreate: () => this.openCreate(), code: s.code, onCode: (e) => this.setState({ code: String(e.target.value || '').toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 6) }), codeDis: s.code.length ? 'false' : 'true',
