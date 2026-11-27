@@ -11,7 +11,7 @@
     Main: '/', Auth: '/auth', ResetPassword: '/reset-password', Welcome: '/welcome', Dashboard: '/dashboard',
     Lesson: '/lesson', PracticeHub: '/practice', Practice: '/practice/session', MockTests: '/mock-tests',
     MockTest: '/mock-test', Plan: '/plan', Mistakes: '/mistakes', Report: '/report', History: '/history',
-    Profile: '/profile', Settings: '/settings', Notifications: '/notifications', Help: '/help', Admin: '/admin', Games: '/games', SpeedRound: '/games/speed', Survival: '/games/survival', Leaderboard: '/games/leaderboard', Duel: '/games/duel', GameReview: '/games/review',
+    Profile: '/profile', Settings: '/settings', Notifications: '/notifications', Help: '/help', Admin: '/admin', Games: '/games', SpeedRound: '/games/speed', Survival: '/games/survival', Leaderboard: '/games/leaderboard', Duel: '/games/duel', GameReview: '/games/review', Friends: '/games/friends',
     NotFound: '/404',
   };
   var PUBLIC = { Main: 1, Auth: 1, ResetPassword: 1, NotFound: 1, Help: 1 };
@@ -149,7 +149,7 @@
         var token = s && s.access_token;
         opts.headers = Object.assign(authHeaders(token), opts.headers || {});
         return api(path, opts);
-      }).then(function (res) { if (key) cachePut(key, res); else if (method !== 'GET') cacheClear(); return res; });
+      }).then(function (res) { if (key) cachePut(key, res); else if (method !== 'GET' && !opts.keepCache) cacheClear(); return res; });
     },
     /* number of rows a filtered query matches, without downloading them */
     restCount: function (path) {
@@ -698,14 +698,69 @@
     if (st.mock !== false) Ufq.satTests().then(function (t) { var r = t.filter(function (x) { return !x.attempt; })[0]; if (r) notify('m' + r.id, r.title + ' is waiting', 'A mock test you have not taken yet.', '/mock-tests'); }).catch(function () { /* ignore */ });
   };
   if (Ufq.isSignedIn() && page && !PUBLIC[page] && page !== 'Practice') setTimeout(function () { Ufq.reminders(); }, 1500);
-  /* someone who opened a duel lobby stays "online" for it while they are anywhere on the site */
-  if (Ufq.isSignedIn() && page && !PUBLIC[page]) {
-    var beat = function () {
-      var has = ''; try { has = localStorage.getItem('ufq_lobby') || ''; } catch (e) { return; }
-      if (!has) return;
-      Ufq.rest('/rest/v1/rpc/game_heartbeat', { method: 'POST', body: '{}' }).then(function (alive) { if (alive === false) try { localStorage.removeItem('ufq_lobby'); } catch (e) { /* ignore */ } }).catch(function () { /* older database */ });
+  /* ---------------- friends: online status, requests and duel invites on every page ---------------- */
+  var fListeners = [], fSeen = {}, fOff = false, fTimer = null, fLast = null;
+  var ACTIVITY = { Practice: 'Practising', Duel: 'In a duel', SpeedRound: 'Playing Speed Round', Survival: 'Playing Survival', Games: 'In Games', Friends: 'In Games', Leaderboard: 'In Games', Lesson: 'In a lesson' };
+  function frpc(name, args) { return Ufq.rest('/rest/v1/rpc/' + name, { method: 'POST', body: JSON.stringify(args || {}), keepCache: true }); }
+  function invitePopup(inv) {
+    var box = document.getElementById('ufq-invites');
+    if (!box) { box = document.createElement('div'); box.id = 'ufq-invites'; box.style.cssText = 'position:fixed;right:16px;bottom:16px;z-index:2147483100;display:flex;flex-direction:column;gap:10px;width:min(340px,calc(100vw - 32px));font-family:"Inter Tight",system-ui,sans-serif'; document.body.appendChild(box); }
+    var card = document.createElement('div');
+    card.setAttribute('role', 'alertdialog'); card.setAttribute('aria-label', 'Duel invite from ' + inv.from);
+    card.style.cssText = 'background:#003049;color:#fff;border-radius:18px;padding:16px;box-shadow:0 24px 50px -20px rgba(0,48,73,.7);display:flex;flex-direction:column;gap:10px;animation:ufqInv .35s cubic-bezier(.16,1,.3,1) both';
+    if (!document.getElementById('ufq-inv-css')) { var st = document.createElement('style'); st.id = 'ufq-inv-css'; st.textContent = '@keyframes ufqInv{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}'; document.head.appendChild(st); }
+    var title = document.createElement('b'); title.textContent = inv.from + ' invites you to a duel';
+    var sub = document.createElement('span'); sub.textContent = inv.match || ''; sub.style.cssText = 'font-size:13px;opacity:.75';
+    var row = document.createElement('div'); row.style.cssText = 'display:flex;gap:8px';
+    var mkBtn = function (label, primary) { var x = document.createElement('button'); x.type = 'button'; x.textContent = label; x.style.cssText = 'flex:1;min-height:42px;border-radius:999px;border:0;cursor:pointer;font:600 14px "Inter Tight",sans-serif;' + (primary ? 'background:#C1121F;color:#fff' : 'background:rgba(255,255,255,.14);color:#fff'); row.appendChild(x); return x; };
+    var yes = mkBtn('Accept', true), no = mkBtn('Decline', false);
+    var close = function () { clearTimeout(timer); card.remove(); };
+    var timer = setTimeout(close, Math.max(5, 60 - (inv.age || 0)) * 1000);
+    yes.onclick = function () {
+      yes.disabled = no.disabled = true;
+      frpc('invite_answer', { p_id: inv.id, p_accept: true }).then(function (r) {
+        close();
+        if (r && r.matchId) location.assign('/games/duel?match=' + r.matchId);
+        else Ufq.toast(r && r.error === 'full' ? 'That match is full.' : 'That match is no longer open.');
+      }).catch(function () { close(); Ufq.toast('Could not accept the invite.'); });
     };
-    setTimeout(beat, 2000); setInterval(beat, 40000);
+    no.onclick = function () { close(); frpc('invite_answer', { p_id: inv.id, p_accept: false }).catch(function () { /* nothing to undo */ }); };
+    card.appendChild(title); card.appendChild(sub); card.appendChild(row); box.appendChild(card);
+  }
+  function fPing() {
+    if (fOff) return Promise.resolve(null);
+    return frpc('friends_ping', { p_activity: ACTIVITY[page] || 'On the site' }).then(function (r) {
+      fLast = r;
+      var quiet = page === 'Practice'; /* never interrupt a running question set or mock test */
+      (r.invites || []).forEach(function (inv) { if (!quiet && !fSeen['i' + inv.id]) { fSeen['i' + inv.id] = 1; invitePopup(inv); } });
+      (r.incoming || []).forEach(function (nick) {
+        var k = 'ufq_req_' + nick, told = true; try { told = !!sessionStorage.getItem(k); sessionStorage.setItem(k, '1'); } catch (e) { /* ignore */ }
+        if (!told && !quiet && page !== 'Friends') Ufq.toast(nick + ' sent you a friend request — see Games → Friends.', 'ok');
+      });
+      (r.declined || []).forEach(function (nick) { Ufq.toast(nick + ' declined your invite.'); });
+      fListeners.forEach(function (fn) { try { fn(r); } catch (e) { /* ignore */ } });
+      return r;
+    }).catch(function (e) {
+      if (/friends_ping|schema cache|PGRST202/i.test(String(e && e.message))) { fOff = true; if (page === 'Friends') Ufq.toast('Friends need one more setup step: run supabase/migrations/20261201_friends.sql.'); }
+      return null;
+    });
+  }
+  Ufq.friends = {
+    ping: fPing,
+    last: function () { return fLast; },
+    onUpdate: function (fn) { fListeners.push(fn); if (fLast) fn(fLast); return function () { fListeners = fListeners.filter(function (x) { return x !== fn; }); }; },
+    send: function (name) { return frpc('friend_send', { p_username: name }); },
+    respond: function (name, accept) { return frpc('friend_respond', { p_username: name, p_accept: accept }).then(fPing); },
+    remove: function (name) { return frpc('friend_remove', { p_username: name }).then(fPing); },
+    invite: function (name, matchId) { return frpc('invite_send', { p_username: name, p_match: matchId }); },
+    setUsername: function (name) {
+      return Ufq.rest('/rest/v1/game_profiles?on_conflict=user_id', { method: 'POST', headers: { Prefer: 'resolution=merge-duplicates,return=minimal' }, body: JSON.stringify({ user_id: (Ufq.user() || {}).id, nick: name }) }).then(fPing);
+    },
+  };
+  if (Ufq.isSignedIn() && page && !PUBLIC[page]) {
+    var loop = function () { clearTimeout(fTimer); fPing().then(function () { if (!fOff) fTimer = setTimeout(loop, document.hidden ? 60000 : 12000); }); };
+    setTimeout(loop, 1200);
+    document.addEventListener('visibilitychange', function () { if (!document.hidden && !fOff) loop(); });
   }
   if (page === 'Auth' && /[?&]suspended=1/.test(location.search)) setTimeout(function () { Ufq.toast('This account has been suspended. Contact your administrator.'); }, 400);
 

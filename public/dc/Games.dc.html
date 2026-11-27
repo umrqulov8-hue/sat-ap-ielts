@@ -505,7 +505,7 @@ a.tile:hover .go{transform:rotate(-45deg);background:#003049;color:#FFFFFF}
 <span class="cap fu" style="color: #669BBC">Games · built for SAT Math</span>
 <h1 class="srf" style="margin: 0; font-size: clamp(40px, 4.4vw, 68px); line-height: 1"><span class="mask ld"><span>Play to get <em style="color: #C1121F">sharper.</em></span></span></h1>
 </div>
-<a href="/games/leaderboard" class="ghost fu" style="animation-delay: .2s">Leaderboard <span aria-hidden="true">→</span></a>
+<span style="display: flex; gap: 10px; flex-wrap: wrap"><a href="/games/friends" class="ghost fu" style="animation-delay: .15s">Friends <span aria-hidden="true">→</span></a><a href="/games/leaderboard" class="ghost fu" style="animation-delay: .2s">Leaderboard <span aria-hidden="true">→</span></a></span>
 </header>
 <sc-if value="{{offline}}" hint-placeholder-val="{{ false }}"><div class="bnr off rg" role="status"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 9a15 15 0 0 1 20 0M5.5 12.5a10 10 0 0 1 13 0M9 16a5 5 0 0 1 6 0M12 19.5h.01M3 3l18 18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path></svg><span>You’re offline. Questions already loaded still work; results save when you reconnect.</span></div></sc-if>
 <sc-if value="{{isError}}" hint-placeholder-val="{{ false }}"><div class="bnr err" role="alert"><span style="flex: 1">{{errMsg}}</span><button type="button" class="lnk" onClick="{{reload}}">Try again</button></div></sc-if>

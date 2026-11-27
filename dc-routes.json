@@ -23,5 +23,6 @@
   "/games/survival": "Survival",
   "/games/leaderboard": "Leaderboard",
   "/games/duel": "Duel",
-  "/games/review": "GameReview"
+  "/games/review": "GameReview",
+  "/games/friends": "Friends"
 }

@@ -73,6 +73,10 @@
       "destination": "/dc/Admin.dc.html"
     },
     {
+      "source": "/games/friends",
+      "destination": "/dc/Friends.dc.html"
+    },
+    {
       "source": "/games",
       "destination": "/dc/Games.dc.html"
     },

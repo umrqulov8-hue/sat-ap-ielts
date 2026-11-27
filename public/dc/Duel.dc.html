@@ -585,6 +585,7 @@ a.tile:hover .go{transform:rotate(-45deg);background:#003049;color:#FFFFFF}
 <div style="display: flex; align-items: center; gap: 12px"><span class="lbar" style="flex: 1"><span></span></span></div>
 <span style="font-size: 15px; color: rgba(0,48,73,.75)">Waiting for <b>{{m.host}}</b> to start the match…</span>
 </sc-if>
+<sc-if value="{{canInvite}}" hint-placeholder-val="{{ false }}"><div style="display: flex; flex-direction: column; gap: 8px"><span style="font-weight: 600; font-size: 14px">Invite an online friend</span><sc-for list="{{inviteList}}" as="f" hint-placeholder-count="2"><div style="display: flex; align-items: center; gap: 10px"><span aria-hidden="true" style="width: 10px; height: 10px; border-radius: 50%; background: #1F9D55"></span><span style="flex: 1; min-width: 0">{{f.nick}}</span><button type="button" class="gbtn nv" onClick="{{f.invite}}" style="min-height: 38px; padding: 0 16px">{{f.label}}</button></div></sc-for></div></sc-if>
 <button type="button" class="gbtn gh" onClick="{{leave}}">{{leaveLabel}}</button>
 <sc-if value="{{isHost}}" hint-placeholder-val="{{ true }}"><button type="button" class="gbtn gh" onClick="{{keepAndBack}}">Keep it open, go back</button><span style="font-size: 13px; color: rgba(0,48,73,.6)">Only you can start while you are on the site. If you close the site, after a few minutes the match starts by itself when two or more players are waiting; with fewer it closes.</span></sc-if>
 </section>
@@ -893,9 +894,12 @@ componentDidMount() {
   window.addEventListener('online', this._on); window.addEventListener('offline', this._off);
   if (GameData.abandonedRun('duel')) this.say('Your last match ended when you left the page.');
   this.load(); this._poll = setInterval(() => this.poll(), 1200);
+  if (window.Ufq && window.Ufq.friends) this._fr = window.Ufq.friends.onUpdate((d) => this.setState({ friends: d.friends || [] }));
+  const open = new URLSearchParams(location.search).get('match');
+  if (open && /^[0-9a-f-]{36}$/i.test(open)) { history.replaceState(null, '', location.pathname); this.openMine(open); }
 }
 componentDidUpdate() { const s = this.state; if (this._ph !== s.phase || this._cf !== s.confirm) { this._ph = s.phase; this._cf = s.confirm; if (s.phase === 'play' || s.phase === 'count') this.focus(); } if (this._sim !== this.props.simulate) { this._sim = this.props.simulate; GameData.simulate = this.props.simulate || 'none'; if (s.phase === 'browse') this.load(); } }
-componentWillUnmount() { clearInterval(this._poll); clearInterval(this._iv); clearTimeout(this._to); clearTimeout(this._tt); clearTimeout(this._cd); window.removeEventListener('online', this._on); window.removeEventListener('offline', this._off); if (this.state.phase === 'play') GameData.endRun(); }
+componentWillUnmount() { if (this._fr) this._fr(); clearInterval(this._poll); clearInterval(this._iv); clearTimeout(this._to); clearTimeout(this._tt); clearTimeout(this._cd); window.removeEventListener('online', this._on); window.removeEventListener('offline', this._off); if (this.state.phase === 'play') GameData.endRun(); }
 focus() { try { if (this.root) this.root.focus({ preventScroll: true }); } catch (e) {} }
 say(m) { clearTimeout(this._tt); this.setState({ toast: m }); this._tt = setTimeout(() => this.setState({ toast: '' }), 2600); }
 load() {
@@ -1076,13 +1080,15 @@ _rv() {
     listA: s.st === 'ready' && s.listK % 2 === 1, listB: s.st === 'ready' && s.listK % 2 === 0 && s.listK > 0, lobbies, tgE: tong('sleep'),
     m: Object.assign({}, m, { count: String(m.count || m.players.length), maxPlayers: String(m.maxPlayers) }),
     visBg: m.visibility === 'private' ? '#003049' : '#EEF4F8', visFg: m.visibility === 'private' ? '#FFFFFF' : '#003049', visIcon: '', visLabel: m.visibility === 'private' ? 'Private · password' : 'Public · anyone can join',
-    lobbySub: m.isHost ? 'You’re the host. Others can see this match in the list' + (m.visibility === 'private' ? ' but need the password.' : ' and join right away.') : 'Hosted by ' + m.host + '.',
+    lobbySub: m.isHost ? (m.visibility === 'private' && !s.cPass ? 'You’re the host. This match is private: invite your friends below.' : 'You’re the host. Others can see this match in the list' + (m.visibility === 'private' ? ' but need the password.' : ' and join right away.')) : 'Hosted by ' + m.host + '.',
     copyCode: () => { const done = () => this.setState({ copied: true }); try { navigator.clipboard.writeText(m.code).then(done, done); } catch (e) { done(); } }, copyLabel: s.copied ? 'Copied' : 'Copy code',
-    showPass: !!(m.isHost && m.visibility === 'private'), hostPass: s.cPass,
+    showPass: !!(m.isHost && m.visibility === 'private' && s.cPass), hostPass: s.cPass,
     seats, feed: s.feed.map(f => Object.assign({}, f)),
     isHost: !!m.isHost, notHost: !m.isHost, startDis: (m.players.length < 2 || s.busy) ? 'true' : 'false', startLabel: s.busy === 'start' ? 'Starting…' : 'Start match · ' + m.players.length + ' players',
     startHint: m.players.length < 2 ? 'You need at least one more player to start.' : m.players.length < m.maxPlayers ? m.players.length + ' of ' + m.maxPlayers + ' seats taken. Start now or wait for more.' : 'Every seat is taken. Ready when you are.',
-    startMatch: () => this.startMatch(), leave: () => this.leave(), leaveLabel: m.isHost ? 'Delete lobby' : 'Leave lobby', keepAndBack: () => this.backToList('Your lobby stays open while you are on this page.'),
+    startMatch: () => this.startMatch(), leave: () => this.leave(),
+    canInvite: (s.friends || []).some(f => f.online && !m.players.some(p => p.nick === f.nick)),
+    inviteList: (s.friends || []).filter(f => f.online && !m.players.some(p => p.nick === f.nick)).slice(0, 8).map(f => ({ nick: f.nick, label: (s.invited || {})[f.nick] ? 'Invited' : 'Invite', invite: () => window.Ufq.friends.invite(f.nick, s.m.id).then(r => { if (r.error) { this.say(r.error === 'closed' ? 'This lobby is no longer open.' : 'Couldn’t invite.'); return; } this.setState({ invited: Object.assign({}, this.state.invited, { [f.nick]: true }) }); this.say('Invite sent to ' + f.nick + '.'); setTimeout(() => this.setState({ invited: Object.assign({}, this.state.invited, { [f.nick]: false }) }), 30000); }).catch(() => this.say('Couldn’t invite.')) })), leaveLabel: m.isHost ? 'Delete lobby' : 'Leave lobby', keepAndBack: () => this.backToList('Your lobby stays open while you are on this page.'),
     cd: String(s.cd), cdCls: s.cd % 2 ? 'cdA' : 'cdB',
     qNum: String(s.qi + 1), secs: String(secs), tScale: String(Math.max(0, Math.min(1, s.left / D_MS))), timeC: secs <= 10 ? '#C1121F' : '#003049',
     dots: Array.from({ length: 10 }, (x, i) => ({ c: i < s.answers.length ? (s.answers[i].correct ? '#003049' : '#C1121F') : i === s.qi ? '#669BBC' : '#E3E9EE', sy: i === s.qi ? '1.6' : '1' })),
