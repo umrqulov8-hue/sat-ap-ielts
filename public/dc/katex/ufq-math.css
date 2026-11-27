@@ -1,0 +1,8 @@
+ufq-math{display:inline-block;max-width:100%;vertical-align:middle;white-space:normal}
+p ufq-math,.mathblock ufq-math{display:block}
+ufq-math p{margin:0 0 .7em}
+ufq-math p:last-child{margin-bottom:0}
+ufq-math .katex{font-size:1.14em;text-rendering:optimizeLegibility}
+ufq-math table{border-collapse:collapse;margin:.4em auto .8em}
+ufq-math td,ufq-math th{border:1px solid rgba(0,48,73,.35);padding:6px 14px;text-align:center}
+ufq-math ul,ufq-math ol{margin:.3em 0;padding-left:1.3em}

@@ -10,6 +10,9 @@
 <script src="/dc/_runtime/react.js"></script>
 <script src="/dc/_runtime/react-dom.js"></script>
 <script src="/dc/_runtime/support.js"></script>
+<link rel="stylesheet" href="/dc/katex/katex.min.css">
+<link rel="stylesheet" href="/dc/katex/ufq-math.css">
+<script src="/dc/math.js" defer></script>
 <link rel="stylesheet" href="/dc/draw.css">
 <script src="/dc/draw.js" defer></script>
 </head>
@@ -150,11 +153,11 @@ html,body{margin:0;background:#003049}
 <button type="button" class="tool" onClick="{{toggleMark}}" aria-pressed="{{markedNow}}"><svg width="14" height="16" viewBox="0 0 14 16" aria-hidden="true"><path d="M1 1h12v14l-6-4-6 4z" fill="{{markFill}}" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"></path></svg>Mark for review</button>
 <button type="button" class="tool" onClick="{{toggleCross}}" aria-pressed="{{crossMode}}" aria-label="Answer eliminator" title="Eliminate answers" style="margin-left: auto; text-decoration: line-through; letter-spacing: .04em">ABC</button>
 </div></div>
-<p style="margin: 0; font-size: 18px; line-height: 1.55; font-weight: 500; white-space: pre-line"><sc-for list="{{stemP}}" as="g" hint-placeholder-count="1"><sc-if value="{{g.tx}}" hint-placeholder-val="{{ true }}"><span>{{g.t}}</span></sc-if><sc-if value="{{g.fr}}" hint-placeholder-val="{{ false }}"><span class="fr"><span>{{g.n}}</span><span>{{g.d}}</span></span></sc-if></sc-for></p>
+<p style="margin: 0; font-size: 18px; line-height: 1.55; font-weight: 500"><ufq-math text="{{stemRaw}}"></ufq-math></p>
 <sc-if value="{{isMc}}" hint-placeholder-val="{{ true }}"><div role="radiogroup" aria-label="Answer choices" style="display: flex; flex-direction: column; gap: 12px">
 <sc-for list="{{opts}}" as="o" hint-placeholder-count="4">
 <div style="display: flex; align-items: center; gap: 10px">
-<button type="button" class="opt {{o.cls}}" aria-pressed="{{o.on}}" onClick="{{o.pick}}"><span class="let">{{o.k}}</span><span class="txt"><sc-for list="{{o.p}}" as="g" hint-placeholder-count="1"><sc-if value="{{g.tx}}" hint-placeholder-val="{{ true }}"><span>{{g.t}}</span></sc-if><sc-if value="{{g.fr}}" hint-placeholder-val="{{ false }}"><span class="fr"><span>{{g.n}}</span><span>{{g.d}}</span></span></sc-if></sc-for></span></button>
+<button type="button" class="opt {{o.cls}}" aria-pressed="{{o.on}}" onClick="{{o.pick}}"><span class="let">{{o.k}}</span><span class="txt"><ufq-math text="{{o.raw}}"></ufq-math></span></button>
 <sc-if value="{{o.showX}}" hint-placeholder-val="{{ false }}"><button type="button" class="xbtn" onClick="{{o.cross}}" aria-label="{{o.xLabel}}">{{o.xTxt}}</button></sc-if>
 </div>
 </sc-for>
@@ -260,16 +263,16 @@ html,body{margin:0;background:#003049}
 <span class="qnum">{{rvNum}}</span>
 <span class="verd" style="color: {{rvColor}}"><span aria-hidden="true" style="width: 8px; height: 8px; border-radius: 50%; background: {{rvColor}}"></span>{{rvVerdict}}</span>
 </div></div>
-<p style="margin: 0; font-size: 18px; line-height: 1.55; font-weight: 500"><sc-for list="{{rvStemP}}" as="g" hint-placeholder-count="1"><sc-if value="{{g.tx}}" hint-placeholder-val="{{ true }}"><span>{{g.t}}</span></sc-if><sc-if value="{{g.fr}}" hint-placeholder-val="{{ false }}"><span class="fr"><span>{{g.n}}</span><span>{{g.d}}</span></span></sc-if></sc-for></p>
+<p style="margin: 0; font-size: 18px; line-height: 1.55; font-weight: 500"><ufq-math text="{{rvStemRaw}}"></ufq-math></p>
 <div style="display: flex; flex-direction: column; gap: 12px">
 <sc-for list="{{rvOpts}}" as="o" hint-placeholder-count="4">
-<div class="opt" style="cursor: default; box-shadow: {{o.ring}}; background: {{o.bg}}"><span class="let" style="background: {{o.lbg}}; color: {{o.lfg}}; box-shadow: inset 0 0 0 1.5px {{o.lring}}">{{o.k}}</span><span class="txt" style="flex: 1"><sc-for list="{{o.p}}" as="g" hint-placeholder-count="1"><sc-if value="{{g.tx}}" hint-placeholder-val="{{ true }}"><span>{{g.t}}</span></sc-if><sc-if value="{{g.fr}}" hint-placeholder-val="{{ false }}"><span class="fr"><span>{{g.n}}</span><span>{{g.d}}</span></span></sc-if></sc-for></span><span class="cap" style="color: {{o.tagc}}">{{o.tag}}</span></div>
+<div class="opt" style="cursor: default; box-shadow: {{o.ring}}; background: {{o.bg}}"><span class="let" style="background: {{o.lbg}}; color: {{o.lfg}}; box-shadow: inset 0 0 0 1.5px {{o.lring}}">{{o.k}}</span><span class="txt" style="flex: 1"><ufq-math text="{{o.raw}}"></ufq-math></span><span class="cap" style="color: {{o.tagc}}">{{o.tag}}</span></div>
 </sc-for>
 </div>
 <section style="margin-top: 6px; border-radius: 14px; background: #F4F6F8; padding: 22px; display: flex; flex-direction: column; gap: 12px">
 <span class="cap" style="color: #669BBC">Explanation · o‘zbek tilida</span>
 <ol style="margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 8px; font-size: 16px; line-height: 1.55">
-<sc-for list="{{rvSteps}}" as="st" hint-placeholder-count="3"><li><sc-for list="{{st.p}}" as="g" hint-placeholder-count="1"><sc-if value="{{g.tx}}" hint-placeholder-val="{{ true }}"><span>{{g.t}}</span></sc-if><sc-if value="{{g.fr}}" hint-placeholder-val="{{ false }}"><span class="fr"><span>{{g.n}}</span><span>{{g.d}}</span></span></sc-if></sc-for></li></sc-for>
+<sc-for list="{{rvSteps}}" as="st" hint-placeholder-count="3"><li><ufq-math text="{{st.t}}"></ufq-math></li></sc-for>
 </ol>
 <p style="margin: 4px 0 0; font-size: 15px; color: rgba(0,48,73,.75)"><b style="color: #C1121F">Tuzoq:</b> {{rvTrap}}</p>
 </section>
@@ -513,7 +516,7 @@ showQ: testing, showReview: mode === 'review', showDone: mode === 'done', showRe
 isMc: !cur.written, isWritten: !!cur.written, wAnswer: s.ans[s.q] === undefined ? '' : String(s.ans[s.q]),
 setW: (e) => { const v = e.target.value; const ans = Object.assign({}, this.state.ans); if (v.trim() === '') delete ans[this.state.q]; else ans[this.state.q] = v; this.setState({ ans }); },
 hasPassage: !!cur.fig, fig: cur.fig || '', cols: cur.fig ? 'minmax(0, 1fr) minmax(0, 1fr)' : '1fr',
-passage: '', stem: cur.stem, stemP: fr(cur.stem), num: String(s.q + 1), opts: opts.map(o => Object.assign({}, o, { p: fr(o.v) })),
+passage: '', stem: cur.stem, stemRaw: cur.stemRaw || cur.stem, stemP: fr(cur.stem), num: String(s.q + 1), opts: opts.map((o, i) => Object.assign({}, o, { p: fr(o.v), raw: cur.optsRaw ? String(cur.optsRaw[i]) : o.v })),
 markedNow: s.marked[s.q] ? 'true' : 'false', markFill: s.marked[s.q] ? '#C1121F' : 'none',
 toggleMark: () => this.setState({ marked: Object.assign({}, this.state.marked, { [this.state.q]: !this.state.marked[this.state.q] }) }),
 crossMode: s.crossMode ? 'true' : 'false', toggleCross: () => this.setState({ crossMode: !this.state.crossMode }),
@@ -554,9 +557,9 @@ canSave: !this._mock && testing && !s.done, saveExit: () => this.saveExit(),
 drawOn: window.UfqDraw && window.UfqDraw.isOpen() ? 'true' : 'false', toggleDraw: () => { if (!window.UfqDraw) return; if (!this._dl) { this._dl = true; window.addEventListener('ufq-draw', () => this.setState({ tick: Date.now() })); } window.UfqDraw.toggle(cur.id || s.q); },
 submitLabel: this._mock && s.mockStage === 1 ? 'Finish Module 1' : this._mock ? 'Submit test' : 'Submit set',
 retry: () => { if (this._mock) { location.assign('/mock-tests'); return; } this.setState({ q: 0, ans: {}, marked: {}, crossed: {}, review: false, done: false, rev: null }); },
-rvNum: String((s.rev || 0) + 1), rvStem: R.stem, rvStemP: fr(R.stem), rvOpts: (R.written ? rvOptsW : rvOpts).map(o => Object.assign({}, o, { p: fr(o.v) })),
+rvNum: String((s.rev || 0) + 1), rvStem: R.stem, rvStemRaw: R.stemRaw || R.stem, rvStemP: fr(R.stem), rvOpts: (R.written ? rvOptsW : rvOpts).map((o, i) => Object.assign({}, o, { p: fr(o.v), raw: !R.written && R.optsRaw ? String(R.optsRaw[i]) : o.v })),
 rvVerdict: ry ? (revOk ? 'Correct' : 'Incorrect — you chose ' + ry) : 'Omitted', rvColor: revOk ? '#003049' : '#C1121F',
-rvSteps: R.steps.map(t => ({ t, p: fr(t) })), rvTrap: R.trap || 'Check each option against exactly what the question asks.'
+rvSteps: (R.explRaw && !R.written ? [R.explRaw] : R.steps).map(t => ({ t, p: [] })), rvTrap: R.trap || 'Check each option against exactly what the question asks.'
 };
 this._submit = V.submit;
 this.keyAct = { next: V.showNext ? V.next : null, back: V.canBack ? V.back : null, pick: (L) => { if (!testing) return; const o = opts.find(x => x.k === L); if (o) o.pick(); }, mark: testing ? V.toggleMark : null, calc: V.openCalc };

@@ -9,6 +9,9 @@
 <script src="/dc/_runtime/react.js"></script>
 <script src="/dc/_runtime/react-dom.js"></script>
 <script src="/dc/_runtime/support.js"></script>
+<link rel="stylesheet" href="/dc/katex/katex.min.css">
+<link rel="stylesheet" href="/dc/katex/ufq-math.css">
+<script src="/dc/math.js" defer></script>
 </head>
 <body>
 <x-dc>
@@ -183,12 +186,12 @@ a.tile:hover .go{transform:rotate(-45deg);background:#003049;color:#FFFFFF}
 <sc-for list="{{items}}" as="m" hint-placeholder-count="3">
 <article class="tile swap" style="animation-delay: {{m.delay}}; background: #FFFFFF; box-shadow: inset 0 0 0 1px rgba(0,48,73,.12); gap: 16px">
 <div style="display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap"><span class="cap" style="padding: 5px 10px; border-radius: 999px; background: {{m.tagBg}}; color: {{m.tagFg}}">{{m.type}}</span><span class="cap" style="color: rgba(0,48,73,.55)">{{m.when}}</span></div>
-<p class="srf" style="margin: 0; font-size: 21px; line-height: 1.35">{{m.q}}</p>
+<p class="srf" style="margin: 0; font-size: 19px; line-height: 1.45"><ufq-math text="{{m.q}}"></ufq-math></p>
 <div style="display: flex; gap: 10px; flex-wrap: wrap; font-size: 14px">
-<span style="padding: 6px 12px; border-radius: 10px; background: #FCE9E6; color: #780000">You chose {{m.yours}}</span>
-<span style="padding: 6px 12px; border-radius: 10px; background: #EEF2F5">Correct {{m.right}}</span>
+<span style="padding: 6px 12px; border-radius: 10px; background: #FCE9E6; color: #780000">You chose <ufq-math text="{{m.yours}}"></ufq-math></span>
+<span style="padding: 6px 12px; border-radius: 10px; background: #EEF2F5">Correct <ufq-math text="{{m.right}}"></ufq-math></span>
 </div>
-<p style="margin: 0; font-size: 15px; color: rgba(0,48,73,.75)">{{m.why}}</p>
+<p style="margin: 0; font-size: 15px; color: rgba(0,48,73,.75)"><ufq-math text="{{m.why}}"></ufq-math></p>
 <div style="display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: auto; padding-top: 12px; border-top: 1px solid rgba(0,48,73,.1)">
 <span style="display: inline-flex; gap: 6px; align-items: center; font-size: 13px; color: rgba(0,48,73,.65)">Right in a row <span aria-hidden="true" style="display: inline-flex; gap: 3px"><span style="width: 10px; height: 10px; border-radius: 50%; background: {{m.s1}}"></span><span style="width: 10px; height: 10px; border-radius: 50%; background: {{m.s2}}"></span></span></span>
 <a href="/practice/session" class="ghost" style="min-height: 40px">Redo</a>

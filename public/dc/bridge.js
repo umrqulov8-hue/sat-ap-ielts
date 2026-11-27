@@ -272,6 +272,7 @@
     return {
       id: q.id, subjectId: q.subject_id, subject: sub.title || 'Math',
       stem: Ufq.tex(q.question_text), written: written, key: key,
+      stemRaw: q.question_text || '', optsRaw: written ? null : options, explRaw: q.explanation || '',
       opts: written ? [] : options.map(function (x) { return Ufq.tex(x); }),
       c: written ? key : ('ABCD'[q.correct_index] || 'A'),
       fig: q.image_url || '', steps: written ? (key ? ['The correct answer is ' + key + '.'] : []) : steps(q.explanation), trap: '', skill: sub.title || 'Math',
@@ -407,10 +408,10 @@
           seen[q.id] = 1;
           var opts = Array.isArray(q.options) ? q.options : [];
           var wr = q.question_type === 'written';
-          var mine = (a.selected === null || a.selected === undefined || a.selected === '') ? '—' : wr ? String(a.selected) : 'ABCD'[a.selected] + ' · ' + Ufq.tex(opts[a.selected]);
-          var right = wr ? Ufq.tex(q.explanation) : 'ABCD'[q.correct_index] + ' · ' + Ufq.tex(opts[q.correct_index]);
-          var why = wr ? 'The correct answer is ' + Ufq.tex(q.explanation) + '.' : ((Ufq.tex(q.explanation || '').split(/(?<=[.!?])\s+/)[0]) || 'Open the review for this question to see the steps.');
-          out.push([mine === '—' ? 'time' : 'concept', GROUPS[t.subject] || 'Algebra', ago(t.ts), Ufq.tex(q.question_text), mine, right, why, 0]);
+          var mine = (a.selected === null || a.selected === undefined || a.selected === '') ? '—' : wr ? String(a.selected) : 'ABCD'[a.selected] + ' · ' + opts[a.selected];
+          var right = wr ? String(q.explanation || '') : 'ABCD'[q.correct_index] + ' · ' + opts[q.correct_index];
+          var why = wr ? 'The correct answer is ' + (q.explanation || '') + '.' : (String(q.explanation || '').split(/(?<=[.!?])\s+(?=[A-Z])/)[0] || 'Open the review for this question to see the steps.');
+          out.push([mine === '—' ? 'time' : 'concept', GROUPS[t.subject] || 'Algebra', ago(t.ts), String(q.question_text || ''), mine, right, why, 0]);
         });
       });
       return out;
