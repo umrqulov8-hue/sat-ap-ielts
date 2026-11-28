@@ -15,13 +15,19 @@
   /* ---------------- the player (lives in the top page) ---------------- */
   function makeCore() {
     var audio = new Audio(); audio.preload = 'none';
-    var list = [], index = -1, cat = 'today', fails = 0, subs = [], pending = 0, saved = 0;
+    var list = [], index = -1, cat = 'today', fails = 0, subs = [], pending = 0, saved = 0, level = 1, ducks = {};
+    function applyVolume() {
+      var f = Object.keys(ducks).reduce(function (m, k) { return Math.min(m, ducks[k]); }, 1), want = level * f;
+      audio.volume = want;
+      /* iPhone and iPad ignore .volume: mute there instead */
+      audio.muted = Math.abs(audio.volume - want) > 0.01 && f < 1;
+    }
     function track() { return list[index] || null; }
     function emit() {
       subs = subs.filter(function (fn) { try { fn(); return true; } catch (e) { return false; } });
     }
     function save() {
-      try { if (!track()) localStorage.removeItem(STORE); else localStorage.setItem(STORE, JSON.stringify({ list: list, index: index, cat: cat, time: audio.currentTime || pending || 0, volume: audio.volume })); } catch (e) { /* storage blocked */ }
+      try { if (!track()) localStorage.removeItem(STORE); else localStorage.setItem(STORE, JSON.stringify({ list: list, index: index, cat: cat, time: audio.currentTime || pending || 0, volume: level })); } catch (e) { /* storage blocked */ }
     }
     function load(i, autoplay) {
       if (!list.length) return;
@@ -38,7 +44,7 @@
     var core = {
       audio: audio,
       state: function () {
-        return { track: track(), list: list, index: index, cat: cat, playing: !!track() && !audio.paused, time: audio.currentTime || pending || 0, duration: isFinite(audio.duration) && audio.duration ? audio.duration : (track() ? track().d : 0), volume: audio.volume };
+        return { track: track(), list: list, index: index, cat: cat, playing: !!track() && !audio.paused, time: audio.currentTime || pending || 0, duration: isFinite(audio.duration) && audio.duration ? audio.duration : (track() ? track().d : 0), volume: level };
       },
       /* copies keep the list alive after the page that passed it is gone */
       play: function (tracks, i, category) { list = JSON.parse(JSON.stringify(tracks)); cat = category; fails = 0; load(i, true); },
@@ -47,7 +53,9 @@
       next: function () { load(index + 1, true); },
       prev: function () { if (audio.currentTime > 4) audio.currentTime = 0; else load(index - 1, true); },
       seek: function (f) { var d = core.state().duration; if (d && audio.src) { try { audio.currentTime = f * d; } catch (e) { /* not seekable yet */ } } },
-      setVolume: function (v) { audio.volume = Math.max(0, Math.min(1, v)); save(); emit(); },
+      setVolume: function (v) { level = Math.max(0, Math.min(1, v)); applyVolume(); save(); emit(); },
+      duck: function (key, f) { if (f === null || f === undefined) delete ducks[key]; else ducks[key] = f; applyVolume(); },
+      unduck: function () { ducks = {}; applyVolume(); },
       stop: function () { audio.pause(); audio.removeAttribute('src'); list = []; index = -1; save(); emit(); },
       on: function (fn) { subs.push(fn); return function () { subs = subs.filter(function (x) { return x !== fn; }); }; }
     };
@@ -63,7 +71,7 @@
     try {
       var s = JSON.parse(localStorage.getItem(STORE) || 'null');
       if (s && s.list && s.list[s.index]) {
-        list = s.list; index = s.index; cat = s.cat || 'today'; pending = s.time || 0; audio.volume = s.volume >= 0 ? s.volume : 1;
+        list = s.list; index = s.index; cat = s.cat || 'today'; pending = s.time || 0; level = s.volume >= 0 && s.volume <= 1 ? s.volume : 1; applyVolume();
         audio.src = API + '/tracks/' + encodeURIComponent(list[index].id) + '/stream?app_name=ufq';
         audio.addEventListener('loadedmetadata', function once() { audio.removeEventListener('loadedmetadata', once); if (pending) { try { audio.currentTime = pending; } catch (e) { /* ignore */ } pending = 0; } });
       }
@@ -86,6 +94,7 @@
       } catch (e) { /* mid navigation */ }
     }
     function host(u) {
+      core.unduck(); /* the page underneath is going away, with whatever it was recording */
       /* the page underneath is done: stop its timers (polling, countdowns) and drop its content */
       var last = setTimeout(function () {}, 0);
       for (var i = 0; i <= last; i++) { clearTimeout(i); clearInterval(i); }
@@ -411,9 +420,5 @@
     if (a) { e.preventDefault(); openPanel(a); }
   });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closePanel(); });
-  /* recording a voice message must not pick up the music */
-  var md = navigator.mediaDevices;
-  if (md && md.getUserMedia) { var gum = md.getUserMedia.bind(md); md.getUserMedia = function (c) { if (c && c.audio) core.pause(); return gum(c); }; }
-
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', ready); else ready();
 })();

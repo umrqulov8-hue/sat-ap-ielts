@@ -113,7 +113,9 @@
   }
   function record() {
     if (rec) return;
-    navigator.mediaDevices.getUserMedia({ audio: true }).then(function (stream) {
+    pauseVoices();
+    U.duck('rec', 0.08);
+    navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: true, noiseSuppression: true } }).then(function (stream) {
       var type = ['audio/webm;codecs=opus', 'audio/mp4', 'audio/webm', 'audio/ogg'].filter(function (t) { return MediaRecorder.isTypeSupported(t); })[0];
       var r = new MediaRecorder(stream, type ? { mimeType: type, audioBitsPerSecond: 24000 } : { audioBitsPerSecond: 24000 });
       var chunks = [], t0 = Date.now();
@@ -121,6 +123,7 @@
       r.ondataavailable = function (e) { if (e.data.size) chunks.push(e.data); };
       r.onstop = function () {
         stream.getTracks().forEach(function (t) { t.stop(); });
+        U.duck('rec', null);
         clearInterval(rec.timer); var keep = rec.keep; rec = null; renderComposer();
         if (!keep || !chunks.length) return;
         var mime = (r.mimeType || 'audio/webm').split(';')[0], ext = mime === 'audio/mp4' ? 'm4a' : mime === 'audio/ogg' ? 'ogg' : 'webm';
@@ -134,6 +137,7 @@
         if (s >= 600) stopVoice(true); /* ten minutes */
       }, 250);
     }).catch(function (e) {
+      U.duck('rec', null);
       var name = e && e.name;
       if (name === 'NotAllowedError' || name === 'SecurityError') micDialog('denied');
       else if (name === 'NotFoundError') U.toast('No microphone was found on this device.');
@@ -141,6 +145,8 @@
     });
   }
   function stopVoice(keep) { if (rec) { rec.keep = keep; rec.r.stop(); } }
+  /* one voice message at a time; leaving a chat stops it (which also brings the background back) */
+  function pauseVoices(except) { if (root) Array.prototype.forEach.call(root.querySelectorAll('.cmedia audio'), function (a) { if (a !== except) a.pause(); }); }
 
   /* ---------------- messages ---------------- */
   function feed() { return root.querySelector('.cfeed'); }
@@ -166,6 +172,9 @@
       signedUrl(m.path).then(function (u) { var stick = nearBottom(); img.onload = function () { if (stick) toBottom(); }; img.src = u; img.onclick = function () { window.open(u, '_blank', 'noopener'); }; }).catch(function () { img.alt = 'Photo unavailable'; });
     } else if (m.kind === 'voice') {
       var audio = el('audio'); audio.controls = true; audio.preload = 'none';
+      var key = 'voice' + m.id;
+      audio.onplay = function () { pauseVoices(audio); U.duck(key, 0.15); };
+      audio.onpause = audio.onended = audio.onerror = function () { U.duck(key, null); };
       var play = btn('▶ Voice message · ' + dur(m.duration), 'cbtn', function () {
         signedUrl(m.path).then(function (u) { audio.src = u; play.replaceWith(audio); audio.play().catch(function () { /* press play */ }); }).catch(function () { U.toast('Could not load the voice message.'); });
       });
@@ -330,7 +339,7 @@
   }
   function info(c) { if (c.dm) return c.silenced ? 'Friend · muted' : 'Friend'; return (c.visibility === 'private' ? 'Private' : 'Public') + ' · ' + c.members + (c.members === 1 ? ' member' : ' members') + (c.description ? ' · ' + c.description : ''); }
   function openChat(c) {
-    gen++; clearTimeout(pollT); stopVoice(false);
+    gen++; clearTimeout(pollT); stopVoice(false); pauseVoices();
     cur = c; msgs = []; byId = {}; since = null; replyTo = null; noOlder = false; lastNew = Date.now();
     root.classList.toggle('inchat', !!c);
     var pane = root.querySelector('.cpane'); pane.textContent = '';
@@ -455,7 +464,7 @@
   var veil = null;
   function closeDm() {
     if (!veil) return;
-    gen++; clearTimeout(pollT); stopVoice(false); cur = null;
+    gen++; clearTimeout(pollT); stopVoice(false); pauseVoices(); cur = null;
     veil.remove(); veil = null;
   }
   window.UfqChat = {

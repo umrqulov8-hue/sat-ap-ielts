@@ -1122,6 +1122,28 @@
     }
   } catch (e) { /* framed by another site */ }
 
+  /* ---------------- background sound steps back for voice messages ----------------
+     Ufq.duck('rec', 0.08) turns music and films down; Ufq.duck('rec', null) brings them back.
+     Each reason is remembered by name, so pressing twice can never lower the sound twice. */
+  var ducks = {}, duckSubs = [];
+  function duckFactor() { return Object.keys(ducks).reduce(function (f, k) { return Math.min(f, ducks[k]); }, 1); }
+  function musicCore() { try { return window.UfqMusicCore || window.parent.UfqMusicCore || null; } catch (e) { return null; } }
+  Ufq.duck = function (key, level) {
+    if (level === null || level === undefined) delete ducks[key]; else ducks[key] = level;
+    var f = duckFactor();
+    duckSubs.forEach(function (fn) { fn(f); });
+    var c = musicCore(); if (c && c.duck) c.duck(key, level);
+  };
+  Ufq.onDuck = function (fn) { duckSubs.push(fn); fn(duckFactor()); return function () { duckSubs = duckSubs.filter(function (x) { return x !== fn; }); }; };
+  /* volume for a player: iPhone and iPad ignore .volume, so there it is muted while something else speaks */
+  Ufq.setVolume = function (media, volume, factor) {
+    var want = volume * factor;
+    media.volume = want;
+    var locked = Math.abs(media.volume - want) > 0.01;
+    media.muted = locked && factor < 1;
+  };
+  window.addEventListener('pagehide', function () { Object.keys(ducks).forEach(function (k) { Ufq.duck(k, null); }); });
+
   /* ---------------- guard + clean URL ---------------- */
   if (page && !PUBLIC[page] && !Ufq.isSignedIn()) {
     location.replace('/auth');

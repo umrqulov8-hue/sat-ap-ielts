@@ -209,7 +209,7 @@
     if (live) close(false);
     pauseMusic();
     var stage = el('div', 'mstage'); document.body.appendChild(stage); document.documentElement.style.overflow = 'hidden';
-    live = { id: id, stage: stage, room: null, since: 0, msgs: [], film: null, cues: [], cc: true, chat: false, unread: 0, timer: null, busy: false, view: '', quizKey: '', watchNick: '', qs: {}, at: 0 };
+    live = { id: id, stage: stage, room: null, since: 0, msgs: [], film: null, cues: [], cc: true, chat: false, unread: 0, timer: null, busy: false, level: 1, view: '', quizKey: '', watchNick: '', qs: {}, at: 0 };
     try { history.replaceState(history.state, '', '/movies?room=' + id); } catch (e) { /* ignore */ }
     stage.appendChild(el('p', 'mload', 'Opening the room…'));
     tick();
@@ -217,7 +217,7 @@
   function close(tell) {
     if (!live) return;
     var l = live; live = null;
-    clearTimeout(l.timer); stopVoice(false);
+    clearTimeout(l.timer); stopVoice(false); stopPlaying(); if (l.offDuck) l.offDuck();
     if (l.video) { l.video.pause(); l.video.removeAttribute('src'); l.video.load(); }
     l.stage.remove(); document.documentElement.style.overflow = '';
     if (document.fullscreenElement) document.exitFullscreen().catch(function () { /* already out */ });
@@ -351,7 +351,12 @@
     });
     row.appendChild(l.playBtn);
     l.time = el('span', 'mtime'); row.appendChild(l.time);
-    var vol = el('input', 'mvol'); vol.type = 'range'; vol.min = 0; vol.max = 100; vol.value = 100; vol.setAttribute('aria-label', 'Volume'); vol.oninput = function () { video.volume = vol.value / 100; video.muted = false; }; row.appendChild(vol);
+    var vol = el('input', 'mvol'); vol.type = 'range'; vol.min = 0; vol.max = 100; vol.value = Math.round(l.level * 100); vol.setAttribute('aria-label', 'Volume'); row.appendChild(vol);
+    /* the film's volume is what the slider says, turned down while a voice message is recorded or played */
+    var factor = 1;
+    if (l.offDuck) l.offDuck();
+    l.offDuck = U.onDuck(function (f) { factor = f; U.setVolume(video, l.level, f); });
+    vol.oninput = function () { l.level = vol.value / 100; U.setVolume(video, l.level, factor); };
     var quality = el('select', 'msel'); quality.setAttribute('aria-label', 'Quality');
     l.sources.forEach(function (s) { var o = el('option', '', s.h + 'p'); o.value = s.h; quality.appendChild(o); });
     quality.value = src.h;
@@ -465,7 +470,9 @@
     if (rec) return;
     var l = live;
     if (!navigator.mediaDevices || !window.MediaRecorder) { U.toast('This browser cannot record. Open the site in Chrome or Safari.'); return; }
-    navigator.mediaDevices.getUserMedia({ audio: true }).then(function (stream) {
+    stopPlaying();
+    U.duck('rec', 0.08);
+    navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: true, noiseSuppression: true } }).then(function (stream) {
       var type = ['audio/webm;codecs=opus', 'audio/mp4', 'audio/webm', 'audio/ogg'].filter(function (t) { return MediaRecorder.isTypeSupported(t); })[0];
       var r = new MediaRecorder(stream, type ? { mimeType: type, audioBitsPerSecond: 24000 } : { audioBitsPerSecond: 24000 });
       var chunks = [], t0 = Date.now();
@@ -473,6 +480,7 @@
       r.ondataavailable = function (e) { if (e.data.size) chunks.push(e.data); };
       r.onstop = function () {
         stream.getTracks().forEach(function (t) { t.stop(); });
+        U.duck('rec', null);
         clearTimeout(rec.limit); var keep = rec.keep; rec = null; composer();
         if (!keep || !chunks.length || live !== l) return;
         var mime = (r.mimeType || 'audio/webm').split(';')[0], ext = mime === 'audio/mp4' ? 'm4a' : mime === 'audio/ogg' ? 'ogg' : 'webm';
@@ -483,19 +491,34 @@
       };
       r.start(500); composer();
       rec.limit = setTimeout(function () { stopVoice(true); }, 60000);
-    }).catch(function () { U.toast('The microphone is blocked. Allow it for this site in your browser settings, then try again.'); });
+    }).catch(function () { U.duck('rec', null); U.toast('The microphone is blocked. Allow it for this site in your browser settings, then try again.'); });
   }
   function stopVoice(keep) { if (rec) { rec.keep = keep; rec.r.stop(); } }
-  function playVoice(path) {
-    var l = live;
+  /* one voice message at a time: the film steps back while it plays and returns when it ends */
+  var playing = null;
+  function stopPlaying() {
+    if (!playing) return;
+    var p = playing; playing = null;
+    clearTimeout(p.limit);
+    if (p.audio) p.audio.pause();
+    U.duck('voice', null);
+  }
+  function playVoice(path, length) {
+    var same = playing && playing.path === path;
+    stopPlaying();
+    if (same) return; /* pressed again: stop */
+    var mine = playing = { path: path, audio: null, limit: 0 };
     var get = signed[path] ? Promise.resolve(signed[path]) : U.rest('/storage/v1/object/sign/movie/' + path, { method: 'POST', body: JSON.stringify({ expiresIn: 3600 }), keepCache: true })
       .then(function (r) { signed[path] = window.UFQ_CONFIG.url + '/storage/v1' + (r.signedURL || r.signedUrl); return signed[path]; });
     get.then(function (url) {
-      var a = new Audio(url), was = l.video ? l.video.volume : 1;
-      if (l.video) l.video.volume = was * 0.25;
-      a.onended = a.onerror = function () { if (l.video) l.video.volume = was; };
+      if (playing !== mine) return;
+      var a = mine.audio = new Audio(url);
+      var done = function () { if (playing === mine) stopPlaying(); };
+      a.onended = a.onerror = a.onpause = done;
+      U.duck('voice', 0.15);
+      mine.limit = setTimeout(done, ((length || 60) + 8) * 1000); /* never stay quiet if the browser reports no end */
       return a.play();
-    }).catch(function () { U.toast('Could not play the voice message.'); });
+    }).catch(function () { if (playing === mine) stopPlaying(); U.toast('Could not play the voice message.'); });
   }
   function renderChat() {
     var l = live; if (!l || !l.feed || !l.chat) return;
@@ -504,7 +527,7 @@
     l.msgs.forEach(function (m) {
       var b = el('div', 'mmsg' + (m.mine ? ' mine' : ''));
       if (!m.mine) b.appendChild(el('b', '', m.nick));
-      if (m.kind === 'voice') b.appendChild(btn('▶ Voice · ' + clock(m.duration), 'mbtn', function () { playVoice(m.path); }));
+      if (m.kind === 'voice') b.appendChild(btn('▶ Voice · ' + clock(m.duration), 'mbtn', function () { playVoice(m.path, m.duration); }));
       else b.appendChild(el('span', '', m.body));
       l.feed.appendChild(b);
     });
