@@ -1144,6 +1144,43 @@
   };
   window.addEventListener('pagehide', function () { Object.keys(ducks).forEach(function (k) { Ufq.duck(k, null); }); });
 
+  /* ---------------- "a new version is here" ----------------
+     A page left open keeps running the old code after a deploy: tell the person, let them refresh. */
+  (function () {
+    var mine = cfg.version, shown = false, dismissed = '', last = 0;
+    if (!mine) return;
+    /* never in the middle of a test or a game: a refresh there would lose the answers */
+    var busy = function () { return page === 'Practice' || page === 'SpeedRound' || page === 'Survival' || page === 'Duel' || !!document.querySelector('.mstage'); };
+    function show(version) {
+      shown = true;
+      var box = document.createElement('div'); box.id = 'ufq-update'; box.setAttribute('role', 'status');
+      box.setAttribute('style', 'position:fixed;left:16px;bottom:calc(16px + env(safe-area-inset-bottom));z-index:9400;width:min(330px,calc(100vw - 32px));box-sizing:border-box;display:flex;flex-direction:column;gap:10px;padding:16px;border-radius:18px 18px 18px 6px;background:#fff;color:#003049;box-shadow:0 0 0 1px rgba(0,48,73,.12),0 24px 50px -22px rgba(0,30,46,.55);font:14px/1.45 "Inter Tight",sans-serif;transform:translateY(16px);opacity:0;transition:transform .45s cubic-bezier(.16,1,.3,1),opacity .45s');
+      box.innerHTML = '<div style="display:flex;gap:10px;align-items:flex-start"><span aria-hidden="true" style="flex:none;width:10px;height:10px;margin-top:6px;border-radius:50%;background:#C1121F"></span>' +
+        '<span style="flex:1"><b style="display:block;font-size:15px">New version of Ufq</b>An update has just arrived. Refresh the page to get it.</span></div>' +
+        '<div style="display:flex;gap:8px"><button type="button" data-a="go" style="flex:1;min-height:40px;border:0;border-radius:999px;background:#C1121F;color:#fff;font:600 14px \'Inter Tight\',sans-serif;cursor:pointer">Refresh</button>' +
+        '<button type="button" data-a="later" style="min-height:40px;padding:0 16px;border:0;border-radius:999px;background:#EEF2F5;color:#003049;font:600 14px \'Inter Tight\',sans-serif;cursor:pointer">Later</button></div>';
+      box.addEventListener('click', function (e) {
+        var a = e.target.getAttribute && e.target.getAttribute('data-a');
+        if (a === 'go') { try { window.top.location.reload(); } catch (err) { location.reload(); } }
+        else if (a === 'later') { dismissed = version; shown = false; box.remove(); }
+      });
+      /* on phones the music player sits along the bottom: stay above it */
+      try { if (window.innerWidth < 700 && localStorage.getItem('ufq_music')) box.style.bottom = 'calc(84px + env(safe-area-inset-bottom))'; } catch (e) { /* storage blocked */ }
+      document.body.appendChild(box);
+      requestAnimationFrame(function () { requestAnimationFrame(function () { box.style.transform = 'none'; box.style.opacity = '1'; }); });
+    }
+    function check() {
+      if (shown || document.hidden || Date.now() - last < 20000) return;
+      last = Date.now();
+      fetch('/dc/version.json', { cache: 'no-store' }).then(function (r) { return r.ok ? r.json() : null; }).then(function (v) {
+        if (v && v.version && v.version !== mine && v.version !== dismissed && !shown && !busy() && document.body) show(v.version);
+      }).catch(function () { /* offline: ask again later */ });
+    }
+    setInterval(check, 60000);
+    setTimeout(check, 15000);
+    document.addEventListener('visibilitychange', check);
+  })();
+
   /* ---------------- guard + clean URL ---------------- */
   if (page && !PUBLIC[page] && !Ufq.isSignedIn()) {
     location.replace('/auth');

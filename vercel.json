@@ -145,6 +145,10 @@
       ]
     },
     {
+      "source": "/dc/version.json",
+      "headers": [{ "key": "Cache-Control", "value": "no-store" }]
+    },
+    {
       "source": "/dc/fonts/(.*)",
       "headers": [
         {

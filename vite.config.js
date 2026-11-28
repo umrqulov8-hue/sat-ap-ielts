@@ -9,9 +9,12 @@ const dcRoutes = JSON.parse(readFileSync(new URL('./dc-routes.json', import.meta
 
 function dcDesign() {
   let env = {}
+  // changes with every deploy: open pages compare it and offer a refresh (public/dc/bridge.js)
+  const version = process.env.VERCEL_GIT_COMMIT_SHA || String(Date.now())
   const configJs = () => `window.UFQ_CONFIG=${JSON.stringify({
     url: env.VITE_SUPABASE_URL || '',
     key: env.VITE_SUPABASE_ANON_KEY || '',
+    version,
   })};\n`
   return {
     name: 'ufq-dc-design',
@@ -21,6 +24,12 @@ function dcDesign() {
     configureServer(server) {
       server.middlewares.use((req, res, next) => {
         const [path, query] = (req.url || '').split('?')
+        if (path === '/dc/version.json') {
+          res.setHeader('Content-Type', 'application/json')
+          res.setHeader('Cache-Control', 'no-store')
+          res.end(JSON.stringify({ version }))
+          return
+        }
         if (path === '/dc/config.js') {
           res.setHeader('Content-Type', 'application/javascript; charset=utf-8')
           res.end(configJs())
@@ -33,6 +42,7 @@ function dcDesign() {
     },
     generateBundle() {
       this.emitFile({ type: 'asset', fileName: 'dc/config.js', source: configJs() })
+      this.emitFile({ type: 'asset', fileName: 'dc/version.json', source: JSON.stringify({ version }) })
     },
   }
 }
