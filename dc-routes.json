@@ -25,5 +25,6 @@
   "/games/duel": "Duel",
   "/games/review": "GameReview",
   "/games/friends": "Friends",
-  "/community": "Community"
+  "/community": "Community",
+  "/music": "Music"
 }

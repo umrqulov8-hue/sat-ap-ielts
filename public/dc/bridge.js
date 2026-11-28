@@ -11,7 +11,7 @@
     Main: '/', Auth: '/auth', ResetPassword: '/reset-password', Welcome: '/welcome', Dashboard: '/dashboard',
     Lesson: '/lesson', PracticeHub: '/practice', Practice: '/practice/session', MockTests: '/mock-tests',
     MockTest: '/mock-test', Plan: '/plan', Mistakes: '/mistakes', Report: '/report', History: '/history',
-    Profile: '/profile', Settings: '/settings', Notifications: '/notifications', Help: '/help', Admin: '/admin', Games: '/games', SpeedRound: '/games/speed', Survival: '/games/survival', Leaderboard: '/games/leaderboard', Duel: '/games/duel', GameReview: '/games/review', Friends: '/games/friends', Community: '/community',
+    Profile: '/profile', Settings: '/settings', Notifications: '/notifications', Help: '/help', Admin: '/admin', Games: '/games', SpeedRound: '/games/speed', Survival: '/games/survival', Leaderboard: '/games/leaderboard', Duel: '/games/duel', GameReview: '/games/review', Friends: '/games/friends', Community: '/community', Music: '/music',
     NotFound: '/404',
   };
   var PUBLIC = { Main: 1, Auth: 1, ResetPassword: 1, NotFound: 1, Help: 1 };
@@ -113,7 +113,7 @@
   /* the side menu must fit short screens (tablets, in-app browsers with their own top bar) */
   var fit = document.createElement('style');
   fit.textContent = '@media (min-width:821px){html aside.side.dk{height:100vh!important;height:100dvh!important;overflow-y:auto!important;overscroll-behavior:contain;scrollbar-width:none}html aside.side.dk::-webkit-scrollbar{display:none}html aside.side.dk>:not(.sbg){flex-shrink:0}}' +
-    '@media (min-width:821px) and (max-height:860px){html aside.side.dk{gap:3px!important;padding:14px!important}html aside.side.dk a.nv{min-height:38px!important}html aside.side.dk .sideExtra{gap:4px!important}html aside.side.dk .sideExtra>div:has(>.cap){display:none!important}}' +
+    '@media (min-width:821px) and (max-height:900px){html aside.side.dk{gap:3px!important;padding:14px!important}html aside.side.dk a.nv{min-height:38px!important}html aside.side.dk .sideExtra{gap:4px!important}html aside.side.dk .sideExtra>div:has(>.cap){display:none!important}}' +
     '@media (min-width:821px) and (max-height:640px){html aside.side.dk{gap:1px!important;padding:10px 12px!important}html aside.side.dk a.nv{min-height:32px!important;font-size:14px!important}}';
   (document.head || document.documentElement).appendChild(fit);
 
@@ -170,7 +170,7 @@
         .catch(function () { return null; }).then(function (set) {
           if (set && set.external && set.external.google === false) throw new Error(friendly('provider is not enabled'));
           /* select_account: Google always shows its account list, so people can pick another one */
-          location.assign(cfg.url + '/auth/v1/authorize?provider=google&prompt=select_account&redirect_to=' + encodeURIComponent(location.origin + '/auth'));
+          window.top.location.assign(cfg.url + '/auth/v1/authorize?provider=google&prompt=select_account&redirect_to=' + encodeURIComponent(location.origin + '/auth'));
         });
     },
     signOut: function (to) {
@@ -1090,6 +1090,13 @@
     return;
   }
 
+  /* while music plays, pages open in a frame over the player; sign-in and landing pages leave it */
+  try {
+    if (window.parent !== window && window.parent.UfqMusicCore && (page === 'Main' || page === 'Auth' || page === 'ResetPassword' || page === 'Welcome')) {
+      window.parent.location.replace(location.href); return;
+    }
+  } catch (e) { /* framed by another site */ }
+
   /* ---------------- guard + clean URL ---------------- */
   if (page && !PUBLIC[page] && !Ufq.isSignedIn()) {
     location.replace('/auth');
@@ -1103,6 +1110,12 @@
 
   // refresh an almost-expired token in the background
   ensureFresh();
+
+  // the music player (see music.js)
+  if (page && !PUBLIC[page] && Ufq.isSignedIn()) {
+    var music = document.createElement('script'); music.src = '/dc/music.js';
+    (document.head || document.documentElement).appendChild(music);
+  }
 
   // any "Sign out" / "Log out" control signs the user out of the real session
   document.addEventListener('click', function (e) {
