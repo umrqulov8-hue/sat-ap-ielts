@@ -244,9 +244,11 @@
         if (r.messages.length) {
           l.since = r.messages[r.messages.length - 1].id;
           l.msgs = l.msgs.concat(r.messages).slice(-200);
-          if (!l.chat) l.unread += r.messages.filter(function (m) { return !m.mine; }).length;
+          if (!l.chat) l.unread += r.messages.filter(function (m) { return !m.mine && !reactionOf(m); }).length;
         }
         draw(r.messages);
+        /* other people's new reactions (not the ones already there when I came in) */
+        if (!first) r.messages.forEach(function (m) { if (!m.mine && reactionOf(m)) float(reactionOf(m), m.nick); });
       });
     }).catch(function (e) {
       if (live !== l) return;
@@ -367,6 +369,8 @@
       video.src = s.src; video.onloadedmetadata = function () { err.hidden = true; video.currentTime = at; if (playing) video.play().catch(function () { big.hidden = false; }); };
     };
     row.appendChild(quality);
+    var smile = btn('😊', 'mbtn glass mround', openTray); smile.setAttribute('aria-label', 'Reactions'); smile.title = 'React'; row.appendChild(smile);
+    l.tray = null; l.sky = el('div', 'msky'); l.sky.setAttribute('aria-live', 'off');
     if (l.film.subs) { var cc = btn('CC', 'mbtn glass', function () { l.cc = !l.cc; cc.setAttribute('aria-pressed', l.cc); }); cc.setAttribute('aria-pressed', 'true'); row.appendChild(cc); }
     row.appendChild(btn('My words', 'mbtn glass', wordDialog));
     var fs = btn('⛶', 'mbtn glass', function () { if (document.fullscreenElement) document.exitFullscreen(); else if (l.stage.requestFullscreen) l.stage.requestFullscreen().catch(function () { /* not allowed */ }); });
@@ -375,7 +379,7 @@
 
     l.chatBox = el('aside', 'mchat'); l.chatBox.hidden = !l.chat; buildChat();
     l.quiz = el('div', 'mquiz'); l.quiz.hidden = true;
-    [video, sub, big, err, top, bar, l.chatBox, l.quiz].forEach(function (n) { l.stage.appendChild(n); });
+    [video, sub, big, err, top, bar, l.chatBox, l.quiz, l.sky].forEach(function (n) { l.stage.appendChild(n); });
     video.ontimeupdate = function () {
       if (live !== l) return; /* the room was closed */
       var t = video.currentTime;
@@ -434,6 +438,33 @@
     d.box.appendChild(btn('Save word', 'mbtn red', add)); d.box.appendChild(list);
     if (l.film.subs) d.box.appendChild(el('p', 'mnote', 'Tip: tap any word in the subtitles to save it.'));
     load();
+  }
+
+  /* ---- reactions: sent like a chat line with a hidden mark, shown floating over the film ---- */
+  var MARK = '\u2063r:';
+  var REACTIONS = ['❤️', '🔥', '😂', '🤣', '😍', '🥰', '😮', '😱', '🤯', '😢', '😭', '😡', '👍', '👎', '👏', '🙌', '🎉', '🥳', '💯', '✨', '👀', '🤔', '🙈', '😴', '💔', '😎', '🤩', '💀'];
+  function reactionOf(m) { return m.kind === 'text' && String(m.body).indexOf(MARK) === 0 ? String(m.body).slice(MARK.length) : ''; }
+  function float(emoji, name) {
+    var l = live; if (!l || !l.sky || l.sky.childElementCount > 40 || REACTIONS.indexOf(emoji) < 0) return;
+    var f = el('span', 'mfloat'); f.appendChild(el('span', '', emoji)); f.appendChild(el('small', '', name));
+    f.style.left = (8 + Math.random() * 80) + '%';
+    f.style.setProperty('--drift', (Math.random() * 70 - 35) + 'px');
+    l.sky.appendChild(f);
+    setTimeout(function () { f.remove(); }, 3400);
+  }
+  function react(emoji) {
+    var l = live; if (!l || (l.reacted && performance.now() - l.reacted < 900)) return;
+    l.reacted = performance.now();
+    float(emoji, 'You');
+    rpc('movie_send', { p_room: l.id, p_kind: 'text', p_body: MARK + emoji }).catch(function (e) { fail(e, 'The reaction was not sent.'); });
+  }
+  function closeTray() { var l = live; if (l && l.tray) { l.tray.remove(); l.tray = null; } }
+  function openTray() {
+    var l = live; if (l.tray) { closeTray(); return; }
+    var veil = el('div', 'mreact'), box = el('div', 'mtray'); box.setAttribute('role', 'dialog'); box.setAttribute('aria-label', 'Reactions');
+    REACTIONS.forEach(function (e) { box.appendChild(btn(e, 'memo', function () { closeTray(); react(e); })); });
+    veil.onclick = function (ev) { if (ev.target === veil) closeTray(); };
+    veil.appendChild(box); l.stage.appendChild(veil); l.tray = veil;
   }
 
   /* ---- chat: text and voice ---- */
@@ -524,14 +555,15 @@
     var l = live; if (!l || !l.feed || !l.chat) return;
     l.unread = 0;
     l.feed.textContent = '';
-    l.msgs.forEach(function (m) {
+    var lines = l.msgs.filter(function (m) { return !reactionOf(m); });
+    lines.forEach(function (m) {
       var b = el('div', 'mmsg' + (m.mine ? ' mine' : ''));
       if (!m.mine) b.appendChild(el('b', '', m.nick));
       if (m.kind === 'voice') b.appendChild(btn('▶ Voice · ' + clock(m.duration), 'mbtn', function () { playVoice(m.path, m.duration); }));
       else b.appendChild(el('span', '', m.body));
       l.feed.appendChild(b);
     });
-    if (!l.msgs.length) l.feed.appendChild(el('p', 'mnote', 'Say hello to the room.'));
+    if (!lines.length) l.feed.appendChild(el('p', 'mnote', 'Say hello to the room.'));
     l.feed.scrollTop = l.feed.scrollHeight;
   }
 
