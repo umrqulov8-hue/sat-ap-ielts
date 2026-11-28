@@ -764,7 +764,7 @@
         }).catch(function () { close(); Ufq.toast('Could not accept the invite.'); });
       } },
       { label: 'Decline', run: function (close) { close(); frpc('invite_answer', { p_id: inv.id, p_accept: false }).catch(function () { /* nothing to undo */ }); } },
-    ], Math.max(5, 60 - (inv.age || 0)), inv.match || '');
+    ], Math.max(5, 60 - (inv.age || 0)), String(inv.match || '').replace(/^· /, ''));
   }
   var NUDGE_TEXT = { play: 'Let’s play a duel!', study: 'Time to practise together?', gg: 'Good game!' }, nOff = false;
   function takeNudges() {

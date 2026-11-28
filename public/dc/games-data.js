@@ -18,6 +18,25 @@
 
   /* ---------------- questions ---------------- */
   var seen = {}; // ids already served in this visit
+  /* levels a player can pick in Speed Round and Duel; mult scales Speed Round points so easy runs can't top the board */
+  var LEVELS = [
+    { id: 'easy', label: 'Easy', mult: 1, help: 'The gentlest questions in the bank. Good for a first game.' },
+    { id: 'medium', label: 'Medium', mult: 1.25, help: 'Typical SAT questions.' },
+    { id: 'hard', label: 'Hard', mult: 1.5, help: 'The bank’s hard questions.' },
+    { id: 'extreme', label: 'Extreme', mult: 2, help: 'The longest, densest of the hard questions.' }
+  ];
+  var LEVEL_TAG = /\s*· (Easy|Medium|Hard|Extreme)$/;
+  /* the bank has no tag above "hard": extreme keeps the longest, most symbol-heavy ones of a bigger hard sample */
+  function weight(q) {
+    var text = q.stem.replace(/<[^>]*>/g, ' ') + ' ' + q.ch.join(' ');
+    return text.length + (q.stem.indexOf('<img') > -1 ? 90 : 0) + 8 * (text.match(/[=^√≤≥π]|\\frac|\\sqrt/g) || []).length;
+  }
+  function byLevel(level, n, slugs, exclude) {
+    if (level !== 'extreme') return sample(level, n, slugs, exclude);
+    return sample('hard', n * 4, slugs, exclude).then(function (list) {
+      return shuffle(list.sort(function (a, b) { return weight(b) - weight(a); }).slice(0, n));
+    });
+  }
   function subjectsMap() { return Ufq().subjects().then(function (subs) { var m = {}; subs.forEach(function (s) { m[s.id] = s.slug; }); return m; }); }
   function toGameQ(row, slugs) {
     var ch = Array.isArray(row.options) ? row.options : [];
@@ -75,13 +94,15 @@
       var start = Date.UTC(t.getUTCFullYear(), t.getUTCMonth(), t.getUTCDate() - dow) - 5 * 3600e3;
       return { id: new Date(start + 5 * 3600e3).toISOString().slice(0, 10), start: start, resetsAt: start + 7 * 864e5, day: dow };
     },
-    /* f: { difficulty: 'easy' | ['easy','medium'], count, exclude: [ids] } */
+    levels: LEVELS,
+    /* f: { level: 'easy'|'medium'|'hard'|'extreme' or difficulty: 'easy' | ['easy','medium'], count, exclude: [ids] } */
     getQuestions: function (f) {
       var ds = [].concat(f.difficulty || ['easy', 'medium']), ex = {};
       (f.exclude || []).forEach(function (id) { ex[id] = 1; });
       Object.keys(seen).forEach(function (id) { ex[id] = 1; });
       var per = Math.ceil(f.count / ds.length);
       return subjectsMap().then(function (slugs) {
+        if (f.level) return Promise.all([byLevel(f.level, f.count, slugs, ex)]);
         return Promise.all(ds.map(function (d) { return sample(d, per, slugs, ex); }));
       }).then(function (parts) {
         var out = shuffle([].concat.apply([], parts)).slice(0, f.count);
@@ -162,7 +183,8 @@
     /* ---------------- multiplayer matches (2–20 players) ---------------- */
     _pub: function (m) {
       var players = (m.players || []).map(function (p) { return { nick: p.nick, me: !!p.me, host: !!p.host, answered: p.answered || 0, points: p.points || 0, right: p.right || 0, finished: !!p.finished, offline: !!p.offline, qAgo: p.qAgo || 0, per: p.per || [] }; });
-      return { id: m.id, code: m.code, name: m.name, host: m.host, visibility: m.visibility, maxPlayers: m.maxPlayers, players: players, status: m.status, createdAt: m.createdAt,
+      var tag = LEVEL_TAG.exec(m.name || ''), name = String(m.name || '').replace(LEVEL_TAG, '') || (m.host + '’s match');
+      return { id: m.id, code: m.code, name: name, level: tag ? tag[1].toLowerCase() : '', levelLabel: tag ? tag[1] : 'Mixed', host: m.host, visibility: m.visibility, maxPlayers: m.maxPlayers, players: players, status: m.status, createdAt: m.createdAt,
         hasPassword: m.visibility === 'private', isHost: !!m.isHost, joined: players.some(function (p) { return p.me; }), count: players.length, full: players.length >= m.maxPlayers, age: Date.now() - m.createdAt };
     },
     /* a match with its questions; remembers the raw server copy for the live standings */
@@ -173,10 +195,12 @@
     },
     listMatches: function () { var self = this; return rpc('game_list_matches').then(function (list) { return (list || []).map(function (m) { return self._pub(m); }); }); },
     createMatch: function (opt) {
-      var self = this;
-      return subjectsMap().then(function (slugs) { return Promise.all([sample('easy', 3, slugs, {}), sample('medium', 4, slugs, {}), sample('hard', 3, slugs, {})]); }).then(function (p) {
-        var ids = [].concat(p[0], p[1], p[2]).map(function (q) { return q.id; });
-        return rpc('game_create_match', { p_name: opt.name || '', p_visibility: opt.visibility, p_password: opt.password || '', p_max: opt.maxPlayers, p_questions: ids });
+      var self = this, level = LEVELS.filter(function (l) { return l.id === opt.level; })[0] || LEVELS[1];
+      /* the level travels in the match name (cut off again in _pub), so no database change is needed */
+      var tag = ' · ' + level.label, name = String(opt.name || '').replace(LEVEL_TAG, '').trim().slice(0, 28 - tag.length) + tag;
+      return subjectsMap().then(function (slugs) { return byLevel(level.id, 10, slugs, {}); }).then(function (list) {
+        var ids = list.map(function (q) { return q.id; });
+        return rpc('game_create_match', { p_name: name.trim(), p_visibility: opt.visibility, p_password: opt.password || '', p_max: opt.maxPlayers, p_questions: ids });
       }).then(function (raw) { try { localStorage.setItem('ufq_lobby', raw.id); } catch (e) { /* ignore */ } return self._full(raw); });
     },
     joinMatch: function (idOrCode, password) {

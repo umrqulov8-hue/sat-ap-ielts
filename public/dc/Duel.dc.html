@@ -719,6 +719,9 @@ a.tile:hover .go{transform:rotate(-45deg);background:#003049;color:#FFFFFF}
 <div class="segc" style="grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: none" role="radiogroup" aria-labelledby="vlab"><span class="segthumb" style="width: calc((100% - 10px) / 2); transform: translateX({{visX}})"></span><sc-for list="{{visOpts}}" as="v" hint-placeholder-count="2"><button type="button" role="radio" aria-checked="{{v.on}}" onClick="{{v.go}}">{{v.label}}</button></sc-for></div>
 <span style="font-size: 13px; color: rgba(0,48,73,.62); margin-top: -6px">{{visHelp}}</span>
 <sc-if value="{{isPriv}}" hint-placeholder-val="{{ false }}"><div class="rg" style="display: flex; flex-direction: column; gap: 6px"><label for="mpass" style="font-weight: 600; font-size: 14px">Password</label><input id="mpass" class="codein" style="height: 52px; font-size: 16px; letter-spacing: .04em; text-transform: none; font-weight: 500" type="text" maxLength="12" autoComplete="off" placeholder="4–12 characters" value="{{cPass}}" onChange="{{onPass}}" aria-invalid="{{passBad}}"></div></sc-if>
+<span id="dlab" style="font-weight: 600; font-size: 14px">Questions</span>
+<div class="segc" style="grid-template-columns: repeat(4, minmax(0, 1fr)); max-width: none" role="radiogroup" aria-labelledby="dlab"><span class="segthumb" style="width: calc((100% - 10px) / 4); transform: translateX({{levelX}})"></span><sc-for list="{{levelOpts}}" as="l" hint-placeholder-count="4"><button type="button" role="radio" aria-checked="{{l.on}}" onClick="{{l.go}}">{{l.label}}</button></sc-for></div>
+<span style="font-size: 13px; color: rgba(0,48,73,.62); margin-top: -6px">{{levelHelp}}</span>
 <span id="plab" style="font-weight: 600; font-size: 14px">Players</span>
 <div class="segc" style="grid-template-columns: repeat(4, minmax(0, 1fr)); max-width: none" role="radiogroup" aria-labelledby="plab"><span class="segthumb" style="width: calc((100% - 10px) / 4); transform: translateX({{sizeX}})"></span><sc-for list="{{sizeOpts}}" as="z" hint-placeholder-count="4"><button type="button" role="radio" aria-checked="{{z.on}}" onClick="{{z.go}}">{{z.label}}</button></sc-for></div>
 <span style="font-size: 13px; color: rgba(0,48,73,.62); margin-top: -6px">{{sizeHelp}}</span>
@@ -908,7 +911,7 @@ const ord = (n) => n + (n % 10 === 1 && n % 100 !== 11 ? 'st' : n % 10 === 2 && 
 class Component extends DCLogic {
 constructor(p) {
   super(p); this._enter = Wipe.read(); this.navRef = (el) => { this.navA = el; };
-  this.state = { phase: 'browse', st: 'loading', err: '', lobbies: [], f: 'all', q: '', code: '', spin: 0, listK: 0, m: null, feed: [], creating: false, cName: '', cVis: 'public', cPass: '', cSize: 5, cErr: '', busy: '', pw: null, pwVal: '', pwBad: 0, cd: 3, qi: 0, left: D_MS, fb: null, answers: [], confirm: false, copied: false, offline: false, sound: Sfx.on(), toast: '', fl: 0, flTxt: '', pop: 0, live: [], place: 0, res: null, burst: false };
+  this.state = { phase: 'browse', st: 'loading', err: '', lobbies: [], f: 'all', q: '', code: '', spin: 0, listK: 0, m: null, feed: [], creating: false, cName: '', cVis: 'public', cPass: '', cSize: 5, cLevel: GameData._ls('ufq.games.level') || 'medium', cErr: '', busy: '', pw: null, pwVal: '', pwBad: 0, cd: 3, qi: 0, left: D_MS, fb: null, answers: [], confirm: false, copied: false, offline: false, sound: Sfx.on(), toast: '', fl: 0, flTxt: '', pop: 0, live: [], place: 0, res: null, burst: false };
   this.rootRef = (el) => { this.root = el; }; this._qv = {};
 }
 componentDidMount() {
@@ -979,7 +982,7 @@ create(e) {
   const s = this.state; if (s.busy) return;
   if (s.cVis === 'private' && !/^.{4,12}$/.test(s.cPass)) { this.setState({ cErr: 'Private matches need a password of 4 to 12 characters.' }); return; }
   this.setState({ busy: 'create', cErr: '' });
-  GameData.createMatch({ name: s.cName, visibility: s.cVis, password: s.cPass, maxPlayers: s.cSize })
+  GameData.createMatch({ name: s.cName, visibility: s.cVis, password: s.cPass, maxPlayers: s.cSize, level: s.cLevel })
     .then(m => { Sfx.play('go'); this.setState({ busy: '', creating: false, phase: 'lobby', m, feed: [{ nick: 'You', txt: 'opened the lobby', c: '#C1121F' }], copied: false }); })
     .catch(e2 => this.setState({ busy: '', cErr: e2.message === 'offline' ? 'You’re offline. Connect and try again.' : 'Couldn’t create the match. Try again.' }));
 }
@@ -1108,7 +1111,7 @@ _rv() {
     const st = l.status === 'playing' ? 'playing' : l.full ? 'full' : 'open';
     return { name: l.name, host: l.host, count: String(l.count), max: String(l.maxPlayers), ago: ago(l.age), delay: (i * 0.05) + 's', st,
       visTxt: l.visibility === 'private' ? 'Private' : 'Public', visBg: l.visibility === 'private' ? '#003049' : '#EEF4F8', visFg: l.visibility === 'private' ? '#FFFFFF' : '#003049',
-      sizeTxt: l.maxPlayers === 2 ? '1 v 1' : 'Up to ' + l.maxPlayers,
+      sizeTxt: (l.maxPlayers === 2 ? '1 v 1' : 'Up to ' + l.maxPlayers) + ' · ' + l.levelLabel,
       pips: Array.from({ length: l.maxPlayers }, (x, k) => ({ c: k < l.count ? (st === 'playing' ? '#669BBC' : '#003049') : '#E3E9EE' })),
       aria: l.count + ' of ' + l.maxPlayers + ' players', stTxt: st === 'playing' ? 'In progress' : st === 'full' ? 'Full' : 'Waiting', stC: st === 'open' ? '#003049' : '#C1121F',
       cta: st === 'open' ? (l.visibility === 'private' ? 'Join · password' : 'Join') : st === 'full' ? 'Full' : 'Playing', btnCls: st === 'open' ? (l.visibility === 'private' ? 'nv' : '') : 'gh', dis: st === 'open' ? 'false' : 'true', joinAria: 'Join ' + l.name,
@@ -1145,7 +1148,7 @@ _rv() {
     errMsg: s.err === 'offline' ? 'You’re offline, so we can’t see open matches.' : 'We couldn’t load matches. Please try again.',
     listA: s.st === 'ready' && s.listK % 2 === 1, listB: s.st === 'ready' && s.listK % 2 === 0 && s.listK > 0, lobbies, tgE: tong('sleep'),
     m: Object.assign({}, m, { count: String(m.count || m.players.length), maxPlayers: String(m.maxPlayers) }),
-    visBg: m.visibility === 'private' ? '#003049' : '#EEF4F8', visFg: m.visibility === 'private' ? '#FFFFFF' : '#003049', visIcon: '', visLabel: m.visibility === 'private' ? 'Private · password' : 'Public · anyone can join',
+    visBg: m.visibility === 'private' ? '#003049' : '#EEF4F8', visFg: m.visibility === 'private' ? '#FFFFFF' : '#003049', visIcon: '', visLabel: (m.visibility === 'private' ? 'Private · password' : 'Public · anyone can join') + (m.levelLabel ? ' · ' + m.levelLabel : ''),
     lobbySub: m.isHost ? (m.visibility === 'private' && !s.cPass ? 'You’re the host. This match is private: invite your friends below.' : 'You’re the host. Others can see this match in the list' + (m.visibility === 'private' ? ' but need the password.' : ' and join right away.')) : 'Hosted by ' + m.host + '.',
     copyCode: () => { const done = () => this.setState({ copied: true }); try { navigator.clipboard.writeText(m.code).then(done, done); } catch (e) { done(); } }, copyLabel: s.copied ? 'Copied' : 'Copy code',
     showPass: !!(m.isHost && m.visibility === 'private' && s.cPass), hostPass: s.cPass,
@@ -1171,7 +1174,7 @@ _rv() {
     headA: meR ? (won ? 'You' : 'You came') : '', headB: meR ? (won ? 'won.' : ord(meR.rank) + '.') : '', won,
     tgR: tong(won ? 'cheer' : meR && meR.rank <= 3 ? 'happy' : 'think'), tgRMsg: won ? 'First of ' + rows.length + '. Fast and right — that is how matches are won.' : meR && meR.rank <= 3 ? 'On the podium. The hard three questions decide first place.' : 'Not this time. Review the misses and call a rematch.',
     pod, rows: rows.map((r, i) => { const a = avatar(r.nick, r.me); return { rank: String(r.rank), nick: r.me ? 'You' : r.nick, pts: fmt(r.pts), right: String(r.right), meS: r.me ? 'true' : 'false', delay: (0.4 + i * 0.04) + 's', bg: a.bg, fg: a.fg, ini: a.ini }; }),
-    rematch: () => { if (m.isHost) { this.setState({ cSize: m.maxPlayers ? Number(m.maxPlayers) : 5, cVis: m.visibility || 'public', creating: true }); } else { this.setState({ phase: 'browse', m: null }); this.load(); } }, rematchLabel: m.isHost ? 'Rematch' : 'Find another match',
+    rematch: () => { if (m.isHost) { this.setState({ cSize: m.maxPlayers ? Number(m.maxPlayers) : 5, cVis: m.visibility || 'public', cLevel: m.level || s.cLevel, creating: true }); } else { this.setState({ phase: 'browse', m: null }); this.load(); } }, rematchLabel: m.isHost ? 'Rematch' : 'Find another match',
     toBrowse: () => { this.setState({ phase: 'browse', m: null }); this.load(); },
     hasMissed: s.answers.some(a => !a.correct), missedN: String(s.answers.filter(a => !a.correct).length),
     burstOn: s.burst && !reduceMotion(), burst: this._bp || (this._bp = burstParts(40, 3)),
@@ -1179,6 +1182,8 @@ _rv() {
     visX: s.cVis === 'private' ? '100%' : '0%', visOpts: [['public', 'Public'], ['private', 'Private']].map(([k, label]) => ({ label, on: s.cVis === k ? 'true' : 'false', go: () => this.setState({ cVis: k, cErr: '' }) })),
     visHelp: s.cVis === 'private' ? 'Listed for everyone, but only people with the password can get in.' : 'Anyone can see it and join until the seats are full.',
     isPriv: s.cVis === 'private', cPass: s.cPass, onPass: (e) => this.setState({ cPass: String(e.target.value || '').slice(0, 12), cErr: '' }), passBad: s.cErr ? 'true' : 'false',
+    levelX: (Math.max(0, GameData.levels.findIndex(l => l.id === s.cLevel)) * 100) + '%', levelHelp: (GameData.levels.find(l => l.id === s.cLevel) || GameData.levels[1]).help,
+    levelOpts: GameData.levels.map(l => ({ label: l.label, on: s.cLevel === l.id ? 'true' : 'false', go: () => { GameData._ls('ufq.games.level', l.id); this.setState({ cLevel: l.id }); } })),
     sizeX: (SIZES.indexOf(s.cSize) * 100) + '%', sizeOpts: SIZES.map(n => ({ label: n === 2 ? '1 v 1' : String(n), on: s.cSize === n ? 'true' : 'false', go: () => this.setState({ cSize: n }) })),
     sizeHelp: s.cSize === 2 ? 'A classic duel: you and one other player.' : 'Up to ' + s.cSize + ' players. You can start as soon as two are in.',
     hasCErr: !!s.cErr, cErr: s.cErr, busyS: s.busy ? 'true' : 'false', createLabel: s.busy === 'create' ? 'Creating…' : 'Create match',

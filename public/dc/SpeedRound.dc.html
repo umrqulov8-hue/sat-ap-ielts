@@ -488,7 +488,7 @@ a.tile:hover .go{transform:rotate(-45deg);background:#003049;color:#FFFFFF}
 <div style="display: flex; flex-direction: column; gap: 8px">
 <span class="cap" style="color: #669BBC">Game 1 · 1, 2 or 3 minutes</span>
 <h1 class="srf" style="margin: 0; font-size: clamp(48px, 9vw, 88px); line-height: .95"><span class="mask2"><span>Speed <em style="color: #C1121F">Round.</em></span></span></h1>
-<p style="margin: 0; max-width: 44ch; font-size: 17px; color: rgba(0,48,73,.75)">Easy and medium questions, one after another. Answer as many as you can before the clock runs out.</p>
+<p style="margin: 0; max-width: 44ch; font-size: 17px; color: rgba(0,48,73,.75)">Pick a level, then answer as many questions as you can before the clock runs out.</p>
 </div>
 <div class="pi" style="animation-delay: .15s; position: relative; width: 128px; height: 128px; flex: none">
 <svg viewBox="0 0 120 120" width="128" height="128" aria-hidden="true"><circle cx="60" cy="64" r="48" fill="#FBF3E3"></circle><circle cx="60" cy="64" r="48" fill="none" stroke="#003049" stroke-width="4"></circle><path d="M52 8h16M60 8v8" stroke="#003049" stroke-width="4" stroke-linecap="round"></path><path d="M60 64V34" stroke="#C1121F" stroke-width="5" stroke-linecap="round"></path><circle cx="60" cy="64" r="5" fill="#003049"></circle></svg>
@@ -496,9 +496,10 @@ a.tile:hover .go{transform:rotate(-45deg);background:#003049;color:#FFFFFF}
 </div>
 </div>
 <div class="rg" style="animation-delay: .05s; display: flex; flex-direction: column; gap: 8px"><span id="mlab" style="font-weight: 600; font-size: 14px">Round length</span><div class="segc" role="radiogroup" aria-labelledby="mlab"><span class="segthumb" style="transform: translateX({{thumbX}})"></span><sc-for list="{{modes}}" as="m" hint-placeholder-count="3"><button type="button" role="radio" aria-checked="{{m.on}}" onClick="{{m.go}}">{{m.label}}</button></sc-for></div></div>
+<div class="rg" style="animation-delay: .07s; display: flex; flex-direction: column; gap: 8px"><span id="llab" style="font-weight: 600; font-size: 14px">Difficulty</span><div class="segc" style="grid-template-columns: repeat(4, minmax(0, 1fr))" role="radiogroup" aria-labelledby="llab"><span class="segthumb" style="width: calc((100% - 10px) / 4); transform: translateX({{levelX}})"></span><sc-for list="{{levelOpts}}" as="l" hint-placeholder-count="4"><button type="button" role="radio" aria-checked="{{l.on}}" onClick="{{l.go}}">{{l.label}}</button></sc-for></div><span style="font-size: 13px; color: rgba(0,48,73,.62)">{{levelHelp}}</span></div>
 <div class="grid4 rg" style="animation-delay: .08s">
 <div class="stat2"><span class="v">{{bestTxt}}</span><span class="k">Your best · {{modeShort}}</span></div>
-<div class="stat2"><span class="v">+100</span><span class="k">Each right answer</span></div>
+<div class="stat2"><span class="v">+{{basePts}}</span><span class="k">Each right answer</span></div>
 <div class="stat2"><span class="v">×2</span><span class="k">3 in a row</span></div>
 <div class="stat2"><span class="v">×3</span><span class="k">6 in a row</span></div>
 </div>
@@ -583,7 +584,7 @@ a.tile:hover .go{transform:rotate(-45deg);background:#003049;color:#FFFFFF}
 <sc-if value="{{isResult}}" hint-placeholder-val="{{ false }}">
 <header class="gbar">
 <a href="/games" onClick="{{goGames}}" class="icob" aria-label="Back to Games"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></a>
-<span style="font-weight: 600">Speed Round · {{modeShort}} · result</span>
+<span style="font-weight: 600">Speed Round · {{modeShort}} · {{levelLabel}} · result</span>
 <span style="margin-left: auto"></span>
 <button type="button" class="icob" onClick="{{toggleSound}}" aria-pressed="{{soundOn}}" aria-label="Sound"><sc-if value="{{soundIs}}" hint-placeholder-val="{{ false }}"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10v4h4l5 4V6L8 10H4zM16 9a4 4 0 0 1 0 6M18.5 6.5a7.5 7.5 0 0 1 0 11" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg></sc-if><sc-if value="{{soundNot}}" hint-placeholder-val="{{ true }}"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10v4h4l5 4V6L8 10H4zM17 10l4 4M21 10l-4 4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg></sc-if></button>
 </header>
@@ -795,7 +796,7 @@ const tong = (mood, hill) => {
 class Component extends DCLogic {
 constructor(p) {
   super(p); this._enter = Wipe.read(); this.navRef = (el) => { this.navA = el; };
-  this.state = { mode: 60, bests: {}, shown: 0, banner: 0, bannerTxt: '', burst: false, phase: 'intro', loading: false, err: '', abandoned: false, offline: false, sound: Sfx.on(), best: null, cd: 3, qs: [], qi: 0, score: 0, correct: 0, wrong: 0, skipped: 0, combo: 0, bestCombo: 0, left: 60000, fb: null, fl: 0, flTxt: '', pen: 0, pop: 0, confirm: false, missed: [], res: null, saving: false, saveErr: false };
+  this.state = { level: GameData._ls('ufq.games.level') || 'medium', mode: 60, bests: {}, shown: 0, banner: 0, bannerTxt: '', burst: false, phase: 'intro', loading: false, err: '', abandoned: false, offline: false, sound: Sfx.on(), best: null, cd: 3, qs: [], qi: 0, score: 0, correct: 0, wrong: 0, skipped: 0, combo: 0, bestCombo: 0, left: 60000, fb: null, fl: 0, flTxt: '', pen: 0, pop: 0, confirm: false, missed: [], res: null, saving: false, saveErr: false };
   this.rootRef = (el) => { this.root = el; };
   this._qv = {};
 }
@@ -810,11 +811,12 @@ componentDidMount() {
 componentDidUpdate() { const s = this.state; if (this._ph !== s.phase || this._cf !== s.confirm) { this._ph = s.phase; this._cf = s.confirm; this.focus(); } GameData.simulate = this.props.simulate || 'none'; }
 componentWillUnmount() { if (this._cu) cancelAnimationFrame(this._cu); clearTimeout(this._bt); clearInterval(this._iv); clearTimeout(this._to); clearTimeout(this._cd); window.removeEventListener('online', this._on); window.removeEventListener('offline', this._off); if (this.state.phase === 'play') GameData.endRun(); }
 focus() { try { if (this.root) this.root.focus({ preventScroll: true }); } catch (e) {} }
+lv() { return GameData.levels.find(l => l.id === this.state.level) || GameData.levels[1]; }
 qv(q) { return this._qv[q.id] || (this._qv[q.id] = qView(q)); }
 start() {
   if (this.state.loading) return;
   this.setState({ loading: true, err: '' });
-  GameData.getQuestions({ difficulty: ['easy', 'medium'], count: 40 })
+  GameData.getQuestions({ level: this.state.level, count: 40 })
     .then(qs => { this.setState({ loading: false, qs, qi: 0, score: 0, correct: 0, wrong: 0, skipped: 0, combo: 0, bestCombo: 0, fb: null, fl: 0, pen: 0, missed: [], res: null, saveErr: false, abandoned: false, burst: false, shown: 0, phase: 'count', left: this.state.mode * 1000 }); this.count(3); })
     .catch(e => this.setState({ loading: false, err: e.message === 'offline' ? 'offline' : 'server' }));
 }
@@ -839,7 +841,7 @@ answer(i) {
   const s = this.state; if (s.phase !== 'play' || s.fb || s.confirm) return;
   const q = s.qs[s.qi]; if (!q || i < 0 || i >= q.ch.length) return;
   if (i === q.a) {
-    const combo = s.combo + 1, mult = combo >= 6 ? 3 : combo >= 3 ? 2 : 1, pts = 100 * mult;
+    const combo = s.combo + 1, mult = combo >= 6 ? 3 : combo >= 3 ? 2 : 1, pts = Math.round(100 * this.lv().mult) * mult;
     Sfx.play('ok');
     if (combo === 3 || combo === 6) { clearTimeout(this._bt); this.setState({ banner: s.banner + 1, bannerTxt: 'Combo ×' + mult }); this._bt = setTimeout(() => this.setState({ bannerTxt: '' }), 950); }
     this.setState({ fb: { pick: i, ok: true }, score: s.score + pts, correct: s.correct + 1, combo, bestCombo: Math.max(s.bestCombo, combo), fl: s.fl + 1, flTxt: '+' + pts, pop: s.pop + 1 });
@@ -861,7 +863,7 @@ next() {
   if (s.qs.length - qi < 10 && !this._more) {
     this._more = true;
     const add = (qs) => { this._more = false; this.setState({ qs: this.state.qs.concat(qs) }); };
-    GameData.getQuestions({ difficulty: ['easy', 'medium'], count: 30, instant: true, seed: Date.now() + qi }).then(add).catch(() => { this._more = false; });
+    GameData.getQuestions({ level: this.state.level, count: 30, instant: true, seed: Date.now() + qi }).then(add).catch(() => { this._more = false; });
   }
 }
 finish() {
@@ -909,6 +911,8 @@ _rv() {
     abandoned: s.abandoned, offline: s.offline, loading: s.loading, loadingS: s.loading ? 'true' : 'false',
     hasErr: !!s.err, errMsg: s.err === 'offline' ? 'You’re offline. Connect to load questions.' : 'We couldn’t load questions. Please try again.',
     bestTxt: bestM === undefined ? '…' : bestM ? fmt(bestM) : '—', mode: String(s.mode), modeShort: s.mode / 60 + ' min', modeLong: s.mode === 60 ? '60 seconds' : s.mode / 60 + ' minutes',
+    basePts: String(Math.round(100 * this.lv().mult)), levelLabel: this.lv().label, levelHelp: this.lv().help + (this.lv().mult > 1 ? ' Points ×' + this.lv().mult + '.' : ''),
+    levelX: (GameData.levels.indexOf(this.lv()) * 100) + '%', levelOpts: GameData.levels.map(l => ({ label: l.label, on: this.lv() === l ? 'true' : 'false', go: () => { GameData._ls('ufq.games.level', l.id); this.setState({ level: l.id }); } })),
     thumbX: (SPEED_MODES.indexOf(s.mode) * 100) + '%', modes: SPEED_MODES.map(m => ({ label: m / 60 + ' min', on: s.mode === m ? 'true' : 'false', go: () => this.setState({ mode: m }) })),
     shownTxt: fmt(s.shown), bannerOn: !!s.bannerTxt, bannerTxt: s.bannerTxt, bannerCls: s.banner % 2 ? 'cbA' : 'cbB', burstOn: s.burst && !reduceMotion(), burst: this._bp || (this._bp = burstParts(36, 11)),
     start: () => this.start(), again: () => this.start(),

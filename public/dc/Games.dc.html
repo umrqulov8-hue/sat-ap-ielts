@@ -761,7 +761,7 @@ _rv() {
   const best = (x, f) => s.st !== 'ready' ? '' : x ? f(x) : '—';
   const WC = { speed: '#C1121F', surv: '#003049', board: '#780000', duel: '#669BBC' };
   const cards = [
-    { k: 'speed', tag: 'Game 1 · 60 seconds', name: 'Speed Round', rule: 'Pick 1, 2 or 3 minutes. Easy and medium questions, and combos multiply your points.', bestLabel: 'Best · 1 min', best: best(b && b.speed, x => fmt(x.score)), href: '/games/speed', cta: 'Play', bg: '#FBF3E3', fg: '#003049', btn: '' },
+    { k: 'speed', tag: 'Game 1 · 60 seconds', name: 'Speed Round', rule: 'Pick 1, 2 or 3 minutes. Pick Easy to Extreme; harder levels and combos multiply your points.', bestLabel: 'Best · 1 min', best: best(b && b.speed, x => fmt(x.score)), href: '/games/speed', cta: 'Play', bg: '#FBF3E3', fg: '#003049', btn: '' },
     { k: 'surv', tag: 'Game 2 · three lives', name: 'Survival', rule: 'Questions get harder as you climb. Three mistakes and the run is over.', bestLabel: 'Your best', best: best(b && b.survival, x => fmt(x.score) + ' · Q' + x.reached), href: '/games/survival', cta: 'Play', bg: '#EEF4F8', fg: '#003049', btn: 'nv' },
     { k: 'board', tag: 'Game 3 · resets Monday', name: 'Weekly Leaderboard', rule: 'Your best scores this week, ranked. Opt in with a nickname.', bestLabel: 'Your rank', best: s.st !== 'ready' ? '' : lb && lb.me ? '#' + lb.me.rank : '—', href: '/games/leaderboard', cta: 'Open', bg: '#003049', fg: '#FFFFFF', btn: '' },
     { k: 'duel', tag: 'Game 4 · 2 to 20 players', name: 'Duel', rule: 'Join an open match or host your own — public, or private with a password.', bestLabel: 'Matches won', best: best(b && b.duelWins, x => String(x)), href: '/games/duel', cta: 'Play', bg: '#F4F6F8', fg: '#003049', btn: 'nv' }
