@@ -26,5 +26,6 @@
   "/games/review": "GameReview",
   "/games/friends": "Friends",
   "/community": "Community",
-  "/music": "Music"
+  "/music": "Music",
+  "/movies": "Movies"
 }

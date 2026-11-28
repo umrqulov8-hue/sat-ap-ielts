@@ -95,6 +95,7 @@
       return { id: new Date(start + 5 * 3600e3).toISOString().slice(0, 10), start: start, resetsAt: start + 7 * 864e5, day: dow };
     },
     levels: LEVELS,
+    byIds: byIds,
     /* f: { level: 'easy'|'medium'|'hard'|'extreme' or difficulty: 'easy' | ['easy','medium'], count, exclude: [ids] } */
     getQuestions: function (f) {
       var ds = [].concat(f.difficulty || ['easy', 'medium']), ex = {};

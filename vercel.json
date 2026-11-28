@@ -73,6 +73,10 @@
       "destination": "/dc/Admin.dc.html"
     },
     {
+      "source": "/movies",
+      "destination": "/dc/Movies.dc.html"
+    },
+    {
       "source": "/music",
       "destination": "/dc/Music.dc.html"
     },

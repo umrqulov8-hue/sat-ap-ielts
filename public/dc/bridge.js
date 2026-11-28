@@ -11,7 +11,7 @@
     Main: '/', Auth: '/auth', ResetPassword: '/reset-password', Welcome: '/welcome', Dashboard: '/dashboard',
     Lesson: '/lesson', PracticeHub: '/practice', Practice: '/practice/session', MockTests: '/mock-tests',
     MockTest: '/mock-test', Plan: '/plan', Mistakes: '/mistakes', Report: '/report', History: '/history',
-    Profile: '/profile', Settings: '/settings', Notifications: '/notifications', Help: '/help', Admin: '/admin', Games: '/games', SpeedRound: '/games/speed', Survival: '/games/survival', Leaderboard: '/games/leaderboard', Duel: '/games/duel', GameReview: '/games/review', Friends: '/games/friends', Community: '/community', Music: '/music',
+    Profile: '/profile', Settings: '/settings', Notifications: '/notifications', Help: '/help', Admin: '/admin', Games: '/games', SpeedRound: '/games/speed', Survival: '/games/survival', Leaderboard: '/games/leaderboard', Duel: '/games/duel', GameReview: '/games/review', Friends: '/games/friends', Community: '/community', Music: '/music', Movies: '/movies',
     NotFound: '/404',
   };
   var PUBLIC = { Main: 1, Auth: 1, ResetPassword: 1, NotFound: 1, Help: 1 };
@@ -113,7 +113,7 @@
   /* the side menu must fit short screens (tablets, in-app browsers with their own top bar) */
   var fit = document.createElement('style');
   fit.textContent = '@media (min-width:821px){html aside.side.dk{height:100vh!important;height:100dvh!important;overflow-y:auto!important;overscroll-behavior:contain;scrollbar-width:none}html aside.side.dk::-webkit-scrollbar{display:none}html aside.side.dk>:not(.sbg){flex-shrink:0}}' +
-    '@media (min-width:821px) and (max-height:900px){html aside.side.dk{gap:3px!important;padding:14px!important}html aside.side.dk a.nv{min-height:38px!important}html aside.side.dk .sideExtra{gap:4px!important}html aside.side.dk .sideExtra>div:has(>.cap){display:none!important}}' +
+    '@media (min-width:821px) and (max-height:940px){html aside.side.dk{gap:3px!important;padding:14px!important}html aside.side.dk a.nv{min-height:38px!important}html aside.side.dk .sideExtra{gap:4px!important}html aside.side.dk .sideExtra>div:has(>.cap){display:none!important}}' +
     '@media (min-width:821px) and (max-height:640px){html aside.side.dk{gap:1px!important;padding:10px 12px!important}html aside.side.dk a.nv{min-height:32px!important;font-size:14px!important}}';
   (document.head || document.documentElement).appendChild(fit);
 
@@ -816,6 +816,19 @@
       return null;
     });
   }
+  /* "come and watch a film with me" */
+  var mvOff = false;
+  function takeMovieInvites() {
+    if (mvOff || page === 'Practice') return;
+    frpc('movie_invites_take').then(function (list) {
+      (list || []).forEach(function (i) {
+        popupCard('Movie invite from ' + i.from, i.from + ' wants to watch with you', [
+          { label: 'Join', primary: true, run: function (close) { close(); location.assign('/movies?room=' + encodeURIComponent(i.roomId)); } },
+          { label: 'Not now', run: function (close) { close(); } },
+        ], 90, i.title);
+      });
+    }).catch(function (e) { if (/movie_|schema cache|PGRST202/i.test(String(e && e.message))) mvOff = true; });
+  }
   Ufq.friends = {
     ping: fPing,
     last: function () { return fLast; },
@@ -843,7 +856,7 @@
     }, 1500);
   }
   if (Ufq.isSignedIn() && page && !PUBLIC[page]) {
-    var loop = function () { clearTimeout(fTimer); fPing().then(function () { if (!fOff) fTimer = setTimeout(loop, document.hidden ? 60000 : 12000); }); };
+    var loop = function () { clearTimeout(fTimer); takeMovieInvites(); fPing().then(function () { if (!fOff) fTimer = setTimeout(loop, document.hidden ? 60000 : 12000); }); };
     setTimeout(loop, 1200);
     document.addEventListener('visibilitychange', function () { if (!document.hidden && !fOff) loop(); });
   }
