@@ -824,12 +824,24 @@
     respond: function (name, accept) { return frpc('friend_respond', { p_username: name, p_accept: accept }).then(fPing); },
     remove: function (name) { return frpc('friend_remove', { p_username: name }).then(fPing); },
     hub: function () { return frpc('friends_hub'); },
+    people: function (q, offset) { return frpc('people_list', { p_q: q || '', p_offset: offset || 0 }); },
+    dmOpen: function (name) { return frpc('dm_open', { p_username: name }); },
+    dmList: function () { return frpc('dm_list'); },
     nudge: function (name, kind) { return frpc('friend_nudge', { p_username: name, p_kind: kind }); },
     invite: function (name, matchId) { return frpc('invite_send', { p_username: name, p_match: matchId }); },
     setUsername: function (name) {
       return Ufq.rest('/rest/v1/game_profiles?on_conflict=user_id', { method: 'POST', headers: { Prefer: 'resolution=merge-duplicates,return=minimal' }, body: JSON.stringify({ user_id: (Ufq.user() || {}).id, nick: name }) }).then(fPing);
     },
   };
+  /* unread messages from friends are mentioned inside Games only */
+  if (Ufq.isSignedIn() && page === 'Games') {
+    setTimeout(function () {
+      Ufq.friends.dmList().then(function (list) {
+        var from = (list || []).filter(function (x) { return x.unread && !x.silenced; });
+        if (from.length) Ufq.toast('New message from ' + from.map(function (x) { return x.nick; }).slice(0, 3).join(', ') + '. Open Friends to read it.', 'ok');
+      }).catch(function () { /* the chat setup step has not been run */ });
+    }, 1500);
+  }
   if (Ufq.isSignedIn() && page && !PUBLIC[page]) {
     var loop = function () { clearTimeout(fTimer); fPing().then(function () { if (!fOff) fTimer = setTimeout(loop, document.hidden ? 60000 : 12000); }); };
     setTimeout(loop, 1200);

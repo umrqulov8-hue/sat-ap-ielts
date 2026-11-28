@@ -9,6 +9,9 @@
 <title>Ufq — Friends</title>
 <script src="/dc/config.js"></script>
 <script src="/dc/bridge.js"></script>
+<link rel="stylesheet" href="/dc/community.css">
+<script src="/dc/community.js" defer></script>
+<script src="/dc/math.js" defer></script>
 <link rel="stylesheet" href="/dc/katex/katex.min.css">
 <link rel="stylesheet" href="/dc/katex/ufq-math.css">
 <script src="/dc/math.js" defer></script>
@@ -574,6 +577,7 @@ a.tile:hover .go{transform:rotate(-45deg);background:#003049;color:#FFFFFF}
 </div>
 <div style="display: flex; gap: 8px"><div class="fstat"><b>{{f.week}}</b><span>this week</span></div><div class="fstat"><b>{{f.wins}}</b><span>duels won</span></div><div class="fstat"><b>{{f.vs}}</b><span>you vs them</span></div></div>
 <div style="display: flex; gap: 8px; flex-wrap: wrap">
+<button type="button" class="fbtn nv" onClick="{{f.chat}}">Chat<sc-if value="{{f.unread}}" hint-placeholder-val="{{ false }}"><span class="fbadge" style="margin-left: 6px">{{f.unread}}</span></sc-if></button>
 <sc-if value="{{f.online}}" hint-placeholder-val="{{ true }}"><button type="button" class="fbtn red" onClick="{{f.invite}}" style="flex: 1">{{f.inviteLabel}}</button></sc-if>
 <button type="button" class="fbtn" onClick="{{f.play}}">Let’s play</button>
 <button type="button" class="fbtn" onClick="{{f.study}}">Study?</button>
@@ -585,6 +589,18 @@ a.tile:hover .go{transform:rotate(-45deg);background:#003049;color:#FFFFFF}
 <sc-if value="{{noMatch}}" hint-placeholder-val="{{ false }}"><p style="margin: 0; color: rgba(0,48,73,.65)">No friend matches that filter.</p></sc-if>
 <sc-if value="{{hasRecent}}" hint-placeholder-val="{{ false }}"><div style="display: flex; flex-direction: column; gap: 8px; border-top: 1px solid rgba(0,48,73,.15); padding-top: 14px"><span class="cap" style="color: #669BBC">Played with recently</span>
 <sc-for list="{{recent}}" as="r" hint-placeholder-count="2"><div class="frow"><b style="flex: 1; min-width: 0">{{r.nick}}</b><button type="button" class="fbtn nv" onClick="{{r.add}}">Add friend</button></div></sc-for></div></sc-if>
+</div>
+</sc-if>
+
+<sc-if value="{{isPeople}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 10px">
+<div style="display: flex; gap: 10px; flex-wrap: wrap; align-items: center">
+<input class="finp" type="search" value="{{pq}}" onInput="{{setPq}}" placeholder="Search everyone by username" aria-label="Search everyone by username" maxlength="20" style="flex: 1; min-width: 180px; max-width: 340px">
+<span class="cap" style="margin-left: auto; color: rgba(0,48,73,.55)">{{peopleTxt}}</span>
+</div>
+<sc-for list="{{people}}" as="u" hint-placeholder-count="5"><div class="frow"><span class="fav" style="width: 40px; height: 40px; font-size: 14px; background: {{u.bg}}; color: {{u.fg}}">{{u.ini}}</span><span style="flex: 1; min-width: 0; display: flex; flex-direction: column"><b style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap">{{u.nick}}</b><span style="font-size: 12px; color: rgba(0,48,73,.55)">{{u.sub}}</span></span><button type="button" class="fbtn {{u.cls}}" onClick="{{u.act}}" disabled="{{u.off}}">{{u.label}}</button></div></sc-for>
+<sc-if value="{{noPeople}}" hint-placeholder-val="{{ false }}"><p style="margin: 0; color: rgba(0,48,73,.65)">{{noPeopleTxt}}</p></sc-if>
+<sc-if value="{{morePeople}}" hint-placeholder-val="{{ false }}"><button type="button" class="fbtn" onClick="{{loadMore}}" style="align-self: center">Show more</button></sc-if>
 </div>
 </sc-if>
 
@@ -635,12 +651,47 @@ const num = (v) => Number(v || 0).toLocaleString('en-US');
 const ago = (sec) => sec === null || sec === undefined ? 'a while ago' : sec < 90 ? 'just now' : sec < 3600 ? Math.round(sec / 60) + ' min ago' : sec < 86400 ? Math.round(sec / 3600) + ' h ago' : Math.round(sec / 86400) + ' d ago';
 const NUDGE = { play: 'Let’s play', study: 'Study?', gg: 'GG' };
 class Component extends DCLogic {
-constructor(props) { super(props); const add = new URLSearchParams(location.search).get('add') || ''; if (add) history.replaceState(null, '', location.pathname); this.state = { d: null, hub: null, noHub: false, name: '', add: add.slice(0, 20), msg: add ? 'Press “Send request” to add ' + add.slice(0, 20) + '.' : '', busy: '', tab: 'friends', q: '', only: false, open: '', copied: '' }; }
+constructor(props) { super(props); const add = new URLSearchParams(location.search).get('add') || ''; if (add) history.replaceState(null, '', location.pathname); this.state = { d: null, hub: null, noHub: false, name: '', add: add.slice(0, 20), msg: add ? 'Press “Send request” to add ' + add.slice(0, 20) + '.' : '', busy: '', tab: 'friends', q: '', only: false, open: '', copied: '', pq: '', people: null, total: 0, peopleErr: false, dms: [] }; }
 componentDidMount() {
 this._off = window.Ufq.friends.onUpdate((d) => this.setState({ d }));
 window.Ufq.friends.ping(); this.loadHub(); this._iv = setInterval(() => { if (!document.hidden) this.loadHub(); }, 20000);
+this.loadDms(); this._dm = setInterval(() => { if (!document.hidden) this.loadDms(); }, 8000);
 }
-componentWillUnmount() { if (this._off) this._off(); clearInterval(this._iv); clearTimeout(this._ct); }
+loadDms() {
+window.Ufq.friends.dmList().then((list) => {
+const openId = window.UfqChat && window.UfqChat.openId(), seen = this._seen;
+this._seen = {};
+(list || []).forEach((x) => { this._seen[x.chatId] = x.lastId; if (seen && x.lastId > (seen[x.chatId] || 0) && x.chatId !== openId && !x.silenced) window.Ufq.toast('New message from ' + x.nick + '.', 'ok'); });
+this.setState({ dms: (list || []).map((x) => x.chatId === openId ? Object.assign({}, x, { unread: 0 }) : x) });
+}).catch(() => {});
+}
+openDm(nick) {
+if (!window.UfqChat) return;
+window.Ufq.friends.dmOpen(nick).then((r) => {
+if (r.error) { window.Ufq.toast('You can only chat with friends.'); return; }
+window.UfqChat.openDm(r.chatId, nick, r.silenced);
+this.setState({ open: '', dms: this.state.dms.map((x) => x.chatId === r.chatId ? Object.assign({}, x, { unread: 0 }) : x) });
+}).catch(() => window.Ufq.toast('Friend chat needs the new setup step first.'));
+}
+loadPeople(more) {
+const q = this.state.pq.trim(), from = more ? (this.state.people || []).length : 0, turn = this._turn = (this._turn || 0) + 1;
+window.Ufq.friends.people(q, from).then((r) => { if (turn === this._turn) this.setState({ people: more ? this.state.people.concat(r.people) : r.people, total: r.total, peopleErr: false }); })
+.catch(() => { if (turn === this._turn) this.setState({ peopleErr: true, people: [] }); });
+}
+searchPeople(value) { this.setState({ pq: value }); clearTimeout(this._pt); this._pt = setTimeout(() => this.loadPeople(), 300); }
+personAct(u) {
+const f = window.Ufq.friends, set = (state) => this.setState({ people: this.state.people.map((x) => x.nick === u.nick ? Object.assign({}, x, { state }) : x) });
+if (u.state === 'friend') { this.openDm(u.nick); return; }
+if (u.state === 'sent') { f.remove(u.nick).then(() => set('none')); return; }
+if (u.state === 'incoming') { f.respond(u.nick, true).then(() => { set('friend'); this.loadHub(); window.Ufq.toast('You and ' + u.nick + ' are friends.', 'ok'); }); return; }
+f.send(u.nick).then((r) => {
+if (r.error === 'nick') window.Ufq.toast('Choose your username first (top of this page).');
+else if (r.error === 'limit') window.Ufq.toast('You have too many unanswered requests.');
+else if (r.error && r.error !== 'sent' && r.error !== 'already') window.Ufq.toast('Could not send the request.');
+else { set(r.ok === 'accepted' || r.error === 'already' ? 'friend' : 'sent'); this.refresh(); }
+}).catch(() => window.Ufq.toast('Could not send the request.'));
+}
+componentWillUnmount() { if (this._off) this._off(); clearInterval(this._iv); clearInterval(this._dm); clearTimeout(this._ct); clearTimeout(this._pt); }
 loadHub() { window.Ufq.friends.hub().then((hub) => this.setState({ hub, noHub: false })).catch(() => this.setState({ noHub: true })); }
 refresh() { window.Ufq.friends.ping(); this.loadHub(); }
 copy(text, which) { const done = () => { this.setState({ copied: which }); clearTimeout(this._ct); this._ct = setTimeout(() => this.setState({ copied: '' }), 1800); }; try { navigator.clipboard.writeText(text).then(done, () => window.prompt('Copy:', text)); } catch (e) { window.prompt('Copy:', text); } }
@@ -677,7 +728,11 @@ const online = all.filter((f) => f.online).length;
 const q = s.q.trim().toLowerCase();
 const shown = all.filter((f) => (!s.only || f.online) && (!q || f.nick.toLowerCase().indexOf(q) >= 0));
 const statusOf = (f) => f.online ? 'Online · ' + (f.activity || 'On the site') : 'Offline · seen ' + ago(f.lastSeen);
-const cards = shown.map((f, i) => Object.assign(av(f.nick), { nick: f.nick, delay: Math.min(i * 0.05, 0.4) + 's', online: f.online, dot: f.online ? '#1F9D55' : '#C5CDD3', status: statusOf(f), statusC: f.online ? '#1F7A45' : 'rgba(0,48,73,.55)', week: num(f.week), wins: num(f.duelWins), vs: f.h2h.wins + '–' + f.h2h.losses, inviteLabel: s.busy === f.nick ? 'Inviting…' : 'Invite to duel', invite: () => this.invite(f.nick), play: () => this.nudge(f.nick, 'play'), study: () => this.nudge(f.nick, 'study'), gg: () => this.nudge(f.nick, 'gg'), open: () => this.setState({ open: f.nick }) }));
+const unread = {}; s.dms.forEach((x) => { unread[x.nick] = x.unread; });
+const unreadAll = s.dms.reduce((n, x) => n + (x.silenced ? 0 : x.unread), 0);
+const ACT = { none: ['Add friend', 'nv'], sent: ['Cancel request', ''], incoming: ['Accept', 'red'], friend: ['Chat', ''] };
+const people = (s.people || []).map((u) => Object.assign(av(u.nick), { nick: u.nick, sub: u.state === 'friend' ? 'Your friend' : u.state === 'sent' ? 'Request sent' : u.state === 'incoming' ? 'Wants to be your friend' : u.named ? 'On Ufq' : 'On Ufq · no username yet', label: ACT[u.state][0], cls: ACT[u.state][1], off: false, act: () => this.personAct(u) }));
+const cards = shown.map((f, i) => Object.assign(av(f.nick), { unread: unread[f.nick] ? String(unread[f.nick]) : '', chat: () => this.openDm(f.nick), nick: f.nick, delay: Math.min(i * 0.05, 0.4) + 's', online: f.online, dot: f.online ? '#1F9D55' : '#C5CDD3', status: statusOf(f), statusC: f.online ? '#1F7A45' : 'rgba(0,48,73,.55)', week: num(f.week), wins: num(f.duelWins), vs: f.h2h.wins + '–' + f.h2h.losses, inviteLabel: s.busy === f.nick ? 'Inviting…' : 'Invite to duel', invite: () => this.invite(f.nick), play: () => this.nudge(f.nick, 'play'), study: () => this.nudge(f.nick, 'study'), gg: () => this.nudge(f.nick, 'gg'), open: () => this.setState({ open: f.nick }) }));
 const me = hub.me || {};
 const rows = all.map((f) => ({ nick: f.nick, pts: f.week || 0, me: false })).concat(d.username ? [{ nick: d.username, pts: me.week || 0, me: true }] : []).sort((a, b) => b.pts - a.pts);
 const max = Math.max(1, rows.length ? rows[0].pts : 1);
@@ -695,7 +750,7 @@ invite: () => this.invite(pf.nick), remove: () => { if (window.confirm('Remove '
 }
 const link = location.origin + '/games/friends?add=' + encodeURIComponent(d.username);
 const nReq = d.incoming.length;
-const tabs = [['friends', 'Friends', 0], ['board', 'Leaderboard', 0], ['feed', 'Activity', 0], ['requests', 'Requests', nReq]].map(([k, label, badge]) => ({ label, badge: badge ? String(badge) : '', on: s.tab === k ? 'true' : 'false', pick: () => this.setState({ tab: k }) }));
+const tabs = [['friends', 'Friends', unreadAll], ['people', 'People', 0], ['board', 'Leaderboard', 0], ['feed', 'Activity', 0], ['requests', 'Requests', nReq]].map(([k, label, badge]) => ({ label, badge: badge ? String(badge) : '', on: s.tab === k ? 'true' : 'false', pick: () => { this.setState({ tab: k }); if (k === 'people') this.loadPeople(); } }));
 return {
 needName: !!s.d && !d.username, hasName: !!d.username, username: d.username, myIni: av(d.username || '?').ini,
 summary: all.length + (all.length === 1 ? ' friend' : ' friends') + ' · ' + online + ' online' + (myRank && all.length ? ' · you are #' + myRank + ' this week' : ''),
@@ -704,6 +759,9 @@ shareLink: () => { if (navigator.share) navigator.share({ title: 'Play SAT Math 
 myStats: [{ v: num(me.week), l: 'points this week' }, { v: num(me.speed), l: 'best speed round' }, { v: num(me.survival), l: 'best survival' }, { v: num(me.duelWins), l: 'duels won' }],
 name: s.name, setName: (e) => this.setState({ name: e.target.value }), saveName: () => this.saveName(),
 add: s.add, setAdd: (e) => this.setState({ add: e.target.value, msg: '' }), addKey: (e) => { if (e.key === 'Enter') this.sendReq(); }, sendReq: () => this.sendReq(), msg: s.msg,
+isPeople: s.tab === 'people', pq: s.pq, setPq: (e) => this.searchPeople(e.target.value), people,
+peopleTxt: s.people === null ? 'Loading…' : s.total + (s.total === 1 ? ' person' : ' people'), noPeople: s.people !== null && !people.length, noPeopleTxt: s.peopleErr ? 'The People list needs the new setup step (run the SQL in Supabase).' : 'Nobody found.',
+morePeople: (s.people || []).length < s.total, loadMore: () => this.loadPeople(true),
 tabs, isFriends: s.tab === 'friends', isBoard: s.tab === 'board', isFeed: s.tab === 'feed', isRequests: s.tab === 'requests',
 q: s.q, setQ: (e) => this.setState({ q: e.target.value }), toggleOnline: () => this.setState({ only: !s.only }), onlyOn: s.only ? 'true' : 'false', onlyCls: s.only ? 'nv' : '',
 onlineTxt: online + ' online · ' + all.length + ' total', cards, noFriends: !!s.d && all.length === 0, noMatch: all.length > 0 && cards.length === 0,

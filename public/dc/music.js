@@ -281,7 +281,7 @@
   var pill = null;
   function refresh() {
     var s = core.state();
-    var want = s.track && !panel && !isMock() && !document.getElementById('ufq-music') ? (tight ? 'tab' : 'pill') : '';
+    var want = s.track && !panel && !isMock() && !document.getElementById('ufq-music') && !document.querySelector('.dmveil') ? (tight ? 'tab' : 'pill') : '';
     if (want !== pillSig) {
       if (pill) pill.remove(); pill = null; pillSig = want;
       if (want === 'tab') pill = btn('tab', ICON.note, 'Open music player', function () { openPanel(null); });

@@ -249,7 +249,7 @@
       since = r.now; merge(r.messages);
       if (r.state && (r.state.closed !== chat.closed || r.state.muted !== chat.muted)) { chat.closed = r.state.closed; chat.muted = r.state.muted; renderComposer(); }
     }).catch(function (e) {
-      if (g === gen && /not a member/i.test(String(e.message))) { U.toast('You are no longer in this chat.'); openChat(null); loadList(); }
+      if (g === gen && /not a member/i.test(String(e.message))) { U.toast('You are no longer in this chat.'); if (chat.dm) closeDm(); else { openChat(null); loadList(); } }
     }).then(function () {
       if (g !== gen) return;
       var idle = Date.now() - lastNew;
@@ -328,7 +328,7 @@
       if (/chat_list|schema cache|PGRST202/i.test(String(e.message))) { var m = root.querySelector('.cpane'); m.textContent = ''; m.appendChild(el('div', 'cempty', 'The community needs one setup step: run supabase/migrations/20261204_community.sql in Supabase.')); clearInterval(listT); }
     });
   }
-  function info(c) { return (c.visibility === 'private' ? 'Private' : 'Public') + ' · ' + c.members + (c.members === 1 ? ' member' : ' members') + (c.description ? ' · ' + c.description : ''); }
+  function info(c) { if (c.dm) return c.silenced ? 'Friend · muted' : 'Friend'; return (c.visibility === 'private' ? 'Private' : 'Public') + ' · ' + c.members + (c.members === 1 ? ' member' : ' members') + (c.description ? ' · ' + c.description : ''); }
   function openChat(c) {
     gen++; clearTimeout(pollT); stopVoice(false);
     cur = c; msgs = []; byId = {}; since = null; replyTo = null; noOlder = false; lastNew = Date.now();
@@ -337,10 +337,20 @@
     renderList();
     if (!c) { pane.appendChild(el('div', 'cempty', 'Choose a chat on the left.')); return; }
     var head = el('header', 'cbar');
-    head.appendChild(btn('←', 'cicon cback', function () { openChat(null); }));
+    head.appendChild(btn('←', 'cicon cback', function () { if (c.dm) closeDm(); else openChat(null); }));
     var title = el('div', 'ctitle'); title.appendChild(el('b', '', c.name)); title.appendChild(el('span', 'cinfo', info(c))); head.appendChild(title);
-    if (c.joined || me.admin) head.appendChild(btn('Members', 'cbtn', function () { members(c); }));
-    if (me.admin) head.appendChild(btn('Settings', 'cbtn', function () { settings(c); }));
+    if (c.dm) {
+      var mute = btn(c.silenced ? 'Unmute' : 'Mute', 'cbtn', function () {
+        rpc('dm_silence', { p_chat: c.id, p_silenced: !c.silenced }).then(function () {
+          c.silenced = !c.silenced; mute.textContent = c.silenced ? 'Unmute' : 'Mute'; head.querySelector('.cinfo').textContent = info(c);
+          U.toast(c.silenced ? 'Muted: no alerts from ' + c.name + '.' : 'Alerts from ' + c.name + ' are on.', 'ok');
+        }).catch(function (e) { fail(e, 'Could not change it.'); });
+      });
+      head.appendChild(mute);
+    }
+    else if (c.joined || me.admin) head.appendChild(btn('Members', 'cbtn', function () { members(c); }));
+    if (c.dm) { /* only the two of you: nothing to manage */ }
+    else if (me.admin) head.appendChild(btn('Settings', 'cbtn', function () { settings(c); }));
     else if (c.joined) head.appendChild(btn('Leave', 'cbtn', function () { if (window.confirm('Leave “' + c.name + '”?')) rpc('chat_leave', { p_chat: c.id }).then(function () { openChat(null); loadList(); }); }));
     pane.appendChild(head);
     pane.appendChild(el('div', 'cfeed'));
@@ -439,6 +449,25 @@
     load();
   }
 
+  /* ---- one friend chat in a drawer (Friends page) ---- */
+  var veil = null;
+  function closeDm() {
+    if (!veil) return;
+    gen++; clearTimeout(pollT); stopVoice(false); cur = null;
+    veil.remove(); veil = null;
+  }
+  window.UfqChat = {
+    openDm: function (chatId, nick, silenced) {
+      closeDm(); U = window.Ufq; me = { admin: false, nick: '' };
+      veil = el('div', 'dmveil'); root = el('div', 'inchat'); root.id = 'ufq-community';
+      root.appendChild(el('section', 'cpane')); veil.appendChild(root); document.body.appendChild(veil);
+      veil.onclick = function (e) { if (e.target === veil) closeDm(); };
+      openChat({ id: chatId, name: nick, dm: true, silenced: !!silenced, joined: true, muted: false, closed: false, visibility: 'private', members: 2 });
+    },
+    openId: function () { return veil && cur ? cur.id : null; },
+    close: closeDm
+  };
+
   function mount() {
     root = document.getElementById('ufq-community');
     if (!root || root.closest('x-dc') || !window.Ufq) { setTimeout(mount, 60); return; }
@@ -453,5 +482,5 @@
     document.addEventListener('visibilitychange', function () { if (!document.hidden && cur && cur.joined) poll(); });
     window.addEventListener('pagehide', function () { stopVoice(false); });
   }
-  mount();
+  if (/\/community$|Community\.dc/.test(location.pathname)) mount();
 })();
