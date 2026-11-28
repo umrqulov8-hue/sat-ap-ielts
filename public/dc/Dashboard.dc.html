@@ -66,9 +66,12 @@ html,body{margin:0;background:#FFFFFF}
 .side a.nv[aria-current="page"]{background:#003049;color:#FFFFFF}
 .side a.nv svg{flex:none}
 .tile{position:relative;border-radius:24px;background:#F4F6F8;padding:24px;display:flex;flex-direction:column;gap:14px;overflow:hidden;text-decoration:none;color:#003049;transition:transform .6s cubic-bezier(.16,1,.3,1),box-shadow .6s cubic-bezier(.16,1,.3,1)}
-a.tile:hover{transform:translateY(-4px);box-shadow:0 24px 48px -28px rgba(0,48,73,.45)}
+a.tile:hover,.tile.lk:hover{transform:translateY(-4px);box-shadow:0 24px 48px -28px rgba(0,48,73,.45)}
 .tile .go{position:absolute;top:20px;right:20px;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;box-shadow:inset 0 0 0 1px rgba(0,48,73,.2);transition:transform .5s cubic-bezier(.16,1,.3,1),background .3s,color .3s}
-a.tile:hover .go{transform:rotate(-45deg);background:#003049;color:#FFFFFF}
+.tile .stretch{position:absolute;inset:0;z-index:1;border-radius:inherit}
+.letsgo{position:relative;z-index:2;margin-top:8px;padding:7px 13px;border-radius:99px;background:#003049;color:#FFFFFF;font-size:12px;font-weight:600;white-space:nowrap;text-decoration:none;transition:background .3s}
+.letsgo:hover{background:#C1121F;color:#FFFFFF}
+a.tile:hover .go,.tile.lk:hover .go{transform:rotate(-45deg);background:#003049;color:#FFFFFF}
 @keyframes tileIn{from{opacity:0;transform:translateY(26px) scale(.97)}to{opacity:1;transform:none}}
 .ti{animation:tileIn 1s cubic-bezier(.16,1,.3,1) both}
 @keyframes ring{from{stroke-dashoffset:100}}
@@ -219,7 +222,8 @@ a.tile:hover .go{transform:rotate(-45deg);background:#003049;color:#FFFFFF}
 <a href="{{ctaHref}}" class="btn" style="position: relative; margin-top: auto; align-self: flex-start">{{cta}} <span class="ar" aria-hidden="true"><span>→</span><span>→</span></span></a>
 </section>
 
-<a href="/report" class="tile ti" style="grid-column: span 2; animation-delay: .08s; background: #FFFFFF; box-shadow: inset 0 0 0 1px rgba(0,48,73,.1); flex-direction: row; align-items: center; gap: 28px; flex-wrap: wrap">
+<div class="tile ti lk" style="grid-column: span 2; animation-delay: .08s; background: #FFFFFF; box-shadow: inset 0 0 0 1px rgba(0,48,73,.1); flex-direction: row; align-items: center; gap: 28px; flex-wrap: wrap">
+<a href="/report" class="stretch" aria-label="Open your report"></a>
 <span class="go" aria-hidden="true">→</span>
 <div style="position: relative; width: 196px; height: 196px; flex: none">
 <svg viewBox="0 0 120 120" width="196" height="196" aria-hidden="true" style="transform: rotate(-90deg)">
@@ -230,7 +234,7 @@ a.tile:hover .go{transform:rotate(-45deg);background:#003049;color:#FFFFFF}
 <div style="position: absolute; inset: 0; display: grid; place-items: center; text-align: center">
 <div style="display: flex; flex-direction: column; align-items: center; line-height: 1">
 <span class="srf cnt" style="--n: {{lastScore}}; font-size: 52px" role="img" aria-label="Latest score {{lastScore}}"></span>
-<span class="cap" style="color: #669BBC; margin-top: 6px">of 800 · latest practice</span>
+<a href="/practice" class="letsgo">Let's practice <span aria-hidden="true">→</span></a>
 </div>
 </div>
 </div>
@@ -239,7 +243,7 @@ a.tile:hover .go{transform:rotate(-45deg);background:#003049;color:#FFFFFF}
 <span class="srf" style="font-size: 30px; line-height: 1.1">{{lastTitle}}</span>
 <span style="color: rgba(0,48,73,.7); font-size: 15px">{{lastNote}}</span>
 </div>
-</a>
+</div>
 
 <a href="/report" class="tile ti" style="animation-delay: .14s">
 <span class="go" aria-hidden="true">→</span>
