@@ -141,7 +141,7 @@
     var row = el('div', 'cmsg' + (m.mine ? ' mine' : ''));
     row.id = 'm' + m.id;
     var b = el('div', 'cbub');
-    if (!m.mine) { var head = el('div', 'chead'); var n = el('b', '', m.nick); n.style.color = color(m.nick); head.appendChild(n); if (m.admin) head.appendChild(el('span', 'cadm', 'admin')); b.appendChild(head); }
+    if (!m.mine) { var head = el('div', 'chead'); var n = el('b', '', m.nick); n.style.color = color(m.nick); head.appendChild(n); if (m.admin) head.appendChild(el('span', 'cadm', m.role || 'admin')); b.appendChild(head); }
     if (m.reply) {
       var q = btn('', 'cquote', function () { var t = document.getElementById('m' + m.reply.id); if (t) { t.scrollIntoView({ block: 'center', behavior: 'smooth' }); t.classList.add('flash'); setTimeout(function () { t.classList.remove('flash'); }, 1200); } });
       q.appendChild(el('b', '', m.reply.nick)); q.appendChild(el('span', '', m.reply.text)); b.appendChild(q);
@@ -351,7 +351,7 @@
       rpc('chat_members_list', { p_chat: c.id }).then(function (list) {
         listBox.textContent = '';
         list.forEach(function (m) {
-          var row = el('div', 'cmember'); var n = el('span', '', m.nick + (m.me ? ' (you)' : '')); if (m.admin) n.appendChild(el('span', 'cadm', 'admin')); if (m.muted) n.appendChild(el('span', 'cadm', 'muted')); row.appendChild(n);
+          var row = el('div', 'cmember'); var n = el('span', '', m.nick + (m.me ? ' (you)' : '')); if (m.admin) n.appendChild(el('span', 'cadm', m.role || 'admin')); if (m.muted) n.appendChild(el('span', 'cadm', 'muted')); row.appendChild(n);
           if (me.admin && !m.me) {
             row.appendChild(btn(m.muted ? 'Unmute' : 'Mute', 'cbtn', function () { rpc('chat_mute', { p_chat: c.id, p_user: m.id, p_muted: !m.muted }).then(load).catch(function (e) { fail(e); }); }));
             row.appendChild(btn('Remove', 'cbtn', function () { if (window.confirm('Remove ' + m.nick + ' from this chat?')) rpc('chat_remove_member', { p_chat: c.id, p_user: m.id }).then(function () { load(); loadList(); }).catch(function (e) { fail(e); }); }));

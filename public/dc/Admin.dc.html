@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
 <link rel="stylesheet" href="/dc/fonts.css"><link rel="preload" as="font" type="font/woff2" crossorigin href="/dc/fonts/Newsreader-normal-latin.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="/dc/fonts/Newsreader-italic-latin.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="/dc/fonts/InterTight-normal-latin.woff2"><script src="/dc/config.js"></script><script src="/dc/bridge.js"></script>
-<style>@view-transition{navigation:none}::view-transition-old(root){animation:none}::view-transition-new(root){animation:.22s ease-out both vtIn}@keyframes vtIn{from{opacity:0}}.side{view-transition-name:ufqside}::view-transition-group(ufqside){animation:none}::view-transition-old(ufqside){display:none}::view-transition-new(ufqside){animation:none}@media (prefers-reduced-motion: reduce){@view-transition{navigation:none}}</style>
+<style>@view-transition{navigation:none}::view-transition-old(root){animation:none}::view-transition-new(root){animation:.22s ease-out both vtIn}@keyframes vtIn{from{opacity:0}}.side{view-transition-name:ufqside}::view-transition-group(ufqside){animation:none}::view-transition-old(ufqside){display:none}::view-transition-new(ufqside){animation:none}@media (prefers-reduced-motion: reduce){@view-transition{navigation:none}}
+.r-teacher{background:#669BBC;color:#FFFFFF}</style>
 <style>html,body{margin:0;background:#FFFFFF}</style>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -683,7 +684,7 @@ const me = s.users.find(u => u.id === 1);
 const isOwner = me.r === 'Owner';
 const rk = (r) => r.toLowerCase();
 const stC = (st) => st === 'Active' ? BLUE : st === 'Suspended' ? RED : '#F6DDB0';
-const av = (u) => u.r === 'Owner' ? ['#780000', '#F6DDB0'] : u.r === 'Admin' ? [NAVY, '#FFFFFF'] : ['#EEF2F5', NAVY];
+const av = (u) => u.r === 'Owner' ? ['#780000', '#F6DDB0'] : u.r === 'Admin' ? [NAVY, '#FFFFFF'] : u.r === 'Teacher' ? [BLUE, '#FFFFFF'] : ['#EEF2F5', NAVY];
 const nFlag = 0;
 const T = [['overview', 'Overview'], ['users', 'Users'], ['questions', 'Questions'], ['tests', 'Tests'], ['videos', 'Videos'], ['analytics', 'Analytics'], ['roles', 'Roles'], ['activity', 'Activity']];
 const tabs = T.map(([k, label]) => ({ label, on: s.tab === k ? 'true' : 'false', badge: k === 'questions' && nFlag ? String(nFlag) : '', pick: () => this.setState({ tab: k, sel: 0 }) }));
@@ -713,7 +714,7 @@ const audMap = (a, i) => ({ who: a.who, a: a.a, k: a.k, t: a.t, ini: ini(a.who),
 const audTop = s.aud.slice(0, 5).map(audMap);
 /* users */
 const qn = s.q.trim().toLowerCase();
-const RF = ['All', 'Owner', 'Admin', 'Student'];
+const RF = ['All', 'Owner', 'Admin', 'Teacher', 'Student'];
 const roleSegs = RF.map(r => ({ l: r === 'All' ? 'All' : r + (r === 'Owner' ? '' : 's'), n: r === 'All' ? s.users.length : s.users.filter(u => u.r === r).length, on: s.rf === r ? 'true' : 'false', pick: () => this.setState({ rf: r }) }));
 const statSegs = ['All', 'Active', 'Suspended', 'Invited'].map(r => ({ l: r, on: s.sf === r ? 'true' : 'false', pick: () => this.setState({ sf: r }) }));
 const filtered = s.users.filter(u => (s.rf === 'All' || u.r === s.rf) && (s.sf === 'All' || u.s === s.sf) && (!qn || (u.n + ' ' + u.e).toLowerCase().indexOf(qn) >= 0));
@@ -725,17 +726,17 @@ if (du0) {
 const c = av(du0);
 du = Object.assign({}, du0, { rk: rk(du0.r), sc: stC(du0.s), ini: ini(du0.n), avb: c[0], avc: c[1] });
 const self = du0.id === 1;
-const D = { Student: 'Learns, practises and takes mocks.', Admin: 'Manages questions, tests and students.', Owner: 'Full control, including roles. Only one.' };
-const canEdit = isOwner && !self && du0.s !== 'Invited';
-roleOpts = ['Student', 'Admin', 'Owner'].map(r => ({ r, d: D[r], on: du0.r === r ? 'true' : 'false', op: canEdit || du0.r === r ? '1' : '.45', pick: () => {
+const D = { Student: 'Learns, practises and takes mocks.', Teacher: 'Runs the Community: chats, members, moderation. No admin panel.', Admin: 'Manages questions, tests and students.', Owner: 'Full control, including roles. Only one.' };
+const LOW = ['Student', 'Teacher']; const meAdmin = me.r === 'Admin' || isOwner; const canEdit = !self && du0.s !== 'Invited' && (isOwner || (meAdmin && LOW.indexOf(du0.r) >= 0));
+roleOpts = ['Student', 'Teacher', 'Admin', 'Owner'].map(r => ({ r, d: D[r], on: du0.r === r ? 'true' : 'false', op: (canEdit && (isOwner || LOW.indexOf(r) >= 0)) || du0.r === r ? '1' : '.45', pick: () => {
 if (du0.r === r) return;
-if (!isOwner) return this.say('Only the Owner can change roles.');
+if (!isOwner && !(meAdmin && LOW.indexOf(r) >= 0 && LOW.indexOf(du0.r) >= 0)) return this.say('Only the Owner can change admin roles.');
 if (self) return this.say('Transfer ownership to someone else to change your own role.');
 if (du0.s === 'Invited') return this.say('Wait until they accept the invite.');
 if (r === 'Owner') return this.setState({ dlg: 'transfer', conf: '' });
-window.Ufq.setRole(du0.rid, r).then(() => this.say(du0.n + ' is now ' + (r === 'Admin' ? 'an Admin.' : 'a Student.'), { users: this.setU(du0.id, { r }), aud: this.log((r === 'Admin' ? 'made ' : 'changed ') + du0.n + (r === 'Admin' ? ' an Admin' : ' back to Student'), 'Roles') })).catch((err) => this.say(errText(err)));
+window.Ufq.setRole(du0.rid, r).then(() => this.say(du0.n + ' is now ' + (r === 'Admin' ? 'an Admin.' : 'a ' + r + '.'), { users: this.setU(du0.id, { r }), aud: this.log('changed ' + du0.n + ' to ' + r, 'Roles') })).catch((err) => this.say(errText(err)));
 } }));
-roleNote = self ? (isOwner ? 'You are the Owner. Give ownership to another user to step down.' : 'Your role is set by the Owner.') : !isOwner ? 'Only the Owner can change roles.' : du0.s === 'Invited' ? 'Roles can be changed after they accept the invite.' : 'Picking Owner hands over full control and makes you an Admin.';
+roleNote = self ? (isOwner ? 'You are the Owner. Give ownership to another user to step down.' : 'Your role is set by the Owner.') : !isOwner ? 'Admins can make a student a teacher and back. Admin roles are set by the Owner.' : du0.s === 'Invited' ? 'Roles can be changed after they accept the invite.' : 'Picking Owner hands over full control and makes you an Admin.';
 suspendL = du0.s === 'Suspended' ? 'Reactivate' : 'Suspend';
 const canAcct = !self && du0.r !== 'Owner' && (isOwner || du0.r === 'Student');
 if (du0.s === 'Invited') suspendL = 'Invited';
@@ -764,7 +765,7 @@ else if (d === 'remove') { const inv = du0.s === 'Invited'; (inv ? window.Ufq.ad
 };
 /* invite */
 const invOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s.invE.trim()) && !s.users.some(u => (u.e || '').toLowerCase() === s.invE.trim().toLowerCase());
-const invRoles = (isOwner ? ['Student', 'Admin'] : ['Student']).map(r => ({ l: r, on: s.invR === r ? 'true' : 'false', pick: () => this.setState({ invR: r }) }));
+const invRoles = (isOwner ? ['Student', 'Teacher', 'Admin'] : ['Student', 'Teacher']).map(r => ({ l: r, on: s.invR === r ? 'true' : 'false', pick: () => this.setState({ invR: r }) }));
 const sendInvite = () => { if (!invOk) return; const e = s.invE.trim().toLowerCase(); const n = e.split('@')[0].replace(/[._-]+/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
 window.Ufq.adminInvite(e, s.invR).then(() => this.say('Invite saved. Your mail app opens so you can send it to ' + e + '.', { users: s.users.concat([{ id: 'inv:' + e, rid: null, n, e, r: s.invR, s: 'Invited', j: 'Nov 2026', la: 'Not yet', m: '—', k: '—', qd: '—', ac: '—' }]), aud: this.log('invited ' + e + ' as ' + s.invR, 'Users'), dlg: '', invE: '', tab: 'users', sf: 'All', rf: 'All' })).catch((err) => this.say(errText(err))); };
 /* questions */
@@ -884,7 +885,7 @@ const W8 = s.wauS, wmx = Math.max.apply(null, [1].concat(W8));
 const wau = W8.map((v, i) => ({ v, l: i === 7 ? 'Now' : '−' + (7 - i) + 'w', h: Math.round(v / wmx * 100) + '%', c: i === 7 ? RED : NAVY, dl: (i * 0.05) + 's' }));
 /* roles */
 const cnt = (r) => s.users.filter(u => u.r === r).length;
-const roleCards = [['Owner', 'owner', 'Full control. Changes roles and can hand over ownership.'], ['Admin', 'admin', 'Runs content and students. Can’t change roles.'], ['Student', 'student', 'Uses the app: plan, practice, mocks, report.']].map(([r, k, d], i) => ({ r, k, d, n: String(cnt(r)), dl: (i * 0.06) + 's' }));
+const roleCards = [['Owner', 'owner', 'Full control. Changes roles and can hand over ownership.'], ['Admin', 'admin', 'Runs content and students. Can make teachers.'], ['Teacher', 'teacher', 'Runs the Community only: chats, members, moderation.'], ['Student', 'student', 'Uses the app: plan, practice, mocks, report.']].map(([r, k, d], i) => ({ r, k, d, n: String(cnt(r)), dl: (i * 0.06) + 's' }));
 const Y = '●', N = '—';
 const perms = [['Study, practise and take mocks', Y, Y, Y], ['Open the Admin section', N, Y, Y], ['Write and edit questions', N, Y, Y], ['Publish tests', N, Y, Y], ['See analytics', N, Y, Y], ['Invite, suspend and remove students', N, Y, Y], ['Make someone an Admin', N, N, Y], ['Remove an Admin', N, N, Y], ['Transfer ownership', N, N, Y]].map(([n, a, b2, c]) => ({ n, a, b: b2, c }));
 /* activity */

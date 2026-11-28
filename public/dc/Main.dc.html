@@ -374,7 +374,9 @@ const v = {
 intro: !this._back, back: this._back,
 curtain: this.state.leaving ? 'inset(0 0 0 0)' : 'inset(0 0 0 100%)',
 authRef: (el) => { this.authLink = el; },
-goAuth: (ev) => { if (!this.authLink) return; if (ev && ev.preventDefault) ev.preventDefault(); this.setState({ leaving: true }); try { sessionStorage.setItem('ufqWipe', 'half'); } catch (e) {} setTimeout(() => { this.authLink.click(); setTimeout(() => this.setState({ leaving: false }), 2500); }, 800); },
+goAuth: (ev) => { if (!this.authLink) return; if (ev && ev.preventDefault) ev.preventDefault(); this.setState({ leaving: true });
+if (window.Ufq && window.Ufq.isSignedIn()) { try { sessionStorage.setItem('ufqWipe', 'wipe'); } catch (e) {} setTimeout(() => { window.location.assign('/dashboard'); setTimeout(() => this.setState({ leaving: false }), 2500); }, 900); return; }
+try { sessionStorage.setItem('ufqWipe', 'half'); } catch (e) {} setTimeout(() => { this.authLink.click(); setTimeout(() => this.setState({ leaving: false }), 2500); }, 800); },
 d: D[sel], btn: this.state.sent ? 'Received' : 'Reserve', submit: (e) => { if (e && e.preventDefault) e.preventDefault(); this.setState({ sent: true }); } };
 D.forEach((_, i) => { v['p' + i] = sel === i ? 'true' : 'false'; v['k' + i] = () => this.setState({ sel: i }); });
 return v;

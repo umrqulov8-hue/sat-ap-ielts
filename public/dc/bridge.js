@@ -262,6 +262,15 @@
     return false;
   };
 
+  /* "Note: Figure not drawn to scale." belongs under the figure, not in the question text */
+  Ufq.figNote = function (text) {
+    var s = String(text == null ? '' : text);
+    var re = /(<p[^>]*>\s*)?(?:<(?:b|i|em|strong)>\s*)?(?:Note\s*:\s*)?(?:<\/(?:b|i|em|strong)>\s*)?(?:(?:The\s+)?Figures?\s+)?(?:(?:is|are)\s+)?not\s+(?:necessarily\s+)?(?:drawn|draw)\s+to\s+(?:the\s+)?scale\s*\.?\s*(?:<\/(?:b|i|em|strong)>)?\s*(<\/p>)?/i;
+    if (!re.test(s)) return { stem: s, note: '' };
+    s = s.replace(re, function (_, open, close) { return open && close ? '' : (open || '') + (close || ''); });
+    s = s.replace(/<p[^>]*>\s*<\/p>/gi, '').replace(/^(\s|<br\s*\/?>)+|(\s|<br\s*\/?>)+$/gi, '').replace(/^(<p[^>]*>)\s+/i, '$1');
+    return { stem: s, note: 'Note: Figure not drawn to scale.' };
+  };
   var QCOLS = 'id,subject_id,difficulty,question_text,options,correct_index,image_url,explanation,question_type';
   function countOf(subjectId, hard) {
     return ensureFresh().then(function (s) {
@@ -276,14 +285,15 @@
     var options = Array.isArray(q.options) ? q.options : [];
     if (!written && (options.length < 2 || options.length > 4)) return null;
     var key = written ? Ufq.tex(q.explanation || '') : '';
+    var sp = q.image_url ? Ufq.figNote(q.question_text) : { stem: q.question_text, note: '' };
     return {
-      id: q.id, subjectId: q.subject_id, subject: sub.title || 'Math',
-      stem: Ufq.tex(q.question_text), written: written, key: key,
-      stemRaw: q.question_text || '', optsRaw: written ? null : options, explRaw: q.explanation || '',
+      id: q.id, subjectId: q.subject_id, subject: sub.title || 'Math', note: sp.note,
+      stem: Ufq.tex(sp.stem), written: written, key: key,
+      stemRaw: sp.stem || '', optsRaw: written ? null : options, explRaw: q.explanation || '',
       opts: written ? [] : options.map(function (x) { return Ufq.tex(x); }),
       c: written ? key : ('ABCD'[q.correct_index] || 'A'),
       fig: q.image_url || '', steps: written ? (key ? ['The correct answer is ' + key + '.'] : []) : steps(q.explanation), trap: '', skill: sub.title || 'Math',
-      raw: { id: q.id, question_text: q.question_text, options: q.options, correct_index: q.correct_index, explanation: q.explanation, question_type: q.question_type },
+      raw: { id: q.id, question_text: q.question_text, options: q.options, correct_index: q.correct_index, explanation: q.explanation, question_type: q.question_type, image_url: q.image_url || undefined },
     };
   }
   /* options: { slugs: ['algebra', ...] (empty = all five), count: 10 }
@@ -418,7 +428,8 @@
           var mine = (a.selected === null || a.selected === undefined || a.selected === '') ? '—' : wr ? String(a.selected) : 'ABCD'[a.selected] + ' · ' + opts[a.selected];
           var right = wr ? String(q.explanation || '') : 'ABCD'[q.correct_index] + ' · ' + opts[q.correct_index];
           var why = wr ? 'The correct answer is ' + (q.explanation || '') + '.' : (String(q.explanation || '').split(/(?<=[.!?])\s+(?=[A-Z])/)[0] || 'Open the review for this question to see the steps.');
-          out.push([mine === '—' ? 'time' : 'concept', GROUPS[t.subject] || 'Algebra', ago(t.ts), String(q.question_text || ''), mine, right, why, 0]);
+          var shown = String(q.question_text || ''); if (q.image_url) { var sp2 = Ufq.figNote(shown); shown = sp2.stem + '<div><img src="' + String(q.image_url).replace(/"/g, '') + '" alt="Figure"></div>' + (sp2.note ? '<p style="text-align:center">' + sp2.note + '</p>' : ''); }
+          out.push([mine === '—' ? 'time' : 'concept', GROUPS[t.subject] || 'Algebra', ago(t.ts), shown, mine, right, why, 0]);
         });
       });
       return out;
@@ -866,11 +877,11 @@
           var sumT = A.reduce(function (t, a) { return t + a.total; }, 0), sumC = A.reduce(function (t, a) { return t + a.score; }, 0);
           var best = A.reduce(function (m, a) { return Math.max(m, a.total ? Math.round(a.score / a.total * 800) : 0); }, 0);
           return { id: mine ? 1 : p.id, rid: p.id, n: mine ? 'You' : (p.display_name || (p.email || 'Student').split('@')[0]), e: p.email || '—',
-            r: p.role === 'owner' ? 'Owner' : p.role === 'admin' ? 'Admin' : 'Student', s: p.suspended ? 'Suspended' : 'Active',
+            r: p.role === 'owner' ? 'Owner' : p.role === 'admin' ? 'Admin' : p.role === 'teacher' ? 'Teacher' : 'Student', s: p.suspended ? 'Suspended' : 'Active',
             j: MON3[d.getMonth()] + ' ' + d.getFullYear(), la: lastTs ? (mine ? 'Now' : agoMin(lastTs)) : 'Never', m: best || '—', k: Object.keys(days).length ? streakOf(days) : '—', qd: sumT || '—', ac: sumT ? Math.round(sumC / sumT * 100) + '%' : '—' };
         });
         invites.filter(function (i) { return !i.accepted; }).forEach(function (i) {
-          users.push({ id: 'inv:' + i.email, rid: null, n: i.email.split('@')[0], e: i.email, r: i.role === 'admin' ? 'Admin' : 'Student', s: 'Invited', j: MON3[new Date(i.created_at).getMonth()] + ' ' + new Date(i.created_at).getFullYear(), la: 'Not yet', m: '—', k: '—', qd: '—', ac: '—' });
+          users.push({ id: 'inv:' + i.email, rid: null, n: i.email.split('@')[0], e: i.email, r: i.role === 'admin' ? 'Admin' : i.role === 'teacher' ? 'Teacher' : 'Student', s: 'Invited', j: MON3[new Date(i.created_at).getMonth()] + ' ' + new Date(i.created_at).getFullYear(), la: 'Not yet', m: '—', k: '—', qd: '—', ac: '—' });
         });
         if (!users.some(function (u) { return u.id === 1; })) users.unshift({ id: 1, rid: me.id, n: 'You', e: me.email || '', r: 'Admin', s: 'Active', j: '—', la: 'Now', m: '—', k: '—', qd: '—', ac: '—' });
         // charts
@@ -920,15 +931,15 @@
     return Ufq.rest('/rest/v1/questions?id=eq.' + e.id, { method: 'PATCH', headers: { Prefer: 'return=representation' }, body: JSON.stringify(body) }).then(function (rows) { return rows[0]; });
   };
   Ufq.adminDeleteQuestion = function (id) { return Ufq.rest('/rest/v1/questions?id=eq.' + id, { method: 'DELETE', headers: { Prefer: 'return=minimal' } }); };
-  Ufq.setRole = function (profileId, role) { return rpc('set_user_role', { target_user_id: profileId, new_role: role === 'Admin' ? 'admin' : role === 'Owner' ? 'owner' : 'user' }); };
+  Ufq.setRole = function (profileId, role) { return rpc('set_user_role', { target_user_id: profileId, new_role: role === 'Admin' ? 'admin' : role === 'Owner' ? 'owner' : role === 'Teacher' ? 'teacher' : 'user' }); };
   Ufq.adminSuspend = function (profileId, flag) { return rpc('admin_set_suspended', { target: profileId, flag: flag }); };
   Ufq.adminRemove = function (profileId) { return rpc('admin_remove_user', { target: profileId }); };
   Ufq.adminTransfer = function (profileId) { return rpc('transfer_ownership', { new_owner: profileId }); };
   Ufq.adminInvite = function (email, role) {
     var me = Ufq.user() || {};
-    return Ufq.rest('/rest/v1/invites?on_conflict=email', { method: 'POST', headers: { Prefer: 'resolution=merge-duplicates,return=minimal' }, body: JSON.stringify({ email: email.toLowerCase(), role: role === 'Admin' ? 'admin' : 'user', invited_by: me.id, accepted: false }) }).then(function () {
+    return Ufq.rest('/rest/v1/invites?on_conflict=email', { method: 'POST', headers: { Prefer: 'resolution=merge-duplicates,return=minimal' }, body: JSON.stringify({ email: email.toLowerCase(), role: role === 'Admin' ? 'admin' : role === 'Teacher' ? 'teacher' : 'user', invited_by: me.id, accepted: false }) }).then(function () {
       var link = location.origin + '/auth';
-      location.href = 'mailto:' + encodeURIComponent(email) + '?subject=' + encodeURIComponent('You are invited to Ufq') + '&body=' + encodeURIComponent('Hi!\n\nI invited you to Ufq as ' + (role === 'Admin' ? 'an Admin' : 'a Student') + '. Sign up with this email address here:\n' + link + '\n');
+      location.href = 'mailto:' + encodeURIComponent(email) + '?subject=' + encodeURIComponent('You are invited to Ufq') + '&body=' + encodeURIComponent('Hi!\n\nI invited you to Ufq as ' + (role === 'Admin' ? 'an Admin' : role === 'Teacher' ? 'a Teacher' : 'a Student') + '. Sign up with this email address here:\n' + link + '\n');
     });
   };
   /* the whole bank, light, for the mock-test builder */

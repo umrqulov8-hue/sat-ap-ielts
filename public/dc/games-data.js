@@ -23,7 +23,10 @@
     var ch = Array.isArray(row.options) ? row.options : [];
     if (ch.length !== 4 || !(row.correct_index >= 0 && row.correct_index < 4)) return null;
     var stem = String(row.question_text || '');
-    if (row.image_url) stem += '<div><img src="' + String(row.image_url).replace(/"/g, '') + '" alt="Figure"></div>';
+    if (row.image_url) {
+      var sp = Ufq().figNote(stem);
+      stem = sp.stem + '<div><img src="' + String(row.image_url).replace(/"/g, '') + '" alt="Figure"></div>' + (sp.note ? '<p style="text-align:center">' + sp.note + '</p>' : '');
+    }
     return { id: row.id, d: row.difficulty === 'easy' ? 'easy' : row.difficulty === 'medium' || row.difficulty === 'mixing' ? 'medium' : 'hard', dom: DOM[slugs[row.subject_id]] || 'Algebra', stem: stem, ch: ch.map(String), a: row.correct_index, ex: String(row.explanation || '') };
   }
   var counts = {};
