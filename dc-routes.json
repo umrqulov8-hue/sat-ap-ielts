@@ -24,5 +24,6 @@
   "/games/leaderboard": "Leaderboard",
   "/games/duel": "Duel",
   "/games/review": "GameReview",
-  "/games/friends": "Friends"
+  "/games/friends": "Friends",
+  "/community": "Community"
 }

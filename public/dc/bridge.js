@@ -11,7 +11,7 @@
     Main: '/', Auth: '/auth', ResetPassword: '/reset-password', Welcome: '/welcome', Dashboard: '/dashboard',
     Lesson: '/lesson', PracticeHub: '/practice', Practice: '/practice/session', MockTests: '/mock-tests',
     MockTest: '/mock-test', Plan: '/plan', Mistakes: '/mistakes', Report: '/report', History: '/history',
-    Profile: '/profile', Settings: '/settings', Notifications: '/notifications', Help: '/help', Admin: '/admin', Games: '/games', SpeedRound: '/games/speed', Survival: '/games/survival', Leaderboard: '/games/leaderboard', Duel: '/games/duel', GameReview: '/games/review', Friends: '/games/friends',
+    Profile: '/profile', Settings: '/settings', Notifications: '/notifications', Help: '/help', Admin: '/admin', Games: '/games', SpeedRound: '/games/speed', Survival: '/games/survival', Leaderboard: '/games/leaderboard', Duel: '/games/duel', GameReview: '/games/review', Friends: '/games/friends', Community: '/community',
     NotFound: '/404',
   };
   var PUBLIC = { Main: 1, Auth: 1, ResetPassword: 1, NotFound: 1, Help: 1 };
@@ -700,7 +700,7 @@
   if (Ufq.isSignedIn() && page && !PUBLIC[page] && page !== 'Practice') setTimeout(function () { Ufq.reminders(); }, 1500);
   /* ---------------- friends: online status, requests and duel invites on every page ---------------- */
   var fListeners = [], fSeen = {}, fOff = false, fTimer = null, fLast = null;
-  var ACTIVITY = { Practice: 'Practising', Duel: 'In a duel', SpeedRound: 'Playing Speed Round', Survival: 'Playing Survival', Games: 'In Games', Friends: 'In Games', Leaderboard: 'In Games', Lesson: 'In a lesson' };
+  var ACTIVITY = { Practice: 'Practising', Duel: 'In a duel', SpeedRound: 'Playing Speed Round', Survival: 'Playing Survival', Games: 'In Games', Friends: 'In Games', Community: 'In Community', Leaderboard: 'In Games', Lesson: 'In a lesson' };
   function frpc(name, args) { return Ufq.rest('/rest/v1/rpc/' + name, { method: 'POST', body: JSON.stringify(args || {}), keepCache: true }); }
   function invitePopup(inv) {
     popupCard('Duel invite from ' + inv.from, inv.from + ' invites you to a duel', [
