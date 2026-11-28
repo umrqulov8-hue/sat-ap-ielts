@@ -80,6 +80,43 @@
     return refreshing;
   }
 
+  /* Google refuses to sign in inside apps' built-in browsers (Telegram, Instagram, Facebook) */
+  function inAppBrowser() {
+    return !!(window.TelegramWebviewProxy || window.TelegramWebview) || /; wv\)|Instagram|FBAN|FBAV|Line\//.test(navigator.userAgent);
+  }
+  function openOutside() {
+    if (document.getElementById('ufq-outside')) return;
+    var link = location.origin + '/auth', android = /Android/i.test(navigator.userAgent);
+    var box = document.createElement('div'); box.id = 'ufq-outside';
+    box.setAttribute('style', 'position:fixed;inset:0;z-index:10000;display:grid;place-items:center;padding:16px;background:rgba(0,48,73,.5);font:16px/1.5 "Inter Tight",sans-serif');
+    var btn = 'display:block;box-sizing:border-box;width:100%;min-height:48px;margin-top:10px;padding:12px;border:0;border-radius:999px;font:600 15px "Inter Tight",sans-serif;text-align:center;text-decoration:none;cursor:pointer;';
+    box.innerHTML = '<div role="dialog" aria-modal="true" aria-label="Open in your browser" style="width:min(420px,100%);background:#fff;color:#003049;border-radius:22px;padding:24px">' +
+      '<b style="font-size:20px">Open Ufq in your browser</b>' +
+      '<p style="margin:8px 0 4px">Google does not allow sign-in inside Telegram or other apps. Open Ufq in ' + (android ? 'Chrome' : 'Safari') + ' and sign in there.</p>' +
+      (android ? '<a style="' + btn + 'background:#003049;color:#fff" href="intent://' + location.host + '/auth#Intent;scheme=https;package=com.android.chrome;end">Open in Chrome</a>' : '') +
+      '<button type="button" data-a="copy" style="' + btn + 'background:#EEF2F5;color:#003049">Copy link</button>' +
+      '<button type="button" data-a="go" style="' + btn + 'background:none;color:#003049">Try here anyway</button>' +
+      '<button type="button" data-a="close" style="' + btn + 'background:none;color:#669BBC;margin-top:0">Close</button></div>';
+    box.addEventListener('click', function (e) {
+      var a = e.target.getAttribute && e.target.getAttribute('data-a');
+      if (e.target === box || a === 'close') box.remove();
+      else if (a === 'go') { box.remove(); Ufq.google(true).catch(function (err) { Ufq.toast(err.message); }); }
+      else if (a === 'copy') {
+        var done = function () { e.target.textContent = 'Copied. Paste it in your browser'; };
+        var manual = function () { window.prompt('Copy this link', link); };
+        if (navigator.clipboard) navigator.clipboard.writeText(link).then(done, manual); else manual();
+      }
+    });
+    document.body.appendChild(box);
+  }
+
+  /* the side menu must fit short screens (tablets, in-app browsers with their own top bar) */
+  var fit = document.createElement('style');
+  fit.textContent = '@media (min-width:821px){html aside.side.dk{height:100vh!important;height:100dvh!important;overflow-y:auto!important;overscroll-behavior:contain;scrollbar-width:none}html aside.side.dk::-webkit-scrollbar{display:none}html aside.side.dk>:not(.sbg){flex-shrink:0}}' +
+    '@media (min-width:821px) and (max-height:860px){html aside.side.dk{gap:3px!important;padding:14px!important}html aside.side.dk a.nv{min-height:38px!important}html aside.side.dk .sideExtra{gap:4px!important}html aside.side.dk .sideExtra>div:has(>.cap){display:none!important}}' +
+    '@media (min-width:821px) and (max-height:640px){html aside.side.dk{gap:1px!important;padding:10px 12px!important}html aside.side.dk a.nv{min-height:32px!important;font-size:14px!important}}';
+  (document.head || document.documentElement).appendChild(fit);
+
   /* ---------------- public API ---------------- */
   var Ufq = {
     config: cfg,
@@ -126,11 +163,14 @@
         return api('/auth/v1/user', { method: 'PUT', headers: authHeaders(s.access_token), body: JSON.stringify({ password: password }) });
       });
     },
-    google: function () {
+    /* force: skip the in-app browser warning */
+    google: function (force) {
+      if (force !== true && inAppBrowser()) { openOutside(); return Promise.resolve(); }
       return fetch(cfg.url + '/auth/v1/settings', { headers: { apikey: cfg.key } }).then(function (r) { return r.ok ? r.json() : null; })
         .catch(function () { return null; }).then(function (set) {
           if (set && set.external && set.external.google === false) throw new Error(friendly('provider is not enabled'));
-          location.assign(cfg.url + '/auth/v1/authorize?provider=google&redirect_to=' + encodeURIComponent(location.origin + '/auth'));
+          /* select_account: Google always shows its account list, so people can pick another one */
+          location.assign(cfg.url + '/auth/v1/authorize?provider=google&prompt=select_account&redirect_to=' + encodeURIComponent(location.origin + '/auth'));
         });
     },
     signOut: function (to) {
