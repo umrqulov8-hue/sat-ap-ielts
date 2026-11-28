@@ -75,9 +75,44 @@
   }
 
   /* ---------------- voice ---------------- */
+  /* ---- microphone permission: ask with a clear button; if the browser has blocked it, show how to unblock ---- */
+  function micState() {
+    if (!navigator.permissions || !navigator.permissions.query) return Promise.resolve('unknown');
+    return navigator.permissions.query({ name: 'microphone' }).then(function (r) { return r.state; }).catch(function () { return 'unknown'; });
+  }
+  function micSteps() {
+    var ua = navigator.userAgent, ios = /iPad|iPhone|iPod/.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1);
+    if (/Telegram|Instagram|FBAN|FBAV|Line\//i.test(ua)) return ['This app’s built-in browser cannot record.', 'Open the site in Chrome or Safari, then try again.'];
+    if (ios && /CriOS|FxiOS|EdgiOS/.test(ua)) return ['Open the iPhone/iPad Settings app.', 'Find this browser (e.g. Chrome) and switch Microphone on.', 'Come back and press “Try again”.'];
+    if (ios) return ['Tap “aA” (or the ⋯ button) in the address bar.', 'Website Settings → Microphone → Allow.', 'Or: Settings app → Safari → Microphone → Allow.'];
+    if (/Android/.test(ua)) return ['Tap the icon to the left of the address (lock or sliders).', 'Permissions → Microphone → Allow.', 'Also check: phone Settings → Apps → your browser → Permissions → Microphone.'];
+    if (/Safari/.test(ua) && !/Chrome|Chromium|Edg/.test(ua)) return ['In the menu bar: Safari → Settings for This Website.', 'Microphone → Allow.'];
+    return ['Click the icon to the left of the address.', 'Microphone → Allow.', 'Also check that your computer lets the browser use the microphone.'];
+  }
+  function micDialog(state) {
+    var old = root.querySelector('.cveil'); if (old) old.remove();
+    var d = dialog(state === 'denied' ? 'Microphone is blocked' : state === 'unsupported' ? 'Recording is not available' : 'Allow the microphone');
+    if (state === 'denied' || state === 'unsupported') {
+      d.box.appendChild(el('p', 'cnote', state === 'denied' ? 'Your browser has blocked the microphone for this site. A website cannot change that itself — it takes a moment:' : 'This browser cannot record voice messages here.'));
+      var list = el('ol', 'csteps'); micSteps().forEach(function (t) { list.appendChild(el('li', '', t)); }); d.box.appendChild(list);
+      d.box.appendChild(btn('Try again', 'cbtn red', function () { d.close(); record(); }));
+      d.box.appendChild(btn('Copy the site address', 'cbtn', function () { try { navigator.clipboard.writeText(location.href).then(function () { U.toast('Address copied.', 'ok'); }); } catch (e) { U.toast(location.href, 'ok'); } }));
+    } else {
+      d.box.appendChild(el('p', 'cnote', 'To record a voice message, allow the microphone. Press the button, then choose “Allow” in the window your browser shows.'));
+      d.box.appendChild(btn('🎤 Allow microphone', 'cbtn red', function () { d.close(); record(); }));
+    }
+  }
   function startVoice() {
     if (rec) return;
-    if (!navigator.mediaDevices || !window.MediaRecorder) { U.toast('Voice recording is not supported in this browser.'); return; }
+    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia || !window.MediaRecorder) { micDialog('unsupported'); return; }
+    micState().then(function (state) {
+      if (state === 'prompt') micDialog('prompt');
+      else if (state === 'denied') micDialog('denied');
+      else record();
+    });
+  }
+  function record() {
+    if (rec) return;
     navigator.mediaDevices.getUserMedia({ audio: true }).then(function (stream) {
       var type = ['audio/webm;codecs=opus', 'audio/mp4', 'audio/webm', 'audio/ogg'].filter(function (t) { return MediaRecorder.isTypeSupported(t); })[0];
       var r = new MediaRecorder(stream, type ? { mimeType: type, audioBitsPerSecond: 24000 } : { audioBitsPerSecond: 24000 });
@@ -98,7 +133,12 @@
         if (lab) lab.textContent = 'Recording ' + dur(s);
         if (s >= 600) stopVoice(true); /* ten minutes */
       }, 250);
-    }).catch(function () { U.toast('Allow the microphone to record a voice message.'); });
+    }).catch(function (e) {
+      var name = e && e.name;
+      if (name === 'NotAllowedError' || name === 'SecurityError') micDialog('denied');
+      else if (name === 'NotFoundError') U.toast('No microphone was found on this device.');
+      else micDialog('unsupported');
+    });
   }
   function stopVoice(keep) { if (rec) { rec.keep = keep; rec.r.stop(); } }
 

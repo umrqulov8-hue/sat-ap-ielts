@@ -795,6 +795,17 @@
     setTimeout(loop, 1200);
     document.addEventListener('visibilitychange', function () { if (!document.hidden && !fOff) loop(); });
   }
+  /* "Back" buttons: return to the previous page of this site, or the given parent page when opened directly */
+  var backCss = document.createElement('style');
+  backCss.textContent = '.ufqback{align-self:flex-start;display:inline-flex;align-items:center;gap:6px;min-height:40px;padding:0 16px;border-radius:999px;box-shadow:inset 0 0 0 1.5px rgba(0,48,73,.2);font:600 14px "Inter Tight",system-ui,sans-serif;color:#003049;text-decoration:none;background:#fff;width:max-content}.ufqback:hover{background:#F4F6F8}';
+  (document.head || document.documentElement).appendChild(backCss);
+  document.addEventListener('click', function (e) {
+    var a = e.target && e.target.closest && e.target.closest('[data-ufq-back]');
+    if (!a) return;
+    var sameSite = document.referrer && document.referrer.indexOf(location.origin) === 0 && document.referrer !== location.href;
+    if (sameSite && history.length > 1) { e.preventDefault(); history.back(); }
+  });
+
   if (page === 'Auth' && /[?&]suspended=1/.test(location.search)) setTimeout(function () { Ufq.toast('This account has been suspended. Contact your administrator.'); }, 400);
 
   /* everything this user has saved, as a downloadable file */
