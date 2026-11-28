@@ -346,6 +346,8 @@
           U.toast(c.silenced ? 'Muted: no alerts from ' + c.name + '.' : 'Alerts from ' + c.name + ' are on.', 'ok');
         }).catch(function (e) { fail(e, 'Could not change it.'); });
       });
+      var note = btn('♫', 'cicon dmmusic'); note.setAttribute('data-ufq-music-open', '1'); note.setAttribute('aria-label', 'Music');
+      head.appendChild(note);
       head.appendChild(mute);
     }
     else if (c.joined || me.admin) head.appendChild(btn('Members', 'cbtn', function () { members(c); }));

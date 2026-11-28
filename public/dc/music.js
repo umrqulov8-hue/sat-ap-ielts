@@ -184,7 +184,9 @@
   var shadow = rootHost.attachShadow({ mode: 'open' });
   var style = el('style');
   style.textContent = CSS +
-    '.pill{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom));z-index:9000;display:flex;align-items:center;gap:4px;padding:6px;width:min(330px,calc(100vw - 32px));background:#003049;color:#fff;border-radius:999px;box-shadow:0 18px 40px -18px rgba(0,30,46,.7)}' +
+    '.pill{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom));z-index:9000;display:flex;align-items:center;gap:4px;padding:6px;width:min(330px,calc(100vw - 32px));background:#003049;color:#fff;border-radius:999px;box-shadow:0 18px 40px -18px rgba(0,30,46,.7);transition:right .55s cubic-bezier(.16,1,.3,1),transform .55s cubic-bezier(.16,1,.3,1),visibility .55s}' +
+    /* a friend chat is open on the right: the player glides to its left; on narrow screens it leaves (the chat has a music button) */
+    '.pill.aside{right:476px}@media (max-width:830px){.pill.aside{right:16px;transform:translateX(calc(100% + 24px));visibility:hidden}}@media (prefers-reduced-motion:reduce){.pill{transition:none}}' +
     '.tab{position:fixed;right:0;top:58%;z-index:9000;width:30px;height:48px;border-radius:14px 0 0 14px;background:#003049;color:#fff;display:grid;place-items:center;opacity:.9}' +
     '.veil{position:fixed;inset:0;z-index:9001}' +
     '.panel{position:fixed;z-index:9002;width:min(360px,calc(100vw - 24px));max-height:min(560px,calc(100dvh - 24px));display:flex;flex-direction:column;gap:10px;padding:14px;background:#fff;color:#003049;border-radius:22px;box-shadow:0 0 0 1px rgba(0,48,73,.12),0 30px 70px -26px rgba(0,30,46,.55);animation:grow .42s cubic-bezier(.16,1,.3,1)}' +
@@ -281,7 +283,7 @@
   var pill = null;
   function refresh() {
     var s = core.state();
-    var want = s.track && !panel && !isMock() && !document.getElementById('ufq-music') && !document.querySelector('.dmveil') ? (tight ? 'tab' : 'pill') : '';
+    var want = s.track && !panel && !isMock() && !document.getElementById('ufq-music') ? (tight ? 'tab' : 'pill') : '';
     if (want !== pillSig) {
       if (pill) pill.remove(); pill = null; pillSig = want;
       if (want === 'tab') pill = btn('tab', ICON.note, 'Open music player', function () { openPanel(null); });
@@ -298,6 +300,10 @@
       if (pill) slot.appendChild(pill);
     }
     if (pill && pill.update) pill.update();
+    if (pill && want === 'pill') {
+      var aside = !!document.querySelector('.dmveil');
+      if (aside !== pill.classList.contains('aside')) { void pill.offsetWidth; pill.classList.toggle('aside', aside); }
+    }
     if (panel) { panel.now.update(); markList(panel.list); }
     if (page) page.update();
   }
@@ -387,6 +393,8 @@
   function ready() {
     document.body.appendChild(rootHost);
     var off = core.on(refresh);
+    /* the chat drawer is added to and removed from <body>: move the player even while the music is paused */
+    new MutationObserver(refresh).observe(document.body, { childList: true });
     window.addEventListener('pagehide', off);
     window.addEventListener('pageshow', function (e) { if (e.persisted) off = core.on(refresh); });
     if (isMock()) core.pause();
